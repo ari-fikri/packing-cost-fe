@@ -1,0 +1,11 @@
+:root { --brand-primary: #007bff }
+html,body,#root { height:100% }
+.content-wrapper { min-height: calc(100vh - 114px); padding-top: 1rem }
+
+
+/* small tweaks to make AdminLTE + React work nicely */
+.brand-link { height: 3.5rem; display:flex; align-items:center; padding-left:1rem }
+
+
+/* ensure chart canvas is responsive */
+.card .card-body canvas{ width:100% !important }
