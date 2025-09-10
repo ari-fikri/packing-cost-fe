@@ -28,6 +28,13 @@ return (
 <p> Inventory </p>
 </a>
 </li>
+<li className="nav-item">
+  <NavLink to="/projects" className={({isActive})=>"nav-link"+(isActive?" active":"")}>
+    <i className="nav-icon fas fa-project-diagram" />
+    <p> Project </p>
+  </NavLink>
+</li>
+
 
 
 {auth.user ? (
