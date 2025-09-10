@@ -9,3 +9,15 @@ html,body,#root { height:100% }
 
 /* ensure chart canvas is responsive */
 .card .card-body canvas{ width:100% !important }
+
+
+/* login page fixes */
+.login-page .login-box { max-width: 360px; margin: 0 auto }
+
+
+/* sidebar logout button style */
+.nav-link.btn { color: #c2c7d0; padding-left: 1rem }
+
+
+/* ensure full height */
+.wrapper { min-height: 100vh }
