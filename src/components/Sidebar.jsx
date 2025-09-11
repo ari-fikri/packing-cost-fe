@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Cps from '../pages/packing/Cps'
 
 export default function Sidebar() {
   const auth = useAuth()
@@ -122,9 +124,9 @@ export default function Sidebar() {
 
               <ul className="nav nav-treeview" style={{ display: packingOpen ? 'block' : 'none' }}>
                 <li className="nav-item">
-                  <NavLink to="/packing/cps" className={navLinkClass}>
-                    <i className="far fa-circle nav-icon" />
-                    <p>CPS</p>
+                  <NavLink to="/packing/cps" className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}>
+                     <i className="far fa-circle nav-icon" />
+                     <p>CPS</p>
                   </NavLink>
                 </li>
 
