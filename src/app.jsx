@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import { useAuth } from './auth'
 import Projects from './pages/Projects'
+import Models from './pages/Models'
 
 function ProtectedRoute({ children }){
   const auth = useAuth()
@@ -39,6 +40,7 @@ export default function App(){
             </ProtectedRoute>
           } />
           <Route path="/projects" element={<ProtectedRoute><Projects/></ProtectedRoute>} />
+          <Route path="/models" element={<ProtectedRoute><Models/></ProtectedRoute>} />
         </Routes>
       </div>
 
