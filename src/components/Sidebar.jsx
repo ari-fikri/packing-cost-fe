@@ -1,21 +1,28 @@
 // src/components/Sidebar.jsx
 import React, { useState, useEffect } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../auth' // keep origin/main auth pattern
+import { useAuth } from '../auth'
 
 export default function Sidebar() {
   const auth = useAuth()
   const [masterOpen, setMasterOpen] = useState(false)
+  const [packingOpen, setPackingOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
-  // auto-open Master when route is inside it
+  // auto-open Master or Packing Spec when route is inside them
   useEffect(() => {
     const path = (location.pathname || '').toLowerCase()
     if (path.startsWith('/projects') || path.startsWith('/models') || path.startsWith('/parts')) {
       setMasterOpen(true)
     } else {
       setMasterOpen(false)
+    }
+
+    if (path.startsWith('/packing') || path.startsWith('/cps') || path.startsWith('/dpi') || path.startsWith('/calculate-packing-cost') || path.startsWith('/calculate')) {
+      setPackingOpen(true)
+    } else {
+      setPackingOpen(false)
     }
   }, [location.pathname])
 
@@ -92,6 +99,46 @@ export default function Sidebar() {
                   <NavLink to="/parts" className={navLinkClass}>
                     <i className="far fa-circle nav-icon" />
                     <p>Parts</p>
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+
+            {/* Packing Spec expandable */}
+            <li className={`nav-item has-treeview ${packingOpen ? 'menu-open' : ''}`}>
+              <div
+                role="button"
+                onClick={() => setPackingOpen(v => !v)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setPackingOpen(v => !v) }}
+                tabIndex={0}
+                aria-expanded={packingOpen}
+                className={`nav-link d-flex align-items-center ${packingOpen ? 'active' : ''}`}
+                style={{ cursor: 'pointer', userSelect: 'none' }}
+              >
+                <i className="nav-icon fas fa-box-open" />
+                <p className="flex-grow-1 mb-0 ml-2">Packing Spec</p>
+                <i className={`right fas ${packingOpen ? 'fa-angle-down' : 'fa-angle-left'}`} />
+              </div>
+
+              <ul className="nav nav-treeview" style={{ display: packingOpen ? 'block' : 'none' }}>
+                <li className="nav-item">
+                  <NavLink to="/packing/cps" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>CPS</p>
+                  </NavLink>
+                </li>
+
+                <li className="nav-item">
+                  <NavLink to="/packing/dpi" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>DPI</p>
+                  </NavLink>
+                </li>
+
+                <li className="nav-item">
+                  <NavLink to="/packing/calculate" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>Calculate Packing Cost</p>
                   </NavLink>
                 </li>
               </ul>
