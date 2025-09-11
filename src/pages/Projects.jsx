@@ -1,7 +1,9 @@
 // src/pages/Projects.jsx
 import React, { useState } from 'react'
+import NewProjectModal from '../components/NewProjectModal'
 
 export default function Projects() {
+  // filter states
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
   const [models, setModels] = useState('')
@@ -14,6 +16,10 @@ export default function Projects() {
   const [statuses, setStatuses] = useState({
     all: true, draft: false, active: false, onhold: false, completed: false
   })
+
+  // modal + results
+  const [showNewModal, setShowNewModal] = useState(false)
+  const [results, setResults] = useState([]) // saved projects list
 
   function toggleStatus(key) {
     if (key === 'all') {
@@ -32,11 +38,31 @@ export default function Projects() {
   }
 
   function handleSearch() {
+    // placeholder — connect to API or local filtering as needed
     console.log('Search with filters:', {
       code, name, models, type,
       startFrom, startTo, endFrom, endTo,
       manager, statuses
     })
+  }
+
+  function handleOpenNew() { setShowNewModal(true) }
+  function handleCloseNew() { setShowNewModal(false) }
+
+  function handleSaveNew(payload) {
+    // payload format from modal: { code, name, type, description, manager, startDate, endDate, status, note, models }
+    const newRow = {
+      code: payload.code || `CFC-${(results.length + 1).toString().padStart(3, '0')}`,
+      name: payload.name || '(No name)',
+      type: payload.type || 'PxP',
+      manager: payload.manager || '',
+      startDate: payload.startDate || '',
+      endDate: payload.endDate || '',
+      status: payload.status || 'Draft',
+      models: (payload.models || []).map(m => m.code).join(', ')
+    }
+    setResults(prev => [newRow, ...prev])
+    setShowNewModal(false)
   }
 
   return (
@@ -45,9 +71,9 @@ export default function Projects() {
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>CFC / Project List</b></h3>
           <div className="card-tools ml-auto">
-            <button className="btn btn-sm btn-success mr-2"><i className="fas fa-plus mr-1"></i> New CFC/PJT</button>
-            <button className="btn btn-sm btn-outline-secondary mr-1"><i className="fas fa-cloud-upload-alt"></i></button>
-            <button className="btn btn-sm btn-outline-secondary"><i className="fas fa-cloud-download-alt"></i></button>
+            <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}><i className="fas fa-plus mr-1"></i> New CFC/PJT</button>
+            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload"><i className="fas fa-cloud-upload-alt"></i></button>
+            <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template"><i className="fas fa-cloud-download-alt"></i></button>
           </div>
         </div>
 
@@ -55,18 +81,19 @@ export default function Projects() {
         <div className="card-body">
           {/* Row 1: Code + Name */}
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">CFC / PJT Code</label>
                 <div className="input-group input-group-sm">
                   <input value={code} onChange={e => setCode(e.target.value)} className="form-control form-control-sm" placeholder="Code" />
                   <div className="input-group-append">
-                    <button className="btn btn-outline-secondary btn-sm" title="Search code"><i className="fas fa-search"></i></button>
+                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code"><i className="fas fa-search"></i></button>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">CFC / PJT Name</label>
                 <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
@@ -76,24 +103,31 @@ export default function Projects() {
 
           {/* Row 2: Models + Type */}
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">Related Models</label>
                 <div className="input-group input-group-sm">
                   <input value={models} onChange={e => setModels(e.target.value)} className="form-control form-control-sm" placeholder="Model code / name" />
                   <div className="input-group-append">
-                    <button className="btn btn-outline-secondary btn-sm" title="Select Model"><i className="fas fa-search"></i></button>
+                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Model"><i className="fas fa-search"></i></button>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1 d-block">Type</label>
-                <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label className={"btn btn-sm " + (type === 'all' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('all')}>All</label>
-                  <label className={"btn btn-sm " + (type === 'pxp' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('pxp')}>PxP</label>
-                  <label className={"btn btn-sm " + (type === 'lot' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('lot')}>Lot</label>
+                <div className="btn-group btn-group-toggle" role="radiogroup" aria-label="Project type">
+                  <label className={"btn btn-sm " + (type === 'all' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('all')}>
+                    <input type="radio" name="type" checked={type === 'all'} readOnly /> All
+                  </label>
+                  <label className={"btn btn-sm " + (type === 'pxp' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('pxp')}>
+                    <input type="radio" name="type" checked={type === 'pxp'} readOnly /> PxP
+                  </label>
+                  <label className={"btn btn-sm " + (type === 'lot' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('lot')}>
+                    <input type="radio" name="type" checked={type === 'lot'} readOnly /> Lot
+                  </label>
                 </div>
               </div>
             </div>
@@ -101,7 +135,7 @@ export default function Projects() {
 
           {/* Row 3: Start + End Dates */}
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">Start Date</label>
                 <div className="d-flex">
@@ -111,7 +145,8 @@ export default function Projects() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">End Date</label>
                 <div className="d-flex">
@@ -125,27 +160,30 @@ export default function Projects() {
 
           {/* Row 4: Manager + Status */}
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">Project Manager</label>
                 <div className="input-group input-group-sm">
                   <input value={manager} onChange={e => setManager(e.target.value)} className="form-control form-control-sm" placeholder="Manager name" />
                   <div className="input-group-append">
-                    <button className="btn btn-outline-secondary btn-sm" title="Select Model"><i className="fas fa-search"></i></button>
-                  </div>                  
+                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Manager"><i className="fas fa-search"></i></button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <label className="small mb-1 d-block">Status</label>
               <div className="form-inline flex-wrap">
-                {['all', 'draft', 'active', 'onhold', 'completed'].map(key => (
-                  <div className="form-check mr-3" key={key}>
-                    <input type="checkbox" className="form-check-input" id={key} checked={statuses[key]} onChange={() => toggleStatus(key)} />
-                    <label className="form-check-label small ml-1" htmlFor={key}>{key === 'onhold' ? 'On Hold' : key.charAt(0).toUpperCase() + key.slice(1)}</label>
-                  </div>
-                ))}
+                {['all', 'draft', 'active', 'onhold', 'completed'].map(key => {
+                  const id = `status-${key}`
+                  return (
+                    <div className="form-check mr-3" key={key}>
+                      <input id={id} type="checkbox" className="form-check-input" checked={statuses[key]} onChange={() => toggleStatus(key)} />
+                      <label className="form-check-label small ml-1" htmlFor={id}>{key === 'onhold' ? 'On Hold' : key.charAt(0).toUpperCase() + key.slice(1)}</label>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -153,8 +191,8 @@ export default function Projects() {
           {/* Buttons row */}
           <div className="row mt-2">
             <div className="col-12 d-flex justify-content-end">
-              <button className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Search</button>
-              <button className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-undo mr-1"></i> Reset</button>
+              <button type="button" className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Search</button>
+              <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-undo mr-1"></i> Reset</button>
             </div>
           </div>
         </div>
@@ -177,12 +215,30 @@ export default function Projects() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td colSpan="9" className="text-center py-4 text-muted">No Data Found</td></tr>
+                {results.length === 0 && (
+                  <tr><td colSpan="9" className="text-center py-4 text-muted">No Data Found</td></tr>
+                )}
+                {results.map((r, idx) => (
+                  <tr key={idx}>
+                    <td>{r.code}</td>
+                    <td>{r.name}</td>
+                    <td>{r.type}</td>
+                    <td>{r.manager}</td>
+                    <td>{r.startDate}</td>
+                    <td>{r.endDate}</td>
+                    <td>{r.status}</td>
+                    <td>{r.models}</td>
+                    <td>
+                      <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => setResults(prev => prev.filter((_, i) => i !== idx))}><i className="fas fa-trash" /></button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      <NewProjectModal visible={showNewModal} onClose={handleCloseNew} onSave={handleSaveNew} />
     </div>
   )
 }

@@ -21,3 +21,17 @@ html,body,#root { height:100% }
 
 /* ensure full height */
 .wrapper { min-height: 100vh }
+
+.np-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+  overflow: auto;
+}
+.np-modal { width: 100%; max-width: 980px; z-index: 2001; }
+.np-modal .card-body { max-height: 70vh; overflow: auto; }
