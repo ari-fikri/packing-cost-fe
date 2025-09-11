@@ -53,7 +53,17 @@ export default function Sidebar() {
                 <p> Model </p>
               </NavLink>
             </li>
-
+            <li className="nav-item">
+              <NavLink
+                to="/Parts"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                <i className="nav-icon fas fa-layer-group" />
+                <p> Parts </p>
+              </NavLink>
+            </li>
             {auth.user ? (
               <li className="nav-item">
                 <button

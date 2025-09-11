@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import { useAuth } from './auth'
 import Projects from './pages/Projects'
 import Models from './pages/Models'
+import Parts from './pages/Parts'
 
 function ProtectedRoute({ children }){
   const auth = useAuth()
@@ -41,6 +42,7 @@ export default function App(){
           } />
           <Route path="/projects" element={<ProtectedRoute><Projects/></ProtectedRoute>} />
           <Route path="/models" element={<ProtectedRoute><Models/></ProtectedRoute>} />
+          <Route path="/parts" element={<ProtectedRoute><Parts/></ProtectedRoute>} />
         </Routes>
       </div>
 
