@@ -9,6 +9,8 @@ import { useAuth } from './auth'
 import Projects from './pages/Projects'
 import Models from './pages/Models'
 import Parts from './pages/Parts'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Cps from './pages/packing/Cps'
 
 function ProtectedRoute({ children }){
   const auth = useAuth()
@@ -43,6 +45,7 @@ export default function App(){
           <Route path="/projects" element={<ProtectedRoute><Projects/></ProtectedRoute>} />
           <Route path="/models" element={<ProtectedRoute><Models/></ProtectedRoute>} />
           <Route path="/parts" element={<ProtectedRoute><Parts/></ProtectedRoute>} />
+          <Route path="/packing/cps" element={<Cps />} />
         </Routes>
       </div>
 

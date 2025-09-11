@@ -1,5 +1,6 @@
 // src/pages/packing/Cps.jsx
 import React, { useState } from 'react'
+import NewCpsModal from '../../components/NewCpsModal' // ensure this file exists
 
 export default function Cps() {
   // filter fields
@@ -15,6 +16,9 @@ export default function Cps() {
   const [effectiveFrom, setEffectiveFrom] = useState('')
   const [effectiveTo, setEffectiveTo] = useState('')
   const [status, setStatus] = useState('Any')
+
+  // modal state
+  const [showNewCps, setShowNewCps] = useState(false)
 
   // table data (empty initially)
   const [rows, setRows] = useState([])
@@ -58,8 +62,9 @@ export default function Cps() {
     setStatus('Any')
   }
 
+  // open modal
   function handleCreateCps() {
-    alert('Create CPS - placeholder')
+    setShowNewCps(true)
   }
   function handleCreatePsi() {
     alert('Create PSI - placeholder')
@@ -78,6 +83,50 @@ export default function Cps() {
 
   // slice rows for current page
   const visibleRows = rows.slice((page - 1) * perPage, page * perPage)
+
+  // Called when NewCpsModal saves a CPS payload
+  function handleSaveNewCps(payload) {
+    // build a minimal row object for table (you can adapt fields)
+    const newRow = {
+      cpsNo: payload.cpsNo || '',
+      refCpsNo: payload.refCpsNo || '',
+      dpiNo: payload.dpiNo || '',
+      issuedDate: payload.issueDate || '',
+      effectiveDate: payload.effectiveDate || '',
+      cfcPjt: payload.cfcPjtCode || '',
+      model: payload.model || '',
+      parts: payload.packing?.innerRows || [],
+      fromUser: '', // empty for now
+      toUser: '', // empty for now
+      status: 'Draft',
+      raw: payload,
+    }
+    setRows(prev => [newRow, ...prev])
+    setShowNewCps(false)
+    setPage(1)
+  }
+
+  // Optional submit handler (Submit from modal)
+  function handleSubmitNewCps(payload) {
+    // for now treat submit same as save but set status Submitted
+    const newRow = {
+      cpsNo: payload.cpsNo || '',
+      refCpsNo: payload.refCpsNo || '',
+      dpiNo: payload.dpiNo || '',
+      issuedDate: payload.issueDate || '',
+      effectiveDate: payload.effectiveDate || '',
+      cfcPjt: payload.cfcPjtCode || '',
+      model: payload.model || '',
+      parts: payload.packing?.innerRows || [],
+      fromUser: '',
+      toUser: '',
+      status: 'Submitted',
+      raw: payload,
+    }
+    setRows(prev => [newRow, ...prev])
+    setShowNewCps(false)
+    setPage(1)
+  }
 
   return (
     <div className="container-fluid">
@@ -107,7 +156,6 @@ export default function Cps() {
             {/* Left column (col-md-6) */}
             <div className="col-12 col-md-6">
               <div className="form-row">
-                {/* Row 1: CPS No */}
                 <div className="form-group col-12">
                   <label className="small mb-1">CPS No</label>
                   <div className="input-group input-group-sm">
@@ -120,7 +168,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 2: DPI No */}
                 <div className="form-group col-12">
                   <label className="small mb-1">DPI No</label>
                   <div className="input-group input-group-sm">
@@ -133,7 +180,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 3: Model */}
                 <div className="form-group col-12">
                   <label className="small mb-1">Model</label>
                   <div className="input-group input-group-sm">
@@ -146,7 +192,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 4: From */}
                 <div className="form-group col-12">
                   <label className="small mb-1">From</label>
                   <div className="input-group input-group-sm">
@@ -159,7 +204,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 5 (left): Issued Date (from → to) */}
                 <div className="form-group col-12">
                   <label className="small mb-1">Issued Date (from → to)</label>
                   <div className="form-row">
@@ -171,14 +215,12 @@ export default function Cps() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
             {/* Right column (col-md-6) */}
             <div className="col-12 col-md-6">
               <div className="form-row">
-                {/* Row 1: Ref CPS No */}
                 <div className="form-group col-12">
                   <label className="small mb-1">Ref CPS No</label>
                   <div className="input-group input-group-sm">
@@ -191,7 +233,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 2: CFC / Pjt */}
                 <div className="form-group col-12">
                   <label className="small mb-1">CFC / Pjt</label>
                   <div className="input-group input-group-sm">
@@ -204,7 +245,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 3: Status */}
                 <div className="form-group col-12">
                   <label className="small mb-1">Status</label>
                   <div className="input-group input-group-sm">
@@ -218,7 +258,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 4: To */}
                 <div className="form-group col-12">
                   <label className="small mb-1">To</label>
                   <div className="input-group input-group-sm">
@@ -231,7 +270,6 @@ export default function Cps() {
                   </div>
                 </div>
 
-                {/* Row 5 (right): Effective Date (from → to) */}
                 <div className="form-group col-12">
                   <label className="small mb-1">Effective Date (from → to)</label>
                   <div className="form-row">
@@ -243,7 +281,6 @@ export default function Cps() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -358,6 +395,14 @@ export default function Cps() {
 
         </div>
       </div>
+
+      {/* New CPS Modal */}
+      <NewCpsModal
+        show={showNewCps}
+        onClose={() => setShowNewCps(false)}
+        onSave={handleSaveNewCps}
+        onSubmit={handleSubmitNewCps}
+      />
     </div>
   )
 }
