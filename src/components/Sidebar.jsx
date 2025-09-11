@@ -1,12 +1,15 @@
 // src/components/Sidebar.jsx
 import React, { useState, useEffect } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth' // keep origin/main auth pattern
 
-export default function Sidebar({ onLogout } = {}) {
+export default function Sidebar() {
+  const auth = useAuth()
   const [masterOpen, setMasterOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
+  // auto-open Master when route is inside it
   useEffect(() => {
     const path = (location.pathname || '').toLowerCase()
     if (path.startsWith('/projects') || path.startsWith('/models') || path.startsWith('/parts')) {
@@ -19,15 +22,19 @@ export default function Sidebar({ onLogout } = {}) {
   const navLinkClass = ({ isActive }) => 'nav-link' + (isActive ? ' active' : '')
 
   function handleLogoutClick(e) {
-    e.preventDefault()
-    if (typeof onLogout === 'function') onLogout()
-    // optional: clear storage / tokens here
+    e && e.preventDefault && e.preventDefault()
+    try {
+      if (auth && typeof auth.logout === 'function') {
+        auth.logout()
+      }
+    } catch (err) {
+      // ignore
+    }
     navigate('/login')
   }
 
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4" style={{ minHeight: '100vh' }}>
-      {/* Brand */}
       <div className="brand-link">
         <NavLink to="/" className="d-block text-decoration-none">
           <span className="brand-text font-weight-light">My App</span>
@@ -44,7 +51,7 @@ export default function Sidebar({ onLogout } = {}) {
           >
             {/* Dashboard */}
             <li className="nav-item">
-              <NavLink to="/" className={navLinkClass}>
+              <NavLink to="/" className={navLinkClass} end>
                 <i className="nav-icon fas fa-tachometer-alt" />
                 <p>Dashboard</p>
               </NavLink>
