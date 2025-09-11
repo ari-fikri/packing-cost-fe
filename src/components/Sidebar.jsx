@@ -34,7 +34,12 @@ return (
     <p> Project </p>
   </NavLink>
 </li>
-
+<li className="nav-item">
+  <NavLink to="/models" className={({isActive})=>"nav-link"+(isActive?" active":"")}>
+    <i className="nav-icon fas fa-layer-group" />
+    <p> Model </p>
+  </NavLink>
+</li>
 
 
 {auth.user ? (
