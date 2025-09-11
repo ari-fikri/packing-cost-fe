@@ -19,6 +19,7 @@ export default function Projects() {
 
   // modal + results
   const [showNewModal, setShowNewModal] = useState(false)
+  const [editingIndex, setEditingIndex] = useState(null)
   const [results, setResults] = useState([]) // saved projects list
 
   function toggleStatus(key) {
@@ -38,7 +39,6 @@ export default function Projects() {
   }
 
   function handleSearch() {
-    // placeholder — connect to API or local filtering as needed
     console.log('Search with filters:', {
       code, name, models, type,
       startFrom, startTo, endFrom, endTo,
@@ -46,11 +46,15 @@ export default function Projects() {
     })
   }
 
-  function handleOpenNew() { setShowNewModal(true) }
-  function handleCloseNew() { setShowNewModal(false) }
+  function handleOpenNew() {
+    setEditingIndex(null)
+    setShowNewModal(true)
+  }
+  function handleCloseNew() {
+    setShowNewModal(false)
+  }
 
   function handleSaveNew(payload) {
-    // payload format from modal: { code, name, type, description, manager, startDate, endDate, status, note, models }
     const newRow = {
       code: payload.code || `CFC-${(results.length + 1).toString().padStart(3, '0')}`,
       name: payload.name || '(No name)',
@@ -61,8 +65,25 @@ export default function Projects() {
       status: payload.status || 'Draft',
       models: (payload.models || []).map(m => m.code).join(', ')
     }
-    setResults(prev => [newRow, ...prev])
+
+    if (editingIndex !== null) {
+      // update existing
+      setResults(prev => prev.map((r, i) => (i === editingIndex ? newRow : r)))
+    } else {
+      // create new
+      setResults(prev => [newRow, ...prev])
+    }
     setShowNewModal(false)
+    setEditingIndex(null)
+  }
+
+  function handleEdit(index) {
+    setEditingIndex(index)
+    setShowNewModal(true)
+  }
+
+  function handleDelete(index) {
+    setResults(prev => prev.filter((_, i) => i !== index))
   }
 
   return (
@@ -71,9 +92,15 @@ export default function Projects() {
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>CFC / Project List</b></h3>
           <div className="card-tools ml-auto">
-            <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}><i className="fas fa-plus mr-1"></i> New CFC/PJT</button>
-            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload"><i className="fas fa-cloud-upload-alt"></i></button>
-            <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template"><i className="fas fa-cloud-download-alt"></i></button>
+            <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}>
+              <i className="fas fa-plus mr-1"></i> New CFC/PJT
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload">
+              <i className="fas fa-cloud-upload-alt"></i>
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template">
+              <i className="fas fa-cloud-download-alt"></i>
+            </button>
           </div>
         </div>
 
@@ -118,7 +145,7 @@ export default function Projects() {
             <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1 d-block">Type</label>
-                <div className="btn-group btn-group-toggle" role="radiogroup" aria-label="Project type">
+                <div className="btn-group btn-group-toggle" role="radiogroup">
                   <label className={"btn btn-sm " + (type === 'all' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('all')}>
                     <input type="radio" name="type" checked={type === 'all'} readOnly /> All
                   </label>
@@ -203,6 +230,7 @@ export default function Projects() {
             <table className="table table-striped table-sm mb-0">
               <thead className="thead-light">
                 <tr>
+                  <th style={{ width: 50 }}>#</th>
                   <th>CFC/PJT Code</th>
                   <th>CFC/PJT Name</th>
                   <th>Type</th>
@@ -216,10 +244,11 @@ export default function Projects() {
               </thead>
               <tbody>
                 {results.length === 0 && (
-                  <tr><td colSpan="9" className="text-center py-4 text-muted">No Data Found</td></tr>
+                  <tr><td colSpan="10" className="text-center py-4 text-muted">No Data Found</td></tr>
                 )}
                 {results.map((r, idx) => (
                   <tr key={idx}>
+                    <td>{idx + 1}</td>
                     <td>{r.code}</td>
                     <td>{r.name}</td>
                     <td>{r.type}</td>
@@ -229,7 +258,8 @@ export default function Projects() {
                     <td>{r.status}</td>
                     <td>{r.models}</td>
                     <td>
-                      <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => setResults(prev => prev.filter((_, i) => i !== idx))}><i className="fas fa-trash" /></button>
+                      <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit(idx)}><i className="fas fa-edit" /></button>
+                      <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(idx)}><i className="fas fa-trash" /></button>
                     </td>
                   </tr>
                 ))}
@@ -237,8 +267,15 @@ export default function Projects() {
             </table>
           </div>
         </div>
+
       </div>
-      <NewProjectModal visible={showNewModal} onClose={handleCloseNew} onSave={handleSaveNew} />
+
+      <NewProjectModal
+        visible={showNewModal}
+        onClose={handleCloseNew}
+        onSave={handleSaveNew}
+        initialData={editingIndex !== null ? results[editingIndex] : null}
+      />
     </div>
   )
 }
