@@ -1,5 +1,6 @@
 // src/components/PackingCostNewModal.jsx
 import React, { useState, useEffect } from "react";
+import PartPickerModal from "./PartPickerModal";
 
 // PackingCostNewModal — blank-slate initial view matching the provided salt design
 // Props: show (bool), onClose(), onSave(payload)
@@ -16,6 +17,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [parts, setParts] = useState([]);
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
+  const [showPartPicker, setShowPartPicker] = useState(false);
 
   useEffect(() => {
     if (show) {
@@ -36,27 +38,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setForm((s) => ({ ...s, [name]: value }));
   }
 
-  function handleAddPart() {
-    // placeholder: will open part picker or add blank row in future
-    setParts((prev) => [
-      ...prev,
-      {
-        partNo: "",
-        suffix: "",
-        partName: "",
-        parent: "",
-        supplierId: "",
-        supplierName: "",
-        L: "",
-        W: "",
-        H: "",
-        boxM3: "",
-        totalCost: "",
-      },
-    ]);
-    setPage(1);
-  }
-
   function handleSave() {
     const payload = { ...form, parts };
     onSave && onSave(payload);
@@ -64,6 +45,38 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
 
   function handleCancel() {
     onClose && onClose();
+  }
+
+  // Called when PartPicker returns selected parts
+  function handlePartsPicked(selected) {
+    if (!Array.isArray(selected) || selected.length === 0) {
+      setShowPartPicker(false);
+      return;
+    }
+    // Map fields from picker into packing-cost parts structure expected by this modal
+    const mapped = selected.map((p) => ({
+      partNo: p.partNo,
+      suffix: '',
+      partName: p.partName,
+      parentPartNo: p.parentPartNo || p.parent || '',
+      supplierId: p.supplierId || '',
+      supplierName: p.supplierName,
+      L: p.L,
+      W: p.W,
+      H: p.H,
+      boxM3: p.boxM3,
+      // group costs: each group shows { totalCost, prevYear, diff }
+      inner: { totalCost: p.innerTotal ?? p.innerTotalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? '0%' },
+      outer: { totalCost: p.outerTotal ?? p.outerTotalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? '0%' },
+      material: { totalCost: p.materialTotal ?? p.materialTotalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? '0%' },
+      labor: { totalCost: p.laborTotal ?? p.laborTotalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? '0%' },
+      inland: { totalCost: p.inlandTotal ?? p.inlandTotalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? '0%' },
+      total: { totalCost: p.totalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? '0%' },
+    }))
+
+    setParts((prev) => [...prev, ...mapped]);
+    setShowPartPicker(false);
+    setPage(1);
   }
 
   const total = parts.length;
@@ -135,7 +148,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                     </select>
                   </div>
 
-                  {/* keep Type here (only one copy) */}
+                  {/* Type control (single copy) */}
                   <div className="form-group">
                     <label>Type</label>
                     <div>
@@ -151,10 +164,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                             setForm((s) => ({ ...s, type: e.target.value }))
                           }
                         />
-                        <label
-                          className="form-check-label ml-2"
-                          htmlFor="type_pxp"
-                        >
+                        <label className="form-check-label ml-2" htmlFor="type_pxp">
                           PxP
                         </label>
                       </div>
@@ -170,10 +180,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                             setForm((s) => ({ ...s, type: e.target.value }))
                           }
                         />
-                        <label
-                          className="form-check-label ml-2"
-                          htmlFor="type_lot"
-                        >
+                        <label className="form-check-label ml-2" htmlFor="type_lot">
                           Lot
                         </label>
                       </div>
@@ -221,7 +228,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <button
                     type="button"
                     className="btn btn-sm btn-primary mr-2"
-                    onClick={handleAddPart}
+                    onClick={() => setShowPartPicker(true)}
                   >
                     <i className="fas fa-plus mr-1" /> Add Part
                   </button>
@@ -241,7 +248,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 </div>
               </div>
 
-              {/* Parts table (blank-slate) */}
+              {/* Parts table */}
               <div className="table-responsive">
                 <table className="table table-bordered table-sm text-center w-100">
                   <thead>
@@ -285,11 +292,52 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td colSpan={28} className="text-center">
-                        No Data Found
-                      </td>
-                    </tr>
+                    {visibleParts.length === 0 ? (
+                      <tr>
+                        <td colSpan={28} className="text-center">
+                          No Data Found
+                        </td>
+                      </tr>
+                    ) : (
+                      visibleParts.map((p, i) => (
+                        <tr key={(page - 1) * perPage + i}>
+                          <td>{p.partNo}</td>
+                          <td>{p.suffix}</td>
+                          <td className="text-left">{p.partName}</td>
+                          <td>{p.parentPartNo}</td>
+                          <td>{p.supplierId}</td>
+                          <td>{p.supplierName}</td>
+                          <td>{p.L}</td>
+                          <td>{p.W}</td>
+                          <td>{p.H}</td>
+                          <td>{p.boxM3}</td>
+
+                          <td>{p.inner.totalCost}</td>
+                          <td>{p.inner.prevYear}</td>
+                          <td>{p.inner.diff}</td>
+
+                          <td>{p.outer.totalCost}</td>
+                          <td>{p.outer.prevYear}</td>
+                          <td>{p.outer.diff}</td>
+
+                          <td>{p.material.totalCost}</td>
+                          <td>{p.material.prevYear}</td>
+                          <td>{p.material.diff}</td>
+
+                          <td>{p.labor.totalCost}</td>
+                          <td>{p.labor.prevYear}</td>
+                          <td>{p.labor.diff}</td>
+
+                          <td>{p.inland.totalCost}</td>
+                          <td>{p.inland.prevYear}</td>
+                          <td>{p.inland.diff}</td>
+
+                          <td>{p.total.totalCost}</td>
+                          <td>{p.total.prevYear}</td>
+                          <td>{p.total.diff}</td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -315,8 +363,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                     <button
                       key={n}
                       type="button"
-                      className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"
-                        }`}
+                      className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"}`}
                       onClick={() => goToPage(n + 1)}
                     >
                       {n + 1}
@@ -332,7 +379,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 </div>
 
                 <div className="form-inline small">
-                  <span className="mr-3">5 per page</span>
+                  <span className="mr-3">{perPage} per page</span>
                 </div>
               </div>
             </div>
@@ -358,6 +405,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       </div>
 
       <div className="modal-backdrop fade show" />
+
+      {/* Part Picker modal */}
+      <PartPickerModal show={showPartPicker} onClose={() => setShowPartPicker(false)} onSelect={handlePartsPicked} />
     </>
   );
 }
