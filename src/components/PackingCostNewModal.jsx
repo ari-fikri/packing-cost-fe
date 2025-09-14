@@ -1,5 +1,5 @@
 // src/components/PackingCostNewModal.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PartPickerModal from "./PartPickerModal";
 
 // PackingCostNewModal — blank-slate initial view matching the provided salt design
@@ -19,6 +19,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [expandedRows, setExpandedRows] = useState(new Set());
+
+  // refs for scrolling into view when expanded
+  const rowContainerRef = useRef(null);
+  const expandedRowRefs = useRef({});
 
   useEffect(() => {
     if (show) {
@@ -68,7 +72,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       boxM3: p.boxM3 || "",
       inner: { totalCost: p.innerTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
       outer: { totalCost: p.outerTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
-      // material subtable removed, but keep a main-table material total if desired:
       material: { totalCost: p.materialTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
       labor: { totalCost: p.laborTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
       inland: { totalCost: p.inlandTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
@@ -87,6 +90,22 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       else next.add(rowIndex);
       return next;
     });
+
+    // after state update, scroll the expanded content into view
+    // use a small timeout so DOM updates first
+    setTimeout(() => {
+      const ref = expandedRowRefs.current[rowIndex];
+      if (ref && typeof ref.scrollIntoView === "function") {
+        try {
+          ref.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        } catch (e) {
+          // ignore
+        }
+      } else if (rowContainerRef.current) {
+        // fallback: scroll the container to bottom
+        rowContainerRef.current.scrollTop = rowContainerRef.current.scrollHeight;
+      }
+    }, 120);
   }
 
   const total = parts.length;
@@ -131,8 +150,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
               </button>
             </div>
 
-            <div className="modal-body">
-              {/* Header form */}
+            {/* make modal-body scrollable so expanded rows can be scrolled into view */}
+            <div className="modal-body" style={{ maxHeight: '78vh', overflowY: 'auto' }} ref={rowContainerRef}>
+              {/* Header form in two columns */}
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
@@ -144,62 +164,61 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                         value={form.calCode}
                         onChange={change}
                       />
+                      <div className="input-group-append">
+                        <button type="button" className="btn btn-outline-secondary btn-sm">
+                          <i className="fas fa-search" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="form-group">
                     <label>Period</label>
-                    <select
-                      className="form-control form-control-sm"
-                      name="period"
-                      value={form.period}
-                      onChange={change}
-                    >
+                    <select className="form-control form-control-sm" name="period" value={form.period} onChange={change}>
                       <option>All</option>
                       <option>01.2025</option>
                       <option>02.2025</option>
                     </select>
                   </div>
 
+                  {/* Type control (single copy) */}
                   <div className="form-group">
                     <label>Type</label>
                     <div>
-                      <label className="mr-2">
+                      <div className="form-check form-check-inline">
                         <input
+                          className="form-check-input"
                           type="radio"
+                          id="type_pxp"
                           name="type"
                           value="PxP"
                           checked={form.type === "PxP"}
-                          onChange={(e) =>
-                            setForm((s) => ({ ...s, type: e.target.value }))
-                          }
-                        />{" "}
-                        PxP
-                      </label>
-                      <label>
+                          onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))}
+                        />
+                        <label className="form-check-label ml-2" htmlFor="type_pxp">
+                          PxP
+                        </label>
+                      </div>
+                      <div className="form-check form-check-inline">
                         <input
+                          className="form-check-input"
                           type="radio"
+                          id="type_lot"
                           name="type"
                           value="Lot"
                           checked={form.type === "Lot"}
-                          onChange={(e) =>
-                            setForm((s) => ({ ...s, type: e.target.value }))
-                          }
-                        />{" "}
-                        Lot
-                      </label>
+                          onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))}
+                        />
+                        <label className="form-check-label ml-2" htmlFor="type_lot">
+                          Lot
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div className="col-md-6">
                   <div className="form-group">
                     <label>Dest Code</label>
-                    <select
-                      className="form-control form-control-sm"
-                      name="destCode"
-                      value={form.destCode}
-                      onChange={change}
-                    >
+                    <select className="form-control form-control-sm" name="destCode" value={form.destCode} onChange={change}>
                       <option>All</option>
                       <option value="TASA">TASA - Argentina</option>
                     </select>
@@ -207,12 +226,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <div className="form-group">
                     <label>Model Code</label>
                     <div className="input-group input-group-sm">
-                      <input
-                        className="form-control form-control-sm"
-                        name="modelCode"
-                        value={form.modelCode}
-                        onChange={change}
-                      />
+                      <input className="form-control form-control-sm" name="modelCode" value={form.modelCode} onChange={change} />
                     </div>
                   </div>
                 </div>
@@ -237,9 +251,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <thead>
                     <tr style={{ backgroundColor: "#d0d0d0" }}>
                       <th rowSpan={2} style={{ width: 40 }}></th>
-                      <th rowSpan={2} style={{ width: 40 }}>
-                        No
-                      </th>
+                      <th rowSpan={2} style={{ width: 40 }}>No</th>
                       <th rowSpan={2}>Part No</th>
                       <th rowSpan={2}>Suffix</th>
                       <th rowSpan={2}>Part Name</th>
@@ -270,9 +282,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <tbody>
                     {visibleParts.length === 0 ? (
                       <tr>
-                        <td colSpan={30} className="text-center py-4 text-muted">
-                          No Data Found
-                        </td>
+                        <td colSpan={30} className="text-center py-4 text-muted">No Data Found</td>
                       </tr>
                     ) : (
                       visibleParts.map((p, i) => {
@@ -283,13 +293,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                         const innerArr = distributeAcross(p.inner.totalCost || 0, 10);
                         const outerArr = distributeAcross(p.outer.totalCost || 0, 10);
 
-                        // Simple labor breakdown demo
-                        const laborRows = [
-                          { label: "Receiving", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.4) },
-                          { label: "Pick & Pack", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.35) },
-                          { label: "Vanning", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.25) },
-                        ];
-
                         return (
                           <React.Fragment key={globalIndex}>
                             <tr>
@@ -298,7 +301,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                   type="button"
                                   className="btn btn-sm btn-light"
                                   onClick={() => toggleExpand(globalIndex)}
-                                  title={isExpanded ? "Collapse" : "Expand"}
                                 >
                                   <i className={`fas ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"}`} />
                                 </button>
@@ -342,7 +344,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                             </tr>
 
                             {isExpanded && (
-                              <tr>
+                              <tr ref={(el) => (expandedRowRefs.current[globalIndex] = el)}>
                                 <td colSpan={30} className="p-0">
                                   <div className="bg-white border-top p-3">
                                     {/* INNER sub-table */}
@@ -350,17 +352,12 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left">
-                                              <strong>INNER</strong>
-                                            </th>
+                                            <th colSpan={40} className="text-left"><strong>INNER</strong></th>
                                           </tr>
 
-                                          {/* Material 1..10 header */}
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
                                             {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">
-                                                Material {m + 1}
-                                              </th>
+                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
                                             ))}
                                           </tr>
 
@@ -400,17 +397,12 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left">
-                                              <strong>OUTER</strong>
-                                            </th>
+                                            <th colSpan={40} className="text-left"><strong>OUTER</strong></th>
                                           </tr>
 
-                                          {/* Material 1..10 header */}
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
                                             {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">
-                                                Material {m + 1}
-                                              </th>
+                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
                                             ))}
                                           </tr>
 
@@ -450,9 +442,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={20} className="text-left">
-                                              <strong>LABOR</strong>
-                                            </th>
+                                            <th colSpan={20} className="text-left"><strong>LABOR</strong></th>
                                           </tr>
                                           <tr style={{ backgroundColor: "#efefef" }}>
                                             <th>Activity</th>
@@ -465,11 +455,12 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                         </thead>
                                         <tbody>
                                           {(() => {
-                                            return [
+                                            const laborRows = [
                                               { label: "Receiving", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.4) },
                                               { label: "Pick & Pack", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.35) },
                                               { label: "Vanning", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.25) },
-                                            ].map((lr, idx) => (
+                                            ];
+                                            return laborRows.map((lr, idx) => (
                                               <tr key={idx}>
                                                 <td className="text-left">{lr.label}</td>
                                                 <td>{lr.qty}</td>
@@ -489,9 +480,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={10} className="text-left">
-                                              <strong>INLAND</strong>
-                                            </th>
+                                            <th colSpan={10} className="text-left"><strong>INLAND</strong></th>
                                           </tr>
                                           <tr style={{ backgroundColor: "#efefef" }}>
                                             <th>Item</th>
@@ -525,9 +514,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-0 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={8} className="text-left">
-                                              <strong>TOTAL</strong>
-                                            </th>
+                                            <th colSpan={8} className="text-left"><strong>TOTAL</strong></th>
                                           </tr>
                                           <tr style={{ backgroundColor: "#efefef" }}>
                                             <th>Inner</th>
@@ -569,25 +556,12 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
               {/* pagination */}
               <div className="d-flex align-items-center justify-content-between mt-2">
                 <div>
-                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(1)}>
-                    {"<<"}
-                  </button>
-                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(Math.max(1, page - 1))}>
-                    {"<"}
-                  </button>
+                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(1)}>{"<<"}</button>
+                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(Math.max(1, page - 1))}>{"<"}</button>
                   {[...Array(totalPages).keys()].map((n) => (
-                    <button
-                      key={n}
-                      type="button"
-                      className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"}`}
-                      onClick={() => goToPage(n + 1)}
-                    >
-                      {n + 1}
-                    </button>
+                    <button key={n} type="button" className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"}`} onClick={() => goToPage(n + 1)}>{n + 1}</button>
                   ))}
-                  <button type="button" className="btn btn-sm btn-light ml-2" onClick={() => goToPage(Math.min(totalPages, page + 1))}>
-                    {">"}
-                  </button>
+                  <button type="button" className="btn btn-sm btn-light ml-2" onClick={() => goToPage(Math.min(totalPages, page + 1))}>{">"}</button>
                 </div>
 
                 <div className="form-inline small">
