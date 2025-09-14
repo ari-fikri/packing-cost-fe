@@ -1,5 +1,6 @@
 // src/pages/packing/CalculatePackingCost.jsx
 import React, { useState } from 'react'
+import PackingCostNewModal from '../../components/PackingCostNewModal'
 
 export default function CalculatePackingCost() {
   // filters (two-column layout)
@@ -16,11 +17,13 @@ export default function CalculatePackingCost() {
   const total = rows.length
   const totalPages = Math.max(1, Math.ceil(total / perPage))
 
+  // Modal state
+  const [showNewModal, setShowNewModal] = useState(false)
+
   function handleFilter(e) {
     e && e.preventDefault && e.preventDefault()
     console.log('Filter with', { calCode, period, destCode, modelCode, type })
     setPage(1)
-    // TODO: call API with filters
   }
 
   function handleClear() {
@@ -39,6 +42,13 @@ export default function CalculatePackingCost() {
 
   const visibleRows = rows.slice((page - 1) * perPage, page * perPage)
 
+  // Called when modal Save is pressed (payload contains modal form + parts)
+  function handleModalSave(payload) {
+    console.log('Packing cost saved payload:', payload)
+    setShowNewModal(false)
+    // TODO: send payload to backend / add to list
+  }
+
   return (
     <div className="container-fluid">
       <div className="card card-outline card-primary">
@@ -46,7 +56,12 @@ export default function CalculatePackingCost() {
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>Packing Cost Calculation List</b></h3>
           <div className="card-tools ml-auto d-flex align-items-center gap-2">
-            <button type="button" className="btn btn-sm btn-success mr-2" title="Calculate Packing Cost">
+            <button
+              type="button"
+              className="btn btn-sm btn-success mr-2"
+              title="Calculate Packing Cost"
+              onClick={() => setShowNewModal(true)}
+            >
               <i className="fas fa-calculator mr-1" /> Calculate Packing Cost
             </button>
 
@@ -89,7 +104,6 @@ export default function CalculatePackingCost() {
                       <option value="All">All</option>
                       <option value="024W">024W</option>
                       <option value="ARG">ARG</option>
-                      {/* expand with real dest codes */}
                     </select>
                   </div>
 
@@ -142,9 +156,6 @@ export default function CalculatePackingCost() {
                       </div>
                     </div>
                   </div>
-
-                  {/* spacer – buttons moved below, outside right column */}
-                  <div className="col-12" />
                 </div>
               </div>
             </div>
@@ -240,6 +251,13 @@ export default function CalculatePackingCost() {
           </div>
         </div>
       </div>
+
+      {/* Packing Cost New Modal */}
+      <PackingCostNewModal
+        show={showNewModal}
+        onClose={() => setShowNewModal(false)}
+        onSave={handleModalSave}
+      />
     </div>
   )
 }
