@@ -85,15 +85,15 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
     }
   }
 
-  function handleSave(e) {
+ function handleSave(e) {
     e && e.preventDefault && e.preventDefault()
-    const payload = { ...form, parts }
+    const payload = { ...form, status: 'Draft', parts }
     onSave && onSave(payload)
   }
 
   function handleSubmit(e) {
     e && e.preventDefault && e.preventDefault()
-    const payload = { ...form, parts }
+    const payload = { ...form, status: 'Submitted', parts }
     onSubmit && onSubmit(payload)
   }
 
