@@ -1,8 +1,6 @@
 // src/components/NewDpiModal.jsx
 import React, { useState, useEffect } from 'react'
 
-// NewDpiModal with Parts Add/Edit/Delete and table layout
-// Props: show (bool), onClose(), onSave(payload), onSubmit(payload), initial
 export default function NewDpiModal({ show = false, onClose, initial = null, onSave, onSubmit }) {
   const emptyForm = {
     dpiNo: '',
@@ -41,7 +39,6 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
     setForm(s => ({ ...s, [name]: value }))
   }
 
-  // Parts manipulation
   function addPart() {
     const newPart = {
       cps: '',
@@ -69,10 +66,7 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
     setParts(prev => prev.filter((_, i) => i !== idx))
   }
 
-  // Mock copy-from-ref behavior (no data returned — as requested, remove prefilled values)
   async function fetchDpiByRef(ref) {
-    // This function should call your backend and return a DPI object (without prefilled values per user request)
-    // For now, return null so we DO NOT auto-fill fields.
     await new Promise(r => setTimeout(r, 200))
     return null
   }
@@ -83,7 +77,6 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
     try {
       const copied = await fetchDpiByRef(ref)
       if (copied) {
-        // if backend returns data, merge it; currently this will not run because fetch returns null
         setForm(s => ({ ...s, ...copied }))
         setParts(copied.parts || [])
       }
@@ -102,11 +95,6 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
     e && e.preventDefault && e.preventDefault()
     const payload = { ...form, parts }
     onSubmit && onSubmit(payload)
-  }
-
-  function handleClear() {
-    setForm(emptyForm)
-    setParts([])
   }
 
   return (
@@ -131,6 +119,28 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
                     </div>
 
                     <div className="form-group">
+                      <label>CFC / PJT</label>
+                      <input name="cfcPjt" className="form-control form-control-sm" value={form.cfcPjt} onChange={change} />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Issued Date</label>
+                      <input type="date" name="issuedDate" className="form-control form-control-sm" value={form.issuedDate} onChange={change} />
+                    </div>
+
+                    <div className="form-group">
+                      <label>From</label>
+                      <input name="from" className="form-control form-control-sm" value={form.from} onChange={change} />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Supplier</label>
+                      <input name="supplier" className="form-control form-control-sm" value={form.supplier} onChange={change} />
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="form-group">
                       <label><strong>DPI Ref No.</strong></label>
                       <div className="input-group input-group-sm">
                         <input
@@ -145,34 +155,24 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="col-md-6">
-                    <div className="form-row">
-                      <div className="form-group col-md-6">
-                        <label>Issued Date</label>
-                        <input type="date" name="issuedDate" className="form-control form-control-sm" value={form.issuedDate} onChange={change} />
-                      </div>
+                    <div className="form-group">
+                      <label>Model</label>
+                      <input name="model" className="form-control form-control-sm" value={form.model} onChange={change} />
+                    </div>
 
-                      <div className="form-group col-md-6">
-                        <label>Effective Date</label>
-                        <input type="date" name="effectiveDate" className="form-control form-control-sm" value={form.effectiveDate} onChange={change} />
-                      </div>
+                    <div className="form-group">
+                      <label>Effective Date</label>
+                      <input type="date" name="effectiveDate" className="form-control form-control-sm" value={form.effectiveDate} onChange={change} />
+                    </div>
 
-                      <div className="form-group col-md-6">
-                        <label>CFC / PJT</label>
-                        <input name="cfcPjt" className="form-control form-control-sm" value={form.cfcPjt} onChange={change} />
-                      </div>
-
-                      <div className="form-group col-md-6">
-                        <label>Model</label>
-                        <input name="model" className="form-control form-control-sm" value={form.model} onChange={change} />
-                      </div>
+                    <div className="form-group">
+                      <label>To</label>
+                      <input name="to" className="form-control form-control-sm" value={form.to} onChange={change} />
                     </div>
                   </div>
                 </div>
 
-                {/* Parts header with Add button */}
                 <div className="d-flex align-items-center justify-content-between mt-3 mb-2">
                   <h6><i className="fas fa-chevron-down" /> <strong>Parts</strong></h6>
                   <div>
@@ -180,7 +180,6 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
                   </div>
                 </div>
 
-                {/* Parts table */}
                 <div className="table-responsive">
                   <table className="table table-sm table-bordered">
                     <thead className="thead-light">
@@ -223,7 +222,7 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
                             <td><input className="form-control form-control-sm" value={p.qtyBox} onChange={e => updatePart(i, 'qtyBox', e.target.value)} /></td>
                             <td><input className="form-control form-control-sm" value={p.totalWt} onChange={e => updatePart(i, 'totalWt', e.target.value)} /></td>
                             <td>
-                              <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={() => { /* optional edit focus */ }} title="Edit"><i className="fas fa-pencil-alt" /></button>
+                              <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Edit"><i className="fas fa-pencil-alt" /></button>
                               <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => removePart(i)} title="Delete"><i className="fas fa-trash" /></button>
                             </td>
                           </tr>
@@ -233,17 +232,13 @@ export default function NewDpiModal({ show = false, onClose, initial = null, onS
                   </table>
                 </div>
 
-                {/* Notes */}
                 <div className="mt-3">
                   <label><strong>Note :</strong></label>
                   <textarea className="form-control form-control-sm" rows={4} value={form.notes} onChange={e => setForm(s => ({ ...s, notes: e.target.value }))} />
                 </div>
-
               </div>
 
               <div className="modal-footer d-flex justify-content-end">
-                <button type="button" className="btn btn-secondary mr-2" onClick={onClose}>Cancel</button>
-                <button type="button" className="btn btn-danger mr-2" onClick={handleClear}>Clear</button>
                 <button type="button" className="btn btn-success mr-2" onClick={handleSave}>Save</button>
                 <button type="button" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
               </div>
