@@ -1,28 +1,23 @@
 // src/components/PackingCostNewModal.jsx
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import PartPickerModal from "./PartPickerModal";
+import PartsTableRow from "../pages/packing/PartsTableRow";
 
-// PackingCostNewModal — blank-slate initial view matching the provided salt design
-// Props: show (bool), onClose(), onSave(payload)
+const emptyForm = {
+  calCode: "",
+  period: "All",
+  destCode: "All",
+  modelCode: "",
+  type: "PxP",
+};
+
 export default function PackingCostNewModal({ show = false, onClose, onSave }) {
-  const emptyForm = {
-    calCode: "",
-    period: "All",
-    destCode: "All",
-    modelCode: "",
-    type: "PxP",
-  };
-
   const [form, setForm] = useState(emptyForm);
   const [parts, setParts] = useState([]);
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [expandedRows, setExpandedRows] = useState(new Set());
-
-  // refs for scrolling into view when expanded
-  const rowContainerRef = useRef(null);
-  const expandedRowRefs = useRef({});
 
   useEffect(() => {
     if (show) {
@@ -53,7 +48,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     onClose && onClose();
   }
 
-  // Called when PartPicker returns selected parts
   function handlePartsPicked(selected) {
     if (!Array.isArray(selected) || selected.length === 0) {
       setShowPartPicker(false);
@@ -64,8 +58,8 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       suffix: "",
       partName: p.partName,
       parentPartNo: p.parentPartNo || p.parent || "",
-      supplierId: p.supplierId || "",
-      supplierName: p.supplierName || "",
+      supplierId: p.supplierName ? (p.supplierId || p.supplierCode || "") : "",
+      supplierName: p.supplierName,
       L: p.L || "",
       W: p.W || "",
       H: p.H || "",
@@ -90,22 +84,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       else next.add(rowIndex);
       return next;
     });
-
-    // after state update, scroll the expanded content into view
-    // use a small timeout so DOM updates first
-    setTimeout(() => {
-      const ref = expandedRowRefs.current[rowIndex];
-      if (ref && typeof ref.scrollIntoView === "function") {
-        try {
-          ref.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        } catch (e) {
-          // ignore
-        }
-      } else if (rowContainerRef.current) {
-        // fallback: scroll the container to bottom
-        rowContainerRef.current.scrollTop = rowContainerRef.current.scrollHeight;
-      }
-    }, 120);
   }
 
   const total = parts.length;
@@ -115,7 +93,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
   const visibleParts = parts.slice((page - 1) * perPage, page * perPage);
 
-  // Helpers
   const distributeAcross = (value, buckets = 10) => {
     const val = Number(value) || 0;
     const base = Math.floor(val / buckets);
@@ -127,48 +104,22 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
 
   return (
     <>
-      <div
-        className="modal fade show d-block"
-        tabIndex={-1}
-        role="dialog"
-        aria-modal="true"
-        style={{ paddingRight: 0 }}
-      >
+      <div className="modal fade show d-block" tabIndex={-1} role="dialog" aria-modal="true" style={{ paddingRight: 0 }}>
         <div className="modal-dialog modal-fullscreen" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">
-                <strong>Packing Cost Calculation New</strong>
-              </h5>
-              <button
-                type="button"
-                className="close"
-                onClick={handleCancel}
-                aria-label="Close"
-              >
-                <span aria-hidden>×</span>
-              </button>
+              <h5 className="modal-title"><strong>Packing Cost Calculation New</strong></h5>
+              <button type="button" className="close" onClick={handleCancel} aria-label="Close"><span aria-hidden>×</span></button>
             </div>
 
-            {/* make modal-body scrollable so expanded rows can be scrolled into view */}
-            <div className="modal-body" style={{ maxHeight: '78vh', overflowY: 'auto' }} ref={rowContainerRef}>
-              {/* Header form in two columns */}
+            <div className="modal-body" style={{ maxHeight: "78vh", overflowY: "auto" }}>
+              {/* Header form */}
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
                     <label>Pack Cost Cal Code</label>
                     <div className="input-group input-group-sm">
-                      <input
-                        className="form-control form-control-sm"
-                        name="calCode"
-                        value={form.calCode}
-                        onChange={change}
-                      />
-                      <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm">
-                          <i className="fas fa-search" />
-                        </button>
-                      </div>
+                      <input className="form-control form-control-sm" name="calCode" value={form.calCode} onChange={change} />
                     </div>
                   </div>
                   <div className="form-group">
@@ -180,41 +131,19 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                     </select>
                   </div>
 
-                  {/* Type control (single copy) */}
                   <div className="form-group">
                     <label>Type</label>
                     <div>
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          id="type_pxp"
-                          name="type"
-                          value="PxP"
-                          checked={form.type === "PxP"}
-                          onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))}
-                        />
-                        <label className="form-check-label ml-2" htmlFor="type_pxp">
-                          PxP
-                        </label>
-                      </div>
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          id="type_lot"
-                          name="type"
-                          value="Lot"
-                          checked={form.type === "Lot"}
-                          onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))}
-                        />
-                        <label className="form-check-label ml-2" htmlFor="type_lot">
-                          Lot
-                        </label>
-                      </div>
+                      <label className="mr-2">
+                        <input type="radio" name="type" value="PxP" checked={form.type === "PxP"} onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))} /> PxP
+                      </label>
+                      <label>
+                        <input type="radio" name="type" value="Lot" checked={form.type === "Lot"} onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))} /> Lot
+                      </label>
                     </div>
                   </div>
                 </div>
+
                 <div className="col-md-6">
                   <div className="form-group">
                     <label>Dest Code</label>
@@ -235,11 +164,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
               {/* Action row */}
               <div className="d-flex align-items-center justify-content-between my-2">
                 <div>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-primary mr-2"
-                    onClick={() => setShowPartPicker(true)}
-                  >
+                  <button type="button" className="btn btn-sm btn-primary mr-2" onClick={() => setShowPartPicker(true)}>
                     <i className="fas fa-plus mr-1" /> Add Part
                   </button>
                 </div>
@@ -279,6 +204,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                       ))}
                     </tr>
                   </thead>
+
                   <tbody>
                     {visibleParts.length === 0 ? (
                       <tr>
@@ -289,263 +215,15 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                         const globalIndex = (page - 1) * perPage + i;
                         const isExpanded = expandedRows.has(globalIndex);
 
-                        // Prepare distributed arrays for inner/outer (10 materials)
-                        const innerArr = distributeAcross(p.inner.totalCost || 0, 10);
-                        const outerArr = distributeAcross(p.outer.totalCost || 0, 10);
-
                         return (
-                          <React.Fragment key={globalIndex}>
-                            <tr>
-                              <td className="text-center">
-                                <button
-                                  type="button"
-                                  className="btn btn-sm btn-light"
-                                  onClick={() => toggleExpand(globalIndex)}
-                                >
-                                  <i className={`fas ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"}`} />
-                                </button>
-                              </td>
-
-                              <td>{globalIndex + 1}</td>
-                              <td>{fmt(p.partNo)}</td>
-                              <td>{fmt(p.suffix)}</td>
-                              <td className="text-left">{fmt(p.partName)}</td>
-                              <td>{fmt(p.parentPartNo)}</td>
-                              <td>{fmt(p.supplierId)}</td>
-                              <td>{fmt(p.supplierName)}</td>
-                              <td>{fmt(p.L)}</td>
-                              <td>{fmt(p.W)}</td>
-                              <td>{fmt(p.H)}</td>
-                              <td>{fmt(p.boxM3)}</td>
-
-                              <td>{fmt(p.inner.totalCost)}</td>
-                              <td>{fmt(p.inner.prevYear)}</td>
-                              <td>{fmt(p.inner.diff)}</td>
-
-                              <td>{fmt(p.outer.totalCost)}</td>
-                              <td>{fmt(p.outer.prevYear)}</td>
-                              <td>{fmt(p.outer.diff)}</td>
-
-                              <td>{fmt(p.material.totalCost)}</td>
-                              <td>{fmt(p.material.prevYear)}</td>
-                              <td>{fmt(p.material.diff)}</td>
-
-                              <td>{fmt(p.labor.totalCost)}</td>
-                              <td>{fmt(p.labor.prevYear)}</td>
-                              <td>{fmt(p.labor.diff)}</td>
-
-                              <td>{fmt(p.inland.totalCost)}</td>
-                              <td>{fmt(p.inland.prevYear)}</td>
-                              <td>{fmt(p.inland.diff)}</td>
-
-                              <td>{fmt(p.total.totalCost)}</td>
-                              <td>{fmt(p.total.prevYear)}</td>
-                              <td>{fmt(p.total.diff)}</td>
-                            </tr>
-
-                            {isExpanded && (
-                              <tr ref={(el) => (expandedRowRefs.current[globalIndex] = el)}>
-                                <td colSpan={30} className="p-0">
-                                  <div className="bg-white border-top p-3">
-                                    {/* INNER sub-table */}
-                                    <div className="mb-3">
-                                      <table className="table table-sm table-bordered mb-1 w-100">
-                                        <thead>
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left"><strong>INNER</strong></th>
-                                          </tr>
-
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
-                                            ))}
-                                          </tr>
-
-                                          <tr style={{ backgroundColor: "#efefef" }}>
-                                            {Array.from({ length: 10 }).map((_, j) => (
-                                              <React.Fragment key={j}>
-                                                <th>Part No</th>
-                                                <th>Qty</th>
-                                                <th>Price</th>
-                                                <th>Sum</th>
-                                              </React.Fragment>
-                                            ))}
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            {Array.from({ length: 10 }).map((_, m) => {
-                                              const price = innerArr[m] || 0;
-                                              const qty = 1;
-                                              const sum = price * qty;
-                                              return (
-                                                <React.Fragment key={m}>
-                                                  <td className="text-left">{fmt(p.partNo)}</td>
-                                                  <td>{qty}</td>
-                                                  <td>{price}</td>
-                                                  <td>{sum}</td>
-                                                </React.Fragment>
-                                              );
-                                            })}
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-
-                                    {/* OUTER sub-table */}
-                                    <div className="mb-3">
-                                      <table className="table table-sm table-bordered mb-1 w-100">
-                                        <thead>
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left"><strong>OUTER</strong></th>
-                                          </tr>
-
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
-                                            ))}
-                                          </tr>
-
-                                          <tr style={{ backgroundColor: "#efefef" }}>
-                                            {Array.from({ length: 10 }).map((_, j) => (
-                                              <React.Fragment key={j}>
-                                                <th>Part No</th>
-                                                <th>Qty</th>
-                                                <th>Price</th>
-                                                <th>Sum</th>
-                                              </React.Fragment>
-                                            ))}
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            {Array.from({ length: 10 }).map((_, m) => {
-                                              const price = outerArr[m] || 0;
-                                              const qty = 1;
-                                              const sum = price * qty;
-                                              return (
-                                                <React.Fragment key={m}>
-                                                  <td className="text-left">{fmt(p.partNo)}</td>
-                                                  <td>{qty}</td>
-                                                  <td>{price}</td>
-                                                  <td>{sum}</td>
-                                                </React.Fragment>
-                                              );
-                                            })}
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-
-                                    {/* LABOR sub-table */}
-                                    <div className="mb-3">
-                                      <table className="table table-sm table-bordered mb-1 w-100">
-                                        <thead>
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={20} className="text-left"><strong>LABOR</strong></th>
-                                          </tr>
-                                          <tr style={{ backgroundColor: "#efefef" }}>
-                                            <th>Activity</th>
-                                            <th>Qty</th>
-                                            <th>Rate</th>
-                                            <th>Sum</th>
-                                            <th>Requirement</th>
-                                            <th>Current</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {(() => {
-                                            const laborRows = [
-                                              { label: "Receiving", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.4) },
-                                              { label: "Pick & Pack", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.35) },
-                                              { label: "Vanning", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.25) },
-                                            ];
-                                            return laborRows.map((lr, idx) => (
-                                              <tr key={idx}>
-                                                <td className="text-left">{lr.label}</td>
-                                                <td>{lr.qty}</td>
-                                                <td>{lr.rate}</td>
-                                                <td>{lr.rate * lr.qty}</td>
-                                                <td>{lr.qty}</td>
-                                                <td>{lr.rate}</td>
-                                              </tr>
-                                            ));
-                                          })()}
-                                        </tbody>
-                                      </table>
-                                    </div>
-
-                                    {/* INLAND sub-table */}
-                                    <div className="mb-3">
-                                      <table className="table table-sm table-bordered mb-1 w-100">
-                                        <thead>
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={10} className="text-left"><strong>INLAND</strong></th>
-                                          </tr>
-                                          <tr style={{ backgroundColor: "#efefef" }}>
-                                            <th>Item</th>
-                                            <th>Value</th>
-                                            <th>M3</th>
-                                            <th>Diff</th>
-                                            <th>Note</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td className="text-left">Pack Time (V-PASS)</td>
-                                            <td>{Math.round((p.inland.totalCost || 0) * 0.6)}</td>
-                                            <td>{fmt(p.boxM3)}</td>
-                                            <td>—</td>
-                                            <td />
-                                          </tr>
-                                          <tr>
-                                            <td className="text-left">Inland Cost</td>
-                                            <td>{Math.round((p.inland.totalCost || 0) * 0.4)}</td>
-                                            <td>{fmt(p.boxM3)}</td>
-                                            <td>—</td>
-                                            <td />
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-
-                                    {/* TOTAL summary */}
-                                    <div>
-                                      <table className="table table-sm table-bordered mb-0 w-100">
-                                        <thead>
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={8} className="text-left"><strong>TOTAL</strong></th>
-                                          </tr>
-                                          <tr style={{ backgroundColor: "#efefef" }}>
-                                            <th>Inner</th>
-                                            <th>Outer</th>
-                                            <th>Material</th>
-                                            <th>Labor</th>
-                                            <th>Inland</th>
-                                            <th>Total Cost</th>
-                                            <th>Prev Year</th>
-                                            <th>Diff</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td>{fmt(p.inner.totalCost)}</td>
-                                            <td>{fmt(p.outer.totalCost)}</td>
-                                            <td>{fmt(p.material.totalCost)}</td>
-                                            <td>{fmt(p.labor.totalCost)}</td>
-                                            <td>{fmt(p.inland.totalCost)}</td>
-                                            <td>{fmt(p.total.totalCost)}</td>
-                                            <td>{fmt(p.total.prevYear)}</td>
-                                            <td>{fmt(p.total.diff)}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            )}
-                          </React.Fragment>
+                          <PartsTableRow
+                            key={globalIndex}
+                            index={globalIndex}
+                            part={p}
+                            isExpanded={isExpanded}
+                            onToggleExpand={toggleExpand}
+                            distributeAcross={distributeAcross}
+                          />
                         );
                       })
                     )}
