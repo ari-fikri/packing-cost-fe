@@ -18,12 +18,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
+  const [expandedRows, setExpandedRows] = useState(new Set());
 
   useEffect(() => {
     if (show) {
       setForm(emptyForm);
       setParts([]);
       setPage(1);
+      setExpandedRows(new Set());
       document.body.classList.add("modal-open");
     } else {
       document.body.classList.remove("modal-open");
@@ -77,6 +79,16 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setParts((prev) => [...prev, ...mapped]);
     setShowPartPicker(false);
     setPage(1);
+  }
+
+  // expand/collapse helpers
+  function toggleExpand(globalIndex) {
+    setExpandedRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(globalIndex)) next.delete(globalIndex);
+      else next.add(globalIndex);
+      return next;
+    });
   }
 
   const total = parts.length;
@@ -301,48 +313,105 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                         </td>
                       </tr>
                     ) : (
-                      visibleParts.map((p, i) => (
-                        <tr key={(page - 1) * perPage + i}>
-                          <td className="text-center">
-                            <button type="button" className="btn btn-sm btn-light"><i className="fas fa-chevron-right" /></button>
-                          </td>
-                          <td>{(page - 1) * perPage + i + 1}</td>
-                          <td>{p.partNo}</td>
-                          <td>{p.suffix}</td>
-                          <td className="text-left">{p.partName}</td>
-                          <td>{p.parentPartNo}</td>
-                          <td>{p.supplierId}</td>
-                          <td>{p.supplierName}</td>
-                          <td>{p.L}</td>
-                          <td>{p.W}</td>
-                          <td>{p.H}</td>
-                          <td>{p.boxM3}</td>
+                      visibleParts.map((p, i) => {
+                        const globalIndex = (page - 1) * perPage + i
+                        const isExpanded = expandedRows.has(globalIndex)
+                        return (
+                          <React.Fragment key={globalIndex}>
+                            <tr>
+                              <td className="text-center">
+                                <button type="button" className="btn btn-sm btn-light" onClick={() => toggleExpand(globalIndex)}>
+                                  <i className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`} />
+                                </button>
+                              </td>
+                              <td>{globalIndex + 1}</td>
+                              <td>{p.partNo}</td>
+                              <td>{p.suffix}</td>
+                              <td className="text-left">{p.partName}</td>
+                              <td>{p.parentPartNo}</td>
+                              <td>{p.supplierId}</td>
+                              <td>{p.supplierName}</td>
+                              <td>{p.L}</td>
+                              <td>{p.W}</td>
+                              <td>{p.H}</td>
+                              <td>{p.boxM3}</td>
 
-                          <td>{p.inner.totalCost}</td>
-                          <td>{p.inner.prevYear}</td>
-                          <td>{p.inner.diff}</td>
+                              <td>{p.inner.totalCost}</td>
+                              <td>{p.inner.prevYear}</td>
+                              <td>{p.inner.diff}</td>
 
-                          <td>{p.outer.totalCost}</td>
-                          <td>{p.outer.prevYear}</td>
-                          <td>{p.outer.diff}</td>
+                              <td>{p.outer.totalCost}</td>
+                              <td>{p.outer.prevYear}</td>
+                              <td>{p.outer.diff}</td>
 
-                          <td>{p.material.totalCost}</td>
-                          <td>{p.material.prevYear}</td>
-                          <td>{p.material.diff}</td>
+                              <td>{p.material.totalCost}</td>
+                              <td>{p.material.prevYear}</td>
+                              <td>{p.material.diff}</td>
 
-                          <td>{p.labor.totalCost}</td>
-                          <td>{p.labor.prevYear}</td>
-                          <td>{p.labor.diff}</td>
+                              <td>{p.labor.totalCost}</td>
+                              <td>{p.labor.prevYear}</td>
+                              <td>{p.labor.diff}</td>
 
-                          <td>{p.inland.totalCost}</td>
-                          <td>{p.inland.prevYear}</td>
-                          <td>{p.inland.diff}</td>
+                              <td>{p.inland.totalCost}</td>
+                              <td>{p.inland.prevYear}</td>
+                              <td>{p.inland.diff}</td>
 
-                          <td>{p.total.totalCost}</td>
-                          <td>{p.total.prevYear}</td>
-                          <td>{p.total.diff}</td>
-                        </tr>
-                      ))
+                              <td>{p.total.totalCost}</td>
+                              <td>{p.total.prevYear}</td>
+                              <td>{p.total.diff}</td>
+                            </tr>
+
+                            {isExpanded && (
+                              <tr>
+                                <td colSpan={28} className="p-0">
+                                  {/* INNER sub-table matching the provided design */}
+                                  <div className="p-3 bg-white border-top">
+                                    <h6 className="mb-2"><strong>INNER</strong></h6>
+                                    <div className="table-responsive">
+                                      <table className="table table-sm table-bordered mb-0">
+                                        <thead>
+                                          <tr>
+                                            {Array.from({ length: 10 }).map((_, mi) => (
+                                              <th key={mi} colSpan={4} className="text-center">Material {mi + 1}</th>
+                                            ))}
+                                          </tr>
+                                          <tr>
+                                            {Array.from({ length: 10 }).map((_, mi) => (
+                                              <React.Fragment key={mi}>
+                                                <th>Part No</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Sum</th>
+                                              </React.Fragment>
+                                            ))}
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            {Array.from({ length: 10 }).map((_, mi) => {
+                                              const price = Math.round((p.inner.totalCost || 0) / 10) || 0;
+                                              const qty = 1;
+                                              const sum = price * qty;
+                                              return (
+                                                <React.Fragment key={mi}>
+                                                  <td className="text-left">{p.partNo}</td>
+                                                  <td>{qty}</td>
+                                                  <td>{price}</td>
+                                                  <td>{sum}</td>
+                                                </React.Fragment>
+                                              );
+                                            })}
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
+                          </React.Fragment>
+                        )
+                      })
                     )}
                   </tbody>
                 </table>
