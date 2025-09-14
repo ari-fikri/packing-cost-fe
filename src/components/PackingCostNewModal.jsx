@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import PartPickerModal from "./PartPickerModal";
 
+// PackingCostNewModal — blank-slate initial view matching the provided salt design
+// Props: show (bool), onClose(), onSave(payload)
 export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const emptyForm = {
     calCode: "",
@@ -47,6 +49,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     onClose && onClose();
   }
 
+  // Called when PartPicker returns selected parts
   function handlePartsPicked(selected) {
     if (!Array.isArray(selected) || selected.length === 0) {
       setShowPartPicker(false);
@@ -65,6 +68,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       boxM3: p.boxM3 || "",
       inner: { totalCost: p.innerTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
       outer: { totalCost: p.outerTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
+      // material subtable removed, but keep a main-table material total if desired:
       material: { totalCost: p.materialTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
       labor: { totalCost: p.laborTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
       inland: { totalCost: p.inlandTotal ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
@@ -92,6 +96,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
   const visibleParts = parts.slice((page - 1) * perPage, page * perPage);
 
+  // Helpers
   const distributeAcross = (value, buckets = 10) => {
     const val = Number(value) || 0;
     const base = Math.floor(val / buckets);
@@ -103,29 +108,52 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
 
   return (
     <>
-      <div className="modal fade show d-block" tabIndex={-1} role="dialog" aria-modal="true" style={{ paddingRight: 0 }}>
+      <div
+        className="modal fade show d-block"
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        style={{ paddingRight: 0 }}
+      >
         <div className="modal-dialog modal-fullscreen" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title"><strong>Packing Cost Calculation New</strong></h5>
-              <button type="button" className="close" onClick={handleCancel} aria-label="Close">
+              <h5 className="modal-title">
+                <strong>Packing Cost Calculation New</strong>
+              </h5>
+              <button
+                type="button"
+                className="close"
+                onClick={handleCancel}
+                aria-label="Close"
+              >
                 <span aria-hidden>×</span>
               </button>
             </div>
 
             <div className="modal-body">
+              {/* Header form */}
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
                     <label>Pack Cost Cal Code</label>
                     <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" name="calCode" value={form.calCode} onChange={change} />
+                      <input
+                        className="form-control form-control-sm"
+                        name="calCode"
+                        value={form.calCode}
+                        onChange={change}
+                      />
                     </div>
                   </div>
-
                   <div className="form-group">
                     <label>Period</label>
-                    <select className="form-control form-control-sm" name="period" value={form.period} onChange={change}>
+                    <select
+                      className="form-control form-control-sm"
+                      name="period"
+                      value={form.period}
+                      onChange={change}
+                    >
                       <option>All</option>
                       <option>01.2025</option>
                       <option>02.2025</option>
@@ -135,11 +163,29 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <div className="form-group">
                     <label>Type</label>
                     <div>
-                      <label className="mr-3">
-                        <input type="radio" name="type" value="PxP" checked={form.type === "PxP"} onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))} /> PxP
+                      <label className="mr-2">
+                        <input
+                          type="radio"
+                          name="type"
+                          value="PxP"
+                          checked={form.type === "PxP"}
+                          onChange={(e) =>
+                            setForm((s) => ({ ...s, type: e.target.value }))
+                          }
+                        />{" "}
+                        PxP
                       </label>
                       <label>
-                        <input type="radio" name="type" value="Lot" checked={form.type === "Lot"} onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))} /> Lot
+                        <input
+                          type="radio"
+                          name="type"
+                          value="Lot"
+                          checked={form.type === "Lot"}
+                          onChange={(e) =>
+                            setForm((s) => ({ ...s, type: e.target.value }))
+                          }
+                        />{" "}
+                        Lot
                       </label>
                     </div>
                   </div>
@@ -148,35 +194,52 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 <div className="col-md-6">
                   <div className="form-group">
                     <label>Dest Code</label>
-                    <select className="form-control form-control-sm" name="destCode" value={form.destCode} onChange={change}>
+                    <select
+                      className="form-control form-control-sm"
+                      name="destCode"
+                      value={form.destCode}
+                      onChange={change}
+                    >
                       <option>All</option>
                       <option value="TASA">TASA - Argentina</option>
                     </select>
                   </div>
-
                   <div className="form-group">
                     <label>Model Code</label>
                     <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" name="modelCode" value={form.modelCode} onChange={change} />
+                      <input
+                        className="form-control form-control-sm"
+                        name="modelCode"
+                        value={form.modelCode}
+                        onChange={change}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Action row */}
               <div className="d-flex align-items-center justify-content-between my-2">
                 <div>
-                  <button type="button" className="btn btn-sm btn-primary mr-2" onClick={() => setShowPartPicker(true)}>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-primary mr-2"
+                    onClick={() => setShowPartPicker(true)}
+                  >
                     <i className="fas fa-plus mr-1" /> Add Part
                   </button>
                 </div>
               </div>
 
+              {/* Parts table */}
               <div className="table-responsive">
                 <table className="table table-bordered table-sm text-center w-100">
                   <thead>
                     <tr style={{ backgroundColor: "#d0d0d0" }}>
                       <th rowSpan={2} style={{ width: 40 }}></th>
-                      <th rowSpan={2} style={{ width: 40 }}>No</th>
+                      <th rowSpan={2} style={{ width: 40 }}>
+                        No
+                      </th>
                       <th rowSpan={2}>Part No</th>
                       <th rowSpan={2}>Suffix</th>
                       <th rowSpan={2}>Part Name</th>
@@ -204,26 +267,39 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                       ))}
                     </tr>
                   </thead>
-
                   <tbody>
                     {visibleParts.length === 0 ? (
                       <tr>
-                        <td colSpan={30} className="text-center py-4 text-muted">No Data Found</td>
+                        <td colSpan={30} className="text-center py-4 text-muted">
+                          No Data Found
+                        </td>
                       </tr>
                     ) : (
                       visibleParts.map((p, i) => {
                         const globalIndex = (page - 1) * perPage + i;
                         const isExpanded = expandedRows.has(globalIndex);
 
+                        // Prepare distributed arrays for inner/outer (10 materials)
                         const innerArr = distributeAcross(p.inner.totalCost || 0, 10);
                         const outerArr = distributeAcross(p.outer.totalCost || 0, 10);
-                        const materialArr = distributeAcross(p.material.totalCost || 0, 10);
+
+                        // Simple labor breakdown demo
+                        const laborRows = [
+                          { label: "Receiving", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.4) },
+                          { label: "Pick & Pack", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.35) },
+                          { label: "Vanning", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.25) },
+                        ];
 
                         return (
                           <React.Fragment key={globalIndex}>
                             <tr>
                               <td className="text-center">
-                                <button type="button" className="btn btn-sm btn-light" onClick={() => toggleExpand(globalIndex)}>
+                                <button
+                                  type="button"
+                                  className="btn btn-sm btn-light"
+                                  onClick={() => toggleExpand(globalIndex)}
+                                  title={isExpanded ? "Collapse" : "Expand"}
+                                >
                                   <i className={`fas ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"}`} />
                                 </button>
                               </td>
@@ -274,12 +350,17 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left"><strong>INNER</strong></th>
+                                            <th colSpan={40} className="text-left">
+                                              <strong>INNER</strong>
+                                            </th>
                                           </tr>
 
+                                          {/* Material 1..10 header */}
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
                                             {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
+                                              <th key={m} colSpan={4} className="text-center">
+                                                Material {m + 1}
+                                              </th>
                                             ))}
                                           </tr>
 
@@ -319,12 +400,17 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left"><strong>OUTER</strong></th>
+                                            <th colSpan={40} className="text-left">
+                                              <strong>OUTER</strong>
+                                            </th>
                                           </tr>
 
+                                          {/* Material 1..10 header */}
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
                                             {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
+                                              <th key={m} colSpan={4} className="text-center">
+                                                Material {m + 1}
+                                              </th>
                                             ))}
                                           </tr>
 
@@ -359,57 +445,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       </table>
                                     </div>
 
-                                    {/* MATERIAL sub-table */}
-                                    <div className="mb-3">
-                                      <table className="table table-sm table-bordered mb-1 w-100">
-                                        <thead>
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={40} className="text-left"><strong>MATERIAL</strong></th>
-                                          </tr>
-
-                                          <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            {Array.from({ length: 10 }).map((_, m) => (
-                                              <th key={m} colSpan={4} className="text-center">Material {m + 1}</th>
-                                            ))}
-                                          </tr>
-
-                                          <tr style={{ backgroundColor: "#efefef" }}>
-                                            {Array.from({ length: 10 }).map((_, j) => (
-                                              <React.Fragment key={j}>
-                                                <th>Part No</th>
-                                                <th>Qty</th>
-                                                <th>Price</th>
-                                                <th>Sum</th>
-                                              </React.Fragment>
-                                            ))}
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            {Array.from({ length: 10 }).map((_, m) => {
-                                              const price = materialArr[m] || 0;
-                                              const qty = 1;
-                                              const sum = price * qty;
-                                              return (
-                                                <React.Fragment key={m}>
-                                                  <td className="text-left">{fmt(p.partNo)}</td>
-                                                  <td>{qty}</td>
-                                                  <td>{price}</td>
-                                                  <td>{sum}</td>
-                                                </React.Fragment>
-                                              );
-                                            })}
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-
                                     {/* LABOR sub-table */}
                                     <div className="mb-3">
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={20} className="text-left"><strong>LABOR</strong></th>
+                                            <th colSpan={20} className="text-left">
+                                              <strong>LABOR</strong>
+                                            </th>
                                           </tr>
                                           <tr style={{ backgroundColor: "#efefef" }}>
                                             <th>Activity</th>
@@ -422,12 +465,11 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                         </thead>
                                         <tbody>
                                           {(() => {
-                                            const laborRows = [
+                                            return [
                                               { label: "Receiving", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.4) },
                                               { label: "Pick & Pack", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.35) },
                                               { label: "Vanning", qty: 1, rate: Math.round((p.labor.totalCost || 0) * 0.25) },
-                                            ];
-                                            return laborRows.map((lr, idx) => (
+                                            ].map((lr, idx) => (
                                               <tr key={idx}>
                                                 <td className="text-left">{lr.label}</td>
                                                 <td>{lr.qty}</td>
@@ -447,7 +489,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-1 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={10} className="text-left"><strong>INLAND</strong></th>
+                                            <th colSpan={10} className="text-left">
+                                              <strong>INLAND</strong>
+                                            </th>
                                           </tr>
                                           <tr style={{ backgroundColor: "#efefef" }}>
                                             <th>Item</th>
@@ -481,7 +525,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                                       <table className="table table-sm table-bordered mb-0 w-100">
                                         <thead>
                                           <tr style={{ backgroundColor: "#d0d0d0" }}>
-                                            <th colSpan={8} className="text-left"><strong>TOTAL</strong></th>
+                                            <th colSpan={8} className="text-left">
+                                              <strong>TOTAL</strong>
+                                            </th>
                                           </tr>
                                           <tr style={{ backgroundColor: "#efefef" }}>
                                             <th>Inner</th>
@@ -520,14 +566,28 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 </table>
               </div>
 
+              {/* pagination */}
               <div className="d-flex align-items-center justify-content-between mt-2">
                 <div>
-                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(1)}>{"<<"}</button>
-                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(Math.max(1, page - 1))}>{"<"}</button>
+                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(1)}>
+                    {"<<"}
+                  </button>
+                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(Math.max(1, page - 1))}>
+                    {"<"}
+                  </button>
                   {[...Array(totalPages).keys()].map((n) => (
-                    <button key={n} type="button" className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"}`} onClick={() => goToPage(n + 1)}>{n + 1}</button>
+                    <button
+                      key={n}
+                      type="button"
+                      className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"}`}
+                      onClick={() => goToPage(n + 1)}
+                    >
+                      {n + 1}
+                    </button>
                   ))}
-                  <button type="button" className="btn btn-sm btn-light ml-2" onClick={() => goToPage(Math.min(totalPages, page + 1))}>{">"}</button>
+                  <button type="button" className="btn btn-sm btn-light ml-2" onClick={() => goToPage(Math.min(totalPages, page + 1))}>
+                    {">"}
+                  </button>
                 </div>
 
                 <div className="form-inline small">
