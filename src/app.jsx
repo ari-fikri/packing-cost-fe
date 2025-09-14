@@ -11,6 +11,7 @@ import Models from './pages/Models'
 import Parts from './pages/Parts'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Cps from './pages/packing/Cps'
+import Dpi from './pages/packing/Dpi'
 
 function ProtectedRoute({ children }){
   const auth = useAuth()
@@ -46,6 +47,7 @@ export default function App(){
           <Route path="/models" element={<ProtectedRoute><Models/></ProtectedRoute>} />
           <Route path="/parts" element={<ProtectedRoute><Parts/></ProtectedRoute>} />
           <Route path="/packing/cps" element={<Cps />} />
+          <Route path="/packing/dpi" element={<Dpi />} />
         </Routes>
       </div>
 

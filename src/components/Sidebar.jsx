@@ -4,6 +4,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Cps from '../pages/packing/Cps'
+import Dpi from '../pages/packing/Dpi'
 
 export default function Sidebar() {
   const auth = useAuth()
@@ -131,11 +132,20 @@ export default function Sidebar() {
                 </li>
 
                 <li className="nav-item">
+                  <NavLink to="/packing/DPI" className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}>
+                     <i className="far fa-circle nav-icon" />
+                     <p>DPI</p>
+                  </NavLink>
+                </li>
+
+                {/*}
+                <li className="nav-item">
                   <NavLink to="/packing/dpi" className={navLinkClass}>
                     <i className="far fa-circle nav-icon" />
                     <p>DPI</p>
                   </NavLink>
                 </li>
+                */}
 
                 <li className="nav-item">
                   <NavLink to="/packing/calculate" className={navLinkClass}>
