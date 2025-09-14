@@ -253,6 +253,8 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 <table className="table table-bordered table-sm text-center w-100">
                   <thead>
                     <tr style={{ backgroundColor: "#d0d0d0" }}>
+                      <th rowSpan={2} style={{ width: 40 }}></th>
+                      <th rowSpan={2} style={{ width: 40 }}>No</th>
                       <th rowSpan={2}>Part No</th>
                       <th rowSpan={2}>Suffix</th>
                       <th rowSpan={2}>Part Name</th>
@@ -301,6 +303,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                     ) : (
                       visibleParts.map((p, i) => (
                         <tr key={(page - 1) * perPage + i}>
+                          <td className="text-center">
+                            <button type="button" className="btn btn-sm btn-light"><i className="fas fa-chevron-right" /></button>
+                          </td>
+                          <td>{(page - 1) * perPage + i + 1}</td>
                           <td>{p.partNo}</td>
                           <td>{p.suffix}</td>
                           <td className="text-left">{p.partName}</td>
