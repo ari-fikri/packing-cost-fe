@@ -3,7 +3,6 @@ import InnerSubTable from "./InnerSubTable";
 import OuterSubTable from "./OuterSubTable";
 import LaborSubTable from "./LaborSubTable";
 import InlandSubTable from "./InlandSubTable";
-import TotalSummary from "./TotalSummary";
 
 /**
  * PartsTableRow
@@ -79,7 +78,6 @@ export default function PartsTableRow({ index, part, isExpanded, onToggleExpand,
               <OuterSubTable part={part} outerArr={outerArr} />
               <LaborSubTable part={part} labor={part.labor} />
               <InlandSubTable part={part} inland={part.inland} />
-              <TotalSummary part={part} />
             </div>
           </td>
         </tr>
