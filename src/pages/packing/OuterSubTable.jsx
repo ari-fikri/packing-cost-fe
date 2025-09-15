@@ -25,7 +25,7 @@ export default function OuterSubTable({ part = {}, outerArr = [] }) {
 
   return (
     <div className="mb-3">
-      <table className="table table-sm table-bordered mb-1 w-100">
+      <table className="table table-sm table-bordered mb-1 w-100 subtable-small">
         <thead>
           {/* Title row: chevron + OUTER */}
           <tr style={{ backgroundColor: "#d0d0d0" }}>

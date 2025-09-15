@@ -22,7 +22,7 @@ export default function InlandSubTable({ part = {}, inland = { totalCost: 0 } })
 
   return (
     <div className="mb-3">
-      <table className="table table-sm table-bordered mb-1 w-100">
+      <table className="table table-sm table-bordered mb-1 w-100 subtable-small">
         <thead>
           {/* Title row with chevron */}
           <tr style={{ backgroundColor: "#d0d0d0" }}>

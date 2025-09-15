@@ -41,3 +41,7 @@ html,body,#root { height:100% }
   margin: 0;
   height: 100vh;
 }
+
+.subtable-small {
+  font-size: 0.85rem; /* ~2pt smaller than default */
+}
