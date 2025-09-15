@@ -91,19 +91,33 @@ export default function ComparisonPage() {
           </tr>
 
           {/* Material Section */}
-          <CollapsibleRow title={`Material`} value1={222} value2={203} diff={calcDiff(222, 203)}>
+          <CollapsibleRow
+            title="Material"
+            value1={materialsData.reduce((sum, m) => sum + m.value1, 0)}
+            value2={materialsData.reduce((sum, m) => sum + m.value2, 0)}
+            diff={calcDiff(
+              materialsData.reduce((sum, m) => sum + m.value1, 0),
+              materialsData.reduce((sum, m) => sum + m.value2, 0)
+            )}
+          >
             {/* Inner */}
-            <CollapsibleRow title={`Inner`} value1={222} value2={203} diff={calcDiff(222, 203)}>
+            <CollapsibleRow
+              title="Inner"
+              value1={materialsData.reduce((sum, m) => sum + m.value1, 0)}
+              value2={materialsData.reduce((sum, m) => sum + m.value2, 0)}
+              diff={calcDiff(
+                materialsData.reduce((sum, m) => sum + m.value1, 0),
+                materialsData.reduce((sum, m) => sum + m.value2, 0)
+              )}
+            >
               {materialsData.map((mat, i) => (
                 <React.Fragment key={`inner-${i}`}>
-                  {/* Summary row */}
                   <tr>
                     <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
                     <td>{mat.value1}</td>
                     <td>{mat.value2}</td>
                     <td>{calcDiff(mat.value1, mat.value2)}</td>
                   </tr>
-                  {/* Detail row */}
                   <tr>
                     <td style={{ paddingLeft: "40px" }}>
                       <div>- Part No: {mat.detail.partNo}</div>
@@ -120,17 +134,23 @@ export default function ComparisonPage() {
             </CollapsibleRow>
 
             {/* Outer */}
-            <CollapsibleRow title={`Outer`} value1={222} value2={203} diff={calcDiff(222, 203)}>
+            <CollapsibleRow
+              title="Outer"
+              value1={materialsData.reduce((sum, m) => sum + m.value1, 0)}
+              value2={materialsData.reduce((sum, m) => sum + m.value2, 0)}
+              diff={calcDiff(
+                materialsData.reduce((sum, m) => sum + m.value1, 0),
+                materialsData.reduce((sum, m) => sum + m.value2, 0)
+              )}
+            >
               {materialsData.map((mat, i) => (
                 <React.Fragment key={`outer-${i}`}>
-                  {/* Summary row */}
                   <tr>
                     <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
                     <td>{mat.value1}</td>
                     <td>{mat.value2}</td>
                     <td>{calcDiff(mat.value1, mat.value2)}</td>
                   </tr>
-                  {/* Detail row */}
                   <tr>
                     <td style={{ paddingLeft: "40px" }}>
                       <div>- Part No: {mat.detail.partNo}</div>
@@ -148,7 +168,12 @@ export default function ComparisonPage() {
           </CollapsibleRow>
 
           {/* Labor Section */}
-          <CollapsibleRow title={`Labor`} value1={labor.total} value2={labor2.dl + labor2.idl + labor2.facility} diff={calcDiff(labor.total, labor2.dl + labor2.idl + labor2.facility)}>
+          <CollapsibleRow
+            title="Labor"
+            value1={labor.total}
+            value2={labor2.dl + labor2.idl + labor2.facility}
+            diff={calcDiff(labor.total, labor2.dl + labor2.idl + labor2.facility)}
+          >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- DL</td>
               <td>{labor.dl}</td>
@@ -170,7 +195,12 @@ export default function ComparisonPage() {
           </CollapsibleRow>
 
           {/* Inland Section */}
-          <CollapsibleRow title={`Inland`} value1={inland.total} value2={inland2.inlandCost + inland2.milkrunCost} diff={calcDiff(inland.total, inland2.inlandCost + inland2.milkrunCost)}>
+          <CollapsibleRow
+            title="Inland"
+            value1={inland.total}
+            value2={inland2.inlandCost + inland2.milkrunCost}
+            diff={calcDiff(inland.total, inland2.inlandCost + inland2.milkrunCost)}
+          >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
               <td>{inland.inlandCost}</td>
