@@ -510,9 +510,11 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* Inner pack materials table */}
-                  <div className="col-md-6">
+                {/* Inner pack materials table in a new row, full width */}
+                <div className="row mt-3">
+                  <div className="col-12">
                     <div className="d-flex justify-content-between align-items-center">
                       <label className="small mb-1">INNER (Pack Material)</label>
                       <div>
