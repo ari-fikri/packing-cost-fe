@@ -1,5 +1,6 @@
 // src/pages/ModuleType.jsx
 import React, { useState } from 'react'
+import NewModuleTypeModal from '../components/NewModuleTypeModal'
 
 export default function ModuleType() {
   // Filters
@@ -7,6 +8,7 @@ export default function ModuleType() {
   const [itemNo, setItemNo] = useState('')
   const [destination, setDestination] = useState('')
   const [price, setPrice] = useState('')
+  const [showNewModal, setShowNewModal] = useState(false)
 
   // Table data
   const [modules, setModules] = useState([])
@@ -22,6 +24,20 @@ export default function ModuleType() {
     setPrice('')
   }
 
+  function handleOpenNew() {
+    setShowNewModal(true)
+  }
+
+  function handleCloseNew() {
+    setShowNewModal(false)
+  }
+
+  function handleSaveNewModuleType(payload) {
+    console.log('New Module Type saved:', payload)
+    setShowNewModal(false)
+    // TODO: push payload to a list if needed
+  }  
+
   function handleDeleteModule(index) {
     if (!confirm('Delete this module type?')) return
     setModules(prev => prev.filter((_, i) => i !== index))
@@ -33,7 +49,7 @@ export default function ModuleType() {
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>Module Type List</b></h3>
           <div className="card-tools ml-auto">
-            <button type="button" className="btn btn-sm btn-success mr-2" onClick={() => alert('Add placeholder')}>
+            <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}>
               <i className="fas fa-file mr-1" /> Add
             </button>
             <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={() => alert('Upload placeholder')}>
@@ -132,6 +148,13 @@ export default function ModuleType() {
           <button type="button" className="btn btn-primary mr-2" onClick={() => alert('Save placeholder')}>Save</button>
           <button type="button" className="btn btn-secondary" onClick={() => alert('Cancel placeholder')}>Cancel</button>
         </div>
+
+        <NewModuleTypeModal
+          show={showNewModal}
+          onClose={handleCloseNew}
+          onSave={handleSaveNewModuleType}
+        />
+
       </div>
     </div>
   )
