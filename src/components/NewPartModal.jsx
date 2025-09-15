@@ -172,7 +172,22 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
           <div className="form-row">
             <div className="form-group col-md-6">
               <label className="small mb-1">Supplier Code</label>
-              <input className="form-control form-control-sm" value={suppCode} onChange={e => setSuppCode(e.target.value)} />
+              <div className="input-group input-group-sm">
+                <input
+                  className="form-control form-control-sm"
+                  value={suppCode}
+                  onChange={e => setSuppCode(e.target.value)}
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-secondary btn-sm"
+                    type="button"
+                    onClick={() => alert('Search Supplier placeholder')}
+                  >
+                    <i className="fas fa-search" />
+                  </button>
+                </div>
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label className="small mb-1">Supplier Name</label>
@@ -285,34 +300,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                         >
                           <i className="fas fa-trash" />
                         </button>
-                      </td>                      // ...existing code...
-                      
-                      {/* 2nd row */}
-                      <div className="form-row">
-                        <div className="form-group col-md-6">
-                          <label className="small mb-1">Unique No</label>
-                          <div className="input-group input-group-sm">
-                            <input
-                              className="form-control form-control-sm"
-                              value={uniqueNo}
-                              onChange={e => setUniqueNo(e.target.value)}
-                            />
-                            <div className="input-group-append">
-                              <button
-                                className="btn btn-outline-secondary btn-sm"
-                                type="button"
-                                onClick={() => alert('Flash/Generate Unique No')}
-                              >
-                                <i className="fas fa-bolt" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="form-group col-md-6"></div>
-                      </div>
-                      {/* end 2nd row */}
-                      
-                      // ...existing code...
+                      </td>
                     </tr>
                   ))
                 )}
