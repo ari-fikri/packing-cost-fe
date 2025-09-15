@@ -1,14 +1,12 @@
 // src/components/NewModuleTypeModal.jsx
 import React, { useState } from 'react'
 
-export default function NewModuleTypeModal({ show, onClose, onSave }) {
+export default function NewModuleTypeModal({ show, onClose, onSave, destinations }) {
   const [typeCode, setTypeCode] = useState('')
   const [itemNo, setItemNo] = useState('')
   const [eWarehousePrice, setEWarehousePrice] = useState('')
   const [dimOuter, setDimOuter] = useState({ L: '', W: '', H: '' })
-  const [dimOuterM3, setDimOuterM3] = useState('')
   const [dimInner, setDimInner] = useState({ L: '', W: '', H: '' })
-  const [dimInnerM3, setDimInnerM3] = useState('')
   const [destCodes, setDestCodes] = useState('')
   const [price, setPrice] = useState('')
 
@@ -20,7 +18,7 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
     const w = parseFloat(dim.W) || 0
     const h = parseFloat(dim.H) || 0
     if (!l || !w || !h) return ''
-    return ((l * w * h) / 1000000000)
+    return ((l * w * h) / 100).toFixed(2)
   }
 
   const handleSave = () => {
@@ -29,9 +27,7 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
       itemNo,
       eWarehousePrice,
       dimOuter,
-      dimOuterM3,
       dimInner,
-      dimInnerM3,
       destCodes,
       price
     }
@@ -42,9 +38,7 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
     setItemNo('')
     setEWarehousePrice('')
     setDimOuter({ L: '', W: '', H: '' })
-    setDimOuterM3('')
     setDimInner({ L: '', W: '', H: '' })
-    setDimInnerM3('')
     setDestCodes('')
     setPrice('')
   }
@@ -69,7 +63,18 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
               </div>
               <div className="form-group col-md-6">
                 <label>Dest Code</label>
-                <input type="text" className="form-control form-control-sm" value={destCodes} onChange={e => setDestCodes(e.target.value)} placeholder="e.g., 301B - Argentina ^ 807B - Indonesia" />
+                <select
+                  className="form-control form-control-sm"
+                  value={destCodes}
+                  onChange={e => setDestCodes(e.target.value)}
+                >
+                  <option value="">Select destination...</option>
+                  {destinations && destinations.map(dest => (
+                    <option key={dest.destCode + dest.code} value={dest.destCode}>
+                      {dest.destCode} - {dest.code} - {dest.country}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 

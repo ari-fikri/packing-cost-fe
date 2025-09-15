@@ -17,6 +17,9 @@ import Comparison from './pages/ComparisonPage'
 import ModuleType from './pages/ModuleType'
 import Settings from './pages/Settings'
 
+//Data files
+import DESTINATIONS from './data/destinations';
+
 function ProtectedRoute({ children }){
   const auth = useAuth()
   if(!auth.user) return <Navigate to="/login" replace />
@@ -94,4 +97,17 @@ function Main(){
       </section>
     </>
   )
+
+  useEffect(() => {
+    // Initialize localStorage for destination table if not already present
+    if (!localStorage.getItem('destinationTable')) {
+      localStorage.setItem('destinationTable', JSON.stringify(DESTINATIONS));
+    }
+  }, []);
+
+  return (
+    <div>
+      <ModuleType />
+    </div>
+  );  
 }

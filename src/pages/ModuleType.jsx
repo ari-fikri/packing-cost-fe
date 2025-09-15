@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import NewModuleTypeModal from '../components/NewModuleTypeModal'
+import DESTINATIONS from '../data/destinations'
 
 export default function ModuleType() {
   // Filters
@@ -153,6 +154,7 @@ export default function ModuleType() {
           show={showNewModal}
           onClose={handleCloseNew}
           onSave={handleSaveNewModuleType}
+          destinations={DESTINATIONS}
         />
       </div>
     </div>
