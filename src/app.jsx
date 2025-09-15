@@ -13,6 +13,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Cps from './pages/packing/Cps'
 import Dpi from './pages/packing/Dpi'
 import Calculate from './pages/packing/CalculatePackingCost'
+import Comparison from './pages/ComparisonPage'
 
 function ProtectedRoute({ children }){
   const auth = useAuth()
@@ -50,6 +51,7 @@ export default function App(){
           <Route path="/packing/cps" element={<Cps />} />
           <Route path="/packing/dpi" element={<Dpi />} />
           <Route path="/packing/CalculatePackingCost" element={<Calculate />} />
+          <Route path="/packing/ComparisonPage" element={<Comparison />} />
         </Routes>
       </div>
 

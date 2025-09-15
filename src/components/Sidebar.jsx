@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Cps from '../pages/packing/Cps'
 import Dpi from '../pages/packing/Dpi'
 import Calculate from '../pages/packing/CalculatePackingCost'
+import Comparsion from '../pages/ComparisonPage'
 
 export default function Sidebar() {
   const auth = useAuth()
@@ -154,6 +155,12 @@ export default function Sidebar() {
                     <p>Calculate Packing Cost</p>
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink to="/packing/ComparisonPage" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>Comparison</p>
+                  </NavLink>
+                </li>                
               </ul>
             </li>
 
