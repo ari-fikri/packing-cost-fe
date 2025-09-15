@@ -43,6 +43,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
 
   // new state for part picker modal
   const [showPartPicker, setShowPartPicker] = useState(false)
+  const [partPickerMode, setPartPickerMode] = useState('parent') // 'parent' or 'child'
 
   useEffect(() => {
     if (show) {
@@ -117,6 +118,30 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
     setShowPartPicker(false)
   }
 
+  // Handler for picking child parts
+  function handlePickChildParts(parts) {
+    if (parts && parts.length > 0) {
+      // Map selected parts to table row structure
+      const mapped = parts.map(p => ({
+        partNo: p.partNo || p[0] || '',
+        suffix: p.suffix || p[1] || '',
+        uniqueNo: p.uniqueNo || '',
+        name: p.name || p[2] || '',
+        parent: p.parent || '',
+        supplierId: p.supplierId || '',
+        supplierName: p.supplierName || p[3] || '',
+        L: p.L || '',
+        W: p.W || '',
+        H: p.H || '',
+        wtPerPc: p.wtPerPc || '',
+        qty: p.qty || '',
+        totalWt: p.totalWt || '',
+      }))
+      setChildParts(prev => [...prev, ...mapped])
+    }
+    setShowPartPicker(false)
+  }
+
   if (!show) return null
 
   return (
@@ -145,12 +170,16 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
             <div className="form-group col-md-6">
               <label className="small mb-1">Parent Part No</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={parentPartNo} onChange={e => setParentPartNo(e.target.value)} />
+                <input
+                  className="form-control form-control-sm"
+                  value={parentPartNo}
+                  onChange={e => setParentPartNo(e.target.value)}
+                />
                 <div className="input-group-append">
                   <button
                     className="btn btn-outline-secondary btn-sm"
                     type="button"
-                    onClick={() => setShowPartPicker(true)}
+                    onClick={() => { setPartPickerMode('parent'); setShowPartPicker(true); }} // <-- set mode here
                   >
                     <i className="fas fa-search" />
                   </button>
@@ -270,7 +299,11 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
 
           {/* Add Child Part toolbar */}
           <div className="mb-3">
-            <button type="button" className="btn btn-sm btn-outline-primary" onClick={handleAddChildClick}>
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-primary"
+              onClick={() => { setPartPickerMode('child'); setShowPartPicker(true); }}
+            >
               <i className="fas fa-file mr-1" /> Add Child Part
             </button>
           </div>
@@ -331,13 +364,13 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
         </div>
       </div>
 
-      {/* PartPickerModal for Parent Part No */}
+      {/* PartPickerModal for Parent Part No or Child Parts */}
       {showPartPicker && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 3000 }}>
           <PartPickerModal
             show={showPartPicker}
             onClose={() => setShowPartPicker(false)}
-            onSelect={handlePickParentPart}
+            onSelect={partPickerMode === 'parent' ? handlePickParentPart : handlePickChildParts}
           />
         </div>
       )}
