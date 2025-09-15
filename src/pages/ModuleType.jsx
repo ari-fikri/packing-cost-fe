@@ -1,4 +1,3 @@
-// src/pages/ModuleType.jsx
 import React, { useState } from 'react'
 import NewModuleTypeModal from '../components/NewModuleTypeModal'
 
@@ -32,11 +31,11 @@ export default function ModuleType() {
     setShowNewModal(false)
   }
 
+  // **Receive new module type from modal and add to table**
   function handleSaveNewModuleType(payload) {
-    console.log('New Module Type saved:', payload)
+    setModules(prev => [payload, ...prev])
     setShowNewModal(false)
-    // TODO: push payload to a list if needed
-  }  
+  }
 
   function handleDeleteModule(index) {
     if (!confirm('Delete this module type?')) return
@@ -121,12 +120,12 @@ export default function ModuleType() {
                     <tr key={i}>
                       <td>{i + 1}</td>
                       <td>{m.typeCode}</td>
-                      <td>{m.destCode}</td>
-                      <td>{m.destName}</td>
+                      <td>{m.destCodes}</td>
+                      <td>{m.destCodes}</td> {/* replace with actual destName if available */}
                       <td>{m.itemNo}</td>
-                      <td>{m.dimension}</td>
-                      <td>{m.outer}</td>
-                      <td>{m.inner}</td>
+                      <td>{`L:${m.dimOuter.L} W:${m.dimOuter.W} H:${m.dimOuter.H}`}</td>
+                      <td>{m.dimOuterM3}</td>
+                      <td>{m.dimInnerM3}</td>
                       <td>{m.price}</td>
                       <td>
                         <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => alert('Edit placeholder')}>
@@ -149,12 +148,12 @@ export default function ModuleType() {
           <button type="button" className="btn btn-secondary" onClick={() => alert('Cancel placeholder')}>Cancel</button>
         </div>
 
+        {/* Modal */}
         <NewModuleTypeModal
           show={showNewModal}
           onClose={handleCloseNew}
           onSave={handleSaveNewModuleType}
         />
-
       </div>
     </div>
   )
