@@ -7,6 +7,7 @@ import Cps from '../pages/packing/Cps'
 import Dpi from '../pages/packing/Dpi'
 import Calculate from '../pages/packing/CalculatePackingCost'
 import Comparsion from '../pages/ComparisonPage'
+import ModuleType from '../pages/ModuleType'
 
 export default function Sidebar() {
   const auth = useAuth()
@@ -99,7 +100,12 @@ export default function Sidebar() {
                     <p>Models</p>
                   </NavLink>
                 </li>
-
+                <li className="nav-item">
+                  <NavLink to="/module-type" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>Module Type</p>
+                  </NavLink>
+                </li>
                 <li className="nav-item">
                   <NavLink to="/parts" className={navLinkClass}>
                     <i className="far fa-circle nav-icon" />
@@ -139,15 +145,6 @@ export default function Sidebar() {
                      <p>DPI</p>
                   </NavLink>
                 </li>
-
-                {/*}
-                <li className="nav-item">
-                  <NavLink to="/packing/dpi" className={navLinkClass}>
-                    <i className="far fa-circle nav-icon" />
-                    <p>DPI</p>
-                  </NavLink>
-                </li>
-                */}
 
                 <li className="nav-item">
                   <NavLink to="/packing/CalculatePackingCost" className={navLinkClass}>
