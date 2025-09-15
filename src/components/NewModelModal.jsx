@@ -1,5 +1,6 @@
 // src/pages/NewModelModal.jsx
 import React, { useState, useEffect } from 'react'
+import PartPickerModal from '../components/PartPickerModal' // Uncomment and adjust path as needed
 
 export default function NewModelModal({ show = false, onClose = () => {}, onSave = () => {} }) {
   // form fields
@@ -9,82 +10,26 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
 
   // parts
   const [parts, setParts] = useState([])
-  const [showAddPartRow, setShowAddPartRow] = useState(false)
-  const [partForm, setPartForm] = useState({
-    partNo: '',
-    suffix: '',
-    name: '',
-    parent: '',
-    supplierId: '',
-    supplierName: '',
-    L: '',
-    W: '',
-    H: '',
-    wtPerPc: '',
-    qty: '',
-  })
+  const [showPartPicker, setShowPartPicker] = useState(false)
 
   useEffect(() => {
-    console.log('NewModelModal show=', show)
     if (show) {
-      // reset the modal fields whenever it's opened
       setNewCode('')
       setNewName('')
       setNewRemark('')
       setParts([])
-      setShowAddPartRow(false)
-      setPartForm({
-        partNo: '',
-        suffix: '',
-        name: '',
-        parent: '',
-        supplierId: '',
-        supplierName: '',
-        L: '',
-        W: '',
-        H: '',
-        wtPerPc: '',
-        qty: '',
-      })
+      setShowPartPicker(false)
     }
   }, [show])
 
-  function resetPartForm() {
-    setPartForm({
-      partNo: '',
-      suffix: '',
-      name: '',
-      parent: '',
-      supplierId: '',
-      supplierName: '',
-      L: '',
-      W: '',
-      H: '',
-      wtPerPc: '',
-      qty: '',
-    })
-  }
-
   function handleAddPartClick() {
-    setShowAddPartRow(true)
+    setShowPartPicker(true)
   }
 
-  function handleSavePart() {
-    if (!partForm.partNo.trim()) {
-      alert('Please enter Part No')
-      return
-    }
-    const qty = Number(partForm.qty) || 0
-    const wt = Number(partForm.wtPerPc) || 0
-    const newPart = {
-      ...partForm,
-      qty,
-      wtPerPc: wt,
-      totalWt: +(qty * wt).toFixed(3),
-    }
-    setParts(prev => [...prev, newPart])
-    resetPartForm()
-    setShowAddPartRow(false)
+  function handlePartPicked(selectedParts) {
+    // Assume selectedParts is an array of part objects
+    setParts(prev => [...prev, ...selectedParts])
+    setShowPartPicker(false)
   }
 
   function handleRemovePart(idx) {
@@ -102,7 +47,6 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
       remark: newRemark,
       parts: parts.slice(),
     }
-    console.log('saving model payload:', payload)
     onSave(payload)
   }
 
@@ -122,17 +66,17 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
         </div>
 
         <div className="card-body">
-          {/* Fields */}
+          {/* Two columns layout for fields */}
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-6">
               <label className="small">Code</label>
               <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-6">
               <label className="small">Name</label>
               <input className="form-control form-control-sm mb-2" value={newName} onChange={e => setNewName(e.target.value)} />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-12">
               <label className="small">Remark</label>
               <input className="form-control form-control-sm mb-2" value={newRemark} onChange={e => setNewRemark(e.target.value)} />
             </div>
@@ -151,7 +95,7 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
             </button>
           </div>
 
-          {/* Parts table — ALWAYS rendered (shows "- No parts added yet -" when empty) */}
+          {/* Parts table */}
           <div className="table-responsive">
             <table className="table table-sm table-bordered mb-2">
               <thead>
@@ -199,30 +143,6 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
                     </tr>
                   ))
                 )}
-
-                {/* Inline Add Part row */}
-                {showAddPartRow && (
-                  <tr>
-                    <td><input className="form-control form-control-sm" value={partForm.partNo} onChange={e => setPartForm(f => ({ ...f, partNo: e.target.value }))} /></td>
-                    <td><input className="form-control form-control-sm" value={partForm.suffix} onChange={e => setPartForm(f => ({ ...f, suffix: e.target.value }))} /></td>
-                    <td><input className="form-control form-control-sm" value={partForm.name} onChange={e => setPartForm(f => ({ ...f, name: e.target.value }))} /></td>
-                    <td><input className="form-control form-control-sm" value={partForm.parent} onChange={e => setPartForm(f => ({ ...f, parent: e.target.value }))} /></td>
-                    <td><input className="form-control form-control-sm" value={partForm.supplierId} onChange={e => setPartForm(f => ({ ...f, supplierId: e.target.value }))} /></td>
-                    <td><input className="form-control form-control-sm" value={partForm.supplierName} onChange={e => setPartForm(f => ({ ...f, supplierName: e.target.value }))} /></td>
-                    <td style={{ width: 80 }}><input className="form-control form-control-sm" value={partForm.L} onChange={e => setPartForm(f => ({ ...f, L: e.target.value }))} /></td>
-                    <td style={{ width: 80 }}><input className="form-control form-control-sm" value={partForm.W} onChange={e => setPartForm(f => ({ ...f, W: e.target.value }))} /></td>
-                    <td style={{ width: 80 }}><input className="form-control form-control-sm" value={partForm.H} onChange={e => setPartForm(f => ({ ...f, H: e.target.value }))} /></td>
-                    <td style={{ width: 90 }}><input type="number" className="form-control form-control-sm" value={partForm.wtPerPc} onChange={e => setPartForm(f => ({ ...f, wtPerPc: e.target.value }))} /></td>
-                    <td style={{ width: 80 }}><input type="number" className="form-control form-control-sm" value={partForm.qty} onChange={e => setPartForm(f => ({ ...f, qty: e.target.value }))} /></td>
-                    <td style={{ width: 90 }} className="align-middle text-center">—</td>
-                    <td style={{ width: 90 }}>
-                      <div className="btn-group" role="group">
-                        <button type="button" className="btn btn-sm btn-primary" onClick={handleSavePart}>Add</button>
-                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => { resetPartForm(); setShowAddPartRow(false); }}>Cancel</button>
-                      </div>
-                    </td>
-                  </tr>
-                )}
               </tbody>
             </table>
           </div>
@@ -237,6 +157,18 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
           </button>
         </div>
       </div>
+
+      {/* PartPickerModal integration */}
+      {showPartPicker && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 3000 }}>
+          <PartPickerModal
+            show={showPartPicker}
+            onClose={() => setShowPartPicker(false)}
+            //onPicked={handlePartPicked}
+            onSelect={handlePartPicked}
+          />
+        </div>
+      )}
 
       <style>{`
         .np-modal-backdrop {
