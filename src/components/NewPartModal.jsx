@@ -1,5 +1,6 @@
 // src/components/NewPartModal.jsx
 import React, { useState, useEffect } from 'react'
+import PartPickerModal from './PartPickerModal' // adjust path if needed
 
 export default function NewPartModal({ show = false, onClose = () => {}, onSave = () => {} }) {
   // main fields
@@ -39,6 +40,9 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
     wtPerPc: '',
     qty: '',
   })
+
+  // new state for part picker modal
+  const [showPartPicker, setShowPartPicker] = useState(false)
 
   useEffect(() => {
     if (show) {
@@ -105,6 +109,14 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
     onSave(payload)
   }
 
+  // Handler for picking parent part
+  function handlePickParentPart(parts) {
+    if (parts && parts.length > 0) {
+      setParentPartNo(parts[0].partNo)
+    }
+    setShowPartPicker(false)
+  }
+
   if (!show) return null
 
   return (
@@ -135,7 +147,11 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
               <div className="input-group input-group-sm">
                 <input className="form-control form-control-sm" value={parentPartNo} onChange={e => setParentPartNo(e.target.value)} />
                 <div className="input-group-append">
-                  <button className="btn btn-outline-secondary btn-sm" onClick={() => alert('Search Parent placeholder')}>
+                  <button
+                    className="btn btn-outline-secondary btn-sm"
+                    type="button"
+                    onClick={() => setShowPartPicker(true)}
+                  >
                     <i className="fas fa-search" />
                   </button>
                 </div>
@@ -314,6 +330,17 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
           <button className="btn btn-outline-secondary" onClick={onClose}><i className="fas fa-times mr-1" /> Cancel</button>
         </div>
       </div>
+
+      {/* PartPickerModal for Parent Part No */}
+      {showPartPicker && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 3000 }}>
+          <PartPickerModal
+            show={showPartPicker}
+            onClose={() => setShowPartPicker(false)}
+            onSelect={handlePickParentPart}
+          />
+        </div>
+      )}
 
       <style>{`
         .np-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 2000; display:flex; align-items:center; justify-content:center; padding:1rem; }
