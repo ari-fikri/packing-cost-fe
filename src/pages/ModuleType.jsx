@@ -13,7 +13,6 @@ export default function ModuleType() {
 
   function handleFilter() {
     console.log('Filter module types by', { typeCode, itemNo, destination, price })
-    // implement filtering logic here
   }
 
   function handleClearFilters() {
@@ -37,43 +36,46 @@ export default function ModuleType() {
             <button type="button" className="btn btn-sm btn-success mr-2" onClick={() => alert('Add placeholder')}>
               <i className="fas fa-file mr-1" /> Add
             </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload" onClick={() => alert('Upload placeholder')}>
+            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={() => alert('Upload placeholder')}>
               <i className="fas fa-cloud-upload-alt" />
             </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary" title="Template" onClick={() => alert('Download template placeholder')}>
+            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => alert('Download template placeholder')}>
               <i className="fas fa-cloud-download-alt" />
             </button>
           </div>
         </div>
 
         <div className="card-body">
-          {/* Filters */}
+          {/* Filters: 2 columns layout */}
           <div className="form-row mb-3">
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-6">
               <label className="small mb-1">Type Code</label>
               <input type="text" className="form-control form-control-sm" value={typeCode} onChange={e => setTypeCode(e.target.value)} placeholder="Type Code" />
             </div>
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-6">
               <label className="small mb-1">Item No</label>
               <input type="text" className="form-control form-control-sm" value={itemNo} onChange={e => setItemNo(e.target.value)} placeholder="Item No" />
             </div>
-            <div className="form-group col-md-3">
+          </div>
+
+          <div className="form-row mb-3">
+            <div className="form-group col-md-6">
               <label className="small mb-1">Destination</label>
               <input type="text" className="form-control form-control-sm" value={destination} onChange={e => setDestination(e.target.value)} placeholder="Destination" />
             </div>
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-6">
               <label className="small mb-1">Price</label>
               <input type="text" className="form-control form-control-sm" value={price} onChange={e => setPrice(e.target.value)} placeholder="Price" />
             </div>
+          </div>
 
-            <div className="form-group col-md-12 text-right">
-              <button type="button" className="btn btn-sm btn-primary mr-2" onClick={handleFilter}>
-                <i className="fas fa-search mr-1" /> Search
-              </button>
-              <button type="button" className="btn btn-sm btn-outline-secondary" onClick={handleClearFilters}>
-                <i className="fas fa-undo mr-1" /> Reset
-              </button>
-            </div>
+          <div className="form-group text-right mb-3">
+            <button type="button" className="btn btn-sm btn-primary mr-2" onClick={handleFilter}>
+              <i className="fas fa-search mr-1" /> Search
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={handleClearFilters}>
+              <i className="fas fa-undo mr-1" /> Reset
+            </button>
           </div>
 
           {/* Table */}
