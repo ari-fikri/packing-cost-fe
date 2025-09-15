@@ -10,8 +10,9 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
   const [parentPartNo, setParentPartNo] = useState('')
   const [suppCode, setSuppCode] = useState('')
   const [supplierName, setSupplierName] = useState('')
+  const [supplierAddress, setSupplierAddress] = useState('')
   const [plantCode, setPlantCode] = useState('')
-  const [uniqueNo2, setUniqueNo2] = useState('') // you included "Uniqe No" twice in SALT; keep second if needed
+  const [uniqueNo2, setUniqueNo2] = useState('')
 
   // dimensions & weights
   const [lengthMM, setLengthMM] = useState('')
@@ -19,7 +20,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
   const [heightMM, setHeightMM] = useState('')
   const [weightPerPc, setWeightPerPc] = useState('')
   const [qtyBox, setQtyBox] = useState('')
-  const [totalWeight, setTotalWeight] = useState('')
+  // Remove totalWeight state, always compute
 
   // child parts inside modal
   const [childParts, setChildParts] = useState([])
@@ -41,11 +42,10 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
 
   useEffect(() => {
     if (show) {
-      // reset form when opened
       setPartNo(''); setUniqueNo(''); setSuffixCode(''); setPartName('')
-      setParentPartNo(''); setSuppCode(''); setSupplierName(''); setPlantCode('')
+      setParentPartNo(''); setSuppCode(''); setSupplierName(''); setSupplierAddress(''); setPlantCode('')
       setUniqueNo2('')
-      setLengthMM(''); setWidthMM(''); setHeightMM(''); setWeightPerPc(''); setQtyBox(''); setTotalWeight('')
+      setLengthMM(''); setWidthMM(''); setHeightMM(''); setWeightPerPc(''); setQtyBox('')
       setChildParts([]); setShowAddChildRow(false)
       setChildForm({
         partNo: '', suffix: '', uniqueNo: '', name: '', parent: '',
@@ -54,10 +54,19 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
     }
   }, [show])
 
+  function computeVolume(l, w, h) {
+    const L = Number(l) || 0
+    const W = Number(w) || 0
+    const H = Number(h) || 0
+    if (!L || !W || !H) return ''
+    return ((L * W * H) / 1000000).toFixed(3)
+  }
+
   function computeTotalWeight(wtGr, qtyN) {
     const w = Number(wtGr) || 0
     const q = Number(qtyN) || 0
-    return (w * q).toString()
+    if (!w || !q) return ''
+    return (w * q).toFixed(3)
   }
 
   function handleAddChildClick() {
@@ -84,15 +93,13 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
       alert('Please enter Part No')
       return
     }
-    // compute total weight if not set
-    const totalWt = totalWeight || computeTotalWeight(weightPerPc, qtyBox)
     const payload = {
-      partNo, uniqueNo, suffixCode, partName, parentPartNo, suppCode, supplierName,
+      partNo, uniqueNo, suffixCode, partName, parentPartNo, suppCode, supplierName, supplierAddress,
       plantCode, uniqueNo2,
       dimensions: { L: lengthMM, W: widthMM, H: heightMM },
       weightPerPc: Number(weightPerPc) || 0,
       qtyBox: Number(qtyBox) || 0,
-      totalWeight: Number(totalWt) || 0,
+      totalWeight: Number(computeTotalWeight(weightPerPc, qtyBox)) || 0,
       childParts: childParts.slice()
     }
     onSave(payload)
@@ -111,35 +118,18 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
         </div>
 
         <div className="card-body">
-          {/* Top fields */}
+          {/* 1st row */}
           <div className="form-row">
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Part No</label>
-              <input className="form-control form-control-sm" value={partNo} onChange={e => setPartNo(e.target.value)} />
-            </div>
-
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Unique No</label>
-              <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={uniqueNo} onChange={e => setUniqueNo(e.target.value)} />
-                <div className="input-group-append">
-                  <button className="btn btn-outline-secondary btn-sm" onClick={() => alert('Generate Unique No placeholder')}>
-                    <i className="fas fa-bolt" />
-                  </button>
-                </div>
+            <div className="form-group col-md-6 d-flex">
+              <div style={{ flex: 1 }}>
+                <label className="small mb-1">Part No</label>
+                <input className="form-control form-control-sm mb-1" value={partNo} onChange={e => setPartNo(e.target.value)} />
+              </div>
+              <div style={{ width: '30%', marginLeft: 8 }}>
+                <label className="small mb-1">Suffix Code</label>
+                <input className="form-control form-control-sm mb-1" value={suffixCode} onChange={e => setSuffixCode(e.target.value)} />
               </div>
             </div>
-
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Suffix Code</label>
-              <input className="form-control form-control-sm" value={suffixCode} onChange={e => setSuffixCode(e.target.value)} />
-            </div>
-
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Part Name</label>
-              <input className="form-control form-control-sm" value={partName} onChange={e => setPartName(e.target.value)} />
-            </div>
-
             <div className="form-group col-md-6">
               <label className="small mb-1">Parent Part No</label>
               <div className="input-group input-group-sm">
@@ -151,66 +141,80 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Supp Code</label>
-              <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={suppCode} onChange={e => setSuppCode(e.target.value)} />
-                <div className="input-group-append">
-                  <button className="btn btn-outline-secondary btn-sm" onClick={() => alert('Search Supplier placeholder')}>
-                    <i className="fas fa-search" />
-                  </button>
-                </div>
-              </div>
+          {/* 2nd row */}
+          <div className="form-row">
+            <div className="form-group col-md-12">
+              <label className="small mb-1">Unique No</label>
+              <input className="form-control form-control-sm" value={uniqueNo} onChange={e => setUniqueNo(e.target.value)} />
             </div>
+          </div>
 
+          {/* 3rd row */}
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label className="small mb-1">Supplier Code</label>
+              <input className="form-control form-control-sm" value={suppCode} onChange={e => setSuppCode(e.target.value)} />
+            </div>
             <div className="form-group col-md-6">
               <label className="small mb-1">Supplier Name</label>
-              <input className="form-control form-control-sm" value={supplierName} onChange={e => setSupplierName(e.target.value)} />
+              <input className="form-control form-control-sm" value={supplierName} readOnly />
             </div>
+          </div>
 
+          {/* 4th row */}
+          <div className="form-row">
             <div className="form-group col-md-6">
-              <label className="small mb-1">Plant Code</label>
-              <input className="form-control form-control-sm" value={plantCode} onChange={e => setPlantCode(e.target.value)} />
+              <label className="small mb-1">Supplier Address</label>
+              <input className="form-control form-control-sm" value={supplierAddress} readOnly />
             </div>
-
             <div className="form-group col-md-6">
-              <label className="small mb-1">Uniqe No</label>
-              <input className="form-control form-control-sm" value={uniqueNo2} onChange={e => setUniqueNo2(e.target.value)} />
+              <label className="small mb-1">Supplier Plant Code</label>
+              <input className="form-control form-control-sm" value={plantCode} readOnly />
             </div>
+          </div>
 
-            {/* Dimensions block */}
-            <div className="col-12">
-              <label className="small">Dimension</label>
+          {/* 5th row: Dimensions */}
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label className="small">Dimension (mm)</label>
               <div className="form-row">
                 <div className="form-group col-md-4">
-                  <label className="small mb-1">Length (mm)</label>
+                  <label className="small mb-1">Length</label>
                   <input className="form-control form-control-sm" value={lengthMM} onChange={e => setLengthMM(e.target.value)} />
                 </div>
                 <div className="form-group col-md-4">
-                  <label className="small mb-1">Width (mm)</label>
+                  <label className="small mb-1">Width</label>
                   <input className="form-control form-control-sm" value={widthMM} onChange={e => setWidthMM(e.target.value)} />
                 </div>
                 <div className="form-group col-md-4">
-                  <label className="small mb-1">Height (mm)</label>
+                  <label className="small mb-1">Height</label>
                   <input className="form-control form-control-sm" value={heightMM} onChange={e => setHeightMM(e.target.value)} />
                 </div>
               </div>
             </div>
-
-            <div className="form-group col-md-4">
-              <label className="small mb-1">Weight/PC (gr)</label>
-              <input type="number" className="form-control form-control-sm" value={weightPerPc} onChange={e => setWeightPerPc(e.target.value)} />
+            <div className="form-group col-md-6">
+              <label className="small mb-1">Volume (m³)</label>
+              <input className="form-control form-control-sm" value={computeVolume(lengthMM, widthMM, heightMM)} readOnly />
             </div>
+          </div>
 
-            <div className="form-group col-md-4">
-              <label className="small mb-1">Qty/Box</label>
-              <input type="number" className="form-control form-control-sm" value={qtyBox} onChange={e => setQtyBox(e.target.value)} />
+          {/* 6th row: Weight and Qty */}
+          <div className="form-row">
+            <div className="form-group col-md-6 d-flex">
+              <div style={{ flex: 1, marginRight: 8 }}>
+                <label className="small mb-1">Weight/PC (gr)</label>
+                <input type="number" className="form-control form-control-sm" value={weightPerPc} onChange={e => setWeightPerPc(e.target.value)} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label className="small mb-1">Qty/Box</label>
+                <input type="number" className="form-control form-control-sm" value={qtyBox} onChange={e => setQtyBox(e.target.value)} />
+              </div>
             </div>
-
-            <div className="form-group col-md-4">
+            <div className="form-group col-md-6">
               <label className="small mb-1">Total Weight (gr)</label>
-              <input className="form-control form-control-sm" value={totalWeight || computeTotalWeight(weightPerPc, qtyBox)} onChange={e => setTotalWeight(e.target.value)} />
+              <input className="form-control form-control-sm" value={computeTotalWeight(weightPerPc, qtyBox)} readOnly />
             </div>
           </div>
 
@@ -240,7 +244,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 ) : (
                   childParts.map((cp, i) => (
                     <tr key={i}>
-                      <td>{i + 1}</td>   {/* Row number */}
+                      <td>{i + 1}</td>
                       <td>{cp.partNo}</td>
                       <td>{cp.suffix}</td>
                       <td>{cp.uniqueNo}</td>
@@ -258,7 +262,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                         <button
                           type="button"
                           className="btn btn-sm btn-outline-danger"
-                          onClick={() => handleDeleteChild(i)}
+                          onClick={() => handleRemoveChild(i)}
                         >
                           <i className="fas fa-trash" />
                         </button>
@@ -266,7 +270,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                     </tr>
                   ))
                 )}
-              </tbody>              
+              </tbody>
             </table>
           </div>
         </div>
