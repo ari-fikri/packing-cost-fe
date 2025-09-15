@@ -77,7 +77,13 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
               </div>
               <div className="form-group col-md-6">
                 <label>E-Warehouse Price</label>
-                <input type="text" className="form-control form-control-sm" value={eWarehousePrice} onChange={e => setEWarehousePrice(e.target.value)} />
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={eWarehousePrice}
+                  onChange={e => setEWarehousePrice(e.target.value)}
+                  readOnly
+                />
               </div>
             </div>
 
@@ -93,7 +99,13 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
               </div>
               <div className="form-group col-md-6">
                 <label>Dim Outer (m³)</label>
-                <input type="text" className="form-control form-control-sm" value={dimOuterM3} onChange={e => setDimOuterM3(e.target.value)} />
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={dimOuterM3}
+                  onChange={e => setDimOuterM3(e.target.value)}
+                  readOnly
+                />
               </div>
             </div>
 
@@ -109,7 +121,13 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
               </div>
               <div className="form-group col-md-6">
                 <label>Dim Inner (m³)</label>
-                <input type="text" className="form-control form-control-sm" value={dimInnerM3} onChange={e => setDimInnerM3(e.target.value)} />
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={dimInnerM3}
+                  onChange={e => setDimInnerM3(e.target.value)}
+                  readOnly
+                />
               </div>
             </div>
 
