@@ -52,12 +52,20 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
           </div>
 
           <div className="modal-body">
+            {/* 1st row: Type Code and Dest Code */}
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label>Type Code</label>
                 <input type="text" className="form-control form-control-sm" value={typeCode} onChange={e => setTypeCode(e.target.value)} />
               </div>
+              <div className="form-group col-md-6">
+                <label>Dest Code</label>
+                <input type="text" className="form-control form-control-sm" value={destCodes} onChange={e => setDestCodes(e.target.value)} placeholder="e.g., 301B - Argentina ^ 807B - Indonesia" />
+              </div>
+            </div>
 
+            {/* 2nd row: Item No and eWarehouse price */}
+            <div className="form-row">
               <div className="form-group col-md-6">
                 <label>Item No</label>
                 <div className="input-group input-group-sm">
@@ -67,13 +75,14 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="form-row">
               <div className="form-group col-md-6">
                 <label>E-Warehouse Price</label>
                 <input type="text" className="form-control form-control-sm" value={eWarehousePrice} onChange={e => setEWarehousePrice(e.target.value)} />
               </div>
+            </div>
+
+            {/* 3rd row: Dim Outer mm3 and Dim Outer m3 */}
+            <div className="form-row">
               <div className="form-group col-md-6">
                 <label>Dim Outer (mm³)</label>
                 <div className="form-row">
@@ -82,13 +91,14 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
                   <div className="col"><input type="text" className="form-control form-control-sm" placeholder="H" value={dimOuter.H} onChange={e => setDimOuter({...dimOuter, H: e.target.value})} /></div>
                 </div>
               </div>
-            </div>
-
-            <div className="form-row">
               <div className="form-group col-md-6">
                 <label>Dim Outer (m³)</label>
                 <input type="text" className="form-control form-control-sm" value={dimOuterM3} onChange={e => setDimOuterM3(e.target.value)} />
               </div>
+            </div>
+
+            {/* 4th row: Dim Inner mm3 and Dim inner m3 */}
+            <div className="form-row">
               <div className="form-group col-md-6">
                 <label>Dim Inner (mm³)</label>
                 <div className="form-row">
@@ -97,20 +107,13 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
                   <div className="col"><input type="text" className="form-control form-control-sm" placeholder="H" value={dimInner.H} onChange={e => setDimInner({...dimInner, H: e.target.value})} /></div>
                 </div>
               </div>
-            </div>
-
-            <div className="form-row mb-2">
               <div className="form-group col-md-6">
                 <label>Dim Inner (m³)</label>
                 <input type="text" className="form-control form-control-sm" value={dimInnerM3} onChange={e => setDimInnerM3(e.target.value)} />
               </div>
-
-              <div className="form-group col-md-6">
-                <label>Dest Code</label>
-                <input type="text" className="form-control form-control-sm" value={destCodes} onChange={e => setDestCodes(e.target.value)} placeholder="e.g., 301B - Argentina ^ 807B - Indonesia" />
-              </div>
             </div>
 
+            {/* 5th row: Price */}
             <div className="form-row mb-2">
               <div className="form-group col-md-6">
                 <label>Price</label>
