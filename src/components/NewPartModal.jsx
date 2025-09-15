@@ -176,27 +176,29 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
           </div>
 
           {/* 5th row: Dimensions */}
-          <div className="form-row">
-            <div className="form-group col-md-6">
+          <div className="form-row align-items-end">
+            <div className="form-group col-md-6 mb-0">
               <label className="small">Dimension (mm)</label>
               <div className="form-row">
-                <div className="form-group col-md-4">
+                <div className="form-group col-md-4 mb-0">
                   <label className="small mb-1">Length</label>
                   <input className="form-control form-control-sm" value={lengthMM} onChange={e => setLengthMM(e.target.value)} />
                 </div>
-                <div className="form-group col-md-4">
+                <div className="form-group col-md-4 mb-0">
                   <label className="small mb-1">Width</label>
                   <input className="form-control form-control-sm" value={widthMM} onChange={e => setWidthMM(e.target.value)} />
                 </div>
-                <div className="form-group col-md-4">
+                <div className="form-group col-md-4 mb-0">
                   <label className="small mb-1">Height</label>
                   <input className="form-control form-control-sm" value={heightMM} onChange={e => setHeightMM(e.target.value)} />
                 </div>
               </div>
             </div>
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Volume (m³)</label>
-              <input className="form-control form-control-sm" value={computeVolume(lengthMM, widthMM, heightMM)} readOnly />
+            <div className="form-group col-md-6 mb-0 d-flex align-items-end">
+              <div style={{ width: '100%' }}>
+                <label className="small mb-1">Volume (m³)</label>
+                <input className="form-control form-control-sm" value={computeVolume(lengthMM, widthMM, heightMM)} readOnly />
+              </div>
             </div>
           </div>
 
