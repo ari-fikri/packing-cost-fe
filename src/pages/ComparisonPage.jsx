@@ -7,37 +7,54 @@ export default function ComparisonPage() {
   const [periode1, setPeriode1] = useState("2025");
   const [periode2, setPeriode2] = useState("2026");
 
-  // Example data
-  const materials = Array.from({ length: 10 }, (_, i) => ({
+  const totalCost1 = 368;
+  const totalCost2 = 362.07;
+
+  const materialsData = Array.from({ length: 10 }, (_, i) => ({
     name: `Material ${i + 1}`,
-    value1: 14.0,
+    value1: 24.0,
     value2: 11.06,
+    detail: {
+      partNo: `B027-0200${i + 1}`,
+      code: `Paper Tape Merk Golda maishu`,
+      qty: 0.2,
+      price: 20700,
+    },
   }));
 
-  const inner = { value1: 222, value2: 203 };
-  const outer = { value1: 222, value2: 203 };
   const labor = { total: 54.57, dl: 14, idl: 26, facility: 15 };
+  const labor2 = { dl: 11.06, idl: 27, facility: 13 };
+
   const inland = { total: 91, inlandCost: 14, milkrunCost: 26 };
+  const inland2 = { inlandCost: 11.06, milkrunCost: 27 };
 
   const calcDiff = (v1, v2) => {
     if (!v1 || !v2) return "";
     return `${(((v2 - v1) / v1) * 100).toFixed(2)}%`;
   };
 
-  const fmt = (v) => (v !== null && v !== undefined ? v : "");
+  const fmtPrice = (v) => `Rp ${v.toLocaleString()}`;
 
   return (
     <div className="container mt-3">
-      <h4>Packing Cost Comparison</h4>
+      <h5>Packing Cost Comparison</h5>
       <table className="table table-bordered table-sm" style={{ fontSize: "0.85rem" }}>
         <thead style={{ backgroundColor: "#efefef" }}>
           <tr>
             <th>Part No</th>
             <th>
-              <input value={partNo1} onChange={(e) => setPartNo1(e.target.value)} className="form-control form-control-sm" />
+              <input
+                value={partNo1}
+                onChange={(e) => setPartNo1(e.target.value)}
+                className="form-control form-control-sm"
+              />
             </th>
             <th>
-              <input value={partNo2} onChange={(e) => setPartNo2(e.target.value)} className="form-control form-control-sm" />
+              <input
+                value={partNo2}
+                onChange={(e) => setPartNo2(e.target.value)}
+                className="form-control form-control-sm"
+              />
             </th>
             <th>Diff</th>
           </tr>
@@ -53,6 +70,7 @@ export default function ComparisonPage() {
           </tr>
         </thead>
         <tbody>
+          {/* Part Info */}
           <tr>
             <td>Part Name</td>
             <td>HOSE, WATER BY-PASS, NO.13</td>
@@ -67,72 +85,103 @@ export default function ComparisonPage() {
           </tr>
           <tr>
             <td>TOTAL COST</td>
-            <td>{368}</td>
-            <td>{362.07}</td>
-            <td>{calcDiff(368, 362.07)}</td>
+            <td>{totalCost1}</td>
+            <td>{totalCost2}</td>
+            <td>{calcDiff(totalCost1, totalCost2)}</td>
           </tr>
 
           {/* Material Section */}
-          <CollapsibleRow title={`Material : ${inner.value1}`}>
+          <CollapsibleRow title={`Material`} value1={222} value2={203} diff={calcDiff(222, 203)}>
             {/* Inner */}
-            <CollapsibleRow title={`Inner : ${inner.value1}`}>
-              {materials.map((m, idx) => (
-                <tr key={idx}>
-                  <td style={{ paddingLeft: "20px" }}>{m.name}</td>
-                  <td>{fmt(m.value1)}</td>
-                  <td>{fmt(m.value2)}</td>
-                  <td>{calcDiff(m.value1, m.value2)}</td>
-                </tr>
+            <CollapsibleRow title={`Inner`} value1={222} value2={203} diff={calcDiff(222, 203)}>
+              {materialsData.map((mat, i) => (
+                <React.Fragment key={`inner-${i}`}>
+                  {/* Summary row */}
+                  <tr>
+                    <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
+                    <td>{mat.value1}</td>
+                    <td>{mat.value2}</td>
+                    <td>{calcDiff(mat.value1, mat.value2)}</td>
+                  </tr>
+                  {/* Detail row */}
+                  <tr>
+                    <td style={{ paddingLeft: "40px" }}>
+                      <div>- Part No: {mat.detail.partNo}</div>
+                      <div>- Code: {mat.detail.code}</div>
+                      <div>- Qty: {mat.detail.qty}</div>
+                      <div>- Price: {fmtPrice(mat.detail.price)}</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </React.Fragment>
               ))}
             </CollapsibleRow>
+
             {/* Outer */}
-            <CollapsibleRow title={`Outer : ${outer.value1}`}>
-              {materials.map((m, idx) => (
-                <tr key={idx}>
-                  <td style={{ paddingLeft: "20px" }}>{m.name}</td>
-                  <td>{fmt(m.value1)}</td>
-                  <td>{fmt(m.value2)}</td>
-                  <td>{calcDiff(m.value1, m.value2)}</td>
-                </tr>
+            <CollapsibleRow title={`Outer`} value1={222} value2={203} diff={calcDiff(222, 203)}>
+              {materialsData.map((mat, i) => (
+                <React.Fragment key={`outer-${i}`}>
+                  {/* Summary row */}
+                  <tr>
+                    <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
+                    <td>{mat.value1}</td>
+                    <td>{mat.value2}</td>
+                    <td>{calcDiff(mat.value1, mat.value2)}</td>
+                  </tr>
+                  {/* Detail row */}
+                  <tr>
+                    <td style={{ paddingLeft: "40px" }}>
+                      <div>- Part No: {mat.detail.partNo}</div>
+                      <div>- Code: {mat.detail.code}</div>
+                      <div>- Qty: {mat.detail.qty}</div>
+                      <div>- Price: {fmtPrice(mat.detail.price)}</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </React.Fragment>
               ))}
             </CollapsibleRow>
           </CollapsibleRow>
 
           {/* Labor Section */}
-          <CollapsibleRow title={`Labor : ${labor.total}`}>
+          <CollapsibleRow title={`Labor`} value1={labor.total} value2={labor2.dl + labor2.idl + labor2.facility} diff={calcDiff(labor.total, labor2.dl + labor2.idl + labor2.facility)}>
             <tr>
-              <td style={{ paddingLeft: "20px" }}>DL</td>
+              <td style={{ paddingLeft: "20px" }}>- DL</td>
               <td>{labor.dl}</td>
-              <td>{11.06}</td>
-              <td>{calcDiff(labor.dl, 11.06)}</td>
+              <td>{labor2.dl}</td>
+              <td>{calcDiff(labor.dl, labor2.dl)}</td>
             </tr>
             <tr>
-              <td style={{ paddingLeft: "20px" }}>IDL</td>
+              <td style={{ paddingLeft: "20px" }}>- IDL</td>
               <td>{labor.idl}</td>
-              <td>{27}</td>
-              <td>{calcDiff(labor.idl, 27)}</td>
+              <td>{labor2.idl}</td>
+              <td>{calcDiff(labor.idl, labor2.idl)}</td>
             </tr>
             <tr>
-              <td style={{ paddingLeft: "20px" }}>Facility/Others</td>
+              <td style={{ paddingLeft: "20px" }}>- Facility/Others</td>
               <td>{labor.facility}</td>
-              <td>{13}</td>
-              <td>{calcDiff(labor.facility, 13)}</td>
+              <td>{labor2.facility}</td>
+              <td>{calcDiff(labor.facility, labor2.facility)}</td>
             </tr>
           </CollapsibleRow>
 
           {/* Inland Section */}
-          <CollapsibleRow title={`Inland : ${inland.total}`}>
+          <CollapsibleRow title={`Inland`} value1={inland.total} value2={inland2.inlandCost + inland2.milkrunCost} diff={calcDiff(inland.total, inland2.inlandCost + inland2.milkrunCost)}>
             <tr>
-              <td style={{ paddingLeft: "20px" }}>Inland Cost</td>
+              <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
               <td>{inland.inlandCost}</td>
-              <td>{11.06}</td>
-              <td>{calcDiff(inland.inlandCost, 11.06)}</td>
+              <td>{inland2.inlandCost}</td>
+              <td>{calcDiff(inland.inlandCost, inland2.inlandCost)}</td>
             </tr>
             <tr>
-              <td style={{ paddingLeft: "20px" }}>Milkrun Cost</td>
+              <td style={{ paddingLeft: "20px" }}>- Milkrun Cost</td>
               <td>{inland.milkrunCost}</td>
-              <td>{27}</td>
-              <td>{calcDiff(inland.milkrunCost, 27)}</td>
+              <td>{inland2.milkrunCost}</td>
+              <td>{calcDiff(inland.milkrunCost, inland2.milkrunCost)}</td>
             </tr>
           </CollapsibleRow>
         </tbody>
