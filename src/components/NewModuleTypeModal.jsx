@@ -14,6 +14,15 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
 
   if (!show) return null
 
+  // Calculate m3 values
+  const calcM3 = (dim) => {
+    const l = parseFloat(dim.L) || 0
+    const w = parseFloat(dim.W) || 0
+    const h = parseFloat(dim.H) || 0
+    if (!l || !w || !h) return ''
+    return ((l * w * h) / 1000000000)
+  }
+
   const handleSave = () => {
     const payload = {
       typeCode,
@@ -92,9 +101,15 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
               <div className="form-group col-md-6">
                 <label>Dim Outer (mm³)</label>
                 <div className="form-row">
-                  <div className="col"><input type="text" className="form-control form-control-sm" placeholder="L" value={dimOuter.L} onChange={e => setDimOuter({...dimOuter, L: e.target.value})} /></div>
-                  <div className="col"><input type="text" className="form-control form-control-sm" placeholder="W" value={dimOuter.W} onChange={e => setDimOuter({...dimOuter, W: e.target.value})} /></div>
-                  <div className="col"><input type="text" className="form-control form-control-sm" placeholder="H" value={dimOuter.H} onChange={e => setDimOuter({...dimOuter, H: e.target.value})} /></div>
+                  <div className="col">
+                    <input type="text" className="form-control form-control-sm" placeholder="L" value={dimOuter.L} onChange={e => setDimOuter({...dimOuter, L: e.target.value})} />
+                  </div>
+                  <div className="col">
+                    <input type="text" className="form-control form-control-sm" placeholder="W" value={dimOuter.W} onChange={e => setDimOuter({...dimOuter, W: e.target.value})} />
+                  </div>
+                  <div className="col">
+                    <input type="text" className="form-control form-control-sm" placeholder="H" value={dimOuter.H} onChange={e => setDimOuter({...dimOuter, H: e.target.value})} />
+                  </div>
                 </div>
               </div>
               <div className="form-group col-md-6">
@@ -102,8 +117,7 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
                 <input
                   type="text"
                   className="form-control form-control-sm"
-                  value={dimOuterM3}
-                  onChange={e => setDimOuterM3(e.target.value)}
+                  value={calcM3(dimOuter)}
                   readOnly
                 />
               </div>
@@ -114,9 +128,15 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
               <div className="form-group col-md-6">
                 <label>Dim Inner (mm³)</label>
                 <div className="form-row">
-                  <div className="col"><input type="text" className="form-control form-control-sm" placeholder="L" value={dimInner.L} onChange={e => setDimInner({...dimInner, L: e.target.value})} /></div>
-                  <div className="col"><input type="text" className="form-control form-control-sm" placeholder="W" value={dimInner.W} onChange={e => setDimInner({...dimInner, W: e.target.value})} /></div>
-                  <div className="col"><input type="text" className="form-control form-control-sm" placeholder="H" value={dimInner.H} onChange={e => setDimInner({...dimInner, H: e.target.value})} /></div>
+                  <div className="col">
+                    <input type="text" className="form-control form-control-sm" placeholder="L" value={dimInner.L} onChange={e => setDimInner({...dimInner, L: e.target.value})} />
+                  </div>
+                  <div className="col">
+                    <input type="text" className="form-control form-control-sm" placeholder="W" value={dimInner.W} onChange={e => setDimInner({...dimInner, W: e.target.value})} />
+                  </div>
+                  <div className="col">
+                    <input type="text" className="form-control form-control-sm" placeholder="H" value={dimInner.H} onChange={e => setDimInner({...dimInner, H: e.target.value})} />
+                  </div>
                 </div>
               </div>
               <div className="form-group col-md-6">
@@ -124,8 +144,7 @@ export default function NewModuleTypeModal({ show, onClose, onSave }) {
                 <input
                   type="text"
                   className="form-control form-control-sm"
-                  value={dimInnerM3}
-                  onChange={e => setDimInnerM3(e.target.value)}
+                  value={calcM3(dimInner)}
                   readOnly
                 />
               </div>
