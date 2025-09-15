@@ -1,6 +1,7 @@
 // src/pages/packing/Cps.jsx
 import React, { useState } from 'react'
-import NewCpsModal from '../../components/NewCpsModal' // ensure this file exists
+import NewCpsModal from '../../components/NewCpsModal'
+import PersonPickerModal from '../../components/PersonPickerModal' // <-- import the modal
 
 export default function Cps() {
   // filter fields
@@ -19,6 +20,10 @@ export default function Cps() {
 
   // modal state
   const [showNewCps, setShowNewCps] = useState(false)
+
+  // person picker state
+  const [showPersonPicker, setShowPersonPicker] = useState(false)
+  const [personPickerTarget, setPersonPickerTarget] = useState('from') // 'from' or 'to'
 
   // table data (empty initially)
   const [rows, setRows] = useState([])
@@ -128,6 +133,13 @@ export default function Cps() {
     setPage(1)
   }
 
+  // Handler for picking a person
+  function handlePersonPicked(person) {
+    if (personPickerTarget === 'from') setFromUser(person.name)
+    else if (personPickerTarget === 'to') setToUser(person.name)
+    setShowPersonPicker(false)
+  }
+
   return (
     <div className="container-fluid">
       <div className="card card-outline card-primary">
@@ -197,7 +209,12 @@ export default function Cps() {
                   <div className="input-group input-group-sm">
                     <input className="form-control form-control-sm" value={fromUser} onChange={e => setFromUser(e.target.value)} placeholder="From user" />
                     <div className="input-group-append">
-                      <button type="button" className="btn btn-outline-secondary btn-sm" title="People picker" onClick={() => alert('People picker placeholder')}>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm"
+                        title="People picker"
+                        onClick={() => { setPersonPickerTarget('from'); setShowPersonPicker(true) }}
+                      >
                         <i className="fas fa-users" />
                       </button>
                     </div>
@@ -263,7 +280,12 @@ export default function Cps() {
                   <div className="input-group input-group-sm">
                     <input className="form-control form-control-sm" value={toUser} onChange={e => setToUser(e.target.value)} placeholder="To user" />
                     <div className="input-group-append">
-                      <button type="button" className="btn btn-outline-secondary btn-sm" title="People picker" onClick={() => alert('People picker placeholder')}>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm"
+                        title="People picker"
+                        onClick={() => { setPersonPickerTarget('to'); setShowPersonPicker(true) }}
+                      >
                         <i className="fas fa-users" />
                       </button>
                     </div>
@@ -403,6 +425,15 @@ export default function Cps() {
         onSave={handleSaveNewCps}
         onSubmit={handleSubmitNewCps}
       />
+
+      {/* Person Picker Modal */}
+      {showPersonPicker && (
+        <PersonPickerModal
+          show={showPersonPicker}
+          onClose={() => setShowPersonPicker(false)}
+          onSelect={handlePersonPicked}
+        />
+      )}
     </div>
   )
 }
