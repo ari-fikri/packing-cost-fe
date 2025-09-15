@@ -163,6 +163,12 @@ export default function Sidebar() {
 
             {/* spacer pushes logout to bottom */}
             <li style={{ marginTop: 'auto' }} />
+            <li className="nav-item" style={{ padding: '0.5rem 0' }}>
+              <NavLink to="/settings" className={navLinkClass}>
+                <i className="far fa-circle nav-icon" />
+                <p>Settings</p>
+              </NavLink>
+            </li>
 
             {/* Logout as a nav-item at the bottom */}
             <li className="nav-item" style={{ padding: '0.5rem 0' }}>

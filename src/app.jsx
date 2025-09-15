@@ -15,6 +15,7 @@ import Dpi from './pages/packing/Dpi'
 import Calculate from './pages/packing/CalculatePackingCost'
 import Comparison from './pages/ComparisonPage'
 import ModuleType from './pages/ModuleType'
+import Settings from './pages/Settings'
 
 function ProtectedRoute({ children }){
   const auth = useAuth()
@@ -54,6 +55,7 @@ export default function App(){
           <Route path="/packing/CalculatePackingCost" element={<Calculate />} />
           <Route path="/packing/ComparisonPage" element={<Comparison />} />
           <Route path="/module-type" element={<ModuleType />} />
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         </Routes>
       </div>
 
