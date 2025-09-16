@@ -178,7 +178,7 @@ export default function CalculatePackingCost() {
               <thead>
                 <tr>
                   <th style={{ width: 40 }}>No</th>
-                  <th>PPR Code</th>
+                  <th>Pack Cost Cal Code</th>
                   <th>Period</th>
                   <th>Dest Code</th>
                   <th>Dest Country</th>
