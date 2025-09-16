@@ -274,10 +274,11 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                               {showRemark ? (
                                 <textarea
                                   className="form-control form-control-sm"
+                                  style={{ minWidth: 220, width: '100%' }} // wider field
                                   value={remarks[globalIndex] || ""}
-                                  onChange={(e) => handleRemarkChange(globalIndex, e.target.value)}
+                                  onChange={e => handleRemarkChange(globalIndex, e.target.value)}
                                   placeholder="Enter remark"
-                                  rows={2}
+                                  rows={3} // default to 3 lines
                                 />
                               ) : null}
                             </td>
