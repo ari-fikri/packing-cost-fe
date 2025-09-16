@@ -24,6 +24,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   // Add state for remarks per part row
   const [remarks, setRemarks] = useState({});
 
+  // Track selected checkboxes
+  const [selectedRows, setSelectedRows] = useState({});
+
   useEffect(() => {
     if (show) {
       setForm(emptyForm);
@@ -111,6 +114,23 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setRemarks((prev) => ({ ...prev, [index]: value }));
   }
 
+  // Handle checkbox change
+  function handleCheckboxChange(index, checked) {
+    setSelectedRows(prev => ({ ...prev, [index]: checked }));
+  }
+
+  // Handle delete selected parts
+  function handleDeleteSelectedParts() {
+    const toDelete = Object.keys(selectedRows)
+      .filter(idx => selectedRows[idx])
+      .map(idx => Number(idx));
+    if (toDelete.length === 0) return;
+    setParts(prev =>
+      prev.filter((_, i) => !toDelete.includes((page - 1) * perPage + i))
+    );
+    setSelectedRows({});
+  }
+
   return (
     <>
       <div className="modal fade show d-block" tabIndex={-1} role="dialog" aria-modal="true" style={{ paddingRight: 0 }}>
@@ -176,6 +196,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <button type="button" className="btn btn-sm btn-primary mr-2" onClick={() => setShowPartPicker(true)}>
                     <i className="fas fa-plus mr-1" /> Add Part
                   </button>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger"
+                    onClick={handleDeleteSelectedParts}
+                    disabled={visibleParts.length === 0}
+                  >
+                    <i className="fas fa-trash mr-1" /> Delete Part
+                  </button>
                 </div>
               </div>
 
@@ -184,6 +212,25 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 <table className="table table-bordered table-sm text-center w-100">
                   <thead>
                     <tr style={{ backgroundColor: "#d0d0d0" }}>
+                      <th rowSpan={2} style={{ width: 40 }}>
+                        <input
+                          type="checkbox"
+                          checked={
+                            visibleParts.length > 0 &&
+                            visibleParts.every((_, i) => selectedRows[(page - 1) * perPage + i])
+                          }
+                          onChange={e => {
+                            const checked = e.target.checked;
+                            setSelectedRows(prev => {
+                              const updated = { ...prev };
+                              visibleParts.forEach((_, i) => {
+                                updated[(page - 1) * perPage + i] = checked;
+                              });
+                              return updated;
+                            });
+                          }}
+                        />
+                      </th>
                       <th rowSpan={2} style={{ width: 40 }}></th>
                       <th rowSpan={2} style={{ width: 40 }}>No</th>
                       <th rowSpan={2}>Part No</th>
@@ -202,7 +249,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                       <th colSpan={3}>LABOR</th>
                       <th colSpan={3}>INLAND</th>
                       <th colSpan={3}>TOTAL</th>
-                      <th rowSpan={2}>Remark</th> {/* Add Remark column */}
+                      <th rowSpan={2}>Remark</th>
                     </tr>
                     <tr style={{ backgroundColor: "#efefef" }}>
                       {[...Array(6)].map((_, i) => (
@@ -218,7 +265,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <tbody>
                     {visibleParts.length === 0 ? (
                       <tr>
-                        <td colSpan={31} className="text-center py-4 text-muted">No Data Found</td>
+                        <td colSpan={32} className="text-center py-4 text-muted">No Data Found</td>
                       </tr>
                     ) : (
                       visibleParts.map((p, i) => {
@@ -233,6 +280,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
 
                         return (
                           <tr key={globalIndex}>
+                            {/* Checkbox column */}
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={!!selectedRows[globalIndex]}
+                                onChange={e => handleCheckboxChange(globalIndex, e.target.checked)}
+                              />
+                            </td>
                             {/* ...existing cells, or use <PartsTableRow /> if you want... */}
                             <td>
                               {/* expand/collapse button or icon */}
@@ -249,8 +304,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                             <td>{p.H}</td>
                             <td>{p.boxM3}</td>
                             {/* INNER, OUTER, MATERIAL, LABOR, INLAND, TOTAL columns */}
-                            {/* ...map your cost columns here as before... */}
-                            {/* Example for TOTAL */}
                             <td>{fmt(p.inner?.totalCost)}</td>
                             <td>{fmt(p.inner?.prevYear)}</td>
                             <td>{fmt(p.inner?.diff)}</td>
@@ -281,11 +334,11 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                               {showRemark ? (
                                 <textarea
                                   className="form-control form-control-sm"
-                                  style={{ minWidth: 220, width: '100%' }} // wider field
+                                  style={{ minWidth: 220, width: '100%' }}
                                   value={remarks[globalIndex] || ""}
                                   onChange={e => handleRemarkChange(globalIndex, e.target.value)}
                                   placeholder="Enter remark"
-                                  rows={3} // default to 3 lines
+                                  rows={3}
                                 />
                               ) : null}
                             </td>
