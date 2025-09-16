@@ -11,6 +11,8 @@ const emptyForm = {
   type: "PxP",
 };
 
+const threshold_percentage = 5; // 5%
+
 export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [form, setForm] = useState(emptyForm);
   const [parts, setParts] = useState([]);
@@ -18,6 +20,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [expandedRows, setExpandedRows] = useState(new Set());
+
+  // Add state for remarks per part row
+  const [remarks, setRemarks] = useState({});
 
   useEffect(() => {
     if (show) {
@@ -101,6 +106,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   };
 
   const fmt = (v) => (v === null || v === undefined ? "" : String(v));
+
+  function handleRemarkChange(index, value) {
+    setRemarks((prev) => ({ ...prev, [index]: value }));
+  }
 
   return (
     <>
@@ -193,6 +202,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                       <th colSpan={3}>LABOR</th>
                       <th colSpan={3}>INLAND</th>
                       <th colSpan={3}>TOTAL</th>
+                      <th rowSpan={2}>Remark</th> {/* Add Remark column */}
                     </tr>
                     <tr style={{ backgroundColor: "#efefef" }}>
                       {[...Array(6)].map((_, i) => (
@@ -208,22 +218,70 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                   <tbody>
                     {visibleParts.length === 0 ? (
                       <tr>
-                        <td colSpan={30} className="text-center py-4 text-muted">No Data Found</td>
+                        <td colSpan={31} className="text-center py-4 text-muted">No Data Found</td>
                       </tr>
                     ) : (
                       visibleParts.map((p, i) => {
                         const globalIndex = (page - 1) * perPage + i;
                         const isExpanded = expandedRows.has(globalIndex);
 
+                        // Calculate diff percentage for TOTAL
+                        const totalCost = Number(p.total?.totalCost ?? 0);
+                        const prevYear = Number(p.total?.prevYear ?? 0);
+                        const diffPerc = prevYear ? ((totalCost - prevYear) / prevYear) * 100 : 0;
+                        const showRemark = diffPerc > threshold_percentage;
+
                         return (
-                          <PartsTableRow
-                            key={globalIndex}
-                            index={globalIndex}
-                            part={p}
-                            isExpanded={isExpanded}
-                            onToggleExpand={toggleExpand}
-                            distributeAcross={distributeAcross}
-                          />
+                          <tr key={globalIndex}>
+                            {/* ...existing cells, or use <PartsTableRow /> if you want... */}
+                            <td>
+                              {/* expand/collapse button or icon */}
+                            </td>
+                            <td>{globalIndex + 1}</td>
+                            <td>{p.partNo}</td>
+                            <td>{p.suffix}</td>
+                            <td>{p.partName}</td>
+                            <td>{p.parentPartNo}</td>
+                            <td>{p.supplierId}</td>
+                            <td>{p.supplierName}</td>
+                            <td>{p.L}</td>
+                            <td>{p.W}</td>
+                            <td>{p.H}</td>
+                            <td>{p.boxM3}</td>
+                            {/* INNER, OUTER, MATERIAL, LABOR, INLAND, TOTAL columns */}
+                            {/* ...map your cost columns here as before... */}
+                            {/* Example for TOTAL */}
+                            <td>{fmt(p.inner?.totalCost)}</td>
+                            <td>{fmt(p.inner?.prevYear)}</td>
+                            <td>{fmt(p.inner?.diff)}</td>
+                            <td>{fmt(p.outer?.totalCost)}</td>
+                            <td>{fmt(p.outer?.prevYear)}</td>
+                            <td>{fmt(p.outer?.diff)}</td>
+                            <td>{fmt(p.material?.totalCost)}</td>
+                            <td>{fmt(p.material?.prevYear)}</td>
+                            <td>{fmt(p.material?.diff)}</td>
+                            <td>{fmt(p.labor?.totalCost)}</td>
+                            <td>{fmt(p.labor?.prevYear)}</td>
+                            <td>{fmt(p.labor?.diff)}</td>
+                            <td>{fmt(p.inland?.totalCost)}</td>
+                            <td>{fmt(p.inland?.prevYear)}</td>
+                            <td>{fmt(p.inland?.diff)}</td>
+                            <td>{fmt(p.total?.totalCost)}</td>
+                            <td>{fmt(p.total?.prevYear)}</td>
+                            <td>{fmt(p.total?.diff)}</td>
+                            {/* Remark field */}
+                            <td>
+                              {showRemark ? (
+                                <textarea
+                                  className="form-control form-control-sm"
+                                  value={remarks[globalIndex] || ""}
+                                  onChange={(e) => handleRemarkChange(globalIndex, e.target.value)}
+                                  placeholder="Enter remark"
+                                  rows={2}
+                                />
+                              ) : null}
+                            </td>
+                          </tr>
                         );
                       })
                     )}
