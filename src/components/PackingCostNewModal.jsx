@@ -268,7 +268,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                             <td>{fmt(p.inland?.diff)}</td>
                             <td>{fmt(p.total?.totalCost)}</td>
                             <td>{fmt(p.total?.prevYear)}</td>
-                            <td>{fmt(p.total?.diff)}</td>
+                            <td
+                              style={{
+                                color: diffPerc > threshold_percentage ? 'red' : undefined,
+                                fontWeight: diffPerc > threshold_percentage ? 'bold' : undefined,
+                              }}
+                            >
+                              {fmt(p.total?.diff)}
+                            </td>
                             {/* Remark field */}
                             <td>
                               {showRemark ? (
