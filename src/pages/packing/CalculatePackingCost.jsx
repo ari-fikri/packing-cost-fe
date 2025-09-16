@@ -11,7 +11,7 @@ export default function CalculatePackingCost() {
   const [type, setType] = useState('All') // 'All' | 'PxP' | 'Lot'
 
   // table / paging state (empty for now)
-  const [rows] = useState([]) // replace with data from API
+  const [rows, setRows] = useState([]) // <-- use both!
   const [perPage, setPerPage] = useState(3)
   const [page, setPage] = useState(1)
   const total = rows.length
@@ -45,6 +45,7 @@ export default function CalculatePackingCost() {
   // Called when modal Save is pressed (payload contains modal form + parts)
   function handleModalSave(payload) {
     console.log('Packing cost saved payload:', payload)
+    setRows(prev => [...prev, payload]);
     setShowNewModal(false)
     // TODO: send payload to backend / add to list
   }
