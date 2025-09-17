@@ -9,10 +9,34 @@ export default function CollapsibleRow({ title, value1, value2, diff, children }
   const mainText = match ? match[1].trim() : title;
   const unitText = match && match[2] ? match[2] : "";
 
-  // helper to detect numeric strings (like "123.45")
-  const isNumeric = (val) =>
-    typeof val === "number" ||
-    (/^-?\d+(\.\d+)?%?$/.test(val) && val !== "");
+  // helper to detect numeric strings (accepts commas and currency like "Rp ")
+  const isNumeric = (val) => {
+    if (val === null || val === undefined || val === "") return false;
+    if (typeof val === "number") return true;
+
+    // Convert to string and remove common non-numeric characters:
+    // - remove currency prefix like 'Rp' or any letters
+    // - remove spaces
+    // - remove thousands separators (commas)
+    // keep digits, minus sign, decimal point and trailing percent sign
+    let s = String(val).trim();
+
+    // If percent like "12.3%", keep the '%' for final test
+    const hasPercent = s.endsWith("%");
+    if (hasPercent) s = s.slice(0, -1);
+
+    // Remove currency symbols/letters and thousands separators
+    s = s.replace(/[^0-9.\-]/g, ""); // removes commas, spaces, 'Rp', etc.
+
+    if (s === "" || s === "-" || s === "." || s === "-.") return false;
+
+    // final numeric test
+    const re = /^-?\d+(\.\d+)?$/;
+    return re.test(s);
+  };
+
+  // styling helper for numeric cells
+  const cellAlign = (val) => ({ textAlign: isNumeric(val) ? "right" : "left", whiteSpace: "nowrap" });
 
   return (
     <>
@@ -43,15 +67,9 @@ export default function CollapsibleRow({ title, value1, value2, diff, children }
         </td>
 
         {/* numeric values right aligned */}
-        <td style={{ textAlign: isNumeric(value1) ? "right" : "left" }}>
-          {value1}
-        </td>
-        <td style={{ textAlign: isNumeric(value2) ? "right" : "left" }}>
-          {value2}
-        </td>
-        <td style={{ textAlign: isNumeric(diff) ? "right" : "left" }}>
-          {diff}
-        </td>
+        <td style={cellAlign(value1)}>{value1}</td>
+        <td style={cellAlign(value2)}>{value2}</td>
+        <td style={cellAlign(diff)}>{diff}</td>
       </tr>
 
       {isOpen && children}
