@@ -41,7 +41,7 @@ const fmt = (v) => {
   if (v === null || v === undefined || v === "") return "";
   const n = Number(v);
   if (isNaN(n)) return String(v);
-  return n.toFixed(2);
+  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 const fmtPrice = (v) =>
   `Rp ${Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -143,34 +143,39 @@ export default function ComparisonPage() {
               value2={fmt(innerTotalRight)}
               diff={calcDiff(innerTotalLeft, innerTotalRight)}
             >
-              {innerMaterials.map((mat, i) => (
-                <React.Fragment key={`inner-${i}`}>
-                  <tr>
-                    <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
-                    <td style={right}>{fmt(mat.value1)}</td>
-                    <td style={right}>{fmt(mat.value2)}</td>
-                    <td style={right}>{calcDiff(mat.value1, mat.value2)}</td>
-                  </tr>
+              {innerMaterials.map((mat, i) => {
+                const subtotal = mat.detail.qty * mat.detail.price;
+                return (
+                  <React.Fragment key={`inner-${i}`}>
+                    <tr>
+                      <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
+                      <td style={right}>{fmt(subtotal)}</td>
+                      <td style={right}>{fmt(subtotal)}</td>
+                      <td></td>
+                    </tr>
 
-                  {/* details moved to 2nd & 3rd columns */}
-                  <tr>
-                    <td></td>
-                    <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                      <div>- Part No: {mat.detail.partNo}</div>
-                      <div>- Code: {mat.detail.code}</div>
-                      <div>- Qty: {fmt(mat.detail.qty)}</div>
-                      <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                    </td>
-                    <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                      <div>- Part No: {mat.detail.partNo}</div>
-                      <div>- Code: {mat.detail.code}</div>
-                      <div>- Qty: {fmt(mat.detail.qty)}</div>
-                      <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                    </td>
-                    <td></td>
-                  </tr>
-                </React.Fragment>
-              ))}
+                    {/* details moved to 2nd & 3rd columns */}
+                    <tr>
+                      <td></td>
+                      <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
+                        <div>- Part No: {mat.detail.partNo}</div>
+                        <div>- Code: {mat.detail.code}</div>
+                        <div>- Qty: {fmt(mat.detail.qty)}</div>
+                        <div>- Price: {fmtPrice(mat.detail.price)}</div>
+                        <div>- Subtotal: {fmt(subtotal)}</div>
+                      </td>
+                      <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
+                        <div>- Part No: {mat.detail.partNo}</div>
+                        <div>- Code: {mat.detail.code}</div>
+                        <div>- Qty: {fmt(mat.detail.qty)}</div>
+                        <div>- Price: {fmtPrice(mat.detail.price)}</div>
+                        <div>- Subtotal: {fmt(subtotal)}</div>
+                      </td>
+                      <td></td>
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
             </CollapsibleRow>
 
             {/* OUTER */}
@@ -180,33 +185,38 @@ export default function ComparisonPage() {
               value2={fmt(outerTotalRight)}
               diff={calcDiff(outerTotalLeft, outerTotalRight)}
             >
-              {outerMaterials.map((mat, i) => (
-                <React.Fragment key={`outer-${i}`}>
-                  <tr>
-                    <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
-                    <td style={right}>{fmt(mat.value1)}</td>
-                    <td style={right}>{fmt(mat.value2)}</td>
-                    <td style={right}>{calcDiff(mat.value1, mat.value2)}</td>
-                  </tr>
+              {outerMaterials.map((mat, i) => {
+                const subtotal = mat.detail.qty * mat.detail.price;
+                return (
+                  <React.Fragment key={`outer-${i}`}>
+                    <tr>
+                      <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
+                      <td style={right}>{fmt(subtotal)}</td>
+                      <td style={right}>{fmt(subtotal)}</td>
+                      <td></td>
+                    </tr>
 
-                  <tr>
-                    <td></td>
-                    <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                      <div>- Part No: {mat.detail.partNo}</div>
-                      <div>- Code: {mat.detail.code}</div>
-                      <div>- Qty: {fmt(mat.detail.qty)}</div>
-                      <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                    </td>
-                    <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                      <div>- Part No: {mat.detail.partNo}</div>
-                      <div>- Code: {mat.detail.code}</div>
-                      <div>- Qty: {fmt(mat.detail.qty)}</div>
-                      <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                    </td>
-                    <td></td>
-                  </tr>
-                </React.Fragment>
-              ))}
+                    <tr>
+                      <td></td>
+                      <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
+                        <div>- Part No: {mat.detail.partNo}</div>
+                        <div>- Code: {mat.detail.code}</div>
+                        <div>- Qty: {fmt(mat.detail.qty)}</div>
+                        <div>- Price: {fmtPrice(mat.detail.price)}</div>
+                        <div>- Subtotal: {fmt(subtotal)}</div>
+                      </td>
+                      <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
+                        <div>- Part No: {mat.detail.partNo}</div>
+                        <div>- Code: {mat.detail.code}</div>
+                        <div>- Qty: {fmt(mat.detail.qty)}</div>
+                        <div>- Price: {fmtPrice(mat.detail.price)}</div>
+                        <div>- Subtotal: {fmt(subtotal)}</div>
+                      </td>
+                      <td></td>
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
             </CollapsibleRow>
           </CollapsibleRow>
 
