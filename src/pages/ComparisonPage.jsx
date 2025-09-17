@@ -136,9 +136,6 @@ export default function ComparisonPage() {
             value2={fmt(materialTotalRight)}
             diff={calcDiff(materialTotalLeft, materialTotalRight)}
           >
-            {/* annotation */}
-            <tr><td style={{ paddingLeft: "20px" }}>(Rp)</td><td></td><td></td><td></td></tr>
-
             {/* INNER */}
             <CollapsibleRow
               title="Inner (Rp)"
