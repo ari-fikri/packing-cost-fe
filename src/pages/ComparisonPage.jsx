@@ -64,10 +64,11 @@ export default function ComparisonPage() {
   const [periodeRight, setPeriodeRight] = useState("2026");
 
   // derived totals
-  const innerTotalLeft = innerMaterials.reduce((s, m) => s + m.value1, 0);
-  const innerTotalRight = innerMaterials.reduce((s, m) => s + m.value2, 0);
-  const outerTotalLeft = outerMaterials.reduce((s, m) => s + m.value1, 0);
-  const outerTotalRight = outerMaterials.reduce((s, m) => s + m.value2, 0);
+  // inner/outer totals should summarize the header values (subtotal = qty * price)
+  const innerTotalLeft = innerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
+  const innerTotalRight = innerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
+  const outerTotalLeft = outerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
+  const outerTotalRight = outerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
   const materialTotalLeft = innerTotalLeft + outerTotalLeft;
   const materialTotalRight = innerTotalRight + outerTotalRight;
 
