@@ -1,19 +1,45 @@
+// src/components/CollapsibleRow.jsx
 import React, { useState } from "react";
 
-export default function CollapsibleRow({ title, children, value1, value2, diff, initiallyExpanded = false }) {
-  const [expanded, setExpanded] = useState(initiallyExpanded);
+export default function CollapsibleRow({ title, value1, value2, diff, children }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  // Split into "label" and "(unit)"
+  const match = title.match(/^(.*?)\s*(\([^)]*\))?$/);
+  const mainText = match ? match[1].trim() : title;
+  const unitText = match && match[2] ? match[2] : "";
 
   return (
     <>
-      <tr style={{ backgroundColor: "#f0f0f0", cursor: "pointer" }} onClick={() => setExpanded(!expanded)}>
+      <tr
+        style={{ backgroundColor: "#f9f9f9", cursor: "pointer" }}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <td>
-          {expanded ? "▼" : "▶"} <strong>{title}</strong>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            {/* caret + main label together */}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span style={{ marginRight: 6 }}>{isOpen ? "▼" : "▶"}</span>
+              <span><strong>{mainText}</strong></span>
+            </div>
+
+            {/* unit text aligned right */}
+            {unitText && <span>{unitText}</span>}
+          </div>
         </td>
-        <td>{value1 !== undefined ? value1 : ""}</td>
-        <td>{value2 !== undefined ? value2 : ""}</td>
-        <td>{diff !== undefined ? diff : ""}</td>
+        <td>{value1}</td>
+        <td>{value2}</td>
+        <td>{diff}</td>
       </tr>
-      {expanded && children}
+
+      {isOpen && children}
     </>
   );
 }

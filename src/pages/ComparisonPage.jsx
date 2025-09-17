@@ -92,7 +92,7 @@ export default function ComparisonPage() {
             <td></td>
           </tr>
           <tr>
-            <td>TOTAL COST</td>
+            <td>TOTAL COST (Rp)</td>
             <td>{fmt(totalCost1)}</td>
             <td>{fmt(totalCost2)}</td>
             <td>{calcDiff(totalCost1, totalCost2)}</td>
@@ -100,7 +100,7 @@ export default function ComparisonPage() {
 
           {/* Material Section */}
           <CollapsibleRow
-            title="Material"
+            title="Material (Rp)"
             value1={fmt(materialsData.reduce((sum, m) => sum + m.value1, 0))}
             value2={fmt(materialsData.reduce((sum, m) => sum + m.value2, 0))}
             diff={calcDiff(
@@ -110,7 +110,7 @@ export default function ComparisonPage() {
           >
             {/* Inner */}
             <CollapsibleRow
-              title="Inner"
+              title="Inner (Rp)"
               value1={fmt(materialsData.reduce((sum, m) => sum + m.value1, 0))}
               value2={fmt(materialsData.reduce((sum, m) => sum + m.value2, 0))}
               diff={calcDiff(
@@ -143,7 +143,7 @@ export default function ComparisonPage() {
 
             {/* Outer */}
             <CollapsibleRow
-              title="Outer"
+              title="Outer (Rp)"
               value1={fmt(materialsData.reduce((sum, m) => sum + m.value1, 0))}
               value2={fmt(materialsData.reduce((sum, m) => sum + m.value2, 0))}
               diff={calcDiff(
@@ -177,7 +177,7 @@ export default function ComparisonPage() {
 
           {/* Labor Section */}
           <CollapsibleRow
-            title="Labor"
+            title="Labor (Rp)"
             value1={fmt(labor.total)}
             value2={fmt(labor2.dl + labor2.idl + labor2.facility)}
             diff={calcDiff(labor.total, labor2.dl + labor2.idl + labor2.facility)}
@@ -204,7 +204,7 @@ export default function ComparisonPage() {
 
           {/* Inland Section */}
           <CollapsibleRow
-            title="Inland"
+            title="Inland (Rp)"
             value1={fmt(inland.total)}
             value2={fmt(inland2.inlandCost + inland2.milkrunCost)}
             diff={calcDiff(inland.total, inland2.inlandCost + inland2.milkrunCost)}
