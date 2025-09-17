@@ -228,8 +228,6 @@ export default function ComparisonPage() {
             value2={fmt(laborTotalRight)}
             diff={calcDiff(laborTotalLeft, laborTotalRight)}
           >
-            <tr><td style={{ paddingLeft: "20px" }}>(Rp)</td><td></td><td></td><td></td></tr>
-
             <tr>
               <td style={{ paddingLeft: "20px" }}>- DL</td>
               <td style={right}>{fmt(laborLeft.dl)}</td>
@@ -257,8 +255,6 @@ export default function ComparisonPage() {
             value2={fmt(inlandTotalRight)}
             diff={calcDiff(inlandTotalLeft, inlandTotalRight)}
           >
-            <tr><td style={{ paddingLeft: "20px" }}>(Rp)</td><td></td><td></td><td></td></tr>
-
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
               <td style={right}>{fmt(inlandLeft.inlandCost)}</td>
