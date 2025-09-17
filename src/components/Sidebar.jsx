@@ -112,6 +112,12 @@ export default function Sidebar() {
                     <p>Parts</p>
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink to="/params" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>Parameters</p>
+                  </NavLink>
+                </li>                
               </ul>
             </li>
 

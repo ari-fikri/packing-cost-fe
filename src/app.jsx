@@ -16,6 +16,7 @@ import Calculate from './pages/packing/CalculatePackingCost'
 import Comparison from './pages/ComparisonPage'
 import ModuleType from './pages/ModuleType'
 import Settings from './pages/Settings'
+import Params from './pages/ParamsPanel'
 
 //Data files
 import DESTINATIONS from './data/destinations';
@@ -59,6 +60,7 @@ export default function App(){
           <Route path="/packing/ComparisonPage" element={<Comparison />} />
           <Route path="/module-type" element={<ModuleType />} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/params" element={<ProtectedRoute><Params /></ProtectedRoute>} />
         </Routes>
       </div>
 
