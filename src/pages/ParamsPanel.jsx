@@ -1,9 +1,12 @@
 // src/pages/ParametersPanel.jsx
 import React, { useState } from "react";
 
-// This page follows the same visual theme as Models.jsx (card, compact controls)
+// ParametersPanel (Bootstrap / Models.jsx style)
 export default function ParametersPanel({ onSave }) {
+  const tabs = ["Inland", "Labor Cost", "Man Hour", "History"];
   const [activeTab, setActiveTab] = useState("Inland");
+
+  // Inland fields (defaults from your layout)
   const [period, setPeriod] = useState("02.2025");
   const [containerM3, setContainerM3] = useState("47.7");
   const [rent40ft, setRent40ft] = useState("86.177");
@@ -17,17 +20,18 @@ export default function ParametersPanel({ onSave }) {
     const payload = {
       activeTab,
       period,
-      containerM3: Number(containerM3.replace(/[^0-9.-]+/g, "")),
-      rent40ft: Number(rent40ft.replace(/[^0-9.-]+/g, "")),
-      rent20ft: Number(rent20ft.replace(/[^0-9.-]+/g, "")),
-      milkrunRate: Number(milkrunRate.replace(/[^0-9.-]+/g, "")),
-      milkrunEff: Number(milkrunEff.replace(/[^0-9.-]+/g, "")),
+      containerM3: Number(containerM3.toString().replace(/[^0-9.-]+/g, "")),
+      rent40ft: Number(rent40ft.toString().replace(/[^0-9.-]+/g, "")),
+      rent20ft: Number(rent20ft.toString().replace(/[^0-9.-]+/g, "")),
+      milkrunRate: Number(milkrunRate.toString().replace(/[^0-9.-]+/g, "")),
+      milkrunEff: Number(milkrunEff.toString().replace(/[^0-9.-]+/g, "")),
     };
 
     setSaved(true);
     if (typeof onSave === "function") onSave(payload);
 
-    setTimeout(() => setSaved(false), 1500);
+    // small feedback
+    setTimeout(() => setSaved(false), 1400);
   };
 
   const handleCancel = () => {
@@ -39,91 +43,117 @@ export default function ParametersPanel({ onSave }) {
     setMilkrunEff("64");
   };
 
-  const inputClass = "w-full border rounded px-2 py-1 text-sm";
-  const labelClass = "text-sm text-gray-700";
-
-  const tabs = ["Inland", "Labor Cost", "Man Hour", "History"];
-
   return (
-    <div className="p-6">
-      <div className="bg-white shadow rounded-lg p-4 max-w-md">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Parameters</h3>
-          <div className="flex gap-2 text-sm">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-2 py-1 rounded ${
-                  activeTab === tab
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+    <div className="container-fluid">
+      <div className="card card-outline card-primary">
+        <div className="card-header d-flex align-items-center">
+          <h3 className="card-title mb-0"><b>Parameters</b></h3>
+
+          <div className="card-tools ml-auto d-flex align-items-center">
+            {/* Tabs as small buttons (acts like tab control) */}
+            <div className="btn-group btn-group-sm mr-3" role="group" aria-label="Tabs">
+              {tabs.map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  className={`btn btn-sm ${activeTab === t ? "btn-primary" : "btn-outline-secondary"}`}
+                  onClick={() => setActiveTab(t)}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+
+            <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleSave}>
+              <i className="fas fa-save mr-1" /> Save
+            </button>
+
+            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={handleCancel}>
+              <i className="fas fa-undo mr-1" /> Reset
+            </button>
           </div>
         </div>
 
-        {activeTab === "Inland" && (
-          <div className="space-y-3">
-            <div>
-              <label className={labelClass}>Period</label>
-              <input className={inputClass} value={period} onChange={(e) => setPeriod(e.target.value)} />
+        <div className="card-body">
+          {/* Tab content — uses same Bootstrap form layout as Models.jsx */}
+          {activeTab === "Inland" && (
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label className="small mb-1">Period</label>
+                <input
+                  value={period}
+                  onChange={e => setPeriod(e.target.value)}
+                  className="form-control form-control-sm"
+                />
+              </div>
+
+              <div className="form-group col-md-6">
+                <label className="small mb-1">Container Volume M3</label>
+                <input
+                  value={containerM3}
+                  onChange={e => setContainerM3(e.target.value)}
+                  className="form-control form-control-sm"
+                />
+              </div>
+
+              <div className="form-group col-md-6">
+                <label className="small mb-1">40 feet container rent rate</label>
+                <input
+                  value={rent40ft}
+                  onChange={e => setRent40ft(e.target.value)}
+                  className="form-control form-control-sm"
+                />
+              </div>
+
+              <div className="form-group col-md-6">
+                <label className="small mb-1">20 feet container rent rate</label>
+                <input
+                  value={rent20ft}
+                  onChange={e => setRent20ft(e.target.value)}
+                  className="form-control form-control-sm"
+                />
+              </div>
+
+              <div className="form-group col-md-6">
+                <label className="small mb-1">Milkrun rate (per m3)</label>
+                <input
+                  value={milkrunRate}
+                  onChange={e => setMilkrunRate(e.target.value)}
+                  className="form-control form-control-sm"
+                />
+              </div>
+
+              <div className="form-group col-md-6">
+                <label className="small mb-1">Milkrun efficiency rate (%)</label>
+                <input
+                  value={milkrunEff}
+                  onChange={e => setMilkrunEff(e.target.value)}
+                  className="form-control form-control-sm"
+                />
+              </div>
             </div>
+          )}
 
-            <div>
-              <label className={labelClass}>Container Volume M3</label>
-              <input className={inputClass} value={containerM3} onChange={(e) => setContainerM3(e.target.value)} />
-            </div>
+          {activeTab === "Labor Cost" && (
+            <div className="alert alert-secondary small">Labor Cost configuration will be here (placeholder)</div>
+          )}
 
-            <div>
-              <label className={labelClass}>40 feet container rent rate</label>
-              <input className={inputClass} value={rent40ft} onChange={(e) => setRent40ft(e.target.value)} />
-            </div>
+          {activeTab === "Man Hour" && (
+            <div className="alert alert-secondary small">Man Hour configuration will be here (placeholder)</div>
+          )}
 
-            <div>
-              <label className={labelClass}>20 feet container rent rate</label>
-              <input className={inputClass} value={rent20ft} onChange={(e) => setRent20ft(e.target.value)} />
-            </div>
-
-            <div>
-              <label className={labelClass}>Milkrun rate (per m3)</label>
-              <input className={inputClass} value={milkrunRate} onChange={(e) => setMilkrunRate(e.target.value)} />
-            </div>
-
-            <div>
-              <label className={labelClass}>Milkrun efficiency rate (%)</label>
-              <input className={inputClass} value={milkrunEff} onChange={(e) => setMilkrunEff(e.target.value)} />
-            </div>
-          </div>
-        )}
-
-        {activeTab !== "Inland" && (
-          <div className="p-6 text-gray-500 text-sm italic">{activeTab} form coming soon...</div>
-        )}
-
-        <div className="flex items-center justify-end gap-2 mt-4">
-          <button
-            className="px-3 py-1 rounded border text-sm bg-white hover:bg-gray-50"
-            onClick={handleCancel}
-            type="button"
-          >
-            Cancel
-          </button>
-
-          <button
-            className="px-3 py-1 rounded bg-blue-600 text-white text-sm hover:bg-blue-700"
-            onClick={handleSave}
-            type="button"
-          >
-            Save
-          </button>
+          {activeTab === "History" && (
+            <div className="alert alert-secondary small">History / change log will be shown here (placeholder)</div>
+          )}
         </div>
 
-        {saved && <div className="mt-3 text-sm text-green-600">Parameters saved</div>}
+        <div className="card-footer text-right">
+          <button type="button" className="btn btn-primary mr-2" onClick={handleSave}>Save</button>
+          <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
+        </div>
       </div>
+
+      {saved && <div className="mt-3 text-success small">Parameters saved</div>}
     </div>
   );
 }
