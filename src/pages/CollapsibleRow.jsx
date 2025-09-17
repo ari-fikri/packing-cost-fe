@@ -9,6 +9,11 @@ export default function CollapsibleRow({ title, value1, value2, diff, children }
   const mainText = match ? match[1].trim() : title;
   const unitText = match && match[2] ? match[2] : "";
 
+  // helper to detect numeric strings (like "123.45")
+  const isNumeric = (val) =>
+    typeof val === "number" ||
+    (/^-?\d+(\.\d+)?%?$/.test(val) && val !== "");
+
   return (
     <>
       <tr
@@ -27,16 +32,26 @@ export default function CollapsibleRow({ title, value1, value2, diff, children }
             {/* caret + main label together */}
             <div style={{ display: "flex", alignItems: "center" }}>
               <span style={{ marginRight: 6 }}>{isOpen ? "▼" : "▶"}</span>
-              <span><strong>{mainText}</strong></span>
+              <span>
+                <strong>{mainText}</strong>
+              </span>
             </div>
 
             {/* unit text aligned right */}
             {unitText && <span>{unitText}</span>}
           </div>
         </td>
-        <td>{value1}</td>
-        <td>{value2}</td>
-        <td>{diff}</td>
+
+        {/* numeric values right aligned */}
+        <td style={{ textAlign: isNumeric(value1) ? "right" : "left" }}>
+          {value1}
+        </td>
+        <td style={{ textAlign: isNumeric(value2) ? "right" : "left" }}>
+          {value2}
+        </td>
+        <td style={{ textAlign: isNumeric(diff) ? "right" : "left" }}>
+          {diff}
+        </td>
       </tr>
 
       {isOpen && children}

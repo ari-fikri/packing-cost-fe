@@ -37,11 +37,21 @@ export default function ComparisonPage() {
   };
 
   const calcDiff = (v1, v2) => {
-    if (!v1 || !v2) return "";
-    return `${(((v2 - v1) / v1) * 100).toFixed(2)}%`;
+    if (v1 == null || v2 == null) return "";
+    const n1 = Number(v1);
+    const n2 = Number(v2);
+    if (isNaN(n1) || isNaN(n2) || n1 === 0) return "";
+    return `${(((n2 - n1) / n1) * 100).toFixed(2)}%`;
   };
 
-  const fmtPrice = (v) => `Rp ${Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const fmtPrice = (v) =>
+    `Rp ${Number(v).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+
+  // helper style for right-aligned numeric cells
+  const right = { textAlign: "right", whiteSpace: "nowrap" };
 
   return (
     <div className="container mt-3">
@@ -69,10 +79,18 @@ export default function ComparisonPage() {
           <tr>
             <th>Periode</th>
             <th>
-              <input value={periode1} onChange={(e) => setPeriode1(e.target.value)} className="form-control form-control-sm" />
+              <input
+                value={periode1}
+                onChange={(e) => setPeriode1(e.target.value)}
+                className="form-control form-control-sm"
+              />
             </th>
             <th>
-              <input value={periode2} onChange={(e) => setPeriode2(e.target.value)} className="form-control form-control-sm" />
+              <input
+                value={periode2}
+                onChange={(e) => setPeriode2(e.target.value)}
+                className="form-control form-control-sm"
+              />
             </th>
             <th></th>
           </tr>
@@ -93,9 +111,9 @@ export default function ComparisonPage() {
           </tr>
           <tr>
             <td>TOTAL COST (Rp)</td>
-            <td>{fmt(totalCost1)}</td>
-            <td>{fmt(totalCost2)}</td>
-            <td>{calcDiff(totalCost1, totalCost2)}</td>
+            <td style={right}>{fmt(totalCost1)}</td>
+            <td style={right}>{fmt(totalCost2)}</td>
+            <td style={right}>{calcDiff(totalCost1, totalCost2)}</td>
           </tr>
 
           {/* Material Section */}
@@ -122,9 +140,9 @@ export default function ComparisonPage() {
                 <React.Fragment key={`inner-${i}`}>
                   <tr>
                     <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
-                    <td>{fmt(mat.value1)}</td>
-                    <td>{fmt(mat.value2)}</td>
-                    <td>{calcDiff(mat.value1, mat.value2)}</td>
+                    <td style={right}>{fmt(mat.value1)}</td>
+                    <td style={right}>{fmt(mat.value2)}</td>
+                    <td style={right}>{calcDiff(mat.value1, mat.value2)}</td>
                   </tr>
                   <tr>
                     <td style={{ paddingLeft: "40px" }}>
@@ -133,9 +151,9 @@ export default function ComparisonPage() {
                       <div>- Qty: {fmt(mat.detail.qty)}</div>
                       <div>- Price: {fmtPrice(mat.detail.price)}</div>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style={right}></td>
+                    <td style={right}></td>
+                    <td style={right}></td>
                   </tr>
                 </React.Fragment>
               ))}
@@ -155,9 +173,9 @@ export default function ComparisonPage() {
                 <React.Fragment key={`outer-${i}`}>
                   <tr>
                     <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
-                    <td>{fmt(mat.value1)}</td>
-                    <td>{fmt(mat.value2)}</td>
-                    <td>{calcDiff(mat.value1, mat.value2)}</td>
+                    <td style={right}>{fmt(mat.value1)}</td>
+                    <td style={right}>{fmt(mat.value2)}</td>
+                    <td style={right}>{calcDiff(mat.value1, mat.value2)}</td>
                   </tr>
                   <tr>
                     <td style={{ paddingLeft: "40px" }}>
@@ -166,9 +184,9 @@ export default function ComparisonPage() {
                       <div>- Qty: {fmt(mat.detail.qty)}</div>
                       <div>- Price: {fmtPrice(mat.detail.price)}</div>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style={right}></td>
+                    <td style={right}></td>
+                    <td style={right}></td>
                   </tr>
                 </React.Fragment>
               ))}
@@ -184,21 +202,21 @@ export default function ComparisonPage() {
           >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- DL</td>
-              <td>{fmt(labor.dl)}</td>
-              <td>{fmt(labor2.dl)}</td>
-              <td>{calcDiff(labor.dl, labor2.dl)}</td>
+              <td style={right}>{fmt(labor.dl)}</td>
+              <td style={right}>{fmt(labor2.dl)}</td>
+              <td style={right}>{calcDiff(labor.dl, labor2.dl)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- IDL</td>
-              <td>{fmt(labor.idl)}</td>
-              <td>{fmt(labor2.idl)}</td>
-              <td>{calcDiff(labor.idl, labor2.idl)}</td>
+              <td style={right}>{fmt(labor.idl)}</td>
+              <td style={right}>{fmt(labor2.idl)}</td>
+              <td style={right}>{calcDiff(labor.idl, labor2.idl)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Facility/Others</td>
-              <td>{fmt(labor.facility)}</td>
-              <td>{fmt(labor2.facility)}</td>
-              <td>{calcDiff(labor.facility, labor2.facility)}</td>
+              <td style={right}>{fmt(labor.facility)}</td>
+              <td style={right}>{fmt(labor2.facility)}</td>
+              <td style={right}>{calcDiff(labor.facility, labor2.facility)}</td>
             </tr>
           </CollapsibleRow>
 
@@ -211,15 +229,15 @@ export default function ComparisonPage() {
           >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
-              <td>{fmt(inland.inlandCost)}</td>
-              <td>{fmt(inland2.inlandCost)}</td>
-              <td>{calcDiff(inland.inlandCost, inland2.inlandCost)}</td>
+              <td style={right}>{fmt(inland.inlandCost)}</td>
+              <td style={right}>{fmt(inland2.inlandCost)}</td>
+              <td style={right}>{calcDiff(inland.inlandCost, inland2.inlandCost)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Milkrun Cost</td>
-              <td>{fmt(inland.milkrunCost)}</td>
-              <td>{fmt(inland2.milkrunCost)}</td>
-              <td>{calcDiff(inland.milkrunCost, inland2.milkrunCost)}</td>
+              <td style={right}>{fmt(inland.milkrunCost)}</td>
+              <td style={right}>{fmt(inland2.milkrunCost)}</td>
+              <td style={right}>{calcDiff(inland.milkrunCost, inland2.milkrunCost)}</td>
             </tr>
           </CollapsibleRow>
         </tbody>
