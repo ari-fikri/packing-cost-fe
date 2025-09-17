@@ -198,7 +198,7 @@ export default function CalculatePackingCost() {
                   visibleRows.map((r, i) => (
                     <tr key={i}>
                       <td>{(page - 1) * perPage + i + 1}</td>
-                      <td>{r.pprCode}</td>
+                      <td>{r.calCode}</td>
                       <td>{r.period}</td>
                       <td>{r.destCode}</td>
                       <td>{r.destCountry}</td>
