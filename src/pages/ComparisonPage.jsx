@@ -28,12 +28,20 @@ export default function ComparisonPage() {
   const inland = { total: 91, inlandCost: 14, milkrunCost: 26 };
   const inland2 = { inlandCost: 11.06, milkrunCost: 27 };
 
+  // Format function for numbers: keep 2 digits after decimal
+  const fmt = (v) => {
+    if (v === null || v === undefined || v === "") return "";
+    const num = Number(v);
+    if (isNaN(num)) return String(v);
+    return num.toFixed(2);
+  };
+
   const calcDiff = (v1, v2) => {
     if (!v1 || !v2) return "";
     return `${(((v2 - v1) / v1) * 100).toFixed(2)}%`;
   };
 
-  const fmtPrice = (v) => `Rp ${v.toLocaleString()}`;
+  const fmtPrice = (v) => `Rp ${Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   return (
     <div className="container mt-3">
@@ -85,16 +93,16 @@ export default function ComparisonPage() {
           </tr>
           <tr>
             <td>TOTAL COST</td>
-            <td>{totalCost1}</td>
-            <td>{totalCost2}</td>
+            <td>{fmt(totalCost1)}</td>
+            <td>{fmt(totalCost2)}</td>
             <td>{calcDiff(totalCost1, totalCost2)}</td>
           </tr>
 
           {/* Material Section */}
           <CollapsibleRow
             title="Material"
-            value1={materialsData.reduce((sum, m) => sum + m.value1, 0)}
-            value2={materialsData.reduce((sum, m) => sum + m.value2, 0)}
+            value1={fmt(materialsData.reduce((sum, m) => sum + m.value1, 0))}
+            value2={fmt(materialsData.reduce((sum, m) => sum + m.value2, 0))}
             diff={calcDiff(
               materialsData.reduce((sum, m) => sum + m.value1, 0),
               materialsData.reduce((sum, m) => sum + m.value2, 0)
@@ -103,8 +111,8 @@ export default function ComparisonPage() {
             {/* Inner */}
             <CollapsibleRow
               title="Inner"
-              value1={materialsData.reduce((sum, m) => sum + m.value1, 0)}
-              value2={materialsData.reduce((sum, m) => sum + m.value2, 0)}
+              value1={fmt(materialsData.reduce((sum, m) => sum + m.value1, 0))}
+              value2={fmt(materialsData.reduce((sum, m) => sum + m.value2, 0))}
               diff={calcDiff(
                 materialsData.reduce((sum, m) => sum + m.value1, 0),
                 materialsData.reduce((sum, m) => sum + m.value2, 0)
@@ -114,15 +122,15 @@ export default function ComparisonPage() {
                 <React.Fragment key={`inner-${i}`}>
                   <tr>
                     <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
-                    <td>{mat.value1}</td>
-                    <td>{mat.value2}</td>
+                    <td>{fmt(mat.value1)}</td>
+                    <td>{fmt(mat.value2)}</td>
                     <td>{calcDiff(mat.value1, mat.value2)}</td>
                   </tr>
                   <tr>
                     <td style={{ paddingLeft: "40px" }}>
                       <div>- Part No: {mat.detail.partNo}</div>
                       <div>- Code: {mat.detail.code}</div>
-                      <div>- Qty: {mat.detail.qty}</div>
+                      <div>- Qty: {fmt(mat.detail.qty)}</div>
                       <div>- Price: {fmtPrice(mat.detail.price)}</div>
                     </td>
                     <td></td>
@@ -136,8 +144,8 @@ export default function ComparisonPage() {
             {/* Outer */}
             <CollapsibleRow
               title="Outer"
-              value1={materialsData.reduce((sum, m) => sum + m.value1, 0)}
-              value2={materialsData.reduce((sum, m) => sum + m.value2, 0)}
+              value1={fmt(materialsData.reduce((sum, m) => sum + m.value1, 0))}
+              value2={fmt(materialsData.reduce((sum, m) => sum + m.value2, 0))}
               diff={calcDiff(
                 materialsData.reduce((sum, m) => sum + m.value1, 0),
                 materialsData.reduce((sum, m) => sum + m.value2, 0)
@@ -147,15 +155,15 @@ export default function ComparisonPage() {
                 <React.Fragment key={`outer-${i}`}>
                   <tr>
                     <td style={{ paddingLeft: "20px" }}>Material {i + 1}</td>
-                    <td>{mat.value1}</td>
-                    <td>{mat.value2}</td>
+                    <td>{fmt(mat.value1)}</td>
+                    <td>{fmt(mat.value2)}</td>
                     <td>{calcDiff(mat.value1, mat.value2)}</td>
                   </tr>
                   <tr>
                     <td style={{ paddingLeft: "40px" }}>
                       <div>- Part No: {mat.detail.partNo}</div>
                       <div>- Code: {mat.detail.code}</div>
-                      <div>- Qty: {mat.detail.qty}</div>
+                      <div>- Qty: {fmt(mat.detail.qty)}</div>
                       <div>- Price: {fmtPrice(mat.detail.price)}</div>
                     </td>
                     <td></td>
@@ -170,26 +178,26 @@ export default function ComparisonPage() {
           {/* Labor Section */}
           <CollapsibleRow
             title="Labor"
-            value1={labor.total}
-            value2={labor2.dl + labor2.idl + labor2.facility}
+            value1={fmt(labor.total)}
+            value2={fmt(labor2.dl + labor2.idl + labor2.facility)}
             diff={calcDiff(labor.total, labor2.dl + labor2.idl + labor2.facility)}
           >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- DL</td>
-              <td>{labor.dl}</td>
-              <td>{labor2.dl}</td>
+              <td>{fmt(labor.dl)}</td>
+              <td>{fmt(labor2.dl)}</td>
               <td>{calcDiff(labor.dl, labor2.dl)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- IDL</td>
-              <td>{labor.idl}</td>
-              <td>{labor2.idl}</td>
+              <td>{fmt(labor.idl)}</td>
+              <td>{fmt(labor2.idl)}</td>
               <td>{calcDiff(labor.idl, labor2.idl)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Facility/Others</td>
-              <td>{labor.facility}</td>
-              <td>{labor2.facility}</td>
+              <td>{fmt(labor.facility)}</td>
+              <td>{fmt(labor2.facility)}</td>
               <td>{calcDiff(labor.facility, labor2.facility)}</td>
             </tr>
           </CollapsibleRow>
@@ -197,20 +205,20 @@ export default function ComparisonPage() {
           {/* Inland Section */}
           <CollapsibleRow
             title="Inland"
-            value1={inland.total}
-            value2={inland2.inlandCost + inland2.milkrunCost}
+            value1={fmt(inland.total)}
+            value2={fmt(inland2.inlandCost + inland2.milkrunCost)}
             diff={calcDiff(inland.total, inland2.inlandCost + inland2.milkrunCost)}
           >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
-              <td>{inland.inlandCost}</td>
-              <td>{inland2.inlandCost}</td>
+              <td>{fmt(inland.inlandCost)}</td>
+              <td>{fmt(inland2.inlandCost)}</td>
               <td>{calcDiff(inland.inlandCost, inland2.inlandCost)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Milkrun Cost</td>
-              <td>{inland.milkrunCost}</td>
-              <td>{inland2.milkrunCost}</td>
+              <td>{fmt(inland.milkrunCost)}</td>
+              <td>{fmt(inland2.milkrunCost)}</td>
               <td>{calcDiff(inland.milkrunCost, inland2.milkrunCost)}</td>
             </tr>
           </CollapsibleRow>

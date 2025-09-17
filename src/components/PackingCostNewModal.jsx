@@ -108,7 +108,13 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     return Array.from({ length: buckets }).map((_, i) => base + (i === 0 ? remainder : 0));
   };
 
-  const fmt = (v) => (v === null || v === undefined ? "" : String(v));
+  // Format function for numbers: keep 2 digits after decimal
+  const fmt = (v) => {
+    if (v === null || v === undefined || v === "") return "";
+    const num = Number(v);
+    if (isNaN(num)) return String(v);
+    return num.toFixed(2);
+  };
 
   function handleRemarkChange(index, value) {
     setRemarks((prev) => ({ ...prev, [index]: value }));
@@ -299,10 +305,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                             <td>{p.parentPartNo}</td>
                             <td>{p.supplierId}</td>
                             <td>{p.supplierName}</td>
-                            <td>{p.L}</td>
-                            <td>{p.W}</td>
-                            <td>{p.H}</td>
-                            <td>{p.boxM3}</td>
+                            <td>{fmt(p.L)}</td>
+                            <td>{fmt(p.W)}</td>
+                            <td>{fmt(p.H)}</td>
+                            <td>{fmt(p.boxM3)}</td>
                             {/* INNER, OUTER, MATERIAL, LABOR, INLAND, TOTAL columns */}
                             <td>{fmt(p.inner?.totalCost)}</td>
                             <td>{fmt(p.inner?.prevYear)}</td>

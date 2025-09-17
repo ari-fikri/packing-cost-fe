@@ -50,6 +50,14 @@ export default function CalculatePackingCost() {
     // TODO: send payload to backend / add to list
   }
 
+  // Format function for numbers: keep 2 digits after decimal
+  const fmt = (v) => {
+    if (v === null || v === undefined || v === "") return "";
+    const num = Number(v);
+    if (isNaN(num)) return String(v);
+    return num.toFixed(2);
+  };
+
   return (
     <div className="container-fluid">
       <div className="card card-outline card-primary">
@@ -188,7 +196,6 @@ export default function CalculatePackingCost() {
                   <th style={{ width: 120 }}>Action</th>
                 </tr>
               </thead>
-
               <tbody>
                 {rows.length === 0 ? (
                   <tr>
@@ -197,13 +204,13 @@ export default function CalculatePackingCost() {
                 ) : (
                   visibleRows.map((r, i) => (
                     <tr key={i}>
-                      <td>{(page - 1) * perPage + i + 1}</td>
+                      <td>{fmt((page - 1) * perPage + i + 1)}</td>
                       <td>{r.calCode}</td>
                       <td>{r.period}</td>
                       <td>{r.destCode}</td>
                       <td>{r.destCountry}</td>
                       <td>{r.modelCode}</td>
-                      <td>{r.numParts}</td>
+                      <td>{fmt(r.numParts)}</td>
                       <td>{r.type}</td>
                       <td>
                         <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => alert('View placeholder')}><i className="fas fa-eye" /></button>
