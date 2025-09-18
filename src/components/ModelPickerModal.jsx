@@ -1,6 +1,7 @@
 // src/components/ModelPickerModal.jsx
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import MODELS from "../data/models";
 
 export default function ModelPickerModal({ show, onClose, onAdd }) {
   const [filterCode, setFilterCode] = useState("");
@@ -8,14 +9,8 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
   const [filterRemark, setFilterRemark] = useState("");
   const [selectedModels, setSelectedModels] = useState([]);
 
-  // Sample static data
-  const modelsData = [
-    { code: "024J", name: "Front Bumper Model", remark: "Prototype 2025" },
-    { code: "286W", name: "Rear Bumper Model", remark: "Production 2024" },
-    { code: "332W", name: "Hood Model", remark: "Prototype 2023" },
-    { code: "385W", name: "Fender Model", remark: "Production 2022" },
-    { code: "388W", name: "Grille Model", remark: "Prototype 2021" },
-  ];
+  // use imported data
+  const modelsData = MODELS;
 
   const handleCheckboxChange = (code) => {
     setSelectedModels((prev) =>
@@ -167,6 +162,5 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
     </div>
   );
 
-  // Portal to document.body so modal escapes any parent stacking context
   return ReactDOM.createPortal(modal, typeof document !== "undefined" ? document.body : null);
 }
