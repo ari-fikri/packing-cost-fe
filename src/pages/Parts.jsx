@@ -1,6 +1,7 @@
 // src/pages/Parts.jsx
 import React, { useState } from 'react'
 import NewPartModal from '../components/NewPartModal' // make sure this file exists
+import PartPickerModal from '../components/PartPickerModal' // wired picker
 
 export default function Parts() {
   // filter fields
@@ -16,6 +17,11 @@ export default function Parts() {
 
   // modal state
   const [showNewPartModal, setShowNewPartModal] = useState(false)
+
+  // Part picker state
+  const [showPartPicker, setShowPartPicker] = useState(false)
+  // which field opened the picker: 'partNo' | 'parentPart' — used in onSelect
+  const [pickerTarget, setPickerTarget] = useState(null)
 
   // pagination placeholders
   const [perPage, setPerPage] = useState(10)
@@ -66,6 +72,52 @@ export default function Parts() {
     setPage(p)
   }
 
+  // --- Part picker helpers ---
+  // open picker for a particular target field
+  function openPartPickerFor(target) {
+    setPickerTarget(target) // 'partNo' or 'parentPart'
+    setShowPartPicker(true)
+  }
+
+  // called when PartPickerModal returns selection(s)
+  // PartPickerModal may return array of selected parts or single object;
+  // we pick the first selection and populate the input for the pickerTarget.
+  function handlePartPicked(selected) {
+    if (!selected) {
+      setShowPartPicker(false)
+      setPickerTarget(null)
+      return
+    }
+
+    // if array, pick the first item
+    const item = Array.isArray(selected) ? selected[0] : selected
+
+    if (!item) {
+      setShowPartPicker(false)
+      setPickerTarget(null)
+      return
+    }
+
+    // Normalize keys commonly used in your codebase
+    const chosenPartNo = item.partNo ?? item.part_number ?? item.code ?? ''
+    const chosenParent = item.partNo ?? item.partNoParent ?? item.parentPartNo ?? ''
+
+    if (pickerTarget === 'partNo') {
+      setPartNo(chosenPartNo)
+    } else if (pickerTarget === 'parentPart') {
+      // some pickers return parent id/partNo in different fields — use best effort
+      setParentPart(chosenParent || chosenPartNo)
+    }
+
+    // Optionally fill other quick fields (supplier etc.) if you want:
+    // if (item.supplierName) setSupplierName(item.supplierName)
+    // if (item.supplierId) setSupplierId(item.supplierId)
+
+    // close picker and reset target
+    setShowPartPicker(false)
+    setPickerTarget(null)
+  }
+
   return (
     <div className="container-fluid">
       <div className="card card-outline card-primary">
@@ -100,7 +152,13 @@ export default function Parts() {
                     placeholder="Part No"
                   />
                   <div className="input-group-append">
-                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part No" onClick={() => alert('search part no placeholder')}>
+                    {/* open part picker for Part No */}
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm"
+                      title="Pick Part"
+                      onClick={() => openPartPickerFor('partNo')}
+                    >
                       <i className="fas fa-search" />
                     </button>
                   </div>
@@ -168,7 +226,13 @@ export default function Parts() {
                     placeholder="Parent Part"
                   />
                   <div className="input-group-append">
-                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Parent" onClick={() => alert('search parent placeholder')}>
+                    {/* open part picker for Parent Part */}
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm"
+                      title="Pick Parent Part"
+                      onClick={() => openPartPickerFor('parentPart')}
+                    >
                       <i className="fas fa-search" />
                     </button>
                   </div>
@@ -301,6 +365,13 @@ export default function Parts() {
         show={showNewPartModal}
         onClose={handleCloseNewPart}
         onSave={handleSaveNewPart}
+      />
+
+      {/* Part Picker Modal — shared for Part No and Parent Part */}
+      <PartPickerModal
+        show={showPartPicker}
+        onClose={() => { setShowPartPicker(false); setPickerTarget(null); }}
+        onSelect={handlePartPicked}
       />
     </div>
   )
