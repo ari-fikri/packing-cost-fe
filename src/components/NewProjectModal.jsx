@@ -1,5 +1,6 @@
 // src/components/NewProjectModal.jsx
 import React, { useState } from 'react'
+import ModelPickerModal from './ModelPickerModal';
 
 export default function NewProjectModal({ visible, onClose, onSave }) {
   const [code, setCode] = useState('')
@@ -12,6 +13,15 @@ export default function NewProjectModal({ visible, onClose, onSave }) {
   const [status, setStatus] = useState('Draft')
   const [note, setNote] = useState('')
   const [models, setModels] = useState([]) // simple array of {code,name,remark}
+  const [showModelPicker, setShowModelPicker] = useState(false);
+  const [selectedModels, setSelectedModels] = useState([]);
+  const handleOpenModelPicker = () => setShowModelPicker(true);
+  const handleCloseModelPicker = () => setShowModelPicker(false);
+  
+  const handleAddModels = (models) => {
+    setSelectedModels(prev => [...prev, ...models]);
+    setShowModelPicker(false);
+  };
 
   function handleAddModel() {
     // placeholder: push a demo row (you can replace with modal selector later)
@@ -111,7 +121,7 @@ export default function NewProjectModal({ visible, onClose, onSave }) {
           {/* action toolbar */}
           <div className="row mt-3 align-items-center">
             <div className="col-8">
-              <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleAddModel}><i className="fas fa-plus mr-1"></i> Add Model</button>
+              <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenModelPicker}><i className="fas fa-plus mr-1"></i> Add Model</button>
               <button type="button" className="btn btn-sm btn-outline-secondary mr-1"><i className="fas fa-cloud-upload-alt"></i></button>
               <button type="button" className="btn btn-sm btn-outline-secondary"><i className="fas fa-cloud-download-alt"></i></button>
             </div>
@@ -156,6 +166,11 @@ export default function NewProjectModal({ visible, onClose, onSave }) {
           <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
         </div>
       </div>
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={handleCloseModelPicker}
+        onAdd={handleAddModels}
+      />      
     </div>
   )
 }
