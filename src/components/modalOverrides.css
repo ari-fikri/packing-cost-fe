@@ -1,0 +1,24 @@
+/* src/components/modalOverrides.css */
+
+/* If your MultiPartsComparisonModal adds the extraClass prop to the modal wrapper
+   or applies it to the root modal, we target it here. Adjust selector if your modal
+   has a different markup. */
+
+/* Ensure comparison modal content is above the CPS modal */
+.multi-parts-comparison .modal {
+  z-index: 2100 !important; /* higher than CPS modal (2001) */
+}
+
+/* Comparison modal backdrop should sit between modals and behind comparison modal */
+.multi-parts-comparison .modal-backdrop.show {
+  z-index: 2095 !important;
+}
+
+/* If MultiPartsComparisonModal renders a plain .modal without nested extraClass,
+   try direct selector fallback */
+.modal.multi-parts-comparison {
+  z-index: 2100 !important;
+}
+.modal-backdrop.show {
+  z-index: 2095 !important;
+}
