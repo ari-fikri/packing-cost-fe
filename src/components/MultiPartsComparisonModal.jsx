@@ -1,90 +1,94 @@
 // src/components/MultiPartsComparisonModal.jsx
-import React from "react";
+import React, { useState, useMemo } from 'react';
+import SearchSection from './SearchSection';
+import CurrentCpsSection from './CurrentCpsSection';
+import ResultsSection from './ResultsSection';
+import { currentDummy, partsDummy } from "../data/comparison";
 
-const MultiPartsComparisonModal = ({ isOpen, onClose, parts, extraClass }) => {
-  if (!isOpen) return null;
+export default function MultiPartsComparisonModal({
+  isOpen = false,
+  onClose = () => {},
+  parts = [],        // array of part objects for search results
+  current = {},      // object containing current CPS data
+  onSelectPart = () => {}
+}) {
+  // 3 query states for search inputs
+  const [partNoQuery, setPartNoQuery] = useState('');
+  const [partNameQuery, setPartNameQuery] = useState('');
+  const [supplierQuery, setSupplierQuery] = useState('');
+
+  // Filtering parts based on the three fields
+  const filteredParts = useMemo(() => {
+    return parts.filter(p => {
+      const pn = partNoQuery.trim().toLowerCase();
+      const pname = partNameQuery.trim().toLowerCase();
+      const sup = supplierQuery.trim().toLowerCase();
+      const partNoMatch = pn === '' || (p.partNo && p.partNo.toLowerCase().includes(pn));
+      const partNameMatch = pname === '' || (p.name && p.name.toLowerCase().includes(pname));
+      const supplierMatch = sup === '' || (p.supplier && p.supplier.toLowerCase().includes(sup));
+      return partNoMatch && partNameMatch && supplierMatch;
+    });
+  }, [parts, partNoQuery, partNameQuery, supplierQuery]);
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <div
-      className={`modal fade show ${extraClass || ""}`}
-      style={{ display: "block" }}
-    >
-      <div className="modal-dialog modal-xl" style={{ maxWidth: "95%" }}>
-        <div className="modal-content">
-          {/* Header */}
-          <div className="modal-header bg-primary">
-            <h5 className="modal-title">Multi Parts Comparison</h5>
-            <button
-              type="button"
-              className="close"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          {/* Body */}
-          <div className="modal-body p-0">
-            <div className="table-responsive" style={{ maxHeight: "70vh" }}>
-              <table className="table table-bordered table-hover table-sm text-nowrap">
-                <thead className="thead-dark sticky-top">
-                  <tr>
-                    <th>Attribute</th>
-                    {parts.map((part, index) => (
-                      <th key={index} className="text-center">
-                        {part.partNo}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Part Name</td>
-                    {parts.map((p, i) => (
-                      <td key={i}>{p.name}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td>Supplier</td>
-                    {parts.map((p, i) => (
-                      <td key={i}>{p.supplier}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td>Price</td>
-                    {parts.map((p, i) => (
-                      <td key={i}>${p.price}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td>Lead Time</td>
-                    {parts.map((p, i) => (
-                      <td key={i}>{p.leadTime} days</td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="modal-footer justify-content-between">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={onClose}
-            >
-              Close
-            </button>
-            <button type="button" className="btn btn-success">
-              Export to Excel
-            </button>
+    <div className="np-modal-backdrop multi-parts-modal" style={{ zIndex: 3000 }} onMouseDown={e => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1200, width: '100%' }}>
+        <div className="card-header d-flex align-items-center">
+          <h3 className="card-title mb-0"><b>Parts Comparison</b></h3>
+          <div className="card-tools ml-auto">
+            <button type="button" className="btn btn-tool" onClick={onClose}><i className="fas fa-times"></i></button>
           </div>
         </div>
+
+        <div className="card-body">
+          {/* 1st Section: Search / Select Part */}
+          <SearchSection
+            current={current}
+            partNoQuery={partNoQuery}
+            partNameQuery={partNameQuery}
+            supplierQuery={supplierQuery}
+            onPartNoChange={setPartNoQuery}
+            onPartNameChange={setPartNameQuery}
+            onSupplierChange={setSupplierQuery}
+            onGo={() => {
+              // Maybe you want to trigger some action on Go, or just rely on filteredParts
+              // For example, you could focus results section or fetch new parts
+            }}
+          />
+
+          <hr />
+
+          {/* 2nd Section: Current CPS data */}
+          <CurrentCpsSection current={current} />
+
+          <hr />
+
+          {/* 3rd Section: Search Results */}
+          <ResultsSection
+            filteredParts={filteredParts}
+            onSelectPart={(p) => {
+              onSelectPart(p);
+              // maybe close modal or update current state
+            }}
+          />
+        </div>
+
+        <div className="card-footer text-right">
+          <button className="btn btn-sm btn-primary mr-2" onClick={() => { /* maybe combine selections, or confirm */ }}>Add</button>
+          <button className="btn btn-sm btn-outline-secondary" onClick={onClose}>Close</button>
+        </div>
+
+        <style>{`
+          .multi-parts-modal .np-modal { max-width: 1200px; }
+          .np-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+          .np-modal { width: 100%; max-height: 95vh; overflow: auto; }
+          .table-sm td, .table-sm th { vertical-align: middle; white-space: nowrap; }
+        `}</style>
       </div>
     </div>
   );
-};
-
-export default MultiPartsComparisonModal;
+}
