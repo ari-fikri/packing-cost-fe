@@ -1,52 +1,32 @@
-// src/components/CurrentCpsSection/InnerInfoColumns.jsx
-import React from 'react';
+// InnerInfoColumns.jsx
+import React from "react";
+import { MaterialLeafHeaders, MaterialLeafCells } from "./MaterialInfoColumns";
 
-export function InnerInfoHeader({ innerMaterials }) {
+/**
+ * Renders the top row groups for Inner Info: Material 1 .. Material N
+ */
+export function InnerGroupHeaders({ count = 10 }) {
   return (
     <>
-      <th colSpan={innerMaterials.length * 4}>Inner Info</th>
-    </>
-  );
-}
-
-// For the 2nd header row under Inner Info: Material 1, Material 2, ...
-export function InnerMaterialsGroupHeaders({ innerMaterials }) {
-  return (
-    <>
-      {innerMaterials.map((mat, idx) => (
-        <th key={`innerMatHdr${idx}`} colSpan="4">Material {idx + 1}</th>
+      {Array.from({ length: count }).map((_, i) => (
+        <th key={`innerGroupHdr-${i}`} colSpan={4} className="align-middle">
+          Material {i + 1}
+        </th>
       ))}
     </>
   );
 }
 
-// For the 3rd & 4th levels: sub-headers and data
-export function InnerInfoSubHeaders({ innerMaterials }) {
-  return (
-    <>
-      {innerMaterials.map((mat, idx) => (
-        <React.Fragment key={`innerMatSubHdr${idx}`}>
-          <th>Mat No</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>Sum</th>
-        </React.Fragment>
-      ))}
-    </>
-  );
+/**
+ * Renders the 3rd-row leaf headers for inner materials (Mat No / Qty / Price / Sum)
+ */
+export function InnerLeafHeaders({ count = 10 }) {
+  return <MaterialLeafHeaders count={count} />;
 }
 
-export function InnerInfoData({ innerMaterials }) {
-  return (
-    <>
-      {innerMaterials.map((mat, idx) => (
-        <React.Fragment key={`innerMatData${idx}`}>
-          <td>{mat.materialNo}</td>
-          <td>{mat.qty}</td>
-          <td>{mat.price}</td>
-          <td>{mat.sum}</td>
-        </React.Fragment>
-      ))}
-    </>
-  );
+/**
+ * Renders the data cells for inner materials
+ */
+export function InnerLeafCells({ data = [], count = 10 }) {
+  return <MaterialLeafCells arr={data} count={count} />;
 }
