@@ -6,8 +6,8 @@ const AuthContext = createContext(null)
 
 // Dummy user database (username + password)
 const USERS = [
-  { username: 'khedi.asmoro', password: '12345678', department: 'PSE', role: 'user' },
-  { username: 'hanifa', password: '12345', department: 'PCD', role: 'user' },
+  { username: 'khedi.asmoro', password: '1', department: 'PSE', role: 'user' },
+  { username: 'hanifa', password: '2', department: 'PCD', role: 'user' },
 ]
 
 export function AuthProvider({ children }){
