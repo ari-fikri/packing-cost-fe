@@ -3,7 +3,6 @@ import React, { useState, useMemo, useRef } from 'react';
 import SearchSection from './SearchSection';
 import CurrentCpsSection from './CurrentCpsSection';
 import ResultsSection from './ResultsSection';
-import { currentDummy, partsDummy } from "../data/comparison";
 
 export default function MultiPartsComparisonModal({
   isOpen = false,
@@ -50,7 +49,7 @@ export default function MultiPartsComparisonModal({
 
   return (
     <div className="np-modal-backdrop multi-parts-modal" style={{ zIndex: 3000 }} onMouseDown={e => { if (e.target === e.currentTarget) onClose() }}>
-      <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1200, width: '100%' }}>
+      <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1200, width: '100%', display: 'flex', flexDirection: 'column', maxHeight: '95vh' }}>
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>Parts Comparison</b></h3>
           <div className="card-tools ml-auto">
@@ -73,9 +72,11 @@ export default function MultiPartsComparisonModal({
               // For example, you could focus results section or fetch new parts
             }}
           />
+        </div>
 
-          <hr />
+        <hr className="my-0" />
 
+        <div className="card-body" style={{ overflowY: 'auto', flex: '1' }}>
           {/* 2nd Section: Current CPS data */}
           <CurrentCpsSection
             current={current}
@@ -105,7 +106,7 @@ export default function MultiPartsComparisonModal({
         <style>{`
           .multi-parts-modal .np-modal { max-width: 1200px; }
           .np-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; padding: 1rem; }
-          .np-modal { width: 100%; max-height: 95vh; overflow: auto; }
+          .np-modal { width: 100%; max-height: 95vh; /* overflow: auto; */ }
           .table-sm td, .table-sm th { vertical-align: middle; white-space: nowrap; }
         `}</style>
       </div>
