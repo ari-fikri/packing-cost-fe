@@ -1,11 +1,11 @@
 // CurrentCpsSection.jsx
 import React from "react";
 
-import { InnerGroupHeaders, InnerLeafHeaders, InnerLeafCells } from "./InnerInfoColumns";
-import { OuterGroupHeaders, OuterLeafHeaders, OuterLeafCells } from "./OuterInfoColumns";
-import { SubTotalHeaders, SubTotalData } from "./SubTotalColumns";
-import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "./LaborInfoColumns";
-import { InlandLeafHeaders, InlandLeafCells } from "./InlandColumns";
+import { InnerGroupHeaders, InnerLeafHeaders, InnerLeafCells } from "./CurrentCpsSection/InnerInfoColumns"
+import { OuterGroupHeaders, OuterLeafHeaders, OuterLeafCells } from "./CurrentCpsSection/OuterInfoColumns";
+import { SubTotalHeaders, SubTotalData } from "./CurrentCpsSection/SubTotalColumns";
+import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "./CurrentCpsSection/LaborInfoColumns";
+import { InlandLeafHeaders, InlandLeafCells } from "./CurrentCpsSection/InlandColumns";
 
 export default function CurrentCpsSection({ current = {} }) {
   const INNER_COUNT = 10;
