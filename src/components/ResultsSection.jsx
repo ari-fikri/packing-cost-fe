@@ -7,17 +7,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart }) {
       <h6 className="mb-2">Search Results</h6>
       <div className="table-responsive" style={{ maxHeight: 260, overflowY: 'auto' }}>
         <table className="table table-sm table-hover table-bordered mb-0">
-          <thead className="thead-light">
-            <tr>
-              <th style={{ width: 40 }}>#</th>
-              <th>Part No</th>
-              <th>Part Name</th>
-              <th>Supplier</th>
-              <th style={{ width: 90 }}>Price</th>
-              <th style={{ width: 90 }}>Lead Time</th>
-              <th style={{ width: 90 }}>Action</th>
-            </tr>
-          </thead>
+
           <tbody>
             {filteredParts.length === 0 ? (
               <tr><td colSpan="7" className="text-center text-muted py-3">No results</td></tr>
