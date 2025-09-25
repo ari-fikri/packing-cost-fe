@@ -67,7 +67,7 @@ export const currentDummy = {
   },
 };
 
-export const partsDummy = Array.from({ length: 15 }, (_, i) => ({
+export const partsDummy = Array.from({ length: 25 }, (_, i) => ({
   recNo: i + 2,
   cpsNo: `CPS-000${i + 2}`,
   partNo: `12345-A${i + 1}`,
