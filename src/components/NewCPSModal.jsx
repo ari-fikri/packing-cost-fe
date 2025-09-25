@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
 import './modalOverrides.css' // small override to ensure proper z-index stacking
-import { partsDummy } from '../data/comparison';
+import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison';
 
 export default function NewCpsModal({ show = false, onClose = () => {}, onSave = () => {}, onSubmit = () => {} }) {
   // Top-level fields (all empty by default)
@@ -632,6 +632,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         isOpen={isComparisonOpen}
         onClose={() => setComparisonOpen(false)}
         parts={partsDummy}
+        current={currentCpsRecord}
         extraClass="multi-parts-comparison"
       />
     </>
