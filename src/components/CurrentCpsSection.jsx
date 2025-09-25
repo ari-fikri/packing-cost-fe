@@ -7,7 +7,7 @@ import { SubTotalHeaders, SubTotalData } from "./CurrentCpsSection/SubTotalColum
 import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "./CurrentCpsSection/LaborInfoColumns";
 import { InlandLeafHeaders, InlandLeafCells } from "./CurrentCpsSection/InlandColumns";
 
-export default function CurrentCpsSection({ current = {} }) {
+export default function CurrentCpsSection({ current = {}, scrollRef, onScroll }) {
   const INNER_COUNT = 10;
   const OUTER_COUNT = 10;
 
@@ -39,7 +39,12 @@ export default function CurrentCpsSection({ current = {} }) {
       </button>
 
       <div className="card card-body mt-2 p-2">
-        <div className="table-responsive" style={{ overflowX: "auto" }}>
+        <div
+          ref={scrollRef}
+          onScroll={onScroll}
+          className="table-responsive"
+          style={{ overflowX: "auto" }}
+        >
           <table
             className="table table-sm table-bordered mb-0 text-center"
             style={{ minWidth: `${minWidthPx}px` }}

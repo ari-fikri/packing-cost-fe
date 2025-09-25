@@ -7,7 +7,7 @@ import { SubTotalHeaders } from "./CurrentCpsSection/SubTotalColumns";
 import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "./CurrentCpsSection/LaborInfoColumns";
 import { InlandLeafHeaders, InlandLeafCells } from "./CurrentCpsSection/InlandColumns";
 
-export default function ResultsSection({ filteredParts = [], onSelectPart }) {
+export default function ResultsSection({ filteredParts = [], onSelectPart, scrollRef, onScroll }) {
   const INNER_COUNT = 10;
   const OUTER_COUNT = 10;
 
@@ -28,7 +28,12 @@ export default function ResultsSection({ filteredParts = [], onSelectPart }) {
   return (
     <div className="mb-1">
       <h6 className="mb-2">Search Results</h6>
-      <div className="table-responsive" style={{ maxHeight: 400, overflowY: 'auto', overflowX: 'auto' }}>
+      <div
+        ref={scrollRef}
+        onScroll={onScroll}
+        className="table-responsive"
+        style={{ maxHeight: 400, overflowY: 'auto', overflowX: 'auto' }}
+      >
         <table
           className="table table-sm table-bordered mb-0 text-center"
           style={{ minWidth: `${minWidthPx}px` }}
@@ -103,7 +108,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart }) {
 
                 {/* Part Info */}
                 <td className="align-middle">{p.partNo ?? "-"}</td>
-                <td className="align-middle">{p.name ?? "-"}</td>
+                <td className="align-.middle">{p.name ?? "-"}</td>
                 <td className="align-middle">{p.parentNo ?? "-"}</td>
                 <td className="align-middle">{p.supplierCode ?? "-"}</td>
                 <td className="align-middle">{p.supplierName ?? "-"}</td>

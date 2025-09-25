@@ -1,5 +1,5 @@
 // src/components/MultiPartsComparisonModal.jsx
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import SearchSection from './SearchSection';
 import CurrentCpsSection from './CurrentCpsSection';
 import ResultsSection from './ResultsSection';
@@ -16,6 +16,20 @@ export default function MultiPartsComparisonModal({
   const [partNoQuery, setPartNoQuery] = useState('');
   const [partNameQuery, setPartNameQuery] = useState('');
   const [supplierQuery, setSupplierQuery] = useState('');
+
+  const scrollRef1 = useRef(null);
+  const scrollRef2 = useRef(null);
+  const isSyncing = useRef(false);
+
+  const handleScroll = (scrollingRef, otherRef) => {
+    if (!isSyncing.current) {
+      isSyncing.current = true;
+      if (otherRef.current && scrollingRef.current) {
+        otherRef.current.scrollLeft = scrollingRef.current.scrollLeft;
+      }
+      isSyncing.current = false;
+    }
+  };
 
   // Filtering parts based on the three fields
   const filteredParts = useMemo(() => {
@@ -63,7 +77,11 @@ export default function MultiPartsComparisonModal({
           <hr />
 
           {/* 2nd Section: Current CPS data */}
-          <CurrentCpsSection current={current} />
+          <CurrentCpsSection
+            current={current}
+            scrollRef={scrollRef1}
+            onScroll={() => handleScroll(scrollRef1, scrollRef2)}
+          />
 
           <hr />
 
@@ -74,6 +92,8 @@ export default function MultiPartsComparisonModal({
               onSelectPart(p);
               // maybe close modal or update current state
             }}
+            scrollRef={scrollRef2}
+            onScroll={() => handleScroll(scrollRef2, scrollRef1)}
           />
         </div>
 
