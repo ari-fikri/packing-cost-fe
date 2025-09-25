@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
 import './modalOverrides.css' // small override to ensure proper z-index stacking
+import { partsDummy } from '../data/comparison';
 
 export default function NewCpsModal({ show = false, onClose = () => {}, onSave = () => {}, onSubmit = () => {} }) {
   // Top-level fields (all empty by default)
@@ -183,12 +184,6 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   }
 
   if (!show) return null
-
-  // sample parts for comparison (you can replace with real data later)
-  const sampleParts = [
-    { partNo: "162990E010-00", name: "Part A", supplier: "Supplier 1", price: 120, leadTime: 10 },
-    { partNo: "364070K010-00", name: "Part B", supplier: "Supplier 2", price: 145, leadTime: 14 },
-  ]
 
   return (
     <>
@@ -468,7 +463,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
                     <div className="col-md-6 mt-2">
                       <label className="small">BKP Images</label>
                       <div className="border p-2 mb-2">
-                        {imagesBkp.length === 0 ? <div className="text-muted">No images</div> : imagesBkp.map((it, i) => <div key={i}>{it.caption}</div>)}
+                        {imagesBkp.length === 0 ? <div className="text-muted">No. images</div> : imagesBkp.map((it, i) => <div key={i}>{it.caption}</div>)}
                         <div className="mt-2">
                           <button className="btn btn-sm btn-outline-primary" onClick={() => { const caption = prompt('Image caption'); if (caption) setImagesBkp(p => [...p, { caption }]) }}>+ Add</button>
                         </div>
@@ -636,7 +631,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       <MultiPartsComparisonModal
         isOpen={isComparisonOpen}
         onClose={() => setComparisonOpen(false)}
-        parts={sampleParts}
+        parts={partsDummy}
         extraClass="multi-parts-comparison"
       />
     </>
