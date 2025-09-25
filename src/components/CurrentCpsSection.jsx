@@ -19,6 +19,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
 
   // compute a reasonable minWidth based on leaf columns
   const leafColumns =
+    1 + // action
     2 + // rec + cps
     7 + // part info fields
     5 + // sub totals (Inner/Outer/Material/Labor/Inland)
@@ -52,6 +53,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
             <thead>
               {/* row 1 */}
               <tr style={{ backgroundColor: "#696969", color: "white" }}>
+                <th rowSpan={3} style={{width: '50px'}}></th>
                 <th rowSpan={3} className="align-middle">Rec No</th>
                 <th rowSpan={3} className="align-middle">CPS No</th>
 
@@ -81,7 +83,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
               {/* row 3 */}
               <tr style={{ backgroundColor: "#D8D8D8", color: "black" }}>
                 {/* Part Info subheaders (7 columns) */}
-                <th className="align-middle">Part No</th>
+                <th className="align-middle" style={{width: '150px'}}>Part No</th>
                 <th className="align-middle">Part Name</th>
                 <th className="align-middle">Parent No</th>
                 <th className="align-middle">Supplier Code</th>
@@ -111,6 +113,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
 
             <tbody>
               <tr>
+                <td></td>
                 {/* Rec & CPS */}
                 <td className="align-middle">{current.recNo ?? "-"}</td>
                 <td className="align-middle">{current.cpsNo ?? "-"}</td>

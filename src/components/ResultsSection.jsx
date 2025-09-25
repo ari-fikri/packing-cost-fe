@@ -41,7 +41,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
           <thead>
             {/* row 1 */}
             <tr style={{ backgroundColor: "#696969", color: "white" }}>
-              <th rowSpan={3} className="align-middle">Action</th>
+              <th rowSpan={3} className="align-middle" style={{width: '50px'}}>Action</th>
               <th rowSpan={3} className="align-middle">Rec No</th>
               <th rowSpan={3} className="align-middle">CPS No</th>
               <th rowSpan={2} colSpan={7} className="align-middle">Part Info</th>
@@ -64,7 +64,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
             {/* row 3 */}
             <tr style={{ backgroundColor: "#D8D8D8", color: "black" }}>
               {/* Part Info subheaders (7 columns) */}
-              <th className="align-middle">Part No</th>
+              <th className="align-middle" style={{width: '150px'}}>Part No</th>
               <th className="align-middle">Part Name</th>
               <th className="align-middle">Parent No</th>
               <th className="align-middle">Supplier Code</th>
@@ -96,10 +96,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
             ) : filteredParts.map((p, idx) => (
               <tr key={idx}>
                 <td className="align-middle">
-                  <div className="btn-group btn-group-sm" role="group">
-                    <button className="btn btn-outline-primary" onClick={() => onSelectPart(p)}>Select</button>
-                    <button className="btn btn-outline-secondary" onClick={() => alert(`View ${p.partNo}`)}>View</button>
-                  </div>
+                  <input type="checkbox" onChange={() => onSelectPart(p)} />
                 </td>
 
                 {/* Rec & CPS */}
