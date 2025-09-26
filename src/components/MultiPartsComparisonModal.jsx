@@ -76,7 +76,7 @@ export default function MultiPartsComparisonModal({
 
         <hr className="my-0" />
 
-        <div className="card-body" style={{ overflowY: 'auto', flex: '1' }}>
+        <div className="card-body" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
           {/* 2nd Section: Current CPS data */}
           <CurrentCpsSection
             current={current}
