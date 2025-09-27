@@ -1,8 +1,6 @@
 // src/components/MultiPartsComparisonModal.jsx
 import React, { useState, useMemo, useRef } from 'react';
-import SearchSection from './SearchSection';
-import CurrentCpsSection from './CurrentCpsSection';
-import ResultsSection from './ResultsSection';
+import { SearchSection, CurrentCpsSection, ResultsSection } from './MultiPartsComparisonModalSections'
 
 export default function MultiPartsComparisonModal({
   isOpen = false,
@@ -97,9 +95,7 @@ export default function MultiPartsComparisonModal({
           {/* 3rd Section: Search Results */}
           <ResultsSection
             filteredParts={filteredParts}
-            onSelectPart={(p) => {
-              onSelectPart(p);
-            }}
+            onSelectPart={onSelectPart}
             scrollRef={scrollRef2}
             onScroll={() => handleScroll(scrollRef2, scrollRef1)}
           />
