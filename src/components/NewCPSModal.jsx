@@ -2,8 +2,16 @@
 import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
 import PartPickerModal from './PartPickerModal';
-import './modalOverrides.css' // small override to ensure proper z-index stacking
-import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison';
+import './modalOverrides.css'
+import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
+
+// Import sections from external folder
+import {
+  GeneralInfoSection,
+  PseInfoSection,
+  ImagesSection,
+  PackingSection
+} from './NewCPSModalSections'
 
 export default function NewCpsModal({ show = false, onClose = () => {}, onSave = () => {}, onSubmit = () => {} }) {
   // Top-level fields (all empty by default)
@@ -210,413 +218,74 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
               <button type="button" className="btn btn-tool" onClick={onClose}><i className="fas fa-times" /></button>
             </div>
           </div>
-
+          
           <div className="card-body">
-            {/* Top grid */}
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-row">
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>CPS No.</b></label>
-                    <input className="form-control form-control-sm" value={cpsNo} onChange={e => setCpsNo(e.target.value)} placeholder="CPSxxxx..." />
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>DPI No.</b></label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" value={dpiNo} onChange={e => setDpiNo(e.target.value)} />
-                      <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm" title="Search DPI" onClick={() => alert('Search DPI placeholder')}><i className="fas fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Model</b></label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" value={model} onChange={e => setModel(e.target.value)} />
-                      <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => alert('Search Model placeholder')}><i className="fas fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Part No</b></label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" value={partNo} onChange={e => setPartNo(e.target.value)} />
-                      <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part" onClick={() => setPartPickerOpen(true)}><i className="fas fa-search" /></button>
-
-                        {/* Compare button next to search */}
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary btn-sm"
-                          title="Compare"
-                          style={{ marginLeft: 6 }}
-                          onClick={() => setComparisonOpen(true)}
-                        >
-                          Compare
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Issued Date</b></label>
-                    <input type="date" className="form-control form-control-sm" value={issueDate} onChange={e => setIssueDate(e.target.value)} />
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Effective Date</b></label>
-                    <input type="date" className="form-control form-control-sm" value={effectiveDate} onChange={e => setEffectiveDate(e.target.value)} />
-                  </div>
-                </div>
-              </div>
-
-              {/* right top */}
-              <div className="col-md-6">
-                <div className="form-row">
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Ref CPS No.</b></label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" value={refCpsNo} onChange={e => setRefCpsNo(e.target.value)} />
-                      <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Ref CPS" onClick={() => alert('Search Ref CPS placeholder')}><i className="fas fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>CFC / PJT Code</b></label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" value={cfcPjtCode} onChange={e => setCfcPjtCode(e.target.value)} />
-                      <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => alert('Search CFC/PJT placeholder')}><i className="fas fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Part Name</b></label>
-                    <input className="form-control form-control-sm" value={partName} onChange={e => setPartName(e.target.value)} />
-                  </div>
-
-                  <div className="form-group col-12">
-                    <label className="small mb-1"><b>Supplier</b></label>
-                    <input className="form-control form-control-sm" value={supplier} onChange={e => setSupplier(e.target.value)} />
-                  </div>
-
-                  <div className="form-group col-6">
-                    <label className="small mb-1">Plant Code</label>
-                    <input className="form-control form-control-sm" value={plantCode} onChange={e => setPlantCode(e.target.value)} />
-                  </div>
-                  <div className="form-group col-6">
-                    <label className="small mb-1">Dock Code</label>
-                    <input className="form-control form-control-sm" value={dockCode} onChange={e => setDockCode(e.target.value)} />
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* General Info */}
+            <GeneralInfoSection
+              cpsNo={cpsNo} setCpsNo={setCpsNo}
+              refCpsNo={refCpsNo} setRefCpsNo={setRefCpsNo}
+              issueDate={issueDate} setIssueDate={setIssueDate}
+              effectiveDate={effectiveDate} setEffectiveDate={setEffectiveDate}
+              dpiNo={dpiNo} setDpiNo={setDpiNo}
+              cfcPjtCode={cfcPjtCode} setCfcPjtCode={setCfcPjtCode}
+              model={model} setModel={setModel}
+              partNo={partNo} setPartNo={setPartNo}
+              partName={partName} setPartName={setPartName}
+              supplier={supplier} setSupplier={setSupplier}
+              plantCode={plantCode} setPlantCode={setPlantCode}
+              dockCode={dockCode} setDockCode={setDockCode}
+              setPartPickerOpen={setPartPickerOpen}
+              setComparisonOpen={setComparisonOpen}
+            />
 
             <hr />
 
-            {/* PSE Info (collapsible) */}
-            <div className="mb-3">
-              <button type="button" className="btn btn-sm btn-link p-0" onClick={() => setPseOpen(v => !v)}>
-                <i className={`fas ${pseOpen ? 'fa-chevron-down' : 'fa-chevron-right'} mr-2`} />
-                <strong>PSE Info</strong>
-              </button>
-              {pseOpen && (
-                <div className="card card-body mt-2">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <label className="small mb-1">Packing Plant (Curr)</label>
-                      <input className="form-control form-control-sm" value={packingPlantCurr} onChange={e => setPackingPlantCurr(e.target.value)} />
-                      <label className="small mb-1 mt-2">Packing Plant (Next)</label>
-                      <input className="form-control form-control-sm" value={packingPlantNext} onChange={e => setPackingPlantNext(e.target.value)} />
-                    </div>
-                    <div className="col-md-4">
-                      <label className="small mb-1">Vanning Plant (Curr)</label>
-                      <input className="form-control form-control-sm" value={vanningPlantCurr} onChange={e => setVanningPlantCurr(e.target.value)} />
-                      <label className="small mb-1 mt-2">Vanning Plant (Next)</label>
-                      <input className="form-control form-control-sm" value={vanningPlantNext} onChange={e => setVanningPlantNext(e.target.value)} />
-                    </div>
-                    <div className="col-md-4">
-                      <label className="small mb-1">Order Pattern (Curr)</label>
-                      <input className="form-control form-control-sm" value={orderPatternCurr} onChange={e => setOrderPatternCurr(e.target.value)} />
-                      <label className="small mb-1 mt-2">Order Pattern (Next)</label>
-                      <input className="form-control form-control-sm" value={orderPatternNext} onChange={e => setOrderPatternNext(e.target.value)} />
-                    </div>
-
-                    <div className="col-12 mt-3">
-                      <label className="small mb-1">Category</label>
-                      <select className="form-control form-control-sm" value={category} onChange={e => setCategory(e.target.value)}>
-                        <option value="">—</option>
-                        <option value="Trim">Trim</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-
-                    <div className="col-12 mt-2">
-                      <label className="small mb-1">Katashiki (AD/AU/AF/AX)</label>
-                      <div className="form-row">
-                        <div className="col"><input className="form-control form-control-sm" placeholder="AD" value={katashiki.AD} onChange={e => setKatashiki(k => ({ ...k, AD: e.target.value }))} /></div>
-                        <div className="col"><input className="form-control form-control-sm" placeholder="AU" value={katashiki.AU} onChange={e => setKatashiki(k => ({ ...k, AU: e.target.value }))} /></div>
-                        <div className="col"><input className="form-control form-control-sm" placeholder="AF" value={katashiki.AF} onChange={e => setKatashiki(k => ({ ...k, AF: e.target.value }))} /></div>
-                        <div className="col"><input className="form-control form-control-sm" placeholder="AX" value={katashiki.AX} onChange={e => setKatashiki(k => ({ ...k, AX: e.target.value }))} /></div>
-                      </div>
-                    </div>
-
-                    <div className="col-12 mt-3">
-                      <div className="form-row">
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Importer Line Process</label>
-                          <input className="form-control form-control-sm" value={importerLineProcess} onChange={e => setImporterLineProcess(e.target.value)} />
-                        </div>
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Case Code</label>
-                          <input className="form-control form-control-sm" value={caseCode} onChange={e => setCaseCode(e.target.value)} />
-                        </div>
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Box Number</label>
-                          <input className="form-control form-control-sm" value={boxNumber} onChange={e => setBoxNumber(e.target.value)} />
-                        </div>
-                      </div>
-
-                      <div className="form-row">
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Renban</label>
-                          <input className="form-control form-control-sm" value={renban} onChange={e => setRenban(e.target.value)} />
-                        </div>
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Renban Eff</label>
-                          <input className="form-control form-control-sm" value={renbanEff} onChange={e => setRenbanEff(e.target.value)} />
-                        </div>
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Packing Process - Boxing</label>
-                          <select className="form-control form-control-sm" value={packingProcessBoxing} onChange={e => setPackingProcessBoxing(e.target.value)}>
-                            <option value="">—</option>
-                            <option value="SUPPLIER">SUPPLIER</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="form-row">
-                        <div className="form-group col-md-4">
-                          <label className="small mb-1">Packing Process - Stacking</label>
-                          <select className="form-control form-control-sm" value={packingProcessStacking} onChange={e => setPackingProcessStacking(e.target.value)}>
-                            <option value="">—</option>
-                            <option value="TMMIN">TMMIN</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Images sections (collapsible) */}
-            <div className="mb-3">
-              <button
-                type="button"
-                className="btn btn-link p-0"
-                onClick={() => setImagesOpen(v => !v)}
-                aria-expanded={imagesOpen}
-                aria-controls="imagesSection"
-              >
-                <strong>
-                  <i className={`fas ${imagesOpen ? 'fa-chevron-down' : 'fa-chevron-right'} mr-2`} />
-                  Images
-                </strong>
-              </button>
-              {imagesOpen && (
-                <div id="imagesSection">
-                  <div className="row mt-2">
-                    <div className="col-md-6">
-                      <label className="small">Part Images</label>
-                      <div className="border p-2 mb-2">
-                        {imagesPart.length === 0 ? <div className="text-muted">No images</div> : imagesPart.map((it, i) => <div key={i}>{it.caption}</div>)}
-                        <div className="mt-2">
-                          <button className="btn btn-sm btn-outline-primary mr-2" onClick={() => { const caption = prompt('Image caption'); if (caption) setImagesPart(p => [...p, { caption }]) }}>+ Add</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6">
-                      <label className="small">Packing Images</label>
-                      <div className="border p-2 mb-2">
-                        {imagesPacking.length === 0 ? <div className="text-muted">No images</div> : imagesPacking.map((it, i) => <div key={i}>{it.caption}</div>)}
-                        <div className="mt-2">
-                          <button className="btn btn-sm btn-outline-primary" onClick={() => { const caption = prompt('Image caption'); if (caption) setImagesPacking(p => [...p, { caption }]) }}>+ Add</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6 mt-2">
-                      <label className="small">Outer Images</label>
-                      <div className="border p-2 mb-2">
-                        {imagesOuter.length === 0 ? <div className="text-muted">No images</div> : imagesOuter.map((it, i) => <div key={i}>{it.caption}</div>)}
-                        <div className="mt-2">
-                          <button className="btn btn-sm btn-outline-primary" onClick={() => { const caption = prompt('Image caption'); if (caption) setImagesOuter(p => [...p, { caption }]) }}>+ Add</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6 mt-2">
-                      <label className="small">QKP Images</label>
-                      <div className="border p-2 mb-2">
-                        {imagesQkp.length === 0 ? <div className="text-muted">No images</div> : imagesQkp.map((it, i) => <div key={i}>{it.caption}</div>)}
-                        <div className="mt-2">
-                          <button className="btn btn-sm btn-outline-primary" onClick={() => { const caption = prompt('Image caption'); if (caption) setImagesQkp(p => [...p, { caption }]) }}>+ Add</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6 mt-2">
-                      <label className="small">BKP Images</label>
-                      <div className="border p-2 mb-2">
-                        {imagesBkp.length === 0 ? <div className="text-muted">No. images</div> : imagesBkp.map((it, i) => <div key={i}>{it.caption}</div>)}
-                        <div className="mt-2">
-                          <button className="btn btn-sm btn-outline-primary" onClick={() => { const caption = prompt('Image caption'); if (caption) setImagesBkp(p => [...p, { caption }]) }}>+ Add</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* PSE Info Section */}
+            <PseInfoSection
+              pseOpen={pseOpen} setPseOpen={setPseOpen}
+              packingPlantCurr={packingPlantCurr} setPackingPlantCurr={setPackingPlantCurr}
+              packingPlantNext={packingPlantNext} setPackingPlantNext={setPackingPlantNext}
+              vanningPlantCurr={vanningPlantCurr} setVanningPlantCurr={setVanningPlantCurr}
+              vanningPlantNext={vanningPlantNext} setVanningPlantNext={setVanningPlantNext}
+              orderPatternCurr={orderPatternCurr} setOrderPatternCurr={setOrderPatternCurr}
+              orderPatternNext={orderPatternNext} setOrderPatternNext={setOrderPatternNext}
+              category={category} setCategory={setCategory}
+              katashiki={katashiki} setKatashiki={setKatashiki}
+              importerLineProcess={importerLineProcess} setImporterLineProcess={setImporterLineProcess}
+              caseCode={caseCode} setCaseCode={setCaseCode}
+              boxNumber={boxNumber} setBoxNumber={setBoxNumber}
+              renban={renban} setRenban={setRenban}
+              renbanEff={renbanEff} setRenbanEff={setRenbanEff}
+              packingProcessBoxing={packingProcessBoxing} setPackingProcessBoxing={setPackingProcessBoxing}
+              packingProcessStacking={packingProcessStacking} setPackingProcessStacking={setPackingProcessStacking}
+            />
 
             <hr />
 
-            {/* Packing outer summary (collapsible) - simpler static table preserved */}
-            <div className="mb-3">
-              <button
-                type="button"
-                className="btn btn-link p-0"
-                onClick={() => setPackingOpen(v => !v)}
-                aria-expanded={packingOpen}
-                aria-controls="packingSection"
-              >
-                <strong>
-                  <i className={`fas ${packingOpen ? 'fa-chevron-down' : 'fa-chevron-right'} mr-2`} />
-                  Packing
-                </strong>
-              </button>
-              {packingOpen && (
-                <div id="packingSection">
-                  <div className="row mt-2">
-                    <div className="col-md-6">
-                      <label className="small">Module Type (Outer)</label>
-                      <div className="input-group input-group-sm">
-                        <input className="form-control form-control-sm" value={outerModuleType} onChange={e => setOuterModuleType(e.target.value)} />
-                        <div className="input-group-append">
-                          <button className="btn btn-outline-secondary btn-sm" onClick={() => alert('Search module type placeholder')}><i className="fas fa-search" /></button>
-                        </div>
-                      </div>
+            {/* Images Section */}
+            <ImagesSection
+              imagesOpen={imagesOpen} setImagesOpen={setImagesOpen}
+              imagesPart={imagesPart} setImagesPart={setImagesPart}
+              imagesPacking={imagesPacking} setImagesPacking={setImagesPacking}
+              imagesOuter={imagesOuter} setImagesOuter={setImagesOuter}
+              imagesQkp={imagesQkp} setImagesQkp={setImagesQkp}
+              imagesBkp={imagesBkp} setImagesBkp={setImagesBkp}
+            />
 
-                      <div className="form-row mt-2">
-                        <div className="col">
-                          <label className="small">Dimension (cm)</label>
-                          <div className="d-flex">
-                            <input className="form-control form-control-sm" value={outerDimension.L} onChange={e => setOuterDimension(d => ({ ...d, L: e.target.value }))} placeholder="L" />
-                            <input className="form-control form-control-sm mx-1" value={outerDimension.W} onChange={e => setOuterDimension(d => ({ ...d, W: e.target.value }))} placeholder="W" />
-                            <input className="form-control form-control-sm" value={outerDimension.H} onChange={e => setOuterDimension(d => ({ ...d, H: e.target.value }))} placeholder="H" />
-                          </div>
-                        </div>
-                      </div>
+            <hr />
 
-                      <div className="form-row mt-2">
-                        <div className="col">
-                          <label className="small">Inner (m³)</label>
-                          <input className="form-control form-control-sm" value={innerVolume} onChange={e => setInnerVolume(e.target.value)} />
-                        </div>
-                        <div className="col">
-                          <label className="small">Outer (m³)</label>
-                          <input className="form-control form-control-sm" value={outerVolume} onChange={e => setOuterVolume(e.target.value)} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Inner pack materials table in a new row, full width (kept simple) */}
-                  <div className="row mt-3">
-                    <div className="col-12">
-                      <div className="d-flex justify-content-between align-items-center">
-                        <label className="small mb-1">INNER (Pack Material)</label>
-                        <div>
-                          <button className="btn btn-sm btn-outline-primary" onClick={() => {
-                            const m = prompt('Material No'); if (m) setNewInner(n => ({ ...n, materialNo: m }))
-                          }}>add</button>
-                        </div>
-                      </div>
-
-                      <div className="table-responsive mt-2">
-                        <table className="table table-sm table-bordered mb-0">
-                          <thead>
-                            <tr>
-                              <th style={{ width: 40 }}>No</th>
-                              <th>Pack Material No</th>
-                              <th>Suffix</th>
-                              <th>Name</th>
-                              <th>Supplier</th>
-                              <th>L</th>
-                              <th>W</th>
-                              <th>H</th>
-                              <th>Wt/PC</th>
-                              <th>Qty</th>
-                              <th>Total Wt</th>
-                              <th style={{ width: 80 }}>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {innerRows.length === 0 ? (
-                              <tr><td colSpan="12" className="text-center text-muted py-3">No Data Found</td></tr>
-                            ) : innerRows.map((r, i) => (
-                              <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>{r.materialNo}</td>
-                                <td>{r.suffix}</td>
-                                <td>{r.name}</td>
-                                <td>{r.supplierName}</td>
-                                <td>{r.L}</td>
-                                <td>{r.W}</td>
-                                <td>{r.H}</td>
-                                <td>{r.wtPerPc}</td>
-                                <td>{r.qty}</td>
-                                <td>{(Number(r.wtPerPc || 0) * Number(r.qty || 0)).toFixed(2)}</td>
-                                <td><button className="btn btn-sm btn-outline-danger" onClick={() => handleRemoveInnerRow(i)}><i className="fas fa-trash" /></button></td>
-                              </tr>
-                            ))}
-                            {/* Add new row inline */}
-                            <tr>
-                              <td>+</td>
-                              <td><input className="form-control form-control-sm" value={newInner.materialNo} onChange={e => setNewInner(n => ({ ...n, materialNo: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.suffix} onChange={e => setNewInner(n => ({ ...n, suffix: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.name} onChange={e => setNewInner(n => ({ ...n, name: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.supplierName} onChange={e => setNewInner(n => ({ ...n, supplierName: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.L} onChange={e => setNewInner(n => ({ ...n, L: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.W} onChange={e => setNewInner(n => ({ ...n, W: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.H} onChange={e => setNewInner(n => ({ ...n, H: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.wtPerPc} onChange={e => setNewInner(n => ({ ...n, wtPerPc: e.target.value }))} /></td>
-                              <td><input className="form-control form-control-sm" value={newInner.qty} onChange={e => setNewInner(n => ({ ...n, qty: e.target.value }))} /></td>
-                              <td>-</td>
-                              <td>
-                                <div className="btn-group">
-                                  <button className="btn btn-sm btn-primary" onClick={handleAddInnerRow}>Add</button>
-                                  <button className="btn btn-sm btn-outline-secondary" onClick={() => setNewInner({ materialNo: '', suffix: '', name: '', parent: '', supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: '' })}>Cancel</button>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* Packing Section */}
+            <PackingSection
+              packingOpen={packingOpen} setPackingOpen={setPackingOpen}
+              outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
+              outerDimension={outerDimension} setOuterDimension={setOuterDimension}
+              innerVolume={innerVolume} setInnerVolume={setInnerVolume}
+              outerVolume={outerVolume} setOuterVolume={setOuterVolume}
+              innerRows={innerRows} setInnerRows={setInnerRows}
+              newInner={newInner} setNewInner={setNewInner}
+              handleAddInnerRow={handleAddInnerRow}
+              handleRemoveInnerRow={handleRemoveInnerRow}
+            />
 
             <hr />
 
