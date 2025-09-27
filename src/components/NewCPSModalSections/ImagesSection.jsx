@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 
 export default function ImagesSection(props) {
-  // Destructure props as needed
   const {
     imagesOpen,
     setImagesOpen,
@@ -16,6 +15,26 @@ export default function ImagesSection(props) {
     imagesBkp,
     setImagesBkp,
   } = props;
+
+  // Allowed image types
+  const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+  // Handler for file selection
+  const handleFileSelect = (setter) => (e) => {
+    const files = Array.from(e.target.files);
+    let hasInvalid = false;
+    files.forEach((file) => {
+      if (allowedTypes.includes(file.type)) {
+        setter((prev) => [...prev, { caption: file.name, file }]);
+      } else {
+        hasInvalid = true;
+      }
+    });
+    if (hasInvalid) {
+      window.alert("File format is not supported. Only JPG, JPEG, PNG are allowed.");
+    }
+    e.target.value = ""; // reset input
+  };
 
   return (
     <div>
@@ -40,6 +59,7 @@ export default function ImagesSection(props) {
         {imagesOpen && (
           <div id="imagesSection">
             <div className="row mt-2">
+              {/* Part Images */}
               <div className="col-md-6">
                 <label className="small">Part Images</label>
                 <div className="border p-2 mb-2">
@@ -49,19 +69,24 @@ export default function ImagesSection(props) {
                     imagesPart.map((it, i) => <div key={i}>{it.caption}</div>)
                   )}
                   <div className="mt-2">
-                    <button
+                    <label
+                      htmlFor="part-image-input"
                       className="btn btn-sm btn-outline-primary mr-2"
-                      onClick={() => {
-                        const caption = prompt("Image caption");
-                        if (caption) setImagesPart((p) => [...p, { caption }]);
-                      }}
                     >
                       + Add
-                    </button>
+                    </label>
+                    <input
+                      type="file"
+                      id="part-image-input"
+                      accept=".jpg,.jpeg,.png"
+                      multiple
+                      style={{ display: "none" }}
+                      onChange={handleFileSelect(setImagesPart)}
+                    />
                   </div>
                 </div>
               </div>
-
+              {/* Packing Images */}
               <div className="col-md-6">
                 <label className="small">Packing Images</label>
                 <div className="border p-2 mb-2">
@@ -73,20 +98,24 @@ export default function ImagesSection(props) {
                     ))
                   )}
                   <div className="mt-2">
-                    <button
+                    <label
+                      htmlFor="packing-image-input"
                       className="btn btn-sm btn-outline-primary"
-                      onClick={() => {
-                        const caption = prompt("Image caption");
-                        if (caption)
-                          setImagesPacking((p) => [...p, { caption }]);
-                      }}
                     >
                       + Add
-                    </button>
+                    </label>
+                    <input
+                      type="file"
+                      id="packing-image-input"
+                      accept=".jpg,.jpeg,.png"
+                      multiple
+                      style={{ display: "none" }}
+                      onChange={handleFileSelect(setImagesPacking)}
+                    />
                   </div>
                 </div>
               </div>
-
+              {/* Outer Images */}
               <div className="col-md-6 mt-2">
                 <label className="small">Outer Images</label>
                 <div className="border p-2 mb-2">
@@ -96,19 +125,24 @@ export default function ImagesSection(props) {
                     imagesOuter.map((it, i) => <div key={i}>{it.caption}</div>)
                   )}
                   <div className="mt-2">
-                    <button
+                    <label
+                      htmlFor="outer-image-input"
                       className="btn btn-sm btn-outline-primary"
-                      onClick={() => {
-                        const caption = prompt("Image caption");
-                        if (caption) setImagesOuter((p) => [...p, { caption }]);
-                      }}
                     >
                       + Add
-                    </button>
+                    </label>
+                    <input
+                      type="file"
+                      id="outer-image-input"
+                      accept=".jpg,.jpeg,.png"
+                      multiple
+                      style={{ display: "none" }}
+                      onChange={handleFileSelect(setImagesOuter)}
+                    />
                   </div>
                 </div>
               </div>
-
+              {/* QKP Images */}
               <div className="col-md-6 mt-2">
                 <label className="small">QKP Images</label>
                 <div className="border p-2 mb-2">
@@ -118,37 +152,47 @@ export default function ImagesSection(props) {
                     imagesQkp.map((it, i) => <div key={i}>{it.caption}</div>)
                   )}
                   <div className="mt-2">
-                    <button
+                    <label
+                      htmlFor="qkp-image-input"
                       className="btn btn-sm btn-outline-primary"
-                      onClick={() => {
-                        const caption = prompt("Image caption");
-                        if (caption) setImagesQkp((p) => [...p, { caption }]);
-                      }}
                     >
                       + Add
-                    </button>
+                    </label>
+                    <input
+                      type="file"
+                      id="qkp-image-input"
+                      accept=".jpg,.jpeg,.png"
+                      multiple
+                      style={{ display: "none" }}
+                      onChange={handleFileSelect(setImagesQkp)}
+                    />
                   </div>
                 </div>
               </div>
-
+              {/* BKP Images */}
               <div className="col-md-6 mt-2">
                 <label className="small">BKP Images</label>
                 <div className="border p-2 mb-2">
                   {imagesBkp.length === 0 ? (
-                    <div className="text-muted">No. images</div>
+                    <div className="text-muted">No images</div>
                   ) : (
                     imagesBkp.map((it, i) => <div key={i}>{it.caption}</div>)
                   )}
                   <div className="mt-2">
-                    <button
+                    <label
+                      htmlFor="bkp-image-input"
                       className="btn btn-sm btn-outline-primary"
-                      onClick={() => {
-                        const caption = prompt("Image caption");
-                        if (caption) setImagesBkp((p) => [...p, { caption }]);
-                      }}
                     >
                       + Add
-                    </button>
+                    </label>
+                    <input
+                      type="file"
+                      id="bkp-image-input"
+                      accept=".jpg,.jpeg,.png"
+                      multiple
+                      style={{ display: "none" }}
+                      onChange={handleFileSelect(setImagesBkp)}
+                    />
                   </div>
                 </div>
               </div>
