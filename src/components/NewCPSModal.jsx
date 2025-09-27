@@ -1,6 +1,7 @@
 // src/components/NewCpsModal.jsx
 import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
+import PartPickerModal from './PartPickerModal';
 import './modalOverrides.css' // small override to ensure proper z-index stacking
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison';
 
@@ -81,6 +82,9 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   // NEW: control for comparison modal
   const [isComparisonOpen, setComparisonOpen] = useState(false)
+
+  // NEW: control for part picker modal
+  const [isPartPickerOpen, setPartPickerOpen] = useState(false);
 
   // Reset all fields when modal opens
   useEffect(() => {
@@ -183,6 +187,16 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
     }
   }
 
+  function handlePartPicked(selectedParts) {
+    if (selectedParts && selectedParts.length > 0) {
+      const part = selectedParts[0];
+      setPartNo(part.partNo || '');
+      setPartName(part.partName || '');
+      setSupplier(part.supplierName || '');
+    }
+    setPartPickerOpen(false);
+  }
+
   if (!show) return null
 
   return (
@@ -232,7 +246,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
                     <div className="input-group input-group-sm">
                       <input className="form-control form-control-sm" value={partNo} onChange={e => setPartNo(e.target.value)} />
                       <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => alert('Search Part placeholder')}><i className="fas fa-search" /></button>
+                        <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part" onClick={() => setPartPickerOpen(true)}><i className="fas fa-search" /></button>
 
                         {/* Compare button next to search */}
                         <button
@@ -635,6 +649,15 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         current={currentCpsRecord}
         extraClass="multi-parts-comparison"
       />
+
+      {/* Part Picker Modal - wrapped to control z-index */}      
+        <PartPickerModal
+          show={isPartPickerOpen}
+          onClose={() => setPartPickerOpen(false)}
+          onSelect={handlePartPicked}
+          zIndex={4000}
+        />
+
     </>
   )
 }

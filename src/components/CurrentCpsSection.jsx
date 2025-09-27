@@ -22,11 +22,6 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
 
   return (
     <div className="mb-3">
-      <button type="button" className="btn btn-sm btn-link p-0">
-        <i className="fas fa-chevron-down mr-2" />
-        <strong>Current CPS (from New CPS modal)</strong>
-      </button>
-
       <div
         ref={scrollRef}
         onScroll={onScroll}
