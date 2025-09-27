@@ -49,7 +49,18 @@ export default function MultiPartsComparisonModal({
 
   return (
     <div className="np-modal-backdrop multi-parts-modal" style={{ zIndex: 3000 }} onMouseDown={e => { if (e.target === e.currentTarget) onClose() }}>
-      <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1200, width: '100%', display: 'flex', flexDirection: 'column', maxHeight: '95vh' }}>
+      <div
+        className="np-modal card card-outline card-primary"
+        style={{
+          maxWidth: 1200,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          height: '700px',
+          maxHeight: '700px',
+          minHeight: '700px',
+        }}
+      >
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>Parts Comparison</b></h3>
           <div className="card-tools ml-auto">
@@ -57,7 +68,7 @@ export default function MultiPartsComparisonModal({
           </div>
         </div>
 
-        <div className="card-body">
+        <div className="card-body" style={{ verticalAlign: 'top', paddingBottom: 0, maxHeight: "fit-content" }}>
           {/* 1st Section: Search / Select Part */}
           <SearchSection
             current={current}
@@ -67,16 +78,13 @@ export default function MultiPartsComparisonModal({
             onPartNoChange={setPartNoQuery}
             onPartNameChange={setPartNameQuery}
             onSupplierChange={setSupplierQuery}
-            onGo={() => {
-              // Maybe you want to trigger some action on Go, or just rely on filteredParts
-              // For example, you could focus results section or fetch new parts
-            }}
+            onGo={() => {}}
           />
         </div>
 
         <hr className="my-0" />
 
-        <div className="card-body" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+        <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingTop: '8px', paddingBottom: '8px'}}>
           {/* 2nd Section: Current CPS data */}
           <CurrentCpsSection
             current={current}
@@ -84,14 +92,13 @@ export default function MultiPartsComparisonModal({
             onScroll={() => handleScroll(scrollRef1, scrollRef2)}
           />
 
-          <hr />
+          <hr style={{ margin: '8px 0' }} />
 
           {/* 3rd Section: Search Results */}
           <ResultsSection
             filteredParts={filteredParts}
             onSelectPart={(p) => {
               onSelectPart(p);
-              // maybe close modal or update current state
             }}
             scrollRef={scrollRef2}
             onScroll={() => handleScroll(scrollRef2, scrollRef1)}
@@ -99,15 +106,16 @@ export default function MultiPartsComparisonModal({
         </div>
 
         <div className="card-footer text-right">
-          <button className="btn btn-sm btn-primary mr-2" onClick={() => { /* maybe combine selections, or confirm */ }}>Add</button>
+          <button className="btn btn-sm btn-primary mr-2" onClick={() => {}}>Add</button>
           <button className="btn btn-sm btn-outline-secondary" onClick={onClose}>Close</button>
         </div>
 
         <style>{`
-          .multi-parts-modal .np-modal { max-width: 1200px; }
+          .multi-parts-modal .np-modal { max-width: 1200px; height: 700px; min-height: 700px; max-height: 700px; }
           .np-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; padding: 1rem; }
-          .np-modal { width: 100%; max-height: 95vh; /* overflow: auto; */ }
+          .np-modal { width: 100%; height: 700px; min-height: 700px; max-height: 700px; }
           .table-sm td, .table-sm th { vertical-align: middle; white-space: nowrap; }
+          .card-body { vertical-align: top; }
         `}</style>
       </div>
     </div>
