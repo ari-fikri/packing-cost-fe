@@ -10,7 +10,8 @@ import {
   GeneralInfoSection,
   PseInfoSection,
   ImagesSection,
-  PackingSection
+  PackingSection,
+  LogisticSection
 } from './NewCPSModalSections'
 
 export default function NewCpsModal({ show = false, onClose = () => {}, onSave = () => {}, onSubmit = () => {} }) {
@@ -94,6 +95,13 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   // NEW: control for part picker modal
   const [isPartPickerOpen, setPartPickerOpen] = useState(false);
 
+  // NEW: Logistic Info collapse state & fields
+  const [logisticOpen, setLogisticOpen] = useState(true);
+  const [tmmindDestDockCode, setTmmindDestDockCode] = useState('');
+  const [logisticRemark, setLogisticRemark] = useState('');
+  const [processType, setProcessType] = useState('N');
+  const [addressRack, setAddressRack] = useState('');
+
   // Reset all fields when modal opens
   useEffect(() => {
     if (show) {
@@ -137,6 +145,12 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         wtPerPc: '',
         qty: '',
       })
+
+      setLogisticOpen(true);
+      setTmmindDestDockCode('');
+      setLogisticRemark('');
+      setProcessType('N');
+      setAddressRack('');
     }
   }, [show])
 
@@ -288,6 +302,20 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
             />
 
             <hr />
+
+            {/* Logistic Info Section */}
+            <LogisticSection
+              logisticOpen={logisticOpen}
+              setLogisticOpen={setLogisticOpen}
+              tmmindDestDockCode={tmmindDestDockCode}
+              setTmmindDestDockCode={setTmmindDestDockCode}
+              logisticRemark={logisticRemark}
+              setLogisticRemark={setLogisticRemark}
+              processType={processType}
+              setProcessType={setProcessType}
+              addressRack={addressRack}
+              setAddressRack={setAddressRack}
+            />
 
             {/* Notes */}
             <div className="form-group">
