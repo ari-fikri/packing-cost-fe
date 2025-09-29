@@ -7,11 +7,7 @@ export default function Projects() {
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
   const [models, setModels] = useState('')
-  const [type, setType] = useState('all')
-  const [startFrom, setStartFrom] = useState('')
-  const [startTo, setStartTo] = useState('')
-  const [endFrom, setEndFrom] = useState('')
-  const [endTo, setEndTo] = useState('')
+  const [sopPacking, setSopPacking] = useState('')
   const [manager, setManager] = useState('')
   const [statuses, setStatuses] = useState({
     all: true, draft: false, active: false, onhold: false, completed: false
@@ -33,16 +29,13 @@ export default function Projects() {
 
   function clearFilters() {
     setCode(''); setName(''); setModels('')
-    setType('all'); setStartFrom(''); setStartTo('')
-    setEndFrom(''); setEndTo(''); setManager('')
+    setSopPacking(''); setManager('')
     setStatuses({ all: true, draft: false, active: false, onhold: false, completed: false })
   }
 
   function handleSearch() {
     console.log('Search with filters:', {
-      code, name, models, type,
-      startFrom, startTo, endFrom, endTo,
-      manager, statuses
+      code, name, models, sopPacking, manager, statuses
     })
   }
 
@@ -58,10 +51,8 @@ export default function Projects() {
     const newRow = {
       code: payload.code || `CFC-${(results.length + 1).toString().padStart(3, '0')}`,
       name: payload.name || '(No name)',
-      type: payload.type || 'PxP',
+      sopPacking: payload.sopPacking || '',
       manager: payload.manager || '',
-      startDate: payload.startDate || '',
-      endDate: payload.endDate || '',
       status: payload.status || 'Draft',
       models: (payload.models || []).map(m => m.code).join(', ')
     }
@@ -90,7 +81,7 @@ export default function Projects() {
     <div className="container-fluid">
       <div className="card card-outline card-secondary">
         <div className="card-header d-flex align-items-center">
-          <h3 className="card-title mb-0"><b>CFC / Project List</b></h3>
+          <h3 className="card-title mb-0"><b>CFC / Pjt List</b></h3>
           <div className="card-tools ml-auto">
             <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}>
               <i className="fas fa-plus mr-1"></i> New CFC/PJT
@@ -123,12 +114,17 @@ export default function Projects() {
             <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="small mb-1">CFC / PJT Name</label>
-                <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
+                <div className="input-group input-group-sm">
+                  <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
+                  <div className="input-group-append">
+                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search name"><i className="fas fa-search"></i></button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Row 2: Models + Type */}
+          {/* Row 2: Related Models + SOP Packing */}
           <div className="row">
             <div className="col-12 col-md-6">
               <div className="form-group">
@@ -141,64 +137,16 @@ export default function Projects() {
                 </div>
               </div>
             </div>
-
             <div className="col-12 col-md-6">
               <div className="form-group">
-                <label className="small mb-1 d-block">Type</label>
-                <div className="btn-group btn-group-toggle" role="radiogroup">
-                  <label className={"btn btn-sm " + (type === 'all' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('all')}>
-                    <input type="radio" name="type" checked={type === 'all'} readOnly /> All
-                  </label>
-                  <label className={"btn btn-sm " + (type === 'pxp' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('pxp')}>
-                    <input type="radio" name="type" checked={type === 'pxp'} readOnly /> PxP
-                  </label>
-                  <label className={"btn btn-sm " + (type === 'lot' ? 'btn-primary' : 'btn-outline-secondary')} onClick={() => setType('lot')}>
-                    <input type="radio" name="type" checked={type === 'lot'} readOnly /> Lot
-                  </label>
-                </div>
+                <label className="small mb-1">SOP Packing <span className="text-muted ml-2"><i>cth: 02.2025</i></span></label>
+                <input value={sopPacking} onChange={e => setSopPacking(e.target.value)} className="form-control form-control-sm" placeholder="SOP Packing" />
               </div>
             </div>
           </div>
 
-          {/* Row 3: Start + End Dates */}
+          {/* Row 3: Status + Project Manager */}
           <div className="row">
-            <div className="col-12 col-md-6">
-              <div className="form-group">
-                <label className="small mb-1">Start Date</label>
-                <div className="d-flex">
-                  <input type="date" value={startFrom} onChange={e => setStartFrom(e.target.value)} className="form-control form-control-sm" />
-                  <div className="px-2 align-self-center">—</div>
-                  <input type="date" value={startTo} onChange={e => setStartTo(e.target.value)} className="form-control form-control-sm" />
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-md-6">
-              <div className="form-group">
-                <label className="small mb-1">End Date</label>
-                <div className="d-flex">
-                  <input type="date" value={endFrom} onChange={e => setEndFrom(e.target.value)} className="form-control form-control-sm" />
-                  <div className="px-2 align-self-center">—</div>
-                  <input type="date" value={endTo} onChange={e => setEndTo(e.target.value)} className="form-control form-control-sm" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Row 4: Manager + Status */}
-          <div className="row">
-            <div className="col-12 col-md-6">
-              <div className="form-group">
-                <label className="small mb-1">Project Manager</label>
-                <div className="input-group input-group-sm">
-                  <input value={manager} onChange={e => setManager(e.target.value)} className="form-control form-control-sm" placeholder="Manager name" />
-                  <div className="input-group-append">
-                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Manager"><i className="fas fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div className="col-12 col-md-6">
               <label className="small mb-1 d-block">Status</label>
               <div className="form-inline flex-wrap">
@@ -213,13 +161,24 @@ export default function Projects() {
                 })}
               </div>
             </div>
+            <div className="col-12 col-md-6">
+              <div className="form-group">
+                <label className="small mb-1">Project Manager</label>
+                <div className="input-group input-group-sm">
+                  <input value={manager} onChange={e => setManager(e.target.value)} className="form-control form-control-sm" placeholder="Manager name" />
+                  <div className="input-group-append">
+                    <span className="input-group-text"><i className="fas fa-user" /></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Buttons row */}
           <div className="row mt-2">
             <div className="col-12 d-flex justify-content-end">
-              <button type="button" className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Search</button>
-              <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-undo mr-1"></i> Reset</button>
+              <button type="button" className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Filter</button>
+              <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-times mr-1"></i> Clear</button>
             </div>
           </div>
         </div>
@@ -230,13 +189,10 @@ export default function Projects() {
             <table className="table table-striped table-sm mb-0">
               <thead className="thead-light">
                 <tr>
-                  <th style={{ width: 50 }}>#</th>
                   <th>CFC/PJT Code</th>
                   <th>CFC/PJT Name</th>
-                  <th>Type</th>
                   <th>Project Manager</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
+                  <th>SOP Packing</th>
                   <th>Status</th>
                   <th>Models</th>
                   <th style={{ width: 120 }}>Action</th>
@@ -244,17 +200,14 @@ export default function Projects() {
               </thead>
               <tbody>
                 {results.length === 0 && (
-                  <tr><td colSpan="10" className="text-center py-4 text-muted">No Data Found</td></tr>
+                  <tr><td colSpan="7" className="text-center py-4 text-muted">No Data Found</td></tr>
                 )}
                 {results.map((r, idx) => (
                   <tr key={idx}>
-                    <td>{idx + 1}</td>
                     <td>{r.code}</td>
                     <td>{r.name}</td>
-                    <td>{r.type}</td>
                     <td>{r.manager}</td>
-                    <td>{r.startDate}</td>
-                    <td>{r.endDate}</td>
+                    <td>{r.sopPacking}</td>
                     <td>{r.status}</td>
                     <td>{r.models}</td>
                     <td>
