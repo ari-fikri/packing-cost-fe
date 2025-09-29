@@ -73,10 +73,10 @@ export default function ResultSection({
 
   return (
     <div className="card-body pt-0">
-      {/* Scrollable Table */}
-      <div className="table-responsive">
+      {/* Fixed Table Container with Scrollable Body */}
+      <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
         <table className="table table-striped table-sm mb-0">
-          <thead className="thead-light">
+          <thead className="thead-light" style={{ position: 'sticky', top: 0, zIndex: 5 }}>
             <tr>
               <th style={{ width: 50 }}>No</th>
               <th>CFC/PJT Code</th>
@@ -117,9 +117,9 @@ export default function ResultSection({
         </table>
       </div>
 
-      {/* Fixed Pagination at Bottom */}
+      {/* Static Pagination at Bottom */}
       {totalPages > 1 && (
-        <div className="d-flex justify-content-between align-items-center mt-3 bg-light p-2 border rounded" style={{ position: 'sticky', bottom: 0, zIndex: 10 }}>
+        <div className="d-flex justify-content-between align-items-center mt-3 bg-light p-2 border rounded">
           <div className="small text-muted">
             Showing {(currentPage - 1) * pageSize + 1} to {Math.min(currentPage * pageSize, results.length)} of {results.length} entries
           </div>
