@@ -78,6 +78,7 @@ export default function ResultSection({
         <table className="table table-striped table-sm mb-0">
           <thead className="thead-light">
             <tr>
+              <th style={{ width: 50 }}>No</th>
               <th>CFC/PJT Code</th>
               <th>CFC/PJT Name</th>
               <th>Project Manager</th>
@@ -89,10 +90,11 @@ export default function ResultSection({
           </thead>
           <tbody>
             {paginatedResults.length === 0 && (
-              <tr><td colSpan="7" className="text-center py-4 text-muted">No Data Found</td></tr>
+              <tr><td colSpan="8" className="text-center py-4 text-muted">No Data Found</td></tr>
             )}
             {paginatedResults.map((r, idx) => (
               <tr key={idx}>
+                <td>{(currentPage - 1) * pageSize + idx + 1}</td>
                 <td>{r.code}</td>
                 <td>{r.name}</td>
                 <td>{r.manager}</td>
