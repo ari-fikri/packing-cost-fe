@@ -103,6 +103,18 @@ export default function Projects() {
       <div className="card card-outline card-secondary">
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>CFC / Pjt List</b></h3>
+          {/* TopSection */}
+          <div className="ml-auto">
+            <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}>
+              <i className="fas fa-plus mr-1"></i> New CFC/PJT
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload">
+              <i className="fas fa-cloud-upload-alt"></i>
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template">
+              <i className="fas fa-cloud-download-alt"></i>
+            </button>
+          </div>
         </div>
         <SearchSection
           code={code} setCode={setCode}
