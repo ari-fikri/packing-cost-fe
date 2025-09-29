@@ -19,8 +19,12 @@ export default function Sidebar() {
   // auto-open Master or Packing Spec when route is inside them
   useEffect(() => {
     const path = (location.pathname || '').toLowerCase()
-    if (path.startsWith('/projects') || path.startsWith('/models') || path.startsWith('/parts')) {
-      setMasterOpen(true)
+    if (path.startsWith('/projects') || 
+        path.startsWith('/models') || 
+        path.startsWith('/parts') || 
+        path.startsWith('/module-type') || 
+        path.startsWith('/params')) {
+          setMasterOpen(true)
     } else {
       setMasterOpen(false)
     }
