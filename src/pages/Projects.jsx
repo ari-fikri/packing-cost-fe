@@ -1,6 +1,7 @@
 // src/pages/Projects.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewProjectModal from '../components/NewProjectModal'
+import projectsData from '../data/projects.json' // Import the dummy data
 
 export default function Projects() {
   // filter states
@@ -16,7 +17,12 @@ export default function Projects() {
   // modal + results
   const [showNewModal, setShowNewModal] = useState(false)
   const [editingIndex, setEditingIndex] = useState(null)
-  const [results, setResults] = useState([]) // saved projects list
+  const [results, setResults] = useState([]) // filtered projects
+
+  // Load dummy data on mount
+  useEffect(() => {
+    setResults(projectsData)
+  }, [])
 
   function toggleStatus(key) {
     if (key === 'all') {
@@ -31,12 +37,29 @@ export default function Projects() {
     setCode(''); setName(''); setModels('')
     setSopPacking(''); setManager('')
     setStatuses({ all: true, draft: false, active: false, onhold: false, completed: false })
+    setResults(projectsData)
   }
 
   function handleSearch() {
-    console.log('Search with filters:', {
-      code, name, models, sopPacking, manager, statuses
-    })
+    let filtered = projectsData.filter(p =>
+      (!code || p.code.toLowerCase().includes(code.toLowerCase())) &&
+      (!name || p.name.toLowerCase().includes(name.toLowerCase())) &&
+      (!models || p.models.toLowerCase().includes(models.toLowerCase())) &&
+      (!sopPacking || p.sopPacking.toLowerCase().includes(sopPacking.toLowerCase())) &&
+      (!manager || p.manager.toLowerCase().includes(manager.toLowerCase()))
+    );
+    // Status filter
+    if (!statuses.all) {
+      const statusKeys = [];
+      if (statuses.draft) statusKeys.push('Draft');
+      if (statuses.active) statusKeys.push('Active');
+      if (statuses.onhold) statusKeys.push('On Hold');
+      if (statuses.completed) statusKeys.push('Completed');
+      if (statusKeys.length > 0) {
+        filtered = filtered.filter(p => statusKeys.includes(p.status));
+      }
+    }
+    setResults(filtered);
   }
 
   function handleOpenNew() {
@@ -58,10 +81,8 @@ export default function Projects() {
     }
 
     if (editingIndex !== null) {
-      // update existing
       setResults(prev => prev.map((r, i) => (i === editingIndex ? newRow : r)))
     } else {
-      // create new
       setResults(prev => [newRow, ...prev])
     }
     setShowNewModal(false)
