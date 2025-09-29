@@ -1,8 +1,9 @@
 // src/pages/Models.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewModelModal from '../components/NewModelModal'
 import SearchSection from '../components/ModelsSections/SearchSection'
 import ResultSection from '../components/ModelsSections/ResultSection'
+import modelsData from '../data/models.json'
 
 export default function Models() {
   // filters
@@ -13,14 +14,25 @@ export default function Models() {
   // modal & data
   const [showNewModal, setShowNewModal] = useState(false)
   const [models, setModels] = useState([])
+  const [filteredModels, setFilteredModels] = useState([])
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10
 
+  // Load models data on mount
+  useEffect(() => {
+    setModels(modelsData)
+    setFilteredModels(modelsData)
+  }, [])
+
   function handleFilter() {
-    console.log('Filter models by', { code, filterName, filterRemark })
-    // implement client-side or API filtering as required
+    let filtered = modelsData.filter(model =>
+      (!code || model.code?.toLowerCase().includes(code.toLowerCase())) &&
+      (!filterName || model.name?.toLowerCase().includes(filterName.toLowerCase())) &&
+      (!filterRemark || model.remark?.toLowerCase().includes(filterRemark.toLowerCase()))
+    )
+    setFilteredModels(filtered)
     setCurrentPage(1) // Reset to first page when filtering
   }
   
@@ -28,6 +40,7 @@ export default function Models() {
     setCode('')
     setFilterName('')
     setFilterRemark('')
+    setFilteredModels(modelsData) // Reset to all models
     setCurrentPage(1) // Reset to first page when clearing filters
   }
 
@@ -43,13 +56,17 @@ export default function Models() {
   // called by NewModelModal when user saves a model (payload includes parts if any)
   function handleSaveNewModel(payload) {
     // payload: { code, name, remark, parts: [...] }
-    setModels(prev => [payload, ...prev])
+    const newModels = [payload, ...models]
+    setModels(newModels)
+    setFilteredModels(newModels)
     setShowNewModal(false)
   }
 
   function handleDeleteModel(index) {
     if (!confirm('Delete this model?')) return
-    setModels(prev => prev.filter((_, i) => i !== index))
+    const newModels = models.filter((_, i) => i !== index)
+    setModels(newModels)
+    setFilteredModels(newModels)
   }
 
   return (
@@ -84,7 +101,7 @@ export default function Models() {
         />
 
         <ResultSection
-          models={models}
+          models={filteredModels}
           handleDeleteModel={handleDeleteModel}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
