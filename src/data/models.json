@@ -28,5 +28,75 @@
     "code": "999W",
     "name": "Sample Model NOT FOR SALE",
     "remark": "Prototype 2025"
+  },
+  {
+    "code": "408W",
+    "name": "Side Panel Model",
+    "remark": "Production 2024"
+  },
+  {
+    "code": "488W",
+    "name": "Door Panel Model",
+    "remark": "Prototype 2023"
+  },
+  {
+    "code": "496W",
+    "name": "Trunk Lid Model",
+    "remark": "Production 2025"
+  },
+  {
+    "code": "514W",
+    "name": "Roof Panel Model",
+    "remark": "Prototype 2022"
+  },
+  {
+    "code": "565W",
+    "name": "Quarter Panel Model",
+    "remark": "Production 2024"
+  },
+  {
+    "code": "578W",
+    "name": "Mirror Cover Model",
+    "remark": "Prototype 2023"
+  },
+  {
+    "code": "579W",
+    "name": "Spoiler Model",
+    "remark": "Production 2025"
+  },
+  {
+    "code": "588W",
+    "name": "Running Board Model",
+    "remark": "Prototype 2024"
+  },
+  {
+    "code": "607W",
+    "name": "Mudguard Model",
+    "remark": "Production 2023"
+  },
+  {
+    "code": "681W",
+    "name": "Wheel Arch Model",
+    "remark": "Prototype 2025"
+  },
+  {
+    "code": "688W",
+    "name": "Side Skirt Model",
+    "remark": "Production 2022"
+  },
+  {
+    "code": "757W",
+    "name": "Headlight Cover Model",
+    "remark": "Prototype 2024"
+  },
+  {
+    "code": "758W",
+    "name": "Taillight Cover Model",
+    "remark": "Production 2023"
+  },
+  {
+    "code": "824W",
+    "name": "License Plate Frame Model",
+    "remark": "Prototype 2025"
   }
 ]
