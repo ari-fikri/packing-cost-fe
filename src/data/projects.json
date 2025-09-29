@@ -5,7 +5,7 @@
     "manager": "Arif Fikri",
     "sopPacking": "01.2025",
     "status": "Draft",
-    "models": "024J,286W"
+    "models": ["024J", "286W"]
   },
   {
     "code": "286W",
@@ -13,7 +13,7 @@
     "manager": "Budi Santoso",
     "sopPacking": "02.2025",
     "status": "Active",
-    "models": "286W,332W,385W"
+    "models": ["286W", "332W", "385W"]
   },
   {
     "code": "332W",
@@ -21,7 +21,7 @@
     "manager": "Siti Aminah",
     "sopPacking": "03.2025",
     "status": "On Hold",
-    "models": "332W,385W"
+    "models": ["332W", "385W"]
   },
   {
     "code": "385W",
@@ -29,7 +29,7 @@
     "manager": "John Doe",
     "sopPacking": "04.2025",
     "status": "Completed",
-    "models": "385W,388W,024J"
+    "models": ["385W", "388W", "024J"]
   },
   {
     "code": "388W",
@@ -37,7 +37,7 @@
     "manager": "Jane Smith",
     "sopPacking": "05.2025",
     "status": "Draft",
-    "models": "388W,999W"
+    "models": ["388W", "999W"]
   },
   {
     "code": "408W",
@@ -45,358 +45,166 @@
     "manager": "Arif Fikri",
     "sopPacking": "06.2025",
     "status": "Active",
-    "models": "408W,024J,286W"
-  },
-  {
-    "code": "488W",
-    "name": "Project 7",
-    "manager": "Budi Santoso",
-    "sopPacking": "01.2025",
-    "status": "On Hold",
-    "models": "488W,332W"
-  },
-  {
-    "code": "496W",
-    "name": "Project 8",
-    "manager": "Siti Aminah",
-    "sopPacking": "02.2025",
-    "status": "Completed",
-    "models": "496W,385W,388W"
-  },
-  {
-    "code": "514W",
-    "name": "Project 9",
-    "manager": "John Doe",
-    "sopPacking": "03.2025",
-    "status": "Draft",
-    "models": "514W,999W,024J"
-  },
-  {
-    "code": "565W",
-    "name": "Project 10",
-    "manager": "Jane Smith",
-    "sopPacking": "04.2025",
-    "status": "Active",
-    "models": "565W,286W"
-  },
-  {
-    "code": "578W",
-    "name": "Project 11",
-    "manager": "Arif Fikri",
-    "sopPacking": "05.2025",
-    "status": "On Hold",
-    "models": "578W,332W,385W"
-  },
-  {
-    "code": "579W",
-    "name": "Project 12",
-    "manager": "Budi Santoso",
-    "sopPacking": "06.2025",
-    "status": "Completed",
-    "models": "579W,388W"
-  },
-  {
-    "code": "588W",
-    "name": "Project 13",
-    "manager": "Siti Aminah",
-    "sopPacking": "01.2025",
-    "status": "Draft",
-    "models": "588W,999W,024J"
-  },
-  {
-    "code": "607W",
-    "name": "Project 14",
-    "manager": "John Doe",
-    "sopPacking": "02.2025",
-    "status": "Active",
-    "models": "607W,286W"
-  },
-  {
-    "code": "681W",
-    "name": "Project 15",
-    "manager": "Jane Smith",
-    "sopPacking": "03.2025",
-    "status": "On Hold",
-    "models": "681W,332W,385W"
-  },
-  {
-    "code": "688W",
-    "name": "Project 16",
-    "manager": "Arif Fikri",
-    "sopPacking": "04.2025",
-    "status": "Completed",
-    "models": "688W,388W"
-  },
-  {
-    "code": "757W",
-    "name": "Project 17",
-    "manager": "Budi Santoso",
-    "sopPacking": "05.2025",
-    "status": "Draft",
-    "models": "757W,999W,024J"
-  },
-  {
-    "code": "758W",
-    "name": "Project 18",
-    "manager": "Siti Aminah",
-    "sopPacking": "06.2025",
-    "status": "Active",
-    "models": "758W,286W"
-  },
-  {
-    "code": "824W",
-    "name": "Project 19",
-    "manager": "John Doe",
-    "sopPacking": "01.2025",
-    "status": "On Hold",
-    "models": "824W,332W,385W"
-  },
-  {
-    "code": "835W",
-    "name": "Project 20",
-    "manager": "Jane Smith",
-    "sopPacking": "02.2025",
-    "status": "Completed",
-    "models": "835W,388W"
-  },
-  {
-    "code": "889W",
-    "name": "Project 21",
-    "manager": "Arif Fikri",
-    "sopPacking": "03.2025",
-    "status": "Draft",
-    "models": "889W,999W,024J"
-  },
-  {
-    "code": "938W",
-    "name": "Project 22",
-    "manager": "Budi Santoso",
-    "sopPacking": "04.2025",
-    "status": "Active",
-    "models": "938W,286W"
-  },
-  {
-    "code": "975W",
-    "name": "Project 23",
-    "manager": "Siti Aminah",
-    "sopPacking": "05.2025",
-    "status": "On Hold",
-    "models": "975W,332W,385W"
-  },
-  {
-    "code": "D33H",
-    "name": "Project 24",
-    "manager": "John Doe",
-    "sopPacking": "06.2025",
-    "status": "Completed",
-    "models": "D33H,388W"
+    "models": ["408W", "024J", "286W"]
   },
   {
     "code": "024J",
-    "name": "Project 25",
-    "manager": "Jane Smith",
-    "sopPacking": "01.2025",
-    "status": "Draft",
-    "models": "024J,757W"
-  },
-  {
-    "code": "286W",
-    "name": "Project 26",
+    "name": "Project 1 Extra 1",
     "manager": "Arif Fikri",
-    "sopPacking": "02.2025",
-    "status": "Active",
-    "models": "286W,824W,835W"
-  },
-  {
-    "code": "332W",
-    "name": "Project 27",
-    "manager": "Budi Santoso",
-    "sopPacking": "03.2025",
-    "status": "On Hold",
-    "models": "332W,889W"
-  },
-  {
-    "code": "385W",
-    "name": "Project 28",
-    "manager": "Siti Aminah",
-    "sopPacking": "04.2025",
-    "status": "Completed",
-    "models": "385W,938W,024J"
-  },
-  {
-    "code": "388W",
-    "name": "Project 29",
-    "manager": "John Doe",
-    "sopPacking": "05.2025",
+    "sopPacking": "07.2025",
     "status": "Draft",
-    "models": "388W,975W"
-  },
-  {
-    "code": "408W",
-    "name": "Project 30",
-    "manager": "Jane Smith",
-    "sopPacking": "06.2025",
-    "status": "Active",
-    "models": "408W,024J,286W"
-  },
-  {
-    "code": "488W",
-    "name": "Project 31",
-    "manager": "Arif Fikri",
-    "sopPacking": "01.2025",
-    "status": "On Hold",
-    "models": "488W,332W"
-  },
-  {
-    "code": "496W",
-    "name": "Project 32",
-    "manager": "Budi Santoso",
-    "sopPacking": "02.2025",
-    "status": "Completed",
-    "models": "496W,385W,388W"
-  },
-  {
-    "code": "514W",
-    "name": "Project 33",
-    "manager": "Siti Aminah",
-    "sopPacking": "03.2025",
-    "status": "Draft",
-    "models": "514W,889W,024J"
-  },
-  {
-    "code": "565W",
-    "name": "Project 34",
-    "manager": "John Doe",
-    "sopPacking": "04.2025",
-    "status": "Active",
-    "models": "565W,286W"
-  },
-  {
-    "code": "578W",
-    "name": "Project 35",
-    "manager": "Jane Smith",
-    "sopPacking": "05.2025",
-    "status": "On Hold",
-    "models": "578W,332W,385W"
-  },
-  {
-    "code": "579W",
-    "name": "Project 36",
-    "manager": "Arif Fikri",
-    "sopPacking": "06.2025",
-    "status": "Completed",
-    "models": "579W,388W"
-  },
-  {
-    "code": "588W",
-    "name": "Project 37",
-    "manager": "Budi Santoso",
-    "sopPacking": "01.2025",
-    "status": "Draft",
-    "models": "588W,975W,024J"
-  },
-  {
-    "code": "607W",
-    "name": "Project 38",
-    "manager": "Siti Aminah",
-    "sopPacking": "02.2025",
-    "status": "Active",
-    "models": "607W,286W"
-  },
-  {
-    "code": "681W",
-    "name": "Project 39",
-    "manager": "John Doe",
-    "sopPacking": "03.2025",
-    "status": "On Hold",
-    "models": "681W,332W,385W"
-  },
-  {
-    "code": "688W",
-    "name": "Project 40",
-    "manager": "Jane Smith",
-    "sopPacking": "04.2025",
-    "status": "Completed",
-    "models": "688W,388W"
-  },
-  {
-    "code": "757W",
-    "name": "Project 41",
-    "manager": "Arif Fikri",
-    "sopPacking": "05.2025",
-    "status": "Draft",
-    "models": "757W,889W,024J"
-  },
-  {
-    "code": "758W",
-    "name": "Project 42",
-    "manager": "Budi Santoso",
-    "sopPacking": "06.2025",
-    "status": "Active",
-    "models": "758W,286W"
-  },
-  {
-    "code": "824W",
-    "name": "Project 43",
-    "manager": "Siti Aminah",
-    "sopPacking": "01.2025",
-    "status": "On Hold",
-    "models": "824W,332W,385W"
-  },
-  {
-    "code": "835W",
-    "name": "Project 44",
-    "manager": "John Doe",
-    "sopPacking": "02.2025",
-    "status": "Completed",
-    "models": "835W,388W"
-  },
-  {
-    "code": "889W",
-    "name": "Project 45",
-    "manager": "Jane Smith",
-    "sopPacking": "03.2025",
-    "status": "Draft",
-    "models": "889W,975W,024J"
-  },
-  {
-    "code": "938W",
-    "name": "Project 46",
-    "manager": "Arif Fikri",
-    "sopPacking": "04.2025",
-    "status": "Active",
-    "models": "938W,286W"
-  },
-  {
-    "code": "975W",
-    "name": "Project 47",
-    "manager": "Budi Santoso",
-    "sopPacking": "05.2025",
-    "status": "On Hold",
-    "models": "975W,332W,385W"
-  },
-  {
-    "code": "D33H",
-    "name": "Project 48",
-    "manager": "Siti Aminah",
-    "sopPacking": "06.2025",
-    "status": "Completed",
-    "models": "D33H,388W"
+    "models": ["024J", "286W"]
   },
   {
     "code": "024J",
-    "name": "Project 49",
-    "manager": "John Doe",
-    "sopPacking": "01.2025",
+    "name": "Project 1 Extra 2",
+    "manager": "Arif Fikri",
+    "sopPacking": "08.2025",
     "status": "Draft",
-    "models": "024J,757W"
+    "models": ["024J", "286W"]
   },
   {
-    "code": "286W",
-    "name": "Project 50",
-    "manager": "Jane Smith",
-    "sopPacking": "02.2025",
-    "status": "Active",
-    "models": "286W,824W,835W"
+    "code": "024J",
+    "name": "Project 1 Extra 3",
+    "manager": "Arif Fikri",
+    "sopPacking": "09.2025",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 4",
+    "manager": "Arif Fikri",
+    "sopPacking": "10.2025",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 5",
+    "manager": "Arif Fikri",
+    "sopPacking": "11.2025",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 6",
+    "manager": "Arif Fikri",
+    "sopPacking": "12.2025",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 7",
+    "manager": "Arif Fikri",
+    "sopPacking": "01.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 8",
+    "manager": "Arif Fikri",
+    "sopPacking": "02.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 9",
+    "manager": "Arif Fikri",
+    "sopPacking": "03.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 10",
+    "manager": "Arif Fikri",
+    "sopPacking": "04.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 11",
+    "manager": "Arif Fikri",
+    "sopPacking": "05.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 12",
+    "manager": "Arif Fikri",
+    "sopPacking": "06.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 13",
+    "manager": "Arif Fikri",
+    "sopPacking": "07.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 14",
+    "manager": "Arif Fikri",
+    "sopPacking": "08.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 15",
+    "manager": "Arif Fikri",
+    "sopPacking": "09.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 16",
+    "manager": "Arif Fikri",
+    "sopPacking": "10.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 17",
+    "manager": "Arif Fikri",
+    "sopPacking": "11.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 18",
+    "manager": "Arif Fikri",
+    "sopPacking": "12.2026",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 19",
+    "manager": "Arif Fikri",
+    "sopPacking": "01.2027",
+    "status": "Draft",
+    "models": ["024J", "286W"]
+  },
+  {
+    "code": "024J",
+    "name": "Project 1 Extra 20",
+    "manager": "Arif Fikri",
+    "sopPacking": "02.2027",
+    "status": "Draft",
+    "models": ["024J", "286W"]
   }
 ]

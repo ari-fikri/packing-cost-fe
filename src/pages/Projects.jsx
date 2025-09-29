@@ -90,8 +90,8 @@ export default function Projects() {
   }
 
   function handleEdit(index) {
-    setEditingIndex(index)
-    setShowNewModal(true)
+    setEditingIndex(index);
+    setShowNewModal(true);
   }
 
   function handleDelete(index) {
@@ -230,7 +230,11 @@ export default function Projects() {
                     <td>{r.manager}</td>
                     <td>{r.sopPacking}</td>
                     <td>{r.status}</td>
-                    <td>{r.models}</td>
+                    <td>
+                      {Array.isArray(r.models)
+                        ? r.models.join(', ')
+                        : r.models}
+                    </td>
                     <td>
                       <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit(idx)}><i className="fas fa-edit" /></button>
                       <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(idx)}><i className="fas fa-trash" /></button>
@@ -248,7 +252,20 @@ export default function Projects() {
         visible={showNewModal}
         onClose={handleCloseNew}
         onSave={handleSaveNew}
-        initialData={editingIndex !== null ? results[editingIndex] : null}
+        initialData={
+          editingIndex !== null && results[editingIndex]
+            ? {
+                ...results[editingIndex],
+                models: Array.isArray(results[editingIndex].models)
+                  ? results[editingIndex].models.map(m =>
+                      typeof m === 'string'
+                        ? { code: m, name: '', remark: '' }
+                        : m
+                    )
+                  : (results[editingIndex].models || '').split(',').map(m => ({ code: m.trim(), name: '', remark: '' }))
+              }
+            : null
+        }
       />
     </div>
   )
