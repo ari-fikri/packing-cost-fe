@@ -5,7 +5,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "01.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "model canggih 1", "remark": "Proto 1" },
+      { "code": "286W", "name": "model canggih 2", "remark": " Proto 2" }
+    ]
   },
   {
     "code": "286W",
@@ -13,7 +16,11 @@
     "manager": "Budi Santoso",
     "sopPacking": "02.2025",
     "status": "Active",
-    "models": ["286W", "332W", "385W"]
+    "models": [
+      { "code": "286W", "name": "Model 286W", "remark": "" },
+      { "code": "332W", "name": "Model 332W", "remark": "" },
+      { "code": "385W", "name": "Model 385W", "remark": "" }
+    ]
   },
   {
     "code": "332W",
@@ -21,7 +28,10 @@
     "manager": "Siti Aminah",
     "sopPacking": "03.2025",
     "status": "On Hold",
-    "models": ["332W", "385W"]
+    "models": [
+      { "code": "332W", "name": "Model 332W", "remark": "" },
+      { "code": "385W", "name": "Model 385W", "remark": "" }
+    ]
   },
   {
     "code": "385W",
@@ -29,7 +39,11 @@
     "manager": "John Doe",
     "sopPacking": "04.2025",
     "status": "Completed",
-    "models": ["385W", "388W", "024J"]
+    "models": [
+      { "code": "385W", "name": "Model 385W", "remark": "" },
+      { "code": "388W", "name": "Model 388W", "remark": "" },
+      { "code": "024J", "name": "Model 024J", "remark": "" }
+    ]
   },
   {
     "code": "388W",
@@ -37,7 +51,10 @@
     "manager": "Jane Smith",
     "sopPacking": "05.2025",
     "status": "Draft",
-    "models": ["388W", "999W"]
+    "models": [
+      { "code": "388W", "name": "Model 388W", "remark": "" },
+      { "code": "999W", "name": "Model 999W", "remark": "" }
+    ]
   },
   {
     "code": "408W",
@@ -45,7 +62,11 @@
     "manager": "Arif Fikri",
     "sopPacking": "06.2025",
     "status": "Active",
-    "models": ["408W", "024J", "286W"]
+    "models": [
+      { "code": "408W", "name": "Model 408W", "remark": "" },
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -53,7 +74,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "07.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -61,7 +85,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "08.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -69,7 +96,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "09.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -77,7 +107,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "10.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -85,7 +118,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "11.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -93,7 +129,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "12.2025",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -101,7 +140,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "01.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -109,7 +151,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "02.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -117,7 +162,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "03.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -125,7 +173,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "04.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -133,7 +184,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "05.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -141,7 +195,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "06.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -149,7 +206,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "07.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -157,7 +217,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "08.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -165,7 +228,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "09.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -173,7 +239,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "10.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -181,7 +250,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "11.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -189,7 +261,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "12.2026",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -197,7 +272,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "01.2027",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   },
   {
     "code": "024J",
@@ -205,6 +283,10 @@
     "manager": "Arif Fikri",
     "sopPacking": "02.2027",
     "status": "Draft",
-    "models": ["024J", "286W"]
+    "models": [
+      { "code": "024J", "name": "Model 024J", "remark": "" },
+      { "code": "286W", "name": "Model 286W", "remark": "" }
+    ]
   }
 ]
+  

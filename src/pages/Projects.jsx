@@ -232,7 +232,9 @@ export default function Projects() {
                     <td>{r.status}</td>
                     <td>
                       {Array.isArray(r.models)
-                        ? r.models.join(', ')
+                        ? r.models
+                            .map(m => (typeof m === 'string' ? m : m.code))
+                            .join(', ')
                         : r.models}
                     </td>
                     <td>
