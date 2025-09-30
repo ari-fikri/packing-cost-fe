@@ -4,6 +4,7 @@ import Pagination from '../Pagination'
 export default function ResultSection({
   models,
   handleDeleteModel,
+  handleEditModel,
   currentPage,
   setCurrentPage,
   pageSize
@@ -40,7 +41,7 @@ export default function ResultSection({
                   <td>{m.remark}</td>
                   <td>{Array.isArray(m.parts) ? m.parts.length : 0}</td>
                   <td>
-                    <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => alert('Edit placeholder')}>
+                    <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEditModel((currentPage - 1) * pageSize + idx)}>
                       <i className="fas fa-pencil-alt" />
                     </button>
                     <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDeleteModel((currentPage - 1) * pageSize + idx)}>

@@ -13,6 +13,8 @@ export default function Models() {
 
   // modal & data
   const [showNewModal, setShowNewModal] = useState(false)
+  const [editingIndex, setEditingIndex] = useState(null)
+  const [editingModel, setEditingModel] = useState(null)
   const [models, setModels] = useState([])
   const [filteredModels, setFilteredModels] = useState([])
 
@@ -27,7 +29,7 @@ export default function Models() {
   }, [])
 
   function handleFilter() {
-    let filtered = modelsData.filter(model =>
+    let filtered = models.filter(model =>
       (!code || model.code?.toLowerCase().includes(code.toLowerCase())) &&
       (!filterName || model.name?.toLowerCase().includes(filterName.toLowerCase())) &&
       (!filterRemark || model.remark?.toLowerCase().includes(filterRemark.toLowerCase()))
@@ -40,33 +42,98 @@ export default function Models() {
     setCode('')
     setFilterName('')
     setFilterRemark('')
-    setFilteredModels(modelsData) // Reset to all models
+    setFilteredModels(models) // Reset to all models
     setCurrentPage(1) // Reset to first page when clearing filters
   }
 
   function handleOpenNew() {
-    console.log('opening NewModelModal')
+    setEditingIndex(null)
+    setEditingModel(null)
     setShowNewModal(true)
   }
   
   function handleCloseNew() {
     setShowNewModal(false)
+    setEditingIndex(null)
+    setEditingModel(null)
   }
 
   // called by NewModelModal when user saves a model (payload includes parts if any)
   function handleSaveNewModel(payload) {
     // payload: { code, name, remark, parts: [...] }
-    const newModels = [payload, ...models]
-    setModels(newModels)
-    setFilteredModels(newModels)
+    if (editingIndex !== null) {
+      // Editing existing model
+      const newModels = models.map((model, index) => 
+        index === editingIndex ? payload : model
+      )
+      setModels(newModels)
+      
+      // Update filtered models as well
+      const newFilteredModels = filteredModels.map(model => {
+        // Find if this model is the one being edited
+        if (model.code === editingModel.code && 
+            model.name === editingModel.name && 
+            model.remark === editingModel.remark) {
+          return payload
+        }
+        return model
+      })
+      setFilteredModels(newFilteredModels)
+    } else {
+      // Adding new model      
+      const newModels = [payload, ...models]
+      setModels(newModels)
+      
+      // Check if new model matches current filter criteria
+      const matchesFilter = 
+        (!code || payload.code?.toLowerCase().includes(code.toLowerCase())) &&
+        (!filterName || payload.name?.toLowerCase().includes(filterName.toLowerCase())) &&
+        (!filterRemark || payload.remark?.toLowerCase().includes(filterRemark.toLowerCase()))
+      
+      if (matchesFilter) {
+        setFilteredModels([payload, ...filteredModels])
+      }
+    }
+    
+    console.log('Model saved:', payload)
     setShowNewModal(false)
+    setEditingIndex(null)
+    setEditingModel(null)
   }
 
-  function handleDeleteModel(index) {
+  function handleEditModel(filteredIndex) {
+    // Find the model in filtered results
+    const modelToEdit = filteredModels[filteredIndex]
+    // Find its index in the original models array
+    const originalIndex = models.findIndex(m => 
+      m.code === modelToEdit.code && 
+      m.name === modelToEdit.name && 
+      m.remark === modelToEdit.remark
+    )
+    
+    console.log('Editing model:', modelToEdit) // Debug log
+    console.log('Original index:', originalIndex) // Debug log
+    
+    setEditingIndex(originalIndex)
+    setEditingModel(modelToEdit)
+    setShowNewModal(true)
+  }
+
+  function handleDeleteModel(filteredIndex) {
     if (!confirm('Delete this model?')) return
-    const newModels = models.filter((_, i) => i !== index)
-    setModels(newModels)
-    setFilteredModels(newModels)
+    const modelToDelete = filteredModels[filteredIndex]
+    const originalIndex = models.findIndex(m => 
+      m.code === modelToDelete.code && 
+      m.name === modelToDelete.name && 
+      m.remark === modelToDelete.remark
+    )
+    
+    if (originalIndex !== -1) {
+      const newModels = models.filter((_, i) => i !== originalIndex)
+      setModels(newModels)
+      const newFilteredModels = filteredModels.filter((_, i) => i !== filteredIndex)
+      setFilteredModels(newFilteredModels)
+    }
   }
 
   return (
@@ -103,22 +170,19 @@ export default function Models() {
         <ResultSection
           models={filteredModels}
           handleDeleteModel={handleDeleteModel}
+          handleEditModel={handleEditModel}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           pageSize={pageSize}
         />
-
-        <div className="card-footer text-right">
-          <button type="button" className="btn btn-primary mr-2" onClick={() => alert('Save (placeholder)')}>Save</button>
-          <button type="button" className="btn btn-secondary" onClick={() => alert('Cancel (placeholder)')}>Cancel</button>
-        </div>
       </div>
 
-      {/* NEW MODEL MODAL (separate component) */}
+      {/* NEW/EDIT MODEL MODAL */}
       <NewModelModal
         show={showNewModal}
         onClose={handleCloseNew}
         onSave={handleSaveNewModel}
+        initialData={editingModel}
       />
     </div>
   )

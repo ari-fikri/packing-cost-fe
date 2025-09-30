@@ -2,7 +2,12 @@
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from '../components/PartPickerModal' // Uncomment and adjust path as needed
 
-export default function NewModelModal({ show = false, onClose = () => {}, onSave = () => {} }) {
+export default function NewModelModal({ 
+  show, 
+  onClose, 
+  onSave, 
+  initialData 
+}) {
   // form fields
   const [newCode, setNewCode] = useState('')
   const [newName, setNewName] = useState('')
@@ -14,13 +19,22 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
 
   useEffect(() => {
     if (show) {
-      setNewCode('')
-      setNewName('')
-      setNewRemark('')
-      setParts([])
+      if (initialData) {
+        // Populate form with existing data for editing
+        setNewCode(initialData.code || '')
+        setNewName(initialData.name || '')
+        setNewRemark(initialData.remark || '')
+        setParts(initialData.parts || [])
+      } else {
+        // Clear form for new entry
+        setNewCode('')
+        setNewName('')
+        setNewRemark('')
+        setParts([])
+      }
       setShowPartPicker(false)
     }
-  }, [show])
+  }, [show, initialData])
 
   function handleAddPartClick() {
     setShowPartPicker(true)
@@ -47,6 +61,7 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
       remark: newRemark,
       parts: parts.slice(),
     }
+    console.log('Saving model:', payload)
     onSave(payload)
   }
 
@@ -58,7 +73,9 @@ export default function NewModelModal({ show = false, onClose = () => {}, onSave
     <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="np-modal card card-outline card-success" style={{ maxWidth: 980 }}>
         <div className="card-header d-flex align-items-center">
-          <h3 className="card-title mb-0"><b>Model - New</b></h3>
+          <h3 className="card-title mb-0">
+            <b>Model - {initialData ? 'Edit' : 'New'}</b>
+          </h3>
           <div className="ml-2 text-muted small" style={{ marginLeft: 8 }}>|</div>
           <div className="card-tools ml-auto">
             <button type="button" className="btn btn-tool" onClick={onClose}><i className="fas fa-times" /></button>
