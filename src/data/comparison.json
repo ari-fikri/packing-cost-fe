@@ -1,0 +1,102 @@
+[
+  {
+    "partNo": "162990E010",
+    "code": "00",
+    "name": "HOSE, WATER BY-PASS, NO.13",
+    "supplier": "IRC INOAC INDONESIA (RUBBER - IRI)",
+    "totalCost": 368,
+    "materials": {
+      "inner": [
+        {
+          "name": "Material 1",
+          "value": 24.0,
+          "detail": { "partNo": "B027-02001", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 }
+        },
+        { "name": "Material 2", "value": 24.0, "detail": { "partNo": "B027-02002", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 3", "value": 24.0, "detail": { "partNo": "B027-02003", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 4", "value": 24.0, "detail": { "partNo": "B027-02004", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 5", "value": 24.0, "detail": { "partNo": "B027-02005", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 6", "value": 24.0, "detail": { "partNo": "B027-02006", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 7", "value": 24.0, "detail": { "partNo": "B027-02007", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 8", "value": 24.0, "detail": { "partNo": "B027-02008", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 9", "value": 24.0, "detail": { "partNo": "B027-02009", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 10", "value": 24.0, "detail": { "partNo": "B027-020010", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } }
+      ],
+      "outer": [
+        {
+          "name": "Material 1",
+          "value": 24.0,
+          "detail": { "partNo": "B027-02001", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 }
+        },
+        { "name": "Material 2", "value": 24.0, "detail": { "partNo": "B027-02002", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 3", "value": 24.0, "detail": { "partNo": "B027-02003", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 4", "value": 24.0, "detail": { "partNo": "B027-02004", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 5", "value": 24.0, "detail": { "partNo": "B027-02005", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 6", "value": 24.0, "detail": { "partNo": "B027-02006", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 7", "value": 24.0, "detail": { "partNo": "B027-02007", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 8", "value": 24.0, "detail": { "partNo": "B027-02008", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 9", "value": 24.0, "detail": { "partNo": "B027-02009", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 10", "value": 24.0, "detail": { "partNo": "B027-020010", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } }
+      ]
+    },
+    "labor": {
+      "dl": 14,
+      "idl": 26,
+      "facility": 15
+    },
+    "inland": {
+      "inlandCost": 14,
+      "milkrunCost": 26
+    }
+  },
+  {
+    "partNo": "364070K010",
+    "code": "00",
+    "name": "HOSE SUB-ASSY, TRANSFER BREATHER",
+    "supplier": "TOKAI RUBBER AUTO HOSE INDONESIA",
+    "totalCost": 362.07,
+    "materials": {
+      "inner": [
+        {
+          "name": "Material 1",
+          "value": 11.06,
+          "detail": { "partNo": "B027-02001", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 }
+        },
+        { "name": "Material 2", "value": 11.06, "detail": { "partNo": "B027-02002", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 3", "value": 11.06, "detail": { "partNo": "B027-02003", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 4", "value": 11.06, "detail": { "partNo": "B027-02004", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 5", "value": 11.06, "detail": { "partNo": "B027-02005", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 6", "value": 11.06, "detail": { "partNo": "B027-02006", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 7", "value": 11.06, "detail": { "partNo": "B027-02007", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 8", "value": 11.06, "detail": { "partNo": "B027-02008", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 9", "value": 11.06, "detail": { "partNo": "B027-02009", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 10", "value": 11.06, "detail": { "partNo": "B027-020010", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } }
+      ],
+      "outer": [
+        {
+          "name": "Material 1",
+          "value": 11.06,
+          "detail": { "partNo": "B027-02001", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 }
+        },
+        { "name": "Material 2", "value": 11.06, "detail": { "partNo": "B027-02002", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 3", "value": 11.06, "detail": { "partNo": "B027-02003", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 4", "value": 11.06, "detail": { "partNo": "B027-02004", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 5", "value": 11.06, "detail": { "partNo": "B027-02005", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 6", "value": 11.06, "detail": { "partNo": "B027-02006", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 7", "value": 11.06, "detail": { "partNo": "B027-02007", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 8", "value": 11.06, "detail": { "partNo": "B027-02008", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 9", "value": 11.06, "detail": { "partNo": "B027-02009", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } },
+        { "name": "Material 10", "value": 11.06, "detail": { "partNo": "B027-020010", "code": "Paper Tape Merk Golda maishu", "qty": 0.2, "price": 20700 } }
+      ]
+    },
+    "labor": {
+      "dl": 11.06,
+      "idl": 27,
+      "facility": 13
+    },
+    "inland": {
+      "inlandCost": 11.06,
+      "milkrunCost": 27
+    }
+  }
+]

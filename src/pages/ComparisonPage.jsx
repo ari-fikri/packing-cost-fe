@@ -1,40 +1,7 @@
 // src/pages/ComparisonPage.jsx
 import React, { useState } from "react";
 import CollapsibleRow from "./CollapsibleRow";
-
-// static part data (for combo boxes / display)
-const parts = [
-  { partNo: "162990E010", code: "00", name: "HOSE, WATER BY-PASS, NO.13", supplier: "IRC INOAC INDONESIA (RUBBER - IRI)" },
-  { partNo: "364070K010", code: "00", name: "HOSE SUB-ASSY, TRANSFER BREATHER", supplier: "TOKAI RUBBER AUTO HOSE INDONESIA" },
-];
-
-// totals (dummy)
-const totalCostLeft = 368;
-const totalCostRight = 362.07;
-
-// generator for 10 materials (used for both Inner and Outer)
-const makeMaterials = () =>
-  Array.from({ length: 10 }, (_, i) => ({
-    name: `Material ${i + 1}`,
-    value1: 24.0,
-    value2: 11.06,
-    detail: {
-      partNo: `B027-0200${i + 1}`,
-      code: "Paper Tape Merk Golda maishu",
-      qty: 0.2,
-      price: 20700,
-    },
-  }));
-
-const innerMaterials = makeMaterials();
-const outerMaterials = makeMaterials();
-
-// labor / inland left & right (dummy)
-const laborLeft = { dl: 14, idl: 26, facility: 15 };
-const laborRight = { dl: 11.06, idl: 27, facility: 13 };
-
-const inlandLeft = { inlandCost: 14, milkrunCost: 26 };
-const inlandRight = { inlandCost: 11.06, milkrunCost: 27 };
+import comparisonData from '../data/comparison.json';
 
 // helpers
 const fmt = (v) => {
@@ -63,20 +30,23 @@ export default function ComparisonPage() {
   const [periodeLeft, setPeriodeLeft] = useState("2025");
   const [periodeRight, setPeriodeRight] = useState("2026");
 
+  // Get selected parts
+  const partLeft = comparisonData[partIndexLeft];
+  const partRight = comparisonData[partIndexRight];
+
   // derived totals
-  // inner/outer totals should summarize the header values (subtotal = qty * price)
-  const innerTotalLeft = innerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
-  const innerTotalRight = innerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
-  const outerTotalLeft = outerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
-  const outerTotalRight = outerMaterials.reduce((s, m) => s + (Number(m.detail.qty) * Number(m.detail.price)), 0);
+  const innerTotalLeft = partLeft.materials.inner.reduce((s, m) => s + m.value, 0);
+  const innerTotalRight = partRight.materials.inner.reduce((s, m) => s + m.value, 0);
+  const outerTotalLeft = partLeft.materials.outer.reduce((s, m) => s + m.value, 0);
+  const outerTotalRight = partRight.materials.outer.reduce((s, m) => s + m.value, 0);
   const materialTotalLeft = innerTotalLeft + outerTotalLeft;
   const materialTotalRight = innerTotalRight + outerTotalRight;
 
-  const laborTotalLeft = laborLeft.dl + laborLeft.idl + laborLeft.facility;
-  const laborTotalRight = laborRight.dl + laborRight.idl + laborRight.facility;
+  const laborTotalLeft = partLeft.labor.dl + partLeft.labor.idl + partLeft.labor.facility;
+  const laborTotalRight = partRight.labor.dl + partRight.labor.idl + partRight.labor.facility;
 
-  const inlandTotalLeft = inlandLeft.inlandCost + inlandLeft.milkrunCost;
-  const inlandTotalRight = inlandRight.inlandCost + inlandRight.milkrunCost;
+  const inlandTotalLeft = partLeft.inland.inlandCost + partLeft.inland.milkrunCost;
+  const inlandTotalRight = partRight.inland.inlandCost + partRight.inland.milkrunCost;
 
   return (
     <div className="container mt-3">
@@ -88,12 +58,12 @@ export default function ComparisonPage() {
             <th>Part No</th>
             <th>
               <select className="form-control form-control-sm" value={partIndexLeft} onChange={(e) => setPartIndexLeft(Number(e.target.value))}>
-                {parts.map((p, i) => <option key={i} value={i}>{p.partNo} - {p.code}</option>)}
+                {comparisonData.map((p, i) => <option key={i} value={i}>{p.partNo} - {p.code}</option>)}
               </select>
             </th>
             <th>
               <select className="form-control form-control-sm" value={partIndexRight} onChange={(e) => setPartIndexRight(Number(e.target.value))}>
-                {parts.map((p, i) => <option key={i} value={i}>{p.partNo} - {p.code}</option>)}
+                {comparisonData.map((p, i) => <option key={i} value={i}>{p.partNo} - {p.code}</option>)}
               </select>
             </th>
             <th>Diff</th>
@@ -111,23 +81,23 @@ export default function ComparisonPage() {
           {/* Part Info */}
           <tr>
             <td>Part Name</td>
-            <td>{parts[partIndexLeft]?.name || ""}</td>
-            <td>{parts[partIndexRight]?.name || ""}</td>
+            <td>{partLeft?.name || ""}</td>
+            <td>{partRight?.name || ""}</td>
             <td></td>
           </tr>
           <tr>
             <td>Supplier</td>
-            <td>{parts[partIndexLeft]?.supplier || ""}</td>
-            <td>{parts[partIndexRight]?.supplier || ""}</td>
+            <td>{partLeft?.supplier || ""}</td>
+            <td>{partRight?.supplier || ""}</td>
             <td></td>
           </tr>
 
           {/* TOTAL COST */}
           <tr style={{ fontWeight: "bold" }}>
             <td>TOTAL COST (Rp)</td>
-            <td style={right}>{fmt(totalCostLeft)}</td>
-            <td style={right}>{fmt(totalCostRight)}</td>
-            <td style={right}>{calcDiff(totalCostLeft, totalCostRight)}</td>
+            <td style={right}>{fmt(partLeft?.totalCost)}</td>
+            <td style={right}>{fmt(partRight?.totalCost)}</td>
+            <td style={right}>{calcDiff(partLeft?.totalCost, partRight?.totalCost)}</td>
           </tr>
 
           {/* MATERIAL */}
@@ -144,15 +114,15 @@ export default function ComparisonPage() {
               value2={fmt(innerTotalRight)}
               diff={calcDiff(innerTotalLeft, innerTotalRight)}
             >
-              {innerMaterials.map((mat, i) => {
-                const subtotal = mat.detail.qty * mat.detail.price;
+              {partLeft.materials.inner.map((mat, i) => {
+                const matRight = partRight.materials.inner[i];
                 return (
                   <React.Fragment key={`inner-${i}`}>
                     <tr>
                       <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
-                      <td style={right}>{fmt(subtotal)}</td>
-                      <td style={right}>{fmt(subtotal)}</td>
-                      <td></td>
+                      <td style={right}>{fmt(mat.value)}</td>
+                      <td style={right}>{fmt(matRight?.value)}</td>
+                      <td style={right}>{calcDiff(mat.value, matRight?.value)}</td>
                     </tr>
 
                     {/* details moved to 2nd & 3rd columns */}
@@ -163,14 +133,14 @@ export default function ComparisonPage() {
                         <div>- Code: {mat.detail.code}</div>
                         <div>- Qty: {fmt(mat.detail.qty)}</div>
                         <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                        <div>- Subtotal: {fmt(subtotal)}</div>
+                        <div>- Subtotal: {fmt(mat.detail.qty * mat.detail.price)}</div>
                       </td>
                       <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                        <div>- Part No: {mat.detail.partNo}</div>
-                        <div>- Code: {mat.detail.code}</div>
-                        <div>- Qty: {fmt(mat.detail.qty)}</div>
-                        <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                        <div>- Subtotal: {fmt(subtotal)}</div>
+                        <div>- Part No: {matRight?.detail.partNo}</div>
+                        <div>- Code: {matRight?.detail.code}</div>
+                        <div>- Qty: {fmt(matRight?.detail.qty)}</div>
+                        <div>- Price: {fmtPrice(matRight?.detail.price)}</div>
+                        <div>- Subtotal: {fmt(matRight?.detail.qty * matRight?.detail.price)}</div>
                       </td>
                       <td></td>
                     </tr>
@@ -186,15 +156,15 @@ export default function ComparisonPage() {
               value2={fmt(outerTotalRight)}
               diff={calcDiff(outerTotalLeft, outerTotalRight)}
             >
-              {outerMaterials.map((mat, i) => {
-                const subtotal = mat.detail.qty * mat.detail.price;
+              {partLeft.materials.outer.map((mat, i) => {
+                const matRight = partRight.materials.outer[i];
                 return (
                   <React.Fragment key={`outer-${i}`}>
                     <tr>
                       <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
-                      <td style={right}>{fmt(subtotal)}</td>
-                      <td style={right}>{fmt(subtotal)}</td>
-                      <td></td>
+                      <td style={right}>{fmt(mat.value)}</td>
+                      <td style={right}>{fmt(matRight?.value)}</td>
+                      <td style={right}>{calcDiff(mat.value, matRight?.value)}</td>
                     </tr>
 
                     <tr>
@@ -204,14 +174,14 @@ export default function ComparisonPage() {
                         <div>- Code: {mat.detail.code}</div>
                         <div>- Qty: {fmt(mat.detail.qty)}</div>
                         <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                        <div>- Subtotal: {fmt(subtotal)}</div>
+                        <div>- Subtotal: {fmt(mat.detail.qty * mat.detail.price)}</div>
                       </td>
                       <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                        <div>- Part No: {mat.detail.partNo}</div>
-                        <div>- Code: {mat.detail.code}</div>
-                        <div>- Qty: {fmt(mat.detail.qty)}</div>
-                        <div>- Price: {fmtPrice(mat.detail.price)}</div>
-                        <div>- Subtotal: {fmt(subtotal)}</div>
+                        <div>- Part No: {matRight?.detail.partNo}</div>
+                        <div>- Code: {matRight?.detail.code}</div>
+                        <div>- Qty: {fmt(matRight?.detail.qty)}</div>
+                        <div>- Price: {fmtPrice(matRight?.detail.price)}</div>
+                        <div>- Subtotal: {fmt(matRight?.detail.qty * matRight?.detail.price)}</div>
                       </td>
                       <td></td>
                     </tr>
@@ -230,21 +200,21 @@ export default function ComparisonPage() {
           >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- DL</td>
-              <td style={right}>{fmt(laborLeft.dl)}</td>
-              <td style={right}>{fmt(laborRight.dl)}</td>
-              <td style={right}>{calcDiff(laborLeft.dl, laborRight.dl)}</td>
+              <td style={right}>{fmt(partLeft.labor.dl)}</td>
+              <td style={right}>{fmt(partRight.labor.dl)}</td>
+              <td style={right}>{calcDiff(partLeft.labor.dl, partRight.labor.dl)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- IDL</td>
-              <td style={right}>{fmt(laborLeft.idl)}</td>
-              <td style={right}>{fmt(laborRight.idl)}</td>
-              <td style={right}>{calcDiff(laborLeft.idl, laborRight.idl)}</td>
+              <td style={right}>{fmt(partLeft.labor.idl)}</td>
+              <td style={right}>{fmt(partRight.labor.idl)}</td>
+              <td style={right}>{calcDiff(partLeft.labor.idl, partRight.labor.idl)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Facility/Others</td>
-              <td style={right}>{fmt(laborLeft.facility)}</td>
-              <td style={right}>{fmt(laborRight.facility)}</td>
-              <td style={right}>{calcDiff(laborLeft.facility, laborRight.facility)}</td>
+              <td style={right}>{fmt(partLeft.labor.facility)}</td>
+              <td style={right}>{fmt(partRight.labor.facility)}</td>
+              <td style={right}>{calcDiff(partLeft.labor.facility, partRight.labor.facility)}</td>
             </tr>
           </CollapsibleRow>
 
@@ -257,15 +227,15 @@ export default function ComparisonPage() {
           >
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
-              <td style={right}>{fmt(inlandLeft.inlandCost)}</td>
-              <td style={right}>{fmt(inlandRight.inlandCost)}</td>
-              <td style={right}>{calcDiff(inlandLeft.inlandCost, inlandRight.inlandCost)}</td>
+              <td style={right}>{fmt(partLeft.inland.inlandCost)}</td>
+              <td style={right}>{fmt(partRight.inland.inlandCost)}</td>
+              <td style={right}>{calcDiff(partLeft.inland.inlandCost, partRight.inland.inlandCost)}</td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Milkrun Cost</td>
-              <td style={right}>{fmt(inlandLeft.milkrunCost)}</td>
-              <td style={right}>{fmt(inlandRight.milkrunCost)}</td>
-              <td style={right}>{calcDiff(inlandLeft.milkrunCost, inlandRight.milkrunCost)}</td>
+              <td style={right}>{fmt(partLeft.inland.milkrunCost)}</td>
+              <td style={right}>{fmt(partRight.inland.milkrunCost)}</td>
+              <td style={right}>{calcDiff(partLeft.inland.milkrunCost, partRight.inland.milkrunCost)}</td>
             </tr>
           </CollapsibleRow>
         </tbody>
