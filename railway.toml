@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+
+[build.buildCommand]
+command = "npm install --legacy-peer-deps && npm run build"
+
+[deploy]
+startCommand = "npm run preview"
+restartPolicyType = "never"
