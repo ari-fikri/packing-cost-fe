@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "start": "serve -s dist -l 0.0.0.0:$PORT"
   },  
+  "dependencies": {
     "chart.js": "4.4.0",
     "react": "^18.2.0",
     "react-chartjs-2": "5.2.0",
