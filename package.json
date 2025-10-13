@@ -8,9 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "npm run build && npx serve -s dist -l tcp://0.0.0.0:$PORT"
-  },
-  "dependencies": {
+    "start": "serve -s dist -l 0.0.0.0:$PORT"
+  },  
     "chart.js": "4.4.0",
     "react": "^18.2.0",
     "react-chartjs-2": "5.2.0",
