@@ -2,7 +2,7 @@
 import React from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
-import Header from './components/Header'
+import Header from './components/header.jsx'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import { useAuth } from './auth'
