@@ -1,6 +1,6 @@
 // src/pages/packing/Cps.jsx
 import React, { useState } from 'react'
-import NewCpsModal from '../../components/NewCpsModal'
+import NewCpsModal from '../../components/NewCPSModal.jsx'
 import PersonPickerModal from '../../components/PersonPickerModal' // <-- import the modal
 
 export default function Cps() {
