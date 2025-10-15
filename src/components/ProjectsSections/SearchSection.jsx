@@ -4,7 +4,6 @@ export default function SearchSection({
   code, setCode,
   name, setName,
   models, setModels,
-  sopPacking, setSopPacking,
   manager, setManager,
   statuses, setStatuses,
   handleSearch,
@@ -57,12 +56,6 @@ export default function SearchSection({
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Model"><i className="fas fa-search"></i></button>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="col-12 col-md-6">
-          <div className="form-group">
-            <label className="small mb-1">Implementation Period <span className="text-muted ml-2"><i>cth: 02.2025</i></span></label>
-            <input value={sopPacking} onChange={e => setSopPacking(e.target.value)} className="form-control form-control-sm" placeholder="SOP Packing" />
           </div>
         </div>
       </div>

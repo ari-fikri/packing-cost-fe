@@ -23,7 +23,6 @@ export default function ResultSection({
               <th>Project Code</th>
               <th>Project Name</th>
               <th>Project Manager</th>
-              <th>Impl Period</th>
               <th>Status</th>
               <th>Models</th>
               <th style={{ width: 120 }}>Action</th>
@@ -31,7 +30,7 @@ export default function ResultSection({
           </thead>
           <tbody>
             {paginatedResults.length === 0 && (
-              <tr><td colSpan="8" className="text-center py-4 text-muted">No Data Found</td></tr>
+              <tr><td colSpan="7" className="text-center py-4 text-muted">No Data Found</td></tr>
             )}
             {paginatedResults.map((r, idx) => (
               <tr key={idx}>
@@ -39,7 +38,6 @@ export default function ResultSection({
                 <td>{r.code}</td>
                 <td>{r.name}</td>
                 <td>{r.manager}</td>
-                <td>{r.sopPacking}</td>
                 <td>{r.status}</td>
                 <td>
                   {Array.isArray(r.models)

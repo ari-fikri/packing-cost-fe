@@ -10,7 +10,6 @@ export default function Projects() {
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
   const [models, setModels] = useState('')
-  const [sopPacking, setSopPacking] = useState('')
   const [manager, setManager] = useState('')
   const [statuses, setStatuses] = useState({
     all: true, draft: false, active: false, onhold: false, completed: false
@@ -31,7 +30,7 @@ export default function Projects() {
 
   function clearFilters() {
     setCode(''); setName(''); setModels('')
-    setSopPacking(''); setManager('')
+    setManager('')
     setStatuses({ all: true, draft: false, active: false, onhold: false, completed: false })
     setResults(projectsData)
     setCurrentPage(1)
@@ -44,7 +43,6 @@ export default function Projects() {
       (!models || (Array.isArray(p.models)
         ? p.models.join(', ').toLowerCase().includes(models.toLowerCase())
         : (p.models || '').toLowerCase().includes(models.toLowerCase()))) &&
-      (!sopPacking || p.sopPacking?.toLowerCase().includes(sopPacking.toLowerCase())) &&
       (!manager || p.manager?.toLowerCase().includes(manager.toLowerCase()))
     );
     // Status filter
@@ -74,7 +72,6 @@ export default function Projects() {
     const newRow = {
       code: payload.code || `CFC-${(results.length + 1).toString().padStart(3, '0')}`,
       name: payload.name || '(No name)',
-      sopPacking: payload.sopPacking || '',
       manager: payload.manager || '',
       status: payload.status || 'Draft',
       models: (payload.models || []).map(m => m.code).join(', ')
@@ -120,7 +117,6 @@ export default function Projects() {
           code={code} setCode={setCode}
           name={name} setName={setName}
           models={models} setModels={setModels}
-          sopPacking={sopPacking} setSopPacking={setSopPacking}
           manager={manager} setManager={setManager}
           statuses={statuses} setStatuses={setStatuses}
           handleSearch={handleSearch}

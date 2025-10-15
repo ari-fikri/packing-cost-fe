@@ -5,7 +5,6 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
   // basic form fields
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
-  const [sopPacking, setSopPacking] = useState('');
   const [status, setStatus] = useState('Draft');
   const [manager, setManager] = useState('');
   const [description, setDescription] = useState('');
@@ -16,7 +15,6 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
     if (initialData) {
       setCode(initialData.code || '');
       setName(initialData.name || '');
-      setSopPacking(initialData.sopPacking || '');
       setStatus(initialData.status || 'Draft');
       setManager(initialData.manager || '');
       setDescription(initialData.description || '');
@@ -25,7 +23,6 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
     } else {
       setCode('');
       setName('');
-      setSopPacking('');
       setStatus('Draft');
       setManager('');
       setDescription('');
@@ -47,7 +44,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
   };
 
   const handleSave = () => {
-    const payload = { code, name, sopPacking, status, manager, description, note, models };
+    const payload = { code, name, status, manager, description, note, models };
     if (onSave) onSave(payload);
   };
 
@@ -74,10 +71,6 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
               <div className="form-group">
                 <label className="small">CFC/PJT Name</label>
                 <input className="form-control form-control-sm mb-2" value={name} onChange={e => setName(e.target.value)} placeholder="CFC/PJT Name" />
-              </div>
-              <div className="form-group">
-                <label className="small">SOP Packing <span className="text-muted ml-2"><i>cth: 02.2025</i></span></label>
-                <input className="form-control form-control-sm mb-2" value={sopPacking} onChange={e => setSopPacking(e.target.value)} placeholder="SOP Packing" />
               </div>
               <div className="form-group">
                 <label className="small">Status</label>
