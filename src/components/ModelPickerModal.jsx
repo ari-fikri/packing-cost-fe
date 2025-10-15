@@ -1,7 +1,7 @@
 // src/components/ModelPickerModal.jsx
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import MODELS from "../data/models";
+import modelsData from "../data/models.json";
 
 export default function ModelPickerModal({ show, onClose, onAdd }) {
   const [filterCode, setFilterCode] = useState("");
@@ -9,8 +9,8 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
   const [filterRemark, setFilterRemark] = useState("");
   const [selectedModels, setSelectedModels] = useState([]);
 
-  // use imported data
-  const modelsData = MODELS;
+  // use imported JSON data
+  // modelsData is already available from the import
 
   const handleCheckboxChange = (code) => {
     setSelectedModels((prev) =>
