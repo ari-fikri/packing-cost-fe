@@ -1,6 +1,7 @@
 // src/pages/NewModelModal.jsx
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from '../components/PartPickerModal' // Uncomment and adjust path as needed
+import DESTINATIONS from '../data/destinations'
 
 export default function NewModelModal({ 
   show, 
@@ -12,6 +13,10 @@ export default function NewModelModal({
   const [newCode, setNewCode] = useState('')
   const [newName, setNewName] = useState('')
   const [newRemark, setNewRemark] = useState('')
+  const [implementationPeriod, setImplementationPeriod] = useState('')
+  const [destinationCode, setDestinationCode] = useState('')
+  const [destinationCountryCode, setDestinationCountryCode] = useState('')
+  const [country, setCountry] = useState('')
 
   // parts
   const [parts, setParts] = useState([])
@@ -24,12 +29,20 @@ export default function NewModelModal({
         setNewCode(initialData.code || '')
         setNewName(initialData.name || '')
         setNewRemark(initialData.remark || '')
+        setImplementationPeriod(initialData.implementationPeriod || '')
+        setDestinationCode(initialData.destinationCode || '')
+        setDestinationCountryCode(initialData.destinationCountryCode || '')
+        setCountry(initialData.country || '')
         setParts(initialData.parts || [])
       } else {
         // Clear form for new entry
         setNewCode('')
         setNewName('')
         setNewRemark('')
+        setImplementationPeriod('')
+        setDestinationCode('')
+        setDestinationCountryCode('')
+        setCountry('')
         setParts([])
       }
       setShowPartPicker(false)
@@ -50,6 +63,19 @@ export default function NewModelModal({
     setParts(prev => prev.filter((_, i) => i !== idx))
   }
 
+  // Handle destination code change and auto-populate related fields
+  function handleDestinationCodeChange(value) {
+    setDestinationCode(value)
+    const destination = DESTINATIONS.find(dest => dest.destCode === value)
+    if (destination) {
+      setDestinationCountryCode(destination.code)
+      setCountry(destination.country)
+    } else {
+      setDestinationCountryCode('')
+      setCountry('')
+    }
+  }
+
   function handleSaveModel() {
     if (!newCode.trim()) {
       alert('Please enter Model Code')
@@ -59,6 +85,10 @@ export default function NewModelModal({
       code: newCode,
       name: newName,
       remark: newRemark,
+      implementationPeriod,
+      destinationCode,
+      destinationCountryCode,
+      country,
       parts: parts.slice(),
     }
     console.log('Saving model:', payload)
@@ -87,15 +117,36 @@ export default function NewModelModal({
           <div className="row">
             <div className="col-md-6">
               <label className="small">Code</label>
-              <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} />
+              <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} placeholder="Model Code" />
             </div>
             <div className="col-md-6">
               <label className="small">Name</label>
-              <input className="form-control form-control-sm mb-2" value={newName} onChange={e => setNewName(e.target.value)} />
+              <input className="form-control form-control-sm mb-2" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Model Name" />
+            </div>
+            <div className="col-md-6">
+              <label className="small">Implementation Period <span className="text-muted ml-2"><i>e.g., Q2 2025</i></span></label>
+              <input className="form-control form-control-sm mb-2" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value)} placeholder="Implementation Period" />
+            </div>
+            <div className="col-md-6">
+              <label className="small">Destination Code</label>
+              <div className="input-group input-group-sm mb-2">
+                <input className="form-control form-control-sm" value={destinationCode} onChange={e => handleDestinationCodeChange(e.target.value)} placeholder="Destination Code" />
+                <div className="input-group-append">
+                  <span className="input-group-text"><i className="fas fa-map-marker-alt" /></span>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <label className="small">Destination Country Code</label>
+              <input className="form-control form-control-sm mb-2" value={destinationCountryCode} readOnly placeholder="Auto-filled" style={{backgroundColor: '#f8f9fa'}} />
+            </div>
+            <div className="col-md-6">
+              <label className="small">Country</label>
+              <input className="form-control form-control-sm mb-2" value={country} readOnly placeholder="Auto-filled" style={{backgroundColor: '#f8f9fa'}} />
             </div>
             <div className="col-md-12">
               <label className="small">Remark</label>
-              <input className="form-control form-control-sm mb-2" value={newRemark} onChange={e => setNewRemark(e.target.value)} />
+              <input className="form-control form-control-sm mb-2" value={newRemark} onChange={e => setNewRemark(e.target.value)} placeholder="Remark" />
             </div>
           </div>
 
