@@ -26,7 +26,7 @@ export default function SearchSection({
       <div className="row">
         <div className="col-12 col-md-6">
           <div className="form-group">
-            <label className="small mb-1">CFC / PJT Code</label>
+            <label className="small mb-1">Project Code</label>
             <div className="input-group input-group-sm">
               <input value={code} onChange={e => setCode(e.target.value)} className="form-control form-control-sm" placeholder="Code" />
               <div className="input-group-append">
@@ -37,7 +37,7 @@ export default function SearchSection({
         </div>
         <div className="col-12 col-md-6">
           <div className="form-group">
-            <label className="small mb-1">CFC / PJT Name</label>
+            <label className="small mb-1">Project Name</label>
             <div className="input-group input-group-sm">
               <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
               <div className="input-group-append">
@@ -61,7 +61,7 @@ export default function SearchSection({
         </div>
         <div className="col-12 col-md-6">
           <div className="form-group">
-            <label className="small mb-1">SOP Packing <span className="text-muted ml-2"><i>cth: 02.2025</i></span></label>
+            <label className="small mb-1">Implementation Period <span className="text-muted ml-2"><i>cth: 02.2025</i></span></label>
             <input value={sopPacking} onChange={e => setSopPacking(e.target.value)} className="form-control form-control-sm" placeholder="SOP Packing" />
           </div>
         </div>

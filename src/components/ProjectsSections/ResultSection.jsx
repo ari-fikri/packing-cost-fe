@@ -20,10 +20,10 @@ export default function ResultSection({
           <thead className="thead-light" style={{ position: 'sticky', top: 0, zIndex: 5 }}>
             <tr>
               <th style={{ width: 50 }}>No</th>
-              <th>CFC/PJT Code</th>
-              <th>CFC/PJT Name</th>
+              <th>Project Code</th>
+              <th>Project Name</th>
               <th>Project Manager</th>
-              <th>SOP Packing</th>
+              <th>Impl Period</th>
               <th>Status</th>
               <th>Models</th>
               <th style={{ width: 120 }}>Action</th>
