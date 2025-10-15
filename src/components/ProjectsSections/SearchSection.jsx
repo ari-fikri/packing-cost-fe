@@ -21,8 +21,9 @@ export default function SearchSection({
 
   return (
     <div className="card-body">
-      {/* MidSection */}
+      {/* First Row: Project Code and Project Name */}
       <div className="row">
+        {/* Project Code Input Field */}
         <div className="col-12 col-md-6">
           <div className="form-group">
             <label className="small mb-1">Project Code</label>
@@ -34,6 +35,7 @@ export default function SearchSection({
             </div>
           </div>
         </div>
+        {/* Project Name Input Field */}
         <div className="col-12 col-md-6">
           <div className="form-group">
             <label className="small mb-1">Project Name</label>
@@ -46,7 +48,9 @@ export default function SearchSection({
           </div>
         </div>
       </div>
+      {/* Second Row: Related Models and Project Manager */}
       <div className="row">
+        {/* Related Models Input Field */}
         <div className="col-12 col-md-6">
           <div className="form-group">
             <label className="small mb-1">Related Models</label>
@@ -58,11 +62,27 @@ export default function SearchSection({
             </div>
           </div>
         </div>
+        {/* Project Manager Input Field */}
+        <div className="col-12 col-md-6">
+          <div className="form-group">
+            <label className="small mb-1">Project Manager</label>
+            <div className="input-group input-group-sm">
+              <input value={manager} onChange={e => setManager(e.target.value)} className="form-control form-control-sm" placeholder="Manager name" />
+              <div className="input-group-append">
+                <span className="input-group-text"><i className="fas fa-user" /></span>
+              </div>
+            </div>
+          </div>
+        </div>        
       </div>
+      {/* Third Row: Status Filter Checkboxes */}
       <div className="row">
+        {/* Status Filter Section */}
         <div className="col-12 col-md-6">
           <label className="small mb-1 d-block">Status</label>
+          {/* Status Checkbox Group */}
           <div className="form-inline flex-wrap">
+            {/* Dynamic Status Checkboxes */}
             {['all', 'draft', 'active', 'onhold', 'completed'].map(key => {
               const id = `status-${key}`
               return (
@@ -74,22 +94,14 @@ export default function SearchSection({
             })}
           </div>
         </div>
-        <div className="col-12 col-md-6">
-          <div className="form-group">
-            <label className="small mb-1">Project Manager</label>
-            <div className="input-group input-group-sm">
-              <input value={manager} onChange={e => setManager(e.target.value)} className="form-control form-control-sm" placeholder="Manager name" />
-              <div className="input-group-append">
-                <span className="input-group-text"><i className="fas fa-user" /></span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-      {/* BottomSection */}
+      {/* Fourth Row: Action Buttons */}
       <div className="row mt-2">
+        {/* Button Container - Right Aligned */}
         <div className="col-12 d-flex justify-content-end">
+          {/* Filter Button */}
           <button type="button" className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Filter</button>
+          {/* Clear Filter Button */}
           <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-times mr-1"></i> Clear</button>
         </div>
       </div>
