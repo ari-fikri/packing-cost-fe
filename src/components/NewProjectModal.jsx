@@ -54,7 +54,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
     <div className="np-modal-backdrop" style={{ position: 'fixed', inset: 0, zIndex: 1040 }}>
       <div className="np-modal card card-outline card-primary" style={{ maxWidth: 600, margin: '40px auto', zIndex: 1041 }}>
         <div className="card-header d-flex align-items-center">
-          <h3 className="card-title mb-0"><b>CFC/Pjt - New</b></h3>
+          <h3 className="card-title mb-0"><b>Project - New</b></h3>
           <div className="card-tools ml-auto">
             <button type="button" className="btn btn-tool" aria-label="Close" onClick={onClose}><i className="fas fa-times" /></button>
           </div>
@@ -65,12 +65,12 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
           <div className="row">
             <div className="col-12 col-md-6">
               <div className="form-group">
-                <label className="small">CFC/PJT Code</label>
-                <input className="form-control form-control-sm mb-2" value={code} onChange={e => setCode(e.target.value)} placeholder="CFC/PJT Code" />
+                <label className="small">Project Code</label>
+                <input className="form-control form-control-sm mb-2" value={code} onChange={e => setCode(e.target.value)} placeholder="Project Code" />
               </div>
               <div className="form-group">
-                <label className="small">CFC/PJT Name</label>
-                <input className="form-control form-control-sm mb-2" value={name} onChange={e => setName(e.target.value)} placeholder="CFC/PJT Name" />
+                <label className="small">Project Name</label>
+                <input className="form-control form-control-sm mb-2" value={name} onChange={e => setName(e.target.value)} placeholder="Project Name" />
               </div>
               <div className="form-group">
                 <label className="small">Status</label>
