@@ -13,13 +13,6 @@ export default function ResultSection({
 }) {
   return (
     <>
-      {/* Results Summary */}
-      <div className="d-flex justify-content-between align-items-center mb-2">
-        <small className="text-muted">
-          Showing {materials.length > 0 ? ((currentPage - 1) * pageSize + 1) : 0} to {Math.min(currentPage * pageSize, totalMaterials)} of {totalMaterials} materials
-        </small>
-      </div>
-      
       <div className="table-responsive">
         <table className="table table-striped table-sm mb-0">
           <thead>
