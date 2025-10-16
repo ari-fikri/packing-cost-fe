@@ -13,11 +13,26 @@ export default function Material() {
   const [materialType, setMaterialType] = useState('')
   const [showNewModal, setShowNewModal] = useState(false)
 
-  // Table data - initialize with sample data
+  // Table data - separate original data and filtered data
+  const [allMaterials, setAllMaterials] = useState(materialsData)
   const [materials, setMaterials] = useState(materialsData)
 
   function handleFilter() {
-    console.log('Filter materials by', { materialNo, materialName, parentMaterial, itemNo, price, materialType })
+    // Filter materials based on search criteria
+    let filtered = allMaterials.filter(material => {
+      const matchMaterialNo = !materialNo || (material.materialNo && material.materialNo.toLowerCase().includes(materialNo.toLowerCase()))
+      const matchMaterialName = !materialName || (material.materialName && material.materialName.toLowerCase().includes(materialName.toLowerCase()))
+      const matchParentMaterial = !parentMaterial || (material.parentMaterial && material.parentMaterial.toLowerCase().includes(parentMaterial.toLowerCase()))
+      const matchItemNo = !itemNo || (material.itemNo && material.itemNo.toLowerCase().includes(itemNo.toLowerCase()))
+      const matchPrice = !price || (material.price && material.price.toString().includes(price))
+      const matchMaterialType = !materialType || material.materialType === materialType
+
+      return matchMaterialNo && matchMaterialName && matchParentMaterial && 
+             matchItemNo && matchPrice && matchMaterialType
+    })
+    
+    setMaterials(filtered)
+    console.log(`Filtered ${filtered.length} materials from ${allMaterials.length} total`)
   }
 
   function handleClearFilters() {
@@ -27,6 +42,8 @@ export default function Material() {
     setItemNo('')
     setPrice('')
     setMaterialType('')
+    // Reset to show all materials
+    setMaterials(allMaterials)
   }
 
   function handleOpenNew() {
@@ -39,13 +56,18 @@ export default function Material() {
 
   // **Receive new material from modal and add to table**
   function handleSaveNewMaterial(payload) {
+    setAllMaterials(prev => [payload, ...prev])
     setMaterials(prev => [payload, ...prev])
     setShowNewModal(false)
   }
 
   function handleDeleteMaterial(index) {
     if (!confirm('Delete this material?')) return
+    const materialToDelete = materials[index]
+    
+    // Remove from both filtered and all materials arrays
     setMaterials(prev => prev.filter((_, i) => i !== index))
+    setAllMaterials(prev => prev.filter(m => m.materialNo !== materialToDelete.materialNo))
   }
 
   return (
@@ -88,6 +110,7 @@ export default function Material() {
           {/* Result Section Component */}
           <ResultSection
             materials={materials}
+            allMaterials={allMaterials}
             onDeleteMaterial={handleDeleteMaterial}
           />
         </div>
