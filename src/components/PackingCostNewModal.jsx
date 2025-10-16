@@ -139,15 +139,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
 
   return (
     <>
-      <div className="modal fade show d-block" tabIndex={-1} role="dialog" aria-modal="true" style={{ paddingRight: 0 }}>
-        <div className="modal-dialog modal-fullscreen" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title"><strong>Packing Cost Calculation New</strong></h5>
+      <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) handleCancel() }}>
+        <div className="np-modal card card-outline card-primary" style={{ maxWidth: '95vw', maxHeight: '90vh', width: '95vw', height: '90vh' }}>
+            <div className="card-header">
+              <h5 className="card-title mb-0"><strong>Packing Cost Calculation New</strong></h5>
               <button type="button" className="close" onClick={handleCancel} aria-label="Close"><span aria-hidden>×</span></button>
             </div>
 
-            <div className="modal-body" style={{ maxHeight: "78vh", overflowY: "auto" }}>
+            <div className="card-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
               {/* Header form */}
               <div className="row">
                 <div className="col-md-6">
@@ -373,7 +372,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
               </div>
             </div>
 
-            <div className="modal-footer d-flex justify-content-end">
+            <div className="card-footer d-flex justify-content-end">
               <button type="button" className="btn btn-success mr-2" onClick={handleSave}>
                 <i className="fas fa-download mr-1" /> Save
               </button>
@@ -383,11 +382,15 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="modal-backdrop fade show" />
-
-      <PartPickerModal show={showPartPicker} onClose={() => setShowPartPicker(false)} onSelect={handlePartsPicked} />
+      {/* Render PartPickerModal outside the main modal */}
+      {showPartPicker && (
+        <PartPickerModal 
+          show={showPartPicker} 
+          onClose={() => setShowPartPicker(false)} 
+          onSelect={handlePartsPicked} 
+        />
+      )}
     </>
   );
 }
