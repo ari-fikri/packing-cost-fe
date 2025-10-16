@@ -14,7 +14,7 @@ import Cps from './pages/packing/Cps'
 import Dpi from './pages/packing/Dpi'
 import Calculate from './pages/packing/CalculatePackingCost'
 import Comparison from './pages/ComparisonPage'
-import ModuleType from './pages/ModuleType'
+import Material from './pages/Material'  // Now using the properly named Material.jsx file
 import Settings from './pages/Settings'
 import Params from './pages/ParamsPanel'
 
@@ -58,7 +58,8 @@ export default function App(){
           <Route path="/packing/dpi" element={<Dpi />} />
           <Route path="/packing/CalculatePackingCost" element={<Calculate />} />
           <Route path="/packing/ComparisonPage" element={<Comparison />} />
-          <Route path="/module-type" element={<ModuleType />} />
+          <Route path="/module-type" element={<Material />} />
+          <Route path="/material" element={<Material />} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/params" element={<ProtectedRoute><Params /></ProtectedRoute>} />
         </Routes>
@@ -109,7 +110,7 @@ function Main(){
 
   return (
     <div>
-      <ModuleType />
+      <Material />
     </div>
   );  
 }

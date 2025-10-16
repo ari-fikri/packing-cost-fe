@@ -7,7 +7,7 @@ import Cps from '../pages/packing/Cps'
 import Dpi from '../pages/packing/Dpi'
 import Calculate from '../pages/packing/CalculatePackingCost'
 import Comparsion from '../pages/ComparisonPage'
-import ModuleType from '../pages/ModuleType'
+import Material from '../pages/Material'  // Now using the properly named Material.jsx file
 
 export default function Sidebar() {
   const auth = useAuth()
@@ -22,6 +22,7 @@ export default function Sidebar() {
     if (path.startsWith('/projects') || 
         path.startsWith('/models') || 
         path.startsWith('/parts') || 
+        path.startsWith('/material') || 
         path.startsWith('/module-type') || 
         path.startsWith('/params')) {
           setMasterOpen(true)
@@ -105,9 +106,9 @@ export default function Sidebar() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/module-type" className={navLinkClass}>
+                  <NavLink to="/material" className={navLinkClass}>
                     <i className="far fa-circle nav-icon" />
-                    <p>Module Type</p>
+                    <p>Material</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">
