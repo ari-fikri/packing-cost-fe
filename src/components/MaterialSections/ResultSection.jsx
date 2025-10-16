@@ -1,8 +1,14 @@
 import React from 'react'
+import Pagination from '../Pagination'
 
 export default function ResultSection({
   materials,
   allMaterials,
+  totalMaterials,
+  currentPage,
+  totalPages,
+  pageSize,
+  onPageChange,
   onDeleteMaterial
 }) {
   return (
@@ -10,7 +16,7 @@ export default function ResultSection({
       {/* Results Summary */}
       <div className="d-flex justify-content-between align-items-center mb-2">
         <small className="text-muted">
-          Showing {materials.length} of {allMaterials?.length || materials.length} materials
+          Showing {materials.length > 0 ? ((currentPage - 1) * pageSize + 1) : 0} to {Math.min(currentPage * pageSize, totalMaterials)} of {totalMaterials} materials
         </small>
       </div>
       
@@ -35,8 +41,8 @@ export default function ResultSection({
               </tr>
             ) : (
               materials.map((material, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
+                <tr key={material.id || i}>
+                  <td>{(currentPage - 1) * pageSize + i + 1}</td>
                   <td>{material.materialNo}</td>
                   <td>{material.materialName}</td>
                   <td>{material.parentMaterial}</td>
@@ -67,6 +73,17 @@ export default function ResultSection({
           </tbody>
         </table>
       </div>
+
+      {/* Pagination Component */}
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalMaterials}
+          pageSize={pageSize}
+          onPageChange={onPageChange}
+        />
+      )}
     </>
   )
 }

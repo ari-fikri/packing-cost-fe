@@ -48,5 +48,305 @@
     "price": 12.75,
     "materialType": "Inner",
     "createdDate": "2024-02-15"
+  },
+  {
+    "id": 6,
+    "materialNo": "MAT006",
+    "materialName": "Carbon Fiber Panel",
+    "parentMaterial": "Carbon Fiber",
+    "itemNo": "ITM006",
+    "price": 350.00,
+    "materialType": "Outer",
+    "createdDate": "2024-02-20"
+  },
+  {
+    "id": 7,
+    "materialNo": "MAT007",
+    "materialName": "Memory Foam Insert",
+    "parentMaterial": "Memory Foam",
+    "itemNo": "ITM007",
+    "price": 45.80,
+    "materialType": "Inner",
+    "createdDate": "2024-02-25"
+  },
+  {
+    "id": 8,
+    "materialNo": "MAT008",
+    "materialName": "Titanium Component",
+    "parentMaterial": "Titanium",
+    "itemNo": "ITM008",
+    "price": 850.00,
+    "materialType": "Module",
+    "createdDate": "2024-03-01"
+  },
+  {
+    "id": 9,
+    "materialNo": "MAT009",
+    "materialName": "Silicone Seal",
+    "parentMaterial": "Silicone",
+    "itemNo": "ITM009",
+    "price": 18.95,
+    "materialType": "Inner",
+    "createdDate": "2024-03-05"
+  },
+  {
+    "id": 10,
+    "materialNo": "MAT010",
+    "materialName": "Stainless Steel Bracket",
+    "parentMaterial": "Stainless Steel",
+    "itemNo": "ITM010",
+    "price": 125.50,
+    "materialType": "Outer",
+    "createdDate": "2024-03-10"
+  },
+  {
+    "id": 11,
+    "materialNo": "MAT011",
+    "materialName": "Polyurethane Core",
+    "parentMaterial": "Polyurethane",
+    "itemNo": "ITM011",
+    "price": 65.30,
+    "materialType": "Module",
+    "createdDate": "2024-03-15"
+  },
+  {
+    "id": 12,
+    "materialNo": "MAT012",
+    "materialName": "Kevlar Reinforcement",
+    "parentMaterial": "Kevlar",
+    "itemNo": "ITM012",
+    "price": 420.75,
+    "materialType": "Inner",
+    "createdDate": "2024-03-20"
+  },
+  {
+    "id": 13,
+    "materialNo": "MAT013",
+    "materialName": "Aluminum Alloy Sheet",
+    "parentMaterial": "Aluminum Alloy",
+    "itemNo": "ITM013",
+    "price": 180.40,
+    "materialType": "Outer",
+    "createdDate": "2024-03-25"
+  },
+  {
+    "id": 14,
+    "materialNo": "MAT014",
+    "materialName": "Neoprene Padding",
+    "parentMaterial": "Neoprene",
+    "itemNo": "ITM014",
+    "price": 32.60,
+    "materialType": "Inner",
+    "createdDate": "2024-03-30"
+  },
+  {
+    "id": 15,
+    "materialNo": "MAT015",
+    "materialName": "Composite Module",
+    "parentMaterial": "Composite",
+    "itemNo": "ITM015",
+    "price": 245.90,
+    "materialType": "Module",
+    "createdDate": "2024-04-01"
+  },
+  {
+    "id": 16,
+    "materialNo": "MAT016",
+    "materialName": "Magnesium Housing",
+    "parentMaterial": "Magnesium",
+    "itemNo": "ITM016",
+    "price": 320.25,
+    "materialType": "Outer",
+    "createdDate": "2024-04-05"
+  },
+  {
+    "id": 17,
+    "materialNo": "MAT017",
+    "materialName": "EVA Foam Layer",
+    "parentMaterial": "EVA Foam",
+    "itemNo": "ITM017",
+    "price": 28.45,
+    "materialType": "Inner",
+    "createdDate": "2024-04-10"
+  },
+  {
+    "id": 18,
+    "materialNo": "MAT018",
+    "materialName": "Ceramic Component",
+    "parentMaterial": "Ceramic",
+    "itemNo": "ITM018",
+    "price": 195.80,
+    "materialType": "Module",
+    "createdDate": "2024-04-15"
+  },
+  {
+    "id": 19,
+    "materialNo": "MAT019",
+    "materialName": "PTFE Liner",
+    "parentMaterial": "PTFE",
+    "itemNo": "ITM019",
+    "price": 85.70,
+    "materialType": "Inner",
+    "createdDate": "2024-04-20"
+  },
+  {
+    "id": 20,
+    "materialNo": "MAT020",
+    "materialName": "Brass Fitting",
+    "parentMaterial": "Brass",
+    "itemNo": "ITM020",
+    "price": 55.35,
+    "materialType": "Outer",
+    "createdDate": "2024-04-25"
+  },
+  {
+    "id": 21,
+    "materialNo": "MAT021",
+    "materialName": "Polycarbonate Shell",
+    "parentMaterial": "Polycarbonate",
+    "itemNo": "ITM021",
+    "price": 95.60,
+    "materialType": "Outer",
+    "createdDate": "2024-05-01"
+  },
+  {
+    "id": 22,
+    "materialNo": "MAT022",
+    "materialName": "Gel Padding",
+    "parentMaterial": "Gel",
+    "itemNo": "ITM022",
+    "price": 68.90,
+    "materialType": "Inner",
+    "createdDate": "2024-05-05"
+  },
+  {
+    "id": 23,
+    "materialNo": "MAT023",
+    "materialName": "Fiberglass Panel",
+    "parentMaterial": "Fiberglass",
+    "itemNo": "ITM023",
+    "price": 120.45,
+    "materialType": "Module",
+    "createdDate": "2024-05-10"
+  },
+  {
+    "id": 24,
+    "materialNo": "MAT024",
+    "materialName": "Zinc Alloy Frame",
+    "parentMaterial": "Zinc Alloy",
+    "itemNo": "ITM024",
+    "price": 78.25,
+    "materialType": "Outer",
+    "createdDate": "2024-05-15"
+  },
+  {
+    "id": 25,
+    "materialNo": "MAT025",
+    "materialName": "Vinyl Cushion",
+    "parentMaterial": "Vinyl",
+    "itemNo": "ITM025",
+    "price": 42.15,
+    "materialType": "Inner",
+    "createdDate": "2024-05-20"
+  },
+  {
+    "id": 26,
+    "materialNo": "MAT026",
+    "materialName": "Acrylic Module",
+    "parentMaterial": "Acrylic",
+    "itemNo": "ITM026",
+    "price": 135.80,
+    "materialType": "Module",
+    "createdDate": "2024-05-25"
+  },
+  {
+    "id": 27,
+    "materialNo": "MAT027",
+    "materialName": "Copper Sheet",
+    "parentMaterial": "Copper",
+    "itemNo": "ITM027",
+    "price": 165.30,
+    "materialType": "Outer",
+    "createdDate": "2024-05-30"
+  },
+  {
+    "id": 28,
+    "materialNo": "MAT028",
+    "materialName": "Polyethylene Foam",
+    "parentMaterial": "Polyethylene",
+    "itemNo": "ITM028",
+    "price": 22.85,
+    "materialType": "Inner",
+    "createdDate": "2024-06-01"
+  },
+  {
+    "id": 29,
+    "materialNo": "MAT029",
+    "materialName": "Glass Fiber Module",
+    "parentMaterial": "Glass Fiber",
+    "itemNo": "ITM029",
+    "price": 210.50,
+    "materialType": "Module",
+    "createdDate": "2024-06-05"
+  },
+  {
+    "id": 30,
+    "materialNo": "MAT030",
+    "materialName": "Nickel Plated Cover",
+    "parentMaterial": "Nickel",
+    "itemNo": "ITM030",
+    "price": 145.75,
+    "materialType": "Outer",
+    "createdDate": "2024-06-10"
+  },
+  {
+    "id": 31,
+    "materialNo": "MAT031",
+    "materialName": "Latex Padding",
+    "parentMaterial": "Latex",
+    "itemNo": "ITM031",
+    "price": 38.40,
+    "materialType": "Inner",
+    "createdDate": "2024-06-15"
+  },
+  {
+    "id": 32,
+    "materialNo": "MAT032",
+    "materialName": "Thermoplastic Component",
+    "parentMaterial": "Thermoplastic",
+    "itemNo": "ITM032",
+    "price": 88.95,
+    "materialType": "Module",
+    "createdDate": "2024-06-20"
+  },
+  {
+    "id": 33,
+    "materialNo": "MAT033",
+    "materialName": "Cast Iron Base",
+    "parentMaterial": "Cast Iron",
+    "itemNo": "ITM033",
+    "price": 275.60,
+    "materialType": "Outer",
+    "createdDate": "2024-06-25"
+  },
+  {
+    "id": 34,
+    "materialNo": "MAT034",
+    "materialName": "Microfiber Lining",
+    "parentMaterial": "Microfiber",
+    "itemNo": "ITM034",
+    "price": 15.30,
+    "materialType": "Inner",
+    "createdDate": "2024-06-30"
+  },
+  {
+    "id": 35,
+    "materialNo": "MAT035",
+    "materialName": "Honeycomb Core",
+    "parentMaterial": "Honeycomb",
+    "itemNo": "ITM035",
+    "price": 185.45,
+    "materialType": "Module",
+    "createdDate": "2024-07-01"
   }
 ]

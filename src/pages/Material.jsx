@@ -13,9 +13,19 @@ export default function Material() {
   const [materialType, setMaterialType] = useState('')
   const [showNewModal, setShowNewModal] = useState(false)
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 10
+
   // Table data - separate original data and filtered data
   const [allMaterials, setAllMaterials] = useState(materialsData)
   const [materials, setMaterials] = useState(materialsData)
+
+  // Calculate pagination
+  const totalPages = Math.ceil(materials.length / pageSize)
+  const startIndex = (currentPage - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  const paginatedMaterials = materials.slice(startIndex, endIndex)
 
   function handleFilter() {
     // Filter materials based on search criteria
@@ -32,6 +42,7 @@ export default function Material() {
     })
     
     setMaterials(filtered)
+    setCurrentPage(1) // Reset to first page when filtering
     console.log(`Filtered ${filtered.length} materials from ${allMaterials.length} total`)
   }
 
@@ -44,6 +55,7 @@ export default function Material() {
     setMaterialType('')
     // Reset to show all materials
     setMaterials(allMaterials)
+    setCurrentPage(1) // Reset to first page when clearing
   }
 
   function handleOpenNew() {
@@ -63,11 +75,23 @@ export default function Material() {
 
   function handleDeleteMaterial(index) {
     if (!confirm('Delete this material?')) return
-    const materialToDelete = materials[index]
+    
+    // Get the actual material from the paginated view
+    const actualIndex = (currentPage - 1) * pageSize + index
+    const materialToDelete = materials[actualIndex]
     
     // Remove from both filtered and all materials arrays
-    setMaterials(prev => prev.filter((_, i) => i !== index))
-    setAllMaterials(prev => prev.filter(m => m.materialNo !== materialToDelete.materialNo))
+    const newMaterials = materials.filter((_, i) => i !== actualIndex)
+    const newAllMaterials = allMaterials.filter(m => m.materialNo !== materialToDelete.materialNo)
+    
+    setMaterials(newMaterials)
+    setAllMaterials(newAllMaterials)
+    
+    // Adjust current page if necessary
+    const newTotalPages = Math.ceil(newMaterials.length / pageSize)
+    if (currentPage > newTotalPages && newTotalPages > 0) {
+      setCurrentPage(newTotalPages)
+    }
   }
 
   return (
@@ -109,15 +133,15 @@ export default function Material() {
 
           {/* Result Section Component */}
           <ResultSection
-            materials={materials}
+            materials={paginatedMaterials}
             allMaterials={allMaterials}
+            totalMaterials={materials.length}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            onPageChange={setCurrentPage}
             onDeleteMaterial={handleDeleteMaterial}
           />
-        </div>
-
-        <div className="card-footer text-right">
-          <button type="button" className="btn btn-primary mr-2" onClick={() => alert('Save placeholder')}>Save</button>
-          <button type="button" className="btn btn-secondary" onClick={() => alert('Cancel placeholder')}>Cancel</button>
         </div>
 
         {/* Modal */}
