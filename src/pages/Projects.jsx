@@ -21,9 +21,10 @@ export default function Projects() {
   // State to track the index of the project being edited.
   const [editingIndex, setEditingIndex] = useState(null)
   // State to hold the search results. Initialized to null to prevent initial rendering of results.
-  const [results, setResults] = useState(null)
-  // State to track if a search has been performed.
-  const [hasSearched, setHasSearched] = useState(false)
+  // State to hold the search results. Initialized to an empty array so the
+  // result section (table header) can be rendered on initial load while
+  // showing no data rows.
+  const [results, setResults] = useState([])
 
   // State for pagination.
   const [currentPage, setCurrentPage] = useState(1)
@@ -34,14 +35,15 @@ export default function Projects() {
     setCode(''); setName(''); setModels('')
     setManager('')
     setStatuses({ all: true, draft: false, active: false, onhold: false, completed: false })
-    setResults(null) // Clear results
+    setResults([]) // Clear results
     setCurrentPage(1)
-    setHasSearched(false) // Reset search status
   }
 
   // Handles the search functionality based on the current filter states.
   function handleSearch() {
-    setHasSearched(true) // Mark that a search has been performed.
+    // Perform search and update results. We don't gate rendering on a
+    // "hasSearched" flag anymore; the results array controls what is
+    // displayed. An empty array will show the table header with no rows.
     // Check if any filters have been applied.
     const noFilters = !code && !name && !models && !manager && statuses.all;
 
@@ -148,15 +150,16 @@ export default function Projects() {
           clearFilters={clearFilters}
           handleOpenNew={handleOpenNew}
         />
-        {/* Result section is only rendered after a search has been performed and there are results */}
-        {hasSearched && results !== null && <ResultSection
+        {/* Result section: render the table header immediately but rows will
+            show only when `results` contains items. */}
+        <ResultSection
           results={results}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           pageSize={pageSize}
-        />}
+        />
       </div>
       {/* Modal for creating/editing a project */}
       <NewProjectModal
