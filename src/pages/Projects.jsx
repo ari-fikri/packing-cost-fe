@@ -1,12 +1,13 @@
 // src/pages/Projects.jsx
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import NewProjectModal from '../components/NewProjectModal'
 import projectsData from '../data/projects.json'
 import SearchSection from '../components/ProjectsSections/SearchSection'
 import ResultSection from '../components/ProjectsSections/ResultSection'
 
+// The main component for the Projects page.
 export default function Projects() {
-  // filter states
+  // State for managing filter inputs.
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
   const [models, setModels] = useState('')
@@ -15,28 +16,36 @@ export default function Projects() {
     all: true, draft: false, active: false, onhold: false, completed: false
   })
 
-  // modal + results
+  // State for the new/edit project modal.
   const [showNewModal, setShowNewModal] = useState(false)
+  // State to track the index of the project being edited.
   const [editingIndex, setEditingIndex] = useState(null)
-  const [results, setResults] = useState([])
+  // State to hold the search results. Initialized to null to prevent initial rendering of results.
+  const [results, setResults] = useState(null)
+  // State to track if a search has been performed.
+  const [hasSearched, setHasSearched] = useState(false)
 
-  // pagination
+  // State for pagination.
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 10
+  const pageSize = 10 // Number of items per page.
 
-  useEffect(() => {
-    setResults(projectsData)
-  }, [])
-
+  // Resets all filters to their default values and clears the search results.
   function clearFilters() {
     setCode(''); setName(''); setModels('')
     setManager('')
     setStatuses({ all: true, draft: false, active: false, onhold: false, completed: false })
-    setResults(projectsData)
+    setResults(null) // Clear results
     setCurrentPage(1)
+    setHasSearched(false) // Reset search status
   }
 
+  // Handles the search functionality based on the current filter states.
   function handleSearch() {
+    setHasSearched(true) // Mark that a search has been performed.
+    // Check if any filters have been applied.
+    const noFilters = !code && !name && !models && !manager && statuses.all;
+
+    // Filter the projectsData based on the input fields.
     let filtered = projectsData.filter(p =>
       (!code || p.code?.toLowerCase().includes(code.toLowerCase())) &&
       (!name || p.name?.toLowerCase().includes(name.toLowerCase())) &&
@@ -45,7 +54,8 @@ export default function Projects() {
         : (p.models || '').toLowerCase().includes(models.toLowerCase()))) &&
       (!manager || p.manager?.toLowerCase().includes(manager.toLowerCase()))
     );
-    // Status filter
+
+    // Apply status filters if 'all' is not selected.
     if (!statuses.all) {
       const statusKeys = [];
       if (statuses.draft) statusKeys.push('Draft');
@@ -56,41 +66,55 @@ export default function Projects() {
         filtered = filtered.filter(p => statusKeys.includes(p.status));
       }
     }
-    setResults(filtered);
-    setCurrentPage(1)
+
+    // If no filters are applied, show the latest data by reversing the array.
+    if (noFilters) {
+      setResults([...filtered].reverse());
+    } else {
+      setResults(filtered);
+    }
+    setCurrentPage(1); // Reset to the first page after a new search.
   }
 
+  // Opens the modal for creating a new project.
   function handleOpenNew() {
-    setEditingIndex(null)
+    setEditingIndex(null) // Ensure we are not in edit mode.
     setShowNewModal(true)
   }
+
+  // Closes the new/edit project modal.
   function handleCloseNew() {
     setShowNewModal(false)
   }
 
+  // Saves a new project or updates an existing one.
   function handleSaveNew(payload) {
     const newRow = {
-      code: payload.code || `CFC-${(results.length + 1).toString().padStart(3, '0')}`,
+      code: payload.code || `CFC-${((results || []).length + 1).toString().padStart(3, '0')}`,
       name: payload.name || '(No name)',
       manager: payload.manager || '',
       status: payload.status || 'Draft',
       models: (payload.models || []).map(m => m.code).join(', ')
     }
 
+    // If editingIndex is not null, update the existing project.
     if (editingIndex !== null) {
       setResults(prev => prev.map((r, i) => (i === editingIndex ? newRow : r)))
     } else {
-      setResults(prev => [newRow, ...prev])
+      // Otherwise, add the new project to the beginning of the results.
+      setResults(prev => [newRow, ...(prev || [])])
     }
-    setShowNewModal(false)
-    setEditingIndex(null)
+    setShowNewModal(false) // Close the modal.
+    setEditingIndex(null) // Reset editing index.
   }
 
+  // Opens the modal in edit mode for a specific project.
   function handleEdit(index) {
     setEditingIndex(index);
     setShowNewModal(true);
   }
 
+  // Deletes a project from the results.
   function handleDelete(index) {
     setResults(prev => prev.filter((_, i) => i !== index))
   }
@@ -100,7 +124,7 @@ export default function Projects() {
       <div className="card card-outline card-secondary">
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>Project List</b></h3>
-          {/* TopSection */}
+          {/* Action buttons in the header */}
           <div className="ml-auto">
             <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}>
               <i className="fas fa-plus mr-1"></i> New Project
@@ -113,6 +137,7 @@ export default function Projects() {
             </button>
           </div>
         </div>
+        {/* Search section component */}
         <SearchSection
           code={code} setCode={setCode}
           name={name} setName={setName}
@@ -123,21 +148,23 @@ export default function Projects() {
           clearFilters={clearFilters}
           handleOpenNew={handleOpenNew}
         />
-        <ResultSection
+        {/* Result section is only rendered after a search has been performed and there are results */}
+        {hasSearched && results !== null && <ResultSection
           results={results}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           pageSize={pageSize}
-        />
+        />}
       </div>
+      {/* Modal for creating/editing a project */}
       <NewProjectModal
         visible={showNewModal}
         onClose={handleCloseNew}
         onSave={handleSaveNew}
         initialData={
-          editingIndex !== null && results[editingIndex]
+          editingIndex !== null && results && results[editingIndex]
             ? {
                 ...results[editingIndex],
                 models: Array.isArray(results[editingIndex].models)
