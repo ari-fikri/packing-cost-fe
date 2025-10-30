@@ -19,7 +19,10 @@ export default function Material() {
 
   // Table data - separate original data and filtered data
   const [allMaterials, setAllMaterials] = useState(materialsData)
-  const [materials, setMaterials] = useState(materialsData)
+  // Keep `materials` (the filtered list) empty on initial load so the table
+  // header is visible but no rows are shown. User must click Filter to load
+  // results; clicking Filter with no criteria will show latest-first.
+  const [materials, setMaterials] = useState([])
 
   // Calculate pagination
   const totalPages = Math.ceil(materials.length / pageSize)
@@ -41,7 +44,14 @@ export default function Material() {
              matchItemNo && matchPrice && matchMaterialType
     })
     
-    setMaterials(filtered)
+    const noFilters = !materialNo && !materialName && !parentMaterial && !itemNo && !price && !materialType
+
+    if (noFilters) {
+      // Show latest-first when there are no filter criteria
+      setMaterials([...allMaterials].reverse())
+    } else {
+      setMaterials(filtered)
+    }
     setCurrentPage(1) // Reset to first page when filtering
     console.log(`Filtered ${filtered.length} materials from ${allMaterials.length} total`)
   }
@@ -53,8 +63,8 @@ export default function Material() {
     setItemNo('')
     setPrice('')
     setMaterialType('')
-    // Reset to show all materials
-    setMaterials(allMaterials)
+    // Clear results so header stays visible with no rows
+    setMaterials([])
     setCurrentPage(1) // Reset to first page when clearing
   }
 
