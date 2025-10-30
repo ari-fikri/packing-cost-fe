@@ -25,7 +25,10 @@ export default function Models() {
   // Load models data on mount
   useEffect(() => {
     setModels(modelsData)
-    setFilteredModels(modelsData)
+    // Do not populate filteredModels on initial load so the table header
+    // is visible but no data rows are shown. The user must click Filter to
+    // load results; clicking Filter with no criteria will show latest-first.
+    setFilteredModels([])
   }, [])
 
   function handleFilter() {
@@ -34,7 +37,15 @@ export default function Models() {
       (!filterName || model.name?.toLowerCase().includes(filterName.toLowerCase())) &&
       (!filterRemark || model.remark?.toLowerCase().includes(filterRemark.toLowerCase()))
     )
-    setFilteredModels(filtered)
+
+    const noFilters = !code && !filterName && !filterRemark
+
+    // If no filters provided, show latest-first (reverse original models order)
+    if (noFilters) {
+      setFilteredModels([...models].reverse())
+    } else {
+      setFilteredModels(filtered)
+    }
     setCurrentPage(1) // Reset to first page when filtering
   }
   
@@ -42,7 +53,7 @@ export default function Models() {
     setCode('')
     setFilterName('')
     setFilterRemark('')
-    setFilteredModels(models) // Reset to all models
+    setFilteredModels([]) // Clear results (keep header visible)
     setCurrentPage(1) // Reset to first page when clearing filters
   }
 
