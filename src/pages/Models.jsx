@@ -8,8 +8,13 @@ import modelsData from '../data/models.json'
 export default function Models() {
   // filters
   const [code, setCode] = useState('')
+  const [projectCode, setProjectCode] = useState('')
   const [filterName, setFilterName] = useState('')
   const [filterRemark, setFilterRemark] = useState('')
+  const [implementationPeriod, setImplementationPeriod] = useState('')
+  const [destinationCode, setDestinationCode] = useState('')
+  const [destinationCountryCode, setDestinationCountryCode] = useState('')
+  const [country, setCountry] = useState('')
 
   // modal & data
   const [showNewModal, setShowNewModal] = useState(false)
@@ -32,27 +37,36 @@ export default function Models() {
   }, [])
 
   function handleFilter() {
+    const noFilters = !code && !projectCode && !filterName && !filterRemark && !implementationPeriod && !destinationCode;
+
+    if (noFilters) {
+      setFilteredModels([...modelsData].reverse());
+      setCurrentPage(1);
+      return;
+    }
+
     let filtered = models.filter(model =>
       (!code || model.code?.toLowerCase().includes(code.toLowerCase())) &&
+      (!projectCode || model.project.code?.toLowerCase().includes(projectCode.toLowerCase())) &&
       (!filterName || model.name?.toLowerCase().includes(filterName.toLowerCase())) &&
-      (!filterRemark || model.remark?.toLowerCase().includes(filterRemark.toLowerCase()))
+      (!filterRemark || model.remark?.toLowerCase().includes(filterRemark.toLowerCase())) &&
+      (!implementationPeriod || model.implementationPeriod?.toLowerCase().includes(implementationPeriod.toLowerCase())) &&
+      (!destinationCode || model.destinationCode?.toLowerCase().includes(destinationCode.toLowerCase()))
     )
 
-    const noFilters = !code && !filterName && !filterRemark
-
-    // If no filters provided, show latest-first (reverse original models order)
-    if (noFilters) {
-      setFilteredModels([...models].reverse())
-    } else {
-      setFilteredModels(filtered)
-    }
+    setFilteredModels(filtered)
     setCurrentPage(1) // Reset to first page when filtering
   }
   
   function handleClearFilters() {
     setCode('')
+    setProjectCode('')
     setFilterName('')
     setFilterRemark('')
+    setImplementationPeriod('')
+    setDestinationCode('')
+    setDestinationCountryCode('')
+    setCountry('')
     setFilteredModels([]) // Clear results (keep header visible)
     setCurrentPage(1) // Reset to first page when clearing filters
   }
@@ -98,8 +112,11 @@ export default function Models() {
       // Check if new model matches current filter criteria
       const matchesFilter = 
         (!code || payload.code?.toLowerCase().includes(code.toLowerCase())) &&
+        (!projectCode || payload.project.code?.toLowerCase().includes(projectCode.toLowerCase())) &&
         (!filterName || payload.name?.toLowerCase().includes(filterName.toLowerCase())) &&
-        (!filterRemark || payload.remark?.toLowerCase().includes(filterRemark.toLowerCase()))
+        (!filterRemark || payload.remark?.toLowerCase().includes(filterRemark.toLowerCase())) &&
+        (!implementationPeriod || payload.implementationPeriod?.toLowerCase().includes(implementationPeriod.toLowerCase())) &&
+        (!destinationCode || payload.destinationCode?.toLowerCase().includes(destinationCode.toLowerCase()))
       
       if (matchesFilter) {
         setFilteredModels([payload, ...filteredModels])
@@ -169,10 +186,20 @@ export default function Models() {
         <SearchSection
           code={code}
           setCode={setCode}
+          projectCode={projectCode}
+          setProjectCode={setProjectCode}
           filterName={filterName}
           setFilterName={setFilterName}
           filterRemark={filterRemark}
           setFilterRemark={setFilterRemark}
+          implementationPeriod={implementationPeriod}
+          setImplementationPeriod={setImplementationPeriod}
+          destinationCode={destinationCode}
+          setDestinationCode={setDestinationCode}
+          destinationCountryCode={destinationCountryCode}
+          setDestinationCountryCode={setDestinationCountryCode}
+          country={country}
+          setCountry={setCountry}
           handleFilter={handleFilter}
           handleClearFilters={handleClearFilters}
           handleOpenNew={handleOpenNew}
