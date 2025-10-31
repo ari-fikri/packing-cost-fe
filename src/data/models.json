@@ -7,6 +7,13 @@
     "destinationCountryCode": "TMMIN",
     "country": "INDONESIA",
     "remark": "Prototype 2025"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "286W",
@@ -16,6 +23,13 @@
     "destinationCountryCode": "TMT",
     "country": "THAILAND",
     "remark": "Production 2024"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "332W",
@@ -25,6 +39,13 @@
     "destinationCountryCode": "TAR",
     "country": "ARGENTINA",
     "remark": "Prototype 2023"
+    ,
+    "project": {
+      "code": "286W",
+      "name": "Project 2",
+      "manager": "Budi Santoso",
+      "status": "Active"
+    }
   },
   {
     "code": "385W",
@@ -34,6 +55,13 @@
     "destinationCountryCode": "TMMIN",
     "country": "INDONESIA",
     "remark": "Production 2022"
+    ,
+    "project": {
+      "code": "286W",
+      "name": "Project 2",
+      "manager": "Budi Santoso",
+      "status": "Active"
+    }
   },
   {
     "code": "388W",
@@ -43,6 +71,13 @@
     "destinationCountryCode": "TMT",
     "country": "THAILAND",
     "remark": "Prototype 2021"
+    ,
+    "project": {
+      "code": "385W",
+      "name": "Project 4",
+      "manager": "John Doe",
+      "status": "Completed"
+    }
   },
   {
     "code": "999W",
@@ -52,6 +87,13 @@
     "destinationCountryCode": "TAR",
     "country": "ARGENTINA",
     "remark": "Prototype 2025"
+    ,
+    "project": {
+      "code": "388W",
+      "name": "Project 5",
+      "manager": "Jane Smith",
+      "status": "Draft"
+    }
   },
   {
     "code": "408W",
@@ -61,6 +103,13 @@
     "destinationCountryCode": "UMW",
     "country": "MALAYSIA",
     "remark": "Production 2024"
+    ,
+    "project": {
+      "code": "408W",
+      "name": "Project 6",
+      "manager": "Arif Fikri",
+      "status": "Active"
+    }
   },
   {
     "code": "488W",
@@ -70,6 +119,13 @@
     "destinationCountryCode": "TMV",
     "country": "VIETNAM",
     "remark": "Prototype 2023"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "496W",
@@ -79,6 +135,13 @@
     "destinationCountryCode": "TMP",
     "country": "PHILIPINE",
     "remark": "Production 2025"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "514W",
@@ -88,6 +151,13 @@
     "destinationCountryCode": "TKM",
     "country": "INDIA",
     "remark": "Prototype 2022"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "565W",
@@ -97,6 +167,13 @@
     "destinationCountryCode": "TSM",
     "country": "AFRIKA",
     "remark": "Production 2024"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "578W",
@@ -106,6 +183,13 @@
     "destinationCountryCode": "TMY",
     "country": "MYANMAR",
     "remark": "Prototype 2023"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "579W",
@@ -115,6 +199,13 @@
     "destinationCountryCode": "TDB",
     "country": "BRAZIL",
     "remark": "Production 2025"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "588W",
@@ -124,6 +215,13 @@
     "destinationCountryCode": "TMMIN",
     "country": "INDONESIA",
     "remark": "Prototype 2024"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "607W",
@@ -133,6 +231,13 @@
     "destinationCountryCode": "TMT",
     "country": "THAILAND",
     "remark": "Production 2023"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "681W",
@@ -142,6 +247,13 @@
     "destinationCountryCode": "TAR",
     "country": "ARGENTINA",
     "remark": "Prototype 2025"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "688W",
@@ -151,6 +263,13 @@
     "destinationCountryCode": "UMW",
     "country": "MALAYSIA",
     "remark": "Production 2022"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "757W",
@@ -160,6 +279,13 @@
     "destinationCountryCode": "TMV",
     "country": "VIETNAM",
     "remark": "Prototype 2024"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "758W",
@@ -169,6 +295,13 @@
     "destinationCountryCode": "TMP",
     "country": "PHILIPINE",
     "remark": "Production 2023"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   },
   {
     "code": "824W",
@@ -178,5 +311,12 @@
     "destinationCountryCode": "TKM",
     "country": "INDIA",
     "remark": "Prototype 2025"
+    ,
+    "project": {
+      "code": "024J",
+      "name": "Project 1",
+      "manager": "Arif Fikri",
+      "status": "Draft"
+    }
   }
 ]

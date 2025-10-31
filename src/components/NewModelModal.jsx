@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from '../components/PartPickerModal'   // Part selection modal component
 import DESTINATIONS from '../data/destinations'               // Destination lookup data
+import projectsData from '../data/projects.json';
 
 export default function NewModelModal({ 
   show,        // Boolean: Controls modal visibility
@@ -14,6 +15,8 @@ export default function NewModelModal({
 }) {
   // === FORM FIELD STATE VARIABLES ===
   // Basic Model Information Fields
+  const [projectCode, setProjectCode] = useState('')                  // Project code input
+  const [projectName, setProjectName] = useState('');
   const [newCode, setNewCode] = useState('')                          // Model code input
   const [newName, setNewName] = useState('')                          // Model name input
   const [newRemark, setNewRemark] = useState('')                      // Model remark/description input
@@ -34,6 +37,8 @@ export default function NewModelModal({
     if (show) {
       if (initialData) {
         // === EDIT MODE: Populate form with existing data ===
+        setProjectCode(initialData.project?.code || '') // Set existing project code from nested object
+        setProjectName(initialData.project?.name || ''); // Set existing project name from nested object
         setNewCode(initialData.code || '')                              // Set existing model code
         setNewName(initialData.name || '')                              // Set existing model name
         setNewRemark(initialData.remark || '')                          // Set existing model remark
@@ -44,6 +49,8 @@ export default function NewModelModal({
         setParts(initialData.parts || [])                               // Set existing parts array
       } else {
         // === NEW MODE: Clear all form fields ===
+        setProjectCode('')                                              // Clear project code
+        setProjectName('');
         setNewCode('')                                                   // Clear model code
         setNewName('')                                                   // Clear model name
         setNewRemark('')                                                 // Clear model remark
@@ -56,6 +63,15 @@ export default function NewModelModal({
       setShowPartPicker(false)                                           // Always close part picker when modal opens
     }
   }, [show, initialData])
+
+  useEffect(() => {
+    if (projectCode) {
+      const project = projectsData.find(p => p.code === projectCode);
+      setProjectName(project ? project.name : '');
+    } else {
+      setProjectName('');
+    }
+  }, [projectCode]);
 
   // === EVENT HANDLER FUNCTIONS ===
   
@@ -100,16 +116,22 @@ export default function NewModelModal({
       return                                                              // Exit function if validation fails
     }
     
-    // Create payload object with all form data
+    // Create payload object, merging new data with existing data to preserve all fields
     const payload = {
-      code: newCode,                                                      // Model code
-      name: newName,                                                      // Model name
-      remark: newRemark,                                                  // Model remark
-      implementationPeriod,                                               // Implementation period
-      destinationCode,                                                    // Destination code
-      destinationCountryCode,                                             // Auto-populated country code
-      country,                                                            // Auto-populated country name
-      parts: parts.slice(),                                               // Copy of parts array
+      ...(initialData || {}), // Preserve unedited fields from the original model
+      code: newCode,
+      name: newName,
+      remark: newRemark,
+      implementationPeriod,
+      destinationCode,
+      destinationCountryCode,
+      country,
+      parts: parts.slice(),
+      project: {
+        ...(initialData?.project || {}), // Preserve unedited project fields like manager and status
+        code: projectCode,
+        name: projectName,
+      }
     }
     console.log('Saving model:', payload)                                 // Debug log
     onSave(payload)                                                       // Call parent save callback
@@ -142,26 +164,37 @@ export default function NewModelModal({
         {/* === MODAL BODY SECTION === */}
         <div className="card-body">
           {/* === FORM FIELDS SECTION === */}
-          {/* Row 1: Basic Model Information */}
+          
+          {/* Row 1: Model Code & Model Name */}
           <div className="row">
-            {/* Model Code Input - Left Column */}
             <div className="col-md-6">
-              <label className="small">Code</label>
+              <label className="small">Model Code</label>
               <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} placeholder="Model Code" />
             </div>
-            {/* Model Name Input - Right Column */}
             <div className="col-md-6">
-              <label className="small">Name</label>
+              <label className="small">Model Name</label>
               <input className="form-control form-control-sm mb-2" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Model Name" />
             </div>
-            
-            {/* Row 2: Implementation and Destination Information */}
-            {/* Implementation Period Input - Left Column */}
+          </div>
+          
+          {/* Row 2: Project Code & Project Name */}
+          <div className="row">
+            <div className="col-md-6">
+              <label className="small">Project Code</label>
+              <input className="form-control form-control-sm mb-2" value={projectCode} onChange={e => setProjectCode(e.target.value)} placeholder="Project Code" />
+            </div>
+            <div className="col-md-6">
+              <label className="small">Project Name</label>
+              <input className="form-control form-control-sm mb-2" value={projectName} placeholder="Project Name" readOnly style={{backgroundColor: '#f8f9fa'}} />
+            </div>
+          </div>
+
+          {/* Row 3: Implementation Period & Destination Code */}
+          <div className="row">
             <div className="col-md-6">
               <label className="small">Implementation Period <span className="text-muted ml-2"><i>e.g., Q2 2025</i></span></label>
               <input className="form-control form-control-sm mb-2" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value)} placeholder="Implementation Period" />
             </div>
-            {/* Destination Code Input with Icon - Right Column */}
             <div className="col-md-6">
               <label className="small">Destination Code</label>
               <div className="input-group input-group-sm mb-2">
@@ -171,20 +204,22 @@ export default function NewModelModal({
                 </div>
               </div>
             </div>
-            
-            {/* Row 3: Auto-populated Destination Information (Read-only) */}
-            {/* Destination Country Code - Auto-filled, Left Column */}
+          </div>
+          
+          {/* Row 4: Destination Country Code & Country */}
+          <div className="row">
             <div className="col-md-6">
               <label className="small">Destination Country Code</label>
               <input className="form-control form-control-sm mb-2" value={destinationCountryCode} readOnly placeholder="Auto-filled" style={{backgroundColor: '#f8f9fa'}} />
             </div>
-            {/* Country Name - Auto-filled, Right Column */}
             <div className="col-md-6">
               <label className="small">Country</label>
               <input className="form-control form-control-sm mb-2" value={country} readOnly placeholder="Auto-filled" style={{backgroundColor: '#f8f9fa'}} />
             </div>
-            
-            {/* Row 4: Remark Field - Full Width */}
+          </div>
+          
+          {/* Row 5: Remark */}
+          <div className="row">
             <div className="col-md-12">
               <label className="small">Remark</label>
               <input className="form-control form-control-sm mb-2" value={newRemark} onChange={e => setNewRemark(e.target.value)} placeholder="Remark" />
