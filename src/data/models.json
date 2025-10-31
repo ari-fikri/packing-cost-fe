@@ -2,12 +2,11 @@
   {
     "code": "024J",
     "name": "Front Bumper Model",
-    "implementationPeriod": "Q1 2025",
+    "implementationPeriod": "001.2025",
     "destinationCode": "807B",
     "destinationCountryCode": "TMMIN",
     "country": "INDONESIA",
-    "remark": "Prototype 2025"
-    ,
+    "remark": "Prototype 2025",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -18,12 +17,11 @@
   {
     "code": "286W",
     "name": "Rear Bumper Model",
-    "implementationPeriod": "Q4 2024",
+    "implementationPeriod": "004.2024",
     "destinationCode": "722C",
     "destinationCountryCode": "TMT",
     "country": "THAILAND",
-    "remark": "Production 2024"
-    ,
+    "remark": "Production 2024",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -34,12 +32,11 @@
   {
     "code": "332W",
     "name": "Hood Model",
-    "implementationPeriod": "Q2 2023",
+    "implementationPeriod": "002.2023",
     "destinationCode": "301B",
     "destinationCountryCode": "TAR",
     "country": "ARGENTINA",
-    "remark": "Prototype 2023"
-    ,
+    "remark": "Prototype 2023",
     "project": {
       "code": "286W",
       "name": "Project 2",
@@ -50,12 +47,11 @@
   {
     "code": "385W",
     "name": "Fender Model",
-    "implementationPeriod": "Q3 2022",
+    "implementationPeriod": "003.2022",
     "destinationCode": "807B",
     "destinationCountryCode": "TMMIN",
     "country": "INDONESIA",
-    "remark": "Production 2022"
-    ,
+    "remark": "Production 2022",
     "project": {
       "code": "286W",
       "name": "Project 2",
@@ -66,12 +62,11 @@
   {
     "code": "388W",
     "name": "Grille Model",
-    "implementationPeriod": "Q1 2021",
+    "implementationPeriod": "001.2021",
     "destinationCode": "722C",
     "destinationCountryCode": "TMT",
     "country": "THAILAND",
-    "remark": "Prototype 2021"
-    ,
+    "remark": "Prototype 2021",
     "project": {
       "code": "385W",
       "name": "Project 4",
@@ -82,12 +77,11 @@
   {
     "code": "999W",
     "name": "Sample Model NOT FOR SALE",
-    "implementationPeriod": "Q4 2025",
+    "implementationPeriod": "004.2025",
     "destinationCode": "301B",
     "destinationCountryCode": "TAR",
     "country": "ARGENTINA",
-    "remark": "Prototype 2025"
-    ,
+    "remark": "Prototype 2025",
     "project": {
       "code": "388W",
       "name": "Project 5",
@@ -98,12 +92,11 @@
   {
     "code": "408W",
     "name": "Side Panel Model",
-    "implementationPeriod": "Q2 2024",
+    "implementationPeriod": "002.2024",
     "destinationCode": "812B",
     "destinationCountryCode": "UMW",
     "country": "MALAYSIA",
-    "remark": "Production 2024"
-    ,
+    "remark": "Production 2024",
     "project": {
       "code": "408W",
       "name": "Project 6",
@@ -114,12 +107,11 @@
   {
     "code": "488W",
     "name": "Door Panel Model",
-    "implementationPeriod": "Q3 2023",
+    "implementationPeriod": "003.2023",
     "destinationCode": "715B",
     "destinationCountryCode": "TMV",
     "country": "VIETNAM",
-    "remark": "Prototype 2023"
-    ,
+    "remark": "Prototype 2023",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -130,12 +122,11 @@
   {
     "code": "496W",
     "name": "Trunk Lid Model",
-    "implementationPeriod": "Q1 2025",
+    "implementationPeriod": "001.2025",
     "destinationCode": "811C",
     "destinationCountryCode": "TMP",
     "country": "PHILIPINE",
-    "remark": "Production 2025"
-    ,
+    "remark": "Production 2025",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -146,12 +137,11 @@
   {
     "code": "514W",
     "name": "Roof Panel Model",
-    "implementationPeriod": "Q4 2022",
+    "implementationPeriod": "004.2022",
     "destinationCode": "709B",
     "destinationCountryCode": "TKM",
     "country": "INDIA",
-    "remark": "Prototype 2022"
-    ,
+    "remark": "Prototype 2022",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -162,12 +152,11 @@
   {
     "code": "565W",
     "name": "Quarter Panel Model",
-    "implementationPeriod": "Q2 2024",
+    "implementationPeriod": "002.2024",
     "destinationCode": "537B",
     "destinationCountryCode": "TSM",
     "country": "AFRIKA",
-    "remark": "Production 2024"
-    ,
+    "remark": "Production 2024",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -178,12 +167,11 @@
   {
     "code": "578W",
     "name": "Mirror Cover Model",
-    "implementationPeriod": "Q1 2023",
+    "implementationPeriod": "001.2023",
     "destinationCode": "704B",
     "destinationCountryCode": "TMY",
     "country": "MYANMAR",
-    "remark": "Prototype 2023"
-    ,
+    "remark": "Prototype 2023",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -194,12 +182,11 @@
   {
     "code": "579W",
     "name": "Spoiler Model",
-    "implementationPeriod": "Q3 2025",
+    "implementationPeriod": "003.2025",
     "destinationCode": "303B",
     "destinationCountryCode": "TDB",
     "country": "BRAZIL",
-    "remark": "Production 2025"
-    ,
+    "remark": "Production 2025",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -210,12 +197,11 @@
   {
     "code": "588W",
     "name": "Running Board Model",
-    "implementationPeriod": "Q4 2024",
+    "implementationPeriod": "004.2024",
     "destinationCode": "807B",
     "destinationCountryCode": "TMMIN",
     "country": "INDONESIA",
-    "remark": "Prototype 2024"
-    ,
+    "remark": "Prototype 2024",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -226,12 +212,11 @@
   {
     "code": "607W",
     "name": "Mudguard Model",
-    "implementationPeriod": "Q2 2023",
+    "implementationPeriod": "002.2023",
     "destinationCode": "722C",
     "destinationCountryCode": "TMT",
     "country": "THAILAND",
-    "remark": "Production 2023"
-    ,
+    "remark": "Production 2023",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -242,12 +227,11 @@
   {
     "code": "681W",
     "name": "Wheel Arch Model",
-    "implementationPeriod": "Q1 2025",
+    "implementationPeriod": "001.2025",
     "destinationCode": "301B",
     "destinationCountryCode": "TAR",
     "country": "ARGENTINA",
-    "remark": "Prototype 2025"
-    ,
+    "remark": "Prototype 2025",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -258,12 +242,11 @@
   {
     "code": "688W",
     "name": "Side Skirt Model",
-    "implementationPeriod": "Q3 2022",
+    "implementationPeriod": "003.2022",
     "destinationCode": "812B",
     "destinationCountryCode": "UMW",
     "country": "MALAYSIA",
-    "remark": "Production 2022"
-    ,
+    "remark": "Production 2022",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -274,12 +257,11 @@
   {
     "code": "757W",
     "name": "Headlight Cover Model",
-    "implementationPeriod": "Q4 2024",
+    "implementationPeriod": "004.2024",
     "destinationCode": "715B",
     "destinationCountryCode": "TMV",
     "country": "VIETNAM",
-    "remark": "Prototype 2024"
-    ,
+    "remark": "Prototype 2024",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -290,12 +272,11 @@
   {
     "code": "758W",
     "name": "Taillight Cover Model",
-    "implementationPeriod": "Q2 2023",
+    "implementationPeriod": "002.2023",
     "destinationCode": "811C",
     "destinationCountryCode": "TMP",
     "country": "PHILIPINE",
-    "remark": "Production 2023"
-    ,
+    "remark": "Production 2023",
     "project": {
       "code": "024J",
       "name": "Project 1",
@@ -306,12 +287,11 @@
   {
     "code": "824W",
     "name": "License Plate Frame Model",
-    "implementationPeriod": "Q1 2025",
+    "implementationPeriod": "001.2025",
     "destinationCode": "709B",
     "destinationCountryCode": "TKM",
     "country": "INDIA",
-    "remark": "Prototype 2025"
-    ,
+    "remark": "Prototype 2025",
     "project": {
       "code": "024J",
       "name": "Project 1",
