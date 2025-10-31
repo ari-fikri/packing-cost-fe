@@ -22,6 +22,7 @@ export default function ResultSection({
               <th style={{ width: 50 }}>No</th>
               <th>Model Code</th>
               <th>Model Name</th>
+              <th>Project Code</th>
               <th>Impl Period</th>
               <th>Dest Code</th>
               <th>Country Code</th>
@@ -34,7 +35,7 @@ export default function ResultSection({
           <tbody>
             {paginatedModels.length === 0 ? (
               <tr>
-                <td colSpan="10" className="text-center py-4 text-muted">No Data Found</td>
+                <td colSpan="11" className="text-center py-4 text-muted">No Data Found</td>
               </tr>
             ) : (
               paginatedModels.map((m, idx) => (
@@ -42,6 +43,7 @@ export default function ResultSection({
                   <td>{(currentPage - 1) * pageSize + idx + 1}</td>
                   <td>{m.code}</td>
                   <td>{m.name}</td>
+                  <td>{m.project.code}</td>
                   <td>{m.implementationPeriod}</td>
                   <td>{m.destinationCode}</td>
                   <td>{m.destinationCountryCode}</td>
