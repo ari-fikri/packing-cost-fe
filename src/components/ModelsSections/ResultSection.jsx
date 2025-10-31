@@ -22,8 +22,8 @@ export default function ResultSection({
               <th style={{ width: 50 }}>No</th>
               <th>Model Code</th>
               <th>Model Name</th>
-              <th>Implementation Period</th>
-              <th>Destination Code</th>
+              <th>Impl Period</th>
+              <th>Dest Code</th>
               <th>Country Code</th>
               <th>Country</th>
               <th>Remark</th>
