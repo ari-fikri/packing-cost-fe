@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import NewPartModal from '../components/NewPartModal' // make sure this file exists
 import PartPickerModal from '../components/PartPickerModal' // wired picker
+import ConfirmationDialog from '../components/ConfirmationDialog';
 import partsData from '../data/parts'
 
 // Transform the raw parts data into a more usable format
@@ -38,6 +39,8 @@ export default function Parts() {
   // modal state
   const [showNewPartModal, setShowNewPartModal] = useState(false)
   const [editingPart, setEditingPart] = useState(null)
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [partToDelete, setPartToDelete] = useState(null);
 
 
   // Part picker state
@@ -128,9 +131,20 @@ export default function Parts() {
     alert('Template placeholder')
   }
 
-  function handleDelete(idx) {
-    if (!confirm('Delete this part?')) return
-    setParts(prev => prev.filter((_, i) => i !== idx))
+  function handleDelete(part) {
+    setPartToDelete(part);
+    setShowConfirmDialog(true);
+  }
+
+  function confirmDelete() {
+    if (partToDelete) {
+      const updatedParts = parts.filter(p => p.id !== partToDelete.id);
+      setParts(updatedParts);
+      const updatedFilteredParts = filteredParts.filter(p => p.id !== partToDelete.id);
+      setFilteredParts(updatedFilteredParts);
+      setPartToDelete(null);
+    }
+    setShowConfirmDialog(false);
   }
 
   // simple pagination controls (visual placeholders)
@@ -376,7 +390,7 @@ export default function Parts() {
                         <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit(p)}>
                           <i className="fas fa-pencil-alt" />
                         </button>
-                        <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDelete((page - 1) * perPage + i)}>
+                        <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(p)}>
                           <i className="fas fa-trash" />
                         </button>
                       </td>
@@ -432,6 +446,14 @@ export default function Parts() {
         onClose={handleCloseNewPart}
         onSave={handleSaveNewPart}
         initialData={editingPart}
+      />
+
+      <ConfirmationDialog
+        show={showConfirmDialog}
+        onClose={() => setShowConfirmDialog(false)}
+        onConfirm={confirmDelete}
+        title="Deletion Confirmation"
+        message="Do you want to delete this data?"
       />
 
       {/* Part Picker Modal — shared for Part No and Parent Part */}
