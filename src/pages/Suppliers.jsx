@@ -115,47 +115,55 @@ export default function Suppliers() {
         </div>
         <div className="card-body">
           {/* Filter Section */}
-          <div className="form-row">
-            <div className="form-group col-md-4">
-              <label>Supplier Code</label>
-              <input
-                type="text"
-                className="form-control"
-                value={filterCode}
-                onChange={e => setFilterCode(e.target.value)}
-              />
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="small mb-1">Supplier Code</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={filterCode}
+                  onChange={e => setFilterCode(e.target.value)}
+                  placeholder="Supplier Code"
+                />
+              </div>
             </div>
-            <div className="form-group col-md-4">
-              <label>Supplier Name</label>
-              <input
-                type="text"
-                className="form-control"
-                value={filterName}
-                onChange={e => setFilterName(e.target.value)}
-              />
-            </div>
-            <div className="form-group col-md-4">
-              <label>Address</label>
-              <input
-                type="text"
-                className="form-control"
-                value={filterAddress}
-                onChange={e => setFilterAddress(e.target.value)}
-              />
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="small mb-1">Supplier Name</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={filterName}
+                  onChange={e => setFilterName(e.target.value)}
+                  placeholder="Supplier Name"
+                />
+              </div>
             </div>
           </div>
-          <div className="text-right mb-3">
-            <button className="btn btn-primary mr-2" onClick={handleFilter}>
-              <i className="fas fa-search mr-1" /> Filter
-            </button>
-            <button className="btn btn-outline-secondary" onClick={handleClear}>
-              <i className="fas fa-times mr-1" /> Clear
-            </button>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="form-group">
+                <label className="small mb-1">Address</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={filterAddress}
+                  onChange={e => setFilterAddress(e.target.value)}
+                  placeholder="Address"
+                />
+              </div>
+            </div>
           </div>
-
-          {/* Action Buttons */}
-          <div className="mb-3">
-            
+          <div className="row mb-3">
+            <div className="col-12 text-right">
+              <button className="btn btn-sm btn-primary mr-2" onClick={handleFilter}>
+                <i className="fas fa-search mr-1" /> Filter
+              </button>
+              <button className="btn btn-sm btn-outline-secondary" onClick={handleClear}>
+                <i className="fas fa-times mr-1" /> Clear
+              </button>
+            </div>
           </div>
 
           {/* Table */}
