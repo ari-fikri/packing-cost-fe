@@ -1,7 +1,25 @@
 // src/pages/Parts.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewPartModal from '../components/NewPartModal' // make sure this file exists
 import PartPickerModal from '../components/PartPickerModal' // wired picker
+import partsData from '../data/parts'
+
+// Transform the raw parts data into a more usable format
+const transformedParts = partsData.map((part, index) => ({
+  id: index,
+  partNo: part[0],
+  name: part[1],
+  supplierName: part[2],
+  // Add other fields with default values if they don't exist in the raw data
+  suffix: 'A',
+  uniqueNo: `UN-00${index + 1}`,
+  parentPartNo: null,
+  childParts: [],
+  dimensions: { L: 10, W: 10, H: 10 },
+  qtyBox: 1,
+  totalWeight: 1,
+}));
+
 
 export default function Parts() {
   // filter fields
@@ -14,24 +32,51 @@ export default function Parts() {
 
   // parts list (table)
   const [parts, setParts] = useState([]) // initially empty
+  const [filteredParts, setFilteredParts] = useState([]);
+
 
   // modal state
   const [showNewPartModal, setShowNewPartModal] = useState(false)
 
   // Part picker state
   const [showPartPicker, setShowPartPicker] = useState(false)
-  // which field opened the picker: 'partNo' | 'parentPart' — used in onSelect
+  // which field opened the picker: \'partNo\' | \'parentPart\' — used in onSelect
   const [pickerTarget, setPickerTarget] = useState(null)
 
   // pagination placeholders
   const [perPage, setPerPage] = useState(10)
   const [page, setPage] = useState(1)
-  const total = parts.length
+  const total = filteredParts.length;
+
+
+  useEffect(() => {
+    setParts(transformedParts);
+    setFilteredParts([]);
+  }, []);
+
 
   // actions
   function handleSearch() {
-    console.log('Search parts with', { partNo, uniqueNo, supplierId, supplierName, parentPart, hasSubparts })
-    // TODO: implement filter logic or API call
+    const noFilters = !partNo && !uniqueNo && !supplierId && !supplierName && !parentPart && !hasSubparts;
+
+    if (noFilters) {
+      setFilteredParts([...parts].reverse());
+      setPage(1);
+      return;
+    }
+
+    let filtered = parts.filter(p => {
+      const partNoMatch = !partNo || p.partNo.toLowerCase().includes(partNo.toLowerCase());
+      const uniqueNoMatch = !uniqueNo || (p.uniqueNo && p.uniqueNo.toLowerCase().includes(uniqueNo.toLowerCase()));
+      const supplierIdMatch = !supplierId || (p.supplierId && p.supplierId.toLowerCase().includes(supplierId.toLowerCase()));
+      const supplierNameMatch = !supplierName || p.supplierName.toLowerCase().includes(supplierName.toLowerCase());
+      const parentPartMatch = !parentPart || (p.parentPartNo && p.parentPartNo.toLowerCase().includes(parentPart.toLowerCase()));
+      const hasSubpartsMatch = !hasSubparts || (hasSubparts === 'Yes' && p.childParts && p.childParts.length > 0) || (hasSubparts === 'No' && (!p.childParts || p.childParts.length === 0));
+      return partNoMatch && uniqueNoMatch && supplierIdMatch && supplierNameMatch && parentPartMatch && hasSubpartsMatch;
+    });
+
+    setFilteredParts(filtered);
+    setPage(1);
   }
 
   function handleClear() {
@@ -41,6 +86,8 @@ export default function Parts() {
     setSupplierName('')
     setParentPart('')
     setHasSubparts('')
+    setFilteredParts([]);
+    setPage(1);
   }
 
   function handleAddPart() {
@@ -286,12 +333,12 @@ export default function Parts() {
                 </tr>
               </thead>
               <tbody>
-                {parts.length === 0 ? (
+                {filteredParts.length === 0 ? (
                   <tr>
                     <td colSpan="14" className="text-center py-4 text-muted">No Data Found</td>
                   </tr>
                 ) : (
-                  parts.slice((page - 1) * perPage, page * perPage).map((p, i) => (
+                  filteredParts.slice((page - 1) * perPage, page * perPage).map((p, i) => (
                     <tr key={i}>
                       <td>{(page - 1) * perPage + i + 1}</td>
                       <td>{p.partNo}</td>
