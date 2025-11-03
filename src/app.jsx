@@ -9,6 +9,7 @@ import { useAuth } from './auth'
 import Projects from './pages/Projects'
 import Models from './pages/Models'
 import Parts from './pages/Parts'
+import Suppliers from './pages/Suppliers'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Cps from './pages/packing/Cps'
 import Dpi from './pages/packing/Dpi'
@@ -54,6 +55,7 @@ export default function App(){
           <Route path="/projects" element={<ProtectedRoute><Projects/></ProtectedRoute>} />
           <Route path="/models" element={<ProtectedRoute><Models/></ProtectedRoute>} />
           <Route path="/parts" element={<ProtectedRoute><Parts/></ProtectedRoute>} />
+          <Route path="/suppliers" element={<ProtectedRoute><Suppliers/></ProtectedRoute>} />
           <Route path="/packing/cps" element={<Cps />} />
           <Route path="/packing/dpi" element={<Dpi />} />
           <Route path="/packing/CalculatePackingCost" element={<Calculate />} />
