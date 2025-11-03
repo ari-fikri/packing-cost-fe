@@ -37,6 +37,8 @@ export default function Parts() {
 
   // modal state
   const [showNewPartModal, setShowNewPartModal] = useState(false)
+  const [editingPart, setEditingPart] = useState(null)
+
 
   // Part picker state
   const [showPartPicker, setShowPartPicker] = useState(false)
@@ -91,15 +93,32 @@ export default function Parts() {
   }
 
   function handleAddPart() {
+    setEditingPart(null)
     setShowNewPartModal(true)
   }
   function handleCloseNewPart() {
+    setEditingPart(null)
     setShowNewPartModal(false)
   }
   function handleSaveNewPart(payload) {
-    // payload is the created part object from modal
-    setParts(prev => [payload, ...prev])
+    if (editingPart) {
+      // Update existing part
+      const updatedParts = parts.map(p => p.id === editingPart.id ? { ...p, ...payload } : p)
+      setParts(updatedParts)
+      const updatedFilteredParts = filteredParts.map(p => p.id === editingPart.id ? { ...p, ...payload } : p)
+      setFilteredParts(updatedFilteredParts)
+    } else {
+      // Add new part
+      const newPart = { ...payload, id: parts.length }
+      setParts(prev => [newPart, ...prev])
+    }
     setShowNewPartModal(false)
+    setEditingPart(null)
+  }
+
+  function handleEdit(part) {
+    setEditingPart(part)
+    setShowNewPartModal(true)
   }
 
   function handleUpload() {
@@ -354,7 +373,7 @@ export default function Parts() {
                       <td>{p.qtyBox ?? p.qty}</td>
                       <td>{p.totalWeight ?? p.totalWt}</td>
                       <td>
-                        <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => alert('Edit placeholder')}>
+                        <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit(p)}>
                           <i className="fas fa-pencil-alt" />
                         </button>
                         <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDelete((page - 1) * perPage + i)}>
@@ -412,6 +431,7 @@ export default function Parts() {
         show={showNewPartModal}
         onClose={handleCloseNewPart}
         onSave={handleSaveNewPart}
+        initialData={editingPart}
       />
 
       {/* Part Picker Modal — shared for Part No and Parent Part */}

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from './PartPickerModal' // adjust path if needed
 
-export default function NewPartModal({ show = false, onClose = () => {}, onSave = () => {} }) {
+export default function NewPartModal({ show = false, onClose = () => {}, onSave = () => {}, initialData = null }) {
   // main fields
   const [partNo, setPartNo] = useState('')
   const [uniqueNo, setUniqueNo] = useState('')
@@ -47,17 +47,41 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
 
   useEffect(() => {
     if (show) {
-      setPartNo(''); setUniqueNo(''); setSuffixCode(''); setPartName('')
-      setParentPartNo(''); setSuppCode(''); setSupplierName(''); setSupplierAddress(''); setPlantCode('')
-      setUniqueNo2('')
-      setLengthMM(''); setWidthMM(''); setHeightMM(''); setWeightPerPc(''); setQtyBox('')
-      setChildParts([]); setShowAddChildRow(false)
-      setChildForm({
-        partNo: '', suffix: '', uniqueNo: '', name: '', parent: '',
-        supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: ''
-      })
+      if (initialData) {
+        setPartNo(initialData.partNo || '')
+        setUniqueNo(initialData.uniqueNo || '')
+        setSuffixCode(initialData.suffixCode || '')
+        setPartName(initialData.partName || '')
+        setParentPartNo(initialData.parentPartNo || '')
+        setSuppCode(initialData.suppCode || '')
+        setSupplierName(initialData.supplierName || '')
+        setSupplierAddress(initialData.supplierAddress || '')
+        setPlantCode(initialData.plantCode || '')
+        setUniqueNo2(initialData.uniqueNo2 || '')
+        setLengthMM(initialData.dimensions?.L || '')
+        setWidthMM(initialData.dimensions?.W || '')
+        setHeightMM(initialData.dimensions?.H || '')
+        setWeightPerPc(initialData.weightPerPc || '')
+        setQtyBox(initialData.qtyBox || '')
+        setChildParts(initialData.childParts || [])
+        setShowAddChildRow(false)
+        setChildForm({
+          partNo: '', suffix: '', uniqueNo: '', name: '', parent: '',
+          supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: ''
+        })
+      } else {
+        setPartNo(''); setUniqueNo(''); setSuffixCode(''); setPartName('')
+        setParentPartNo(''); setSuppCode(''); setSupplierName(''); setSupplierAddress(''); setPlantCode('')
+        setUniqueNo2('')
+        setLengthMM(''); setWidthMM(''); setHeightMM(''); setWeightPerPc(''); setQtyBox('')
+        setChildParts([]); setShowAddChildRow(false)
+        setChildForm({
+          partNo: '', suffix: '', uniqueNo: '', name: '', parent: '',
+          supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: ''
+        })
+      }
     }
-  }, [show])
+  }, [show, initialData])
 
   function computeVolume(l, w, h) {
     const L = Number(l) || 0
