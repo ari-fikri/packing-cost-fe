@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchSection from './cps/SearchSection';
 import ResultSection from './cps/ResultSection';
+import HeaderActions from './cps/HeaderActions';
 import DESTINATIONS from '../../data/destinations';
 import { cpsData } from '../../data/cps';
 
@@ -111,17 +112,7 @@ export default function Cps() {
       <div className="card card-outline card-secondary">
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>CPS List</b></h3>
-          <div className="ml-auto">
-            <button type="button" className="btn btn-sm btn-success mr-2" onClick={() => setShowNewCps(true)}>
-              <i className="fas fa-plus mr-1"></i> Create CPS
-            </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload">
-              <i className="fas fa-cloud-upload-alt"></i>
-            </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template">
-              <i className="fas fa-cloud-download-alt"></i>
-            </button>
-          </div>
+          <HeaderActions onNewCps={() => setShowNewCps(true)} />
         </div>
         <div className="card-body">
           <SearchSection
