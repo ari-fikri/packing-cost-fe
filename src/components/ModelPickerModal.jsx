@@ -1,5 +1,5 @@
 // src/components/ModelPickerModal.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import modelsData from "../data/models.json";
 
@@ -8,9 +8,20 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
   const [filterName, setFilterName] = useState("");
   const [filterRemark, setFilterRemark] = useState("");
   const [selectedModels, setSelectedModels] = useState([]);
+  const [displayedModels, setDisplayedModels] = useState(modelsData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const modelsPerPage = 15;
 
-  // use imported JSON data
-  // modelsData is already available from the import
+  useEffect(() => {
+    if (show) {
+      setFilterCode("");
+      setFilterName("");
+      setFilterRemark("");
+      setSelectedModels([]);
+      setDisplayedModels(modelsData);
+      setCurrentPage(1);
+    }
+  }, [show]);
 
   const handleCheckboxChange = (code) => {
     setSelectedModels((prev) =>
@@ -19,21 +30,23 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
   };
 
   const handleSearch = () => {
-    // no-op: filtering is reactive via filteredModels
+    const filtered = modelsData.filter(
+      (m) =>
+        m.code.toLowerCase().includes(filterCode.toLowerCase()) &&
+        m.name.toLowerCase().includes(filterName.toLowerCase()) &&
+        m.remark.toLowerCase().includes(filterRemark.toLowerCase())
+    );
+    setDisplayedModels(filtered);
+    setCurrentPage(1);
   };
 
   const handleClear = () => {
     setFilterCode("");
     setFilterName("");
     setFilterRemark("");
+    setDisplayedModels(modelsData);
+    setCurrentPage(1);
   };
-
-  const filteredModels = modelsData.filter(
-    (m) =>
-      m.code.toLowerCase().includes(filterCode.toLowerCase()) &&
-      m.name.toLowerCase().includes(filterName.toLowerCase()) &&
-      m.remark.toLowerCase().includes(filterRemark.toLowerCase())
-  );
 
   const handleAdd = () => {
     if (typeof onAdd === "function") {
@@ -42,6 +55,11 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
     setSelectedModels([]);
     if (typeof onClose === "function") onClose();
   };
+
+  const indexOfLastModel = currentPage * modelsPerPage;
+  const indexOfFirstModel = indexOfLastModel - modelsPerPage;
+  const currentModels = displayedModels.slice(indexOfFirstModel, indexOfLastModel);
+  const totalPages = Math.ceil(displayedModels.length / modelsPerPage);
 
   if (!show) return null;
 
@@ -91,7 +109,7 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
                   onChange={(e) => setFilterName(e.target.value)}
                 />
               </div>
-              <div className="form-group col-md-4">
+              <div className="form-group col-md-3">
                 <label className="small">Remark</label>
                 <input
                   type="text"
@@ -100,62 +118,85 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
                   onChange={(e) => setFilterRemark(e.target.value)}
                 />
               </div>
-              <div className="form-group col-md-1 text-right">
-                <button className="btn btn-sm btn-outline-primary mr-1" onClick={handleSearch} type="button">
-                  <i className="fas fa-search" />
+              <div className="form-group col-md-2 text-right">
+                <button className="btn btn-sm btn-primary mr-1" onClick={handleSearch} type="button">
+                  Search
                 </button>
-                <button className="btn btn-sm btn-outline-secondary" onClick={handleClear} type="button">
-                  <i className="fas fa-times" />
+                <button className="btn btn-sm btn-secondary" onClick={handleClear} type="button">
+                  Clear
                 </button>
               </div>
             </div>
 
             {/* Table */}
-            <div className="table-responsive">
-              <table className="table table-striped table-sm mb-0">
-                <thead>
-                  <tr>
-                    <th style={{ width: 30 }}></th>
-                    <th>Model Code</th>
-                    <th>Name</th>
-                    <th>Remark</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredModels.length === 0 ? (
+            <div style={{ height: "450px" }}>
+              <div className="table-responsive" style={{ height: "100%", overflowY: "auto" }}>
+                <table className="table table-striped table-sm mb-0">
+                  <thead>
                     <tr>
-                      <td colSpan="4" className="text-center text-muted py-4">
-                        No models found
-                      </td>
+                      <th style={{ width: 30 }}></th>
+                      <th>Model Code</th>
+                      <th>Name</th>
+                      <th>Remark</th>
                     </tr>
-                  ) : (
-                    filteredModels.map((m) => (
-                      <tr key={m.code}>
-                        <td>
-                          <input
-                            type="checkbox"
-                            checked={selectedModels.includes(m.code)}
-                            onChange={() => handleCheckboxChange(m.code)}
-                          />
+                  </thead>
+                  <tbody>
+                    {currentModels.length === 0 ? (
+                      <tr>
+                        <td colSpan="4" className="text-center text-muted" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
+                          No models found
                         </td>
-                        <td>{m.code}</td>
-                        <td>{m.name}</td>
-                        <td>{m.remark}</td>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                    ) : (
+                      currentModels.map((m) => (
+                        <tr key={m.code}>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={selectedModels.includes(m.code)}
+                              onChange={() => handleCheckboxChange(m.code)}
+                            />
+                          </td>
+                          <td>{m.code}</td>
+                          <td>{m.name}</td>
+                          <td>{m.remark}</td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
-          <div className="modal-footer">
-            <button className="btn btn-primary" onClick={handleAdd} type="button">
-              Add <i className="fas fa-check" />
-            </button>
-            <button className="btn btn-secondary" onClick={onClose} type="button">
-              Cancel
-            </button>
+          <div className="modal-footer d-flex justify-content-between">
+            <div>
+              <button 
+                className="btn btn-sm btn-outline-secondary" 
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span className="mx-2">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button 
+                className="btn btn-sm btn-outline-secondary" 
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+            <div>
+              <button className="btn btn-primary" onClick={handleAdd} type="button">
+                Add <i className="fas fa-check" />
+              </button>
+              <button className="btn btn-secondary" onClick={onClose} type="button">
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
