@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
 import PartPickerModal from './PartPickerModal';
+import ModelPickerModal from './ModelPickerModal';
 import './modalOverrides.css'
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
 
@@ -94,6 +95,9 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   // NEW: control for part picker modal
   const [isPartPickerOpen, setPartPickerOpen] = useState(false);
+
+  // NEW: control for model picker modal
+  const [isModelPickerOpen, setModelPickerOpen] = useState(false);
 
   // NEW: Logistic Info collapse state & fields
   const [logisticOpen, setLogisticOpen] = useState(true);
@@ -219,6 +223,16 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
     setPartPickerOpen(false);
   }
 
+  function handleModelPicked(selectedModels) {
+    if (selectedModels && selectedModels.length > 0) {
+      const model = selectedModels[0];
+      setModel(model.name || '');
+    }
+    setModelPickerOpen(false);
+  }
+
+  const openModelPicker = () => setModelPickerOpen(true);
+
   if (!show) return null
 
   return (
@@ -248,7 +262,8 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
               supplier={supplier} setSupplier={setSupplier}
               plantCode={plantCode} setPlantCode={setPlantCode}
               dockCode={dockCode} setDockCode={setDockCode}
-              setPartPickerOpen={setPartPickerOpen}
+              openPartPicker={() => setPartPickerOpen(true)}
+              openModelPicker={openModelPicker}
               setComparisonOpen={setComparisonOpen}
             />
 
@@ -355,6 +370,12 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
           zIndex={4000}
         />
 
+      {/* Model Picker Modal */}
+      <ModelPickerModal
+        show={isModelPickerOpen}
+        onClose={() => setModelPickerOpen(false)}
+        onAdd={handleModelPicked}
+      />
     </>
   )
 }

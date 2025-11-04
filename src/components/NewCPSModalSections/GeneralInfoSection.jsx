@@ -27,7 +27,8 @@ export default function GeneralInfoSection(props) {
     setPlantCode,
     dockCode,
     setDockCode,
-    setPartPickerOpen,
+    openPartPicker,
+    openModelPicker,
     setComparisonOpen,
   } = props;
 
@@ -88,7 +89,7 @@ export default function GeneralInfoSection(props) {
                   <button
                     type="button"
                     className="btn btn-outline-secondary btn-sm"
-                    onClick={() => alert("Search Model placeholder")}
+                    onClick={openModelPicker}
                   >
                     <i className="fas fa-search" />
                   </button>
@@ -111,7 +112,7 @@ export default function GeneralInfoSection(props) {
                     type="button"
                     className="btn btn-outline-secondary btn-sm"
                     title="Search Part"
-                    onClick={() => setPartPickerOpen(true)}
+                    onClick={openPartPicker}
                   >
                     <i className="fas fa-search" />
                   </button>
