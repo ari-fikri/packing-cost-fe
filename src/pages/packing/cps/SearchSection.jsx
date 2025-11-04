@@ -6,13 +6,12 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
     setters.setDestCode(code);
     const destination = destinations.find(d => d.destCode === code);
     if (destination) {
-      setters.setDestCountry(`${destination.country} - ${destination.company}`);
+      setters.setDestCountry(`${destination.code} - ${destination.country}`);
     } else {
       setters.setDestCountry('');
     }
   };
 
-  // Create a unique list of destination codes for the dropdown
   const uniqueDestCodes = [...new Set(destinations.map(d => d.destCode))];
 
   return (
@@ -20,161 +19,110 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
       <div className="row">
         {/* Column 1 */}
         <div className="col-md-6">
-          {/* Row 1: CPS No. */}
+          {/* Row 1 */}
           <div className="form-group">
-            <label className="small mb-1">CPS No.</label>
-            <div className="input-group input-group-sm">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={filters.cpsNo}
-                onChange={(e) => setters.setCpsNo(e.target.value)}
-                placeholder="CPS No."
-              />
-              <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search CPS No.">
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
+            <label className="small mb-1">CPS/PSI/ECI No</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={filters.cpsNo}
+              onChange={(e) => setters.setCpsNo(e.target.value)}
+              placeholder="CPS/PSI/ECI No"
+            />
           </div>
-          {/* Row 2: Ref. CPS No. */}
+          {/* Row 2 */}
           <div className="form-group">
-            <label className="small mb-1">Ref. CPS No.</label>
-            <div className="input-group input-group-sm">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={filters.refCpsNo}
-                onChange={(e) => setters.setRefCpsNo(e.target.value)}
-                placeholder="Ref. CPS No."
-              />
-              <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Ref. CPS No.">
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
+            <label className="small mb-1">CFC/Model</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={filters.model}
+              onChange={(e) => setters.setModel(e.target.value)}
+              placeholder="Model"
+            />
           </div>
-          {/* Row 3: Dest Code */}
+          {/* Row 3 */}
           <div className="form-group">
             <label className="small mb-1">Dest Code</label>
-            <select
+            <div className="input-group input-group-sm">
+                <select
+                    className="form-control form-control-sm mr-2"
+                    value={filters.destCode}
+                    onChange={handleDestCodeChange}
+                >
+                    <option value="">Select Dest Code</option>
+                    {uniqueDestCodes.map(code => (
+                        <option key={code} value={code}>{code}</option>
+                    ))}
+                </select>
+                <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    value={filters.destCountry}
+                    readOnly
+                    placeholder="Country Code - Country"
+                />
+            </div>
+          </div>
+          {/* Row 4 */}
+          <div className="form-group">
+            <label className="small mb-1">Part No - Part Name</label>
+            <div className="input-group input-group-sm">
+                <input
+                    type="text"
+                    className="form-control form-control-sm mr-2"
+                    value={filters.partNo}
+                    onChange={(e) => setters.setPartNo(e.target.value)}
+                    placeholder="Part No"
+                />
+                <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    value={filters.partName}
+                    readOnly
+                    placeholder="Part Name"
+                />
+            </div>
+          </div>
+          {/* Row 5 */}
+          <div className="form-group">
+            <label className="small mb-1">From</label>
+            <input
+              type="text"
               className="form-control form-control-sm"
-              value={filters.destCode}
-              onChange={handleDestCodeChange}
-            >
-              <option value="">Select Dest Code</option>
-              {uniqueDestCodes.map(code => (
-                <option key={code} value={code}>{code}</option>
-              ))}
-            </select>
-          </div>
-          {/* Row 4: Model */}
-          <div className="form-group">
-            <label className="small mb-1">Model</label>
-            <div className="input-group input-group-sm">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={filters.model}
-                onChange={(e) => setters.setModel(e.target.value)}
-                placeholder="Model"
-              />
-              <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model">
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          {/* Row 5: From User */}
-          <div className="form-group">
-            <label className="small mb-1">From User</label>
-            <div className="input-group input-group-sm">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={filters.fromUser}
-                onChange={(e) => setters.setFromUser(e.target.value)}
-                placeholder="From User"
-              />
-              <div className="input-group-append">
-                <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => onPersonPicker('fromUser')}>...</button>
-              </div>
-            </div>
-          </div>
-          {/* Row 6: Issued Date */}
-          <div className="form-group">
-            <label className="small mb-1">Issued Date</label>
-            <div className="row">
-              <div className="col-6">
-                <input
-                  type="date"
-                  className="form-control form-control-sm"
-                  value={filters.issuedFrom}
-                  onChange={(e) => setters.setIssuedFrom(e.target.value)}
-                />
-              </div>
-              <div className="col-6">
-                <input
-                  type="date"
-                  className="form-control form-control-sm"
-                  value={filters.issuedTo}
-                  onChange={(e) => setters.setIssuedTo(e.target.value)}
-                />
-              </div>
-            </div>
+              value={filters.fromUser}
+              onChange={(e) => setters.setFromUser(e.target.value)}
+              placeholder="From"
+            />
           </div>
         </div>
         {/* Column 2 */}
         <div className="col-md-6">
-          {/* Row 1: Status */}
+          {/* Row 1 */}
           <div className="form-group">
-            <label className="small mb-1">Status</label>
-            <select
-              className="form-control form-control-sm"
-              value={filters.status}
-              onChange={(e) => setters.setStatus(e.target.value)}
-            >
-              <option>Any</option>
-              <option>Draft</option>
-              <option>Approved</option>
-              <option>Rejected</option>
-            </select>
-          </div>
-          {/* Row 2: CFC/PJT */}
-          <div className="form-group">
-            <label className="small mb-1">CFC/PJT</label>
-            <div className="input-group input-group-sm">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={filters.cfcPjt}
-                onChange={(e) => setters.setCfcPjt(e.target.value)}
-                placeholder="CFC/PJT"
-              />
-              <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search CFC/PJT">
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          {/* Row 3: Dest Country Name */}
-          <div className="form-group">
-            <label className="small mb-1">Dest Country Name</label>
+            <label className="small mb-1">Ref CPS No</label>
             <input
               type="text"
               className="form-control form-control-sm"
-              value={filters.destCountry}
-              readOnly
-              placeholder="Country - Company"
+              value={filters.refCpsNo}
+              onChange={(e) => setters.setRefCpsNo(e.target.value)}
+              placeholder="Ref CPS No"
             />
           </div>
-          {/* Row 4: CPS/PSI/ECI */}
+          {/* Row 2 */}
           <div className="form-group">
-            <label className="small mb-1">CPS/PSI/ECI</label>
+            <label className="small mb-1">Project Code</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={filters.cfcPjt}
+              onChange={(e) => setters.setCfcPjt(e.target.value)}
+              placeholder="CFC/PJT"
+            />
+          </div>
+          {/* Row 3 */}
+          <div className="form-group">
+            <label className="small mb-1">CPS/PSI/ECI Type</label>
             <select
               className="form-control form-control-sm"
               value={filters.cpsPsiEci}
@@ -186,21 +134,36 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
               <option value="ECI">ECI</option>
             </select>
           </div>
-          {/* Row 5: To User */}
+          {/* Row 4 */}
           <div className="form-group">
-            <label className="small mb-1">To User</label>
+            <label className="small mb-1">Supplier Code - Supplier Name</label>
             <div className="input-group input-group-sm">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={filters.toUser}
-                onChange={(e) => setters.setToUser(e.target.value)}
-                placeholder="To User"
-              />
-              <div className="input-group-append">
-                <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => onPersonPicker('toUser')}>...</button>
-              </div>
+                <input
+                    type="text"
+                    className="form-control form-control-sm mr-2"
+                    value={filters.supplierCode}
+                    readOnly
+                    placeholder="Supplier Code"
+                />
+                <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    value={filters.supplierName}
+                    readOnly
+                    placeholder="Supplier Name"
+                />
             </div>
+          </div>
+          {/* Row 5 */}
+          <div className="form-group">
+            <label className="small mb-1">To</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={filters.toUser}
+              onChange={(e) => setters.setToUser(e.target.value)}
+              placeholder="To"
+            />
           </div>
         </div>
       </div>
