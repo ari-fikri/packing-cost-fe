@@ -1,7 +1,9 @@
 // src/pages/packing/Cps.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewCpsModal from '../../components/NewCPSModal.jsx'
 import PersonPickerModal from '../../components/PersonPickerModal' // <-- import the modal
+import { cpsData } from '../../data/cps.js'
+import Pagination from '../../components/Pagination.jsx'
 
 export default function Cps() {
   // filter fields
@@ -18,6 +20,10 @@ export default function Cps() {
   const [effectiveTo, setEffectiveTo] = useState('')
   const [status, setStatus] = useState('Any')
 
+  // Data state
+  const [allCps, setAllCps] = useState([])
+  const [filteredCps, setFilteredCps] = useState([])
+
   // modal state
   const [showNewCps, setShowNewCps] = useState(false)
 
@@ -25,31 +31,71 @@ export default function Cps() {
   const [showPersonPicker, setShowPersonPicker] = useState(false)
   const [personPickerTarget, setPersonPickerTarget] = useState('from') // 'from' or 'to'
 
-  // table data (empty initially)
-  const [rows, setRows] = useState([])
-
   // paging
   const [perPage, setPerPage] = useState(10)
   const [page, setPage] = useState(1)
-  const total = rows.length
-  const totalPages = Math.max(1, Math.ceil(total / perPage))
+
+  useEffect(() => {
+    // Load initial data
+    setAllCps(cpsData);
+    setFilteredCps([]); // Keep table empty initially
+  }, []);
 
   function handleSearch() {
-    console.log('Search CPS with', {
-      cpsNo,
-      refCpsNo,
-      model,
-      dpiNo,
-      cfcPjt,
-      fromUser,
-      toUser,
-      issuedFrom,
-      issuedTo,
-      effectiveFrom,
-      effectiveTo,
-      status,
-    })
-    // TODO: replace with real API call / filter logic
+    let filtered = allCps;
+
+    const hasFilters =
+      cpsNo ||
+      refCpsNo ||
+      model ||
+      dpiNo ||
+      cfcPjt ||
+      fromUser ||
+      toUser ||
+      issuedFrom ||
+      issuedTo ||
+      effectiveFrom ||
+      effectiveTo ||
+      status !== 'Any';
+
+    if (hasFilters) {
+      filtered = allCps.filter(item => {
+        const issuedDate = new Date(item.issuedDate);
+        const effectiveDate = new Date(item.effectiveDate);
+        const issuedFromDate = issuedFrom ? new Date(issuedFrom) : null;
+        const issuedToDate = issuedTo ? new Date(issuedTo) : null;
+        const effectiveFromDate = effectiveFrom ? new Date(effectiveFrom) : null;
+        const effectiveToDate = effectiveTo ? new Date(effectiveTo) : null;
+
+        if (issuedFromDate) issuedFromDate.setHours(0, 0, 0, 0);
+        if (issuedToDate) issuedToDate.setHours(0, 0, 0, 0);
+        if (effectiveFromDate) effectiveFromDate.setHours(0, 0, 0, 0);
+        if (effectiveToDate) effectiveToDate.setHours(0, 0, 0, 0);
+        issuedDate.setHours(0, 0, 0, 0);
+        effectiveDate.setHours(0, 0, 0, 0);
+
+        return (
+          (!cpsNo || item.cpsNo.toLowerCase().includes(cpsNo.toLowerCase())) &&
+          (!refCpsNo || item.refCpsNo.toLowerCase().includes(refCpsNo.toLowerCase())) &&
+          (!model || item.model.toLowerCase().includes(model.toLowerCase())) &&
+          (!dpiNo || item.dpiNo.toLowerCase().includes(dpiNo.toLowerCase())) &&
+          (!cfcPjt || item.cfcPjt.toLowerCase().includes(cfcPjt.toLowerCase())) &&
+          (!fromUser || item.fromUser.toLowerCase().includes(fromUser.toLowerCase())) &&
+          (!toUser || item.toUser.toLowerCase().includes(toUser.toLowerCase())) &&
+          (!issuedFrom || issuedDate >= issuedFromDate) &&
+          (!issuedTo || issuedDate <= issuedToDate) &&
+          (!effectiveFrom || effectiveDate >= effectiveFromDate) &&
+          (!effectiveTo || effectiveDate <= effectiveToDate) &&
+          (status === 'Any' || item.status === status)
+        );
+      });
+    }
+
+    // Sort by latest first (id descending)
+    const sorted = [...filtered].sort((a, b) => b.id - a.id);
+
+    setFilteredCps(sorted);
+    setPage(1);
   }
 
   function handleClear() {
@@ -65,6 +111,8 @@ export default function Cps() {
     setEffectiveFrom('')
     setEffectiveTo('')
     setStatus('Any')
+    setFilteredCps([]);
+    setPage(1);
   }
 
   // open modal
@@ -87,50 +135,56 @@ export default function Cps() {
   }
 
   // slice rows for current page
-  const visibleRows = rows.slice((page - 1) * perPage, page * perPage)
+  const visibleRows = filteredCps.slice((page - 1) * perPage, page * perPage);
 
   // Called when NewCpsModal saves a CPS payload
   function handleSaveNewCps(payload) {
-    // build a minimal row object for table (you can adapt fields)
-    const newRow = {
+    const newCps = {
+      id: allCps.reduce((maxId, item) => Math.max(item.id, maxId), 0) + 1,
       cpsNo: payload.cpsNo || '',
       refCpsNo: payload.refCpsNo || '',
       dpiNo: payload.dpiNo || '',
-      issuedDate: payload.issueDate || '',
-      effectiveDate: payload.effectiveDate || '',
+      issuedDate: payload.issueDate || new Date().toISOString().slice(0, 10),
+      effectiveDate: payload.effectiveDate || new Date().toISOString().slice(0, 10),
       cfcPjt: payload.cfcPjtCode || '',
       model: payload.model || '',
       parts: payload.packing?.innerRows || [],
-      fromUser: '', // empty for now
-      toUser: '', // empty for now
+      fromUser: '',
+      toUser: '',
       status: 'Draft',
-      raw: payload,
-    }
-    setRows(prev => [newRow, ...prev])
-    setShowNewCps(false)
-    setPage(1)
+    };
+    const updatedAllCps = [newCps, ...allCps];
+    setAllCps(updatedAllCps);
+
+    const sorted = [...filteredCps, newCps].sort((a, b) => b.id - a.id);
+    setFilteredCps(sorted);
+    setShowNewCps(false);
+    setPage(1);
   }
 
   // Optional submit handler (Submit from modal)
   function handleSubmitNewCps(payload) {
-    // for now treat submit same as save but set status Submitted
-    const newRow = {
+    const newCps = {
+      id: allCps.reduce((maxId, item) => Math.max(item.id, maxId), 0) + 1,
       cpsNo: payload.cpsNo || '',
       refCpsNo: payload.refCpsNo || '',
       dpiNo: payload.dpiNo || '',
-      issuedDate: payload.issueDate || '',
-      effectiveDate: payload.effectiveDate || '',
+      issuedDate: payload.issueDate || new Date().toISOString().slice(0, 10),
+      effectiveDate: payload.effectiveDate || new Date().toISOString().slice(0, 10),
       cfcPjt: payload.cfcPjtCode || '',
       model: payload.model || '',
       parts: payload.packing?.innerRows || [],
       fromUser: '',
       toUser: '',
       status: 'Submitted',
-      raw: payload,
-    }
-    setRows(prev => [newRow, ...prev])
-    setShowNewCps(false)
-    setPage(1)
+    };
+    const updatedAllCps = [newCps, ...allCps];
+    setAllCps(updatedAllCps);
+
+    const sorted = [...filteredCps, newCps].sort((a, b) => b.id - a.id);
+    setFilteredCps(sorted);
+    setShowNewCps(false);
+    setPage(1);
   }
 
   // Handler for picking a person
@@ -345,7 +399,7 @@ export default function Cps() {
                 </tr>
               </thead>
               <tbody>
-                {rows.length === 0 ? (
+                {filteredCps.length === 0 ? (
                   <tr>
                     <td colSpan="13" className="text-center py-4 text-muted">No Data Found</td>
                   </tr>
@@ -380,40 +434,13 @@ export default function Cps() {
           </div>
 
           {/* pagination */}
-          <div className="d-flex align-items-center justify-content-between mt-3">
-            <div>
-              <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(1)}>{'<<'}</button>
-              <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(Math.max(1, page - 1))}>{'<'}</button>
-              {[...Array(totalPages).keys()].map(n => (
-                <button
-                  key={n}
-                  type="button"
-                  className={`btn btn-sm mr-1 ${page === n + 1 ? 'btn-primary' : 'btn-light'}`}
-                  onClick={() => goToPage(n + 1)}
-                >
-                  {n + 1}
-                </button>
-              ))}
-              <button type="button" className="btn btn-sm btn-light ml-2" onClick={() => goToPage(Math.min(totalPages, page + 1))}>{'>'}</button>
-            </div>
-
-            <div className="form-inline small">
-              <span className="mr-3">Total: {total}</span>
-
-              <div className="dropdown mr-2">
-                <button className="btn btn-sm btn-light dropdown-toggle" type="button" data-toggle="dropdown">
-                  {perPage} per page
-                </button>
-                <div className="dropdown-menu">
-                  <button className="dropdown-item" type="button" onClick={() => { setPerPage(10); setPage(1) }}>10</button>
-                  <button className="dropdown-item" type="button" onClick={() => { setPerPage(25); setPage(1) }}>25</button>
-                  <button className="dropdown-item" type="button" onClick={() => { setPerPage(50); setPage(1) }}>50</button>
-                </div>
-              </div>
-
-              <i className="fas fa-chevron-down" />
-            </div>
-          </div>
+          <Pagination
+            currentPage={page}
+            totalItems={filteredCps.length}
+            itemsPerPage={perPage}
+            onPageChange={setPage}
+            onItemsPerPageChange={p => { setPerPage(p); setPage(1); }}
+          />
 
         </div>
       </div>
