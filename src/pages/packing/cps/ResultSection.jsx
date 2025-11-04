@@ -56,9 +56,7 @@ export default function ResultSection({
               </tr>
             ) : (
               visibleRows.map((r, i) => {
-                console.log(">>>>>>>>"+ r.model.code + " >>> "+ r.model.destinationCode + " >> " + r.model.implementationPeriod);
                 const modelData = getModelData(r.model.code);
-                console.log("================="+ modelData.model);
                 return (                  
                   <tr key={i}>
                     <td>{(page - 1) * perPage + i + 1}</td>
@@ -66,10 +64,10 @@ export default function ResultSection({
                     <td>{getType(r.cpsNo)}</td>
                     <td>{r.refCpsNo}</td>
                     <td>{r.part_no}</td>
-                    <td>{r.cfcPjt}</td>                          {/*Project*/}
+                    <td>{r.cfcPjt}</td>
                     <td>{r.model.code}</td>
                     <td>{r.model.implementationPeriod}</td>
-                    <td>{r.model.destinationCode + "<< "}</td>
+                    <td>{r.model.destinationCode}</td>
                     <td>{r.fromUser}</td>
                     <td>{r.toUser}</td>
                     <td>{r.status}</td>
