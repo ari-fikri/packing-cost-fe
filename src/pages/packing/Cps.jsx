@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchSection from './cps/SearchSection';
 import ResultSection from './cps/ResultSection';
+import DESTINATIONS from '../../data/destinations';
+import { cpsData } from '../../data/cps';
 
 export default function Cps() {
   // States for controlling modals
@@ -17,24 +19,40 @@ export default function Cps() {
   const [toUser, setToUser] = useState('');
   const [issuedFrom, setIssuedFrom] = useState('');
   const [issuedTo, setIssuedTo] = useState('');
-  const [effectiveFrom, setEffectiveFrom] = useState('');
-  const [effectiveTo, setEffectiveTo] = useState('');
   const [status, setStatus] = useState('Any');
+  const [destCode, setDestCode] = useState('');
+  const [destCountry, setDestCountry] = useState('');
+  const [cpsPsiEci, setCpsPsiEci] = useState('');
 
   // States for pagination
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
 
-  // Mock data for the results table
+  // State for the results table
   const [filteredCps, setFilteredCps] = useState([]);
 
+  useEffect(() => {
+    // Initially, load all data
+    setFilteredCps(cpsData);
+  }, []);
+
   const handleSearch = () => {
-    // In a real app, you'd fetch data from an API based on filters
-    const mockData = [
-        { id: 1, cpsNo: "CPS-001", refCpsNo: 'REF-001', dpiNo: 'DPI-001', issuedDate: '2023-01-01', effectiveDate: '2023-02-01', cfcPjt: 'CFC1', model: "Model A", parts: [1,2,3], fromUser: 'UserA', toUser: 'UserB', status: "Approved" },
-        { id: 2, cpsNo: "CPS-002", refCpsNo: 'REF-002', dpiNo: 'DPI-002', issuedDate: '2023-01-02', effectiveDate: '2023-02-02', cfcPjt: 'CFC2', model: "Model B", numParts: 5, fromUser: 'UserC', toUser: 'UserD', status: "Pending" },
-    ];
-    setFilteredCps(mockData);
+    let filtered = cpsData.filter(item => {
+      return (
+        (cpsNo ? item.cpsNo.toLowerCase().includes(cpsNo.toLowerCase()) : true) &&
+        (refCpsNo ? item.refCpsNo.toLowerCase().includes(refCpsNo.toLowerCase()) : true) &&
+        (model ? item.model.toLowerCase().includes(model.toLowerCase()) : true) &&
+        (cfcPjt ? item.cfcPjt.toLowerCase().includes(cfcPjt.toLowerCase()) : true) &&
+        (fromUser ? item.fromUser.toLowerCase().includes(fromUser.toLowerCase()) : true) &&
+        (toUser ? item.toUser.toLowerCase().includes(toUser.toLowerCase()) : true) &&
+        (status !== 'Any' ? item.status === status : true) &&
+        (destCode ? item.destCode === destCode : true) &&
+        (cpsPsiEci ? item.cpsPsiEci === cpsPsiEci : true) &&
+        (!issuedFrom || new Date(item.issuedDate) >= new Date(issuedFrom)) &&
+        (!issuedTo || new Date(item.issuedDate) <= new Date(issuedTo))
+      );
+    });
+    setFilteredCps(filtered);
   };
 
   const handleClear = () => {
@@ -46,10 +64,11 @@ export default function Cps() {
     setToUser('');
     setIssuedFrom('');
     setIssuedTo('');
-    setEffectiveFrom('');
-    setEffectiveTo('');
     setStatus('Any');
-    setFilteredCps([]);
+    setDestCode('');
+    setDestCountry('');
+    setCpsPsiEci('');
+    setFilteredCps(cpsData);
   };
 
   const handlePersonPicker = (target) => {
@@ -66,9 +85,10 @@ export default function Cps() {
     toUser,
     issuedFrom,
     issuedTo,
-    effectiveFrom,
-    effectiveTo,
     status,
+    destCode,
+    destCountry,
+    cpsPsiEci,
   };
 
   const setters = {
@@ -80,33 +100,28 @@ export default function Cps() {
     setToUser,
     setIssuedFrom,
     setIssuedTo,
-    setEffectiveFrom,
-    setEffectiveTo,
     setStatus,
+    setDestCode,
+    setDestCountry,
+    setCpsPsiEci,
   };
 
   return (
     <div className="container-fluid">
-      {/* Page title */}
-      <div className="row mb-2">
-        <div className="col-6">
-          <h1 className="h3 mb-0 text-gray-800">CPS List</h1>
-        </div>
-        <div className="col-6 d-flex justify-content-end">
-          <button
-            className="btn btn-sm btn-primary"
-            onClick={() => setShowNewCps(true)}
-          >
-            <i className="fas fa-plus mr-1" />
-            Create CPS
-          </button>
-        </div>
-      </div>
-
-      {/* Search section */}
-      <div className="card shadow mb-4">
-        <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">Search Criteria</h6>
+      <div className="card card-outline card-secondary">
+        <div className="card-header d-flex align-items-center">
+          <h3 className="card-title mb-0"><b>CPS List</b></h3>
+          <div className="ml-auto">
+            <button type="button" className="btn btn-sm btn-success mr-2" onClick={() => setShowNewCps(true)}>
+              <i className="fas fa-plus mr-1"></i> Create CPS
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload">
+              <i className="fas fa-cloud-upload-alt"></i>
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template">
+              <i className="fas fa-cloud-download-alt"></i>
+            </button>
+          </div>
         </div>
         <div className="card-body">
           <SearchSection
@@ -115,16 +130,9 @@ export default function Cps() {
             onSearch={handleSearch}
             onClear={handleClear}
             onPersonPicker={handlePersonPicker}
+            destinations={DESTINATIONS}
           />
-        </div>
-      </div>
-
-      {/* Result section */}
-      <div className="card shadow mb-4">
-        <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">Search Result</h6>
-        </div>
-        <div className="card-body">
+          <hr />
           <ResultSection
             filteredCps={filteredCps}
             page={page}
