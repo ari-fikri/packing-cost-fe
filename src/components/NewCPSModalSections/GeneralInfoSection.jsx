@@ -7,12 +7,6 @@ export default function GeneralInfoSection(props) {
     setCpsNo,
     refCpsNo,
     setRefCpsNo,
-    issueDate,
-    setIssueDate,
-    effectiveDate,
-    setEffectiveDate,
-    dpiNo,
-    setDpiNo,
     cfcPjtCode,
     setCfcPjtCode,
     model,
@@ -54,30 +48,7 @@ export default function GeneralInfoSection(props) {
 
             <div className="form-group col-12">
               <label className="small mb-1">
-                <b>DPI No.</b>
-              </label>
-              <div className="input-group input-group-sm">
-                <input
-                  className="form-control form-control-sm"
-                  value={dpiNo}
-                  onChange={(e) => setDpiNo(e.target.value)}
-                />
-                <div className="input-group-append">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary btn-sm"
-                    title="Search DPI"
-                    onClick={() => alert("Search DPI placeholder")}
-                  >
-                    <i className="fas fa-search" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group col-12">
-              <label className="small mb-1">
-                <b>Model</b>
+                <b>CFC/Model</b>
               </label>
               <div className="input-group input-group-sm">
                 <input
@@ -130,30 +101,6 @@ export default function GeneralInfoSection(props) {
                 </div>
               </div>
             </div>
-
-            <div className="form-group col-12">
-              <label className="small mb-1">
-                <b>Issued Date</b>
-              </label>
-              <input
-                type="date"
-                className="form-control form-control-sm"
-                value={issueDate}
-                onChange={(e) => setIssueDate(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group col-12">
-              <label className="small mb-1">
-                <b>Effective Date</b>
-              </label>
-              <input
-                type="date"
-                className="form-control form-control-sm"
-                value={effectiveDate}
-                onChange={(e) => setEffectiveDate(e.target.value)}
-              />
-            </div>
           </div>
         </div>
 
@@ -185,7 +132,7 @@ export default function GeneralInfoSection(props) {
 
             <div className="form-group col-12">
               <label className="small mb-1">
-                <b>CFC / PJT Code</b>
+                <b>Project Code</b>
               </label>
               <div className="input-group input-group-sm">
                 <input
@@ -212,38 +159,39 @@ export default function GeneralInfoSection(props) {
               <input
                 className="form-control form-control-sm"
                 value={partName}
-                onChange={(e) => setPartName(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group col-12">
-              <label className="small mb-1">
-                <b>Supplier</b>
-              </label>
-              <input
-                className="form-control form-control-sm"
-                value={supplier}
-                onChange={(e) => setSupplier(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group col-6">
-              <label className="small mb-1">Plant Code</label>
-              <input
-                className="form-control form-control-sm"
-                value={plantCode}
-                onChange={(e) => setPlantCode(e.target.value)}
-              />
-            </div>
-            <div className="form-group col-6">
-              <label className="small mb-1">Dock Code</label>
-              <input
-                className="form-control form-control-sm"
-                value={dockCode}
-                onChange={(e) => setDockCode(e.target.value)}
+                readOnly
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-4">
+          <label className="small mb-1">
+            <b>Supplier</b>
+          </label>
+          <input
+            className="form-control form-control-sm"
+            value={supplier}
+            readOnly
+          />
+        </div>
+
+        <div className="form-group col-md-4">
+          <label className="small mb-1">Plant Code</label>
+          <input
+            className="form-control form-control-sm"
+            value={plantCode}
+            readOnly
+          />
+        </div>
+        <div className="form-group col-md-4">
+          <label className="small mb-1">Dock Code</label>
+          <input
+            className="form-control form-control-sm"
+            value={dockCode}
+            readOnly
+          />
         </div>
       </div>
     </div>

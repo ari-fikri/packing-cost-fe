@@ -21,7 +21,6 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   const [refCpsNo, setRefCpsNo] = useState('')
   const [issueDate, setIssueDate] = useState('')
   const [effectiveDate, setEffectiveDate] = useState('')
-  const [dpiNo, setDpiNo] = useState('')
   const [cfcPjtCode, setCfcPjtCode] = useState('')
   const [model, setModel] = useState('')
   const [partNo, setPartNo] = useState('')
@@ -113,7 +112,6 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       setRefCpsNo('')
       setIssueDate('')
       setEffectiveDate('')
-      setDpiNo('')
       setCfcPjtCode('')
       setModel('')
       setPartNo('')
@@ -255,13 +253,14 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
           <div className="card-body">
             {/* General Info */}
             <GeneralInfoSection
-              cpsNo={cpsNo} setCpsNo={setCpsNo}
-              refCpsNo={refCpsNo} setRefCpsNo={setRefCpsNo}
-              issueDate={issueDate} setIssueDate={setIssueDate}
-              effectiveDate={effectiveDate} setEffectiveDate={setEffectiveDate}
-              dpiNo={dpiNo} setDpiNo={setDpiNo}
-              cfcPjtCode={cfcPjtCode} setCfcPjtCode={setCfcPjtCode}
-              model={model} setModel={setModel}
+              cpsNo={cpsNo}
+              setCpsNo={setCpsNo}
+              refCpsNo={refCpsNo}
+              setRefCpsNo={setRefCpsNo}
+              cfcPjtCode={cfcPjtCode}
+              setCfcPjtCode={setCfcPjtCode}
+              model={model}
+              setModel={setModel}
               partNo={partNo} setPartNo={setPartNo}
               partName={partName} setPartName={setPartName}
               supplier={supplier} setSupplier={setSupplier}
