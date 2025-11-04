@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import modelsData from "../data/models.json";
 
-export default function ModelPickerModal({ show, onClose, onAdd }) {
+export default function ModelPickerModal({ show, onClose, onAdd, selectionMode = "multi" }) {
   const [filterCode, setFilterCode] = useState("");
   const [filterName, setFilterName] = useState("");
   const [filterRemark, setFilterRemark] = useState("");
-  const [selectedModels, setSelectedModels] = useState([]);
+  const [selectedModels, setSelectedModels] = useState(selectionMode === "multi" ? [] : null);
   const [displayedModels, setDisplayedModels] = useState(modelsData);
   const [currentPage, setCurrentPage] = useState(1);
   const modelsPerPage = 15;
@@ -17,16 +17,18 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
       setFilterCode("");
       setFilterName("");
       setFilterRemark("");
-      setSelectedModels([]);
+      setSelectedModels(selectionMode === "multi" ? [] : null);
       setDisplayedModels(modelsData);
       setCurrentPage(1);
     }
-  }, [show]);
+  }, [show, selectionMode]);
 
-  const handleCheckboxChange = (code) => {
-    setSelectedModels((prev) =>
-      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
-    );
+  const handleSelectionChange = (code) => {
+    if (selectionMode === "multi") {
+      setSelectedModels((prev) => (prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]));
+    } else {
+      setSelectedModels(code);
+    }
   };
 
   const handleSearch = () => {
@@ -50,9 +52,14 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
 
   const handleAdd = () => {
     if (typeof onAdd === "function") {
-      onAdd(selectedModels.map((code) => modelsData.find((m) => m.code === code)));
+      if (selectionMode === "multi") {
+        onAdd(selectedModels.map((code) => modelsData.find((m) => m.code === code)));
+      } else {
+        const selectedModel = modelsData.find((m) => m.code === selectedModels);
+        onAdd(selectedModel);
+      }
     }
-    setSelectedModels([]);
+    setSelectedModels(selectionMode === "multi" ? [] : null);
     if (typeof onClose === "function") onClose();
   };
 
@@ -152,9 +159,10 @@ export default function ModelPickerModal({ show, onClose, onAdd }) {
                         <tr key={m.code}>
                           <td>
                             <input
-                              type="checkbox"
-                              checked={selectedModels.includes(m.code)}
-                              onChange={() => handleCheckboxChange(m.code)}
+                              type={selectionMode === "multi" ? "checkbox" : "radio"}
+                              name="model-selection"
+                              checked={selectionMode === "multi" ? selectedModels.includes(m.code) : selectedModels === m.code}
+                              onChange={() => handleSelectionChange(m.code)}
                             />
                           </td>
                           <td>{m.code}</td>

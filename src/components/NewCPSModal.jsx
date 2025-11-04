@@ -223,17 +223,22 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
     setPartPickerOpen(false);
   }
 
-  function handleModelPicked(selectedModels) {
-    if (selectedModels && selectedModels.length > 0) {
-      const model = selectedModels[0];
-      setModel(model.name || '');
+  function handleModelPicked(selection) {
+    if (selection) {
+      if (Array.isArray(selection)) {
+        // Multi-select mode
+        setModel(selection.map((m) => m.name).join(", "));
+      } else {
+        // Single-select mode
+        setModel(selection.name || "");
+      }
     }
     setModelPickerOpen(false);
   }
 
   const openModelPicker = () => setModelPickerOpen(true);
 
-  if (!show) return null
+  if (!show) return null;
 
   return (
     <>
@@ -375,7 +380,10 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         show={isModelPickerOpen}
         onClose={() => setModelPickerOpen(false)}
         onAdd={handleModelPicked}
+        selectionMode="single"
       />
+
+      <PartPickerModal show={isPartPickerOpen} onClose={() => setPartPickerOpen(false)} onAdd={handlePartPicked} />
     </>
   )
 }
