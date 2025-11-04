@@ -72,6 +72,21 @@ export default function Cps() {
     setFilteredCps(cpsData);
   };
 
+  const handleCreatePsi = () => {
+    console.log("Create PSI clicked");
+    // Placeholder for Create PSI functionality
+  };
+
+  const handleCreateEci = () => {
+    console.log("Create ECI clicked");
+    // Placeholder for Create ECI functionality
+  };
+
+  const handleComparePcs = () => {
+    console.log("Compare PCS clicked");
+    // Placeholder for Compare PCS functionality
+  };
+
   const handlePersonPicker = (target) => {
     setPersonPickerTarget(target);
     setShowPersonPicker(true);
@@ -112,7 +127,12 @@ export default function Cps() {
       <div className="card card-outline card-secondary">
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>CPS List</b></h3>
-          <HeaderActions onNewCps={() => setShowNewCps(true)} />
+          <HeaderActions
+            onNewCps={() => setShowNewCps(true)}
+            onCreatePsi={handleCreatePsi}
+            onCreateEci={handleCreateEci}
+            onComparePcs={handleComparePcs}
+          />
         </div>
         <div className="card-body">
           <SearchSection
