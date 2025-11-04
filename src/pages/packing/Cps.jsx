@@ -4,6 +4,7 @@ import ResultSection from './cps/ResultSection';
 import HeaderActions from './cps/HeaderActions';
 import DESTINATIONS from '../../data/destinations';
 import { cpsData } from '../../data/cps';
+import NewCPSModal from '../../components/NewCPSModal';
 
 export default function Cps() {
   // States for controlling modals
@@ -167,6 +168,7 @@ export default function Cps() {
           />
         </div>
       </div>
+      <NewCPSModal show={showNewCps} onClose={() => setShowNewCps(false)} />
     </div>
   );
 }
