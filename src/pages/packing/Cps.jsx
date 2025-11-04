@@ -32,27 +32,41 @@ export default function Cps() {
   // State for the results table
   const [filteredCps, setFilteredCps] = useState([]);
 
-  useEffect(() => {
-    // Initially, load all data
-    setFilteredCps(cpsData);
-  }, []);
-
   const handleSearch = () => {
-    let filtered = cpsData.filter(item => {
-      return (
-        (cpsNo ? item.cpsNo.toLowerCase().includes(cpsNo.toLowerCase()) : true) &&
-        (refCpsNo ? item.refCpsNo.toLowerCase().includes(refCpsNo.toLowerCase()) : true) &&
-        (model ? item.model.toLowerCase().includes(model.toLowerCase()) : true) &&
-        (cfcPjt ? item.cfcPjt.toLowerCase().includes(cfcPjt.toLowerCase()) : true) &&
-        (fromUser ? item.fromUser.toLowerCase().includes(fromUser.toLowerCase()) : true) &&
-        (toUser ? item.toUser.toLowerCase().includes(toUser.toLowerCase()) : true) &&
-        (status !== 'Any' ? item.status === status : true) &&
-        (destCode ? item.destCode === destCode : true) &&
-        (cpsPsiEci ? item.cpsPsiEci === cpsPsiEci : true) &&
-        (!issuedFrom || new Date(item.issuedDate) >= new Date(issuedFrom)) &&
-        (!issuedTo || new Date(item.issuedDate) <= new Date(issuedTo))
-      );
-    });
+    const noFiltersApplied =
+      !cpsNo &&
+      !refCpsNo &&
+      !model &&
+      !cfcPjt &&
+      !fromUser &&
+      !toUser &&
+      status === 'Any' &&
+      !destCode &&
+      !cpsPsiEci &&
+      !issuedFrom &&
+      !issuedTo;
+
+    let filtered = cpsData;
+
+    if (noFiltersApplied) {
+      filtered = [...cpsData].sort((a, b) => new Date(b.issuedDate) - new Date(a.issuedDate));
+    } else {
+      filtered = cpsData.filter(item => {
+        return (
+          (cpsNo ? item.cpsNo.toLowerCase().includes(cpsNo.toLowerCase()) : true) &&
+          (refCpsNo ? item.refCpsNo.toLowerCase().includes(refCpsNo.toLowerCase()) : true) &&
+          (model ? item.model.toLowerCase().includes(model.toLowerCase()) : true) &&
+          (cfcPjt ? item.cfcPjt.toLowerCase().includes(cfcPjt.toLowerCase()) : true) &&
+          (fromUser ? item.fromUser.toLowerCase().includes(fromUser.toLowerCase()) : true) &&
+          (toUser ? item.toUser.toLowerCase().includes(toUser.toLowerCase()) : true) &&
+          (status !== 'Any' ? item.status === status : true) &&
+          (destCode ? item.destCode === destCode : true) &&
+          (cpsPsiEci ? item.cpsPsiEci === cpsPsiEci : true) &&
+          (!issuedFrom || new Date(item.issuedDate) >= new Date(issuedFrom)) &&
+          (!issuedTo || new Date(item.issuedDate) <= new Date(issuedTo))
+        );
+      });
+    }
     setFilteredCps(filtered);
   };
 
@@ -69,7 +83,7 @@ export default function Cps() {
     setDestCode('');
     setDestCountry('');
     setCpsPsiEci('');
-    setFilteredCps(cpsData);
+    setFilteredCps([]);
   };
 
   const handleCreatePsi = () => {
