@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
 import PartPickerModal from './PartPickerModal';
 import ModelPickerModal from './ModelPickerModal';
+import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
 
@@ -97,6 +98,9 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   // NEW: control for model picker modal
   const [isModelPickerOpen, setModelPickerOpen] = useState(false);
+
+  // NEW: control for material picker modal
+  const [isMaterialPickerOpen, setMaterialPickerOpen] = useState(false);
 
   // NEW: Logistic Info collapse state & fields
   const [logisticOpen, setLogisticOpen] = useState(true);
@@ -237,6 +241,13 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
     setModelPickerOpen(false);
   }
 
+  function handleMaterialPicked(material) {
+    if (material) {
+      setOuterModuleType(material.materialNo);
+    }
+    setMaterialPickerOpen(false);
+  }
+
   const openModelPicker = () => setModelPickerOpen(true);
 
   if (!show) return null;
@@ -321,6 +332,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
               newInner={newInner} setNewInner={setNewInner}
               handleAddInnerRow={handleAddInnerRow}
               handleRemoveInnerRow={handleRemoveInnerRow}
+              openMaterialPicker={() => setMaterialPickerOpen(true)}
             />
 
             <hr />
@@ -384,6 +396,13 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         onClose={() => setModelPickerOpen(false)}
         onAdd={handleModelPicked}
         selectionMode="single"
+      />
+
+      <MaterialPickerModal
+        show={isMaterialPickerOpen}
+        onClose={() => setMaterialPickerOpen(false)}
+        onAdd={handleMaterialPicked}
+        zIndex={3000}
       />
     </>
   )

@@ -1,27 +1,18 @@
-import React from "react";
+import React, { useState } from 'react';
 
-export default function PackingSection(props) {
-  // Destructure props as needed
-  const {
-    packingOpen,
-    setPackingOpen,
-    outerModuleType,
-    setOuterModuleType,
-    outerDimension,
-    setOuterDimension,
-    innerVolume,
-    setInnerVolume,
-    outerVolume,
-    setOuterVolume,
-    innerRows,
-    setInnerRows,
-    newInner,
-    setNewInner,
-    handleAddInnerRow,
-    handleRemoveInnerRow,
-  } = props;
-
-  const [showNewInnerRow, setShowNewInnerRow] = React.useState(false);
+export default function PackingSection({
+  packingOpen, setPackingOpen,
+  outerModuleType, setOuterModuleType,
+  outerDimension, setOuterDimension,
+  innerVolume, setInnerVolume,
+  outerVolume, setOuterVolume,
+  innerRows, setInnerRows,
+  newInner, setNewInner,
+  handleAddInnerRow,
+  handleRemoveInnerRow,
+  openMaterialPicker,
+}) {
+  const [showNewRow, setShowNewRow] = useState(false);
 
   return (
     <div>
@@ -56,8 +47,10 @@ export default function PackingSection(props) {
                   />
                   <div className="input-group-append">
                     <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => alert("Search module type placeholder")}
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="modulePickerBtn"
+                      onClick={openMaterialPicker}
                     >
                       <i className="fas fa-search" />
                     </button>
@@ -134,8 +127,8 @@ export default function PackingSection(props) {
                   <div>
                     <button
                       className="btn btn-sm btn-outline-primary"
-                      onClick={() => setShowNewInnerRow(true)}
-                      disabled={showNewInnerRow}
+                      onClick={() => setShowNewRow(true)}
+                      disabled={showNewRow}
                     >
                       Add
                     </button>
@@ -161,7 +154,7 @@ export default function PackingSection(props) {
                       </tr>
                     </thead>
                     <tbody>
-                      {innerRows.length === 0 && !showNewInnerRow ? (
+                      {innerRows.length === 0 && !showNewRow ? (
                         <tr>
                           <td
                             colSpan="12"
@@ -199,7 +192,7 @@ export default function PackingSection(props) {
                           </tr>
                         ))
                       )}
-                      {showNewInnerRow && (
+                      {showNewRow && (
                         <tr>
                           <td>+</td>
                           <td>
@@ -337,7 +330,7 @@ export default function PackingSection(props) {
                                     wtPerPc: "",
                                     qty: "",
                                   });
-                                  setShowNewInnerRow(false);
+                                  setShowNewRow(false);
                                 }}
                               >
                                 Cancel
