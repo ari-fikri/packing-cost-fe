@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 
-export default function PackingSection({
-  packingOpen, setPackingOpen,
-  outerModuleType, setOuterModuleType,
-  outerDimension, setOuterDimension,
-  innerVolume, setInnerVolume,
-  outerVolume, setOuterVolume,
-  innerRows, setInnerRows,
-  newInner, setNewInner,
-  handleAddInnerRow,
-  handleRemoveInnerRow,
-  openMaterialPicker,
-}) {
+export default function PackingSection(props) {
+  const {
+    packingOpen, setPackingOpen,
+    outerModuleType, setOuterModuleType,
+    outerMaterialName,
+    outerDimension,
+    innerVolume,
+    outerVolume,
+    innerRows, setInnerRows,
+    newInner, setNewInner,
+    handleAddInnerRow, handleRemoveInnerRow,
+    openMaterialPicker
+  } = props;
+
+  const [innerTableMode, setInnerTableMode] = useState('view'); // view | add
+
   const [showNewRow, setShowNewRow] = useState(false);
 
   return (
     <div>
-      {/* Packing outer summary (collapsible) - simpler static table preserved */}
       <div className="mb-3">
         <button
           type="button"
@@ -63,35 +66,20 @@ export default function PackingSection({
                       <input
                         className="form-control form-control-sm"
                         value={outerDimension.L}
-                        onChange={(e) =>
-                          setOuterDimension((d) => ({
-                            ...d,
-                            L: e.target.value,
-                          }))
-                        }
                         placeholder="L"
+                        readOnly
                       />
                       <input
                         className="form-control form-control-sm mx-1"
                         value={outerDimension.W}
-                        onChange={(e) =>
-                          setOuterDimension((d) => ({
-                            ...d,
-                            W: e.target.value,
-                          }))
-                        }
                         placeholder="W"
+                        readOnly
                       />
                       <input
                         className="form-control form-control-sm"
                         value={outerDimension.H}
-                        onChange={(e) =>
-                          setOuterDimension((d) => ({
-                            ...d,
-                            H: e.target.value,
-                          }))
-                        }
                         placeholder="H"
+                        readOnly
                       />
                     </div>
                   </div>
@@ -103,7 +91,7 @@ export default function PackingSection({
                     <input
                       className="form-control form-control-sm"
                       value={innerVolume}
-                      onChange={(e) => setInnerVolume(e.target.value)}
+                      readOnly
                     />
                   </div>
                   <div className="col">
@@ -111,14 +99,22 @@ export default function PackingSection({
                     <input
                       className="form-control form-control-sm"
                       value={outerVolume}
-                      onChange={(e) => setOuterVolume(e.target.value)}
+                      readOnly
                     />
                   </div>
                 </div>
               </div>
+              <div className="col-md-6">
+                <label className="small">Material Name</label>
+                <input
+                  className="form-control form-control-sm"
+                  value={outerMaterialName}
+                  readOnly
+                />
+              </div>
             </div>
 
-            {/* Inner pack materials table in a new row, full width (kept simple) */}
+            {/* Inner pack materials table */}
             <div className="row mt-3">
               <div className="col-12">
                 <div className="d-flex justify-content-between align-items-center">
@@ -210,7 +206,7 @@ export default function PackingSection({
                                 <button
                                   className="btn btn-outline-secondary btn-sm"
                                   type="button"
-                                  onClick={() => alert("...")}
+                                  onClick={() => openMaterialPicker('inner')}
                                 >
                                   ...
                                 </button>

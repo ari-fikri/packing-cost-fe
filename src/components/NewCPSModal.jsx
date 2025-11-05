@@ -59,6 +59,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   // Packing - Outer summary
   const [outerModuleType, setOuterModuleType] = useState('')
+  const [outerMaterialName, setOuterMaterialName] = useState('')
   const [outerDimension, setOuterDimension] = useState({ L: '', W: '', H: '' }) // cm
   const [innerVolume, setInnerVolume] = useState('')
   const [outerVolume, setOuterVolume] = useState('')
@@ -139,7 +140,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       setImagesQkp({ caption: "", files: [] });
       setImagesBkp({ caption: "", files: [] });
 
-      setOuterModuleType(''); setOuterDimension({ L: '', W: '', H: '' })
+      setOuterModuleType(''); setOuterMaterialName(''); setOuterDimension({ L: '', W: '', H: '' })
       setInnerVolume(''); setOuterVolume('')
       setInnerRows([])
       setNotes('')
@@ -244,12 +245,36 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   function handleMaterialPicked(material) {
     if (material) {
-      setOuterModuleType(material.materialNo);
+      if (materialFilter === 'outer') {
+        setOuterModuleType(material.materialNo);
+        setOuterMaterialName(material.materialName);
+        setOuterDimension({
+          L: material.dimensionL,
+          W: material.dimensionW,
+          H: material.dimensionH,
+        });
+        setOuterVolume(material.volume);
+      } else if (materialFilter === 'inner') {
+        setNewInner(prev => ({
+          ...prev,
+          materialNo: material.materialNo,
+          name: material.materialName,
+          L: material.dimensionL,
+          W: material.dimensionW,
+          H: material.dimensionH,
+          wtPerPc: material.unitWeight,
+        }));
+      }
     }
     setMaterialPickerOpen(false);
   }
 
   const openModelPicker = () => setModelPickerOpen(true);
+
+  const openMaterialPicker = (filter) => {
+    setMaterialFilter(filter);
+    setMaterialPickerOpen(true);
+  };
 
   if (!show) return null;
 
@@ -326,17 +351,15 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
             <PackingSection
               packingOpen={packingOpen} setPackingOpen={setPackingOpen}
               outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
-              outerDimension={outerDimension} setOuterDimension={setOuterDimension}
-              innerVolume={innerVolume} setInnerVolume={setInnerVolume}
-              outerVolume={outerVolume} setOuterVolume={setOuterVolume}
+              outerMaterialName={outerMaterialName}
+              outerDimension={outerDimension}
+              innerVolume={innerVolume}
+              outerVolume={outerVolume}
               innerRows={innerRows} setInnerRows={setInnerRows}
               newInner={newInner} setNewInner={setNewInner}
               handleAddInnerRow={handleAddInnerRow}
               handleRemoveInnerRow={handleRemoveInnerRow}
-              openMaterialPicker={(filter) => {
-                setMaterialFilter(filter);
-                setMaterialPickerOpen(true);
-              }}
+              openMaterialPicker={openMaterialPicker}
             />
 
             <hr />
