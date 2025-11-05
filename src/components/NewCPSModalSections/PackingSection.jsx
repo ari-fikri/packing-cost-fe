@@ -21,6 +21,8 @@ export default function PackingSection(props) {
     handleRemoveInnerRow,
   } = props;
 
+  const [showNewInnerRow, setShowNewInnerRow] = React.useState(false);
+
   return (
     <div>
       {/* Packing outer summary (collapsible) - simpler static table preserved */}
@@ -132,12 +134,10 @@ export default function PackingSection(props) {
                   <div>
                     <button
                       className="btn btn-sm btn-outline-primary"
-                      onClick={() => {
-                        const m = prompt("Material No");
-                        if (m) setNewInner((n) => ({ ...n, materialNo: m }));
-                      }}
+                      onClick={() => setShowNewInnerRow(true)}
+                      disabled={showNewInnerRow}
                     >
-                      add
+                      Add
                     </button>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ export default function PackingSection(props) {
                       </tr>
                     </thead>
                     <tbody>
-                      {innerRows.length === 0 ? (
+                      {innerRows.length === 0 && !showNewInnerRow ? (
                         <tr>
                           <td
                             colSpan="12"
@@ -198,6 +198,153 @@ export default function PackingSection(props) {
                             </td>
                           </tr>
                         ))
+                      )}
+                      {showNewInnerRow && (
+                        <tr>
+                          <td>+</td>
+                          <td>
+                            <div className="input-group input-group-sm">
+                              <input
+                                className="form-control form-control-sm"
+                                value={newInner.materialNo}
+                                onChange={(e) =>
+                                  setNewInner((n) => ({
+                                    ...n,
+                                    materialNo: e.target.value,
+                                  }))
+                                }
+                              />
+                              <div className="input-group-append">
+                                <button
+                                  className="btn btn-outline-secondary btn-sm"
+                                  type="button"
+                                  onClick={() => alert("...")}
+                                >
+                                  ...
+                                </button>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.suffix}
+                              onChange={(e) =>
+                                setNewInner((n) => ({
+                                  ...n,
+                                  suffix: e.target.value,
+                                }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.name}
+                              onChange={(e) =>
+                                setNewInner((n) => ({
+                                  ...n,
+                                  name: e.target.value,
+                                }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.supplierName}
+                              onChange={(e) =>
+                                setNewInner((n) => ({
+                                  ...n,
+                                  supplierName: e.target.value,
+                                }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.L}
+                              onChange={(e) =>
+                                setNewInner((n) => ({ ...n, L: e.target.value }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.W}
+                              onChange={(e) =>
+                                setNewInner((n) => ({ ...n, W: e.target.value }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.H}
+                              onChange={(e) =>
+                                setNewInner((n) => ({ ...n, H: e.target.value }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.wtPerPc}
+                              onChange={(e) =>
+                                setNewInner((n) => ({
+                                  ...n,
+                                  wtPerPc: e.target.value,
+                                }))
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={newInner.qty}
+                              onChange={(e) =>
+                                setNewInner((n) => ({
+                                  ...n,
+                                  qty: e.target.value,
+                                }))
+                              }
+                            />
+                          </td>
+                          <td>-</td>
+                          <td>
+                            <div className="btn-group">
+                              <button
+                                className="btn btn-sm btn-primary"
+                                onClick={handleAddInnerRow}
+                              >
+                                Add
+                              </button>
+                              <button
+                                className="btn btn-sm btn-outline-secondary"
+                                onClick={() => {
+                                  setNewInner({
+                                    materialNo: "",
+                                    suffix: "",
+                                    name: "",
+                                    parent: "",
+                                    supplierId: "",
+                                    supplierName: "",
+                                    L: "",
+                                    W: "",
+                                    H: "",
+                                    wtPerPc: "",
+                                    qty: "",
+                                  });
+                                  setShowNewInnerRow(false);
+                                }}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
                       )}
                     </tbody>
                   </table>
