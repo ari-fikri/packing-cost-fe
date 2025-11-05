@@ -80,6 +80,7 @@ export default function GeneralInfoSection(props) {
                 />
                 <div className="input-group-append">
                   <button
+                    id="partPickerBtn"
                     type="button"
                     className="btn btn-outline-secondary btn-sm"
                     title="Search Part"

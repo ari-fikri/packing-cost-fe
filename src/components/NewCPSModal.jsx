@@ -182,7 +182,16 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   }
 
   function handleRemoveInnerRow(i) {
-    setInnerRows(prev => prev.filter((_, idx) => idx !== i))
+    setInnerRows((prev) => prev.filter((_, idx) => idx !== i));
+  }
+
+  function handlePartPicked(part) {
+    if (part) {
+      setPartNo(part.partNo);
+      setPartName(part.partName);
+      setSupplier(part.supplierName);
+    }
+    setPartPickerOpen(false);
   }
 
   function buildPayload() {
@@ -213,16 +222,6 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       },
       notes,
     }
-  }
-
-  function handlePartPicked(selectedParts) {
-    if (selectedParts && selectedParts.length > 0) {
-      const part = selectedParts[0];
-      setPartNo(part.partNo || '');
-      setPartName(part.partName || '');
-      setSupplier(part.supplierName || '');
-    }
-    setPartPickerOpen(false);
   }
 
   function handleModelPicked(selection) {
@@ -370,13 +369,14 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         extraClass="multi-parts-comparison"
       />
 
-      {/* Part Picker Modal - wrapped to control z-index */}      
-        <PartPickerModal
-          show={isPartPickerOpen}
-          onClose={() => setPartPickerOpen(false)}
-          onSelect={handlePartPicked}
-          zIndex={4000}
-        />
+      {/* Part Picker Modal - wrapped to control z-index */}
+      <PartPickerModal
+        show={isPartPickerOpen}
+        onClose={() => setPartPickerOpen(false)}
+        onSelect={handlePartPicked}
+        zIndex={4000}
+        mode="single"
+      />
 
       {/* Model Picker Modal */}
       <ModelPickerModal
@@ -385,8 +385,6 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         onAdd={handleModelPicked}
         selectionMode="single"
       />
-
-      <PartPickerModal show={isPartPickerOpen} onClose={() => setPartPickerOpen(false)} onAdd={handlePartPicked} />
     </>
   )
 }
