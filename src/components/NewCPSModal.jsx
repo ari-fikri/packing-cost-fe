@@ -101,6 +101,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   // NEW: control for material picker modal
   const [isMaterialPickerOpen, setMaterialPickerOpen] = useState(false);
+  const [materialFilter, setMaterialFilter] = useState("all");
 
   // NEW: Logistic Info collapse state & fields
   const [logisticOpen, setLogisticOpen] = useState(true);
@@ -332,7 +333,10 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
               newInner={newInner} setNewInner={setNewInner}
               handleAddInnerRow={handleAddInnerRow}
               handleRemoveInnerRow={handleRemoveInnerRow}
-              openMaterialPicker={() => setMaterialPickerOpen(true)}
+              openMaterialPicker={(filter) => {
+                setMaterialFilter(filter);
+                setMaterialPickerOpen(true);
+              }}
             />
 
             <hr />
@@ -403,6 +407,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         onClose={() => setMaterialPickerOpen(false)}
         onAdd={handleMaterialPicked}
         zIndex={3000}
+        filter={materialFilter}
       />
     </>
   )

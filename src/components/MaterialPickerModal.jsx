@@ -9,6 +9,7 @@ export default function MaterialPickerModal({
   onAdd = () => {},
   selectionMode = "single",
   zIndex = 1050,
+  filter = "all",
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,14 +22,21 @@ export default function MaterialPickerModal({
 
   useEffect(() => {
     if (show) {
+      let initialMaterials = materialsData;
+      if (typeof filter === "string" && filter !== "all") {
+        initialMaterials = materialsData.filter(
+          (m) => m.materialType.toLowerCase() === filter.toLowerCase()
+        );
+      }
+
       setFilterMaterialNo("");
       setFilterName("");
       setFilterType("");
       setSelectedMaterials(selectionMode === "multi" ? [] : null);
-      setDisplayedMaterials(materialsData);
+      setDisplayedMaterials(initialMaterials);
       setCurrentPage(1);
     }
-  }, [show, selectionMode]);
+  }, [show, selectionMode, filter]);
 
   const handleSelectionChange = (materialNo) => {
     if (selectionMode === "multi") {

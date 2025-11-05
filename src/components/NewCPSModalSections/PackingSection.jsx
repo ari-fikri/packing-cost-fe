@@ -49,8 +49,7 @@ export default function PackingSection({
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
-                      id="modulePickerBtn"
-                      onClick={openMaterialPicker}
+                      onClick={() => openMaterialPicker("module")}
                     >
                       <i className="fas fa-search" />
                     </button>
