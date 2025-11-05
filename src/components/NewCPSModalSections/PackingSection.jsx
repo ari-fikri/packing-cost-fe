@@ -84,7 +84,14 @@ export default function PackingSection(props) {
                     </div>
                   </div>
                 </div>
-
+              </div>
+              <div className="col-md-6">
+                <label className="small">Material Name</label>
+                <input
+                  className="form-control form-control-sm"
+                  value={outerMaterialName}
+                  readOnly
+                />
                 <div className="form-row mt-2">
                   <div className="col">
                     <label className="small">Inner (m³)</label>
@@ -103,14 +110,6 @@ export default function PackingSection(props) {
                     />
                   </div>
                 </div>
-              </div>
-              <div className="col-md-6">
-                <label className="small">Material Name</label>
-                <input
-                  className="form-control form-control-sm"
-                  value={outerMaterialName}
-                  readOnly
-                />
               </div>
             </div>
 
