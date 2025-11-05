@@ -20,9 +20,15 @@ const Thumbnail = React.memo(({ file, index, onRemove }) => {
     }
 
     return (
-        <div className="relative inline-block mr-2 mb-2">
-            <img src={thumb} alt={file.name} className="w-24 h-24 object-cover border" />
-            <button onClick={handleRemove} className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">&times;</button>
+        <div style={{ position: 'relative', display: 'inline-block', marginRight: '10px', marginBottom: '10px' }}>
+            <img src={thumb} alt={file.name} className="border" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+            <button
+                onClick={handleRemove}
+                className="btn btn-danger btn-sm"
+                style={{ position: 'absolute', top: '0', right: '0', borderRadius: '50%', width: '24px', height: '24px', lineHeight: '1', padding: '0' }}
+            >
+                &times;
+            </button>
         </div>
     );
 });
