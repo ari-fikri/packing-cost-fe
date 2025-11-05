@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import PARTS from '../data/parts'
 
 // PartPickerModal
-// Props: show (bool), onClose(), onSelect(selectedParts:Array)
+// Props: show (bool), onClose(), onSelect(selectedParts:Array), mode ('single'|'multi')
 // Displays a list of parts (provided data) and extra generated fields (dimensions, costs, supplierId, parent)
-export default function PartPickerModal({ show = false, onClose, onSelect, zIndex = 4000 }) {
+export default function PartPickerModal({ show = false, onClose, onSelect, zIndex = 4000, mode = 'multi' }) {
 
   // deterministic pseudo-random generator based on index (keeps values stable across renders)
   function randFromIndex(i, min, max) {
@@ -20,13 +20,6 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
     const W = randFromIndex(i + 3, 20, 600)
     const H = randFromIndex(i + 7, 10, 800)
     const boxM3 = Number(((L * W * H) / 1_000_000).toFixed(3))
-    const material = randFromIndex(i + 11, 50, 15000)
-    const outer = randFromIndex(i + 13, 10, 5000)
-    const labor = randFromIndex(i + 17, 5, 2000)
-    const inland = randFromIndex(i + 19, 1, 1000)
-    const totalCost = material + outer + labor + inland
-    const prevYear = Math.max(1, Math.round(totalCost * (0.9 + ((randFromIndex(i+23,0,20))/100))))
-    const diffPerc = (((totalCost - prevYear) / prevYear) * 100).toFixed(1) + '%'
     const parent = 'P' + String(100000 + randFromIndex(i, 1, 9999))
     const supplierId = 'S' + String(200 + (i % 999))
 
@@ -38,26 +31,18 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
       supplierId,
       L, W, H,
       boxM3,
-      innerTotal: material,
-      outerTotal: outer,
-      materialTotal: material, // reuse for demo
-      laborTotal: labor,
-      inlandTotal: inland,
-      totalCost,
-      prevYear,
-      diffPerc
     }
   })
 
   const [filters, setFilters] = useState({ partNo: '', partName: '', supplierName: '' })
-  const [selected, setSelected] = useState({})
+  const [selected, setSelected] = useState(mode === 'multi' ? {} : null)
   const [page, setPage] = useState(1)
   const [perPage, setPerPage] = useState(10)
 
   useEffect(() => {
     if (show) {
       setFilters({ partNo: '', partName: '', supplierName: '' })
-      setSelected({})
+      setSelected(mode === 'multi' ? {} : null)
       setPage(1)
       document.body.classList.add('modal-open')
     } else {
@@ -92,10 +77,15 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
   const visible = allFiltered.slice((page-1)*perPage, page*perPage)
 
   function toggleSelect(idxGlobal) {
-    setSelected(s => ({ ...s, [idxGlobal]: !s[idxGlobal] }))
+    if (mode === 'multi') {
+      setSelected(s => ({ ...s, [idxGlobal]: !s[idxGlobal] }))
+    } else {
+      setSelected(idxGlobal)
+    }
   }
 
   function selectAllOnPage(checked) {
+    if (mode !== 'multi') return
     const base = (page-1)*perPage
     const updates = {}
     visible.forEach((_, i) => { updates[base + i] = checked })
@@ -103,9 +93,19 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
   }
 
   function handleAddSelected() {
-    const chosen = Object.keys(selected).filter(k => selected[k]).map(k => allFiltered[Number(k)])
-    onSelect && onSelect(chosen)
-    onClose && onClose()
+    if (mode === 'multi') {
+      const chosen = Object.keys(selected).filter(k => selected[k]).map(k => allFiltered[Number(k)])
+      onSelect && onSelect(chosen)
+      onClose && onClose()
+    } else {
+      if (selected !== null) {
+        const chosen = allFiltered[selected]
+        onSelect && onSelect(chosen)
+        onClose && onClose()
+      } else {
+        onClose && onClose()
+      }
+    }
   }
 
   function goToPage(p) { setPage(Math.min(Math.max(1, p), totalPages)) }
@@ -197,7 +197,9 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
               <table className="table table-sm table-striped table-bordered mb-0">
                 <thead>
                   <tr>
-                    <th style={{width:36}}><input type="checkbox" onChange={e => selectAllOnPage(e.target.checked)} /></th>
+                    <th style={{width:36}}>
+                      {mode === 'multi' && <input type="checkbox" onChange={e => selectAllOnPage(e.target.checked)} />}
+                    </th>
                     <th>Part No</th>
                     <th>Part Name</th>
                     <th>Supplier Name</th>
@@ -207,24 +209,22 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
                     <th>W (mm)</th>
                     <th>H (mm)</th>
                     <th>Box M3</th>
-                    <th>Inner</th>
-                    <th>Outer</th>
-                    <th>Material</th>
-                    <th>Labor</th>
-                    <th>Inland</th>
-                    <th>Total Cost</th>
-                    <th>Prev Year</th>
-                    <th>Diff</th>
                   </tr>
                 </thead>
                 <tbody>
                   {visible.length === 0 ? (
-                    <tr><td colSpan={18} className="text-center text-muted py-4">No Data Found</td></tr>
+                    <tr><td colSpan={10} className="text-center text-muted py-4">No Data Found</td></tr>
                   ) : visible.map((p, i) => {
                     const idxGlobal = (page-1)*perPage + i
                     return (
                       <tr key={idxGlobal}>
-                        <td className="text-center"><input type="checkbox" checked={!!selected[idxGlobal]} onChange={() => toggleSelect(idxGlobal)} /></td>
+                        <td className="text-center">
+                          {mode === 'multi' ? (
+                            <input type="checkbox" checked={!!selected[idxGlobal]} onChange={() => toggleSelect(idxGlobal)} />
+                          ) : (
+                            <input type="radio" name="part-picker-radio" checked={selected === idxGlobal} onChange={() => toggleSelect(idxGlobal)} />
+                          )}
+                        </td>
                         <td>{p.partNo}</td>
                         <td className="text-left">{p.partName}</td>
                         <td>{p.supplierName}</td>
@@ -234,14 +234,6 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
                         <td>{p.W}</td>
                         <td>{p.H}</td>
                         <td>{p.boxM3}</td>
-                        <td>{p.innerTotal}</td>
-                        <td>{p.outerTotal}</td>
-                        <td>{p.materialTotal}</td>
-                        <td>{p.laborTotal}</td>
-                        <td>{p.inlandTotal}</td>
-                        <td>{p.totalCost}</td>
-                        <td>{p.prevYear}</td>
-                        <td>{p.diffPerc}</td>
                       </tr>
                     )
                   })}
