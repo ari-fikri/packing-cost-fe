@@ -228,10 +228,10 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
     if (selection) {
       if (Array.isArray(selection)) {
         // Multi-select mode
-        setModel(selection.map((m) => m.name).join(", "));
+        setModel(selection.map((m) => m.code).join(", "));
       } else {
         // Single-select mode
-        setModel(selection.name || "");
+        setModel(selection.code || "");
       }
     }
     setModelPickerOpen(false);
