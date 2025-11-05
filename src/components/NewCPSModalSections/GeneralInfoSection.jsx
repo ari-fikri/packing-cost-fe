@@ -36,7 +36,7 @@ export default function GeneralInfoSection(props) {
           <div className="form-row">
             <div className="form-group col-12">
               <label className="small mb-1">
-                <b>CPS No.</b>
+                <b>CPS/PSI/ECI No.</b>
               </label>
               <input
                 className="form-control form-control-sm"

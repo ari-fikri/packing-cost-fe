@@ -49,12 +49,12 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   const [packingProcessBoxing, setPackingProcessBoxing] = useState('')
   const [packingProcessStacking, setPackingProcessStacking] = useState('')
 
-  // images groups (arrays of objects with caption + optional url)
-  const [imagesPart, setImagesPart] = useState([])
-  const [imagesPacking, setImagesPacking] = useState([])
-  const [imagesOuter, setImagesOuter] = useState([])
-  const [imagesQkp, setImagesQkp] = useState([])
-  const [imagesBkp, setImagesBkp] = useState([])
+  // images groups (caption and array of files)
+  const [imagesPart, setImagesPart] = useState({ caption: "", files: [] });
+  const [imagesPacking, setImagesPacking] = useState({ caption: "", files: [] });
+  const [imagesOuter, setImagesOuter] = useState({ caption: "", files: [] });
+  const [imagesQkp, setImagesQkp] = useState({ caption: "", files: [] });
+  const [imagesBkp, setImagesBkp] = useState({ caption: "", files: [] });
 
   // Packing - Outer summary
   const [outerModuleType, setOuterModuleType] = useState('')
@@ -128,7 +128,11 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('')
       setPackingProcessBoxing(''); setPackingProcessStacking('')
 
-      setImagesPart([]); setImagesPacking([]); setImagesOuter([]); setImagesQkp([]); setImagesBkp([])
+      setImagesPart({ caption: "", files: [] });
+      setImagesPacking({ caption: "", files: [] });
+      setImagesOuter({ caption: "", files: [] });
+      setImagesQkp({ caption: "", files: [] });
+      setImagesBkp({ caption: "", files: [] });
 
       setOuterModuleType(''); setOuterDimension({ L: '', W: '', H: '' })
       setInnerVolume(''); setOuterVolume('')
