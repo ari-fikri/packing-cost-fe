@@ -295,6 +295,12 @@ export default function NewCPSModal({ show, onClose, onSave, editData }) {
         innerRows
       },
       notes,
+      logistic: {
+        tmmindDestDockCode,
+        logisticRemark,
+        processType,
+        addressRack,
+      },
     });
     onSave(payload);
     handleClose();

@@ -52,6 +52,14 @@ export const buildPayload = (data) => {
 
     // Notes
     notes: data.notes,
+
+    // Logistic
+    logistic: {
+      tmmindDestDockCode: data.logistic.tmmindDestDockCode,
+      logisticRemark: data.logistic.logisticRemark,
+      processType: data.logistic.processType,
+      addressRack: data.logistic.addressRack,
+    },
   };
 };
 
