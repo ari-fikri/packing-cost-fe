@@ -11,13 +11,6 @@ export default function ResultSection({
 }) {
   const visibleRows = filteredCps.slice((page - 1) * perPage, page * perPage);
 
-  const getModelData = (modelCode) => {
-    if (!models) {
-      return {};
-    }
-    return models.find((m) => m.code === modelCode) || {};
-  };
-
   const getType = (cpsNo) => {
     if (cpsNo.includes('CPS')) return 'CPS';
     if (cpsNo.includes('PCI')) return 'PCI';
@@ -38,40 +31,35 @@ export default function ResultSection({
               <th>Part No</th>
               <th>Project Code</th>
               <th>Model</th>
-              <th>Impl. Time</th>
-              <th>Destination</th>
               <th>From</th>
               <th>To</th>
               <th>Status</th>
               <th>Submit Date</th>
-              <th style={{ width: 120 }}>Action</th>
+              <th style={{ width: 160 }}>Action</th>
             </tr>
           </thead>
           <tbody>
             {filteredCps.length === 0 ? (
               <tr>
-                <td colSpan="14" className="text-center py-4 text-muted">
+                <td colSpan="12" className="text-center py-4 text-muted">
                   No Data Found
                 </td>
               </tr>
             ) : (
               visibleRows.map((r, i) => {
-                const modelData = getModelData(r.model.code);
                 return (                  
                   <tr key={i}>
                     <td>{(page - 1) * perPage + i + 1}</td>
                     <td>{r.cpsNo}</td>
                     <td>{getType(r.cpsNo)}</td>
                     <td>{r.refCpsNo}</td>
-                    <td>{r.part_no}</td>
-                    <td>{r.cfcPjt}</td>
-                    <td>{r.model.code}</td>
-                    <td>{r.model.implementationPeriod}</td>
-                    <td>{r.model.destinationCode}</td>
+                    <td>{r.partNo}</td>
+                    <td>{r.cfcPjtCode}</td>
+                    <td>{r.model}</td>
                     <td>{r.fromUser}</td>
                     <td>{r.toUser}</td>
                     <td>{r.status}</td>
-                    <td>{r.issuedDate}</td>
+                    <td>{r.issueDate}</td>
                     <td>
                       <button
                         type="button"
@@ -79,6 +67,20 @@ export default function ResultSection({
                         onClick={() => alert('View placeholder')}
                       >
                         <i className="fas fa-eye" />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-info mr-1"
+                        onClick={() => alert('Edit placeholder')}
+                      >
+                        <i className="fas fa-pencil-alt" />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary mr-1"
+                        onClick={() => alert('Clone placeholder')}
+                      >
+                        <i className="fas fa-clone" />
                       </button>
                       <button
                         type="button"

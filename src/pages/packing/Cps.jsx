@@ -57,7 +57,7 @@ export default function Cps() {
           (cpsNo ? item.cpsNo.toLowerCase().includes(cpsNo.toLowerCase()) : true) &&
           (refCpsNo ? item.refCpsNo.toLowerCase().includes(refCpsNo.toLowerCase()) : true) &&
           (model ? item.model.toLowerCase().includes(model.toLowerCase()) : true) &&
-          (cfcPjt ? item.cfcPjt.toLowerCase().includes(cfcPjt.toLowerCase()) : true) &&
+          (cfcPjt ? item.cfcPjtCode.toLowerCase().includes(cfcPjt.toLowerCase()) : true) &&
           (fromUser ? item.fromUser.toLowerCase().includes(fromUser.toLowerCase()) : true) &&
           (toUser ? item.toUser.toLowerCase().includes(toUser.toLowerCase()) : true) &&
           (status !== 'Any' ? item.status === status : true) &&
