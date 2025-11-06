@@ -19,8 +19,12 @@ import {
   LogisticSection
 } from './NewCPSModalSections'
 
-export default function NewCpsModal({ show = false, onClose = () => {}, onSave = () => {}, onSubmit = () => {} }) {
-  // Top-level fields (all empty by default)
+import { buildPayload, resetStates } from '../utils/cpsHelpers.js';
+
+export default function NewCPSModal({ show, onClose, onSave, editData }) {
+  const [activeTab, setActiveTab] = useState('general');
+
+  // General states
   const [cpsNo, setCpsNo] = useState('')
   const [refCpsNo, setRefCpsNo] = useState('')
   const [issueDate, setIssueDate] = useState('')
@@ -118,57 +122,117 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   // Reset all fields when modal opens
   useEffect(() => {
     if (show) {
-      setCpsNo('')
-      setRefCpsNo('')
-      setIssueDate('')
-      setEffectiveDate('')
-      setCfcPjtCode('')
-      setModel('')
-      setPartNo('')
-      setPartName('')
-      setSupplier('')
-      setPlantCode('')
-      setDockCode('')
+      if (editData) {
+        // Populate fields from editData
+        setCpsNo(editData.cpsNo || '');
+        setRefCpsNo(editData.refCpsNo || '');
+        setIssueDate(editData.issueDate || '');
+        setEffectiveDate(editData.effectiveDate || '');
+        setCfcPjtCode(editData.cfcPjtCode || '');
+        setModel(editData.model || '');
+        setPartNo(editData.partNo || '');
+        setPartName(editData.partName || '');
+        setSupplier(editData.supplier || '');
+        setPlantCode(editData.plantCode || '');
+        setDockCode(editData.dockCode || '');
 
-      setPseOpen(false)
-      setPackingPlantCurr(''); setPackingPlantNext('')
-      setVanningPlantCurr(''); setVanningPlantNext('')
-      setOrderPatternCurr(''); setOrderPatternNext('')
-      setCategory(''); setKatashiki({ AD: '', AU: '', AF: '', AX: '' })
-      setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('')
-      setPackingProcessBoxing(''); setPackingProcessStacking('')
+        if (editData.pseInfo) {
+          setPackingPlantCurr(editData.pseInfo.packingPlantCurr || '');
+          setPackingPlantNext(editData.pseInfo.packingPlantNext || '');
+          setVanningPlantCurr(editData.pseInfo.vanningPlantCurr || '');
+          setVanningPlantNext(editData.pseInfo.vanningPlantNext || '');
+          setOrderPatternCurr(editData.pseInfo.orderPatternCurr || '');
+          setOrderPatternNext(editData.pseInfo.orderPatternNext || '');
+          setCategory(editData.pseInfo.category || '');
+          setKatashiki(editData.pseInfo.katashiki || { AD: '', AU: '', AF: '', AX: '' });
+          setImporterLineProcess(editData.pseInfo.importerLineProcess || '');
+          setCaseCode(editData.pseInfo.caseCode || '');
+          setBoxNumber(editData.pseInfo.boxNumber || '');
+          setRenban(editData.pseInfo.renban || '');
+          setRenbanEff(editData.pseInfo.renbanEff || '');
+          setPackingProcessBoxing(editData.pseInfo.packingProcessBoxing || '');
+          setPackingProcessStacking(editData.pseInfo.packingProcessStacking || '');
+        }
 
-      setImagesPart({ caption: "", files: [] });
-      setImagesPacking({ caption: "", files: [] });
-      setImagesOuter({ caption: "", files: [] });
-      setImagesQkp({ caption: "", files: [] });
-      setImagesBkp({ caption: "", files: [] });
+        if (editData.images) {
+          setImagesPart(editData.images.part || { caption: "", files: [] });
+          setImagesPacking(editData.images.packing || { caption: "", files: [] });
+          setImagesOuter(editData.images.outer || { caption: "", files: [] });
+          setImagesQkp(editData.images.qkp || { caption: "", files: [] });
+          setImagesBkp(editData.images.bkp || { caption: "", files: [] });
+        }
 
-      setOuterModuleType(''); setOuterMaterialName(''); setOuterDimension({ L: '', W: '', H: '' })
-      setInnerVolume(''); setOuterVolume('')
-      setInnerRows([])
-      setNotes('')
-      setNewInner({
-        materialNo: '',
-        suffix: '',
-        name: '',
-        parent: '',
-        supplierId: '',
-        supplierName: '',
-        L: '',
-        W: '',
-        H: '',
-        wtPerPc: '',
-        qty: '',
-      })
+        if (editData.packing) {
+          setOuterModuleType(editData.packing.outerModuleType || '');
+          setOuterMaterialName(editData.packing.outerMaterialName || '');
+          setOuterDimension(editData.packing.outerDimension || { L: '', W: '', H: '' });
+          setInnerVolume(editData.packing.innerVolume || '');
+          setOuterVolume(editData.packing.outerVolume || '');
+          setInnerRows(editData.packing.innerRows || []);
+        }
 
-      setLogisticOpen(true);
-      setTmmindDestDockCode('');
-      setLogisticRemark('');
-      setProcessType('N');
-      setAddressRack('');
+        setNotes(editData.notes || '');
+
+        if (editData.logistic) {
+          setTmmindDestDockCode(editData.logistic.tmmindDestDockCode || '');
+          setLogisticRemark(editData.logistic.logisticRemark || '');
+          setProcessType(editData.logistic.processType || 'N');
+          setAddressRack(editData.logistic.addressRack || '');
+        }
+      } else {
+        // Reset all fields for a new entry
+        setCpsNo('');
+        setRefCpsNo('');
+        setIssueDate('');
+        setEffectiveDate('');
+        setCfcPjtCode('');
+        setModel('');
+        setPartNo('');
+        setPartName('');
+        setSupplier('');
+        setPlantCode('');
+        setDockCode('');
+
+        setPseOpen(false);
+        setPackingPlantCurr(''); setPackingPlantNext('');
+        setVanningPlantCurr(''); setVanningPlantNext('');
+        setOrderPatternCurr(''); setOrderPatternNext('');
+        setCategory(''); setKatashiki({ AD: '', AU: '', AF: '', AX: '' });
+        setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('');
+        setPackingProcessBoxing(''); setPackingProcessStacking('');
+
+        setImagesPart({ caption: "", files: [] });
+        setImagesPacking({ caption: "", files: [] });
+        setImagesOuter({ caption: "", files: [] });
+        setImagesQkp({ caption: "", files: [] });
+        setImagesBkp({ caption: "", files: [] });
+
+        setOuterModuleType(''); setOuterMaterialName(''); setOuterDimension({ L: '', W: '', H: '' });
+        setInnerVolume(''); setOuterVolume('');
+        setInnerRows([]);
+        setNotes('');
+        setNewInner({
+          materialNo: '',
+          suffix: '',
+          name: '',
+          parent: '',
+          supplierId: '',
+          supplierName: '',
+          L: '',
+          W: '',
+          H: '',
+          wtPerPc: '',
+          qty: '',
+        });
+
+        setLogisticOpen(true);
+        setTmmindDestDockCode('');
+        setLogisticRemark('');
+        setProcessType('N');
+        setAddressRack('');
+      }
     }
-  }, [show])
+  }, [show, editData]);
 
   function handleAddInnerRow() {
     if (!newInner.materialNo.trim()) {
@@ -204,13 +268,13 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
     setPartPickerOpen(false);
   }
 
-  function buildPayload() {
-    return {
+  const handleSave = () => {
+    const payload = buildPayload({
+      // General
       cpsNo,
       refCpsNo,
       issueDate,
       effectiveDate,
-      dpiNo,
       cfcPjtCode,
       model,
       partNo,
@@ -231,8 +295,25 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         innerRows
       },
       notes,
-    }
-  }
+    });
+    onSave(payload);
+    handleClose();
+  };
+
+  const handleClose = () => {
+    resetStates({
+      setCpsNo, setRefCpsNo, setIssueDate, setEffectiveDate, setCfcPjtCode, setModel, setPartNo,
+      setPartName, setSupplier, setPlantCode, setDockCode,
+      setPseOpen, setPackingPlantCurr, setPackingPlantNext, setVanningPlantCurr, setVanningPlantNext,
+      setOrderPatternCurr, setOrderPatternNext, setCategory, setKatashiki, setImporterLineProcess,
+      setCaseCode, setBoxNumber, setRenban, setRenbanEff, setPackingProcessBoxing, setPackingProcessStacking,
+      setImagesPart, setImagesPacking, setImagesOuter, setImagesQkp, setImagesBkp,
+      setOuterModuleType, setOuterMaterialName, setOuterDimension, setInnerVolume, setOuterVolume,
+      setInnerRows, setNotes, setNewInner,
+      setLogisticOpen, setTmmindDestDockCode, setLogisticRemark, setProcessType, setAddressRack
+    });
+    onClose();
+  };
 
   function handleModelPicked(selection) {
     if (selection) {
@@ -292,7 +373,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}>
         <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1100 }}>
           <div className="card-header d-flex align-items-center">
-            <h3 className="card-title mb-0"><b>CPS - New</b></h3>
+            <h3 className="card-title mb-0"><b>{editData ? 'CPS - Edit' : 'CPS - New'}</b></h3>
             <div className="card-tools ml-auto">
               <button type="button" className="btn btn-tool" onClick={onClose}><i className="fas fa-times" /></button>
             </div>
@@ -395,9 +476,9 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
           </div>
 
           <div className="card-footer text-right">
-            <button className="btn btn-primary mr-2" onClick={() => { onSave(buildPayload()); onClose() }}><i className="fas fa-save mr-1" /> Save</button>
-            <button className="btn btn-success mr-2" onClick={() => { onSubmit(buildPayload()); onClose() }}><i className="fas fa-upload mr-1" /> Submit</button>
-            <button className="btn btn-outline-secondary" onClick={onClose}><i className="fas fa-times mr-1" /> Cancel</button>
+            <button className="btn btn-secondary" onClick={handleClose}>Cancel</button>
+            <button className="btn btn-primary ml-2" onClick={handleSave}>Save</button>
+            <button className="btn btn-success ml-2" onClick={() => alert('Submit action to be implemented.')}>Submit</button>
           </div>
         </div>
 

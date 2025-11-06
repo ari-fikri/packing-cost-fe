@@ -7,7 +7,7 @@ export default function ResultSection({
   perPage,
   setPage,
   setPerPage,
-  models,
+  onEdit,
 }) {
   const visibleRows = filteredCps.slice((page - 1) * perPage, page * perPage);
 
@@ -71,7 +71,7 @@ export default function ResultSection({
                       <button
                         type="button"
                         className="btn btn-sm btn-outline-info mr-1"
-                        onClick={() => alert('Edit placeholder')}
+                        onClick={() => onEdit(r)}
                       >
                         <i className="fas fa-pencil-alt" />
                       </button>
