@@ -6,6 +6,8 @@ import ModelPickerModal from './ModelPickerModal';
 import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
+import { formatCurrency } from '../utils/globalFunctions';
+
 
 // Import sections from external folder
 import {
@@ -59,10 +61,11 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   // Packing - Outer summary
   const [outerModuleType, setOuterModuleType] = useState('')
-  const [outerMaterialName, setOuterMaterialName] = useState('')
-  const [outerDimension, setOuterDimension] = useState({ L: '', W: '', H: '' }) // cm
+  const [outerMaterialName, setOuterMaterialName] = useState("");
+  const [outerMaterialNo, setOuterMaterialNo] = useState("");
+  const [outerDimension, setOuterDimension] = useState({ L: "", W: "", H: "" });
+  const [outerVolume, setOuterVolume] = useState("");
   const [innerVolume, setInnerVolume] = useState('')
-  const [outerVolume, setOuterVolume] = useState('')
 
   // Inner pack materials table (static/simpler table as requested)
   const [innerRows, setInnerRows] = useState([])
@@ -245,15 +248,19 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
   function handleMaterialPicked(material) {
     if (material) {
-      if (materialFilter === 'outer') {
+      if (materialFilter === 'outer' || materialFilter === 'module') {
+        console.dir(" Material >>>" + JSON.stringify(material));
         setOuterModuleType(material.materialNo);
         setOuterMaterialName(material.materialName);
         setOuterDimension({
-          L: material.dimensionL,
-          W: material.dimensionW,
-          H: material.dimensionH,
+          L: material.dimension_length,
+          W: material.dimension_width,
+          H: material.dimension_height,
         });
-        setOuterVolume(material.volume);
+        var inner = (material.dimension_inner_width * material.dimension_inner_height * material.dimension_inner_length/1000000);
+        var outer = (material.dimension_outer_width * material.dimension_outer_height * material.dimension_outer_length)/1000000;
+        setOuterVolume(formatCurrency(outer));
+        setInnerVolume(formatCurrency(inner));
       } else if (materialFilter === 'inner') {
         setNewInner(prev => ({
           ...prev,

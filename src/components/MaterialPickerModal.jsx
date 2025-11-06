@@ -71,6 +71,7 @@ export default function MaterialPickerModal({
         onAdd(selectedMaterials.map((materialNo) => materialsData.find((m) => m.materialNo === materialNo)));
       } else {
         const selectedMaterial = materialsData.find((m) => m.materialNo === selectedMaterials);
+        console.log(">>>>" + selectedMaterial);
         onAdd(selectedMaterial);
       }
     }
