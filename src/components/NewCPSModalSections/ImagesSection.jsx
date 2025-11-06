@@ -74,7 +74,7 @@ const ImagesSection = ({
         <div className="mb-3">
             <button
                 type="button"
-                className="btn btn-link p-0"
+                className="btn btn-sm btn-link p-0 section-header"
                 onClick={() => setImagesOpen((v) => !v)}
                 aria-expanded={imagesOpen}
                 aria-controls="imagesSection"

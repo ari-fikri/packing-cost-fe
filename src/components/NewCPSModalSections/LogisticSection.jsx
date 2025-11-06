@@ -18,7 +18,7 @@ export default function LogisticSection(props) {
     <div className="mb-3">
       <button
         type="button"
-        className="btn btn-link p-0"
+        className="btn btn-sm btn-link p-0 section-header"
         onClick={() => setLogisticOpen((v) => !v)}
         aria-expanded={logisticOpen}
         aria-controls="logisticSection"

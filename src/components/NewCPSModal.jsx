@@ -8,6 +8,7 @@ import './modalOverrides.css'
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
 import { formatCurrency } from '../utils/globalFunctions';
 import materials from '../data/materials.json';
+import './NewCPSModalSections/NewCPSModalSections.css';
 
 
 // Import sections from external folder

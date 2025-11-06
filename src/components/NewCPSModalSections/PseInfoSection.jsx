@@ -43,7 +43,7 @@ export default function PseInfoSection(props) {
       <div className="mb-3">
         <button
           type="button"
-          className="btn btn-sm btn-link p-0"
+          className="btn btn-sm btn-link p-0 section-header"
           onClick={() => setPseOpen((v) => !v)}
         >
           <i
@@ -51,7 +51,7 @@ export default function PseInfoSection(props) {
               pseOpen ? "fa-chevron-down" : "fa-chevron-right"
             } mr-2`}
           />
-          <strong>PSE Info</strong>
+          <strong>PSE Information</strong>
         </button>
         {pseOpen && (
           <div className="card card-body mt-2">

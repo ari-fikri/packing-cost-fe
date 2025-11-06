@@ -10,7 +10,7 @@ export default function PackingSection(props) {
       <div className="mb-3">
         <button
           type="button"
-          className="btn btn-link p-0"
+          className="btn btn-sm btn-link p-0 section-header"
           onClick={() => setPackingOpen((v) => !v)}
           aria-expanded={packingOpen}
           aria-controls="packingSection"
