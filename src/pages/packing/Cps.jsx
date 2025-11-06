@@ -9,7 +9,7 @@ import HeaderActions from './cps/HeaderActions';
 
 const Cps = () => {
   const [cpsData, setCpsData] = useState(initialCpsData);
-  const [filteredCps, setFilteredCps] = useState(cpsData);
+  const [filteredCps, setFilteredCps] = useState([]);
   const [showNewCps, setShowNewCps] = useState(false);
   const [editingCps, setEditingCps] = useState(null);
   const [showPersonPicker, setShowPersonPicker] = useState(false);
@@ -45,10 +45,7 @@ const Cps = () => {
     setDestCode('');
     setDestCountry('');
     setCpsPsiEci('');
-    handleSearch({
-      cpsNo: '', refCpsNo: '', model: '', partNo: '', cfcPjt: '',
-      fromUser: '', toUser: '', status: '', destCode: '', cpsPsiEci: ''
-    });
+    setFilteredCps([]);
   };
 
   const handleSearch = (searchFilters) => {
