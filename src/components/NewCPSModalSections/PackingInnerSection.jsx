@@ -144,6 +144,7 @@ export default function PackingInnerSection(props) {
                           name: e.target.value,
                         }))
                       }
+                      readOnly
                     />
                   </td>
                   <td>
@@ -156,6 +157,7 @@ export default function PackingInnerSection(props) {
                           supplierName: e.target.value,
                         }))
                       }
+                      readOnly
                     />
                   </td>
                   <td>
@@ -165,6 +167,7 @@ export default function PackingInnerSection(props) {
                       onChange={(e) =>
                         setNewInner((n) => ({ ...n, L: e.target.value }))
                       }
+                      readOnly
                     />
                   </td>
                   <td>
@@ -174,6 +177,7 @@ export default function PackingInnerSection(props) {
                       onChange={(e) =>
                         setNewInner((n) => ({ ...n, W: e.target.value }))
                       }
+                      readOnly
                     />
                   </td>
                   <td>
@@ -183,6 +187,7 @@ export default function PackingInnerSection(props) {
                       onChange={(e) =>
                         setNewInner((n) => ({ ...n, H: e.target.value }))
                       }
+                      readOnly
                     />
                   </td>
                   <td>
