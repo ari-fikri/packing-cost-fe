@@ -7,6 +7,7 @@ import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
 import { formatCurrency } from '../utils/globalFunctions';
+import materials from '../data/materials.json';
 
 
 // Import sections from external folder
@@ -262,15 +263,15 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         setOuterVolume(formatCurrency(outer));
         setInnerVolume(formatCurrency(inner));
       } else if (materialFilter === 'inner') {
-        setNewInner(prev => ({
-          ...prev,
+        setNewInner({
+          ...newInner,
           materialNo: material.materialNo,
           name: material.materialName,
-          L: material.dimensionL,
-          W: material.dimensionW,
-          H: material.dimensionH,
+          L: material.dimension_length,
+          W: material.dimension_width,
+          H: material.dimension_height,
           wtPerPc: material.unitWeight,
-        }));
+        });
       }
     }
     setMaterialPickerOpen(false);
@@ -356,6 +357,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
             {/* Packing Section */}
             <PackingSection
+              materials={materials}
               packingOpen={packingOpen} setPackingOpen={setPackingOpen}
               outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
               outerMaterialName={outerMaterialName}

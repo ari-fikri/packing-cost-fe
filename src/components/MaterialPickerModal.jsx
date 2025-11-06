@@ -49,9 +49,9 @@ export default function MaterialPickerModal({
   const handleSearch = () => {
     const filtered = materialsData.filter(
       (m) =>
-        m.materialNo.toLowerCase().includes(filterMaterialNo.toLowerCase()) &&
-        m.name.toLowerCase().includes(filterName.toLowerCase()) &&
-        m.type.toLowerCase().includes(filterType.toLowerCase())
+        (m.materialNo || "").toLowerCase().includes(filterMaterialNo.toLowerCase()) &&
+        (m.materialName || "").toLowerCase().includes(filterName.toLowerCase()) &&
+        (m.materialType || "").toLowerCase().includes(filterType.toLowerCase())
     );
     setDisplayedMaterials(filtered);
     setCurrentPage(1);

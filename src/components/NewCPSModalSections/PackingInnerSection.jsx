@@ -10,6 +10,7 @@ import React, { useState, useEffect, useRef } from 'react';
  * @param {function} props.handleAddInnerRow - Function to add a new inner row to the list.
  * @param {function} props.handleRemoveInnerRow - Function to remove an inner row from the list.
  * @param {function} props.openMaterialPicker - Function to open the material picker modal.
+ * @param {Array<object>} props.materials - The list of all materials.
  */
 export default function PackingInnerSection(props) {
   const {
@@ -20,6 +21,7 @@ export default function PackingInnerSection(props) {
     handleAddInnerRow,
     handleRemoveInnerRow,
     openMaterialPicker,
+    materials,
   } = props;
 
   // State to control the visibility of the new row input form
@@ -41,6 +43,40 @@ export default function PackingInnerSection(props) {
       return row;
     });
     setInnerRows(updatedRows);
+  };
+
+  const handleMaterialNoBlur = (materialNo, index) => {
+    const material = materials.find((m) => m.materialNo === materialNo);
+    console.log("Blurred ->>");
+    if (material) {
+      console.log("Material FOund -->", JSON.stringify(material));
+      const updatedData = {
+        name: material.materialName,
+        supplierName: material.supplier.supplier_name,
+        L: material.dimension_inner_length,
+        W: material.dimension_inner_width,
+        H: material.dimension_inner_height,
+      };
+
+      if (index === "new") {
+        console.log("New Inner -->", newInner);
+        setNewInner((prev) => ({
+          ...prev,
+          ...updatedData,
+        }));
+      } else {
+        const updatedRows = innerRows.map((row, i) => {
+          if (i === index) {
+            return {
+              ...row,
+              ...updatedData,
+            };
+          }
+          return row;
+        });
+        setInnerRows(updatedRows);
+      }
+    }
   };
 
   return (
@@ -103,6 +139,7 @@ export default function PackingInnerSection(props) {
                             ref={materialNoInputRef}
                             value={r.materialNo}
                             onChange={(e) => handleRowChange(i, 'materialNo', e.target.value)}
+                            onBlur={(e) => handleMaterialNoBlur(e.target.value, i)}
                             className="form-control form-control-sm"
                           />
                         </td>
@@ -190,6 +227,7 @@ export default function PackingInnerSection(props) {
                             materialNo: e.target.value,
                           }))
                         }
+                        onBlur={(e) => handleMaterialNoBlur(e.target.value, "new")}
                       />
                       <div className="input-group-append">
                         <button

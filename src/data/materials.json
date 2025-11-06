@@ -18,7 +18,13 @@
     "dimension_outer_length": 1573,
     "dimension_outer_height": 1571,
     "ewarehouse_price": 154.25,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "722E",
+    "supplier": {
+      "supplier_code": "5365",
+      "supplier_name": "TOKAI RUBBER INDONESIA",
+      "supplier_address": "Jl. Mitra Timur II Blok E No. 13-14, Parungmulya, Ciampel, Karawang, Jawa Barat"
+    }
   },
   {
     "id": 2,
@@ -39,7 +45,13 @@
     "dimension_outer_length": 1371,
     "dimension_outer_height": 1074,
     "ewarehouse_price": 19.56,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5062",
+      "supplier_name": "MENARA TERUS MAKMUR",
+      "supplier_address": "Jl. Jababeka XI Blok H-3 No.12, Kawasan Industri Jababeka, Cikarang, Bekasi"
+    }
   },
   {
     "id": 3,
@@ -60,7 +72,13 @@
     "dimension_outer_length": 1949,
     "dimension_outer_height": 1351,
     "ewarehouse_price": 72.95,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5150",
+    "supplier": {
+      "supplier_code": "5006",
+      "supplier_name": "NUSAHADI CITRAHARMONIS",
+      "supplier_address": "Jl. Raya Bekasi No.KM. 28, RT.005/RW.004, Medan Satria, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17132"
+    }
   },
   {
     "id": 4,
@@ -81,7 +99,13 @@
     "dimension_outer_length": 1350,
     "dimension_outer_height": 169,
     "ewarehouse_price": 204.6,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5028",
+    "supplier": {
+      "supplier_code": "5151",
+      "supplier_name": "SAKURA JAVA INDONESIA",
+      "supplier_address": "Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530"
+    }
   },
   {
     "id": 5,
@@ -102,7 +126,13 @@
     "dimension_outer_length": 1210,
     "dimension_outer_height": 1973,
     "ewarehouse_price": 16.03,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5002",
+    "supplier": {
+      "supplier_code": "5062",
+      "supplier_name": "MENARA TERUS MAKMUR",
+      "supplier_address": "Jl. Jababeka XI Blok H-3 No.12, Kawasan Industri Jababeka, Cikarang, Bekasi"
+    }
   },
   {
     "id": 6,
@@ -123,7 +153,13 @@
     "dimension_outer_length": 1642,
     "dimension_outer_height": 1714,
     "ewarehouse_price": 342.9,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5335",
+      "supplier_name": "DINAR MAKMUR",
+      "supplier_address": "Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185"
+    }
   },
   {
     "id": 7,
@@ -144,7 +180,13 @@
     "dimension_outer_length": 231,
     "dimension_outer_height": 1218,
     "ewarehouse_price": 44.19,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5150",
+    "supplier": {
+      "supplier_code": "5365",
+      "supplier_name": "TOKAI RUBBER INDONESIA",
+      "supplier_address": "Jl. Mitra Timur II Blok E No. 13-14, Parungmulya, Ciampel, Karawang, Jawa Barat"
+    }
   },
   {
     "id": 8,
@@ -165,7 +207,13 @@
     "dimension_outer_length": 1445,
     "dimension_outer_height": 1750,
     "ewarehouse_price": 859.3,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5002",
+    "supplier": {
+      "supplier_code": "5002",
+      "supplier_name": "ASALTA MANDIRI AGUNG",
+      "supplier_address": "Jl. Pulo Buaran Raya No.1A, RT.1/RW.8, Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13930"
+    }
   },
   {
     "id": 9,
@@ -186,7 +234,13 @@
     "dimension_outer_length": 1361,
     "dimension_outer_height": 149,
     "ewarehouse_price": 13.63,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5335",
+    "supplier": {
+      "supplier_code": "5335",
+      "supplier_name": "DINAR MAKMUR",
+      "supplier_address": "Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185"
+    }
   },
   {
     "id": 10,
@@ -207,7 +261,13 @@
     "dimension_outer_length": 209,
     "dimension_outer_height": 1928,
     "ewarehouse_price": 127.89,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5365",
+    "supplier": {
+      "supplier_code": "5006",
+      "supplier_name": "NUSAHADI CITRAHARMONIS",
+      "supplier_address": "Jl. Raya Bekasi No.KM. 28, RT.005/RW.004, Medan Satria, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17132"
+    }
   },
   {
     "id": 11,
@@ -228,7 +288,13 @@
     "dimension_outer_length": 1429,
     "dimension_outer_height": 158,
     "ewarehouse_price": 60.7,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5335",
+      "supplier_name": "DINAR MAKMUR",
+      "supplier_address": "Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185"
+    }
   },
   {
     "id": 12,
@@ -249,7 +315,13 @@
     "dimension_outer_length": 221,
     "dimension_outer_height": 211,
     "ewarehouse_price": 420.53,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5028",
+    "supplier": {
+      "supplier_code": "5062",
+      "supplier_name": "MENARA TERUS MAKMUR",
+      "supplier_address": "Jl. Jababeka XI Blok H-3 No.12, Kawasan Industri Jababeka, Cikarang, Bekasi"
+    }
   },
   {
     "id": 13,
@@ -270,7 +342,13 @@
     "dimension_outer_length": 1753,
     "dimension_outer_height": 223,
     "ewarehouse_price": 181.9,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5365",
+    "supplier": {
+      "supplier_code": "5028",
+      "supplier_name": "GARUDA METAL UTAMA",
+      "supplier_address": "Jl. Kapuk Kamal Raya No.28, RT.6/RW.2, Kamal Muara, Kec. Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470"
+    }
   },
   {
     "id": 14,
@@ -291,7 +369,13 @@
     "dimension_outer_length": 218,
     "dimension_outer_height": 216,
     "ewarehouse_price": 39.31,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5365",
+      "supplier_name": "TOKAI RUBBER INDONESIA",
+      "supplier_address": "Jl. Mitra Timur II Blok E No. 13-14, Parungmulya, Ciampel, Karawang, Jawa Barat"
+    }
   },
   {
     "id": 15,
@@ -312,7 +396,13 @@
     "dimension_outer_length": 160,
     "dimension_outer_height": 2008,
     "ewarehouse_price": 245.49,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5151",
+    "supplier": {
+      "supplier_code": "5335",
+      "supplier_name": "DINAR MAKMUR",
+      "supplier_address": "Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185"
+    }
   },
   {
     "id": 16,
@@ -333,7 +423,13 @@
     "dimension_outer_length": 218,
     "dimension_outer_height": 232,
     "ewarehouse_price": 329.83,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5151",
+    "supplier": {
+      "supplier_code": "5151",
+      "supplier_name": "SAKURA JAVA INDONESIA",
+      "supplier_address": "Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530"
+    }
   },
   {
     "id": 17,
@@ -354,7 +450,13 @@
     "dimension_outer_length": 153,
     "dimension_outer_height": 171,
     "ewarehouse_price": 21.94,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5151",
+    "supplier": {
+      "supplier_code": "5151",
+      "supplier_name": "SAKURA JAVA INDONESIA",
+      "supplier_address": "Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530"
+    }
   },
   {
     "id": 18,
@@ -375,7 +477,13 @@
     "dimension_outer_length": 245,
     "dimension_outer_height": 224,
     "ewarehouse_price": 191.93,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5335",
+      "supplier_name": "DINAR MAKMUR",
+      "supplier_address": "Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185"
+    }
   },
   {
     "id": 19,
@@ -396,7 +504,13 @@
     "dimension_outer_length": 183,
     "dimension_outer_height": 153,
     "ewarehouse_price": 88.7,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5028",
+    "supplier": {
+      "supplier_code": "5151",
+      "supplier_name": "SAKURA JAVA INDONESIA",
+      "supplier_address": "Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530"
+    }
   },
   {
     "id": 20,
@@ -417,7 +531,13 @@
     "dimension_outer_length": 158,
     "dimension_outer_height": 188,
     "ewarehouse_price": 50.35,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5365",
+    "supplier": {
+      "supplier_code": "5010",
+      "supplier_name": "3 M INDONESIA",
+      "supplier_address": "Perkantoran Hijau Arkadia, Tower F, 8th Floor, Jl. TB Simatupang No.Kav. 88, RT.1/RW.1, Kebagusan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520"
+    }
   },
   {
     "id": 21,
@@ -438,7 +558,13 @@
     "dimension_outer_length": 148,
     "dimension_outer_height": 198,
     "ewarehouse_price": 99.6,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5335",
+    "supplier": {
+      "supplier_code": "5365",
+      "supplier_name": "TOKAI RUBBER INDONESIA",
+      "supplier_address": "Jl. Mitra Timur II Blok E No. 13-14, Parungmulya, Ciampel, Karawang, Jawa Barat"
+    }
   },
   {
     "id": 22,
@@ -459,7 +585,13 @@
     "dimension_outer_length": 138,
     "dimension_outer_height": 208,
     "ewarehouse_price": 72.9,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5335",
+      "supplier_name": "DINAR MAKMUR",
+      "supplier_address": "Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185"
+    }
   },
   {
     "id": 23,
@@ -480,7 +612,13 @@
     "dimension_outer_length": 168,
     "dimension_outer_height": 218,
     "ewarehouse_price": 125.45,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "722E",
+      "supplier_name": "TOYOTA MOTOR THAILAND",
+      "supplier_address": "186/1 Moo 1, Old Railway Road, Samrong Tai, Phra Pradaeng, Samut Prakan 10130, Thailand"
+    }
   },
   {
     "id": 24,
@@ -501,7 +639,13 @@
     "dimension_outer_length": 178,
     "dimension_outer_height": 228,
     "ewarehouse_price": 75.25,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5010",
+    "supplier": {
+      "supplier_code": "5150",
+      "supplier_name": "NAMICOH INDONESIA",
+      "supplier_address": "EJIP Industrial Park, Plot 6B-1, Cikarang Selatan, Bekasi, Jawa Barat"
+    }
   },
   {
     "id": 25,
@@ -522,7 +666,13 @@
     "dimension_outer_length": 188,
     "dimension_outer_height": 138,
     "ewarehouse_price": 45.15,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5006",
+    "supplier": {
+      "supplier_code": "5151",
+      "supplier_name": "SAKURA JAVA INDONESIA",
+      "supplier_address": "Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530"
+    }
   },
   {
     "id": 26,
@@ -543,7 +693,13 @@
     "dimension_outer_length": 198,
     "dimension_outer_height": 148,
     "ewarehouse_price": 130.8,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5010",
+    "supplier": {
+      "supplier_code": "5028",
+      "supplier_name": "GARUDA METAL UTAMA",
+      "supplier_address": "Jl. Kapuk Kamal Raya No.28, RT.6/RW.2, Kamal Muara, Kec. Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470"
+    }
   },
   {
     "id": 27,
@@ -564,7 +720,13 @@
     "dimension_outer_length": 208,
     "dimension_outer_height": 158,
     "ewarehouse_price": 160.3,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5010",
+      "supplier_name": "3 M INDONESIA",
+      "supplier_address": "Perkantoran Hijau Arkadia, Tower F, 8th Floor, Jl. TB Simatupang No.Kav. 88, RT.1/RW.1, Kebagusan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520"
+    }
   },
   {
     "id": 28,
@@ -585,7 +747,13 @@
     "dimension_outer_length": 218,
     "dimension_outer_height": 168,
     "ewarehouse_price": 25.85,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5028",
+    "supplier": {
+      "supplier_code": "5151",
+      "supplier_name": "SAKURA JAVA INDONESIA",
+      "supplier_address": "Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530"
+    }
   },
   {
     "id": 29,
@@ -606,7 +774,13 @@
     "dimension_outer_length": 228,
     "dimension_outer_height": 178,
     "ewarehouse_price": 215.5,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5453",
+    "supplier": {
+      "supplier_code": "5062",
+      "supplier_name": "MENARA TERUS MAKMUR",
+      "supplier_address": "Jl. Jababeka XI Blok H-3 No.12, Kawasan Industri Jababeka, Cikarang, Bekasi"
+    }
   },
   {
     "id": 30,
@@ -627,7 +801,13 @@
     "dimension_outer_length": 138,
     "dimension_outer_height": 188,
     "ewarehouse_price": 150.75,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5028",
+    "supplier": {
+      "supplier_code": "5365",
+      "supplier_name": "TOKAI RUBBER INDONESIA",
+      "supplier_address": "Jl. Mitra Timur II Blok E No. 13-14, Parungmulya, Ciampel, Karawang, Jawa Barat"
+    }
   },
   {
     "id": 31,
@@ -648,7 +828,13 @@
     "dimension_outer_length": 148,
     "dimension_outer_height": 198,
     "ewarehouse_price": 35.4,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5335",
+    "supplier": {
+      "supplier_code": "5453",
+      "supplier_name": "VELASTO INDONESIA",
+      "supplier_address": "Kp. Nagrog RT04 / RW02 Desa Kertamukti, Kecamatan Campaka, Purwakarta, Jawa Barat"
+    }
   },
   {
     "id": 32,
@@ -669,7 +855,13 @@
     "dimension_outer_length": 158,
     "dimension_outer_height": 208,
     "ewarehouse_price": 92.95,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5062",
+    "supplier": {
+      "supplier_code": "5150",
+      "supplier_name": "NAMICOH INDONESIA",
+      "supplier_address": "EJIP Industrial Park, Plot 6B-1, Cikarang Selatan, Bekasi, Jawa Barat"
+    }
   },
   {
     "id": 33,
@@ -690,7 +882,13 @@
     "dimension_outer_length": 168,
     "dimension_outer_height": 218,
     "ewarehouse_price": 270.6,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5335",
+    "supplier": {
+      "supplier_code": "5453",
+      "supplier_name": "VELASTO INDONESIA",
+      "supplier_address": "Kp. Nagrog RT04 / RW02 Desa Kertamukti, Kecamatan Campaka, Purwakarta, Jawa Barat"
+    }
   },
   {
     "id": 34,
@@ -711,7 +909,13 @@
     "dimension_outer_length": 178,
     "dimension_outer_height": 228,
     "ewarehouse_price": 18.3,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5151",
+    "supplier": {
+      "supplier_code": "5006",
+      "supplier_name": "NUSAHADI CITRAHARMONIS",
+      "supplier_address": "Jl. Raya Bekasi No.KM. 28, RT.005/RW.004, Medan Satria, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17132"
+    }
   },
   {
     "id": 35,
@@ -732,6 +936,12 @@
     "dimension_outer_length": 188,
     "dimension_outer_height": 138,
     "ewarehouse_price": 180.45,
-    "currency_code": "IDR"
+    "currency_code": "IDR",
+    "supplierCode": "5010",
+    "supplier": {
+      "supplier_code": "5150",
+      "supplier_name": "NAMICOH INDONESIA",
+      "supplier_address": "EJIP Industrial Park, Plot 6B-1, Cikarang Selatan, Bekasi, Jawa Barat"
+    }
   }
 ]
