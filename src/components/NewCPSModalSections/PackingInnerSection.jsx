@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 /**
  * Section for managing inner pack materials.
  * @param {object} props - Component props.
  * @param {Array<object>} props.innerRows - The list of inner pack material rows.
+ * @param {function} props.setInnerRows - Function to update the inner rows.
  * @param {object} props.newInner - The object holding data for a new inner row.
  * @param {function} props.setNewInner - Function to update the new inner row data.
  * @param {function} props.handleAddInnerRow - Function to add a new inner row to the list.
@@ -13,6 +14,7 @@ import React, { useState } from 'react';
 export default function PackingInnerSection(props) {
   const {
     innerRows,
+    setInnerRows,
     newInner,
     setNewInner,
     handleAddInnerRow,
@@ -22,6 +24,24 @@ export default function PackingInnerSection(props) {
 
   // State to control the visibility of the new row input form
   const [showNewRow, setShowNewRow] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const materialNoInputRef = useRef(null);
+
+  useEffect(() => {
+    if (editingIndex !== null && materialNoInputRef.current) {
+      materialNoInputRef.current.focus();
+    }
+  }, [editingIndex]);
+
+  const handleRowChange = (index, field, value) => {
+    const updatedRows = innerRows.map((row, i) => {
+      if (i === index) {
+        return { ...row, [field]: value };
+      }
+      return row;
+    });
+    setInnerRows(updatedRows);
+  };
 
   return (
     <div className="row mt-3">
@@ -31,7 +51,10 @@ export default function PackingInnerSection(props) {
           <div>
             <button
               className="btn btn-sm btn-outline-primary"
-              onClick={() => setShowNewRow(true)}
+              onClick={() => {
+                setEditingIndex(null);
+                setShowNewRow(true);
+              }}
               disabled={showNewRow}
             >
               Add
@@ -68,33 +91,90 @@ export default function PackingInnerSection(props) {
                   </td>
                 </tr>
               ) : (
-                innerRows.map((r, i) => (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{r.materialNo}</td>
-                    <td>{r.suffix}</td>
-                    <td>{r.name}</td>
-                    <td>{r.supplierName}</td>
-                    <td>{r.L}</td>
-                    <td>{r.W}</td>
-                    <td>{r.H}</td>
-                    <td>{r.wtPerPc}</td>
-                    <td>{r.qty}</td>
-                    <td>
-                      {(
-                        Number(r.wtPerPc || 0) * Number(r.qty || 0)
-                      ).toFixed(2)}
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => handleRemoveInnerRow(i)}
-                      >
-                        <i className="fas fa-trash" />
-                      </button>
-                    </td>
-                  </tr>
-                ))
+                innerRows.map((r, i) => {
+                  const isEditing = editingIndex === i;
+
+                  if (isEditing) {
+                    return (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>
+                          <input
+                            ref={materialNoInputRef}
+                            value={r.materialNo}
+                            onChange={(e) => handleRowChange(i, 'materialNo', e.target.value)}
+                            className="form-control form-control-sm"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={r.suffix}
+                            onChange={(e) => handleRowChange(i, 'suffix', e.target.value)}
+                            className="form-control form-control-sm"
+                          />
+                        </td>
+                        <td><input value={r.name} readOnly className="form-control form-control-sm" /></td>
+                        <td><input value={r.supplierName} readOnly className="form-control form-control-sm" /></td>
+                        <td><input value={r.L} readOnly className="form-control form-control-sm" /></td>
+                        <td><input value={r.W} readOnly className="form-control form-control-sm" /></td>
+                        <td><input value={r.H} readOnly className="form-control form-control-sm" /></td>
+                        <td>
+                          <input
+                            value={r.wtPerPc}
+                            onChange={(e) => handleRowChange(i, 'wtPerPc', e.target.value)}
+                            className="form-control form-control-sm"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={r.qty}
+                            onChange={(e) => handleRowChange(i, 'qty', e.target.value)}
+                            className="form-control form-control-sm"
+                          />
+                        </td>
+                        <td>{(Number(r.wtPerPc || 0) * Number(r.qty || 0)).toFixed(2)}</td>
+                        <td>
+                          <button className="btn btn-sm btn-primary" onClick={() => setEditingIndex(null)}>
+                            Save
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  }
+
+                  return (
+                    <tr
+                      key={i}
+                      onClick={() => {
+                        setEditingIndex(i);
+                        setShowNewRow(false);
+                      }}
+                    >
+                      <td>{i + 1}</td>
+                      <td>{r.materialNo}</td>
+                      <td>{r.suffix}</td>
+                      <td>{r.name}</td>
+                      <td>{r.supplierName}</td>
+                      <td>{r.L}</td>
+                      <td>{r.W}</td>
+                      <td>{r.H}</td>
+                      <td>{r.wtPerPc}</td>
+                      <td>{r.qty}</td>
+                      <td>{(Number(r.wtPerPc || 0) * Number(r.qty || 0)).toFixed(2)}</td>
+                      <td>
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemoveInnerRow(i);
+                          }}
+                        >
+                          <i className="fas fa-trash" />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
               {showNewRow && (
                 <tr>
