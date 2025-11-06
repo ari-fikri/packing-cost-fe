@@ -9,7 +9,8 @@ export default function ResultSection({
   totalPages,
   pageSize,
   onPageChange,
-  onDeleteMaterial
+  onDeleteMaterial,
+  onEditMaterial
 }) {
   return (
     <>
@@ -46,7 +47,7 @@ export default function ResultSection({
                     <button 
                       type="button" 
                       className="btn btn-sm btn-outline-primary mr-1" 
-                      onClick={() => alert('Edit placeholder')}
+                      onClick={() => onEditMaterial && onEditMaterial(material)}
                       title="Edit Material"
                     >
                       <i className="fas fa-pencil-alt" />
@@ -54,7 +55,7 @@ export default function ResultSection({
                     <button 
                       type="button" 
                       className="btn btn-sm btn-outline-danger" 
-                      onClick={() => onDeleteMaterial(i)}
+                      onClick={() => onDeleteMaterial && onDeleteMaterial(i)}
                       title="Delete Material"
                     >
                       <i className="fas fa-trash" />

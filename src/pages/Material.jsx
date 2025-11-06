@@ -4,7 +4,6 @@ import { SearchSection, ResultSection } from '../components/MaterialSections'
 import materialsData from '../data/materials.json'
 
 export default function Material() {
-  // Search filters - based on the form fields in the attachment
   const [materialNo, setMaterialNo] = useState('')
   const [materialName, setMaterialName] = useState('')
   const [parentMaterial, setParentMaterial] = useState('')
@@ -13,25 +12,22 @@ export default function Material() {
   const [materialType, setMaterialType] = useState('')
   const [showNewModal, setShowNewModal] = useState(false)
 
-  // Pagination state
+  // NEW: modal mode and selected material for edit
+  const [modalMode, setModalMode] = useState('new')
+  const [selectedMaterial, setSelectedMaterial] = useState(null)
+
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10
 
-  // Table data - separate original data and filtered data
   const [allMaterials, setAllMaterials] = useState(materialsData)
-  // Keep `materials` (the filtered list) empty on initial load so the table
-  // header is visible but no rows are shown. User must click Filter to load
-  // results; clicking Filter with no criteria will show latest-first.
   const [materials, setMaterials] = useState([])
 
-  // Calculate pagination
   const totalPages = Math.ceil(materials.length / pageSize)
   const startIndex = (currentPage - 1) * pageSize
   const endIndex = startIndex + pageSize
   const paginatedMaterials = materials.slice(startIndex, endIndex)
 
   function handleFilter() {
-    // Filter materials based on search criteria
     let filtered = allMaterials.filter(material => {
       const matchMaterialNo = !materialNo || (material.materialNo && material.materialNo.toLowerCase().includes(materialNo.toLowerCase()))
       const matchMaterialName = !materialName || (material.materialName && material.materialName.toLowerCase().includes(materialName.toLowerCase()))
@@ -47,12 +43,11 @@ export default function Material() {
     const noFilters = !materialNo && !materialName && !parentMaterial && !itemNo && !price && !materialType
 
     if (noFilters) {
-      // Show latest-first when there are no filter criteria
       setMaterials([...allMaterials].reverse())
     } else {
       setMaterials(filtered)
     }
-    setCurrentPage(1) // Reset to first page when filtering
+    setCurrentPage(1)
     console.log(`Filtered ${filtered.length} materials from ${allMaterials.length} total`)
   }
 
@@ -63,45 +58,65 @@ export default function Material() {
     setItemNo('')
     setPrice('')
     setMaterialType('')
-    // Clear results so header stays visible with no rows
     setMaterials([])
-    setCurrentPage(1) // Reset to first page when clearing
+    setCurrentPage(1)
   }
 
   function handleOpenNew() {
+    setSelectedMaterial(null)
+    setModalMode('new')
     setShowNewModal(true)
   }
 
   function handleCloseNew() {
     setShowNewModal(false)
+    setSelectedMaterial(null)
+    setModalMode('new')
   }
 
-  // **Receive new material from modal and add to table**
-  function handleSaveNewMaterial(payload) {
-    setAllMaterials(prev => [payload, ...prev])
-    setMaterials(prev => [payload, ...prev])
+  // Updated to handle both new and edit
+  function handleSaveNewMaterial(payload, mode = 'new') {
+    if (mode === 'edit' && selectedMaterial) {
+      // find by original materialNo (selectedMaterial) and replace
+      const origKey = selectedMaterial.materialNo
+      const updatedAll = allMaterials.map(m => (m.materialNo === origKey ? { ...m, ...payload } : m))
+      const updatedFiltered = materials.map(m => (m.materialNo === origKey ? { ...m, ...payload } : m))
+      setAllMaterials(updatedAll)
+      setMaterials(updatedFiltered)
+    } else {
+      // add new at top
+      setAllMaterials(prev => [payload, ...prev])
+      setMaterials(prev => [payload, ...prev])
+    }
     setShowNewModal(false)
+    setSelectedMaterial(null)
+    setModalMode('new')
   }
 
   function handleDeleteMaterial(index) {
     if (!confirm('Delete this material?')) return
     
-    // Get the actual material from the paginated view
     const actualIndex = (currentPage - 1) * pageSize + index
     const materialToDelete = materials[actualIndex]
-    
-    // Remove from both filtered and all materials arrays
+    if (!materialToDelete) return
+
     const newMaterials = materials.filter((_, i) => i !== actualIndex)
     const newAllMaterials = allMaterials.filter(m => m.materialNo !== materialToDelete.materialNo)
     
     setMaterials(newMaterials)
     setAllMaterials(newAllMaterials)
     
-    // Adjust current page if necessary
     const newTotalPages = Math.ceil(newMaterials.length / pageSize)
     if (currentPage > newTotalPages && newTotalPages > 0) {
       setCurrentPage(newTotalPages)
     }
+  }
+
+  // NEW: open modal in edit mode with selected data
+  function handleEditMaterial(material) {
+    setSelectedMaterial(material)
+    setModalMode('edit')
+    setShowNewModal(true)
   }
 
   return (
@@ -123,7 +138,6 @@ export default function Material() {
         </div>
 
         <div className="card-body">
-          {/* Search Section Component */}
           <SearchSection
             materialNo={materialNo}
             setMaterialNo={setMaterialNo}
@@ -141,7 +155,6 @@ export default function Material() {
             onClearFilters={handleClearFilters}
           />
 
-          {/* Result Section Component */}
           <ResultSection
             materials={paginatedMaterials}
             allMaterials={allMaterials}
@@ -151,14 +164,17 @@ export default function Material() {
             pageSize={pageSize}
             onPageChange={setCurrentPage}
             onDeleteMaterial={handleDeleteMaterial}
+            // NEW: pass edit handler so ResultSection can call it when Edit button clicked
+            onEditMaterial={handleEditMaterial}
           />
         </div>
 
-        {/* Modal */}
         <NewMaterialModal
           show={showNewModal}
           onClose={handleCloseNew}
           onSave={handleSaveNewMaterial}
+          initialData={selectedMaterial}
+          mode={modalMode}
         />
       </div>
     </div>

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export default function NewMaterialModal({ show, onClose, onSave }) {
-  // Form fields based on the attachment
+export default function NewMaterialModal({ show, onClose, onSave, initialData = null, mode = 'new' }) {
   const [materialNo, setMaterialNo] = useState('')
   const [materialName, setMaterialName] = useState('')
   const [parentMaterial, setParentMaterial] = useState('')
@@ -9,26 +8,39 @@ export default function NewMaterialModal({ show, onClose, onSave }) {
   const [price, setPrice] = useState('')
   const [materialType, setMaterialType] = useState('')
 
+  useEffect(() => {
+    if (show && initialData) {
+      setMaterialNo(initialData.materialNo || '')
+      setMaterialName(initialData.materialName || '')
+      setParentMaterial(initialData.parentMaterial || '')
+      setItemNo(initialData.itemNo || '')
+      setPrice(initialData.price ?? '')
+      setMaterialType(initialData.materialType || '')
+    } else if (!show) {
+      handleClear()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [show, initialData])
+
   function handleSave() {
-    // Basic validation
     if (!materialNo || !materialName || !materialType) {
       alert('Please fill in Material No, Material Name, and Material Type')
       return
     }
 
-    // Create material object
     const newMaterial = {
+      // preserve any id if present
+      id: initialData?.id,
       materialNo,
       materialName,
       parentMaterial,
       itemNo,
       price,
       materialType,
-      createdDate: new Date().toLocaleDateString()
+      createdDate: mode === 'edit' ? (initialData?.createdDate || new Date().toLocaleDateString()) : new Date().toLocaleDateString()
     }
 
-    // Send to parent
-    onSave(newMaterial)
+    onSave(newMaterial, mode)
     handleClear()
   }
 
@@ -48,14 +60,15 @@ export default function NewMaterialModal({ show, onClose, onSave }) {
 
   if (!show) return null
 
+  const title = mode === 'edit' ? 'Material - Edit' : 'Material - New'
+  const saveLabel = mode === 'edit' ? 'Save Changes' : 'Save Material'
+
   return (
     <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) handleClose() }}>
       <div className="np-modal card card-outline card-primary" style={{ maxWidth: 800 }}>
-        
-        {/* Modal Header */}
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0">
-            <b>Material - New</b>
+            <b>{title}</b>
           </h3>
           <div className="card-tools ml-auto">
             <button type="button" className="btn btn-tool" onClick={handleClose}>
@@ -64,10 +77,8 @@ export default function NewMaterialModal({ show, onClose, onSave }) {
           </div>
         </div>
 
-        {/* Modal Body */}
         <div className="card-body">
           <div className="row">
-            {/* Left Column */}
             <div className="col-md-6">
               <div className="form-group">
                 <label className="form-label">
@@ -108,7 +119,6 @@ export default function NewMaterialModal({ show, onClose, onSave }) {
               </div>
             </div>
 
-            {/* Right Column */}
             <div className="col-md-6">
               <div className="form-group">
                 <label className="form-label">Item No</label>
@@ -159,7 +169,6 @@ export default function NewMaterialModal({ show, onClose, onSave }) {
           </div>
         </div>
 
-        {/* Modal Footer */}
         <div className="card-footer text-right">
           <button type="button" className="btn btn-secondary mr-2" onClick={handleClose}>
             <i className="fas fa-times mr-1"></i>
@@ -167,7 +176,7 @@ export default function NewMaterialModal({ show, onClose, onSave }) {
           </button>
           <button type="button" className="btn btn-primary" onClick={handleSave}>
             <i className="fas fa-save mr-1"></i>
-            Save Material
+            {saveLabel}
           </button>
         </div>
       </div>
