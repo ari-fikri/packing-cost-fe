@@ -1,0 +1,57 @@
+export const suppliers = [
+  {
+    code: '5062',
+    name: 'MENARA TERUS MAKMUR',
+    address: 'Jl. Jababeka XI Blok H-3 No.12, Kawasan Industri Jababeka, Cikarang, Bekasi',
+  },
+  {
+    code: '722E',
+    name: 'TOYOTA MOTOR THAILAND',
+    address: '186/1 Moo 1, Old Railway Road, Samrong Tai, Phra Pradaeng, Samut Prakan 10130, Thailand',
+  },
+  {
+    code: '5453',
+    name: 'VELASTO INDONESIA',
+    address: 'Kp. Nagrog RT04 / RW02 Desa Kertamukti, Kecamatan Campaka, Purwakarta, Jawa Barat',
+  },
+  {
+    code: '5365',
+    name: 'TOKAI RUBBER INDONESIA',
+    address: 'Jl. Mitra Timur II Blok E No. 13-14, Parungmulya, Ciampel, Karawang, Jawa Barat',
+  },
+  {
+    code: '5150',
+    name: 'NAMICOH INDONESIA',
+    address: 'EJIP Industrial Park, Plot 6B-1, Cikarang Selatan, Bekasi, Jawa Barat',
+  },
+  {
+    code: '5028',
+    name: 'GARUDA METAL UTAMA',
+    address: 'Jl. Kapuk Kamal Raya No.28, RT.6/RW.2, Kamal Muara, Kec. Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470',
+  },
+  {
+    code: '5335',
+    name: 'DINAR MAKMUR',
+    address: 'Jl. Raya Serang No.KM. 78, RW.3, Cijeruk, Kec. Kibin, Kabupaten Serang, Banten 42185',
+  },
+  {
+    code: '5006',
+    name: 'NUSAHADI CITRAHARMONIS',
+    address: 'Jl. Raya Bekasi No.KM. 28, RT.005/RW.004, Medan Satria, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17132',
+  },
+  {
+    code: '5151',
+    name: 'SAKURA JAVA INDONESIA',
+    address: 'Kawasan Industri EJIP, Plot 8C/D, Cikarang Selatan, Bekasi, Jawa Barat 17530',
+  },
+  {
+    code: '5010',
+    name: '3 M INDONESIA',
+    address: 'Perkantoran Hijau Arkadia, Tower F, 8th Floor, Jl. TB Simatupang No.Kav. 88, RT.1/RW.1, Kebagusan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520',
+  },
+  {
+    code: '5002',
+    name: 'ASALTA MANDIRI AGUNG',
+    address: 'Jl. Pulo Buaran Raya No.1A, RT.1/RW.8, Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13930',
+  },
+];

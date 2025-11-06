@@ -22,6 +22,7 @@ export default function Sidebar() {
     if (path.startsWith('/projects') || 
         path.startsWith('/models') || 
         path.startsWith('/parts') || 
+        path.startsWith('/suppliers') || 
         path.startsWith('/material') || 
         path.startsWith('/module-type') || 
         path.startsWith('/params')) {
@@ -115,6 +116,12 @@ export default function Sidebar() {
                   <NavLink to="/parts" className={navLinkClass}>
                     <i className="far fa-circle nav-icon" />
                     <p>Parts</p>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/suppliers" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>Suppliers</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">

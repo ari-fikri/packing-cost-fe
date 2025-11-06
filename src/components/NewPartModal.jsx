@@ -135,9 +135,9 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
   }
 
   // Handler for picking parent part
-  function handlePickParentPart(parts) {
-    if (parts && parts.length > 0) {
-      setParentPartNo(parts[0].partNo)
+  function handlePickParentPart(part) {
+    if (part) {
+      setParentPartNo(part.partNo)
     }
     setShowPartPicker(false)
   }
@@ -393,6 +393,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
         <div style={{ position: 'fixed', inset: 0, zIndex: 3000 }}>
           <PartPickerModal
             show={showPartPicker}
+            mode={partPickerMode === 'parent' ? 'single' : 'multi'}
             onClose={() => setShowPartPicker(false)}
             onSelect={partPickerMode === 'parent' ? handlePickParentPart : handlePickChildParts}
           />

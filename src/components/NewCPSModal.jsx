@@ -2,8 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import MultiPartsComparisonModal from './MultiPartsComparisonModal'
 import PartPickerModal from './PartPickerModal';
+import ModelPickerModal from './ModelPickerModal';
+import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
 import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
+import { formatCurrency } from '../utils/globalFunctions';
+import materials from '../data/materials.json';
+
 
 // Import sections from external folder
 import {
@@ -14,13 +19,16 @@ import {
   LogisticSection
 } from './NewCPSModalSections'
 
-export default function NewCpsModal({ show = false, onClose = () => {}, onSave = () => {}, onSubmit = () => {} }) {
-  // Top-level fields (all empty by default)
+import { buildPayload, resetStates } from '../utils/cpsHelpers.js';
+
+export default function NewCPSModal({ show, onClose, onSave, editData }) {
+  const [activeTab, setActiveTab] = useState('general');
+
+  // General states
   const [cpsNo, setCpsNo] = useState('')
   const [refCpsNo, setRefCpsNo] = useState('')
   const [issueDate, setIssueDate] = useState('')
   const [effectiveDate, setEffectiveDate] = useState('')
-  const [dpiNo, setDpiNo] = useState('')
   const [cfcPjtCode, setCfcPjtCode] = useState('')
   const [model, setModel] = useState('')
   const [partNo, setPartNo] = useState('')
@@ -49,18 +57,20 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   const [packingProcessBoxing, setPackingProcessBoxing] = useState('')
   const [packingProcessStacking, setPackingProcessStacking] = useState('')
 
-  // images groups (arrays of objects with caption + optional url)
-  const [imagesPart, setImagesPart] = useState([])
-  const [imagesPacking, setImagesPacking] = useState([])
-  const [imagesOuter, setImagesOuter] = useState([])
-  const [imagesQkp, setImagesQkp] = useState([])
-  const [imagesBkp, setImagesBkp] = useState([])
+  // images groups (caption and array of files)
+  const [imagesPart, setImagesPart] = useState({ caption: "", files: [] });
+  const [imagesPacking, setImagesPacking] = useState({ caption: "", files: [] });
+  const [imagesOuter, setImagesOuter] = useState({ caption: "", files: [] });
+  const [imagesQkp, setImagesQkp] = useState({ caption: "", files: [] });
+  const [imagesBkp, setImagesBkp] = useState({ caption: "", files: [] });
 
   // Packing - Outer summary
   const [outerModuleType, setOuterModuleType] = useState('')
-  const [outerDimension, setOuterDimension] = useState({ L: '', W: '', H: '' }) // cm
+  const [outerMaterialName, setOuterMaterialName] = useState("");
+  const [outerMaterialNo, setOuterMaterialNo] = useState("");
+  const [outerDimension, setOuterDimension] = useState({ L: "", W: "", H: "" });
+  const [outerVolume, setOuterVolume] = useState("");
   const [innerVolume, setInnerVolume] = useState('')
-  const [outerVolume, setOuterVolume] = useState('')
 
   // Inner pack materials table (static/simpler table as requested)
   const [innerRows, setInnerRows] = useState([])
@@ -95,6 +105,13 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   // NEW: control for part picker modal
   const [isPartPickerOpen, setPartPickerOpen] = useState(false);
 
+  // NEW: control for model picker modal
+  const [isModelPickerOpen, setModelPickerOpen] = useState(false);
+
+  // NEW: control for material picker modal
+  const [isMaterialPickerOpen, setMaterialPickerOpen] = useState(false);
+  const [materialFilter, setMaterialFilter] = useState("all");
+
   // NEW: Logistic Info collapse state & fields
   const [logisticOpen, setLogisticOpen] = useState(true);
   const [tmmindDestDockCode, setTmmindDestDockCode] = useState('');
@@ -105,54 +122,117 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   // Reset all fields when modal opens
   useEffect(() => {
     if (show) {
-      setCpsNo('')
-      setRefCpsNo('')
-      setIssueDate('')
-      setEffectiveDate('')
-      setDpiNo('')
-      setCfcPjtCode('')
-      setModel('')
-      setPartNo('')
-      setPartName('')
-      setSupplier('')
-      setPlantCode('')
-      setDockCode('')
+      if (editData) {
+        // Populate fields from editData
+        setCpsNo(editData.cpsNo || '');
+        setRefCpsNo(editData.refCpsNo || '');
+        setIssueDate(editData.issueDate || '');
+        setEffectiveDate(editData.effectiveDate || '');
+        setCfcPjtCode(editData.cfcPjtCode || '');
+        setModel(editData.model || '');
+        setPartNo(editData.partNo || '');
+        setPartName(editData.partName || '');
+        setSupplier(editData.supplier || '');
+        setPlantCode(editData.plantCode || '');
+        setDockCode(editData.dockCode || '');
 
-      setPseOpen(false)
-      setPackingPlantCurr(''); setPackingPlantNext('')
-      setVanningPlantCurr(''); setVanningPlantNext('')
-      setOrderPatternCurr(''); setOrderPatternNext('')
-      setCategory(''); setKatashiki({ AD: '', AU: '', AF: '', AX: '' })
-      setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('')
-      setPackingProcessBoxing(''); setPackingProcessStacking('')
+        if (editData.pseInfo) {
+          setPackingPlantCurr(editData.pseInfo.packingPlantCurr || '');
+          setPackingPlantNext(editData.pseInfo.packingPlantNext || '');
+          setVanningPlantCurr(editData.pseInfo.vanningPlantCurr || '');
+          setVanningPlantNext(editData.pseInfo.vanningPlantNext || '');
+          setOrderPatternCurr(editData.pseInfo.orderPatternCurr || '');
+          setOrderPatternNext(editData.pseInfo.orderPatternNext || '');
+          setCategory(editData.pseInfo.category || '');
+          setKatashiki(editData.pseInfo.katashiki || { AD: '', AU: '', AF: '', AX: '' });
+          setImporterLineProcess(editData.pseInfo.importerLineProcess || '');
+          setCaseCode(editData.pseInfo.caseCode || '');
+          setBoxNumber(editData.pseInfo.boxNumber || '');
+          setRenban(editData.pseInfo.renban || '');
+          setRenbanEff(editData.pseInfo.renbanEff || '');
+          setPackingProcessBoxing(editData.pseInfo.packingProcessBoxing || '');
+          setPackingProcessStacking(editData.pseInfo.packingProcessStacking || '');
+        }
 
-      setImagesPart([]); setImagesPacking([]); setImagesOuter([]); setImagesQkp([]); setImagesBkp([])
+        if (editData.images) {
+          setImagesPart(editData.images.part || { caption: "", files: [] });
+          setImagesPacking(editData.images.packing || { caption: "", files: [] });
+          setImagesOuter(editData.images.outer || { caption: "", files: [] });
+          setImagesQkp(editData.images.qkp || { caption: "", files: [] });
+          setImagesBkp(editData.images.bkp || { caption: "", files: [] });
+        }
 
-      setOuterModuleType(''); setOuterDimension({ L: '', W: '', H: '' })
-      setInnerVolume(''); setOuterVolume('')
-      setInnerRows([])
-      setNotes('')
-      setNewInner({
-        materialNo: '',
-        suffix: '',
-        name: '',
-        parent: '',
-        supplierId: '',
-        supplierName: '',
-        L: '',
-        W: '',
-        H: '',
-        wtPerPc: '',
-        qty: '',
-      })
+        if (editData.packing) {
+          setOuterModuleType(editData.packing.outerModuleType || '');
+          setOuterMaterialName(editData.packing.outerMaterialName || '');
+          setOuterDimension(editData.packing.outerDimension || { L: '', W: '', H: '' });
+          setInnerVolume(editData.packing.innerVolume || '');
+          setOuterVolume(editData.packing.outerVolume || '');
+          setInnerRows(editData.packing.innerRows || []);
+        }
 
-      setLogisticOpen(true);
-      setTmmindDestDockCode('');
-      setLogisticRemark('');
-      setProcessType('N');
-      setAddressRack('');
+        setNotes(editData.notes || '');
+
+        if (editData.logistic) {
+          setTmmindDestDockCode(editData.logistic.tmmindDestDockCode || '');
+          setLogisticRemark(editData.logistic.logisticRemark || '');
+          setProcessType(editData.logistic.processType || 'N');
+          setAddressRack(editData.logistic.addressRack || '');
+        }
+      } else {
+        // Reset all fields for a new entry
+        setCpsNo('');
+        setRefCpsNo('');
+        setIssueDate('');
+        setEffectiveDate('');
+        setCfcPjtCode('');
+        setModel('');
+        setPartNo('');
+        setPartName('');
+        setSupplier('');
+        setPlantCode('');
+        setDockCode('');
+
+        setPseOpen(false);
+        setPackingPlantCurr(''); setPackingPlantNext('');
+        setVanningPlantCurr(''); setVanningPlantNext('');
+        setOrderPatternCurr(''); setOrderPatternNext('');
+        setCategory(''); setKatashiki({ AD: '', AU: '', AF: '', AX: '' });
+        setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('');
+        setPackingProcessBoxing(''); setPackingProcessStacking('');
+
+        setImagesPart({ caption: "", files: [] });
+        setImagesPacking({ caption: "", files: [] });
+        setImagesOuter({ caption: "", files: [] });
+        setImagesQkp({ caption: "", files: [] });
+        setImagesBkp({ caption: "", files: [] });
+
+        setOuterModuleType(''); setOuterMaterialName(''); setOuterDimension({ L: '', W: '', H: '' });
+        setInnerVolume(''); setOuterVolume('');
+        setInnerRows([]);
+        setNotes('');
+        setNewInner({
+          materialNo: '',
+          suffix: '',
+          name: '',
+          parent: '',
+          supplierId: '',
+          supplierName: '',
+          L: '',
+          W: '',
+          H: '',
+          wtPerPc: '',
+          qty: '',
+        });
+
+        setLogisticOpen(true);
+        setTmmindDestDockCode('');
+        setLogisticRemark('');
+        setProcessType('N');
+        setAddressRack('');
+      }
     }
-  }, [show])
+  }, [show, editData]);
 
   function handleAddInnerRow() {
     if (!newInner.materialNo.trim()) {
@@ -176,16 +256,25 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
   }
 
   function handleRemoveInnerRow(i) {
-    setInnerRows(prev => prev.filter((_, idx) => idx !== i))
+    setInnerRows((prev) => prev.filter((_, idx) => idx !== i));
   }
 
-  function buildPayload() {
-    return {
+  function handlePartPicked(part) {
+    if (part) {
+      setPartNo(part.partNo);
+      setPartName(part.partName);
+      setSupplier(part.supplierName);
+    }
+    setPartPickerOpen(false);
+  }
+
+  const handleSave = () => {
+    const payload = buildPayload({
+      // General
       cpsNo,
       refCpsNo,
       issueDate,
       effectiveDate,
-      dpiNo,
       cfcPjtCode,
       model,
       partNo,
@@ -206,20 +295,83 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         innerRows
       },
       notes,
+      logistic: {
+        tmmindDestDockCode,
+        logisticRemark,
+        processType,
+        addressRack,
+      },
+    });
+    onSave(payload);
+    handleClose();
+  };
+
+  const handleClose = () => {
+    resetStates({
+      setCpsNo, setRefCpsNo, setIssueDate, setEffectiveDate, setCfcPjtCode, setModel, setPartNo,
+      setPartName, setSupplier, setPlantCode, setDockCode,
+      setPseOpen, setPackingPlantCurr, setPackingPlantNext, setVanningPlantCurr, setVanningPlantNext,
+      setOrderPatternCurr, setOrderPatternNext, setCategory, setKatashiki, setImporterLineProcess,
+      setCaseCode, setBoxNumber, setRenban, setRenbanEff, setPackingProcessBoxing, setPackingProcessStacking,
+      setImagesPart, setImagesPacking, setImagesOuter, setImagesQkp, setImagesBkp,
+      setOuterModuleType, setOuterMaterialName, setOuterDimension, setInnerVolume, setOuterVolume,
+      setInnerRows, setNotes, setNewInner,
+      setLogisticOpen, setTmmindDestDockCode, setLogisticRemark, setProcessType, setAddressRack
+    });
+    onClose();
+  };
+
+  function handleModelPicked(selection) {
+    if (selection) {
+      if (Array.isArray(selection)) {
+        // Multi-select mode
+        setModel(selection.map((m) => m.code).join(", "));
+      } else {
+        // Single-select mode
+        setModel(selection.code || "");
+      }
     }
+    setModelPickerOpen(false);
   }
 
-  function handlePartPicked(selectedParts) {
-    if (selectedParts && selectedParts.length > 0) {
-      const part = selectedParts[0];
-      setPartNo(part.partNo || '');
-      setPartName(part.partName || '');
-      setSupplier(part.supplierName || '');
+  function handleMaterialPicked(material) {
+    if (material) {
+      if (materialFilter === 'outer' || materialFilter === 'module') {
+        console.dir(" Material >>>" + JSON.stringify(material));
+        setOuterModuleType(material.materialNo);
+        setOuterMaterialName(material.materialName);
+        setOuterDimension({
+          L: material.dimension_length,
+          W: material.dimension_width,
+          H: material.dimension_height,
+        });
+        var inner = (material.dimension_inner_width * material.dimension_inner_height * material.dimension_inner_length/1000000);
+        var outer = (material.dimension_outer_width * material.dimension_outer_height * material.dimension_outer_length)/1000000;
+        setOuterVolume(formatCurrency(outer));
+        setInnerVolume(formatCurrency(inner));
+      } else if (materialFilter === 'inner') {
+        setNewInner({
+          ...newInner,
+          materialNo: material.materialNo,
+          name: material.materialName,
+          L: material.dimension_length,
+          W: material.dimension_width,
+          H: material.dimension_height,
+          wtPerPc: material.unitWeight,
+        });
+      }
     }
-    setPartPickerOpen(false);
+    setMaterialPickerOpen(false);
   }
 
-  if (!show) return null
+  const openModelPicker = () => setModelPickerOpen(true);
+
+  const openMaterialPicker = (filter) => {
+    setMaterialFilter(filter);
+    setMaterialPickerOpen(true);
+  };
+
+  if (!show) return null;
 
   return (
     <>
@@ -227,7 +379,7 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
       <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}>
         <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1100 }}>
           <div className="card-header d-flex align-items-center">
-            <h3 className="card-title mb-0"><b>CPS - New</b></h3>
+            <h3 className="card-title mb-0"><b>{editData ? 'CPS - Edit' : 'CPS - New'}</b></h3>
             <div className="card-tools ml-auto">
               <button type="button" className="btn btn-tool" onClick={onClose}><i className="fas fa-times" /></button>
             </div>
@@ -236,19 +388,21 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
           <div className="card-body">
             {/* General Info */}
             <GeneralInfoSection
-              cpsNo={cpsNo} setCpsNo={setCpsNo}
-              refCpsNo={refCpsNo} setRefCpsNo={setRefCpsNo}
-              issueDate={issueDate} setIssueDate={setIssueDate}
-              effectiveDate={effectiveDate} setEffectiveDate={setEffectiveDate}
-              dpiNo={dpiNo} setDpiNo={setDpiNo}
-              cfcPjtCode={cfcPjtCode} setCfcPjtCode={setCfcPjtCode}
-              model={model} setModel={setModel}
+              cpsNo={cpsNo}
+              setCpsNo={setCpsNo}
+              refCpsNo={refCpsNo}
+              setRefCpsNo={setRefCpsNo}
+              cfcPjtCode={cfcPjtCode}
+              setCfcPjtCode={setCfcPjtCode}
+              model={model}
+              setModel={setModel}
               partNo={partNo} setPartNo={setPartNo}
               partName={partName} setPartName={setPartName}
               supplier={supplier} setSupplier={setSupplier}
               plantCode={plantCode} setPlantCode={setPlantCode}
               dockCode={dockCode} setDockCode={setDockCode}
-              setPartPickerOpen={setPartPickerOpen}
+              openPartPicker={() => setPartPickerOpen(true)}
+              openModelPicker={openModelPicker}
               setComparisonOpen={setComparisonOpen}
             />
 
@@ -290,15 +444,18 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
 
             {/* Packing Section */}
             <PackingSection
+              materials={materials}
               packingOpen={packingOpen} setPackingOpen={setPackingOpen}
               outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
-              outerDimension={outerDimension} setOuterDimension={setOuterDimension}
-              innerVolume={innerVolume} setInnerVolume={setInnerVolume}
-              outerVolume={outerVolume} setOuterVolume={setOuterVolume}
+              outerMaterialName={outerMaterialName}
+              outerDimension={outerDimension}
+              innerVolume={innerVolume}
+              outerVolume={outerVolume}
               innerRows={innerRows} setInnerRows={setInnerRows}
               newInner={newInner} setNewInner={setNewInner}
               handleAddInnerRow={handleAddInnerRow}
               handleRemoveInnerRow={handleRemoveInnerRow}
+              openMaterialPicker={openMaterialPicker}
             />
 
             <hr />
@@ -325,9 +482,9 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
           </div>
 
           <div className="card-footer text-right">
-            <button className="btn btn-primary mr-2" onClick={() => { onSave(buildPayload()); onClose() }}><i className="fas fa-save mr-1" /> Save</button>
-            <button className="btn btn-success mr-2" onClick={() => { onSubmit(buildPayload()); onClose() }}><i className="fas fa-upload mr-1" /> Submit</button>
-            <button className="btn btn-outline-secondary" onClick={onClose}><i className="fas fa-times mr-1" /> Cancel</button>
+            <button className="btn btn-secondary" onClick={handleClose}>Cancel</button>
+            <button className="btn btn-primary ml-2" onClick={handleSave}>Save</button>
+            <button className="btn btn-success ml-2" onClick={() => alert('Submit action to be implemented.')}>Submit</button>
           </div>
         </div>
 
@@ -347,14 +504,30 @@ export default function NewCpsModal({ show = false, onClose = () => {}, onSave =
         extraClass="multi-parts-comparison"
       />
 
-      {/* Part Picker Modal - wrapped to control z-index */}      
-        <PartPickerModal
-          show={isPartPickerOpen}
-          onClose={() => setPartPickerOpen(false)}
-          onSelect={handlePartPicked}
-          zIndex={4000}
-        />
+      {/* Part Picker Modal - wrapped to control z-index */}
+      <PartPickerModal
+        show={isPartPickerOpen}
+        onClose={() => setPartPickerOpen(false)}
+        onSelect={handlePartPicked}
+        zIndex={4000}
+        mode="single"
+      />
 
+      {/* Model Picker Modal */}
+      <ModelPickerModal
+        show={isModelPickerOpen}
+        onClose={() => setModelPickerOpen(false)}
+        onAdd={handleModelPicked}
+        selectionMode="single"
+      />
+
+      <MaterialPickerModal
+        show={isMaterialPickerOpen}
+        onClose={() => setMaterialPickerOpen(false)}
+        onAdd={handleMaterialPicked}
+        zIndex={3000}
+        filter={materialFilter}
+      />
     </>
   )
 }
