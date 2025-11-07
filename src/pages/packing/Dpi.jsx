@@ -25,7 +25,7 @@ export default function DPI() {
 const [showNewDpi, setShowNewDpi] = useState(false)
 
   // table data (empty initially)
-  const [rows, setRows] = useState(dpiData)
+  const [rows, setRows] = useState([])
 
   // paging
   const [perPage, setPerPage] = useState(10)
@@ -34,20 +34,10 @@ const [showNewDpi, setShowNewDpi] = useState(false)
   const totalPages = Math.max(1, Math.ceil(total / perPage))
 
   function handleSearch() {
-    console.log('Search DPI with', {
-      dpiNo,
-      refDpiNo,
-      model,
-      cfcPjt,
-      fromUser,
-      toUser,
-      issuedFrom,
-      issuedTo,
-      effectiveFrom,
-      effectiveTo,
-      status,
-    })
-    // TODO: replace with real API call / filter logic
+    // For now, load all data and sort by implementation_period descending
+    const sortedData = [...dpiData].sort((a, b) => b.implementation_period.localeCompare(a.implementation_period))
+    setRows(sortedData)
+    setPage(1)
   }
 
   function handleClear() {
@@ -61,7 +51,9 @@ const [showNewDpi, setShowNewDpi] = useState(false)
     setIssuedTo('')
     setEffectiveFrom('')
     setEffectiveTo('')
-    setStatus('Any')
+    setStatuses([])
+    setRows([])
+    setPage(1)
   }
 
   // actions
