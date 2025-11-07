@@ -1,0 +1,550 @@
+{
+  "dpiData": [
+    {
+      "id": 1,
+      "cpsNo": "CPS-2024-001",
+      "refCpsNo": "",
+      "issueDate": "2024-07-01",
+      "effectiveDate": "2024-07-10",
+      "dpiNo": "DPI-2024-001",
+      "cfcPjtCode": "PJT-A",
+      "model": "579W",
+      "partNo": "16264BZ38000",
+      "partName": "HOSE, WATER BY-PASS, NO.2",
+      "supplier": {
+        "supplier_code": "5062",
+        "supplier_name": "MENARA TERUS MAKMUR"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D01",
+      "pseInfo": {
+        "packingPlantCurr": "PLANT-1",
+        "packingPlantNext": "PLANT-1",
+        "vanningPlantCurr": "VPLANT-A",
+        "vanningPlantNext": "VPLANT-A",
+        "orderPatternCurr": "A1",
+        "orderPatternNext": "A1",
+        "category": "CAT-1",
+        "katashiki": {
+          "AD": "AD1",
+          "AU": "AU1",
+          "AF": "AF1",
+          "AX": "AX1"
+        },
+        "importerLineProcess": "ILP-1",
+        "caseCode": "CC-001",
+        "boxNumber": "B-001",
+        "renban": "R-001",
+        "renbanEff": "2024-07-10",
+        "packingProcessBoxing": "Manual",
+        "packingProcessStacking": "Auto"
+      },
+      "images": {
+        "part": {
+          "caption": "Part Image",
+          "files": []
+        },
+        "packing": {
+          "caption": "Packing Image",
+          "files": []
+        },
+        "outer": {
+          "caption": "Outer Image",
+          "files": []
+        },
+        "qkp": {
+          "caption": "QKP Image",
+          "files": []
+        },
+        "bkp": {
+          "caption": "BKP Image",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "MOD-A",
+        "outerDimension": {
+          "L": "100",
+          "W": "80",
+          "H": "60"
+        },
+        "innerVolume": "0.0384",
+        "outerVolume": "0.048",
+        "innerRows": []
+      },
+      "notes": "This is a note for the first CPS.",
+      "numParts": 5,
+      "fromUser": "User A",
+      "toUser": "User B",
+      "status": "Approved"
+    },
+    {
+      "id": 2,
+      "cpsNo": "CPS-2024-002",
+      "refCpsNo": "",
+      "issueDate": "2024-07-02",
+      "effectiveDate": "2024-07-11",
+      "dpiNo": "DPI-2024-002",
+      "cfcPjtCode": "PJT-B",
+      "model": "385W",
+      "partNo": "11115BZ16000",
+      "partName": "GASKET, CYLINDER HEAD",
+      "supplier": {
+        "supplier_code": "5453",
+        "supplier_name": "VELASTO INDONESIA"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D02",
+      "pseInfo": {
+        "packingPlantCurr": "",
+        "packingPlantNext": "",
+        "vanningPlantCurr": "",
+        "vanningPlantNext": "",
+        "orderPatternCurr": "",
+        "orderPatternNext": "",
+        "category": "",
+        "katashiki": {
+          "AD": "",
+          "AU": "",
+          "AF": "",
+          "AX": ""
+        },
+        "importerLineProcess": "",
+        "caseCode": "",
+        "boxNumber": "",
+        "renban": "",
+        "renbanEff": "",
+        "packingProcessBoxing": "",
+        "packingProcessStacking": ""
+      },
+      "images": {
+        "part": {
+          "caption": "",
+          "files": []
+        },
+        "packing": {
+          "caption": "",
+          "files": []
+        },
+        "outer": {
+          "caption": "",
+          "files": []
+        },
+        "qkp": {
+          "caption": "",
+          "files": []
+        },
+        "bkp": {
+          "caption": "",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "",
+        "outerDimension": {
+          "L": "",
+          "W": "",
+          "H": ""
+        },
+        "innerVolume": "",
+        "outerVolume": "",
+        "innerRows": []
+      },
+      "notes": "",
+      "numParts": 10,
+      "fromUser": "User C",
+      "toUser": "User D",
+      "status": "Pending"
+    },
+    {
+      "id": 3,
+      "cpsNo": "CPS-2024-003",
+      "refCpsNo": "CPS-2024-001",
+      "issueDate": "2024-07-03",
+      "effectiveDate": "2024-07-12",
+      "dpiNo": "DPI-2024-003",
+      "cfcPjtCode": "PJT-C",
+      "model": "578W",
+      "partNo": "111910Y01000",
+      "partName": "TUBE, SPARK PLUG",
+      "supplier": {
+        "supplier_code": "722E",
+        "supplier_name": "TOYOTA MOTOR THAILAND"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D03",
+      "pseInfo": {
+        "packingPlantCurr": "",
+        "packingPlantNext": "",
+        "vanningPlantCurr": "",
+        "vanningPlantNext": "",
+        "orderPatternCurr": "",
+        "orderPatternNext": "",
+        "category": "",
+        "katashiki": {
+          "AD": "",
+          "AU": "",
+          "AF": "",
+          "AX": ""
+        },
+        "importerLineProcess": "",
+        "caseCode": "",
+        "boxNumber": "",
+        "renban": "",
+        "renbanEff": "",
+        "packingProcessBoxing": "",
+        "packingProcessStacking": ""
+      },
+      "images": {
+        "part": {
+          "caption": "",
+          "files": []
+        },
+        "packing": {
+          "caption": "",
+          "files": []
+        },
+        "outer": {
+          "caption": "",
+          "files": []
+        },
+        "qkp": {
+          "caption": "",
+          "files": []
+        },
+        "bkp": {
+          "caption": "",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "",
+        "outerDimension": {
+          "L": "",
+          "W": "",
+          "H": ""
+        },
+        "innerVolume": "",
+        "outerVolume": "",
+        "innerRows": []
+      },
+      "notes": "",
+      "numParts": 15,
+      "fromUser": "User E",
+      "toUser": "User F",
+      "status": "Rejected"
+    },
+    {
+      "id": 4,
+      "cpsNo": "CPS-2024-004",
+      "refCpsNo": "",
+      "issueDate": "2024-07-04",
+      "effectiveDate": "2024-07-13",
+      "dpiNo": "DPI-2024-004",
+      "cfcPjtCode": "PJT-D",
+      "model": "588W",
+      "partNo": "111150Y03000",
+      "partName": "GASKET, CYLINDER HEAD",
+      "supplier": {
+        "supplier_code": "5150",
+        "supplier_name": "NAMICOH INDONESIA"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D04",
+      "pseInfo": {
+        "packingPlantCurr": "",
+        "packingPlantNext": "",
+        "vanningPlantCurr": "",
+        "vanningPlantNext": "",
+        "orderPatternCurr": "",
+        "orderPatternNext": "",
+        "category": "",
+        "katashiki": {
+          "AD": "",
+          "AU": "",
+          "AF": "",
+          "AX": ""
+        },
+        "importerLineProcess": "",
+        "caseCode": "",
+        "boxNumber": "",
+        "renban": "",
+        "renbanEff": "",
+        "packingProcessBoxing": "",
+        "packingProcessStacking": ""
+      },
+      "images": {
+        "part": {
+          "caption": "",
+          "files": []
+        },
+        "packing": {
+          "caption": "",
+          "files": []
+        },
+        "outer": {
+          "caption": "",
+          "files": []
+        },
+        "qkp": {
+          "caption": "",
+          "files": []
+        },
+        "bkp": {
+          "caption": "",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "",
+        "outerDimension": {
+          "L": "",
+          "W": "",
+          "H": ""
+        },
+        "innerVolume": "",
+        "outerVolume": "",
+        "innerRows": []
+      },
+      "notes": "",
+      "numParts": 20,
+      "fromUser": "User G",
+      "toUser": "User H",
+      "status": "Approved"
+    },
+    {
+      "id": 5,
+      "cpsNo": "CPS-2024-005",
+      "refCpsNo": "",
+      "issueDate": "2024-07-05",
+      "effectiveDate": "2024-07-14",
+      "dpiNo": "DPI-2024-005",
+      "cfcPjtCode": "PJT-E",
+      "model": "488W",
+      "partNo": "16264BZ38000",
+      "partName": "HOSE, WATER BY-PASS, NO.2",
+      "supplier": {
+        "supplier_code": "5062",
+        "supplier_name": "MENARA TERUS MAKMUR"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D05",
+      "pseInfo": {
+        "packingPlantCurr": "",
+        "packingPlantNext": "",
+        "vanningPlantCurr": "",
+        "vanningPlantNext": "",
+        "orderPatternCurr": "",
+        "orderPatternNext": "",
+        "category": "",
+        "katashiki": {
+          "AD": "",
+          "AU": "",
+          "AF": "",
+          "AX": ""
+        },
+        "importerLineProcess": "",
+        "caseCode": "",
+        "boxNumber": "",
+        "renban": "",
+        "renbanEff": "",
+        "packingProcessBoxing": "",
+        "packingProcessStacking": ""
+      },
+      "images": {
+        "part": {
+          "caption": "",
+          "files": []
+        },
+        "packing": {
+          "caption": "",
+          "files": []
+        },
+        "outer": {
+          "caption": "",
+          "files": []
+        },
+        "qkp": {
+          "caption": "",
+          "files": []
+        },
+        "bkp": {
+          "caption": "",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "",
+        "outerDimension": {
+          "L": "",
+          "W": "",
+          "H": ""
+        },
+        "innerVolume": "",
+        "outerVolume": "",
+        "innerRows": []
+      },
+      "notes": "",
+      "numParts": 25,
+      "fromUser": "User I",
+      "toUser": "User J",
+      "status": "Draft"
+    },
+    {
+      "id": 6,
+      "cpsNo": "CPS-2024-006",
+      "refCpsNo": "CPS-2024-002",
+      "issueDate": "2024-07-06",
+      "effectiveDate": "2024-07-15",
+      "dpiNo": "DPI-2024-006",
+      "cfcPjtCode": "PJT-F",
+      "model": "565W",
+      "partNo": "115130Y04000",
+      "partName": "CAP, CRANKSHAFT BEARING, NO.3",
+      "supplier": {
+        "supplier_code": "5150",
+        "supplier_name": "NAMICOH INDONESIA"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D06",
+      "pseInfo": {
+        "packingPlantCurr": "",
+        "packingPlantNext": "",
+        "vanningPlantCurr": "",
+        "vanningPlantNext": "",
+        "orderPatternCurr": "",
+        "orderPatternNext": "",
+        "category": "",
+        "katashiki": {
+          "AD": "",
+          "AU": "",
+          "AF": "",
+          "AX": ""
+        },
+        "importerLineProcess": "",
+        "caseCode": "",
+        "boxNumber": "",
+        "renban": "",
+        "renbanEff": "",
+        "packingProcessBoxing": "",
+        "packingProcessStacking": ""
+      },
+      "images": {
+        "part": {
+          "caption": "",
+          "files": []
+        },
+        "packing": {
+          "caption": "",
+          "files": []
+        },
+        "outer": {
+          "caption": "",
+          "files": []
+        },
+        "qkp": {
+          "caption": "",
+          "files": []
+        },
+        "bkp": {
+          "caption": "",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "",
+        "outerDimension": {
+          "L": "",
+          "W": "",
+          "H": ""
+        },
+        "innerVolume": "",
+        "outerVolume": "",
+        "innerRows": []
+      },
+      "notes": "",
+      "numParts": 30,
+      "fromUser": "User K",
+      "toUser": "User L",
+      "status": "Pending"
+    },
+    {
+      "id": 7,
+      "cpsNo": "CPS-2024-007",
+      "refCpsNo": "",
+      "issueDate": "2024-07-07",
+      "effectiveDate": "2024-07-16",
+      "dpiNo": "DPI-2024-007",
+      "cfcPjtCode": "PJT-G",
+      "model": "681W",
+      "partNo": "111150Y03000",
+      "partName": "GASKET, CYLINDER HEAD",
+      "supplier": {
+        "supplier_code": "5150",
+        "supplier_name": "NAMICOH INDONESIA"
+      },
+      "plantCode": "TMMIN",
+      "dockCode": "D07",
+      "pseInfo": {
+        "packingPlantCurr": "",
+        "packingPlantNext": "",
+        "vanningPlantCurr": "",
+        "vanningPlantNext": "",
+        "orderPatternCurr": "",
+        "orderPatternNext": "",
+        "category": "",
+        "katashiki": {
+          "AD": "",
+          "AU": "",
+          "AF": "",
+          "AX": ""
+        },
+        "importerLineProcess": "",
+        "caseCode": "",
+        "boxNumber": "",
+        "renban": "",
+        "renbanEff": "",
+        "packingProcessBoxing": "",
+        "packingProcessStacking": ""
+      },
+      "images": {
+        "part": {
+          "caption": "",
+          "files": []
+        },
+        "packing": {
+          "caption": "",
+          "files": []
+        },
+        "outer": {
+          "caption": "",
+          "files": []
+        },
+        "qkp": {
+          "caption": "",
+          "files": []
+        },
+        "bkp": {
+          "caption": "",
+          "files": []
+        }
+      },
+      "packing": {
+        "outerModuleType": "",
+        "outerDimension": {
+          "L": "",
+          "W": "",
+          "H": ""
+        },
+        "innerVolume": "",
+        "outerVolume": "",
+        "innerRows": []
+      },
+      "notes": "",
+      "numParts": 35,
+      "fromUser": "User M",
+      "toUser": "User N",
+      "status": "Approved"
+    }
+  ]
+}
