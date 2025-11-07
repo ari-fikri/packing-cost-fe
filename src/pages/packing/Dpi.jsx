@@ -7,19 +7,11 @@ import ActionHeaderButtons from './dpi/ActionHeaderButtons';
 
 export default function DPI() {
   // filter fields
-  const [dpiNo, setDpiNo] = useState('');
-  const [refDpiNo, setRefDpiNo] = useState('');
-  const [model, setModel] = useState('');
-  const [cfcPjt, setCfcPjt] = useState('');
-  const [fromUser, setFromUser] = useState('');
-  const [toUser, setToUser] = useState('');
-  const [issuedFrom, setIssuedFrom] = useState('');
-  const [issuedTo, setIssuedTo] = useState('');
-  const [effectiveFrom, setEffectiveFrom] = useState('');
-  const [effectiveTo, setEffectiveTo] = useState('');
-  
-  const STATUS_OPTIONS = ['Draft', 'Submitted', 'Rejected', 'Approved'];
-  const [statuses, setStatuses] = useState([]);
+  const [modelCode, setModelCode] = useState('');
+  const [destCode, setDestCode] = useState('');
+  const [supplierCode, setSupplierCode] = useState('');
+  const [cpsNo, setCpsNo] = useState('');
+  const [implementationPeriod, setImplementationPeriod] = useState('');
 
   // modal state
   const [showNewDpi, setShowNewDpi] = useState(false);
@@ -34,23 +26,50 @@ export default function DPI() {
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
   function handleSearch() {
-    const sortedData = [...dpiData].sort((a, b) => b.implementation_period.localeCompare(a.implementation_period));
+    let filteredData = [...dpiData];
+    
+    // Apply filters
+    if (modelCode) {
+      filteredData = filteredData.filter(item => 
+        item.model_code?.toLowerCase().includes(modelCode.toLowerCase())
+      );
+    }
+    if (destCode) {
+      filteredData = filteredData.filter(item => 
+        item.cps.model.destination.code?.toLowerCase().includes(destCode.toLowerCase())
+      );
+    }
+    if (supplierCode) {
+      filteredData = filteredData.filter(item => 
+        item.cps.supplier.supplier_code?.toLowerCase().includes(supplierCode.toLowerCase())
+      );
+    }
+    if (cpsNo) {
+      filteredData = filteredData.filter(item => 
+        item.cps.cps_no?.toLowerCase().includes(cpsNo.toLowerCase())
+      );
+    }
+    if (implementationPeriod) {
+      filteredData = filteredData.filter(item => 
+        item.implementation_period?.toLowerCase().includes(implementationPeriod.toLowerCase())
+      );
+    }
+
+    // Sort by implementation period
+    const sortedData = filteredData.sort((a, b) => 
+      (b.implementation_period || '').localeCompare(a.implementation_period || '')
+    );
+    
     setRows(sortedData);
     setPage(1);
   }
 
   function handleClear() {
-    setDpiNo('');
-    setRefDpiNo('');
-    setModel('');
-    setCfcPjt('');
-    setFromUser('');
-    setToUser('');
-    setIssuedFrom('');
-    setIssuedTo('');
-    setEffectiveFrom('');
-    setEffectiveTo('');
-    setStatuses([]);
+    setModelCode('');
+    setDestCode('');
+    setSupplierCode('');
+    setCpsNo('');
+    setImplementationPeriod('');
     setRows([]);
     setPage(1);
   }
@@ -124,11 +143,19 @@ export default function DPI() {
   }
 
   const searchFilters = {
-    dpiNo, refDpiNo, model, cfcPjt, fromUser, toUser, issuedFrom, issuedTo, effectiveFrom, effectiveTo
+    modelCode,
+    destCode,
+    supplierCode,
+    cpsNo,
+    implementationPeriod
   };
 
   const searchSetters = {
-    setDpiNo, setRefDpiNo, setModel, setCfcPjt, setFromUser, setToUser, setIssuedFrom, setIssuedTo, setEffectiveFrom, setEffectiveTo
+    setModelCode,
+    setDestCode,
+    setSupplierCode,
+    setCpsNo,
+    setImplementationPeriod
   };
 
   return (
@@ -147,11 +174,8 @@ export default function DPI() {
         <SearchSection
           filters={searchFilters}
           setters={searchSetters}
-          statuses={statuses}
-          toggleStatus={toggleStatus}
           onSearch={handleSearch}
           onClear={handleClear}
-          STATUS_OPTIONS={STATUS_OPTIONS}
         />
 
         <ResultSection

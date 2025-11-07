@@ -3,36 +3,25 @@ import React from 'react';
 export default function SearchSection({
   filters,
   setters,
-  statuses,
-  toggleStatus,
   onSearch,
   onClear,
-  STATUS_OPTIONS
 }) {
   const {
-    dpiNo,
-    refDpiNo,
-    model,
-    cfcPjt,
-    fromUser,
-    toUser,
-    issuedFrom,
-    issuedTo,
-    effectiveFrom,
-    effectiveTo,
+    modelCode,
+    destCode,
+    partNo,
+    supplierCode,
+    cpsNo,
+    implementationPeriod,
   } = filters;
 
   const {
-    setDpiNo,
-    setRefDpiNo,
-    setModel,
-    setCfcPjt,
-    setFromUser,
-    setToUser,
-    setIssuedFrom,
-    setIssuedTo,
-    setEffectiveFrom,
-    setEffectiveTo,
+    setModelCode,
+    setDestCode,
+    setPartNo,
+    setSupplierCode,
+    setCpsNo,
+    setImplementationPeriod,
   } = setters;
 
   return (
@@ -42,11 +31,11 @@ export default function SearchSection({
         <div className="col-12 col-md-6">
           <div className="form-row">
             <div className="form-group col-12">
-              <label className="small mb-1">DPI No</label>
+              <label className="small mb-1">Model Code</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={dpiNo} onChange={e => setDpiNo(e.target.value)} placeholder="DPI No" />
+                <input className="form-control form-control-sm" value={modelCode} onChange={e => setModelCode(e.target.value)} placeholder="Model Code" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search DPI No" onClick={() => alert('Search DPI No placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => alert('Search Model Code placeholder')}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
@@ -54,40 +43,24 @@ export default function SearchSection({
             </div>
 
             <div className="form-group col-12">
-              <label className="small mb-1">From</label>
+              <label className="small mb-1">Implementation Period</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={fromUser} onChange={e => setFromUser(e.target.value)} placeholder="From user" />
-                <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="People picker" onClick={() => alert('People picker placeholder')}>
-                    <i className="fas fa-users" />
-                  </button>
-                </div>
+                <input className="form-control form-control-sm" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value)} placeholder="Implementation Period" />
               </div>
             </div>
 
             <div className="form-group col-12">
-              <label className="small mb-1">Model</label>
+              <label className="small mb-1">Part No</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={model} onChange={e => setModel(e.target.value)} placeholder="Model" />
+                <input className="form-control form-control-sm" value={partNo} onChange={e => setPartNo(e.target.value)} placeholder="Part No" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model" onClick={() => alert('Search Model placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part No" onClick={() => alert('Search Part No placeholder')}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="form-group col-12">
-              <label className="small mb-1">Issued Date (from → to)</label>
-              <div className="form-row">
-                <div className="col">
-                  <input type="date" className="form-control form-control-sm" value={issuedFrom} onChange={e => setIssuedFrom(e.target.value)} />
-                </div>
-                <div className="col">
-                  <input type="date" className="form-control form-control-sm" value={issuedTo} onChange={e => setIssuedTo(e.target.value)} />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -95,11 +68,11 @@ export default function SearchSection({
         <div className="col-12 col-md-6">
           <div className="form-row">
             <div className="form-group col-12">
-              <label className="small mb-1">Ref DPI No</label>
+              <label className="small mb-1">Dest Code</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={refDpiNo} onChange={e => setRefDpiNo(e.target.value)} placeholder="Ref DPI No" />
+                <input className="form-control form-control-sm" value={destCode} onChange={e => setDestCode(e.target.value)} placeholder="Dest Code" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Ref DPI No" onClick={() => alert('Search Ref DPI No placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Dest Code" onClick={() => alert('Search Dest Code placeholder')}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
@@ -107,56 +80,25 @@ export default function SearchSection({
             </div>
 
             <div className="form-group col-12">
-              <label className="small mb-1">CFC / Pjt</label>
+              <label className="small mb-1">CPS No</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={cfcPjt} onChange={e => setCfcPjt(e.target.value)} placeholder="CFC / Project" />
+                <input className="form-control form-control-sm" value={cpsNo} onChange={e => setCpsNo(e.target.value)} placeholder="CPS No" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search CFC/Pjt" onClick={() => alert('Search CFC/Pjt placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search CPS No" onClick={() => alert('Search CPS No placeholder')}>
                     <i className="fas fa-search" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="form-group col-12">
-              <label className="small mb-1">Status (multi)</label>
-              <div className="form-control form-control-sm" style={{ minHeight: 44 }}>
-                <div className="d-flex flex-wrap" style={{ gap: '0.5rem' }}>
-                  {STATUS_OPTIONS.map(s => (
-                    <div key={s} className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id={`status_${s}`}
-                        checked={statuses.includes(s)}
-                        onChange={() => toggleStatus(s)}
-                      />
-                      <label className="form-check-label ml-2" htmlFor={`status_${s}`}>{s}</label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <small className="form-text text-muted">You can select multiple statuses to filter.</small>
-            </div>
-            <div className="form-group col-12">
-              <label className="small mb-1">To</label>
-              <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={toUser} onChange={e => setToUser(e.target.value)} placeholder="To user" />
-                <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="People picker" onClick={() => alert('People picker placeholder')}>
-                    <i className="fas fa-users" />
                   </button>
                 </div>
               </div>
             </div>
 
             <div className="form-group col-12">
-              <label className="small mb-1">Effective Date (from → to)</label>
-              <div className="form-row">
-                <div className="col">
-                  <input type="date" className="form-control form-control-sm" value={effectiveFrom} onChange={e => setEffectiveFrom(e.target.value)} />
-                </div>
-                <div className="col">
-                  <input type="date" className="form-control form-control-sm" value={effectiveTo} onChange={e => setEffectiveTo(e.target.value)} />
+              <label className="small mb-1">Supplier Code</label>
+              <div className="input-group input-group-sm">
+                <input className="form-control form-control-sm" value={supplierCode} onChange={e => setSupplierCode(e.target.value)} placeholder="Supplier Code" />
+                <div className="input-group-append">
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => alert('Search Supplier placeholder')}>
+                    <i className="fas fa-search" />
+                  </button>
                 </div>
               </div>
             </div>
