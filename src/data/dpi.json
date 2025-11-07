@@ -2,549 +2,491 @@
   "dpiData": [
     {
       "id": 1,
-      "cpsNo": "CPS-2024-001",
-      "refCpsNo": "",
-      "issueDate": "2024-07-01",
-      "effectiveDate": "2024-07-10",
-      "dpiNo": "DPI-2024-001",
-      "cfcPjtCode": "PJT-A",
-      "model": "579W",
-      "partNo": "16264BZ38000",
-      "partName": "HOSE, WATER BY-PASS, NO.2",
-      "supplier": {
-        "supplier_code": "5062",
-        "supplier_name": "MENARA TERUS MAKMUR"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D01",
-      "pseInfo": {
-        "packingPlantCurr": "PLANT-1",
-        "packingPlantNext": "PLANT-1",
-        "vanningPlantCurr": "VPLANT-A",
-        "vanningPlantNext": "VPLANT-A",
-        "orderPatternCurr": "A1",
-        "orderPatternNext": "A1",
-        "category": "CAT-1",
-        "katashiki": {
-          "AD": "AD1",
-          "AU": "AU1",
-          "AF": "AF1",
-          "AX": "AX1"
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_code": "579W",
+          "model_name": "Spoiler Model",
+          "implementation_period": "003.2025",
+          "destination": {
+            "code": "303B",
+            "dest_country_code": "TDB",
+            "dest_country_name": "BRAZIL"
+          }
         },
-        "importerLineProcess": "ILP-1",
-        "caseCode": "CC-001",
-        "boxNumber": "B-001",
-        "renban": "R-001",
-        "renbanEff": "2024-07-10",
-        "packingProcessBoxing": "Manual",
-        "packingProcessStacking": "Auto"
-      },
-      "images": {
-        "part": {
-          "caption": "Part Image",
-          "files": []
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {
+          "supplier_code": "5062",
+          "supplier_name": "MENARA TERUS MAKMUR"
         },
-        "packing": {
-          "caption": "Packing Image",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "AD1",
+            "AU": "AU1",
+            "AF": "AF1",
+            "AX": "AX1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
         },
-        "outer": {
-          "caption": "Outer Image",
-          "files": []
+        "images": {
+          "part": { "caption": "Part Image", "files": [] },
+          "packing": { "caption": "Packing Image", "files": [] },
+          "outer": { "caption": "Outer Image", "files": [] },
+          "qkp": { "caption": "QKP Image", "files": [] },
+          "bkp": { "caption": "BKP Image", "files": [] }
         },
-        "qkp": {
-          "caption": "QKP Image",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "BKP Image",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "MOD-A",
-        "outerDimension": {
-          "L": "100",
-          "W": "80",
-          "H": "60"
-        },
-        "innerVolume": "0.0384",
-        "outerVolume": "0.048",
-        "innerRows": []
-      },
-      "notes": "This is a note for the first CPS.",
-      "numParts": 5,
-      "fromUser": "User A",
-      "toUser": "User B",
-      "status": "Approved"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     },
     {
       "id": 2,
-      "cpsNo": "CPS-2024-002",
-      "refCpsNo": "",
-      "issueDate": "2024-07-02",
-      "effectiveDate": "2024-07-11",
-      "dpiNo": "DPI-2024-002",
-      "cfcPjtCode": "PJT-B",
-      "model": "385W",
-      "partNo": "11115BZ16000",
-      "partName": "GASKET, CYLINDER HEAD",
-      "supplier": {
-        "supplier_code": "5453",
-        "supplier_name": "VELASTO INDONESIA"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D02",
-      "pseInfo": {
-        "packingPlantCurr": "",
-        "packingPlantNext": "",
-        "vanningPlantCurr": "",
-        "vanningPlantNext": "",
-        "orderPatternCurr": "",
-        "orderPatternNext": "",
-        "category": "",
-        "katashiki": {
-          "AD": "",
-          "AU": "",
-          "AF": "",
-          "AX": ""
+      "implementation_period": "003.2022",
+      "model_code": "385W",
+      "part_no": "11115BZ16000",
+      "cps": {
+        "cps_no": "CPS-2024-002",
+        "refCpsNo": "",
+        "issue_date": "2024-07-02",
+        "effective_date": "2024-07-11",
+        "model": {
+          "model_code": "385W",
+          "model_name": "Fender Model",
+          "implementation_period": "003.2022",
+          "destination": {
+            "code": "807B",
+            "dest_country_code": "TMMIN",
+            "dest_country_name": "INDONESIA"
+          }
         },
-        "importerLineProcess": "",
-        "caseCode": "",
-        "boxNumber": "",
-        "renban": "",
-        "renbanEff": "",
-        "packingProcessBoxing": "",
-        "packingProcessStacking": ""
-      },
-      "images": {
-        "part": {
-          "caption": "",
-          "files": []
+        "part_no": "11115BZ16000",
+        "part_name": "GASKET, CYLINDER HEAD",
+        "supplier": {
+          "supplier_code": "5453",
+          "supplier_name": "VELASTO INDONESIA"
         },
-        "packing": {
-          "caption": "",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D02",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
         },
-        "outer": {
-          "caption": "",
-          "files": []
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
         },
-        "qkp": {
-          "caption": "",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "",
-        "outerDimension": {
-          "L": "",
-          "W": "",
-          "H": ""
-        },
-        "innerVolume": "",
-        "outerVolume": "",
-        "innerRows": []
-      },
-      "notes": "",
-      "numParts": 10,
-      "fromUser": "User C",
-      "toUser": "User D",
-      "status": "Pending"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     },
     {
       "id": 3,
-      "cpsNo": "CPS-2024-003",
-      "refCpsNo": "CPS-2024-001",
-      "issueDate": "2024-07-03",
-      "effectiveDate": "2024-07-12",
-      "dpiNo": "DPI-2024-003",
-      "cfcPjtCode": "PJT-C",
-      "model": "578W",
-      "partNo": "111910Y01000",
-      "partName": "TUBE, SPARK PLUG",
-      "supplier": {
-        "supplier_code": "722E",
-        "supplier_name": "TOYOTA MOTOR THAILAND"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D03",
-      "pseInfo": {
-        "packingPlantCurr": "",
-        "packingPlantNext": "",
-        "vanningPlantCurr": "",
-        "vanningPlantNext": "",
-        "orderPatternCurr": "",
-        "orderPatternNext": "",
-        "category": "",
-        "katashiki": {
-          "AD": "",
-          "AU": "",
-          "AF": "",
-          "AX": ""
+      "implementation_period": "001.2023",
+      "model_code": "578W",
+      "part_no": "111910Y01000",
+      "cps": {
+        "cps_no": "CPS-2024-003",
+        "refCpsNo": "CPS-2024-001",
+        "issue_date": "2024-07-03",
+        "effective_date": "2024-07-12",
+        "model": {
+          "model_code": "578W",
+          "model_name": "Mirror Cover Model",
+          "implementation_period": "001.2023",
+          "destination": {
+            "code": "704B",
+            "dest_country_code": "TMY",
+            "dest_country_name": "MYANMAR"
+          }
         },
-        "importerLineProcess": "",
-        "caseCode": "",
-        "boxNumber": "",
-        "renban": "",
-        "renbanEff": "",
-        "packingProcessBoxing": "",
-        "packingProcessStacking": ""
-      },
-      "images": {
-        "part": {
-          "caption": "",
-          "files": []
+        "part_no": "111910Y01000",
+        "part_name": "TUBE, SPARK PLUG",
+        "supplier": {
+          "supplier_code": "722E",
+          "supplier_name": "TOYOTA MOTOR THAILAND"
         },
-        "packing": {
-          "caption": "",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D03",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
         },
-        "outer": {
-          "caption": "",
-          "files": []
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
         },
-        "qkp": {
-          "caption": "",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "",
-        "outerDimension": {
-          "L": "",
-          "W": "",
-          "H": ""
-        },
-        "innerVolume": "",
-        "outerVolume": "",
-        "innerRows": []
-      },
-      "notes": "",
-      "numParts": 15,
-      "fromUser": "User E",
-      "toUser": "User F",
-      "status": "Rejected"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     },
     {
       "id": 4,
-      "cpsNo": "CPS-2024-004",
-      "refCpsNo": "",
-      "issueDate": "2024-07-04",
-      "effectiveDate": "2024-07-13",
-      "dpiNo": "DPI-2024-004",
-      "cfcPjtCode": "PJT-D",
-      "model": "588W",
-      "partNo": "111150Y03000",
-      "partName": "GASKET, CYLINDER HEAD",
-      "supplier": {
-        "supplier_code": "5150",
-        "supplier_name": "NAMICOH INDONESIA"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D04",
-      "pseInfo": {
-        "packingPlantCurr": "",
-        "packingPlantNext": "",
-        "vanningPlantCurr": "",
-        "vanningPlantNext": "",
-        "orderPatternCurr": "",
-        "orderPatternNext": "",
-        "category": "",
-        "katashiki": {
-          "AD": "",
-          "AU": "",
-          "AF": "",
-          "AX": ""
+      "implementation_period": "004.2024",
+      "model_code": "588W",
+      "part_no": "111150Y03000",
+      "cps": {
+        "cps_no": "CPS-2024-004",
+        "refCpsNo": "",
+        "issue_date": "2024-07-04",
+        "effective_date": "2024-07-13",
+        "model": {
+          "model_code": "588W",
+          "model_name": "Running Board Model",
+          "implementation_period": "004.2024",
+          "destination": {
+            "code": "807B",
+            "dest_country_code": "TMMIN",
+            "dest_country_name": "INDONESIA"
+          }
         },
-        "importerLineProcess": "",
-        "caseCode": "",
-        "boxNumber": "",
-        "renban": "",
-        "renbanEff": "",
-        "packingProcessBoxing": "",
-        "packingProcessStacking": ""
-      },
-      "images": {
-        "part": {
-          "caption": "",
-          "files": []
+        "part_no": "111150Y03000",
+        "part_name": "GASKET, CYLINDER HEAD",
+        "supplier": {
+          "supplier_code": "5150",
+          "supplier_name": "NAMICOH INDONESIA"
         },
-        "packing": {
-          "caption": "",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D04",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
         },
-        "outer": {
-          "caption": "",
-          "files": []
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
         },
-        "qkp": {
-          "caption": "",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "",
-        "outerDimension": {
-          "L": "",
-          "W": "",
-          "H": ""
-        },
-        "innerVolume": "",
-        "outerVolume": "",
-        "innerRows": []
-      },
-      "notes": "",
-      "numParts": 20,
-      "fromUser": "User G",
-      "toUser": "User H",
-      "status": "Approved"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     },
     {
       "id": 5,
-      "cpsNo": "CPS-2024-005",
-      "refCpsNo": "",
-      "issueDate": "2024-07-05",
-      "effectiveDate": "2024-07-14",
-      "dpiNo": "DPI-2024-005",
-      "cfcPjtCode": "PJT-E",
-      "model": "488W",
-      "partNo": "16264BZ38000",
-      "partName": "HOSE, WATER BY-PASS, NO.2",
-      "supplier": {
-        "supplier_code": "5062",
-        "supplier_name": "MENARA TERUS MAKMUR"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D05",
-      "pseInfo": {
-        "packingPlantCurr": "",
-        "packingPlantNext": "",
-        "vanningPlantCurr": "",
-        "vanningPlantNext": "",
-        "orderPatternCurr": "",
-        "orderPatternNext": "",
-        "category": "",
-        "katashiki": {
-          "AD": "",
-          "AU": "",
-          "AF": "",
-          "AX": ""
+      "implementation_period": "003.2023",
+      "model_code": "488W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-005",
+        "refCpsNo": "",
+        "issue_date": "2024-07-05",
+        "effective_date": "2024-07-14",
+        "model": {
+          "model_code": "488W",
+          "model_name": "Door Panel Model",
+          "implementation_period": "003.2023",
+          "destination": {
+            "code": "715B",
+            "dest_country_code": "TMV",
+            "dest_country_name": "VIETNAM"
+          }
         },
-        "importerLineProcess": "",
-        "caseCode": "",
-        "boxNumber": "",
-        "renban": "",
-        "renbanEff": "",
-        "packingProcessBoxing": "",
-        "packingProcessStacking": ""
-      },
-      "images": {
-        "part": {
-          "caption": "",
-          "files": []
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {
+          "supplier_code": "5062",
+          "supplier_name": "MENARA TERUS MAKMUR"
         },
-        "packing": {
-          "caption": "",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D05",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
         },
-        "outer": {
-          "caption": "",
-          "files": []
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
         },
-        "qkp": {
-          "caption": "",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "",
-        "outerDimension": {
-          "L": "",
-          "W": "",
-          "H": ""
-        },
-        "innerVolume": "",
-        "outerVolume": "",
-        "innerRows": []
-      },
-      "notes": "",
-      "numParts": 25,
-      "fromUser": "User I",
-      "toUser": "User J",
-      "status": "Draft"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     },
     {
       "id": 6,
-      "cpsNo": "CPS-2024-006",
-      "refCpsNo": "CPS-2024-002",
-      "issueDate": "2024-07-06",
-      "effectiveDate": "2024-07-15",
-      "dpiNo": "DPI-2024-006",
-      "cfcPjtCode": "PJT-F",
-      "model": "565W",
-      "partNo": "115130Y04000",
-      "partName": "CAP, CRANKSHAFT BEARING, NO.3",
-      "supplier": {
-        "supplier_code": "5150",
-        "supplier_name": "NAMICOH INDONESIA"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D06",
-      "pseInfo": {
-        "packingPlantCurr": "",
-        "packingPlantNext": "",
-        "vanningPlantCurr": "",
-        "vanningPlantNext": "",
-        "orderPatternCurr": "",
-        "orderPatternNext": "",
-        "category": "",
-        "katashiki": {
-          "AD": "",
-          "AU": "",
-          "AF": "",
-          "AX": ""
+      "implementation_period": "002.2024",
+      "model_code": "565W",
+      "part_no": "115130Y04000",
+      "cps": {
+        "cps_no": "CPS-2024-006",
+        "refCpsNo": "CPS-2024-002",
+        "issue_date": "2024-07-06",
+        "effective_date": "2024-07-15",
+        "model": {
+          "model_code": "565W",
+          "model_name": "Quarter Panel Model",
+          "implementation_period": "002.2024",
+          "destination": {
+            "code": "537B",
+            "dest_country_code": "TSM",
+            "dest_country_name": "AFRIKA"
+          }
         },
-        "importerLineProcess": "",
-        "caseCode": "",
-        "boxNumber": "",
-        "renban": "",
-        "renbanEff": "",
-        "packingProcessBoxing": "",
-        "packingProcessStacking": ""
-      },
-      "images": {
-        "part": {
-          "caption": "",
-          "files": []
+        "part_no": "115130Y04000",
+        "part_name": "CAP, CRANKSHAFT BEARING, NO.3",
+        "supplier": {
+          "supplier_code": "5150",
+          "supplier_name": "NAMICOH INDONESIA"
         },
-        "packing": {
-          "caption": "",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D06",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
         },
-        "outer": {
-          "caption": "",
-          "files": []
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
         },
-        "qkp": {
-          "caption": "",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "",
-        "outerDimension": {
-          "L": "",
-          "W": "",
-          "H": ""
-        },
-        "innerVolume": "",
-        "outerVolume": "",
-        "innerRows": []
-      },
-      "notes": "",
-      "numParts": 30,
-      "fromUser": "User K",
-      "toUser": "User L",
-      "status": "Pending"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     },
     {
       "id": 7,
-      "cpsNo": "CPS-2024-007",
-      "refCpsNo": "",
-      "issueDate": "2024-07-07",
-      "effectiveDate": "2024-07-16",
-      "dpiNo": "DPI-2024-007",
-      "cfcPjtCode": "PJT-G",
-      "model": "681W",
-      "partNo": "111150Y03000",
-      "partName": "GASKET, CYLINDER HEAD",
-      "supplier": {
-        "supplier_code": "5150",
-        "supplier_name": "NAMICOH INDONESIA"
-      },
-      "plantCode": "TMMIN",
-      "dockCode": "D07",
-      "pseInfo": {
-        "packingPlantCurr": "",
-        "packingPlantNext": "",
-        "vanningPlantCurr": "",
-        "vanningPlantNext": "",
-        "orderPatternCurr": "",
-        "orderPatternNext": "",
-        "category": "",
-        "katashiki": {
-          "AD": "",
-          "AU": "",
-          "AF": "",
-          "AX": ""
+      "implementation_period": "001.2025",
+      "model_code": "681W",
+      "part_no": "111150Y03000",
+      "cps": {
+        "cps_no": "CPS-2024-007",
+        "refCpsNo": "",
+        "issue_date": "2024-07-07",
+        "effective_date": "2024-07-16",
+        "model": {
+          "model_code": "681W",
+          "model_name": "Wheel Arch Model",
+          "implementation_period": "001.2025",
+          "destination": {
+            "code": "301B",
+            "dest_country_code": "TAR",
+            "dest_country_name": "ARGENTINA"
+          }
         },
-        "importerLineProcess": "",
-        "caseCode": "",
-        "boxNumber": "",
-        "renban": "",
-        "renbanEff": "",
-        "packingProcessBoxing": "",
-        "packingProcessStacking": ""
-      },
-      "images": {
-        "part": {
-          "caption": "",
-          "files": []
+        "part_no": "111150Y03000",
+        "part_name": "GASKET, CYLINDER HEAD",
+        "supplier": {
+          "supplier_code": "5150",
+          "supplier_name": "NAMICOH INDONESIA"
         },
-        "packing": {
-          "caption": "",
-          "files": []
+        "plant_code": "TMMIN",
+        "dock_code": "D07",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
         },
-        "outer": {
-          "caption": "",
-          "files": []
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
         },
-        "qkp": {
-          "caption": "",
-          "files": []
+        "packing": { "inner": [], "outer": [] },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
         },
-        "bkp": {
-          "caption": "",
-          "files": []
-        }
-      },
-      "packing": {
-        "outerModuleType": "",
-        "outerDimension": {
-          "L": "",
-          "W": "",
-          "H": ""
-        },
-        "innerVolume": "",
-        "outerVolume": "",
-        "innerRows": []
-      },
-      "notes": "",
-      "numParts": 35,
-      "fromUser": "User M",
-      "toUser": "User N",
-      "status": "Approved"
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
     }
   ]
 }

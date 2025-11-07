@@ -1,0 +1,100 @@
+{
+  "id": "",
+  "implementation_period": "",
+  "model_code": "",
+  "part_no": "",
+  "cps": {
+    "cps_no": "",
+    "refCpsNo": "",
+    "issue_date": "",
+    "effective_date": "",
+    "model": {
+      "model_code": "",
+      "model_name": "",
+      "implementation_period": "",
+      "destination": {
+        "code": "",
+        "dest_country_code": "",
+        "dest_country_name": ""
+      }
+    },
+    "part_no": "",
+    "part_name": "",
+    "supplier": {
+      "supplier_code": "",
+      "supplier_name": ""
+    },
+    "plant_code": "",
+    "dock_code": "",
+    "pse_info": {
+      "packing_plant_curr": "",
+      "packing_plant_next": "",
+      "vanning_plant_curr": "",
+      "vanning_plant_next": "",
+      "order_pattern_curr": "",
+      "order_pattern_next": "",
+      "category": "",
+      "katashiki": {
+        "AD": "",
+        "AU": "",
+        "AF": "",
+        "AX": ""
+      },
+      "importer_line_process": "",
+      "case_code": "",
+      "box_number": "",
+      "renban": "",
+      "renban_eff": "",
+      "packing_process_boxing": "",
+      "packing_process_stacking": ""
+    },
+    "images": {
+      "part": {
+        "caption": "",
+        "files": []
+      },
+      "packing": {
+        "caption": "",
+        "files": []
+      },
+      "outer": {
+        "caption": "",
+        "files": []
+      },
+      "qkp": {
+        "caption": "",
+        "files": []
+      },
+      "bkp": {
+        "caption": "",
+        "files": []
+      }
+    },
+    "packing": {
+      "inner": [],
+      "outer": []
+    },
+    "manhour": {
+      "receiving": 0,
+      "inspection": 0,
+      "delivery_course": 0,
+      "pallet_supply": 0,
+      "binding": 0,
+      "non_pallet_supply": 0,
+      "pick_packing": 0,
+      "empty_box": 0,
+      "mix_van": 0,
+      "lashing": 0
+    },
+    "labor": {
+      "dl": 0,
+      "idl": 0,
+      "facility": 0
+    },
+    "inland": {
+      "packing_time": 0,
+      "inland_cost": 0,
+      "milkrun_cost": 0
+    }
+  }
+}
