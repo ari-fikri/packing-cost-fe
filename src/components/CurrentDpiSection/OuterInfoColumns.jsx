@@ -17,6 +17,8 @@ export function OuterGroupHeaders({ count = 1 }) {
 export const OuterLeafHeaders = ({ count }) => (
   <MaterialLeafHeaders count={count} />
 );
-export const OuterLeafCells = ({ data, count }) => (
-  <MaterialLeafCells arr={data} count={count} />
-);
+
+export const OuterLeafCells = ({ data, count }) => {  
+  //debugger;
+  return <MaterialLeafCells arr={data} count={count} />
+  ;}

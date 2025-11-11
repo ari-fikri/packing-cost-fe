@@ -18,7 +18,5 @@ export const InnerLeafHeaders = ({ count }) => (
   <MaterialLeafHeaders count={count} />
 );
 export const InnerLeafCells = ({ data, count }) => {
-  //debugger;
-  (
-  <MaterialLeafCells arr={data} count={count} />
-)};
+  return <MaterialLeafCells arr={data} count={count} />;
+};

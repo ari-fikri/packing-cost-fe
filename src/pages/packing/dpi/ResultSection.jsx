@@ -121,7 +121,7 @@ export default function ResultSection({
           </thead>
           <tbody>
             {visibleRows.map((row, i) => {
-              debugger;              
+              //debugger;              
               const current = row.cps || {};
               const innerData = current.packing?.inner || [];
               const outerData = current.packing?.outer || [];
