@@ -61,9 +61,6 @@ export default function ResultSection({
                 No
               </th>
               <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Rec No
-              </th>
-              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 CPS No
               </th>
               <th colSpan={7} className="align-middle">
@@ -130,7 +127,6 @@ export default function ResultSection({
               return (
                 <tr key={i}>
                   <td>{((page - 1) * perPage) + i + 1}</td>
-                  <td className="align-middle">{current.recNo ?? "-"}</td>
                   <td className="align-middle">{current.cps_no ?? "-"}</td>
                   <td className="align-middle">{current.part_no ?? "-"}</td>
                   <td className="align-middle">{current.part_name ?? "-"}</td>
