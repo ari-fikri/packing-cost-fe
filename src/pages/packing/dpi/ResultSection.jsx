@@ -10,6 +10,10 @@ import {
   OuterLeafCells,
 } from "../../../components/CurrentDpiSection/OuterInfoColumns";
 import {
+  PartInfoHeaders,
+  PartInfoCells,
+} from "../../../components/CurrentDpiSection/PartInfoColumns";
+import {
   SubTotalHeaders,
   SubTotalData,
 } from "../../../components/CurrentCpsSection/SubTotalColumns";
@@ -63,7 +67,7 @@ export default function ResultSection({
               <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 CPS No
               </th>
-              <th colSpan={7} className="align-middle">
+              <th colSpan={10} className="align-middle">
                 Part Information
               </th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0}>Inner Materials</th>
@@ -73,27 +77,7 @@ export default function ResultSection({
               <th colSpan={2}>Inland Trucking Cost</th>
             </tr>
             <tr>
-              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Part No
-              </th>
-              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Part Name
-              </th>
-              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Parent Part
-              </th>
-              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Supplier Code
-              </th>
-              <th rowSpan={2} className="align-middle">
-                Supplier Name
-              </th>
-              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Weight/Pc (Kg)
-              </th>
-              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Qty/Box
-              </th>
+              <PartInfoHeaders />
 
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
@@ -120,14 +104,7 @@ export default function ResultSection({
                 <tr key={i}>
                   <td>{((page - 1) * perPage) + i + 1}</td>
                   <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{current.cps_no ?? "-"}</td>
-                  <td className="align-middle">{current.part_no ?? "-"}</td>
-                  <td className="align-middle">{current.part_name ?? "-"}</td>
-                  <td className="align-middle">{current.parent_no ?? "-"}</td>
-                  <td className="align-middle">{current.supplier?.supplier_code ?? "-"}</td>
-                  <td className="align-middle">{current.supplier?.supplier_name ?? "-"}</td>
-                  <td className="align-middle">{current.weightPerPc ?? "-"}</td>
-                  <td className="align-middle">{current.qtyPerBox ?? "-"}</td>
-
+                  <PartInfoCells partInfo={current} />
                   <InnerLeafCells data={innerData} count={innerCount} />
                   <OuterLeafCells data={outerData} count={outerCount} />
                   <LaborManHourCells labor={labor} />

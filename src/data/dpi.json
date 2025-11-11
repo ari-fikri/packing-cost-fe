@@ -26,6 +26,9 @@
           "supplier_code": "5062",
           "supplier_name": "MENARA TERUS MAKMUR"
         },
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
         "plant_code": "TMMIN",
         "dock_code": "D01",
         "pse_info": {
@@ -708,6 +711,9 @@
           "supplier_code": "5453",
           "supplier_name": "VELASTO INDONESIA"
         },
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
         "plant_code": "TMMIN",
         "dock_code": "D02",
         "pse_info": {
@@ -1390,6 +1396,9 @@
           "supplier_code": "722E",
           "supplier_name": "TOYOTA MOTOR THAILAND"
         },
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
         "plant_code": "TMMIN",
         "dock_code": "D03",
         "pse_info": {
@@ -2072,6 +2081,9 @@
           "supplier_code": "5150",
           "supplier_name": "NAMICOH INDONESIA"
         },
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
         "plant_code": "TMMIN",
         "dock_code": "D04",
         "pse_info": {
@@ -2754,6 +2766,9 @@
           "supplier_code": "5150",
           "supplier_name": "NAMICOH INDONESIA"
         },
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
         "plant_code": "TMMIN",
         "dock_code": "D06",
         "pse_info": {
@@ -3436,6 +3451,9 @@
           "supplier_code": "5150",
           "supplier_name": "NAMICOH INDONESIA"
         },
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
         "plant_code": "TMMIN",
         "dock_code": "D07",
         "pse_info": {
