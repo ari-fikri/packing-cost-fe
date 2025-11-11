@@ -19,6 +19,10 @@ import {
   PseInfoCells,
 } from "../../../components/CurrentDpiSection/PseInfoColumns";
 import {
+  LogisticInfoHeaders,
+  LogisticInfoCells,
+} from "../../../components/CurrentDpiSection/LogisticInfoColumns";
+import {
   SubTotalHeaders,
   SubTotalData,
 } from "../../../components/CurrentCpsSection/SubTotalColumns";
@@ -78,6 +82,9 @@ export default function ResultSection({
               <th colSpan={17} className="align-middle">
                 PSE Information
               </th>
+              <th colSpan={3} className="align-middle">
+                Logistic Information
+              </th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0}>Inner Materials</th>
               <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0}>Outer Materials</th>
               <th colSpan={5}>Labor Man Hour</th>
@@ -87,6 +94,7 @@ export default function ResultSection({
             <tr>
               <PartInfoHeaders />
               <PseInfoHeaders />
+              <LogisticInfoHeaders />
 
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
@@ -104,8 +112,10 @@ export default function ResultSection({
           </thead>
           <tbody style={{ fontSize: '8pt' }}>
             {visibleRows.map((row, i) => {
+              //debugger;              
               const current = row.cps || {};
-              const pseInfo = row.cps?.pse_info || {};
+              const pseInfo = current.pse_info || {};
+              const logisticInfo = current.logistic_info || {};
               const innerData = current.packing?.inner || [];
               const outerData = current.packing?.outer || [];
               const labor = current.labor || {};
@@ -116,6 +126,7 @@ export default function ResultSection({
                   <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{current.cps_no ?? "-"}</td>
                   <PartInfoCells partInfo={current} />
                   <PseInfoCells pseInfo={pseInfo} />
+                  <LogisticInfoCells logisticInfo={logisticInfo} />
                   <InnerLeafCells data={innerData} count={innerCount} />
                   <OuterLeafCells data={outerData} count={outerCount} />
                   <LaborManHourCells labor={labor} />

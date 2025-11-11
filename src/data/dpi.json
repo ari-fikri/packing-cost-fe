@@ -682,6 +682,11 @@
           "packing_time": 0,
           "inland_cost": 0,
           "milkrun_cost": 0
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
         }
       }
     },
@@ -1367,6 +1372,11 @@
           "packing_time": 0,
           "inland_cost": 0,
           "milkrun_cost": 0
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
         }
       }
     },
@@ -2052,6 +2062,11 @@
           "packing_time": 0,
           "inland_cost": 0,
           "milkrun_cost": 0
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
         }
       }
     },
@@ -2737,6 +2752,11 @@
           "packing_time": 0,
           "inland_cost": 0,
           "milkrun_cost": 0
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
         }
       }
     },
@@ -3422,6 +3442,11 @@
           "packing_time": 0,
           "inland_cost": 0,
           "milkrun_cost": 0
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
         }
       }
     },
@@ -4107,6 +4132,11 @@
           "packing_time": 0,
           "inland_cost": 0,
           "milkrun_cost": 0
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
         }
       }
     }
