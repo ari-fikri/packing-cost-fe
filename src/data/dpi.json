@@ -40,10 +40,10 @@
           "order_pattern_next": "A1",
           "category": "CAT-1",
           "katashiki": {
-            "AD": "AD1",
-            "AU": "AU1",
-            "AF": "AF1",
-            "AX": "AX1"
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
           },
           "importer_line_process": "ILP-1",
           "case_code": "CC-001",
@@ -1402,26 +1402,26 @@
         "plant_code": "TMMIN",
         "dock_code": "D03",
         "pse_info": {
-          "packing_plant_curr": "",
-          "packing_plant_next": "",
-          "vanning_plant_curr": "",
-          "vanning_plant_next": "",
-          "order_pattern_curr": "",
-          "order_pattern_next": "",
+          "packing_plant_curr": "STR 1",
+          "packing_plant_next": "STR 2",
+          "vanning_plant_curr": "STR 3",
+          "vanning_plant_next": "STR 4",
+          "order_pattern_curr": "KRW 1",
+          "order_pattern_next": "KRW 2",
           "category": "",
           "katashiki": {
-            "AD": "",
-            "AU": "",
-            "AF": "",
-            "AX": ""
+            "AD": "1",
+            "AU": "2",
+            "AF": "2",
+            "AX": "1"
           },
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
           "renban": "",
-          "renban_eff": "",
-          "packing_process_boxing": "",
-          "packing_process_stacking": ""
+          "renban_eff": "90%",
+          "packing_process_boxing": "TMMIN",
+          "packing_process_stacking": "Supplier"
         },
         "images": {
           "part": {
