@@ -66,12 +66,6 @@ export default function ResultSection({
               <th colSpan={7} className="align-middle">
                 Part Information
               </th>
-              <th colSpan={4} className="align-middle">
-                Sub Total (USD)
-              </th>
-              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                Diff (%)
-              </th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0}>Inner Materials</th>
               <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0}>Outer Materials</th>
               <th colSpan={5}>Labor Man Hour</th>
@@ -100,8 +94,6 @@ export default function ResultSection({
               <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Qty/Box
               </th>
-
-              <SubTotalHeaders />
 
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
@@ -135,8 +127,7 @@ export default function ResultSection({
                   <td className="align-middle">{current.supplier?.supplier_name ?? "-"}</td>
                   <td className="align-middle">{current.weightPerPc ?? "-"}</td>
                   <td className="align-middle">{current.qtyPerBox ?? "-"}</td>
-                  <SubTotalData current={current} />
-                  <td className="align-middle">{current.diffPct ?? "-"}</td>
+
                   <InnerLeafCells data={innerData} count={innerCount} />
                   <OuterLeafCells data={outerData} count={outerCount} />
                   <LaborManHourCells labor={labor} />
