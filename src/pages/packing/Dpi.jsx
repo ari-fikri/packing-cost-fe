@@ -97,10 +97,6 @@ export default function DPI() {
     setPage(p2);
   }
 
-  function toggleStatus(status) {
-    setStatuses(prev => prev.includes(status) ? prev.filter(s => s !== status) : [...prev, status]);
-  }
-
   // slice rows for current page
   const visibleRows = rows.slice((page - 1) * perPage, page * perPage);
 

@@ -22,7 +22,7 @@ export default function ResultSection({
     <div>
       <div className="table-responsive">
         <table className="table table-striped table-sm mb-0">
-          <thead>
+          <thead style={{ fontSize: '8pt' }}>
             <tr>
               <th style={{ width: 40 }}>No</th>
               <th>CPS/PCI/ECI No</th>

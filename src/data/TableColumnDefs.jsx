@@ -64,8 +64,8 @@ export function makeColGroup(
   for (let i = 0; i < outerCount; i++) {
     push(`out_matNo_${i}`, 120);
     push(`out_qty_${i}`, 30);
-    push(`out_price_${i}`, 50);
-    push(`out_sum_${i}`, 110);
+    // push(`out_price_${i}`, 50);
+    // push(`out_sum_${i}`, 110);
   }
 
   // Labor - Man Hour Requirement (10 cols)
