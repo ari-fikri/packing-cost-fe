@@ -725,18 +725,18 @@
           "order_pattern_next": "",
           "category": "",
           "katashiki": {
-            "AD": "",
-            "AU": "",
-            "AF": "",
-            "AX": ""
+            "AD": "1",
+            "AU": "2",
+            "AF": "2",
+            "AX": "1"
           },
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
           "renban": "",
           "renban_eff": "",
-          "packing_process_boxing": "",
-          "packing_process_stacking": ""
+          "packing_process_boxing": "Supplier",
+          "packing_process_stacking": "TMMIN"
         },
         "images": {
           "part": {
