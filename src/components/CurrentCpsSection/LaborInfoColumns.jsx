@@ -7,19 +7,19 @@ import React from "react";
 export function LaborManHourHeaders() {
   return (
     <>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Receiving</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Inspection</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Delivery Course</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Pallet Supply</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Binding</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Sorting & Supply</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Pick & Packing</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Vanning</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Box/Valet Return</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Mix Van</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Lashing</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Total Time Req</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Others</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Receiving</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Inspection</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Delivery Course</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Pallet Supply</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Binding</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Sorting & Supply</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Pick & Packing</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Vanning</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Box/Valet Return</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Mix Van</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Lashing</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Total Time Req</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Others</th>
     </>
   );
 }
@@ -30,10 +30,10 @@ export function LaborManHourHeaders() {
 export function LaborCostHeaders() {
   return (
     <>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Current</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>DL</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>IDL</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Facility Others</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Current</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>DL</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>IDL</th>
+      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Facility Others</th>
     </>
   );
 }

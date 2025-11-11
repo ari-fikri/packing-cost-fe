@@ -12,18 +12,18 @@ export function MaterialLeafHeaders({ count = 1 }) {
         <React.Fragment key={`matLeafHdr-${i}`}>
           {i === 0 ? (
             <>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '100px', border: '1px solid #6c757d' }}>Mat No</th>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d' }}>Length</th>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d' }}>Width</th>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d' }}>Height</th>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d' }}>Volume Inner</th>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d' }}>Volume Outer</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '100px', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Mat No</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Length</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Width</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Height</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Volume Inner</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Volume Outer</th>
               <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '1%', whiteSpace: 'nowrap', border: '1px solid #6c757d' }}>Usage</th>
               <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '1%', whiteSpace: 'nowrap', border: '1px solid #6c757d' }}>Source</th>
             </>
           ) : (
             <>
-              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '100px', border: '1px solid #6c757d' }}>Mat No</th>
+              <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '100px', border: '1px solid #6c757d', whiteSpace: 'nowrap' }}>Mat No</th>
               <th className="align-middle text-center" style={{ backgroundColor: '#dee2e6', width: '1%', whiteSpace: 'nowrap', border: '1px solid #6c757d' }}>Usage</th>
             </>
           )}

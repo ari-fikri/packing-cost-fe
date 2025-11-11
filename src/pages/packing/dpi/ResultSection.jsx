@@ -53,17 +53,17 @@ export default function ResultSection({
       >
         <table
           className="table table-sm table-bordered mb-0 text-center"
-          style={{ tableLayout: "fixed", width: "3000px" }}
+          style={{ tableLayout: "fixed", width: "auto" }}
         >
           <thead style={{ fontSize: '8pt' }}>
             <tr>
-              <th rowSpan={3} className="align-middle">
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 No
               </th>
-              <th rowSpan={3} className="align-middle">
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Rec No
               </th>
-              <th rowSpan={3} className="align-middle">
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 CPS No
               </th>
               <th colSpan={7} className="align-middle">
@@ -72,7 +72,7 @@ export default function ResultSection({
               <th colSpan={4} className="align-middle">
                 Sub Total (USD)
               </th>
-              <th rowSpan={3} className="align-middle">
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Diff (%)
               </th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0}>Inner Materials</th>
@@ -82,25 +82,25 @@ export default function ResultSection({
               <th colSpan={2}>Inland Trucking Cost</th>
             </tr>
             <tr>
-              <th rowSpan={2} className="align-middle">
+              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Part No
               </th>
-              <th rowSpan={2} className="align-middle">
+              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Part Name
               </th>
-              <th rowSpan={2} className="align-middle">
+              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Parent Part
               </th>
-              <th rowSpan={2} className="align-middle">
+              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Supplier Code
               </th>
               <th rowSpan={2} className="align-middle">
                 Supplier Name
               </th>
-              <th rowSpan={2} className="align-middle">
+              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Weight/Pc (Kg)
               </th>
-              <th rowSpan={2} className="align-middle">
+              <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 Qty/Box
               </th>
 
@@ -119,7 +119,7 @@ export default function ResultSection({
               <OuterLeafHeaders count={outerCount} />
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ fontSize: '8pt' }}>
             {visibleRows.map((row, i) => {
               //debugger;              
               const current = row.cps || {};
