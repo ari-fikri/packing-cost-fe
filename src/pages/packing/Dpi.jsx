@@ -88,6 +88,10 @@ export default function DPI() {
     alert('Download template placeholder');
   }
 
+  function handleViewDpi() {
+    alert('View DPI placeholder');
+  }
+
   function goToPage(p) {
     const p2 = Math.min(Math.max(1, p), totalPages);
     setPage(p2);
@@ -164,6 +168,7 @@ export default function DPI() {
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>DPI List</b></h3>
           <ActionHeaderButtons
+            onViewDpi={handleViewDpi}
             onUpload={handleUpload}
             onTemplate={handleTemplate}
             onCreateDpi={handleCreateDpi}

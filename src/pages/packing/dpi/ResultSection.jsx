@@ -1,4 +1,13 @@
 import React from 'react';
+import { makeColGroup } from '../../../data/TableColumnDefs';
+import { SubTotalData } from '../../../components/CurrentCpsSection/SubTotalColumns';
+import { InnerLeafCells } from '../../../components/CurrentCpsSection/InnerInfoColumns';
+import { OuterLeafCells } from '../../../components/CurrentCpsSection/OuterInfoColumns';
+import { LaborManHourCells, LaborCostCells } from '../../../components/CurrentCpsSection/LaborInfoColumns';
+import { InlandLeafCells } from '../../../components/CurrentCpsSection/InlandColumns';
+
+const INNER_COUNT = 10;
+const OUTER_COUNT = 10;
 
 export default function ResultSection({
   rows,
@@ -10,6 +19,8 @@ export default function ResultSection({
   goToPage,
   setPerPage,
 }) {
+  const { colGroup, totalWidth } = makeColGroup(INNER_COUNT, OUTER_COUNT);
+
   return (
     <>
       {/* small spacer */}
@@ -17,55 +28,46 @@ export default function ResultSection({
 
       {/* Table */}
       <div className="table-responsive">
-        <table className="table table-striped table-sm mb-0" style={{ whiteSpace: 'nowrap' }}>
-          <thead>
-            <tr>
-              <th style={{ width: 40 }}>No</th>
-              <th>Impl Period</th>
-              <th>Dest Code</th>
-              <th>Model code</th>
-              <th>Model</th>
-              <th>Part No</th>
-              <th>Part Name</th>
-              <th>Supplier Code</th>
-              <th>Supplier Name</th>
-              <th>Part Status</th>
-              <th>Detail Part Status</th>
-              <th>CPS Status</th>
-              <th>CPSNo</th>
-              <th>Part Category</th>
-              <th style={{ width: 120 }}>Action</th>
-            </tr>
-          </thead>
+        <table className="table table-striped table-sm mb-0" style={{ width: totalWidth, whiteSpace: 'nowrap', fontSize: '8pt' }}>
+          {colGroup}
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan="15" className="text-center py-4 text-muted">No Data Found</td>
+                <td colSpan="100%" className="text-center py-4 text-muted">No Data Found</td>
               </tr>
             ) : (
-              visibleRows.map((r, i) => (
-                <tr key={i}>
-                  <td>{(page - 1) * perPage + i + 1}</td>
-                  <td>{r.implementation_period}</td>
-                  <td>{r.cps.model.destination.code}</td>
-                  <td>{r.model_code}</td>
-                  <td>{r.cps.model.model_name}</td>
-                  <td>{r.part_no}</td>
-                  <td>{r.cps.part_name}</td>
-                  <td>{r.cps.supplier.supplier_code}</td>
-                  <td>{r.cps.supplier.supplier_name}</td>
-                  <td>{r.partStatus || ''}</td>
-                  <td>{r.detailPartStatus || ''}</td>
-                  <td>{r.status || ''}</td>
-                  <td>{r.cps.cps_no}</td>
-                  <td>{r.cps.pse_info.category}</td>
-                  <td>
-                    <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => alert('View placeholder')}>
-                      <i className="fas fa-eye" />
-                    </button>
-                  </td>
-                </tr>
-              ))
+              visibleRows.map((r, i) => {
+                // if (r.cps?.cps_no === 'CPS-2024-001') {
+                  // debugger;
+                // }
+                return (
+                  <tr key={i}>
+                    <td>
+                      <button className="btn btn-sm btn-light" onClick={() => alert('placeholder')}>
+                        <i className="fas fa-pencil-alt" />
+                      </button>
+                    </td>
+                    <td>{(page - 1) * perPage + i + 1}</td>
+                    <td>{r.cps?.cps_no}</td>
+                    
+                    <td>{r.cps?.part?.part_no || ''}</td>
+                    <td>{r.cps?.part?.part_name || ''}</td>
+                    <td>{r.cps?.part?.parent_no || ''}</td>
+                    <td>{r.cps?.supplier?.supplier_code || ''}</td>
+                    <td>{r.cps?.supplier?.supplier_name || ''}</td>
+                    <td>{r.cps?.part?.weight || ''}</td>
+                    <td>{r.cps?.part?.qty_per_box || ''}</td>
+
+                    <SubTotalData current={r.subtotal} />
+                    <td>-</td>
+                    <InnerLeafCells data={r.cps?.packing?.inner} count={INNER_COUNT} />
+                    <OuterLeafCells data={r.cps?.packing?.outer} count={OUTER_COUNT} />
+                    <LaborManHourCells labor={r.manhour} />
+                    <LaborCostCells labor={r.labor} />
+                    <InlandLeafCells inland={r.inland} />
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>

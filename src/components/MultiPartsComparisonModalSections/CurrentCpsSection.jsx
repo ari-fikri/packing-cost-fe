@@ -36,6 +36,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
           <thead>
             {/* row 1 */}
             <tr style={{ backgroundColor: "#696969", color: "white" }}>
+              {/*console.log("<<<<< --- creating Part headers")*/}
               <th rowSpan={3}></th>
               <th rowSpan={3} className="align-middle">Rec No</th>
               <th rowSpan={3} className="align-middle">CPS No</th>
@@ -56,6 +57,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
 
             {/* row 2 */}
             <tr style={{ backgroundColor: "#969696", color: "black" }}>
+              {/*console.log("<<<<< --- creating inner/outer headers")*/}
               <InnerGroupHeaders count={INNER_COUNT} />
               <OuterGroupHeaders count={OUTER_COUNT} />
 

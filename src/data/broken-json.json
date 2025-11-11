@@ -1,0 +1,373 @@
+    {
+      "id": 5,
+      "implementation_period": "003.2023",
+      "model_code": "488W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-005",
+        "refCpsNo": "",
+        "issue_date": "2024-07-05",
+        "effective_date": "2024-07-14",
+        "model": {
+          "model_code": "488W",
+          "model_name": "Door Panel Model",
+          "implementation_period": "003.2023",
+          "destination": {
+            "code": "715B",
+            "dest_country_code": "TMV",
+            "dest_country_name": "VIETNAM"
+          }
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {
+          "supplier_code": "5062",
+          "supplier_name": "MENARA TERUS MAKMUR"
+        },
+        "plant_code": "TMMIN",
+        "dock_code": "D05",
+        "pse_info": {
+          "packing_plant_curr": "",
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
+        },
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
+        },
+        "packing": {
+          "inner": [
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            }
+          ],
+          "outer": [
+            {
+              "id": 3,
+              "materialNo": "MAT003",
+              "materialName": "Plastic Module",
+              "parentMaterial": "Plastic",
+              "itemNo": "ITM003",
+              "price": 120.5,
+              "materialType": "Module",
+              "createdDate": "2024-02-15",
+              "dimension_width": 123,
+              "dimension_height": 143,
+              "dimension_length": 113,
+              "dimension_inner_width": 103,
+              "dimension_inner_length": 93,
+              "dimension_inner_height": 123,
+              "dimension_outer_width": 153,
+              "dimension_outer_length": 143,
+              "dimension_outer_height": 173,
+              "ewarehouse_price": 125.5,
+              "currency_code": "IDR",
+              "supplierCode": "5062",
+              "supplier": {
+                "supplier_code": "5062",
+                "supplier_name": "MENARA TERUS MAKMUR",
+                "supplier_address": "Jl. Jababeka XI Blok H-3 No.12, Kawasan Industri Jababeka, Cikarang, Bekasi"
+              }
+            },
+            {
+              "id": null,
+              "materialNo": null,
+              "materialName": null,
+              "parentMaterial": null,
+              "itemNo": null,
+              "price": null,
+              "materialType": null,
+              "createdDate": null,
+              "dimension_width": null,
+              "dimension_height": null,
+              "dimension_length": null,
+              "dimension_inner_width": null,
+              "dimension_inner_length": null,
+              "dimension_inner_height": null,
+              "dimension_outer_width": null,
+              "dimension_outer_length": null,
+              "dimension_outer_height": null,
+              "ewarehouse_price": null,
+              "currency_code": null,
+              "supplierCode": null,
+              "supplier": {
+                "supplier_code": null,
+                "supplier_name": null,
+                "supplier_address": null
+              }
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
+        },
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
+    }
+  }
+}
+          "packing_plant_next": "",
+          "vanning_plant_curr": "",
+          "vanning_plant_next": "",
+          "order_pattern_curr": "",
+          "order_pattern_next": "",
+          "category": "",
+          "katashiki": { "AD": "", "AU": "", "AF": "", "AX": "" },
+          "importer_line_process": "",
+          "case_code": "",
+          "box_number": "",
+          "renban": "",
+          "renban_eff": "",
+          "packing_process_boxing": "",
+          "packing_process_stacking": ""
+        },
+        "images": {
+          "part": { "caption": "", "files": [] },
+          "packing": { "caption": "", "files": [] },
+          "outer": { "caption": "", "files": [] },
+          "qkp": { "caption": "", "files": [] },
+          "bkp": { "caption": "", "files": [] }
+        },
+        "packing": {
+          "inner": [
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            },
+            {
+              "material_no": "",
+              "material_name": "",
+              "qty": 0,
+              "dimension_length": 0,
+              "dimension_width": 0,
+              "dimension_height": 0,
+              "volume_inner": 0,
+              "volume_outer": 0
+            }
+          ],
+          "outer": []
+        },
+        "manhour": {
+          "receiving": 0,
+          "inspection": 0,
+          "delivery_course": 0,
+          "pallet_supply": 0,
+          "binding": 0,
+          "non_pallet_supply": 0,
+          "pick_packing": 0,
+          "empty_box": 0,
+          "mix_van": 0,
+          "lashing": 0
+        },
+        "labor": { "dl": 0, "idl": 0, "facility": 0 },
+        "inland": { "packing_time": 0, "inland_cost": 0, "milkrun_cost": 0 }
+      }
+    },

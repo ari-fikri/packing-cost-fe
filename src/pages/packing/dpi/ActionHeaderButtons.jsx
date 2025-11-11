@@ -1,11 +1,17 @@
 import React from 'react';
 
 export default function ActionHeaderButtons({
+  onViewDpi,
   onUpload,
   onTemplate,
+  onCreateDpi,
+  onCreatePci,
 }) {
   return (
     <div className="card-tools ml-auto">
+      <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={onViewDpi} title="View DPI">
+        <i className="fas fa-eye" /> View DPI
+      </button>
       <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={onUpload} title="Upload">
         <i className="fas fa-cloud-upload-alt" /> Upload
       </button>

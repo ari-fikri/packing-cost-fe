@@ -1,0 +1,15 @@
+{
+  "inner":
+  [
+    {
+      "material_no":"",
+      "material_name":"",
+      "qty":0,
+      "dimension_length":0.00,
+      "dimension_width":0.00,
+      "dimension_height":0.00,
+      "volume_inner":0,
+      "volume_outer":0
+    }
+  ]
+}

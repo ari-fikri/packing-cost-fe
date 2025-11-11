@@ -9,7 +9,7 @@ export function OuterGroupHeaders({ count = 10 }) {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
-        <th key={`outerGroupHdr-${i}`} colSpan={4} className="align-middle">
+        <th key={`outerGroupHdr-${i}`} colSpan={4} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>
           Material {i + 1}
         </th>
       ))}
