@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ImageModal } from './ImageModal';
 
 export function ImageInfoHeaders() {
   return (
@@ -13,14 +14,27 @@ export function ImageInfoHeaders() {
 }
 
 function ImageViewer({ files }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   if (!files || files.length === 0) {
     return '-';
   }
-  // In a real app, you might open a modal with the image
+
+  const imageUrl = files[0];
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <a href={files[0]} target="_blank" rel="noopener noreferrer">
-      <img src={files[0]} alt="thumbnail" style={{ width: '50px', height: 'auto' }} />
-    </a>
+    <>
+      <img
+        src={imageUrl}
+        alt="thumbnail"
+        style={{ width: '50px', height: 'auto', cursor: 'pointer' }}
+        onClick={openModal}
+      />
+      <ImageModal imageUrl={imageUrl} isOpen={isModalOpen} onClose={closeModal} />
+    </>
   );
 }
 
