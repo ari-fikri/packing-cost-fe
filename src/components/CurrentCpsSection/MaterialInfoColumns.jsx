@@ -10,10 +10,10 @@ export function MaterialLeafHeaders({ count = 1 }) {
     <>
       {Array.from({ length: count }).map((_, i) => (
         <React.Fragment key={`matLeafHdr-${i}`}>
-          <th className="align-middle">Mat No</th>
-          <th className="align-middle">Qty</th>
-          <th className="align-middle">Price</th>
-          <th className="align-middle">Sum</th>
+          <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Mat No</th>
+          <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Qty</th>
+          <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Price</th>
+          <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Sum</th>
         </React.Fragment>
       ))}
     </>

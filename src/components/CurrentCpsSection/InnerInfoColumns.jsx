@@ -9,8 +9,8 @@ export function InnerGroupHeaders({ count = 10 }) {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
-        <th key={`innerGroupHdr-${i}`} colSpan={4} className="align-middle">
-          Material {i + 1}
+        <th key={`innerGroupHdr-${i}`} colSpan={4} className="align-middle border text-center tbl-row2-hdr text-nowrap">
+          Inner {i + 1}
         </th>
       ))}
     </>

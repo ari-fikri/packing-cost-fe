@@ -35,44 +35,43 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
           {colGroup}
           <thead>
             {/* row 1 */}
-            <tr style={{ backgroundColor: "#696969", color: "white" }}>
-              <th rowSpan={3}></th>
-              <th rowSpan={3} className="align-middle">Rec No</th>
-              <th rowSpan={3} className="align-middle">CPS No</th>
+            <tr>
+              <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap"></th>
+              <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">No</th>
+              <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">CPS No</th>
 
-              <th rowSpan={2} colSpan={7} className="align-middle">Part Info</th>
+              <th rowSpan={2} colSpan={7} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Info</th>
+              <th rowSpan={2} colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Sub Total Costs</th>
 
-              <th rowSpan={2} colSpan={5} className="align-middle">Sub Total Costs</th>
+              <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Diff (%)</th>
 
-              <th rowSpan={3} className="align-middle">Diff (%)</th>
+              <th colSpan={INNER_COUNT * 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Info</th>
+              <th colSpan={OUTER_COUNT * 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Info</th>
 
-              <th colSpan={INNER_COUNT * 4} className="align-middle">Inner Info</th>
-              <th colSpan={OUTER_COUNT * 4} className="align-middle">Outer Info</th>
+              <th colSpan={13 + 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Labor</th>
 
-              <th colSpan={13 + 4} className="align-middle">Labor</th>
-
-              <th colSpan={4} rowSpan={2} className="align-middle">Inland</th>
+              <th colSpan={4} rowSpan={2} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inland</th>
             </tr>
 
             {/* row 2 */}
-            <tr style={{ backgroundColor: "#969696", color: "black" }}>
+            <tr>
               <InnerGroupHeaders count={INNER_COUNT} />
               <OuterGroupHeaders count={OUTER_COUNT} />
 
-              <th colSpan={13} className="align-middle">Man Hour Requirement</th>
-              <th colSpan={4} className="align-middle">Labor Cost</th>
+              <th colSpan={13} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Man Hour Requirement</th>
+              <th colSpan={4} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Labor Cost</th>
             </tr>
 
             {/* row 3 */}
-            <tr style={{ backgroundColor: "#D8D8D8", color: "black" }}>
+            <tr>
               {/* Part Info subheaders (7 columns) */}
-              <th className="align-middle font-size-10pt">Part No</th>
-              <th className="align-middle font-size-10pt">Part Name</th>
-              <th className="align-middle font-size-10pt">Parent No</th>
-              <th className="align-middle font-size-10pt">Supplier Code</th>
-              <th className="align-middle font-size-10pt">Supplier Name</th>
-              <th className="align-middle font-size-10pt">Weight/pc</th>
-              <th className="align-middle font-size-10pt">Qty/Box</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Part No</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Part Name</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Parent No</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Supplier Code</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Supplier Name</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Weight/pc</th>
+              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Qty/Box</th>
 
               {/* Sub totals */}
               <SubTotalHeaders />
