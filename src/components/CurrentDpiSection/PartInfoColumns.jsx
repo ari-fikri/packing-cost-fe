@@ -3,36 +3,16 @@ import React from 'react';
 export function PartInfoHeaders() {
   return (
     <>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Part No
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Part Name
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Parent Part
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Supplier Code
-      </th>
-      <th rowSpan={2} className="align-middle">
-        Supplier Name
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Part Status
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Dtl Part Status
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Pack Spec Status
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Weight/Pc (Kg)
-      </th>
-      <th rowSpan={2} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Qty/Box
-      </th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part No </th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part Name</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Parent Part</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Supplier Code</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Supplier Name</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part Status</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Dtl Part Status</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Pack Spec Status</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Weight/Pc (Kg)</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Qty/Box</th>
     </>
   );
 }
