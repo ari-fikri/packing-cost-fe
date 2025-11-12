@@ -23,6 +23,10 @@ import {
   LogisticInfoCells,
 } from "../../../components/CurrentDpiSection/LogisticInfoColumns";
 import {
+  ImageInfoHeaders,
+  ImageInfoCells,
+} from "../../../components/CurrentDpiSection/ImageInfoColumns";
+import {
   SubTotalHeaders,
   SubTotalData,
 } from "../../../components/CurrentCpsSection/SubTotalColumns";
@@ -85,6 +89,9 @@ export default function ResultSection({
               <th colSpan={3} className="align-middle">
                 Logistic Information
               </th>
+              <th colSpan={5} className="align-middle">
+                Images
+              </th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0}>Inner Materials</th>
               <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0}>Outer Materials</th>
               <th colSpan={5}>Labor Man Hour</th>
@@ -95,6 +102,7 @@ export default function ResultSection({
               <PartInfoHeaders />
               <PseInfoHeaders />
               <LogisticInfoHeaders />
+              <ImageInfoHeaders />
 
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
@@ -116,6 +124,7 @@ export default function ResultSection({
               const current = row.cps || {};
               const pseInfo = current.pse_info || {};
               const logisticInfo = current.logistic_info || {};
+              const images = current.images || {};
               const innerData = current.packing?.inner || [];
               const outerData = current.packing?.outer || [];
               const labor = current.labor || {};
@@ -127,6 +136,7 @@ export default function ResultSection({
                   <PartInfoCells partInfo={current} />
                   <PseInfoCells pseInfo={pseInfo} />
                   <LogisticInfoCells logisticInfo={logisticInfo} />
+                  <ImageInfoCells images={images} />
                   <InnerLeafCells data={innerData} count={innerCount} />
                   <OuterLeafCells data={outerData} count={outerCount} />
                   <LaborManHourCells labor={labor} />

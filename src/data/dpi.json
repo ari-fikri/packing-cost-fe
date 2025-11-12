@@ -56,23 +56,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": []
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": []
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": []
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -746,23 +756,33 @@
         "images": {
           "part": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "packing": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "outer": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/1.png"
+            ]
           },
           "qkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/5.png"
+            ]
           },
           "bkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/5.png"
+            ]
           }
         },
         "packing": {
@@ -1436,23 +1456,33 @@
         "images": {
           "part": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/1.png"
+            ]
           },
           "packing": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "outer": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/1.png"
+            ]
           },
           "qkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "bkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -2126,23 +2156,33 @@
         "images": {
           "part": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/1.png"
+            ]
           },
           "packing": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "outer": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "qkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "bkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/3.png"
+            ]
           }
         },
         "packing": {
@@ -2816,23 +2856,33 @@
         "images": {
           "part": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "outer": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/1.png"
+            ]
           },
           "qkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/5.png"
+            ]
           },
           "bkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/1.png"
+            ]
           }
         },
         "packing": {
@@ -3506,23 +3556,33 @@
         "images": {
           "part": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "outer": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "qkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/5.png"
+            ]
           },
           "bkp": {
             "caption": "",
-            "files": []
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
