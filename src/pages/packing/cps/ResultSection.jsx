@@ -22,19 +22,19 @@ export default function ResultSection({
     <div>
       <div className="table-responsive">
         <table className="table table-striped table-sm mb-0">
-          <thead style={{ fontSize: '8pt' }}>
+          <thead>
             <tr>
-              <th style={{ width: 40 }}>No</th>
-              <th>CPS/PCI/ECI No</th>
-              <th>Type</th>
-              <th>Ref CPS No</th>
-              <th>Part No</th>
-              <th>Project Code</th>
-              <th>Model</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Status</th>
-              <th>Submit Date</th>
+              <th style={{ fontSize: '10pt' }}>No</th>
+              <th style={{ fontSize: '10pt' }}>CPS/PCI/ECI No</th>
+              <th style={{ fontSize: '10pt' }}>Type</th>
+              <th style={{ fontSize: '10pt' }}>Ref CPS No</th>
+              <th style={{ fontSize: '10pt' }}>Part No</th>
+              <th style={{ fontSize: '10pt' }}>Project Code</th>
+              <th style={{ fontSize: '10pt' }}>Model</th>
+              <th style={{ fontSize: '10pt' }}>From</th>
+              <th style={{ fontSize: '10pt' }}>To</th>
+              <th style={{ fontSize: '10pt' }}>Status</th>
+              <th style={{ fontSize: '10pt' }}>Submit Date</th>
               <th style={{ width: 160 }}>Action</th>
             </tr>
           </thead>
@@ -49,17 +49,17 @@ export default function ResultSection({
               visibleRows.map((r, i) => {
                 return (                  
                   <tr key={i}>
-                    <td>{(page - 1) * perPage + i + 1}</td>
-                    <td>{r.cpsNo}</td>
-                    <td>{getType(r.cpsNo)}</td>
-                    <td>{r.refCpsNo}</td>
-                    <td>{r.partNo}</td>
-                    <td>{r.cfcPjtCode}</td>
-                    <td>{r.model}</td>
-                    <td>{r.fromUser}</td>
-                    <td>{r.toUser}</td>
-                    <td>{r.status}</td>
-                    <td>{r.issueDate}</td>
+                    <td style={{ fontSize: '10pt' }}>{(page - 1) * perPage + i + 1}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.cpsNo}</td>
+                    <td style={{ fontSize: '10pt' }}>{getType(r.cpsNo)}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.refCpsNo}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.partNo}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.cfcPjtCode}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.model}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.fromUser}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.toUser}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.status}</td>
+                    <td style={{ fontSize: '10pt' }}>{r.issueDate}</td>
                     <td>
                       <button
                         type="button"
