@@ -78,41 +78,22 @@ export default function ResultSection({
         >
           <thead style={{ fontSize: '8pt' }}>
             <tr>
-              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-                No
-              </th>
+              <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">No</th>
               <MainInfoHeaders />              
-              <th colSpan={10} className="align-middle">
-                Part Information
-              </th>
-              <th colSpan={17} className="align-middle">
-                PSE Information
-              </th>
-              <th colSpan={3} className="align-middle">
-                Logistic Information
-              </th>
-              <th colSpan={5} className="align-middle">
-                Images
-              </th>
-              <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0}>Inner Materials</th>
-              <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0}>Outer Materials</th>
-              <th colSpan={5}>Labor Man Hour</th>
-              <th colSpan={5}>Labor Cost</th>
-              <th colSpan={2}>Inland Trucking Cost</th>
+              <th colSpan={10} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>
+              <th colSpan={17} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>
+              <th colSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>
+              <th colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Images</th>
+              <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Materials</th>
+              <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Materials</th>
             </tr>
             <tr>
               <PartInfoHeaders />
               <PseInfoHeaders />
               <LogisticInfoHeaders />
               <ImageInfoHeaders />
-
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
-
-              <LaborManHourHeaders />
-              <LaborCostHeaders />
-
-              <InlandLeafHeaders />
             </tr>
             <tr>
               <PseInfoSubHeaders />
@@ -141,9 +122,6 @@ export default function ResultSection({
                   <ImageInfoCells images={images} />
                   <InnerLeafCells data={innerData} count={innerCount} />
                   <OuterLeafCells data={outerData} count={outerCount} />
-                  <LaborManHourCells labor={labor} />
-                  <LaborCostCells labor={labor} />
-                  <InlandLeafCells inland={inland} />
                 </tr>
               );
             })}

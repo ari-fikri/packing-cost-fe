@@ -3,18 +3,10 @@ import React from 'react';
 export function MainInfoHeaders() {
   return (
     <>
-      <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Destination
-      </th>
-      <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Model
-      </th>
-      <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        Impl Period
-      </th>
-      <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
-        CPS No
-      </th>
+      <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Destination</th>
+      <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Model</th>
+      <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Impl Period</th>
+      <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">CPS No</th>
     </>
   );
 }

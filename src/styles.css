@@ -46,6 +46,11 @@ html,body,#root { height:100% }
   font-size: 0.85rem; /* ~2pt smaller than default */
 }
 
+.tbl-row1-hdr {
+  background-color: #f7fbff;
+  border: 1px solid rgb(148, 148, 148) !important;
+}
+
 .tbl-row2-hdr {
   background-color: #dee2e6;
   border: 1px solid rgb(148, 148, 148) !important;
