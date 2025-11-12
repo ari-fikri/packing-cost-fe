@@ -32,9 +32,9 @@ export function MaterialLeafCells({ arr = [], count = 1 }) {
         return (
           <React.Fragment key={`matLeafData-${i}`}>
             <td className="align-middle">{mat.materialNo ?? "-"}</td>
-            <td className="align-middle">{mat.qty ?? "-"}</td>
-            <td className="align-middle">{mat.price ?? "-"}</td>
-            <td className="align-middle">{mat.sum ?? "-"}</td>
+            <td className="text-right">{mat.qty ?? "-"}</td>
+            <td className="text-right">{mat.price ?? "-"}</td>
+            <td className="text-right">{mat.sum ?? "-"}</td>
           </React.Fragment>
         );
       })}

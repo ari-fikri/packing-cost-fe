@@ -51,18 +51,18 @@ export function makeColGroup(innerCount = DEFAULT_INNER, outerCount = DEFAULT_OU
 
   // Inner Materials (each has 4 subcolumns)
   for (let i = 0; i < innerCount; i++) {
-    push(`in_matNo_${i}`, 200);
-    push(`in_qty_${i}`, 70);
-    push(`in_price_${i}`, 100);
-    push(`in_sum_${i}`, 110);
+    push(`in_matNo_${i}`, 100);
+    push(`in_qty_${i}`, 50);
+    push(`in_price_${i}`, 70);
+    push(`in_sum_${i}`, 100);
   }
 
   // Outer Materials
   for (let i = 0; i < outerCount; i++) {
-    push(`out_matNo_${i}`, 200);
-    push(`out_qty_${i}`, 70);
-    push(`out_price_${i}`, 100);
-    push(`out_sum_${i}`, 110);
+    push(`out_matNo_${i}`, 100);
+    push(`out_qty_${i}`, 50);
+    push(`out_price_${i}`, 70);
+    push(`out_sum_${i}`, 100);
   }
 
   // Labor - Man Hour Requirement (13 cols)
