@@ -3,9 +3,9 @@ import React from 'react';
 export function LogisticInfoHeaders() {
   return (
     <>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Dock Code</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Address</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Process Type</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Dock Code</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Address</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Process Type</th>
     </>
   );
 }
