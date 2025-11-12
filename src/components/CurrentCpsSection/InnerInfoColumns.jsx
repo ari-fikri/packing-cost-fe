@@ -9,7 +9,7 @@ export function InnerGroupHeaders({ count = 10 }) {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
-        <th key={`innerGroupHdr-${i}`} colSpan={i === 0 ? 8 : 2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef', border: '1px solid #000' }}>
+        <th key={`innerGroupHdr-${i}`} colSpan={4} className="align-middle">
           Material {i + 1}
         </th>
       ))}
@@ -28,8 +28,5 @@ export function InnerLeafHeaders({ count = 10 }) {
  * Renders the data cells for inner materials
  */
 export function InnerLeafCells({ data = [], count = 10 }) {
-  //  {if (data.length > 0)
-  //     debugger;
-  //  }
   return <MaterialLeafCells arr={data} count={count} />;
 }

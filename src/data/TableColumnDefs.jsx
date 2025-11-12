@@ -4,25 +4,22 @@ import React from "react";
 export const DEFAULT_INNER = 10;
 export const DEFAULT_OUTER = 10;
 
-import {
-  InnerGroupHeaders,
-  InnerLeafHeaders,
-} from "../components/CurrentCpsSection/InnerInfoColumns";
-import {
-  OuterGroupHeaders,
-  OuterLeafHeaders,
-} from "../components/CurrentCpsSection/OuterInfoColumns";
-import { SubTotalHeaders } from "../components/CurrentCpsSection/SubTotalColumns";
-import {
-  LaborManHourHeaders,
-  LaborCostHeaders,
-} from "../components/CurrentCpsSection/LaborInfoColumns";
-import { InlandLeafHeaders } from "../components/CurrentCpsSection/InlandColumns";
-
-export function makeColGroup(
-  innerCount = DEFAULT_INNER,
-  outerCount = DEFAULT_OUTER
-) {
+/**
+ * Generates a <colgroup> and a totalWidth (px) for a table that has:
+ * - action
+ * - recNo, cpsNo
+ * - part info (7 columns)
+ * - sub total (5)
+ * - diff
+ * - innerCount * (MatNo, Qty, Price, Sum)
+ * - outerCount * (MatNo, Qty, Price, Sum)
+ * - labor man-hour (13 cols)
+ * - labor cost (4 cols)
+ * - inland (4 cols)
+ *
+ * Returns: { colGroup: JSX, totalWidth: number, cols: Array }
+ */
+export function makeColGroup(innerCount = DEFAULT_INNER, outerCount = DEFAULT_OUTER) {
   const cols = [];
   const push = (key, w) => cols.push({ key, w });
 
@@ -54,34 +51,37 @@ export function makeColGroup(
 
   // Inner Materials (each has 4 subcolumns)
   for (let i = 0; i < innerCount; i++) {
-    push(`in_matNo_${i}`, 120);
-    push(`in_qty_${i}`, 30);
-    push(`in_price_${i}`, 50);
+    push(`in_matNo_${i}`, 200);
+    push(`in_qty_${i}`, 70);
+    push(`in_price_${i}`, 100);
     push(`in_sum_${i}`, 110);
   }
 
   // Outer Materials
   for (let i = 0; i < outerCount; i++) {
-    push(`out_matNo_${i}`, 120);
-    push(`out_qty_${i}`, 30);
-    // push(`out_price_${i}`, 50);
-    // push(`out_sum_${i}`, 110);
+    push(`out_matNo_${i}`, 200);
+    push(`out_qty_${i}`, 70);
+    push(`out_price_${i}`, 100);
+    push(`out_sum_${i}`, 110);
   }
 
-  // Labor - Man Hour Requirement (10 cols)
-  const laborMhCols = [
-    "receiving",
-    "inspection",
-    "delivery_course",
-    "pallet_supply",
-    "binding",
-    "non_pallet_supply",
-    "pick_packing",
-    "empty_box",
-    "mix_van",
-    "lashing",
-  ];
-  laborMhCols.forEach((name, idx) => push(`lab_mh_${idx}`, 90));
+  // Labor - Man Hour Requirement (13 cols)
+  //const laborMhCols = [;
+    push("receiving",90);
+    push("inspection",90);
+    push("deliveryCourse",150);
+    push("palletSupply",90);
+    push("binding",90);
+    push("sorting",90);
+    push("pickPacking",90);
+    push("vanning",90);
+    push("boxValetReturn",90);
+    push("mixVan",90);
+    push("lashing",90);
+    push("totalTimeReq",90);
+    push("others",90);
+  //];
+  //laborMhCols.forEach((name, idx) => push(`lab_mh_${idx}`, 190));
 
   // Labor Cost (4)
   push("labCostCurrent", 130);
@@ -98,62 +98,17 @@ export function makeColGroup(
   const totalWidth = cols.reduce((s, c) => s + c.w, 0);
 
   const colGroup = (
-    <>
-    {/*console.log("<<<<< --- entering TableColumnDefs.jsx")*/}
-      <colgroup>
-        {cols.map((c, i) => (
-          <col
-            key={`${c.key}-${i}`}
-            style={{
-              width: `${c.w}px`,
-              minWidth: `${c.w}px`,
-            }}
-          />
-        ))}
-      </colgroup>
-      <thead>
-        {/* ROW 1 */}
-        <tr>
-          <th rowSpan={3} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Action</th>
-          <th rowSpan={3} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Rec No</th>
-          <th rowSpan={3} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>CPS No</th>
-          <th colSpan={7} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Part Info</th>
-          <th colSpan={5} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Sub Total</th>
-          <th rowSpan={3} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Diff (%)</th>
-          <th colSpan={innerCount * 4} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Inner Materials</th>
-          <th colSpan={outerCount * 4} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Outer Materials</th>
-          <th colSpan={10} rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Labor Man Hour Requirement</th>
-          <th colSpan={4} rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Labor Cost</th>
-          <th colSpan={4} rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#f8f9fa' }}>Inland</th>
-        </tr>
-        {/* ROW 2 */}
-        <tr>
-          {/* Part Info Headers */}
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Part No</th>
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Part Name</th>
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Parent Part No</th>
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Supplier Code</th>
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Supplier Name</th>
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Weight/Pc (kg)</th>
-          <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef' }}>Qty/Box</th>
-          
-          {/* SubTotal Headers */}
-          <SubTotalHeaders />
-
-          {/* Inner/Outer Material Groups */}
-          <InnerGroupHeaders count={innerCount} />
-          <OuterGroupHeaders count={outerCount} />
-        </tr>
-        {/* ROW 3 */}
-        <tr>
-          <InnerLeafHeaders count={innerCount} />
-          <OuterLeafHeaders count={outerCount} />
-          <LaborManHourHeaders />
-          <LaborCostHeaders />
-          <InlandLeafHeaders />
-        </tr>
-      </thead>
-    </>
+    <colgroup>
+      {cols.map((c, i) => (
+        <col
+          key={`${c.key}-${i}`}
+          style={{
+            width: `${c.w}px`,
+            minWidth: `${c.w}px`,
+          }}
+        />
+      ))}
+    </colgroup>
   );
 
   return { colGroup, totalWidth, cols };

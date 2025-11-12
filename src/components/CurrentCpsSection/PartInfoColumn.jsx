@@ -18,13 +18,13 @@ export function PartInfoHeader() {
 export function PartInfoData({ current }) {
   return (
     <>
-      <td>{current.cps?.part_no || ''}</td>
-      <td>{current.cps?.part_name || ''}</td>
-      <td>{current.cps?.parent_mo || ''}</td>
-      <td>{current.cps?.supplier?.supplier_code || ''}</td>
-      <td>{current.cps?.supplier?.supplier_name || ''}</td>
-      <td>{current.cps?.weightPerPc || ''}</td>
-      <td>{current.cps?.qtyPerBox || ''}</td>
+      <td>{current.partNo || ''}</td>
+      <td>{current.partName || ''}</td>
+      <td>{current.parentNo || ''}</td>
+      <td>{current.supplierCode || ''}</td>
+      <td>{current.supplierName || ''}</td>
+      <td>{current.weightPerPc || ''}</td>
+      <td>{current.qtyPerBox || ''}</td>
     </>
   );
 }

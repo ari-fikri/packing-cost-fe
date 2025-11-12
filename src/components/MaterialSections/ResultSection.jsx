@@ -34,42 +34,39 @@ export default function ResultSection({
                 <td colSpan="8" className="text-center py-4 text-muted">No Data Found</td>
               </tr>
             ) : (
-              materials.map((material, i) => {
-                //debugger;
-                return (
-                  <tr key={material.id || i}>
-                    <td>{(currentPage - 1) * pageSize + i + 1}</td>
-                    <td>{material.material_no}</td>
-                    <td>{material.material_name}</td>
-                    <td>{material.parentMaterial}</td>
-                    <td>{material.itemNo}</td>
-                    <td>{material.price}</td>
-                    <td>{material.materialType}</td>
-                    <td>
-                      <button 
-                        type="button" 
-                        className="btn btn-sm btn-outline-primary mr-1" 
-                        onClick={() => onEditMaterial && onEditMaterial(material)}
-                        title="Edit Material"
-                      >
-                        <i className="fas fa-pencil-alt" />
-                      </button>
-                      <button 
-                        type="button" 
-                        className="btn btn-sm btn-outline-danger" 
-                        onClick={() => onDeleteMaterial && onDeleteMaterial(i)}
-                        title="Delete Material"
-                      >
-                        <i className="fas fa-trash" />
-                      </button>
-                    </td>
-                    </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
-        </div>
+              materials.map((material, i) => (
+                <tr key={material.id || i}>
+                  <td>{(currentPage - 1) * pageSize + i + 1}</td>
+                  <td>{material.materialNo}</td>
+                  <td>{material.materialName}</td>
+                  <td>{material.parentMaterial}</td>
+                  <td>{material.itemNo}</td>
+                  <td>{material.price}</td>
+                  <td>{material.materialType}</td>
+                  <td>
+                    <button 
+                      type="button" 
+                      className="btn btn-sm btn-outline-primary mr-1" 
+                      onClick={() => onEditMaterial && onEditMaterial(material)}
+                      title="Edit Material"
+                    >
+                      <i className="fas fa-pencil-alt" />
+                    </button>
+                    <button 
+                      type="button" 
+                      className="btn btn-sm btn-outline-danger" 
+                      onClick={() => onDeleteMaterial && onDeleteMaterial(i)}
+                      title="Delete Material"
+                    >
+                      <i className="fas fa-trash" />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {/* Pagination Component */}
       {totalPages > 1 && (

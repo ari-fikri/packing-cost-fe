@@ -59,3 +59,9 @@ html,body,#root { height:100% }
 .text-nowrap {
   white-space: nowrap;
 }
+.table-sm td, .table-sm th { vertical-align: middle; white-space: nowrap; }
+.card-body { vertical-align: top; }
+.table-font-size-10pt td,
+.table-font-size-10pt th {
+  font-size: 10pt;
+}

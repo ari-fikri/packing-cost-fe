@@ -8,11 +8,11 @@ import React from "react";
 export function SubTotalHeaders() {
   return (
     <>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef', whiteSpace: 'nowrap' }}>Inner</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef', whiteSpace: 'nowrap' }}>Outer</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef', whiteSpace: 'nowrap' }}>Material</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef', whiteSpace: 'nowrap' }}>Labor</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#e9ecef', whiteSpace: 'nowrap' }}>Inland</th>
+      <th className="align-middle">Inner</th>
+      <th className="align-middle">Outer</th>
+      <th className="align-middle">Material</th>
+      <th className="align-middle">Labor</th>
+      <th className="align-middle">Inland</th>
     </>
   );
 }

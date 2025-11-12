@@ -7,19 +7,19 @@ import React from "react";
 export function LaborManHourHeaders() {
   return (
     <>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Receiving</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Inspection</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Delivery Course</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Pallet Supply</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Binding</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Sorting & Supply</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Pick & Packing</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Vanning</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Box/Valet Return</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Mix Van</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Lashing</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Total Time Req</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Others</th>
+      <th className="align-middle">Receiving</th>
+      <th className="align-middle">Inspection</th>
+      <th className="align-middle">Delivery Course</th>
+      <th className="align-middle">Pallet Supply</th>
+      <th className="align-middle">Binding</th>
+      <th className="align-middle">Sorting & Supply</th>
+      <th className="align-middle">Pick & Packing</th>
+      <th className="align-middle">Vanning</th>
+      <th className="align-middle">Box/Valet Return</th>
+      <th className="align-middle">Mix Van</th>
+      <th className="align-middle">Lashing</th>
+      <th className="align-middle">Total Time Req</th>
+      <th className="align-middle">Others</th>
     </>
   );
 }
@@ -30,10 +30,10 @@ export function LaborManHourHeaders() {
 export function LaborCostHeaders() {
   return (
     <>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Current</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>DL</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>IDL</th>
-      <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Facility Others</th>
+      <th className="align-middle">Current</th>
+      <th className="align-middle">DL</th>
+      <th className="align-middle">IDL</th>
+      <th className="align-middle">Facility Others</th>
     </>
   );
 }

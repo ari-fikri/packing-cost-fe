@@ -22,7 +22,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
         style={{ maxHeight: 400, overflowY: 'auto', overflowX: 'auto' }}
       >
         <table
-          className="table table-sm table-bordered mb-0 text-center"
+          className="table table-sm table-bordered mb-0 text-center table-font-size-10pt"
           style={{ minWidth: `${totalWidth}px`, tableLayout: 'fixed' }}
         >
           {colGroup}
