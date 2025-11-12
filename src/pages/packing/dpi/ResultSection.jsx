@@ -78,6 +78,15 @@ export default function ResultSection({
                 No
               </th>
               <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
+                Destination
+              </th>
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
+                Model
+              </th>
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
+                Impl Period
+              </th>              
+              <th rowSpan={3} className="align-middle" style={{ whiteSpace: 'nowrap' }}>
                 CPS No
               </th>
               <th colSpan={10} className="align-middle">
@@ -132,7 +141,9 @@ export default function ResultSection({
               return (
                 <tr key={i}>
                   <td>{((page - 1) * perPage) + i + 1}</td>
-                  <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{current.cps_no ?? "-"}</td>
+                  <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{current.model.destination.code ?? "-"}</td>
+                  <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{row.model_code ?? "-"}</td>
+                  <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{row.implementation_period ?? "-"}</td>
                   <PartInfoCells partInfo={current} />
                   <PseInfoCells pseInfo={pseInfo} />
                   <LogisticInfoCells logisticInfo={logisticInfo} />
