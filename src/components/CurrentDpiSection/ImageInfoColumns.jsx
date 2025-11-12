@@ -4,11 +4,11 @@ import { ImageModal } from './ImageModal';
 export function ImageInfoHeaders() {
   return (
     <>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Part</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Packing</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Outer</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Qkp</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Bkp</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Packing</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Outer</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Qkp</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Bkp</th>
     </>
   );
 }
