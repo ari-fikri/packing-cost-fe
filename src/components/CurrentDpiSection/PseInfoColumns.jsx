@@ -3,16 +3,16 @@ import React from 'react';
 export function PseInfoHeaders() {
   return (
     <>
-      <th colSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Packing Plant</th>
-      <th colSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Vanning Plant</th>
-      <th colSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Order Pattern</th>
-      <th colSpan={4} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Katashiiki</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Importer Line Process</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Case code</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Box Number</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Renban</th>
-      <th rowSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Renban Eff</th>
-      <th colSpan={2} className="align-middle border text-center" style={{ backgroundColor: '#dee2e6' }}>Packing Process</th>
+      <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Packing Plant</th>
+      <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Vanning Plant</th>
+      <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Order Pattern</th>
+      <th colSpan={4} className="align-middle border text-center tbl-row2-hdr">Katashiiki</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Importer Line Process</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Case code</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Box Number</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Renban</th>
+      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Renban Eff</th>
+      <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Packing Process</th>
     </>
   );
 }
@@ -20,18 +20,23 @@ export function PseInfoHeaders() {
 export function PseInfoSubHeaders() {
     return (
       <>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Current</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Next</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Current</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Next</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Current</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Next</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>AD</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>AU</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>AF</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>AX</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Boxing</th>
-        <th className="align-middle border text-center" style={{ backgroundColor: '#dee2e6', whiteSpace: 'nowrap' }}>Stacking</th>
+        {/* Packing Plant */}
+        <th className="align-middle border text-center tbl-row2-hdr">Current</th>
+        <th className="align-middle border text-center tbl-row2-hdr">Next</th>
+        {/* Vanning Plant */}
+        <th className="align-middle border text-center tbl-row2-hdr">Current</th>
+        <th className="align-middle border text-center tbl-row2-hdr">Next</th>
+        {/* Order Pattern */}
+        <th className="align-middle border text-center tbl-row2-hdr">Current</th>
+        <th className="align-middle border text-center tbl-row2-hdr">Next</th>
+        {/* Katashiiki */}
+        <th className="align-middle border text-center tbl-row2-hdr">AD</th>
+        <th className="align-middle border text-center tbl-row2-hdr">AU</th>
+        <th className="align-middle border text-center tbl-row2-hdr">AF</th>
+        <th className="align-middle border text-center tbl-row2-hdr">AX</th>
+        {/* Packing Process */}
+        <th className="align-middle border text-center tbl-row2-hdr">Boxing</th>
+        <th className="align-middle border text-center tbl-row2-hdr">Stacking</th>
       </>
     );
 }
