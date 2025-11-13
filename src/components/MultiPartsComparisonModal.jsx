@@ -74,7 +74,7 @@ export default function MultiPartsComparisonModal({
         }}
       >
         <div className="card-header d-flex align-items-center">
-          <h3 className="card-title mb-0"><b>Parts Comparison</b></h3>
+          <h3 className="card-title mb-0"><b>CPS Comparison</b></h3>
           <div className="card-tools ml-auto">
             <button type="button" className="btn btn-tool" onClick={onClose}><i className="fas fa-times"></i></button>
           </div>
