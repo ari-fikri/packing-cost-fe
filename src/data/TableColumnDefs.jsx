@@ -39,61 +39,59 @@ export function makeColGroup(innerCount = 0, outerCount = 0, isPseUser = false) 
   push("weightPerPc", 100);
   push("qtyPerBox", 100);
 
-  // Sub total costs (5)
-  push("subInner", 120);
-  push("subOuter", 120);
-  push("subMaterial", 120);
-  push("subLabor", 120);
-  push("subInland", 120);
-
-  // Diff
-  push("diffPct", 100);
+  if (!isPseUser) {
+    // Sub total costs (5)
+    push("subInner", 120);
+    push("subOuter", 120);
+    push("subMaterial", 120);
+    push("subLabor", 120);
+    push("subInland", 120);
+  
+    // Diff
+    push("diffPct", 100);
+  }
 
   // Inner Materials (each has 4 subcolumns)
   for (let i = 0; i < innerCount; i++) {
     push(`in_matNo_${i}`, 100);
     push(`in_qty_${i}`, 50);
-    push(`in_price_${i}`, 70);
-    push(`in_sum_${i}`, 100);
+    if (!isPseUser) {
+      push(`in_price_${i}`, 70);
+      push(`in_sum_${i}`, 100);
+    }
   }
 
   // Outer Materials
   for (let i = 0; i < outerCount; i++) {
     push(`out_matNo_${i}`, 100);
     push(`out_qty_${i}`, 50);
-    push(`out_price_${i}`, 70);
-    push(`out_sum_${i}`, 100);
+    if (!isPseUser) {
+      push(`out_price_${i}`, 70);
+      push(`out_sum_${i}`, 100);
+    }
   }
 
-  // Labor - Man Hour Requirement (13 cols)
-  //const laborMhCols = [;
-  // push("receiving",90);
-  // push("inspection",90);
-  // push("deliveryCourse",150);
-  // push("palletSupply",90);
-  // push("binding",90);
-  // push("sorting",90);
-  // push("pickPacking",90);
-  // push("vanning",90);
-  // push("boxValetReturn",90);
-  // push("mixVan",90);
-  // push("lashing",90);
-  // push("totalTimeReq",90);
-  // push("others",90);
-  //];
-  //laborMhCols.forEach((name, idx) => push(`lab_mh_${idx}`, 190));
+  if (!isPseUser) {
+    // Labor - Man Hour Requirement (13 cols)
+    const laborMhCols = [
+      "receiving", "inspection", "deliveryCourse", "palletSupply", "binding",
+      "sorting", "pickPacking", "vanning", "boxValetReturn", "mixVan",
+      "lashing", "totalTimeReq", "others"
+    ];
+    laborMhCols.forEach((name, idx) => push(`lab_mh_${idx}`, 90));
 
-  // Labor Cost (4)
-  // push("labCostCurrent", 130);
-  // push("labCostDL", 130);
-  // push("labCostIDL", 130);
-  // push("labCostFacility", 130);
+    // Labor Cost (4)
+    push("labCostCurrent", 130);
+    push("labCostDL", 130);
+    push("labCostIDL", 130);
+    push("labCostFacility", 130);
 
-  // Inland (4)
-  // push("inland_packTime", 140);
-  // push("inland_costM3", 140);
-  // push("inland_diff", 120);
-  // push("inland_milkrun", 140);
+    // Inland (4)
+    push("inland_packTime", 140);
+    push("inland_costM3", 140);
+    push("inland_diff", 120);
+    push("inland_milkrun", 140);
+  }
 
   const totalWidth = cols.reduce((s, c) => s + c.w, 0);
 
