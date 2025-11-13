@@ -8,7 +8,7 @@ import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCell
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
 
-export default function ResultsSection({ filteredParts = [], onSelectPart, scrollRef, onScroll }) {
+export default function ResultsSection({ filteredParts = [], onSelectPart, scrollRef, onScroll, isPseUser }) {
   const INNER_COUNT = 10;
   const OUTER_COUNT = 10;
   const { colGroup, totalWidth, cols } = makeColGroup(INNER_COUNT, OUTER_COUNT);
@@ -50,27 +50,27 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
                 <td className="align-middle">{p.qtyPerBox ?? "-"}</td>
 
                 {/* SubTotals */}
-                <td className="align-middle">{p.subTotalInner ?? "-"}</td>
-                <td className="align-middle">{p.subTotalOuter ?? "-"}</td>
-                <td className="align-middle">{p.subTotalMaterial ?? "-"}</td>
-                <td className="align-middle">{p.subTotalLabor ?? "-"}</td>
-                <td className="align-middle">{p.subTotalInland ?? "-"}</td>
+                {!isPseUser && <td className="align-middle">{p.subTotalInner ?? "-"}</td>}
+                {!isPseUser && <td className="align-middle">{p.subTotalOuter ?? "-"}</td>}
+                {!isPseUser && <td className="align-middle">{p.subTotalMaterial ?? "-"}</td>}
+                {!isPseUser && <td className="align-middle">{p.subTotalLabor ?? "-"}</td>}
+                {!isPseUser && <td className="align-middle">{p.subTotalInland ?? "-"}</td>}
 
                 {/* Diff */}
-                <td className="align-middle">{p.diffPct ?? "-"}</td>
+                {!isPseUser && <td className="align-middle">{p.diffPct ?? "-"}</td>}
 
                 {/* Inner materials data cells */}
-                <InnerLeafCells data={p.innerMaterials} count={INNER_COUNT} />
+                <InnerLeafCells data={p.innerMaterials} count={INNER_COUNT} isPseUser={isPseUser}/>
 
                 {/* Outer materials data cells */}
-                <OuterLeafCells data={p.outerMaterials} count={OUTER_COUNT} />
+                <OuterLeafCells data={p.outerMaterials} count={OUTER_COUNT} isPseUser={isPseUser}/>
 
                 {/* Labor cells */}
                 <LaborManHourCells labor={p.labor} />
                 <LaborCostCells labor={p.labor} />
 
                 {/* Inland cells */}
-                <InlandLeafCells inland={p.inland} />
+                {!isPseUser && <InlandLeafCells inland={p.inland} />}
               </tr>
             ))}
           </tbody>

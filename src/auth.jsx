@@ -6,7 +6,9 @@ const AuthContext = createContext(null)
 
 // Dummy user database (username + password)
 const USERS = [
-  { username: 'khedi.asmoro', password: '1', department: 'PSE', role: 'user' },
+  { username: 'khedi.asmoro', password: '1', department: 'PSE', role: 'pic' },
+  { username: 'ujang.jayadi', password: '1', department: 'PSE', role: 'user' },
+  { username: 'anton', password: '1', department: 'PSE', role: 'dph' },
   { username: 'hanifa', password: '2', department: 'PCD', role: 'user' },
 ]
 

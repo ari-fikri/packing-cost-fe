@@ -1,6 +1,7 @@
 // src/components/MultiPartsComparisonModal.jsx
 import React, { useState, useMemo, useRef } from 'react';
 import { SearchSection, CurrentCpsSection, ResultsSection } from './MultiPartsComparisonModalSections'
+import { useAuth } from '../auth';
 
 export default function MultiPartsComparisonModal({
   isOpen = false,
@@ -13,6 +14,9 @@ export default function MultiPartsComparisonModal({
   const [partNoQuery, setPartNoQuery] = useState('');
   const [partNameQuery, setPartNameQuery] = useState('');
   const [supplierQuery, setSupplierQuery] = useState('');
+
+  const { user } = useAuth();
+  const isPseUser = user && user.department === 'PSE' && !['pic', 'sh', 'dph'].includes(user.role);
 
   const scrollRef1 = useRef(null);
   const scrollRef2 = useRef(null);
@@ -88,6 +92,7 @@ export default function MultiPartsComparisonModal({
             current={current}
             scrollRef={scrollRef1}
             onScroll={() => handleScroll(scrollRef1, scrollRef2)}
+            isPseUser={isPseUser}
           />
 
           <hr style={{ margin: '8px 0' }} />
@@ -98,6 +103,7 @@ export default function MultiPartsComparisonModal({
             onSelectPart={onSelectPart}
             scrollRef={scrollRef2}
             onScroll={() => handleScroll(scrollRef2, scrollRef1)}
+            isPseUser={isPseUser}
           />
         </div>
 

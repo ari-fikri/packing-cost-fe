@@ -8,10 +8,10 @@ import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCell
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
 
-export default function CurrentCpsSection({ current = {}, scrollRef, onScroll }) {
+export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, isPseUser }) {
   const INNER_COUNT = 10;
   const OUTER_COUNT = 10;
-
+  debugger;
   const innerData = current.innerMaterials || [];
   const outerData = current.outerMaterials || [];
 
@@ -41,25 +41,22 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
               <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">CPS No</th>
 
               <th rowSpan={2} colSpan={7} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Info</th>
-              <th rowSpan={2} colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Sub Total Costs</th>
+              {!isPseUser && <th rowSpan={2} colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Sub Total Costs</th>}
+              {!isPseUser && <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Diff (%)</th>}
 
-              <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Diff (%)</th>
-
-              <th colSpan={INNER_COUNT * 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Info</th>
-              <th colSpan={OUTER_COUNT * 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Info</th>
-
-              <th colSpan={13 + 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Labor</th>
-
-              <th colSpan={4} rowSpan={2} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inland</th>
+              <th colSpan={INNER_COUNT * (isPseUser ? 2 : 4)} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Info</th>
+              <th colSpan={OUTER_COUNT * (isPseUser ? 2 : 4)} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Info</th>
+              {!isPseUser && <th colSpan={13 + 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Labor</th>}
+              {!isPseUser && <th colSpan={4} rowSpan={2} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inland</th>}
             </tr>
 
             {/* row 2 */}
             <tr>
-              <InnerGroupHeaders count={INNER_COUNT} />
-              <OuterGroupHeaders count={OUTER_COUNT} />
+              <InnerGroupHeaders count={INNER_COUNT} isPseUser={isPseUser} />
+              <OuterGroupHeaders count={OUTER_COUNT} isPseUser={isPseUser} />
 
-              <th colSpan={13} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Man Hour Requirement</th>
-              <th colSpan={4} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Labor Cost</th>
+              {!isPseUser && <th colSpan={13} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Man Hour Requirement</th>}
+              {!isPseUser && <th colSpan={4} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Labor Cost</th>}
             </tr>
 
             {/* row 3 */}
@@ -74,13 +71,13 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
               <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Qty/Box</th>
 
               {/* Sub totals */}
-              <SubTotalHeaders />
+              {!isPseUser && <SubTotalHeaders />}
 
               {/* inner leaf headers */}
-              <InnerLeafHeaders count={INNER_COUNT} />
+              <InnerLeafHeaders count={INNER_COUNT} isPseUser={isPseUser} />
 
               {/* outer leaf headers */}
-              <OuterLeafHeaders count={OUTER_COUNT} />
+              <OuterLeafHeaders count={OUTER_COUNT} isPseUser={isPseUser} />
 
               {/* labor man hour leaf headers */}
               <LaborManHourHeaders />
@@ -89,7 +86,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
               <LaborCostHeaders />
 
               {/* inland leaf headers */}
-              <InlandLeafHeaders />
+              {!isPseUser && <InlandLeafHeaders />}
             </tr>
           </thead>
 
@@ -110,13 +107,13 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
               <td className="align-middle">{current.qtyPerBox ?? "-"}</td>
 
               {/* SubTotals */}
-              <SubTotalData current={current} />
+              {!isPseUser && <SubTotalData current={current} />}
 
               {/* Diff (was already placed earlier in header as rowSpan 3) */}
-              <td className="align-middle">{current.diffPct ?? "-"}</td>
+              {!isPseUser && <td className="align-middle">{current.diffPct ?? "-"}</td>}
 
               {/* Inner materials data cells */}
-              <InnerLeafCells data={innerData} count={INNER_COUNT} />
+              <InnerLeafCells data={innerData} count={INNER_COUNT} isPseUser={isPseUser} />
 
               {/* Outer materials data cells */}
               <OuterLeafCells data={outerData} count={OUTER_COUNT} />
@@ -128,7 +125,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll })
               <LaborCostCells labor={labor} />
 
               {/* Inland cells */}
-              <InlandLeafCells inland={inland} />
+              {!isPseUser && <InlandLeafCells inland={inland} />}
             </tr>
           </tbody>
         </table>
