@@ -20,14 +20,14 @@ export function SubTotalHeaders() {
 /**
  * SubTotal data cells
  */
-export function SubTotalData({ current = {} }) {
+export function SubTotalData({ data = {} }) {
   return (
     <>
-      <td className="align-middle">{current.subTotalInner ?? "-"}</td>
-      <td className="align-middle">{current.subTotalOuter ?? "-"}</td>
-      <td className="align-middle">{current.subTotalMaterial ?? "-"}</td>
-      <td className="align-middle">{current.subTotalLabor ?? "-"}</td>
-      <td className="align-middle">{current.subTotalInland ?? "-"}</td>
+      <td className="align-middle">{data.subTotalInner ?? "-"}</td>
+      <td className="align-middle">{data.subTotalOuter ?? "-"}</td>
+      <td className="align-middle">{data.subTotalMaterial ?? "-"}</td>
+      <td className="align-middle">{data.subTotalLabor ?? "-"}</td>
+      <td className="align-middle">{data.subTotalInland ?? "-"}</td>
     </>
   );
 }

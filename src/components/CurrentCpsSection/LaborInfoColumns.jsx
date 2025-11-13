@@ -9,13 +9,13 @@ export function LaborManHourHeaders() {
     <>
       <th className="align-middle">Receiving</th>
       <th className="align-middle">Inspection</th>
-      <th className="align-middle">Delivery Course</th>
+      <th className="align-middle">Dlvr Course</th>
       <th className="align-middle">Pallet Supply</th>
       <th className="align-middle">Binding</th>
-      <th className="align-middle">Sorting & Supply</th>
+      <th className="align-middle">Sort & Supply</th>
       <th className="align-middle">Pick & Packing</th>
       <th className="align-middle">Vanning</th>
-      <th className="align-middle">Box/Valet Return</th>
+      <th className="align-middle">Box/Valet Rtrn</th>
       <th className="align-middle">Mix Van</th>
       <th className="align-middle">Lashing</th>
       <th className="align-middle">Total Time Req</th>

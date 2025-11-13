@@ -71,29 +71,36 @@ export function makeColGroup(innerCount = 0, outerCount = 0, isPseUser = false) 
     }
   }
 
+  // Labor (Man Hour)
   if (!isPseUser) {
-    // Labor - Man Hour Requirement (13 cols)
-    const laborMhCols = [
-      "receiving", "inspection", "deliveryCourse", "palletSupply", "binding",
-      "sorting", "pickPacking", "vanning", "boxValetReturn", "mixVan",
-      "lashing", "totalTimeReq", "others"
-    ];
-    laborMhCols.forEach((name, idx) => push(`lab_mh_${idx}`, 90));
-
-    // Labor Cost (4)
-    push("labCostCurrent", 130);
-    push("labCostDL", 130);
-    push("labCostIDL", 130);
-    push("labCostFacility", 130);
-
-    // Inland (4)
-    push("inland_packTime", 140);
-    push("inland_costM3", 140);
-    push("inland_diff", 120);
-    push("inland_milkrun", 140);
+    push("lab_mh_receiving", 90);
+    push("lab_mh_inspection", 90);
+    push("lab_mh_deliveryCourse", 120);
+    push("lab_mh_palletSupply", 110);
+    push("lab_mh_binding", 90);
+    push("lab_mh_sorting", 120);
+    push("lab_mh_pickPacking", 120);
+    push("lab_mh_vanning", 90);
+    push("lab_mh_boxValetReturn", 120);
+    push("lab_mh_mixVan", 90);
+    push("lab_mh_lashing", 90);
+    push("lab_mh_totalTimeReq", 110);
+    push("lab_mh_others", 90);
+  
+    // Labor (Cost)
+    push("lab_cost_direct", 90);
+    push("lab_cost_indirect", 90);
+    push("lab_cost_subTotal", 100);
+    push("lab_cost_costPerPc", 110);
+    
+    // Inland
+    push("inland_trucking", 150);
+    push("inland_clp", 120);
+    push("inland_delivery", 70);
+    push("inland_total", 100);
   }
 
-  const totalWidth = cols.reduce((s, c) => s + c.w, 0);
+  const totalWidth = cols.reduce((sum, c) => sum + c.w, 0);
 
   const colGroup = (
     <colgroup>

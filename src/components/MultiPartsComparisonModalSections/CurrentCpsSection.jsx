@@ -87,7 +87,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, i
               <PartInfoCells part={current} />
 
               {/* SubTotals */}
-              {!isPseUser && <SubTotalData current={current} />}
+              {!isPseUser && <SubTotalData data={current} />}
 
               {/* Diff (was already placed earlier in header as rowSpan 3) */}
               {!isPseUser && <td className="align-middle">{current.diffPct ?? "-"}</td>}

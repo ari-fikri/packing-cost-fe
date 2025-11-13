@@ -3,7 +3,7 @@ import React from "react";
 
 import { InnerGroupHeaders, InnerLeafHeaders, InnerLeafCells } from "../CurrentCpsSection/InnerInfoColumns"
 import { OuterGroupHeaders, OuterLeafHeaders, OuterLeafCells } from "../CurrentCpsSection/OuterInfoColumns";
-import { SubTotalHeaders } from "../CurrentCpsSection/SubTotalColumns";
+import { SubTotalHeaders, SubTotalData } from "../CurrentCpsSection/SubTotalColumns";
 import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "../CurrentCpsSection/LaborInfoColumns";
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
@@ -43,11 +43,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
                 <PartInfoCells part={p} />
 
                 {/* SubTotals */}
-                {!isPseUser && <td className="align-middle">{p.subTotalInner ?? "-"}</td>}
-                {!isPseUser && <td className="align-middle">{p.subTotalOuter ?? "-"}</td>}
-                {!isPseUser && <td className="align-middle">{p.subTotalMaterial ?? "-"}</td>}
-                {!isPseUser && <td className="align-middle">{p.subTotalLabor ?? "-"}</td>}
-                {!isPseUser && <td className="align-middle">{p.subTotalInland ?? "-"}</td>}
+                {!isPseUser && <SubTotalData data={p} />}
 
                 {/* Diff */}
                 {!isPseUser && <td className="align-middle">{p.diffPct ?? "-"}</td>}
