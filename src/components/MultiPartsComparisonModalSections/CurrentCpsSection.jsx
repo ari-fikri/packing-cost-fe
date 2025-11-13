@@ -7,6 +7,7 @@ import { SubTotalHeaders, SubTotalData } from "../CurrentCpsSection/SubTotalColu
 import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "../CurrentCpsSection/LaborInfoColumns";
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
+import { PartInfoHeaders, PartInfoCells } from "./PartInfoColumns";
 
 export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, isPseUser, innerCount, outerCount }) {
   const innerData = current.inner || [];
@@ -59,13 +60,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, i
             {/* row 3 */}
             <tr>
               {/* Part Info subheaders (7 columns) */}
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Part No</th>
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Part Name</th>
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Parent No</th>
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Supplier Code</th>
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Supplier Name</th>
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Weight/pc</th>
-              <th className="align-middle border text-center tbl-row2-hdr text-nowrap">Qty/Box</th>
+              <PartInfoHeaders />
 
               {/* Sub totals */}
               {!isPseUser && <SubTotalHeaders />}
@@ -89,13 +84,7 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, i
               <td className="align-middle">{current.cpsNo ?? "-"}</td>
 
               {/* Part Info */}
-              <td className="align-middle">{current.partNo ?? "-"}</td>
-              <td className="align-middle">{current.partName ?? "-"}</td>
-              <td className="align-middle">{current.parentNo ?? "-"}</td>
-              <td className="align-middle">{current.supplierCode ?? "-"}</td>
-              <td className="align-middle">{current.supplierName ?? "-"}</td>
-              <td className="align-middle">{current.weightPerPc ?? "-"}</td>
-              <td className="align-middle">{current.qtyPerBox ?? "-"}</td>
+              <PartInfoCells part={current} />
 
               {/* SubTotals */}
               {!isPseUser && <SubTotalData current={current} />}

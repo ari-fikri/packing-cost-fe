@@ -7,6 +7,7 @@ import { SubTotalHeaders } from "../CurrentCpsSection/SubTotalColumns";
 import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCells } from "../CurrentCpsSection/LaborInfoColumns";
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
+import { PartInfoCells } from "./PartInfoColumns";
 
 export default function ResultsSection({ filteredParts = [], onSelectPart, scrollRef, onScroll, isPseUser, innerCount, outerCount }) {
   const { colGroup, totalWidth, cols } = makeColGroup(innerCount, outerCount, isPseUser);
@@ -39,13 +40,7 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
                 <td className="align-middle">{p.cpsNo ?? "-"}</td>
 
                 {/* Part Info */}
-                <td className="align-middle">{p.partNo ?? "-"}</td>
-                <td className="align-.middle">{p.name ?? "-"}</td>
-                <td className="align-middle">{p.parentNo ?? "-"}</td>
-                <td className="align-middle">{p.supplierCode ?? "-"}</td>
-                <td className="align-middle">{p.supplierName ?? "-"}</td>
-                <td className="align-middle">{p.weightPerPc ?? "-"}</td>
-                <td className="align-middle">{p.qtyPerBox ?? "-"}</td>
+                <PartInfoCells part={p} />
 
                 {/* SubTotals */}
                 {!isPseUser && <td className="align-middle">{p.subTotalInner ?? "-"}</td>}
