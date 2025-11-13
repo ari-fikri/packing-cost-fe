@@ -5,7 +5,7 @@ import PartPickerModal from './PartPickerModal';
 import ModelPickerModal from './ModelPickerModal';
 import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
-import { partsDummy, currentDummy as currentCpsRecord } from '../data/comparison'
+import comparisonData from '../data/cpsComparison.json';
 import { formatCurrency } from '../utils/globalFunctions';
 import materials from '../data/materials.json';
 import './NewCPSModalSections/NewCPSModalSections.css';
@@ -119,6 +119,11 @@ export default function NewCPSModal({ show, onClose, onSave, editData }) {
   const [logisticRemark, setLogisticRemark] = useState('');
   const [processType, setProcessType] = useState('N');
   const [addressRack, setAddressRack] = useState('');
+
+  // Transform comparison data from cpsComparison.json
+  const currentCpsRecord = comparisonData.current;
+  const partsDummy = comparisonData.comparisons;
+
 
   // Reset all fields when modal opens
   useEffect(() => {

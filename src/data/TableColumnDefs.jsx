@@ -19,7 +19,7 @@ export const DEFAULT_OUTER = 10;
  *
  * Returns: { colGroup: JSX, totalWidth: number, cols: Array }
  */
-export function makeColGroup(innerCount = DEFAULT_INNER, outerCount = DEFAULT_OUTER) {
+export function makeColGroup(innerCount = 0, outerCount = 0, isPseUser = false) {
   const cols = [];
   const push = (key, w) => cols.push({ key, w });
 
@@ -67,33 +67,33 @@ export function makeColGroup(innerCount = DEFAULT_INNER, outerCount = DEFAULT_OU
 
   // Labor - Man Hour Requirement (13 cols)
   //const laborMhCols = [;
-    push("receiving",90);
-    push("inspection",90);
-    push("deliveryCourse",150);
-    push("palletSupply",90);
-    push("binding",90);
-    push("sorting",90);
-    push("pickPacking",90);
-    push("vanning",90);
-    push("boxValetReturn",90);
-    push("mixVan",90);
-    push("lashing",90);
-    push("totalTimeReq",90);
-    push("others",90);
+  // push("receiving",90);
+  // push("inspection",90);
+  // push("deliveryCourse",150);
+  // push("palletSupply",90);
+  // push("binding",90);
+  // push("sorting",90);
+  // push("pickPacking",90);
+  // push("vanning",90);
+  // push("boxValetReturn",90);
+  // push("mixVan",90);
+  // push("lashing",90);
+  // push("totalTimeReq",90);
+  // push("others",90);
   //];
   //laborMhCols.forEach((name, idx) => push(`lab_mh_${idx}`, 190));
 
   // Labor Cost (4)
-  push("labCostCurrent", 130);
-  push("labCostDL", 130);
-  push("labCostIDL", 130);
-  push("labCostFacility", 130);
+  // push("labCostCurrent", 130);
+  // push("labCostDL", 130);
+  // push("labCostIDL", 130);
+  // push("labCostFacility", 130);
 
   // Inland (4)
-  push("inland_packTime", 140);
-  push("inland_costM3", 140);
-  push("inland_diff", 120);
-  push("inland_milkrun", 140);
+  // push("inland_packTime", 140);
+  // push("inland_costM3", 140);
+  // push("inland_diff", 120);
+  // push("inland_milkrun", 140);
 
   const totalWidth = cols.reduce((s, c) => s + c.w, 0);
 

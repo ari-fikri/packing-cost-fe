@@ -8,10 +8,8 @@ import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCell
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
 
-export default function ResultsSection({ filteredParts = [], onSelectPart, scrollRef, onScroll, isPseUser }) {
-  const INNER_COUNT = 10;
-  const OUTER_COUNT = 10;
-  const { colGroup, totalWidth, cols } = makeColGroup(INNER_COUNT, OUTER_COUNT);
+export default function ResultsSection({ filteredParts = [], onSelectPart, scrollRef, onScroll, isPseUser, innerCount, outerCount }) {
+  const { colGroup, totalWidth, cols } = makeColGroup(innerCount, outerCount, isPseUser);
 
   return (
     <div className="mb-1">
@@ -60,14 +58,14 @@ export default function ResultsSection({ filteredParts = [], onSelectPart, scrol
                 {!isPseUser && <td className="align-middle">{p.diffPct ?? "-"}</td>}
 
                 {/* Inner materials data cells */}
-                <InnerLeafCells data={p.innerMaterials} count={INNER_COUNT} isPseUser={isPseUser}/>
+                <InnerLeafCells data={p.inner} count={innerCount} isPseUser={isPseUser} />
 
                 {/* Outer materials data cells */}
-                <OuterLeafCells data={p.outerMaterials} count={OUTER_COUNT} isPseUser={isPseUser}/>
+                <OuterLeafCells data={p.outer} count={outerCount} isPseUser={isPseUser} />
 
                 {/* Labor cells */}
-                <LaborManHourCells labor={p.labor} />
-                <LaborCostCells labor={p.labor} />
+                {!isPseUser && <LaborManHourCells labor={p.labor} />}
+                {!isPseUser && <LaborCostCells labor={p.labor} />}
 
                 {/* Inland cells */}
                 {!isPseUser && <InlandLeafCells inland={p.inland} />}

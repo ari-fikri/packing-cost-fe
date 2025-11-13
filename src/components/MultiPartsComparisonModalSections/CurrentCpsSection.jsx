@@ -8,17 +8,14 @@ import { LaborManHourHeaders, LaborCostHeaders, LaborManHourCells, LaborCostCell
 import { InlandLeafHeaders, InlandLeafCells } from "../CurrentCpsSection/InlandColumns";
 import { makeColGroup } from "../../data/TableColumnDefs";
 
-export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, isPseUser }) {
-  const INNER_COUNT = 10;
-  const OUTER_COUNT = 10;
-  debugger;
-  const innerData = current.innerMaterials || [];
-  const outerData = current.outerMaterials || [];
+export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, isPseUser, innerCount, outerCount }) {
+  const innerData = current.inner || [];
+  const outerData = current.outer || [];
 
   const labor = current.labor || {};
   const inland = current.inland || {};
 
-  const { colGroup, totalWidth } = makeColGroup(INNER_COUNT, OUTER_COUNT);
+  const { colGroup, totalWidth } = makeColGroup(innerCount, outerCount, isPseUser);
 
   return (
     <div className="mb-3">
@@ -44,16 +41,16 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, i
               {!isPseUser && <th rowSpan={2} colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Sub Total Costs</th>}
               {!isPseUser && <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Diff (%)</th>}
 
-              <th colSpan={INNER_COUNT * (isPseUser ? 2 : 4)} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Info</th>
-              <th colSpan={OUTER_COUNT * (isPseUser ? 2 : 4)} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Info</th>
+              <th colSpan={innerCount * (isPseUser ? 2 : 4)} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Info</th>
+              <th colSpan={outerCount * (isPseUser ? 2 : 4)} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Info</th>
               {!isPseUser && <th colSpan={13 + 4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Labor</th>}
               {!isPseUser && <th colSpan={4} rowSpan={2} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inland</th>}
             </tr>
 
             {/* row 2 */}
             <tr>
-              <InnerGroupHeaders count={INNER_COUNT} isPseUser={isPseUser} />
-              <OuterGroupHeaders count={OUTER_COUNT} isPseUser={isPseUser} />
+              <InnerGroupHeaders count={innerCount} isPseUser={isPseUser} />
+              <OuterGroupHeaders count={outerCount} isPseUser={isPseUser} />
 
               {!isPseUser && <th colSpan={13} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Man Hour Requirement</th>}
               {!isPseUser && <th colSpan={4} className="align-align-middle border text-center tbl-row1-hdr text-nowrap">Labor Cost</th>}
@@ -74,18 +71,12 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, i
               {!isPseUser && <SubTotalHeaders />}
 
               {/* inner leaf headers */}
-              <InnerLeafHeaders count={INNER_COUNT} isPseUser={isPseUser} />
+              <InnerLeafHeaders count={innerCount} isPseUser={isPseUser} />
 
               {/* outer leaf headers */}
-              <OuterLeafHeaders count={OUTER_COUNT} isPseUser={isPseUser} />
-
-              {/* labor man hour leaf headers */}
-              <LaborManHourHeaders />
-
-              {/* labor cost headers */}
-              <LaborCostHeaders />
-
-              {/* inland leaf headers */}
+              <OuterLeafHeaders count={outerCount} isPseUser={isPseUser} />
+              {!isPseUser && <LaborManHourHeaders />}
+              {!isPseUser && <LaborCostHeaders />}
               {!isPseUser && <InlandLeafHeaders />}
             </tr>
           </thead>
@@ -113,18 +104,12 @@ export default function CurrentCpsSection({ current = {}, scrollRef, onScroll, i
               {!isPseUser && <td className="align-middle">{current.diffPct ?? "-"}</td>}
 
               {/* Inner materials data cells */}
-              <InnerLeafCells data={innerData} count={INNER_COUNT} isPseUser={isPseUser} />
+              <InnerLeafCells data={innerData} count={innerCount} isPseUser={isPseUser} />
 
               {/* Outer materials data cells */}
-              <OuterLeafCells data={outerData} count={OUTER_COUNT} />
-
-              {/* Labor man hour cells */}
-              <LaborManHourCells labor={labor} />
-
-              {/* Labor cost cells */}
-              <LaborCostCells labor={labor} />
-
-              {/* Inland cells */}
+              <OuterLeafCells data={outerData} count={outerCount} isPseUser={isPseUser} />
+              {!isPseUser && <LaborManHourCells labor={labor} />}
+              {!isPseUser && <LaborCostCells labor={labor} />}
               {!isPseUser && <InlandLeafCells inland={inland} />}
             </tr>
           </tbody>

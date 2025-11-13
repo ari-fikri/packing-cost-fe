@@ -6,7 +6,6 @@ import React from "react";
  */
 export function MaterialLeafHeaders({ count = 1, isPseUser }) {
   // returns sequence of <th> * count * 4
-  debugger
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
@@ -26,6 +25,7 @@ export function MaterialLeafHeaders({ count = 1, isPseUser }) {
  * innerArr is an array of material objects; if missing an entry, cells show '-'
  */
 export function MaterialLeafCells({ arr = [], count = 1, isPseUser }) {
+  debugger;
   return (
     <>
       {Array.from({ length: count }).map((_, i) => {

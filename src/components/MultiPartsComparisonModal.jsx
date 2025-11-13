@@ -45,6 +45,16 @@ export default function MultiPartsComparisonModal({
     });
   }, [parts, partNoQuery, partNameQuery, supplierQuery]);
 
+  const maxInnerCount = useMemo(() => {
+    const allParts = [current, ...filteredParts];
+    return Math.max(...allParts.map(p => p.inner?.length || 0));
+  }, [current, filteredParts]);
+
+  const maxOuterCount = useMemo(() => {
+    const allParts = [current, ...filteredParts];
+    return Math.max(...allParts.map(p => p.outer?.length || 0));
+  }, [current, filteredParts]);
+
   if (!isOpen) {
     return null;
   }
@@ -93,6 +103,8 @@ export default function MultiPartsComparisonModal({
             scrollRef={scrollRef1}
             onScroll={() => handleScroll(scrollRef1, scrollRef2)}
             isPseUser={isPseUser}
+            innerCount={maxInnerCount}
+            outerCount={maxOuterCount}
           />
 
           <hr style={{ margin: '8px 0' }} />
@@ -104,6 +116,8 @@ export default function MultiPartsComparisonModal({
             scrollRef={scrollRef2}
             onScroll={() => handleScroll(scrollRef2, scrollRef1)}
             isPseUser={isPseUser}
+            innerCount={maxInnerCount}
+            outerCount={maxOuterCount}
           />
         </div>
 
