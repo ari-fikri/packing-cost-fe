@@ -1,6 +1,7 @@
 // src/components/PackingCostNewModal.jsx
 import React, { useState, useEffect } from "react";
 import PartPickerModal from "./PartPickerModal";
+import ModelPickerModal from "./ModelPickerModal";
 import SearchSection from "./PackingCostNewModalSections/SearchSection";
 import ResultSection from "./PackingCostNewModalSections/ResultSection";
 import Pagination from "./PackingCostNewModalSections/Pagination";
@@ -19,6 +20,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
+  const [showModelPicker, setShowModelPicker] = useState(false);
   const [remarks, setRemarks] = useState({});
   const [selectedRows, setSelectedRows] = useState({});
 
@@ -39,6 +41,13 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   function change(e) {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
+  }
+
+  function handleModelPicked(model) {
+    if (model) {
+      setForm((prev) => ({ ...prev, modelCode: model.modelCode }));
+    }
+    setShowModelPicker(false);
   }
 
   function handleSave() {
@@ -137,8 +146,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 form={form}
                 change={change}
                 setShowPartPicker={setShowPartPicker}
-                handleDeleteSelectedParts={handleDeleteSelectedParts}
-                visibleParts={visibleParts}
+                setShowModelPicker={setShowModelPicker}
+                handleCalculate={handleCalculate}
+                handleClear={handleClear}
               />
 
               <ResultSection 
@@ -175,6 +185,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
           show={showPartPicker} 
           onClose={() => setShowPartPicker(false)} 
           onSelect={handlePartsPicked} 
+        />
+      )}
+
+      {showModelPicker && (
+        <ModelPickerModal 
+          show={showModelPicker} 
+          onClose={() => setShowModelPicker(false)} 
+          onSelect={handleModelPicked} 
         />
       )}
     </>

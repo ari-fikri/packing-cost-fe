@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchSection({ form, change, setShowPartPicker, handleCalculate, handleClear }) {
+export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear }) {
   return (
     <>
       {/* Header form */}
@@ -11,7 +11,7 @@ export default function SearchSection({ form, change, setShowPartPicker, handleC
             <div className="input-group input-group-sm">
               <input className="form-control form-control-sm" name="modelCode" value={form.modelCode} onChange={change} />
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => alert('Search Model Code placeholder')}>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => setShowModelPicker(true)}>
                   <i className="fas fa-search" />
                 </button>
               </div>
