@@ -46,9 +46,13 @@ export default function CalculatePackingCost() {
 
   // Called when modal Save is pressed (payload contains modal form + parts)
   function handleModalSave(payload) {
-    console.log('Packing cost saved payload:', payload)
-    setRows(prev => [...prev, payload]);
-    setShowNewModal(false)
+    console.log('Packing cost saved payload:', payload);
+    const newRow = {
+      ...payload,
+      numParts: payload.parts.length,
+    };
+    setRows(prev => [...prev, newRow]);
+    setShowNewModal(false);
     // TODO: send payload to backend / add to list
   }
 

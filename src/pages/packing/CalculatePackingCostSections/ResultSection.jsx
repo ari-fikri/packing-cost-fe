@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MaterialCostDetail from '../../../components/PackingCostNewModalSections/MaterialCostDetail';
 
 export default function ResultSection({
   rows, visibleRows,
   page, totalPages, goToPage,
   perPage, setPerPage, total
 }) {
+  const [expandedRow, setExpandedRow] = useState(null);
+
   const fmt = (v) => {
     if (v === null || v === undefined || v === "") return "";
     const num = Number(v);
     if (isNaN(num)) return String(v);
     return num.toFixed(2);
+  };
+
+  const toggleRow = (index) => {
+    setExpandedRow(expandedRow === index ? null : index);
   };
 
   return (
@@ -35,22 +42,36 @@ export default function ResultSection({
                 <td colSpan="9" className="text-center py-4 text-muted">No Data Found</td>
               </tr>
             ) : (
-              visibleRows.map((r, i) => (
-                <tr key={i}>
-                  <td>{fmt((page - 1) * perPage + i + 1)}</td>
-                  <td>{r.calCode}</td>
-                  <td>{r.period}</td>
-                  <td>{r.destCode}</td>
-                  <td>{r.destCountry}</td>
-                  <td>{r.modelCode}</td>
-                  <td>{fmt(r.numParts)}</td>
-                  <td>{r.type}</td>
-                  <td>
-                    <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => alert('View placeholder')}><i className="fas fa-eye" /></button>
-                    <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => alert('Delete placeholder')}><i className="fas fa-trash" /></button>
-                  </td>
-                </tr>
-              ))
+              visibleRows.map((r, i) => {
+                const fullIndex = (page - 1) * perPage + i;
+                return (
+                  <React.Fragment key={i}>
+                    <tr>
+                      <td>{fmt(fullIndex + 1)}</td>
+                      <td>{r.calCode}</td>
+                      <td>{r.period}</td>
+                      <td>{r.destCode}</td>
+                      <td>{r.destCountry}</td>
+                      <td>{r.modelCode}</td>
+                      <td>{fmt(r.numParts)}</td>
+                      <td>{r.type}</td>
+                      <td>
+                        <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => toggleRow(fullIndex)}><i className="fas fa-eye" /></button>
+                        <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => alert('Delete placeholder')}><i className="fas fa-trash" /></button>
+                      </td>
+                    </tr>
+                    {expandedRow === fullIndex && (
+                      <tr>
+                        <td colSpan="9">
+                          {r.parts.map((part, partIndex) => (
+                            <MaterialCostDetail key={partIndex} part={part} />
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
+                )
+              })
             )}
           </tbody>
         </table>

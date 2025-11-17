@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   ChevronDown,
   ChevronRight,
@@ -208,13 +208,7 @@ export default function ResultSection({
                   {/* Expanded row with details */}
                   {isExpanded && (
                     <tr className="expandable-row">
-                      <td colSpan="32">
-                        <div style={{ padding: '10px', backgroundColor: '#f8f9fa' }}>
-                          <h5>Material Cost Details</h5>
-                          <p>Inner and Outer material cost details will be shown here.</p>
-                          {/* You can add a more detailed breakdown once the data structure is available */}
-                        </div>
-                      </td>
+                      <MaterialCostDetail part={p} />
                     </tr>
                   )}
                 </React.Fragment>
