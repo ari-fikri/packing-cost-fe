@@ -1,36 +1,29 @@
 import React from 'react';
 
-export default function SearchSection({ form, change, setShowPartPicker, handleDeleteSelectedParts, visibleParts }) {
+export default function SearchSection({ form, change, setShowPartPicker, handleCalculate, handleClear }) {
   return (
     <>
       {/* Header form */}
       <div className="row">
         <div className="col-md-6">
           <div className="form-group">
-            <label>Pack Cost Cal Code</label>
+            <label>Model Code</label>
             <div className="input-group input-group-sm">
-              <input className="form-control form-control-sm" name="calCode" value={form.calCode} onChange={change} />
+              <input className="form-control form-control-sm" name="modelCode" value={form.modelCode} onChange={change} />
+              <div className="input-group-append">
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => alert('Search Model Code placeholder')}>
+                  <i className="fas fa-search" />
+                </button>
+              </div>
             </div>
           </div>
           <div className="form-group">
-            <label>Period</label>
+            <label>Implementation Period</label>
             <select className="form-control form-control-sm" name="period" value={form.period} onChange={change}>
               <option>All</option>
               <option>01.2025</option>
               <option>02.2025</option>
             </select>
-          </div>
-
-          <div className="form-group">
-            <label>Type</label>
-            <div>
-              <label className="mr-2">
-                <input type="radio" name="type" value="PxP" checked={form.type === "PxP"} onChange={(e) => change({ target: { name: 'type', value: e.target.value }})} /> PxP
-              </label>
-              <label>
-                <input type="radio" name="type" value="Lot" checked={form.type === "Lot"} onChange={(e) => change({ target: { name: 'type', value: e.target.value }})} /> Lot
-              </label>
-            </div>
           </div>
         </div>
 
@@ -43,29 +36,27 @@ export default function SearchSection({ form, change, setShowPartPicker, handleD
             </select>
           </div>
           <div className="form-group">
-            <label>Model Code</label>
+            <label>Part</label>
             <div className="input-group input-group-sm">
-              <input className="form-control form-control-sm" name="modelCode" value={form.modelCode} onChange={change} />
+              <input className="form-control form-control-sm" name="part" value={form.part} onChange={change} />
+              <div className="input-group-append">
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part" onClick={() => setShowPartPicker(true)}>
+                  <i className="fas fa-search" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Action row */}
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <div>
-          <button type="button" className="btn btn-sm btn-primary mr-2" onClick={() => setShowPartPicker(true)}>
-            <i className="fas fa-plus mr-1" /> Add Part
-          </button>
-          <button
-            type="button"
-            className="btn btn-sm btn-danger"
-            onClick={handleDeleteSelectedParts}
-            disabled={visibleParts.length === 0}
-          >
-            <i className="fas fa-trash mr-1" /> Delete Part
-          </button>
-        </div>
+      <div className="d-flex justify-content-end my-2">
+        <button type="button" className="btn btn-sm btn-primary mr-2" onClick={handleCalculate}>
+          <i className="fas fa-calculator mr-1" /> Calculate
+        </button>
+        <button type="button" className="btn btn-sm btn-secondary" onClick={handleClear}>
+          <i className="fas fa-eraser mr-1" /> Clear
+        </button>
       </div>
     </>
   );
