@@ -1,7 +1,9 @@
 // src/components/PackingCostNewModal.jsx
 import React, { useState, useEffect } from "react";
 import PartPickerModal from "./PartPickerModal";
-import PartsTableRow from "../pages/packing/PartsTableRow";
+import SearchSection from "./PackingCostNewModalSections/SearchSection";
+import ResultSection from "./PackingCostNewModalSections/ResultSection";
+import Pagination from "./PackingCostNewModalSections/Pagination";
 
 const emptyForm = {
   calCode: "",
@@ -11,20 +13,13 @@ const emptyForm = {
   type: "PxP",
 };
 
-const threshold_percentage = 5; // 5%
-
 export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [form, setForm] = useState(emptyForm);
   const [parts, setParts] = useState([]);
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
-  const [expandedRows, setExpandedRows] = useState(new Set());
-
-  // Add state for remarks per part row
   const [remarks, setRemarks] = useState({});
-
-  // Track selected checkboxes
   const [selectedRows, setSelectedRows] = useState({});
 
   useEffect(() => {
@@ -32,7 +27,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       setForm(emptyForm);
       setParts([]);
       setPage(1);
-      setExpandedRows(new Set());
       document.body.classList.add("modal-open");
     } else {
       document.body.classList.remove("modal-open");
@@ -85,15 +79,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setPage(1);
   }
 
-  function toggleExpand(rowIndex) {
-    setExpandedRows((prev) => {
-      const next = new Set(prev);
-      if (next.has(rowIndex)) next.delete(rowIndex);
-      else next.add(rowIndex);
-      return next;
-    });
-  }
-
   const total = parts.length;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
   function goToPage(p) {
@@ -101,40 +86,41 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
   const visibleParts = parts.slice((page - 1) * perPage, page * perPage);
 
-  const distributeAcross = (value, buckets = 10) => {
-    const val = Number(value) || 0;
-    const base = Math.floor(val / buckets);
-    const remainder = val - base * buckets;
-    return Array.from({ length: buckets }).map((_, i) => base + (i === 0 ? remainder : 0));
-  };
-
-  // Format function for numbers: keep 2 digits after decimal
-  const fmt = (v) => {
-    if (v === null || v === undefined || v === "") return "";
-    const num = Number(v);
-    if (isNaN(num)) return String(v);
-    return num.toFixed(2);
-  };
-
   function handleRemarkChange(index, value) {
     setRemarks((prev) => ({ ...prev, [index]: value }));
   }
 
-  // Handle checkbox change
-  function handleCheckboxChange(index, checked) {
-    setSelectedRows(prev => ({ ...prev, [index]: checked }));
+  function handleCheckboxChange(newSelectedRows) {
+    setSelectedRows(newSelectedRows);
   }
 
-  // Handle delete selected parts
   function handleDeleteSelectedParts() {
     const toDelete = Object.keys(selectedRows)
       .filter(idx => selectedRows[idx])
       .map(idx => Number(idx));
     if (toDelete.length === 0) return;
-    setParts(prev =>
-      prev.filter((_, i) => !toDelete.includes((page - 1) * perPage + i))
-    );
-    setSelectedRows({});
+    
+    const newParts = parts.filter((_, i) => !toDelete.includes(i));
+    setParts(newParts);
+
+    const newSelectedRows = {};
+    const newRemarks = {};
+    
+    // Adjust selected rows and remarks indices
+    const remainingParts = parts.map((part, i) => (toDelete.includes(i) ? null : part)).filter(Boolean);
+    
+    remainingParts.forEach((part, i) => {
+        const oldIndex = parts.indexOf(part);
+        if (selectedRows[oldIndex]) {
+            newSelectedRows[i] = true;
+        }
+        if (remarks[oldIndex]) {
+            newRemarks[i] = remarks[oldIndex];
+        }
+    });
+
+    setSelectedRows(newSelectedRows);
+    setRemarks(newRemarks);
   }
 
   return (
@@ -147,229 +133,30 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
             </div>
 
             <div className="card-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
-              {/* Header form */}
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label>Pack Cost Cal Code</label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" name="calCode" value={form.calCode} onChange={change} />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label>Period</label>
-                    <select className="form-control form-control-sm" name="period" value={form.period} onChange={change}>
-                      <option>All</option>
-                      <option>01.2025</option>
-                      <option>02.2025</option>
-                    </select>
-                  </div>
+              <SearchSection 
+                form={form}
+                change={change}
+                setShowPartPicker={setShowPartPicker}
+                handleDeleteSelectedParts={handleDeleteSelectedParts}
+                visibleParts={visibleParts}
+              />
 
-                  <div className="form-group">
-                    <label>Type</label>
-                    <div>
-                      <label className="mr-2">
-                        <input type="radio" name="type" value="PxP" checked={form.type === "PxP"} onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))} /> PxP
-                      </label>
-                      <label>
-                        <input type="radio" name="type" value="Lot" checked={form.type === "Lot"} onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))} /> Lot
-                      </label>
-                    </div>
-                  </div>
-                </div>
+              <ResultSection 
+                visibleParts={visibleParts}
+                selectedRows={selectedRows}
+                handleCheckboxChange={handleCheckboxChange}
+                page={page}
+                perPage={perPage}
+                remarks={remarks}
+                handleRemarkChange={handleRemarkChange}
+              />
 
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label>Dest Code</label>
-                    <select className="form-control form-control-sm" name="destCode" value={form.destCode} onChange={change}>
-                      <option>All</option>
-                      <option value="TASA">TASA - Argentina</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label>Model Code</label>
-                    <div className="input-group input-group-sm">
-                      <input className="form-control form-control-sm" name="modelCode" value={form.modelCode} onChange={change} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action row */}
-              <div className="d-flex align-items-center justify-content-between my-2">
-                <div>
-                  <button type="button" className="btn btn-sm btn-primary mr-2" onClick={() => setShowPartPicker(true)}>
-                    <i className="fas fa-plus mr-1" /> Add Part
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-danger"
-                    onClick={handleDeleteSelectedParts}
-                    disabled={visibleParts.length === 0}
-                  >
-                    <i className="fas fa-trash mr-1" /> Delete Part
-                  </button>
-                </div>
-              </div>
-
-              {/* Parts table */}
-              <div className="table-responsive">
-                <table className="table table-bordered table-sm text-center w-100">
-                  <thead>
-                    <tr style={{ backgroundColor: "#d0d0d0" }}>
-                      <th rowSpan={2} style={{ width: 40 }}>
-                        <input
-                          type="checkbox"
-                          checked={
-                            visibleParts.length > 0 &&
-                            visibleParts.every((_, i) => selectedRows[(page - 1) * perPage + i])
-                          }
-                          onChange={e => {
-                            const checked = e.target.checked;
-                            setSelectedRows(prev => {
-                              const updated = { ...prev };
-                              visibleParts.forEach((_, i) => {
-                                updated[(page - 1) * perPage + i] = checked;
-                              });
-                              return updated;
-                            });
-                          }}
-                        />
-                      </th>
-                      <th rowSpan={2} style={{ width: 40 }}></th>
-                      <th rowSpan={2} style={{ width: 40 }}>No</th>
-                      <th rowSpan={2}>Part No</th>
-                      <th rowSpan={2}>Suffix</th>
-                      <th rowSpan={2}>Part Name</th>
-                      <th rowSpan={2}>Parent Part No</th>
-                      <th rowSpan={2}>Supplier ID</th>
-                      <th rowSpan={2}>Supplier Name</th>
-                      <th rowSpan={2}>L</th>
-                      <th rowSpan={2}>W</th>
-                      <th rowSpan={2}>H</th>
-                      <th rowSpan={2}>Box M3</th>
-                      <th colSpan={3}>INNER</th>
-                      <th colSpan={3}>OUTER</th>
-                      <th colSpan={3}>MATERIAL</th>
-                      <th colSpan={3}>LABOR</th>
-                      <th colSpan={3}>INLAND</th>
-                      <th colSpan={3}>TOTAL</th>
-                      <th rowSpan={2}>Remark</th>
-                    </tr>
-                    <tr style={{ backgroundColor: "#efefef" }}>
-                      {[...Array(6)].map((_, i) => (
-                        <React.Fragment key={i}>
-                          <th>Total Cost</th>
-                          <th>Prev Year</th>
-                          <th>Diff</th>
-                        </React.Fragment>
-                      ))}
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {visibleParts.length === 0 ? (
-                      <tr>
-                        <td colSpan={32} className="text-center py-4 text-muted">No Data Found</td>
-                      </tr>
-                    ) : (
-                      visibleParts.map((p, i) => {
-                        const globalIndex = (page - 1) * perPage + i;
-                        const isExpanded = expandedRows.has(globalIndex);
-
-                        // Calculate diff percentage for TOTAL
-                        const totalCost = Number(p.total?.totalCost ?? 0);
-                        const prevYear = Number(p.total?.prevYear ?? 0);
-                        const diffPerc = prevYear ? ((totalCost - prevYear) / prevYear) * 100 : 0;
-                        const showRemark = diffPerc > threshold_percentage;
-
-                        return (
-                          <tr key={globalIndex}>
-                            {/* Checkbox column */}
-                            <td>
-                              <input
-                                type="checkbox"
-                                checked={!!selectedRows[globalIndex]}
-                                onChange={e => handleCheckboxChange(globalIndex, e.target.checked)}
-                              />
-                            </td>
-                            {/* ...existing cells, or use <PartsTableRow /> if you want... */}
-                            <td>
-                              {/* expand/collapse button or icon */}
-                            </td>
-                            <td>{globalIndex + 1}</td>
-                            <td>{p.partNo}</td>
-                            <td>{p.suffix}</td>
-                            <td>{p.partName}</td>
-                            <td>{p.parentPartNo}</td>
-                            <td>{p.supplierId}</td>
-                            <td>{p.supplierName}</td>
-                            <td>{fmt(p.L)}</td>
-                            <td>{fmt(p.W)}</td>
-                            <td>{fmt(p.H)}</td>
-                            <td>{fmt(p.boxM3)}</td>
-                            {/* INNER, OUTER, MATERIAL, LABOR, INLAND, TOTAL columns */}
-                            <td>{fmt(p.inner?.totalCost)}</td>
-                            <td>{fmt(p.inner?.prevYear)}</td>
-                            <td>{fmt(p.inner?.diff)}</td>
-                            <td>{fmt(p.outer?.totalCost)}</td>
-                            <td>{fmt(p.outer?.prevYear)}</td>
-                            <td>{fmt(p.outer?.diff)}</td>
-                            <td>{fmt(p.material?.totalCost)}</td>
-                            <td>{fmt(p.material?.prevYear)}</td>
-                            <td>{fmt(p.material?.diff)}</td>
-                            <td>{fmt(p.labor?.totalCost)}</td>
-                            <td>{fmt(p.labor?.prevYear)}</td>
-                            <td>{fmt(p.labor?.diff)}</td>
-                            <td>{fmt(p.inland?.totalCost)}</td>
-                            <td>{fmt(p.inland?.prevYear)}</td>
-                            <td>{fmt(p.inland?.diff)}</td>
-                            <td>{fmt(p.total?.totalCost)}</td>
-                            <td>{fmt(p.total?.prevYear)}</td>
-                            <td
-                              style={{
-                                color: diffPerc > threshold_percentage ? 'red' : undefined,
-                                fontWeight: diffPerc > threshold_percentage ? 'bold' : undefined,
-                              }}
-                            >
-                              {fmt(p.total?.diff)}
-                            </td>
-                            {/* Remark field */}
-                            <td>
-                              {showRemark ? (
-                                <textarea
-                                  className="form-control form-control-sm"
-                                  style={{ minWidth: 220, width: '100%' }}
-                                  value={remarks[globalIndex] || ""}
-                                  onChange={e => handleRemarkChange(globalIndex, e.target.value)}
-                                  placeholder="Enter remark"
-                                  rows={3}
-                                />
-                              ) : null}
-                            </td>
-                          </tr>
-                        );
-                      })
-                    )}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* pagination */}
-              <div className="d-flex align-items-center justify-content-between mt-2">
-                <div>
-                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(1)}>{"<<"}</button>
-                  <button type="button" className="btn btn-sm btn-light mr-1" onClick={() => goToPage(Math.max(1, page - 1))}>{"<"}</button>
-                  {[...Array(totalPages).keys()].map((n) => (
-                    <button key={n} type="button" className={`btn btn-sm mr-1 ${page === n + 1 ? "btn-primary" : "btn-light"}`} onClick={() => goToPage(n + 1)}>{n + 1}</button>
-                  ))}
-                  <button type="button" className="btn btn-sm btn-light ml-2" onClick={() => goToPage(Math.min(totalPages, page + 1))}>{">"}</button>
-                </div>
-
-                <div className="form-inline small">
-                  <span className="mr-3">{perPage} per page</span>
-                </div>
-              </div>
+              <Pagination 
+                page={page}
+                totalPages={totalPages}
+                goToPage={goToPage}
+                perPage={perPage}
+              />
             </div>
 
             <div className="card-footer d-flex justify-content-end">
@@ -383,7 +170,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
           </div>
         </div>
 
-      {/* Render PartPickerModal outside the main modal */}
       {showPartPicker && (
         <PartPickerModal 
           show={showPartPicker} 
