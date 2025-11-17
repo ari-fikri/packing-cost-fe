@@ -7,7 +7,7 @@ import ResultSection from "./PackingCostNewModalSections/ResultSection";
 import Pagination from "./PackingCostNewModalSections/Pagination";
 
 const emptyForm = {
-  part: "",
+  part: [],
   period: "All",
   destCode: "All",
   modelCode: [],
@@ -17,6 +17,7 @@ const emptyForm = {
 export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [form, setForm] = useState(emptyForm);
   const [parts, setParts] = useState([]);
+  const [stagedParts, setStagedParts] = useState([]);
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
   const [showPartPicker, setShowPartPicker] = useState(false);
@@ -28,6 +29,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     if (show) {
       setForm(emptyForm);
       setParts([]);
+      setStagedParts([]);
       setPage(1);
       document.body.classList.add("modal-open");
     } else {
@@ -44,12 +46,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
 
   function handleCalculate() {
-    // Placeholder for calculation logic
-    alert("Calculate button clicked!");
+    setParts(stagedParts);
+    setPage(1);
   }
 
   function handleClear() {
     setForm(emptyForm);
+    setParts([]);
+    setStagedParts([]);
   }
 
   function handleModelsPicked(models) {
@@ -104,9 +108,28 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       total: { totalCost: p.totalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
     }));
 
-    setParts((prev) => [...prev, ...mapped]);
+    setStagedParts((prev) => {
+      const existingPartNos = prev.map(p => p.partNo);
+      const uniqueNewParts = mapped.filter(p => !existingPartNos.includes(p.partNo));
+      return [...prev, ...uniqueNewParts];
+    });
+
+    const newPartNos = mapped.map(p => p.partNo);
+    setForm(prevForm => {
+        const existingPartNos = prevForm.part || [];
+        const uniqueNewPartNos = newPartNos.filter(code => !existingPartNos.includes(code));
+        return { ...prevForm, part: [...existingPartNos, ...uniqueNewPartNos] };
+    });
+
     setShowPartPicker(false);
-    setPage(1);
+  }
+
+  function handlePartRemove(partNoToRemove) {
+    setForm((prev) => ({
+      ...prev,
+      part: prev.part.filter((partNo) => partNo !== partNoToRemove),
+    }));
+    setStagedParts((prev) => prev.filter((p) => p.partNo !== partNoToRemove));
   }
 
   const total = parts.length;
@@ -171,6 +194,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 handleCalculate={handleCalculate}
                 handleClear={handleClear}
                 onModelRemove={handleModelRemove}
+                onPartRemove={handlePartRemove}
               />
 
               <ResultSection

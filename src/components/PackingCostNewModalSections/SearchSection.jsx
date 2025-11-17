@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove }) {
+export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove }) {
   return (
     <>
       {/* Header form */}
@@ -53,7 +53,22 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
           <div className="form-group">
             <label>Part</label>
             <div className="input-group input-group-sm">
-              <input className="form-control form-control-sm" name="part" value={form.part} onChange={change} />
+              <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                {Array.isArray(form.part) && form.part.map(partNo => (
+                  <span key={partNo} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
+                    {partNo}
+                    <button
+                      type="button"
+                      className="close"
+                      aria-label="Close"
+                      style={{ color: 'white', marginLeft: '5px', textShadow: 'none', opacity: 0.7, fontSize: '1.2em', lineHeight: '0.8' }}
+                      onClick={() => onPartRemove(partNo)}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </span>
+                ))}
+              </div>
               <div className="input-group-append">
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part" onClick={() => setShowPartPicker(true)}>
                   <i className="fas fa-search" />
