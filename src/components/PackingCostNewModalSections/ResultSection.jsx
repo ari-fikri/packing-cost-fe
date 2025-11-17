@@ -1,7 +1,14 @@
-import React from 'react';
-
-// Threshold for highlighting the 'Diff' percentage in red.
-const threshold_percentage = 5; // 5%
+import React, { useState } from 'react';
+import {
+  ChevronDown,
+  ChevronRight,
+  GripVertical,
+  Pencil,
+  Save,
+  X,
+} from 'lucide-react';
+import Pagination from '../Pagination';
+import MaterialCostDetail from './MaterialCostDetail';
 
 /**
  * Formats a numeric value to two decimal places.
@@ -29,8 +36,22 @@ const fmt = (v) => {
  * @param {number} props.perPage - The number of items per page.
  * @param {object} props.remarks - An object storing remarks for each part.
  * @param {function} props.handleRemarkChange - Handler for remark input changes.
+ * @param {object} props.expandedRows - An object tracking which rows are expanded.
+ * @param {function} props.handleToggleExpand - Handler to toggle the expanded state of a row.
+ * @param {number} [props.threshold_percentage=5] - The percentage threshold to highlight differences.
  */
-export default function ResultSection({ visibleParts, selectedRows, handleCheckboxChange, page, perPage, remarks, handleRemarkChange }) {
+export default function ResultSection({
+  visibleParts,
+  selectedRows,
+  handleCheckboxChange,
+  page,
+  perPage,
+  remarks,
+  handleRemarkChange,
+  expandedRows,
+  handleToggleExpand,
+  threshold_percentage = 5,
+}) {
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-sm text-center w-100" style={{ fontSize: '8pt' }}>
@@ -55,7 +76,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
                 }}
               />
             </th>
-            <th rowSpan={2} style={{ width: 40 }}></th>{/* Empty column */}
+            <th rowSpan={2} style={{ width: 40 }}></th>
             <th rowSpan={2} style={{ width: 40 }}>No</th>
             <th rowSpan={2}>Part No</th>
             <th rowSpan={2}>Suffix</th>
@@ -97,7 +118,11 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
           ) : (
             // Map through visible parts to create table rows
             visibleParts.map((p, i) => {
+              // Ensure part data 'p' is not null or undefined before rendering
+              if (!p) return null;
+
               const globalIndex = (page - 1) * perPage + i;
+              const isExpanded = expandedRows && expandedRows[globalIndex];
 
               // Calculate difference percentage for highlighting
               const totalCost = Number(p.total?.totalCost ?? 0);
@@ -106,70 +131,93 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
               const showRemark = diffPerc > threshold_percentage;
 
               return (
-                <tr key={globalIndex}>
-                  {/* Row checkbox */}
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={!!selectedRows[globalIndex]}
-                      onChange={e => {
-                        const newSelectedRows = { ...selectedRows, [globalIndex]: e.target.checked };
-                        handleCheckboxChange(newSelectedRows);
-                      }}
-                    />
-                  </td>
-                  <td></td>{/* Empty cell */}
-                  <td>{globalIndex + 1}</td>
-                  <td>{p.partNo}</td>
-                  <td>{p.suffix}</td>
-                  <td>{p.partName}</td>
-                  <td>{p.parentPartNo}</td>
-                  <td>{p.supplierId}</td>
-                  <td>{p.supplierName}</td>
-                  <td>{fmt(p.L)}</td>
-                  <td>{fmt(p.W)}</td>
-                  <td>{fmt(p.H)}</td>
-                  <td>{fmt(p.boxM3)}</td>
-                  <td>{fmt(p.inner?.totalCost)}</td>
-                  <td>{fmt(p.inner?.prevYear)}</td>
-                  <td>{fmt(p.inner?.diff)}</td>
-                  <td>{fmt(p.outer?.totalCost)}</td>
-                  <td>{fmt(p.outer?.prevYear)}</td>
-                  <td>{fmt(p.outer?.diff)}</td>
-                  <td>{fmt(p.material?.totalCost)}</td>
-                  <td>{fmt(p.material?.prevYear)}</td>
-                  <td>{fmt(p.material?.diff)}</td>
-                  <td>{fmt(p.labor?.totalCost)}</td>
-                  <td>{fmt(p.labor?.prevYear)}</td>
-                  <td>{fmt(p.labor?.diff)}</td>
-                  <td>{fmt(p.inland?.totalCost)}</td>
-                  <td>{fmt(p.inland?.prevYear)}</td>
-                  <td>{fmt(p.inland?.diff)}</td>
-                  <td>{fmt(p.total?.totalCost)}</td>
-                  <td>{fmt(p.total?.prevYear)}</td>
-                  {/* Difference cell with conditional styling */}
-                  <td
-                    style={{
-                      color: diffPerc > threshold_percentage ? 'red' : undefined,
-                      fontWeight: diffPerc > threshold_percentage ? 'bold' : undefined,
-                    }}
-                  >
-                    {fmt(p.total?.diff)}
-                  </td>
-                  {/* Remark textarea, shown conditionally */}
-                  <td>
-                    {showRemark ? (
-                      <textarea
-                        className="form-control form-control-sm"
-                        style={{ minWidth: 220, width: '100%' }}
-                        value={remarks[globalIndex] || ""}
-                        onChange={e => handleRemarkChange(globalIndex, e.target.value)}
-                        placeholder="Enter remark"
-                        rows={3}
+                <React.Fragment key={globalIndex}>
+                  <tr>
+                    {/* Row checkbox */}
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={!!(selectedRows && selectedRows[globalIndex])}
+                        onChange={e => {
+                          const newSelectedRows = { ...selectedRows, [globalIndex]: e.target.checked };
+                          handleCheckboxChange(newSelectedRows);
+                        }}
                       />
-                    ) : null}
-                  </td>
-                </tr>
+                    </td>
+                    {/* Expand/collapse button */}
+                    <td>
+                      <button
+                        type="button"
+                        className="btn btn-xs btn-link"
+                        onClick={() => handleToggleExpand(globalIndex)}
+                      >
+                        <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`} />
+                      </button>
+                    </td>
+                    <td>{globalIndex + 1}</td>
+                    <td>{p.partNo}</td>
+                    <td>{p.suffix}</td>
+                    <td>{p.partName}</td>
+                    <td>{p.parentPartNo}</td>
+                    <td>{p.supplierId}</td>
+                    <td>{p.supplierName}</td>
+                    <td>{fmt(p.L)}</td>
+                    <td>{fmt(p.W)}</td>
+                    <td>{fmt(p.H)}</td>
+                    <td>{fmt(p.boxM3)}</td>
+                    <td>{fmt(p.inner?.totalCost)}</td>
+                    <td>{fmt(p.inner?.prevYear)}</td>
+                    <td>{fmt(p.inner?.diff)}</td>
+                    <td>{fmt(p.outer?.totalCost)}</td>
+                    <td>{fmt(p.outer?.prevYear)}</td>
+                    <td>{fmt(p.outer?.diff)}</td>
+                    <td>{fmt(p.material?.totalCost)}</td>
+                    <td>{fmt(p.material?.prevYear)}</td>
+                    <td>{fmt(p.material?.diff)}</td>
+                    <td>{fmt(p.labor?.totalCost)}</td>
+                    <td>{fmt(p.labor?.prevYear)}</td>
+                    <td>{fmt(p.labor?.diff)}</td>
+                    <td>{fmt(p.inland?.totalCost)}</td>
+                    <td>{fmt(p.inland?.prevYear)}</td>
+                    <td>{fmt(p.inland?.diff)}</td>
+                    <td>{fmt(p.total?.totalCost)}</td>
+                    <td>{fmt(p.total?.prevYear)}</td>
+                    {/* Difference cell with conditional styling */}
+                    <td
+                      style={{
+                        color: diffPerc > threshold_percentage ? 'red' : undefined,
+                        fontWeight: diffPerc > threshold_percentage ? 'bold' : undefined,
+                      }}
+                    >
+                      {fmt(p.total?.diff)}
+                    </td>
+                    {/* Remark textarea, shown conditionally */}
+                    <td>
+                      {showRemark ? (
+                        <textarea
+                          className="form-control form-control-sm"
+                          style={{ minWidth: 220, width: '100%' }}
+                          value={(remarks && remarks[globalIndex]) || ""}
+                          onChange={e => handleRemarkChange(globalIndex, e.target.value)}
+                          placeholder="Enter remark"
+                          rows={3}
+                        />
+                      ) : null}
+                    </td>
+                  </tr>
+                  {/* Expanded row with details */}
+                  {isExpanded && (
+                    <tr className="expandable-row">
+                      <td colSpan="32">
+                        <div style={{ padding: '10px', backgroundColor: '#f8f9fa' }}>
+                          <h5>Material Cost Details</h5>
+                          <p>Inner and Outer material cost details will be shown here.</p>
+                          {/* You can add a more detailed breakdown once the data structure is available */}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               );
             })
           )}

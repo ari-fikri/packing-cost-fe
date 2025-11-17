@@ -44,6 +44,8 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [remarks, setRemarks] = useState({});
   // State to track selected rows in the result table
   const [selectedRows, setSelectedRows] = useState({});
+  // State to track expanded rows in the result table
+  const [expandedRows, setExpandedRows] = useState({});
 
   // Effect to handle modal visibility changes
   useEffect(() => {
@@ -53,6 +55,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       setParts([]);
       setStagedParts([]);
       setPage(1);
+      setExpandedRows({});
       document.body.classList.add("modal-open");
     } else {
       document.body.classList.remove("modal-open");
@@ -275,6 +278,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
 
   /**
+   * Toggles the expanded state of a row.
+   * @param {number} index - The index of the row to toggle.
+   */
+  function handleToggleExpand(index) {
+    setExpandedRows((prev) => ({ ...prev, [index]: !prev[index] }));
+  }
+
+  /**
    * Deletes all currently selected parts from the results table.
    */
   function handleDeleteSelectedParts() {
@@ -340,6 +351,9 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 perPage={perPage}
                 remarks={remarks}
                 handleRemarkChange={handleRemarkChange}
+                expandedRows={expandedRows}
+                handleToggleExpand={handleToggleExpand}
+                threshold_percentage={5}
               />
 
               <Pagination 
