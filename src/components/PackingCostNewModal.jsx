@@ -7,10 +7,10 @@ import ResultSection from "./PackingCostNewModalSections/ResultSection";
 import Pagination from "./PackingCostNewModalSections/Pagination";
 
 const emptyForm = {
-  calCode: "",
+  part: "",
   period: "All",
   destCode: "All",
-  modelCode: "",
+  modelCode: [],
   type: "PxP",
 };
 
@@ -43,11 +43,32 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setForm((s) => ({ ...s, [name]: value }));
   }
 
-  function handleModelPicked(model) {
-    if (model) {
-      setForm((prev) => ({ ...prev, modelCode: model.modelCode }));
+  function handleCalculate() {
+    // Placeholder for calculation logic
+    alert("Calculate button clicked!");
+  }
+
+  function handleClear() {
+    setForm(emptyForm);
+  }
+
+  function handleModelsPicked(models) {
+    if (Array.isArray(models) && models.length > 0) {
+      const newModelCodes = models.map((m) => m.code);
+      setForm((prev) => {
+        const existingModelCodes = prev.modelCode || [];
+        const uniqueNewCodes = newModelCodes.filter((code) => !existingModelCodes.includes(code));
+        return { ...prev, modelCode: [...existingModelCodes, ...uniqueNewCodes] };
+      });
     }
     setShowModelPicker(false);
+  }
+
+  function handleModelRemove(modelCodeToRemove) {
+    setForm((prev) => ({
+      ...prev,
+      modelCode: prev.modelCode.filter((code) => code !== modelCodeToRemove),
+    }));
   }
 
   function handleSave() {
@@ -142,16 +163,17 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
             </div>
 
             <div className="card-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
-              <SearchSection 
+              <SearchSection
                 form={form}
                 change={change}
                 setShowPartPicker={setShowPartPicker}
                 setShowModelPicker={setShowModelPicker}
                 handleCalculate={handleCalculate}
                 handleClear={handleClear}
+                onModelRemove={handleModelRemove}
               />
 
-              <ResultSection 
+              <ResultSection
                 visibleParts={visibleParts}
                 selectedRows={selectedRows}
                 handleCheckboxChange={handleCheckboxChange}
@@ -189,10 +211,11 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       )}
 
       {showModelPicker && (
-        <ModelPickerModal 
-          show={showModelPicker} 
-          onClose={() => setShowModelPicker(false)} 
-          onSelect={handleModelPicked} 
+        <ModelPickerModal
+          show={showModelPicker}
+          onClose={() => setShowModelPicker(false)}
+          onAdd={handleModelsPicked}
+          selectionMode="multi"
         />
       )}
     </>
