@@ -8,9 +8,11 @@ import Pagination from "./PackingCostNewModalSections/Pagination";
 
 const emptyForm = {
   part: [],
+  partInput: "",
   period: "All",
   destCode: "All",
   modelCode: [],
+  modelCodeInput: "",
   type: "PxP",
 };
 
@@ -43,6 +45,49 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   function change(e) {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
+  }
+
+  function handleModelCodeKeyDown(e) {
+    if (e.key === " " && form.modelCodeInput.trim()) {
+      e.preventDefault();
+      const newModelCode = form.modelCodeInput.trim();
+      setForm((prev) => {
+        if (prev.modelCode.includes(newModelCode)) {
+          return { ...prev, modelCodeInput: "" };
+        }
+        return {
+          ...prev,
+          modelCode: [...prev.modelCode, newModelCode],
+          modelCodeInput: "",
+        };
+      });
+    }
+  }
+
+  function handlePartKeyDown(e) {
+    if (e.key === " " && form.partInput.trim()) {
+      e.preventDefault();
+      const newPartNo = form.partInput.trim();
+
+      setForm((prev) => {
+        if (prev.part.includes(newPartNo)) {
+          return { ...prev, partInput: "" };
+        }
+        return {
+          ...prev,
+          part: [...prev.part, newPartNo],
+          partInput: "",
+        };
+      });
+
+      setStagedParts((prev) => {
+        const exists = prev.some((p) => p.partNo === newPartNo);
+        if (exists) {
+          return prev;
+        }
+        return [...prev, { partNo: newPartNo }];
+      });
+    }
   }
 
   function handleCalculate() {
@@ -195,6 +240,8 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 handleClear={handleClear}
                 onModelRemove={handleModelRemove}
                 onPartRemove={handlePartRemove}
+                onModelCodeKeyDown={handleModelCodeKeyDown}
+                onPartKeyDown={handlePartKeyDown}
               />
 
               <ResultSection

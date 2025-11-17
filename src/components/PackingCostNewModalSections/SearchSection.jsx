@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove }) {
+export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove, onModelCodeKeyDown, onPartKeyDown }) {
   return (
     <>
       {/* Header form */}
@@ -9,7 +9,7 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
           <div className="form-group">
             <label>Model Code</label>
             <div className="input-group input-group-sm">
-              <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+              <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px', alignItems: 'center' }}>
                 {form.modelCode.map(code => (
                   <span key={code} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
                     {code}
@@ -24,6 +24,14 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
                     </button>
                   </span>
                 ))}
+                <input
+                  type="text"
+                  name="modelCodeInput"
+                  value={form.modelCodeInput}
+                  onChange={change}
+                  onKeyDown={onModelCodeKeyDown}
+                  style={{ border: 'none', outline: 'none', flexGrow: 1, padding: 0, margin: 0, height: '20px' }}
+                />
               </div>
               <div className="input-group-append">
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => setShowModelPicker(true)}>
@@ -53,7 +61,7 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
           <div className="form-group">
             <label>Part</label>
             <div className="input-group input-group-sm">
-              <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+              <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px', alignItems: 'center' }}>
                 {Array.isArray(form.part) && form.part.map(partNo => (
                   <span key={partNo} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
                     {partNo}
@@ -68,6 +76,14 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
                     </button>
                   </span>
                 ))}
+                <input
+                  type="text"
+                  name="partInput"
+                  value={form.partInput}
+                  onChange={change}
+                  onKeyDown={onPartKeyDown}
+                  style={{ border: 'none', outline: 'none', flexGrow: 1, padding: 0, margin: 0, height: '20px' }}
+                />
               </div>
               <div className="input-group-append">
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part" onClick={() => setShowPartPicker(true)}>
