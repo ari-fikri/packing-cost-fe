@@ -1,5 +1,23 @@
 import React from 'react';
 
+/**
+ * SearchSection component for filtering packing cost calculations.
+ *
+ * @param {object} props - The props for the component.
+ * @param {string} props.calCode - The packing cost calculation code.
+ * @param {function} props.setCalCode - Function to set the packing cost calculation code.
+ * @param {string} props.period - The selected period.
+ * @param {function} props.setPeriod - Function to set the period.
+ * @param {string} props.destCode - The destination code.
+ * @param {function} props.setDestCode - Function to set the destination code.
+ * @param {string} props.modelCode - The model code.
+ * @param {function} props.setModelCode - Function to set the model code.
+ * @param {string} props.type - The calculation type ('All', 'PxP', 'Lot').
+ * @param {function} props.setType - Function to set the calculation type.
+ * @param {function} props.handleFilter - Function to apply the filters.
+ * @param {function} props.handleClear - Function to clear the filters.
+ * @returns {JSX.Element} The rendered search section.
+ */
 export default function SearchSection({
   calCode, setCalCode,
   period, setPeriod,
@@ -10,11 +28,13 @@ export default function SearchSection({
 }) {
   return (
     <div className="card-body">
+      {/* Filter form */}
       <form onSubmit={handleFilter} className="mb-3">
         <div className="row">
-          {/* left column */}
+          {/* Left column for inputs */}
           <div className="col-12 col-md-6">
             <div className="form-row">
+              {/* Pack Cost Cal Code input */}
               <div className="form-group col-12">
                 <label className="small mb-1">Pack Cost Cal Code</label>
                 <div className="input-group input-group-sm">
@@ -32,6 +52,7 @@ export default function SearchSection({
                 </div>
               </div>
 
+              {/* Destination Code dropdown */}
               <div className="form-group col-12">
                 <label className="small mb-1">Dest Code</label>
                 <select className="form-control form-control-sm" value={destCode} onChange={e => setDestCode(e.target.value)}>
@@ -41,6 +62,7 @@ export default function SearchSection({
                 </select>
               </div>
 
+              {/* Type radio buttons */}
               <div className="form-group col-12">
                 <label className="small mb-1">Type</label>
                 <div className="form-control form-control-sm" style={{ minHeight: 44 }}>
@@ -61,9 +83,10 @@ export default function SearchSection({
             </div>
           </div>
 
-          {/* right column */}
+          {/* Right column for inputs */}
           <div className="col-12 col-md-6">
             <div className="form-row">
+              {/* Period dropdown */}
               <div className="form-group col-12">
                 <label className="small mb-1">Period</label>
                 <select className="form-control form-control-sm" value={period} onChange={e => setPeriod(e.target.value)}>
@@ -74,6 +97,7 @@ export default function SearchSection({
                 </select>
               </div>
 
+              {/* Model Code input */}
               <div className="form-group col-12">
                 <label className="small mb-1">Model Code</label>
                 <div className="input-group input-group-sm">
@@ -95,6 +119,7 @@ export default function SearchSection({
         </div>
       </form>
 
+      {/* Action buttons */}
       <div className="d-flex justify-content-end mb-3">
         <button type="button" className="btn btn-sm btn-primary mr-2" onClick={handleFilter}>
           <i className="fas fa-search mr-1" /> Filter

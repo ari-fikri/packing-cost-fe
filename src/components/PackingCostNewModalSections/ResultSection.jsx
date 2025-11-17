@@ -1,7 +1,15 @@
 import React from 'react';
 
+// Threshold for highlighting the 'Diff' percentage in red.
 const threshold_percentage = 5; // 5%
 
+/**
+ * Formats a numeric value to two decimal places.
+ * Returns an empty string for null, undefined, or empty values.
+ * Returns the original value if it's not a number.
+ * @param {*} v - The value to format.
+ * @returns {string} The formatted value.
+ */
 const fmt = (v) => {
   if (v === null || v === undefined || v === "") return "";
   const num = Number(v);
@@ -9,12 +17,27 @@ const fmt = (v) => {
   return num.toFixed(2);
 };
 
+/**
+ * Displays the results table for the Packing Cost New Modal.
+ * Shows calculated part data with various cost breakdowns.
+ *
+ * @param {object} props - Component props.
+ * @param {Array<object>} props.visibleParts - The parts to display on the current page.
+ * @param {object} props.selectedRows - An object tracking which rows are selected.
+ * @param {function} props.handleCheckboxChange - Handler for checkbox changes.
+ * @param {number} props.page - The current page number.
+ * @param {number} props.perPage - The number of items per page.
+ * @param {object} props.remarks - An object storing remarks for each part.
+ * @param {function} props.handleRemarkChange - Handler for remark input changes.
+ */
 export default function ResultSection({ visibleParts, selectedRows, handleCheckboxChange, page, perPage, remarks, handleRemarkChange }) {
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-sm text-center w-100" style={{ fontSize: '8pt' }}>
+        {/* Table Header */}
         <thead>
           <tr style={{ backgroundColor: "#f7fbff" }}>
+            {/* Checkbox for selecting all visible rows */}
             <th rowSpan={2} style={{ width: 40 }}>
               <input
                 type="checkbox"
@@ -32,7 +55,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
                 }}
               />
             </th>
-            <th rowSpan={2} style={{ width: 40 }}></th>
+            <th rowSpan={2} style={{ width: 40 }}></th>{/* Empty column */}
             <th rowSpan={2} style={{ width: 40 }}>No</th>
             <th rowSpan={2}>Part No</th>
             <th rowSpan={2}>Suffix</th>
@@ -52,6 +75,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
             <th colSpan={3}>TOTAL</th>
             <th rowSpan={2}>Remark</th>
           </tr>
+          {/* Sub-headers for cost breakdowns */}
           <tr style={{ backgroundColor: "#dee2e6" }}>
             {[...Array(6)].map((_, i) => (
               <React.Fragment key={i}>
@@ -63,15 +87,19 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
           </tr>
         </thead>
 
+        {/* Table Body */}
         <tbody>
           {visibleParts.length === 0 ? (
+            // Display when no data is available
             <tr>
               <td colSpan={32} className="text-center py-4 text-muted">No Data Found</td>
             </tr>
           ) : (
+            // Map through visible parts to create table rows
             visibleParts.map((p, i) => {
               const globalIndex = (page - 1) * perPage + i;
 
+              // Calculate difference percentage for highlighting
               const totalCost = Number(p.total?.totalCost ?? 0);
               const prevYear = Number(p.total?.prevYear ?? 0);
               const diffPerc = prevYear ? ((totalCost - prevYear) / prevYear) * 100 : 0;
@@ -79,6 +107,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
 
               return (
                 <tr key={globalIndex}>
+                  {/* Row checkbox */}
                   <td>
                     <input
                       type="checkbox"
@@ -89,7 +118,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
                       }}
                     />
                   </td>
-                  <td></td>
+                  <td></td>{/* Empty cell */}
                   <td>{globalIndex + 1}</td>
                   <td>{p.partNo}</td>
                   <td>{p.suffix}</td>
@@ -118,6 +147,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
                   <td>{fmt(p.inland?.diff)}</td>
                   <td>{fmt(p.total?.totalCost)}</td>
                   <td>{fmt(p.total?.prevYear)}</td>
+                  {/* Difference cell with conditional styling */}
                   <td
                     style={{
                       color: diffPerc > threshold_percentage ? 'red' : undefined,
@@ -126,6 +156,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
                   >
                     {fmt(p.total?.diff)}
                   </td>
+                  {/* Remark textarea, shown conditionally */}
                   <td>
                     {showRemark ? (
                       <textarea

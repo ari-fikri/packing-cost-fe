@@ -16,19 +16,39 @@ const emptyForm = {
   type: "PxP",
 };
 
+/**
+ * Modal for creating a new Packing Cost Calculation.
+ * Manages state for the form, parts, and interactions within the modal.
+ *
+ * @param {object} props - Component props.
+ * @param {boolean} props.show - Whether the modal is visible.
+ * @param {function} props.onClose - Callback to close the modal.
+ * @param {function} props.onSave - Callback to save the data.
+ */
 export default function PackingCostNewModal({ show = false, onClose, onSave }) {
+  // State for the main form inputs
   const [form, setForm] = useState(emptyForm);
+  // State for the parts displayed in the result table
   const [parts, setParts] = useState([]);
+  // State for parts selected from the picker, before being "calculated"
   const [stagedParts, setStagedParts] = useState([]);
+  // State for pagination: items per page
   const [perPage, setPerPage] = useState(5);
+  // State for pagination: current page
   const [page, setPage] = useState(1);
+  // State to control the visibility of the Part Picker Modal
   const [showPartPicker, setShowPartPicker] = useState(false);
+  // State to control the visibility of the Model Picker Modal
   const [showModelPicker, setShowModelPicker] = useState(false);
+  // State for remarks on each part row
   const [remarks, setRemarks] = useState({});
+  // State to track selected rows in the result table
   const [selectedRows, setSelectedRows] = useState({});
 
+  // Effect to handle modal visibility changes
   useEffect(() => {
     if (show) {
+      // Reset state when modal is opened
       setForm(emptyForm);
       setParts([]);
       setStagedParts([]);
@@ -37,21 +57,33 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     } else {
       document.body.classList.remove("modal-open");
     }
+    // Cleanup effect
     return () => document.body.classList.remove("modal-open");
   }, [show]);
 
+  // Do not render if not visible
   if (!show) return null;
 
+  /**
+   * Handles changes in form input fields.
+   * @param {React.ChangeEvent<HTMLInputElement|HTMLSelectElement>} e - The change event.
+   */
   function change(e) {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
   }
 
+  /**
+   * Handles the 'keydown' event for the model code input.
+   * Converts typed text into a model code pill when the space key is pressed.
+   * @param {React.KeyboardEvent<HTMLInputElement>} e - The keyboard event.
+   */
   function handleModelCodeKeyDown(e) {
     if (e.key === " " && form.modelCodeInput.trim()) {
       e.preventDefault();
       const newModelCode = form.modelCodeInput.trim();
       setForm((prev) => {
+        // Avoid adding duplicate model codes
         if (prev.modelCode.includes(newModelCode)) {
           return { ...prev, modelCodeInput: "" };
         }
@@ -64,11 +96,17 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     }
   }
 
+  /**
+   * Handles the 'keydown' event for the part input.
+   * Converts typed text into a part number pill when the space key is pressed.
+   * @param {React.KeyboardEvent<HTMLInputElement>} e - The keyboard event.
+   */
   function handlePartKeyDown(e) {
     if (e.key === " " && form.partInput.trim()) {
       e.preventDefault();
       const newPartNo = form.partInput.trim();
 
+      // Add to form's part array for display as a pill
       setForm((prev) => {
         if (prev.part.includes(newPartNo)) {
           return { ...prev, partInput: "" };
@@ -80,32 +118,45 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         };
       });
 
+      // Add to staged parts for later calculation
       setStagedParts((prev) => {
         const exists = prev.some((p) => p.partNo === newPartNo);
         if (exists) {
           return prev;
         }
+        // Here we only have partNo, other details will be missing until fetched
         return [...prev, { partNo: newPartNo }];
       });
     }
   }
 
+  /**
+   * Moves staged parts to the main parts list to be displayed in the results table.
+   */
   function handleCalculate() {
     setParts(stagedParts);
-    setPage(1);
+    setPage(1); // Reset to first page
   }
 
+  /**
+   * Clears the form and all part lists.
+   */
   function handleClear() {
     setForm(emptyForm);
     setParts([]);
     setStagedParts([]);
   }
 
+  /**
+   * Handles models selected from the ModelPickerModal.
+   * @param {Array<object>} models - The array of selected model objects.
+   */
   function handleModelsPicked(models) {
     if (Array.isArray(models) && models.length > 0) {
       const newModelCodes = models.map((m) => m.code);
       setForm((prev) => {
         const existingModelCodes = prev.modelCode || [];
+        // Filter out duplicates
         const uniqueNewCodes = newModelCodes.filter((code) => !existingModelCodes.includes(code));
         return { ...prev, modelCode: [...existingModelCodes, ...uniqueNewCodes] };
       });
@@ -113,6 +164,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setShowModelPicker(false);
   }
 
+  /**
+   * Removes a model code from the form.
+   * @param {string} modelCodeToRemove - The model code to remove.
+   */
   function handleModelRemove(modelCodeToRemove) {
     setForm((prev) => ({
       ...prev,
@@ -120,20 +175,31 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     }));
   }
 
+  /**
+   * Prepares and sends the final data payload for saving.
+   */
   function handleSave() {
     const payload = { ...form, parts };
     onSave && onSave(payload);
   }
 
+  /**
+   * Closes the modal.
+   */
   function handleCancel() {
     onClose && onClose();
   }
 
+  /**
+   * Handles parts selected from the PartPickerModal.
+   * @param {Array<object>} selected - The array of selected part objects.
+   */
   function handlePartsPicked(selected) {
     if (!Array.isArray(selected) || selected.length === 0) {
       setShowPartPicker(false);
       return;
     }
+    // Map selected data to the structure needed for the results table
     const mapped = selected.map((p) => ({
       partNo: p.partNo,
       suffix: "",
@@ -153,12 +219,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       total: { totalCost: p.totalCost ?? 0, prevYear: p.prevYear ?? 0, diff: p.diffPerc ?? "0%" },
     }));
 
+    // Add new unique parts to the staged list
     setStagedParts((prev) => {
       const existingPartNos = prev.map(p => p.partNo);
       const uniqueNewParts = mapped.filter(p => !existingPartNos.includes(p.partNo));
       return [...prev, ...uniqueNewParts];
     });
 
+    // Add new unique part numbers to the form for pill display
     const newPartNos = mapped.map(p => p.partNo);
     setForm(prevForm => {
         const existingPartNos = prevForm.part || [];
@@ -169,6 +237,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setShowPartPicker(false);
   }
 
+  /**
+   * Removes a part from both the form and the staged parts list.
+   * @param {string} partNoToRemove - The part number to remove.
+   */
   function handlePartRemove(partNoToRemove) {
     setForm((prev) => ({
       ...prev,
@@ -177,6 +249,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     setStagedParts((prev) => prev.filter((p) => p.partNo !== partNoToRemove));
   }
 
+  // Pagination logic
   const total = parts.length;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
   function goToPage(p) {
@@ -184,14 +257,26 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
   const visibleParts = parts.slice((page - 1) * perPage, page * perPage);
 
+  /**
+   * Updates the remark for a specific part.
+   * @param {number} index - The global index of the part.
+   * @param {string} value - The new remark text.
+   */
   function handleRemarkChange(index, value) {
     setRemarks((prev) => ({ ...prev, [index]: value }));
   }
 
+  /**
+   * Updates the state of selected rows.
+   * @param {object} newSelectedRows - The new object of selected rows.
+   */
   function handleCheckboxChange(newSelectedRows) {
     setSelectedRows(newSelectedRows);
   }
 
+  /**
+   * Deletes all currently selected parts from the results table.
+   */
   function handleDeleteSelectedParts() {
     const toDelete = Object.keys(selectedRows)
       .filter(idx => selectedRows[idx])
@@ -204,7 +289,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     const newSelectedRows = {};
     const newRemarks = {};
     
-    // Adjust selected rows and remarks indices
+    // Re-index selected rows and remarks after deletion
     const remainingParts = parts.map((part, i) => (toDelete.includes(i) ? null : part)).filter(Boolean);
     
     remainingParts.forEach((part, i) => {
@@ -223,13 +308,16 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
 
   return (
     <>
+      {/* Modal backdrop */}
       <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) handleCancel() }}>
+        {/* Modal dialog */}
         <div className="np-modal card card-outline card-primary" style={{ maxWidth: '95vw', maxHeight: '90vh', width: '95vw', height: '90vh' }}>
             <div className="card-header">
               <h5 className="card-title mb-0"><strong>Packing Cost Calculation New</strong></h5>
               <button type="button" className="close" onClick={handleCancel} aria-label="Close"><span aria-hidden>×</span></button>
             </div>
 
+            {/* Modal body with scrolling content */}
             <div className="card-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
               <SearchSection
                 form={form}
@@ -262,6 +350,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
               />
             </div>
 
+            {/* Modal footer with action buttons */}
             <div className="card-footer d-flex justify-content-end">
               <button type="button" className="btn btn-success mr-2" onClick={handleSave}>
                 <i className="fas fa-download mr-1" /> Save
@@ -273,6 +362,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
           </div>
         </div>
 
+      {/* Part Picker Modal, shown conditionally */}
       {showPartPicker && (
         <PartPickerModal 
           show={showPartPicker} 
@@ -281,6 +371,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         />
       )}
 
+      {/* Model Picker Modal, shown conditionally */}
       {showModelPicker && (
         <ModelPickerModal
           show={showModelPicker}

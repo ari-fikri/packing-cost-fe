@@ -1,15 +1,34 @@
 import React from 'react';
 
+/**
+ * Search section for the Packing Cost New Modal.
+ * Contains input fields for filtering and actions like calculate and clear.
+ *
+ * @param {object} props - Component props.
+ * @param {object} props.form - The state of the form from the parent component.
+ * @param {function} props.change - Handler for input changes.
+ * @param {function} props.setShowPartPicker - Function to show the part picker modal.
+ * @param {function} props.setShowModelPicker - Function to show the model picker modal.
+ * @param {function} props.handleCalculate - Handler for the calculate button.
+ * @param {function} props.handleClear - Handler for the clear button.
+ * @param {function} props.onModelRemove - Handler to remove a model pill.
+ * @param {function} props.onPartRemove - Handler to remove a part pill.
+ * @param {function} props.onModelCodeKeyDown - Keydown handler for model code input.
+ * @param {function} props.onPartKeyDown - Keydown handler for part input.
+ */
 export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove, onModelCodeKeyDown, onPartKeyDown }) {
   return (
     <>
-      {/* Header form */}
+      {/* Header form with input fields */}
       <div className="row">
+        {/* Left column */}
         <div className="col-md-6">
+          {/* Model Code input with pills */}
           <div className="form-group">
             <label>Model Code</label>
             <div className="input-group input-group-sm">
               <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px', alignItems: 'center' }}>
+                {/* Display selected model codes as pills */}
                 {form.modelCode.map(code => (
                   <span key={code} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
                     {code}
@@ -24,6 +43,7 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
                     </button>
                   </span>
                 ))}
+                {/* Input for typing new model codes */}
                 <input
                   type="text"
                   name="modelCodeInput"
@@ -40,6 +60,7 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
               </div>
             </div>
           </div>
+          {/* Implementation Period dropdown */}
           <div className="form-group">
             <label>Implementation Period</label>
             <select className="form-control form-control-sm" name="period" value={form.period} onChange={change}>
@@ -50,7 +71,9 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
           </div>
         </div>
 
+        {/* Right column */}
         <div className="col-md-6">
+          {/* Destination Code dropdown */}
           <div className="form-group">
             <label>Dest Code</label>
             <select className="form-control form-control-sm" name="destCode" value={form.destCode} onChange={change}>
@@ -58,10 +81,12 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
               <option value="TASA">TASA - Argentina</option>
             </select>
           </div>
+          {/* Part input with pills */}
           <div className="form-group">
             <label>Part</label>
             <div className="input-group input-group-sm">
               <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px', alignItems: 'center' }}>
+                {/* Display selected part numbers as pills */}
                 {Array.isArray(form.part) && form.part.map(partNo => (
                   <span key={partNo} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
                     {partNo}
@@ -76,6 +101,7 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
                     </button>
                   </span>
                 ))}
+                {/* Input for typing new part numbers */}
                 <input
                   type="text"
                   name="partInput"
@@ -95,7 +121,7 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
         </div>
       </div>
 
-      {/* Action row */}
+      {/* Action buttons row */}
       <div className="d-flex justify-content-end my-2">
         <button type="button" className="btn btn-sm btn-primary mr-2" onClick={handleCalculate}>
           <i className="fas fa-calculator mr-1" /> Calculate
