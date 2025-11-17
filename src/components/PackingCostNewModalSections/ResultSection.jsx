@@ -12,9 +12,9 @@ const fmt = (v) => {
 export default function ResultSection({ visibleParts, selectedRows, handleCheckboxChange, page, perPage, remarks, handleRemarkChange }) {
   return (
     <div className="table-responsive">
-      <table className="table table-bordered table-sm text-center w-100">
+      <table className="table table-bordered table-sm text-center w-100" style={{ fontSize: '8pt' }}>
         <thead>
-          <tr style={{ backgroundColor: "#d0d0d0" }}>
+          <tr style={{ backgroundColor: "#f7fbff" }}>
             <th rowSpan={2} style={{ width: 40 }}>
               <input
                 type="checkbox"
@@ -52,7 +52,7 @@ export default function ResultSection({ visibleParts, selectedRows, handleCheckb
             <th colSpan={3}>TOTAL</th>
             <th rowSpan={2}>Remark</th>
           </tr>
-          <tr style={{ backgroundColor: "#efefef" }}>
+          <tr style={{ backgroundColor: "#dee2e6" }}>
             {[...Array(6)].map((_, i) => (
               <React.Fragment key={i}>
                 <th>Total Cost</th>
