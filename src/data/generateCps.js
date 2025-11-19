@@ -60,22 +60,27 @@ try {
     newCps.weightPerPc = (Math.random() * 10).toFixed(2);
     newCps.qtyPerBox = Math.floor(Math.random() * 50) + 1;
 
+    // Ensure packing object exists
+    if (!newCps.cps.packing) {
+      newCps.cps.packing = {};
+    }
+
     // Generate inner materials
     const innerMaterialCount = Math.floor(Math.random() * 6) + 5; // 5 to 10
-    newCps.inner = [];
+    newCps.cps.packing.inner = [];
     if (boxMaterials.length > 0) {
         const boxMaterial = boxMaterials[Math.floor(Math.random() * boxMaterials.length)];
-        newCps.inner.push({
+        newCps.cps.packing.inner.push({
             materialNo: boxMaterial.materialNo,
             qty: 1,
             price: boxMaterial.price,
             sum: boxMaterial.price,
         });
     }
-    for (let j = newCps.inner.length; j < innerMaterialCount; j++) {
+    for (let j = newCps.cps.packing.inner.length; j < innerMaterialCount; j++) {
         const material = otherMaterials[Math.floor(Math.random() * otherMaterials.length)];
         const qty = Math.floor(Math.random() * 10) + 1;
-        newCps.inner.push({
+        newCps.cps.packing.inner.push({
             materialNo: material.materialNo,
             qty: qty,
             price: material.price,
@@ -85,20 +90,20 @@ try {
 
     // Generate outer materials
     const outerMaterialCount = Math.floor(Math.random() * 6) + 5; // 5 to 10
-    newCps.outer = [];
+    newCps.cps.packing.outer = [];
     if (moduleMaterials.length > 0) {
         const moduleMaterial = moduleMaterials[Math.floor(Math.random() * moduleMaterials.length)];
-        newCps.outer.push({
+        newCps.cps.packing.outer.push({
             materialNo: moduleMaterial.materialNo,
             qty: 1,
             price: moduleMaterial.price,
             sum: moduleMaterial.price,
         });
     }
-    for (let k = newCps.outer.length; k < outerMaterialCount; k++) {
+    for (let k = newCps.cps.packing.outer.length; k < outerMaterialCount; k++) {
         const material = otherMaterials[Math.floor(Math.random() * otherMaterials.length)];
         const qty = Math.floor(Math.random() * 10) + 1;
-        newCps.outer.push({
+        newCps.cps.packing.outer.push({
             materialNo: material.materialNo,
             qty: qty,
             price: material.price,
@@ -107,8 +112,8 @@ try {
     }
     
     // Calculate totals
-    newCps.subTotalInner = newCps.inner.reduce((acc, item) => acc + item.sum, 0);
-    newCps.subTotalOuter = newCps.outer.reduce((acc, item) => acc + item.sum, 0);
+    newCps.subTotalInner = newCps.cps.packing.inner.reduce((acc, item) => acc + item.sum, 0);
+    newCps.subTotalOuter = newCps.cps.packing.outer.reduce((acc, item) => acc + item.sum, 0);
     newCps.subTotalMaterial = newCps.subTotalInner + newCps.subTotalOuter;
     newCps.subTotalLabor = Math.floor(Math.random() * 50000) + 10000;
     newCps.subTotalInland = Math.floor(Math.random() * 10000) + 1000;
