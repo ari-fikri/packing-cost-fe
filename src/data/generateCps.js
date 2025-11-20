@@ -11,7 +11,10 @@ const suppliersPath = path.join(dataDir, 'suppliers.js');
 const materialsPath = path.join(dataDir, 'materials.json');
 const generatedDataPath = path.join(dataDir, 'generatedData.json');
 
-const MAX_CPS = 3;
+const MAX_CPS = 8;
+
+// Helper function to format numbers to two decimal places
+const formatNumber = (num) => parseFloat(num.toFixed(2));
 
 try {
   // Read all necessary files
@@ -57,7 +60,7 @@ try {
       newCps.supplierName = randomSupplier.name;
     }
 
-    newCps.weightPerPc = (Math.random() * 10).toFixed(2);
+    newCps.weightPerPc = formatNumber(Math.random() * 10);
     newCps.qtyPerBox = Math.floor(Math.random() * 50) + 1;
 
     // Ensure packing object exists
@@ -73,8 +76,8 @@ try {
         newCps.cps.packing.inner.push({
             materialNo: boxMaterial.materialNo,
             qty: 1,
-            price: boxMaterial.price,
-            sum: boxMaterial.price,
+            price: formatNumber(boxMaterial.price),
+            sum: formatNumber(boxMaterial.price),
         });
     }
     for (let j = newCps.cps.packing.inner.length; j < innerMaterialCount; j++) {
@@ -83,8 +86,8 @@ try {
         newCps.cps.packing.inner.push({
             materialNo: material.materialNo,
             qty: qty,
-            price: material.price,
-            sum: qty * material.price,
+            price: formatNumber(material.price),
+            sum: formatNumber(qty * material.price),
         });
     }
 
@@ -96,8 +99,8 @@ try {
         newCps.cps.packing.outer.push({
             materialNo: moduleMaterial.materialNo,
             qty: 1,
-            price: moduleMaterial.price,
-            sum: moduleMaterial.price,
+            price: formatNumber(moduleMaterial.price),
+            sum: formatNumber(moduleMaterial.price),
         });
     }
     for (let k = newCps.cps.packing.outer.length; k < outerMaterialCount; k++) {
@@ -106,15 +109,15 @@ try {
         newCps.cps.packing.outer.push({
             materialNo: material.materialNo,
             qty: qty,
-            price: material.price,
-            sum: qty * material.price,
+            price: formatNumber(material.price),
+            sum: formatNumber(qty * material.price),
         });
     }
     
     // Calculate totals
-    newCps.subTotalInner = newCps.cps.packing.inner.reduce((acc, item) => acc + item.sum, 0);
-    newCps.subTotalOuter = newCps.cps.packing.outer.reduce((acc, item) => acc + item.sum, 0);
-    newCps.subTotalMaterial = newCps.subTotalInner + newCps.subTotalOuter;
+    newCps.subTotalInner = formatNumber(newCps.cps.packing.inner.reduce((acc, item) => acc + item.sum, 0));
+    newCps.subTotalOuter = formatNumber(newCps.cps.packing.outer.reduce((acc, item) => acc + item.sum, 0));
+    newCps.subTotalMaterial = formatNumber(newCps.subTotalInner + newCps.subTotalOuter);
 
     // Generate manhour data
     const manhour = {
@@ -133,23 +136,23 @@ try {
 
     // Generate labor data
     const labor = {
-        dl: Math.floor(Math.random() * 5000),
-        idl: Math.floor(Math.random() * 5000),
-        facility: Math.floor(Math.random() * 2000),
+        dl: formatNumber(Math.random() * 5000),
+        idl: formatNumber(Math.random() * 5000),
+        facility: formatNumber(Math.random() * 2000),
     };
     newCps.cps.labor = labor;
-    newCps.subTotalLabor = labor.dl + labor.idl + labor.facility;
+    newCps.subTotalLabor = formatNumber(labor.dl + labor.idl + labor.facility);
 
     // Generate inland data
     const inland = {
         packing_time: Math.floor(Math.random() * 100),
-        inland_cost: Math.floor(Math.random() * 2000),
-        milkrun_cost: Math.floor(Math.random() * 1000),
+        inland_cost: formatNumber(Math.random() * 2000),
+        milkrun_cost: formatNumber(Math.random() * 1000),
     };
     newCps.cps.inland = inland;
-    newCps.subTotalInland = inland.inland_cost + inland.milkrun_cost; // Example calculation
+    newCps.subTotalInland = formatNumber(inland.inland_cost + inland.milkrun_cost); // Example calculation
 
-    newCps.subTotal = newCps.subTotalMaterial + newCps.subTotalLabor + newCps.subTotalInland;
+    newCps.subTotal = formatNumber(newCps.subTotalMaterial + newCps.subTotalLabor + newCps.subTotalInland);
     newCps.diffPct = `${(Math.random() * 5).toFixed(1)}%`;
 
 
