@@ -10,15 +10,33 @@ const partsPath = path.join(dataDir, 'parts.json');
 const suppliersPath = path.join(dataDir, 'suppliers.js');
 const materialsPath = path.join(dataDir, 'materials.json');
 const generatedDataPath = path.join(dataDir, 'generatedData.json');
+const subtotalStructPath = path.join(templateDir, 'subtotal.json');
 
 const MAX_CPS = 8;
 
 // Helper function to format numbers to two decimal places
 const formatNumber = (num) => parseFloat(num.toFixed(2));
 
+const calculateSubtotalDetails = (total) => {
+  const prev_year = formatNumber(total * (Math.random() * 0.4 + 0.8)); // Generates a value between 80% and 120% of the total
+  let diff = 0;
+  if (prev_year !== 0) {
+    diff = ((total - prev_year) / prev_year) * 100;
+  } else if (total > 0) {
+    diff = 100.0;
+  }
+
+  return {
+    total,
+    prev_year,
+    diff: formatNumber(diff),
+  };
+};
+
 try {
   // Read all necessary files
   const cpsStruct = JSON.parse(fs.readFileSync(cpsStructPath, 'utf-8'));
+  const subtotalStruct = JSON.parse(fs.readFileSync(subtotalStructPath, 'utf-8'));
   const models = JSON.parse(fs.readFileSync(modelsPath, 'utf-8'));
   const allParts = JSON.parse(fs.readFileSync(partsPath, 'utf-8'));
   
@@ -115,9 +133,9 @@ try {
     }
     
     // Calculate totals
-    newCps.subTotalInner = formatNumber(newCps.cps.packing.inner.reduce((acc, item) => acc + item.sum, 0));
-    newCps.subTotalOuter = formatNumber(newCps.cps.packing.outer.reduce((acc, item) => acc + item.sum, 0));
-    newCps.subTotalMaterial = formatNumber(newCps.subTotalInner + newCps.subTotalOuter);
+    const subTotalInner = formatNumber(newCps.cps.packing.inner.reduce((acc, item) => acc + item.sum, 0));
+    const subTotalOuter = formatNumber(newCps.cps.packing.outer.reduce((acc, item) => acc + item.sum, 0));
+    const subTotalMaterial = formatNumber(subTotalInner + subTotalOuter);
 
     // Generate manhour data
     const manhour = {
@@ -141,7 +159,7 @@ try {
         facility: formatNumber(Math.random() * 2000),
     };
     newCps.cps.labor = labor;
-    newCps.subTotalLabor = formatNumber(labor.dl + labor.idl + labor.facility);
+    const subTotalLabor = formatNumber(labor.dl + labor.idl + labor.facility);
 
     // Generate inland data
     const inland = {
@@ -150,11 +168,19 @@ try {
         milkrun_cost: formatNumber(Math.random() * 1000),
     };
     newCps.cps.inland = inland;
-    newCps.subTotalInland = formatNumber(inland.inland_cost + inland.milkrun_cost); // Example calculation
+    const subTotalInland = formatNumber(inland.inland_cost + inland.milkrun_cost); // Example calculation
 
-    newCps.subTotal = formatNumber(newCps.subTotalMaterial + newCps.subTotalLabor + newCps.subTotalInland);
-    newCps.diffPct = `${(Math.random() * 5).toFixed(1)}%`;
+    const subTotal = formatNumber(subTotalMaterial + subTotalLabor + subTotalInland);
 
+    // Create and populate the new subtotals object
+    newCps.subtotals = {
+      inner: calculateSubtotalDetails(subTotalInner),
+      outer: calculateSubtotalDetails(subTotalOuter),
+      material: calculateSubtotalDetails(subTotalMaterial),
+      labor: calculateSubtotalDetails(subTotalLabor),
+      inland: calculateSubtotalDetails(subTotalInland),
+      total: calculateSubtotalDetails(subTotal),
+    };
 
     generatedData.cpsData.push(newCps);
   }

@@ -80,132 +80,144 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT006",
-              "qty": 6,
-              "price": 350,
-              "sum": 2100
+              "materialNo": "MAT023",
+              "qty": 4,
+              "price": 120.45,
+              "sum": 481.8
             },
             {
-              "materialNo": "MAT030",
-              "qty": 7,
-              "price": 145.75,
-              "sum": 1020.25
+              "materialNo": "MAT032",
+              "qty": 6,
+              "price": 88.95,
+              "sum": 533.7
+            },
+            {
+              "materialNo": "MAT009",
+              "qty": 2,
+              "price": 18.95,
+              "sum": 37.9
             },
             {
               "materialNo": "MAT007",
-              "qty": 3,
+              "qty": 9,
               "price": 45.8,
-              "sum": 137.4
-            },
-            {
-              "materialNo": "MAT008",
-              "qty": 7,
-              "price": 850,
-              "sum": 5950
-            },
-            {
-              "materialNo": "MAT001",
-              "qty": 8,
-              "price": 150,
-              "sum": 1200
-            },
-            {
-              "materialNo": "MAT017",
-              "qty": 8,
-              "price": 28.45,
-              "sum": 227.6
-            },
-            {
-              "materialNo": "MAT024",
-              "qty": 7,
-              "price": 78.25,
-              "sum": 547.75
-            },
-            {
-              "materialNo": "MAT023",
-              "qty": 9,
-              "price": 120.45,
-              "sum": 1084.05
-            },
-            {
-              "materialNo": "MAT025",
-              "qty": 9,
-              "price": 42.15,
-              "sum": 379.35
+              "sum": 412.2
             },
             {
               "materialNo": "MAT020",
               "qty": 3,
               "price": 55.35,
               "sum": 166.05
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 5,
+              "price": 320.25,
+              "sum": 1601.25
+            },
+            {
+              "materialNo": "MAT020",
+              "qty": 7,
+              "price": 55.35,
+              "sum": 387.45
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 7,
+              "price": 68.9,
+              "sum": 482.3
+            },
+            {
+              "materialNo": "MAT008",
+              "qty": 8,
+              "price": 850,
+              "sum": 6800
             }
           ],
           "outer": [
             {
-              "materialNo": "MAT002",
+              "materialNo": "MAT003",
+              "qty": 6,
+              "price": 75.25,
+              "sum": 451.5
+            },
+            {
+              "materialNo": "MAT027",
               "qty": 7,
-              "price": 25.5,
-              "sum": 178.5
+              "price": 165.3,
+              "sum": 1157.1
+            },
+            {
+              "materialNo": "MAT004",
+              "qty": 8,
+              "price": 200,
+              "sum": 1600
+            },
+            {
+              "materialNo": "MAT031",
+              "qty": 3,
+              "price": 38.4,
+              "sum": 115.2
+            },
+            {
+              "materialNo": "MAT023",
+              "qty": 7,
+              "price": 120.45,
+              "sum": 843.15
+            },
+            {
+              "materialNo": "MAT011",
+              "qty": 1,
+              "price": 65.3,
+              "sum": 65.3
             },
             {
               "materialNo": "MAT015",
-              "qty": 5,
-              "price": 245.9,
-              "sum": 1229.5
-            },
-            {
-              "materialNo": "MAT029",
-              "qty": 9,
-              "price": 210.5,
-              "sum": 1894.5
-            },
-            {
-              "materialNo": "MAT019",
-              "qty": 3,
-              "price": 85.7,
-              "sum": 257.1
-            },
-            {
-              "materialNo": "MAT030",
               "qty": 2,
-              "price": 145.75,
-              "sum": 291.5
+              "price": 245.9,
+              "sum": 491.8
             },
             {
-              "materialNo": "MAT007",
-              "qty": 8,
-              "price": 45.8,
-              "sum": 366.4
+              "materialNo": "MAT005",
+              "qty": 3,
+              "price": 12.75,
+              "sum": 38.25
             },
             {
-              "materialNo": "MAT035",
-              "qty": 9,
-              "price": 185.45,
-              "sum": 1669.05
+              "materialNo": "MAT004",
+              "qty": 5,
+              "price": 200,
+              "sum": 1000
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 2,
+              "price": 275.6,
+              "sum": 551.2
             }
           ]
         },
         "manhour": {
-          "receiving": 659,
-          "inspection": 616,
-          "delivery_course": 197,
-          "pallet_supply": 332,
-          "binding": 483,
-          "non_pallet_supply": 512,
-          "pick_packing": 506,
-          "empty_box": 954,
-          "mix_van": 377,
-          "lashing": 925
+          "receiving": 601,
+          "inspection": 812,
+          "delivery_course": 351,
+          "pallet_supply": 826,
+          "binding": 164,
+          "non_pallet_supply": 108,
+          "pick_packing": 983,
+          "empty_box": 403,
+          "mix_van": 417,
+          "lashing": 206
         },
         "labor": {
-          "dl": 2007.05,
-          "idl": 3451.82,
-          "facility": 480.23
+          "dl": 679.86,
+          "idl": 2705.78,
+          "facility": 1126.8
         },
         "inland": {
-          "packing_time": 37,
-          "inland_cost": 1263.67,
-          "milkrun_cost": 96.21
+          "packing_time": 86,
+          "inland_cost": 926.73,
+          "milkrun_cost": 218.19
         },
         "logistic_info": {
           "dock_code": "L",
@@ -214,21 +226,46 @@
         }
       },
       "recNo": 1,
-      "cpsNo": "CPS999W301B004.202590360T001200",
-      "partNo": "90360T001200",
-      "partName": "BALL",
-      "parentNo": "PARENT-008",
-      "supplierCode": "5150",
-      "supplierName": "NAMICOH INDONESIA",
-      "weightPerPc": 9.43,
-      "qtyPerBox": 19,
-      "subTotalInner": 12812.45,
-      "subTotalOuter": 5886.55,
-      "subTotalMaterial": 18699,
-      "subTotalLabor": 5939.1,
-      "subTotalInland": 1359.88,
-      "subTotal": 25997.98,
-      "diffPct": "3.0%"
+      "cpsNo": "CPS588W807B004.2024122810Y11000",
+      "partNo": "122810Y11000",
+      "partName": "HANGER, ENGINE, NO.1",
+      "parentNo": "PARENT-007",
+      "supplierCode": "5062",
+      "supplierName": "MENARA TERUS MAKMUR",
+      "weightPerPc": 9.06,
+      "qtyPerBox": 29,
+      "subtotals": {
+        "inner": {
+          "total": 10902.65,
+          "prev_year": 10345.07,
+          "diff": 5.39
+        },
+        "outer": {
+          "total": 6313.5,
+          "prev_year": 7162.75,
+          "diff": -11.86
+        },
+        "material": {
+          "total": 17216.15,
+          "prev_year": 14549.02,
+          "diff": 18.33
+        },
+        "labor": {
+          "total": 4512.44,
+          "prev_year": 5382.39,
+          "diff": -16.16
+        },
+        "inland": {
+          "total": 1144.92,
+          "prev_year": 1356.45,
+          "diff": -15.59
+        },
+        "total": {
+          "total": 22873.51,
+          "prev_year": 25430.66,
+          "diff": -10.06
+        }
+      }
     },
     {
       "id": 2,
@@ -310,34 +347,108 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT004",
+              "materialNo": "MAT023",
               "qty": 1,
-              "price": 200,
-              "sum": 200
+              "price": 120.45,
+              "sum": 120.45
             },
             {
-              "materialNo": "MAT008",
+              "materialNo": "MAT024",
+              "qty": 5,
+              "price": 78.25,
+              "sum": 391.25
+            },
+            {
+              "materialNo": "MAT029",
+              "qty": 1,
+              "price": 210.5,
+              "sum": 210.5
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 7,
+              "price": 275.6,
+              "sum": 1929.2
+            },
+            {
+              "materialNo": "MAT001",
               "qty": 3,
-              "price": 850,
-              "sum": 2550
+              "price": 150,
+              "sum": 450
             },
             {
-              "materialNo": "MAT031",
+              "materialNo": "MAT023",
               "qty": 10,
-              "price": 38.4,
-              "sum": 384
+              "price": 120.45,
+              "sum": 1204.5
             },
             {
-              "materialNo": "MAT028",
+              "materialNo": "MAT018",
               "qty": 9,
-              "price": 22.85,
-              "sum": 205.65
+              "price": 195.8,
+              "sum": 1762.2
+            },
+            {
+              "materialNo": "MAT030",
+              "qty": 5,
+              "price": 145.75,
+              "sum": 728.75
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 5,
+              "price": 68.9,
+              "sum": 344.5
+            },
+            {
+              "materialNo": "MAT010",
+              "qty": 3,
+              "price": 125.5,
+              "sum": 376.5
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT022",
+              "qty": 8,
+              "price": 68.9,
+              "sum": 551.2
+            },
+            {
+              "materialNo": "MAT012",
+              "qty": 4,
+              "price": 420.75,
+              "sum": 1683
             },
             {
               "materialNo": "MAT009",
-              "qty": 6,
+              "qty": 9,
               "price": 18.95,
-              "sum": 113.7
+              "sum": 170.55
+            },
+            {
+              "materialNo": "MAT019",
+              "qty": 10,
+              "price": 85.7,
+              "sum": 857
+            },
+            {
+              "materialNo": "MAT029",
+              "qty": 10,
+              "price": 210.5,
+              "sum": 2105
+            },
+            {
+              "materialNo": "MAT013",
+              "qty": 2,
+              "price": 180.4,
+              "sum": 360.8
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 10,
+              "price": 275.6,
+              "sum": 2756
             },
             {
               "materialNo": "MAT004",
@@ -346,72 +457,40 @@
               "sum": 600
             },
             {
-              "materialNo": "MAT027",
-              "qty": 3,
-              "price": 165.3,
-              "sum": 495.9
-            }
-          ],
-          "outer": [
-            {
-              "materialNo": "MAT003",
-              "qty": 2,
-              "price": 75.25,
-              "sum": 150.5
-            },
-            {
-              "materialNo": "MAT019",
-              "qty": 1,
-              "price": 85.7,
-              "sum": 85.7
-            },
-            {
               "materialNo": "MAT009",
-              "qty": 8,
+              "qty": 2,
               "price": 18.95,
-              "sum": 151.6
+              "sum": 37.9
             },
             {
-              "materialNo": "MAT021",
-              "qty": 4,
-              "price": 95.6,
-              "sum": 382.4
-            },
-            {
-              "materialNo": "MAT025",
-              "qty": 8,
-              "price": 42.15,
-              "sum": 337.2
-            },
-            {
-              "materialNo": "MAT034",
-              "qty": 10,
-              "price": 15.3,
-              "sum": 153
+              "materialNo": "MAT020",
+              "qty": 3,
+              "price": 55.35,
+              "sum": 166.05
             }
           ]
         },
         "manhour": {
-          "receiving": 334,
-          "inspection": 985,
-          "delivery_course": 91,
-          "pallet_supply": 558,
-          "binding": 289,
-          "non_pallet_supply": 660,
-          "pick_packing": 128,
-          "empty_box": 998,
-          "mix_van": 487,
-          "lashing": 737
+          "receiving": 74,
+          "inspection": 524,
+          "delivery_course": 118,
+          "pallet_supply": 645,
+          "binding": 862,
+          "non_pallet_supply": 456,
+          "pick_packing": 622,
+          "empty_box": 960,
+          "mix_van": 340,
+          "lashing": 952
         },
         "labor": {
-          "dl": 2932.09,
-          "idl": 3745.95,
-          "facility": 463.05
+          "dl": 2331.93,
+          "idl": 498.98,
+          "facility": 730.33
         },
         "inland": {
-          "packing_time": 3,
-          "inland_cost": 1147.76,
-          "milkrun_cost": 439.69
+          "packing_time": 70,
+          "inland_cost": 591.48,
+          "milkrun_cost": 922.2
         },
         "logistic_info": {
           "dock_code": "L",
@@ -420,21 +499,46 @@
         }
       },
       "recNo": 2,
-      "cpsNo": "CPS607W722C002.202316282BZ11000",
-      "partNo": "16282BZ11000",
-      "partName": "HOSE, WATER BY-PASS, NO.5",
-      "parentNo": "PARENT-005",
-      "supplierCode": "5150",
-      "supplierName": "NAMICOH INDONESIA",
-      "weightPerPc": 5.2,
-      "qtyPerBox": 37,
-      "subTotalInner": 4549.25,
-      "subTotalOuter": 1260.4,
-      "subTotalMaterial": 5809.65,
-      "subTotalLabor": 7141.09,
-      "subTotalInland": 1587.45,
-      "subTotal": 14538.19,
-      "diffPct": "0.3%"
+      "cpsNo": "CPS332W301B002.2023256300E010",
+      "partNo": "256300E010",
+      "partName": "VALVE ASSY, EGR, NO.2",
+      "parentNo": "PARENT-003",
+      "supplierCode": "5453",
+      "supplierName": "VELASTO INDONESIA",
+      "weightPerPc": 0.25,
+      "qtyPerBox": 16,
+      "subtotals": {
+        "inner": {
+          "total": 7517.85,
+          "prev_year": 6074.14,
+          "diff": 23.77
+        },
+        "outer": {
+          "total": 9287.5,
+          "prev_year": 9044.6,
+          "diff": 2.69
+        },
+        "material": {
+          "total": 16805.35,
+          "prev_year": 18546.73,
+          "diff": -9.39
+        },
+        "labor": {
+          "total": 3561.24,
+          "prev_year": 2963.49,
+          "diff": 20.17
+        },
+        "inland": {
+          "total": 1513.68,
+          "prev_year": 1630.46,
+          "diff": -7.16
+        },
+        "total": {
+          "total": 21880.27,
+          "prev_year": 22269.12,
+          "diff": -1.75
+        }
+      }
     },
     {
       "id": 3,
@@ -516,114 +620,114 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT020",
-              "qty": 10,
-              "price": 55.35,
-              "sum": 553.5
-            },
-            {
-              "materialNo": "MAT019",
-              "qty": 10,
-              "price": 85.7,
-              "sum": 857
-            },
-            {
-              "materialNo": "MAT016",
-              "qty": 5,
-              "price": 320.25,
-              "sum": 1601.25
-            },
-            {
-              "materialNo": "MAT012",
-              "qty": 2,
-              "price": 420.75,
-              "sum": 841.5
-            },
-            {
-              "materialNo": "MAT031",
-              "qty": 9,
-              "price": 38.4,
-              "sum": 345.6
-            },
-            {
-              "materialNo": "MAT035",
+              "materialNo": "MAT001",
               "qty": 6,
-              "price": 185.45,
-              "sum": 1112.7
+              "price": 150,
+              "sum": 900
             },
             {
-              "materialNo": "MAT020",
+              "materialNo": "MAT004",
+              "qty": 3,
+              "price": 200,
+              "sum": 600
+            },
+            {
+              "materialNo": "MAT010",
+              "qty": 4,
+              "price": 125.5,
+              "sum": 502
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 9,
+              "price": 275.6,
+              "sum": 2480.4
+            },
+            {
+              "materialNo": "MAT018",
+              "qty": 2,
+              "price": 195.8,
+              "sum": 391.6
+            },
+            {
+              "materialNo": "MAT003",
+              "qty": 5,
+              "price": 75.25,
+              "sum": 376.25
+            },
+            {
+              "materialNo": "MAT013",
+              "qty": 5,
+              "price": 180.4,
+              "sum": 902
+            },
+            {
+              "materialNo": "MAT008",
+              "qty": 10,
+              "price": 850,
+              "sum": 8500
+            },
+            {
+              "materialNo": "MAT030",
               "qty": 8,
-              "price": 55.35,
-              "sum": 442.8
+              "price": 145.75,
+              "sum": 1166
             }
           ],
           "outer": [
             {
-              "materialNo": "MAT023",
-              "qty": 10,
-              "price": 120.45,
-              "sum": 1204.5
-            },
-            {
-              "materialNo": "MAT029",
+              "materialNo": "MAT004",
               "qty": 6,
-              "price": 210.5,
-              "sum": 1263
+              "price": 200,
+              "sum": 1200
             },
             {
-              "materialNo": "MAT032",
-              "qty": 7,
-              "price": 88.95,
-              "sum": 622.65
+              "materialNo": "MAT013",
+              "qty": 9,
+              "price": 180.4,
+              "sum": 1623.6
             },
             {
-              "materialNo": "MAT010",
-              "qty": 10,
-              "price": 125.5,
-              "sum": 1255
+              "materialNo": "MAT022",
+              "qty": 4,
+              "price": 68.9,
+              "sum": 275.6
+            },
+            {
+              "materialNo": "MAT028",
+              "qty": 3,
+              "price": 22.85,
+              "sum": 68.55
             },
             {
               "materialNo": "MAT016",
-              "qty": 3,
+              "qty": 7,
               "price": 320.25,
-              "sum": 960.75
-            },
-            {
-              "materialNo": "MAT026",
-              "qty": 8,
-              "price": 135.8,
-              "sum": 1086.4
-            },
-            {
-              "materialNo": "MAT015",
-              "qty": 5,
-              "price": 245.9,
-              "sum": 1229.5
+              "sum": 2241.75
             }
           ]
         },
         "manhour": {
-          "receiving": 593,
-          "inspection": 557,
-          "delivery_course": 489,
-          "pallet_supply": 857,
-          "binding": 924,
-          "non_pallet_supply": 533,
-          "pick_packing": 927,
-          "empty_box": 453,
-          "mix_van": 547,
-          "lashing": 660
+          "receiving": 908,
+          "inspection": 77,
+          "delivery_course": 397,
+          "pallet_supply": 963,
+          "binding": 481,
+          "non_pallet_supply": 827,
+          "pick_packing": 5,
+          "empty_box": 275,
+          "mix_van": 446,
+          "lashing": 204
         },
         "labor": {
-          "dl": 2243.05,
-          "idl": 2324.97,
-          "facility": 5.35
+          "dl": 182.13,
+          "idl": 4135.01,
+          "facility": 1117.2
         },
         "inland": {
-          "packing_time": 0,
-          "inland_cost": 1607.19,
-          "milkrun_cost": 505.19
+          "packing_time": 78,
+          "inland_cost": 1686.3,
+          "milkrun_cost": 98.86
         },
         "logistic_info": {
           "dock_code": "L",
@@ -632,21 +736,46 @@
         }
       },
       "recNo": 3,
-      "cpsNo": "CPS286W722C004.202416261BZ75000",
-      "partNo": "16261BZ75000",
-      "partName": "HOSE, WATER BY-PASS, NO.1",
-      "parentNo": "PARENT-009",
-      "supplierCode": "5453",
-      "supplierName": "VELASTO INDONESIA",
-      "weightPerPc": 4.48,
-      "qtyPerBox": 15,
-      "subTotalInner": 5754.35,
-      "subTotalOuter": 7621.8,
-      "subTotalMaterial": 13376.15,
-      "subTotalLabor": 4573.37,
-      "subTotalInland": 2112.38,
-      "subTotal": 20061.9,
-      "diffPct": "0.4%"
+      "cpsNo": "CPS607W722C002.2023171730Y03000",
+      "partNo": "171730Y03000",
+      "partName": "GASKET, EXHAUST MANIFOLD",
+      "parentNo": "PARENT-003",
+      "supplierCode": "722E",
+      "supplierName": "TOYOTA MOTOR THAILAND",
+      "weightPerPc": 9.13,
+      "qtyPerBox": 33,
+      "subtotals": {
+        "inner": {
+          "total": 15818.25,
+          "prev_year": 17514.01,
+          "diff": -9.68
+        },
+        "outer": {
+          "total": 5409.5,
+          "prev_year": 5717.12,
+          "diff": -5.38
+        },
+        "material": {
+          "total": 21227.75,
+          "prev_year": 19377.72,
+          "diff": 9.55
+        },
+        "labor": {
+          "total": 5434.34,
+          "prev_year": 5353.6,
+          "diff": 1.51
+        },
+        "inland": {
+          "total": 1785.16,
+          "prev_year": 1612.94,
+          "diff": 10.68
+        },
+        "total": {
+          "total": 28447.25,
+          "prev_year": 26763.85,
+          "diff": 6.29
+        }
+      }
     },
     {
       "id": 4,
@@ -728,132 +857,120 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT034",
-              "qty": 9,
-              "price": 15.3,
-              "sum": 137.7
-            },
-            {
-              "materialNo": "MAT033",
-              "qty": 5,
-              "price": 275.6,
-              "sum": 1378
-            },
-            {
-              "materialNo": "MAT024",
-              "qty": 5,
-              "price": 78.25,
-              "sum": 391.25
-            },
-            {
-              "materialNo": "MAT001",
+              "materialNo": "MAT028",
               "qty": 6,
-              "price": 150,
-              "sum": 900
+              "price": 22.85,
+              "sum": 137.1
             },
             {
-              "materialNo": "MAT010",
-              "qty": 10,
-              "price": 125.5,
-              "sum": 1255
+              "materialNo": "MAT019",
+              "qty": 9,
+              "price": 85.7,
+              "sum": 771.3
             },
             {
-              "materialNo": "MAT033",
-              "qty": 4,
-              "price": 275.6,
-              "sum": 1102.4
-            },
-            {
-              "materialNo": "MAT027",
-              "qty": 10,
-              "price": 165.3,
-              "sum": 1653
-            },
-            {
-              "materialNo": "MAT014",
+              "materialNo": "MAT017",
               "qty": 3,
-              "price": 32.6,
-              "sum": 97.8
+              "price": 28.45,
+              "sum": 85.35
+            },
+            {
+              "materialNo": "MAT030",
+              "qty": 7,
+              "price": 145.75,
+              "sum": 1020.25
+            },
+            {
+              "materialNo": "MAT006",
+              "qty": 10,
+              "price": 350,
+              "sum": 3500
+            },
+            {
+              "materialNo": "MAT032",
+              "qty": 5,
+              "price": 88.95,
+              "sum": 444.75
+            },
+            {
+              "materialNo": "MAT035",
+              "qty": 9,
+              "price": 185.45,
+              "sum": 1669.05
+            },
+            {
+              "materialNo": "MAT005",
+              "qty": 7,
+              "price": 12.75,
+              "sum": 89.25
+            },
+            {
+              "materialNo": "MAT017",
+              "qty": 6,
+              "price": 28.45,
+              "sum": 170.7
             }
           ],
           "outer": [
             {
-              "materialNo": "MAT027",
-              "qty": 7,
-              "price": 165.3,
-              "sum": 1157.1
+              "materialNo": "MAT002",
+              "qty": 4,
+              "price": 25.5,
+              "sum": 102
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 3,
+              "price": 320.25,
+              "sum": 960.75
             },
             {
               "materialNo": "MAT035",
-              "qty": 7,
+              "qty": 10,
               "price": 185.45,
-              "sum": 1298.15
+              "sum": 1854.5
             },
             {
-              "materialNo": "MAT009",
-              "qty": 1,
-              "price": 18.95,
-              "sum": 18.95
-            },
-            {
-              "materialNo": "MAT021",
-              "qty": 7,
-              "price": 95.6,
-              "sum": 669.2
-            },
-            {
-              "materialNo": "MAT019",
-              "qty": 7,
-              "price": 85.7,
-              "sum": 599.9
-            },
-            {
-              "materialNo": "MAT002",
-              "qty": 6,
-              "price": 25.5,
-              "sum": 153
-            },
-            {
-              "materialNo": "MAT014",
-              "qty": 3,
-              "price": 32.6,
-              "sum": 97.8
-            },
-            {
-              "materialNo": "MAT022",
+              "materialNo": "MAT015",
               "qty": 5,
-              "price": 68.9,
-              "sum": 344.5
+              "price": 245.9,
+              "sum": 1229.5
             },
             {
-              "materialNo": "MAT028",
-              "qty": 2,
-              "price": 22.85,
-              "sum": 45.7
+              "materialNo": "MAT010",
+              "qty": 8,
+              "price": 125.5,
+              "sum": 1004
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 3,
+              "price": 275.6,
+              "sum": 826.8
             }
           ]
         },
         "manhour": {
-          "receiving": 15,
-          "inspection": 456,
-          "delivery_course": 475,
-          "pallet_supply": 900,
-          "binding": 357,
-          "non_pallet_supply": 574,
-          "pick_packing": 694,
-          "empty_box": 629,
-          "mix_van": 210,
-          "lashing": 363
+          "receiving": 1,
+          "inspection": 883,
+          "delivery_course": 181,
+          "pallet_supply": 66,
+          "binding": 103,
+          "non_pallet_supply": 465,
+          "pick_packing": 313,
+          "empty_box": 771,
+          "mix_van": 830,
+          "lashing": 66
         },
         "labor": {
-          "dl": 1267.57,
-          "idl": 2781.2,
-          "facility": 74.04
+          "dl": 4496.58,
+          "idl": 1100.71,
+          "facility": 1155.67
         },
         "inland": {
-          "packing_time": 54,
-          "inland_cost": 521.13,
-          "milkrun_cost": 976.39
+          "packing_time": 63,
+          "inland_cost": 1407.95,
+          "milkrun_cost": 724.75
         },
         "logistic_info": {
           "dock_code": "L",
@@ -862,21 +979,46 @@
         }
       },
       "recNo": 4,
-      "cpsNo": "CPS999W301B004.202532101BZ10000",
-      "partNo": "32101BZ10000",
-      "partName": "GEAR SUB-ASSY DRIVE PLATE & RING",
-      "parentNo": "PARENT-003",
-      "supplierCode": "5062",
-      "supplierName": "MENARA TERUS MAKMUR",
-      "weightPerPc": 7.3,
-      "qtyPerBox": 4,
-      "subTotalInner": 6915.15,
-      "subTotalOuter": 4384.3,
-      "subTotalMaterial": 11299.45,
-      "subTotalLabor": 4122.81,
-      "subTotalInland": 1497.52,
-      "subTotal": 16919.78,
-      "diffPct": "3.7%"
+      "cpsNo": "CPS757W715B004.202416261BZ75000",
+      "partNo": "16261BZ75000",
+      "partName": "HOSE, WATER BY-PASS, NO.1",
+      "parentNo": "PARENT-002",
+      "supplierCode": "5453",
+      "supplierName": "VELASTO INDONESIA",
+      "weightPerPc": 4.6,
+      "qtyPerBox": 38,
+      "subtotals": {
+        "inner": {
+          "total": 7887.75,
+          "prev_year": 7893.27,
+          "diff": -0.07
+        },
+        "outer": {
+          "total": 5977.55,
+          "prev_year": 6344.47,
+          "diff": -5.78
+        },
+        "material": {
+          "total": 13865.3,
+          "prev_year": 11518.47,
+          "diff": 20.37
+        },
+        "labor": {
+          "total": 6752.96,
+          "prev_year": 7721.8,
+          "diff": -12.55
+        },
+        "inland": {
+          "total": 2132.7,
+          "prev_year": 1920.76,
+          "diff": 11.03
+        },
+        "total": {
+          "total": 22750.96,
+          "prev_year": 19687.24,
+          "diff": 15.56
+        }
+      }
     },
     {
       "id": 5,
@@ -958,43 +1100,97 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT018",
+              "materialNo": "MAT012",
               "qty": 5,
-              "price": 195.8,
-              "sum": 979
+              "price": 420.75,
+              "sum": 2103.75
+            },
+            {
+              "materialNo": "MAT023",
+              "qty": 3,
+              "price": 120.45,
+              "sum": 361.35
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 4,
+              "price": 320.25,
+              "sum": 1281
+            },
+            {
+              "materialNo": "MAT024",
+              "qty": 7,
+              "price": 78.25,
+              "sum": 547.75
             },
             {
               "materialNo": "MAT022",
+              "qty": 10,
+              "price": 68.9,
+              "sum": 689
+            },
+            {
+              "materialNo": "MAT006",
+              "qty": 4,
+              "price": 350,
+              "sum": 1400
+            },
+            {
+              "materialNo": "MAT033",
               "qty": 8,
-              "price": 68.9,
-              "sum": 551.2
+              "price": 275.6,
+              "sum": 2204.8
             },
             {
-              "materialNo": "MAT022",
-              "qty": 6,
-              "price": 68.9,
-              "sum": 413.4
+              "materialNo": "MAT034",
+              "qty": 8,
+              "price": 15.3,
+              "sum": 122.4
             },
             {
-              "materialNo": "MAT029",
-              "qty": 9,
-              "price": 210.5,
-              "sum": 1894.5
+              "materialNo": "MAT016",
+              "qty": 4,
+              "price": 320.25,
+              "sum": 1281
             },
             {
-              "materialNo": "MAT026",
-              "qty": 2,
-              "price": 135.8,
-              "sum": 271.6
-            },
-            {
-              "materialNo": "MAT010",
-              "qty": 9,
-              "price": 125.5,
-              "sum": 1129.5
+              "materialNo": "MAT006",
+              "qty": 5,
+              "price": 350,
+              "sum": 1750
             }
           ],
           "outer": [
+            {
+              "materialNo": "MAT026",
+              "qty": 6,
+              "price": 135.8,
+              "sum": 814.8
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 1,
+              "price": 320.25,
+              "sum": 320.25
+            },
+            {
+              "materialNo": "MAT031",
+              "qty": 9,
+              "price": 38.4,
+              "sum": 345.6
+            },
+            {
+              "materialNo": "MAT026",
+              "qty": 1,
+              "price": 135.8,
+              "sum": 135.8
+            },
+            {
+              "materialNo": "MAT015",
+              "qty": 9,
+              "price": 245.9,
+              "sum": 2213.1
+            },
             {
               "materialNo": "MAT013",
               "qty": 5,
@@ -1002,52 +1198,52 @@
               "sum": 902
             },
             {
-              "materialNo": "MAT003",
-              "qty": 2,
-              "price": 75.25,
-              "sum": 150.5
+              "materialNo": "MAT023",
+              "qty": 8,
+              "price": 120.45,
+              "sum": 963.6
             },
             {
-              "materialNo": "MAT022",
-              "qty": 3,
-              "price": 68.9,
-              "sum": 206.7
-            },
-            {
-              "materialNo": "MAT027",
+              "materialNo": "MAT024",
               "qty": 10,
-              "price": 165.3,
-              "sum": 1653
+              "price": 78.25,
+              "sum": 782.5
             },
             {
               "materialNo": "MAT004",
-              "qty": 1,
+              "qty": 4,
               "price": 200,
-              "sum": 200
+              "sum": 800
+            },
+            {
+              "materialNo": "MAT003",
+              "qty": 7,
+              "price": 75.25,
+              "sum": 526.75
             }
           ]
         },
         "manhour": {
-          "receiving": 287,
-          "inspection": 630,
-          "delivery_course": 267,
-          "pallet_supply": 763,
-          "binding": 737,
-          "non_pallet_supply": 232,
-          "pick_packing": 667,
-          "empty_box": 795,
-          "mix_van": 995,
-          "lashing": 10
+          "receiving": 993,
+          "inspection": 279,
+          "delivery_course": 640,
+          "pallet_supply": 495,
+          "binding": 24,
+          "non_pallet_supply": 116,
+          "pick_packing": 471,
+          "empty_box": 624,
+          "mix_van": 686,
+          "lashing": 680
         },
         "labor": {
-          "dl": 4976.52,
-          "idl": 961.06,
-          "facility": 1886.18
+          "dl": 1140.68,
+          "idl": 3100.28,
+          "facility": 1081.8
         },
         "inland": {
-          "packing_time": 52,
-          "inland_cost": 443.51,
-          "milkrun_cost": 45.23
+          "packing_time": 42,
+          "inland_cost": 1958.86,
+          "milkrun_cost": 594.53
         },
         "logistic_info": {
           "dock_code": "L",
@@ -1056,21 +1252,46 @@
         }
       },
       "recNo": 5,
-      "cpsNo": "CPS578W704B001.202390119T044400",
-      "partNo": "90119T044400",
-      "partName": "BOLT, W/WASHER",
-      "parentNo": "PARENT-002",
-      "supplierCode": "722E",
-      "supplierName": "TOYOTA MOTOR THAILAND",
-      "weightPerPc": 9.47,
-      "qtyPerBox": 44,
-      "subTotalInner": 5239.2,
-      "subTotalOuter": 3112.2,
-      "subTotalMaterial": 8351.4,
-      "subTotalLabor": 7823.76,
-      "subTotalInland": 488.74,
-      "subTotal": 16663.9,
-      "diffPct": "4.1%"
+      "cpsNo": "CPS688W812B003.2022115110Y04000",
+      "partNo": "115110Y04000",
+      "partName": "CAP, CRANKSHAFT BEARING, NO.1",
+      "parentNo": "PARENT-009",
+      "supplierCode": "5365",
+      "supplierName": "TOKAI RUBBER INDONESIA",
+      "weightPerPc": 4.23,
+      "qtyPerBox": 43,
+      "subtotals": {
+        "inner": {
+          "total": 11741.05,
+          "prev_year": 12820.06,
+          "diff": -8.42
+        },
+        "outer": {
+          "total": 7804.4,
+          "prev_year": 6634.26,
+          "diff": 17.64
+        },
+        "material": {
+          "total": 19545.45,
+          "prev_year": 15646.62,
+          "diff": 24.92
+        },
+        "labor": {
+          "total": 5322.76,
+          "prev_year": 5636.93,
+          "diff": -5.57
+        },
+        "inland": {
+          "total": 2553.39,
+          "prev_year": 2213.99,
+          "diff": 15.33
+        },
+        "total": {
+          "total": 27421.6,
+          "prev_year": 23779.23,
+          "diff": 15.32
+        }
+      }
     },
     {
       "id": 6,
@@ -1152,132 +1373,126 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT026",
+              "materialNo": "MAT005",
               "qty": 2,
-              "price": 135.8,
-              "sum": 271.6
+              "price": 12.75,
+              "sum": 25.5
+            },
+            {
+              "materialNo": "MAT005",
+              "qty": 4,
+              "price": 12.75,
+              "sum": 51
             },
             {
               "materialNo": "MAT002",
-              "qty": 10,
+              "qty": 6,
               "price": 25.5,
-              "sum": 255
-            },
-            {
-              "materialNo": "MAT026",
-              "qty": 9,
-              "price": 135.8,
-              "sum": 1222.2
-            },
-            {
-              "materialNo": "MAT035",
-              "qty": 9,
-              "price": 185.45,
-              "sum": 1669.05
-            },
-            {
-              "materialNo": "MAT024",
-              "qty": 10,
-              "price": 78.25,
-              "sum": 782.5
+              "sum": 153
             },
             {
               "materialNo": "MAT008",
-              "qty": 1,
+              "qty": 7,
               "price": 850,
-              "sum": 850
+              "sum": 5950
             },
             {
-              "materialNo": "MAT018",
-              "qty": 3,
-              "price": 195.8,
-              "sum": 587.4
+              "materialNo": "MAT012",
+              "qty": 7,
+              "price": 420.75,
+              "sum": 2945.25
             },
             {
-              "materialNo": "MAT018",
-              "qty": 5,
-              "price": 195.8,
-              "sum": 979
+              "materialNo": "MAT001",
+              "qty": 6,
+              "price": 150,
+              "sum": 900
             },
             {
-              "materialNo": "MAT011",
+              "materialNo": "MAT022",
+              "qty": 9,
+              "price": 68.9,
+              "sum": 620.1
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 10,
+              "price": 68.9,
+              "sum": 689
+            },
+            {
+              "materialNo": "MAT027",
+              "qty": 9,
+              "price": 165.3,
+              "sum": 1487.7
+            },
+            {
+              "materialNo": "MAT015",
               "qty": 1,
-              "price": 65.3,
-              "sum": 65.3
-            },
-            {
-              "materialNo": "MAT029",
-              "qty": 1,
-              "price": 210.5,
-              "sum": 210.5
+              "price": 245.9,
+              "sum": 245.9
             }
           ],
           "outer": [
             {
-              "materialNo": "MAT012",
-              "qty": 10,
-              "price": 420.75,
-              "sum": 4207.5
-            },
-            {
-              "materialNo": "MAT007",
-              "qty": 1,
-              "price": 45.8,
-              "sum": 45.8
-            },
-            {
-              "materialNo": "MAT015",
+              "materialNo": "MAT031",
               "qty": 6,
-              "price": 245.9,
-              "sum": 1475.4
+              "price": 38.4,
+              "sum": 230.4
             },
             {
-              "materialNo": "MAT002",
-              "qty": 10,
-              "price": 25.5,
-              "sum": 255
-            },
-            {
-              "materialNo": "MAT008",
+              "materialNo": "MAT016",
               "qty": 9,
-              "price": 850,
-              "sum": 7650
+              "price": 320.25,
+              "sum": 2882.25
+            },
+            {
+              "materialNo": "MAT019",
+              "qty": 6,
+              "price": 85.7,
+              "sum": 514.2
+            },
+            {
+              "materialNo": "MAT001",
+              "qty": 4,
+              "price": 150,
+              "sum": 600
             },
             {
               "materialNo": "MAT020",
-              "qty": 8,
+              "qty": 4,
               "price": 55.35,
-              "sum": 442.8
+              "sum": 221.4
             },
             {
-              "materialNo": "MAT014",
-              "qty": 9,
-              "price": 32.6,
-              "sum": 293.4
+              "materialNo": "MAT002",
+              "qty": 1,
+              "price": 25.5,
+              "sum": 25.5
             }
           ]
         },
         "manhour": {
-          "receiving": 347,
-          "inspection": 68,
-          "delivery_course": 675,
-          "pallet_supply": 551,
-          "binding": 553,
-          "non_pallet_supply": 93,
-          "pick_packing": 24,
-          "empty_box": 611,
-          "mix_van": 323,
-          "lashing": 892
+          "receiving": 368,
+          "inspection": 977,
+          "delivery_course": 11,
+          "pallet_supply": 861,
+          "binding": 218,
+          "non_pallet_supply": 894,
+          "pick_packing": 743,
+          "empty_box": 566,
+          "mix_van": 843,
+          "lashing": 630
         },
         "labor": {
-          "dl": 455.4,
-          "idl": 3242.48,
-          "facility": 1506.89
+          "dl": 4171.29,
+          "idl": 169.29,
+          "facility": 1660.29
         },
         "inland": {
-          "packing_time": 60,
-          "inland_cost": 241.46,
-          "milkrun_cost": 406.36
+          "packing_time": 87,
+          "inland_cost": 1473.24,
+          "milkrun_cost": 518.55
         },
         "logistic_info": {
           "dock_code": "L",
@@ -1286,21 +1501,46 @@
         }
       },
       "recNo": 6,
-      "cpsNo": "CPS385W807B003.2022115110Y04000",
-      "partNo": "115110Y04000",
-      "partName": "CAP, CRANKSHAFT BEARING, NO.1",
-      "parentNo": "PARENT-001",
-      "supplierCode": "5365",
-      "supplierName": "TOKAI RUBBER INDONESIA",
-      "weightPerPc": 1.71,
-      "qtyPerBox": 9,
-      "subTotalInner": 6892.55,
-      "subTotalOuter": 14369.9,
-      "subTotalMaterial": 21262.45,
-      "subTotalLabor": 5204.77,
-      "subTotalInland": 647.82,
-      "subTotal": 27115.04,
-      "diffPct": "0.8%"
+      "cpsNo": "CPS688W812B003.202225051BZ26000",
+      "partNo": "25051BZ26000",
+      "partName": "CONVERTER SUB-ASSY, EXHAUST MANIFOLD",
+      "parentNo": "PARENT-004",
+      "supplierCode": "5453",
+      "supplierName": "VELASTO INDONESIA",
+      "weightPerPc": 4.51,
+      "qtyPerBox": 10,
+      "subtotals": {
+        "inner": {
+          "total": 13067.45,
+          "prev_year": 13600.26,
+          "diff": -3.92
+        },
+        "outer": {
+          "total": 4473.75,
+          "prev_year": 3761.53,
+          "diff": 18.93
+        },
+        "material": {
+          "total": 17541.2,
+          "prev_year": 17306.29,
+          "diff": 1.36
+        },
+        "labor": {
+          "total": 6000.87,
+          "prev_year": 5054.77,
+          "diff": 18.72
+        },
+        "inland": {
+          "total": 1991.79,
+          "prev_year": 1942.97,
+          "diff": 2.51
+        },
+        "total": {
+          "total": 25533.86,
+          "prev_year": 22606.5,
+          "diff": 12.95
+        }
+      }
     },
     {
       "id": 7,
@@ -1382,114 +1622,108 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT026",
-              "qty": 9,
-              "price": 135.8,
-              "sum": 1222.2
-            },
-            {
-              "materialNo": "MAT035",
+              "materialNo": "MAT008",
               "qty": 5,
-              "price": 185.45,
-              "sum": 927.25
+              "price": 850,
+              "sum": 4250
             },
             {
-              "materialNo": "MAT013",
+              "materialNo": "MAT005",
               "qty": 4,
-              "price": 180.4,
-              "sum": 721.6
+              "price": 12.75,
+              "sum": 51
             },
             {
-              "materialNo": "MAT015",
+              "materialNo": "MAT025",
+              "qty": 2,
+              "price": 42.15,
+              "sum": 84.3
+            },
+            {
+              "materialNo": "MAT021",
               "qty": 3,
-              "price": 245.9,
-              "sum": 737.7
+              "price": 95.6,
+              "sum": 286.8
             },
             {
-              "materialNo": "MAT032",
-              "qty": 10,
-              "price": 88.95,
-              "sum": 889.5
+              "materialNo": "MAT026",
+              "qty": 5,
+              "price": 135.8,
+              "sum": 679
+            },
+            {
+              "materialNo": "MAT006",
+              "qty": 8,
+              "price": 350,
+              "sum": 2800
+            },
+            {
+              "materialNo": "MAT018",
+              "qty": 1,
+              "price": 195.8,
+              "sum": 195.8
+            },
+            {
+              "materialNo": "MAT004",
+              "qty": 4,
+              "price": 200,
+              "sum": 800
             }
           ],
           "outer": [
             {
-              "materialNo": "MAT029",
-              "qty": 4,
-              "price": 210.5,
-              "sum": 842
+              "materialNo": "MAT006",
+              "qty": 2,
+              "price": 350,
+              "sum": 700
             },
             {
-              "materialNo": "MAT034",
-              "qty": 4,
-              "price": 15.3,
-              "sum": 61.2
+              "materialNo": "MAT020",
+              "qty": 8,
+              "price": 55.35,
+              "sum": 442.8
+            },
+            {
+              "materialNo": "MAT006",
+              "qty": 9,
+              "price": 350,
+              "sum": 3150
+            },
+            {
+              "materialNo": "MAT015",
+              "qty": 2,
+              "price": 245.9,
+              "sum": 491.8
             },
             {
               "materialNo": "MAT016",
-              "qty": 9,
+              "qty": 6,
               "price": 320.25,
-              "sum": 2882.25
-            },
-            {
-              "materialNo": "MAT023",
-              "qty": 8,
-              "price": 120.45,
-              "sum": 963.6
-            },
-            {
-              "materialNo": "MAT021",
-              "qty": 8,
-              "price": 95.6,
-              "sum": 764.8
-            },
-            {
-              "materialNo": "MAT027",
-              "qty": 5,
-              "price": 165.3,
-              "sum": 826.5
-            },
-            {
-              "materialNo": "MAT032",
-              "qty": 3,
-              "price": 88.95,
-              "sum": 266.85
-            },
-            {
-              "materialNo": "MAT034",
-              "qty": 8,
-              "price": 15.3,
-              "sum": 122.4
-            },
-            {
-              "materialNo": "MAT009",
-              "qty": 2,
-              "price": 18.95,
-              "sum": 37.9
+              "sum": 1921.5
             }
           ]
         },
         "manhour": {
-          "receiving": 452,
-          "inspection": 44,
-          "delivery_course": 463,
-          "pallet_supply": 389,
-          "binding": 360,
-          "non_pallet_supply": 649,
-          "pick_packing": 54,
-          "empty_box": 342,
-          "mix_van": 321,
-          "lashing": 649
+          "receiving": 524,
+          "inspection": 796,
+          "delivery_course": 596,
+          "pallet_supply": 432,
+          "binding": 806,
+          "non_pallet_supply": 377,
+          "pick_packing": 104,
+          "empty_box": 898,
+          "mix_van": 855,
+          "lashing": 287
         },
         "labor": {
-          "dl": 1725.27,
-          "idl": 1228.6,
-          "facility": 664.45
+          "dl": 4016.61,
+          "idl": 4172.31,
+          "facility": 990.39
         },
         "inland": {
-          "packing_time": 34,
-          "inland_cost": 1512.75,
-          "milkrun_cost": 530.6
+          "packing_time": 10,
+          "inland_cost": 756.93,
+          "milkrun_cost": 237.64
         },
         "logistic_info": {
           "dock_code": "L",
@@ -1498,21 +1732,46 @@
         }
       },
       "recNo": 7,
-      "cpsNo": "CPS578W704B001.2023893400K010",
-      "partNo": "893400K010",
-      "partName": "COMPUTER ASSY, CLEARANCE WARNING",
-      "parentNo": "PARENT-001",
-      "supplierCode": "5062",
-      "supplierName": "MENARA TERUS MAKMUR",
-      "weightPerPc": 3.96,
-      "qtyPerBox": 15,
-      "subTotalInner": 4498.25,
-      "subTotalOuter": 6767.5,
-      "subTotalMaterial": 11265.75,
-      "subTotalLabor": 3618.32,
-      "subTotalInland": 2043.35,
-      "subTotal": 16927.42,
-      "diffPct": "2.0%"
+      "cpsNo": "CPS388W722C001.2021115110Y04000",
+      "partNo": "115110Y04000",
+      "partName": "CAP, CRANKSHAFT BEARING, NO.1",
+      "parentNo": "PARENT-004",
+      "supplierCode": "5365",
+      "supplierName": "TOKAI RUBBER INDONESIA",
+      "weightPerPc": 5.14,
+      "qtyPerBox": 14,
+      "subtotals": {
+        "inner": {
+          "total": 9146.9,
+          "prev_year": 8808.88,
+          "diff": 3.84
+        },
+        "outer": {
+          "total": 6706.1,
+          "prev_year": 5944.25,
+          "diff": 12.82
+        },
+        "material": {
+          "total": 15853,
+          "prev_year": 15446.1,
+          "diff": 2.63
+        },
+        "labor": {
+          "total": 9179.31,
+          "prev_year": 9639.93,
+          "diff": -4.78
+        },
+        "inland": {
+          "total": 994.57,
+          "prev_year": 834.41,
+          "diff": 19.19
+        },
+        "total": {
+          "total": 26026.88,
+          "prev_year": 28105.57,
+          "diff": -7.4
+        }
+      }
     },
     {
       "id": 8,
@@ -1594,96 +1853,150 @@
         "packing": {
           "inner": [
             {
-              "materialNo": "MAT012",
-              "qty": 3,
-              "price": 420.75,
-              "sum": 1262.25
+              "materialNo": "MAT007",
+              "qty": 1,
+              "price": 45.8,
+              "sum": 45.8
+            },
+            {
+              "materialNo": "MAT031",
+              "qty": 8,
+              "price": 38.4,
+              "sum": 307.2
+            },
+            {
+              "materialNo": "MAT002",
+              "qty": 1,
+              "price": 25.5,
+              "sum": 25.5
             },
             {
               "materialNo": "MAT029",
-              "qty": 3,
+              "qty": 7,
               "price": 210.5,
-              "sum": 631.5
+              "sum": 1473.5
             },
             {
-              "materialNo": "MAT008",
-              "qty": 4,
-              "price": 850,
-              "sum": 3400
+              "materialNo": "MAT011",
+              "qty": 5,
+              "price": 65.3,
+              "sum": 326.5
             },
             {
-              "materialNo": "MAT018",
-              "qty": 3,
-              "price": 195.8,
-              "sum": 587.4
+              "materialNo": "MAT019",
+              "qty": 2,
+              "price": 85.7,
+              "sum": 171.4
             },
             {
-              "materialNo": "MAT021",
-              "qty": 3,
-              "price": 95.6,
-              "sum": 286.8
+              "materialNo": "MAT022",
+              "qty": 5,
+              "price": 68.9,
+              "sum": 344.5
+            },
+            {
+              "materialNo": "MAT002",
+              "qty": 6,
+              "price": 25.5,
+              "sum": 153
+            },
+            {
+              "materialNo": "MAT020",
+              "qty": 9,
+              "price": 55.35,
+              "sum": 498.15
+            },
+            {
+              "materialNo": "MAT009",
+              "qty": 2,
+              "price": 18.95,
+              "sum": 37.9
             }
           ],
           "outer": [
             {
-              "materialNo": "MAT008",
-              "qty": 10,
-              "price": 850,
-              "sum": 8500
+              "materialNo": "MAT015",
+              "qty": 3,
+              "price": 245.9,
+              "sum": 737.7
+            },
+            {
+              "materialNo": "MAT014",
+              "qty": 3,
+              "price": 32.6,
+              "sum": 97.8
             },
             {
               "materialNo": "MAT012",
-              "qty": 8,
+              "qty": 10,
               "price": 420.75,
-              "sum": 3366
+              "sum": 4207.5
+            },
+            {
+              "materialNo": "MAT034",
+              "qty": 10,
+              "price": 15.3,
+              "sum": 153
             },
             {
               "materialNo": "MAT008",
-              "qty": 4,
+              "qty": 1,
               "price": 850,
-              "sum": 3400
+              "sum": 850
+            },
+            {
+              "materialNo": "MAT021",
+              "qty": 2,
+              "price": 95.6,
+              "sum": 191.2
+            },
+            {
+              "materialNo": "MAT018",
+              "qty": 2,
+              "price": 195.8,
+              "sum": 391.6
             },
             {
               "materialNo": "MAT019",
-              "qty": 6,
+              "qty": 9,
               "price": 85.7,
-              "sum": 514.2
+              "sum": 771.3
             },
             {
-              "materialNo": "MAT033",
-              "qty": 2,
-              "price": 275.6,
-              "sum": 551.2
+              "materialNo": "MAT019",
+              "qty": 10,
+              "price": 85.7,
+              "sum": 857
             },
             {
-              "materialNo": "MAT032",
-              "qty": 2,
-              "price": 88.95,
-              "sum": 177.9
+              "materialNo": "MAT015",
+              "qty": 10,
+              "price": 245.9,
+              "sum": 2459
             }
           ]
         },
         "manhour": {
-          "receiving": 723,
-          "inspection": 842,
-          "delivery_course": 630,
-          "pallet_supply": 510,
-          "binding": 530,
-          "non_pallet_supply": 379,
-          "pick_packing": 117,
-          "empty_box": 428,
-          "mix_van": 313,
-          "lashing": 347
+          "receiving": 827,
+          "inspection": 499,
+          "delivery_course": 425,
+          "pallet_supply": 663,
+          "binding": 247,
+          "non_pallet_supply": 536,
+          "pick_packing": 905,
+          "empty_box": 114,
+          "mix_van": 240,
+          "lashing": 76
         },
         "labor": {
-          "dl": 48.09,
-          "idl": 1010.45,
-          "facility": 1526.97
+          "dl": 3331.94,
+          "idl": 4467.83,
+          "facility": 541.4
         },
         "inland": {
-          "packing_time": 10,
-          "inland_cost": 1477.03,
-          "milkrun_cost": 432.54
+          "packing_time": 75,
+          "inland_cost": 409.86,
+          "milkrun_cost": 230.15
         },
         "logistic_info": {
           "dock_code": "L",
@@ -1692,21 +2005,46 @@
         }
       },
       "recNo": 8,
-      "cpsNo": "CPS824W709B001.2025115130Y04000",
-      "partNo": "115130Y04000",
-      "partName": "CAP, CRANKSHAFT BEARING, NO.3",
-      "parentNo": "PARENT-005",
-      "supplierCode": "5150",
-      "supplierName": "NAMICOH INDONESIA",
-      "weightPerPc": 8.3,
-      "qtyPerBox": 19,
-      "subTotalInner": 6167.95,
-      "subTotalOuter": 16509.3,
-      "subTotalMaterial": 22677.25,
-      "subTotalLabor": 2585.51,
-      "subTotalInland": 1909.57,
-      "subTotal": 27172.33,
-      "diffPct": "0.2%"
+      "cpsNo": "CPS286W722C004.2024171730Y03000",
+      "partNo": "171730Y03000",
+      "partName": "GASKET, EXHAUST MANIFOLD",
+      "parentNo": "PARENT-001",
+      "supplierCode": "722E",
+      "supplierName": "TOYOTA MOTOR THAILAND",
+      "weightPerPc": 1.75,
+      "qtyPerBox": 32,
+      "subtotals": {
+        "inner": {
+          "total": 3383.45,
+          "prev_year": 2828.45,
+          "diff": 19.62
+        },
+        "outer": {
+          "total": 10716.1,
+          "prev_year": 9753.85,
+          "diff": 9.87
+        },
+        "material": {
+          "total": 14099.55,
+          "prev_year": 13445.86,
+          "diff": 4.86
+        },
+        "labor": {
+          "total": 8341.17,
+          "prev_year": 8497.75,
+          "diff": -1.84
+        },
+        "inland": {
+          "total": 640.01,
+          "prev_year": 615.09,
+          "diff": 4.05
+        },
+        "total": {
+          "total": 23080.73,
+          "prev_year": 20259.87,
+          "diff": 13.92
+        }
+      }
     }
   ]
 }

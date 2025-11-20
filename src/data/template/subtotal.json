@@ -1,0 +1,32 @@
+{
+  "inner":{
+    "prev_year": 0,
+    "total": 0,
+    "diff": 0
+  },
+  "outer":{
+    "prev_year": 0,
+    "total": 0,
+    "diff": 0
+  },
+  "material":{
+    "prev_year": 0,
+    "total": 0,
+    "diff": 0
+  },
+  "labor":{
+    "prev_year": 0,
+    "total": 0,
+    "diff": 0
+  },
+  "inland": {
+    "prev_year": 0,
+    "total": 0,
+    "diff": 0
+  },
+  "total": {
+    "prev_year": 0,
+    "total": 0,
+    "diff": 0
+  }
+}
