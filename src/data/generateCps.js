@@ -115,8 +115,40 @@ try {
     newCps.subTotalInner = newCps.cps.packing.inner.reduce((acc, item) => acc + item.sum, 0);
     newCps.subTotalOuter = newCps.cps.packing.outer.reduce((acc, item) => acc + item.sum, 0);
     newCps.subTotalMaterial = newCps.subTotalInner + newCps.subTotalOuter;
-    newCps.subTotalLabor = Math.floor(Math.random() * 50000) + 10000;
-    newCps.subTotalInland = Math.floor(Math.random() * 10000) + 1000;
+
+    // Generate manhour data
+    const manhour = {
+        receiving: Math.floor(Math.random() * 1000),
+        inspection: Math.floor(Math.random() * 1000),
+        delivery_course: Math.floor(Math.random() * 1000),
+        pallet_supply: Math.floor(Math.random() * 1000),
+        binding: Math.floor(Math.random() * 1000),
+        non_pallet_supply: Math.floor(Math.random() * 1000),
+        pick_packing: Math.floor(Math.random() * 1000),
+        empty_box: Math.floor(Math.random() * 1000),
+        mix_van: Math.floor(Math.random() * 1000),
+        lashing: Math.floor(Math.random() * 1000),
+    };
+    newCps.cps.manhour = manhour;
+
+    // Generate labor data
+    const labor = {
+        dl: Math.floor(Math.random() * 5000),
+        idl: Math.floor(Math.random() * 5000),
+        facility: Math.floor(Math.random() * 2000),
+    };
+    newCps.cps.labor = labor;
+    newCps.subTotalLabor = labor.dl + labor.idl + labor.facility;
+
+    // Generate inland data
+    const inland = {
+        packing_time: Math.floor(Math.random() * 100),
+        inland_cost: Math.floor(Math.random() * 2000),
+        milkrun_cost: Math.floor(Math.random() * 1000),
+    };
+    newCps.cps.inland = inland;
+    newCps.subTotalInland = inland.inland_cost + inland.milkrun_cost; // Example calculation
+
     newCps.subTotal = newCps.subTotalMaterial + newCps.subTotalLabor + newCps.subTotalInland;
     newCps.diffPct = `${(Math.random() * 5).toFixed(1)}%`;
 
