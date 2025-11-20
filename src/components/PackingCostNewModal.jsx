@@ -160,7 +160,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       .map((stagedPart) => {
         // Find the CPS data for the current part number, ensuring cps and cps.part exist.
         const data = cpsData.find(
-          (cps) => cps && cps.part_no === stagedPart.partNo
+          (cps) => cps && cps.part && cps.part.part_no === stagedPart.partNo
         );
 
         // If no data is found for the part, return a default object indicating it was not found.
