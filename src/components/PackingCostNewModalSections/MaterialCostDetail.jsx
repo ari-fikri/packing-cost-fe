@@ -48,7 +48,7 @@ const MaterialCostDetail = ({ part }) => {
 
     return (
       <>
-        <h5 style={{ fontSize: '8pt', textAlign: 'left', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => toggleSection(lowerCaseType)}>
+        <h5 style={{ fontSize: '8pt', textAlign: 'left', fontWeight: 'bold', cursor: 'pointer', backgroundColor: '#f7fbff' }} onClick={() => toggleSection(lowerCaseType)}>
           <i className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'} mr-2`}></i>
           {type.toUpperCase()}
         </h5>
@@ -58,7 +58,7 @@ const MaterialCostDetail = ({ part }) => {
               className="table table-bordered table-sm"
               style={{ minWidth: '2000px' }}
             >
-              <thead>
+              <thead style={{ backgroundColor: '#e9ecef' }}>
                 <tr>{materialHeaders}</tr>
                 <tr>
                   <MaterialLeafHeaders count={maxMaterials} />
@@ -76,19 +76,19 @@ const MaterialCostDetail = ({ part }) => {
     );
   };
 
-  const renderLaborTable = (labor) => {
+  const renderLaborTable = (manhour, labor) => {
     const isExpanded = expandedSections.labor;
-    if (!labor) return null;
+    if (!manhour || !labor) return null;
     return (
       <>
-        <h5 style={{ fontSize: '8pt', textAlign: 'left', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => toggleSection('labor')}>
+        <h5 style={{ fontSize: '8pt', textAlign: 'left', fontWeight: 'bold', cursor: 'pointer', backgroundColor: '#f7fbff' }} onClick={() => toggleSection('labor')}>
           <i className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'} mr-2`}></i>
           LABOR
         </h5>
         {isExpanded && (
           <div className="table-responsive">
             <table className="table table-bordered table-sm" style={{ minWidth: '1500px' }}>
-              <thead>
+              <thead style={{ backgroundColor: '#e9ecef' }}>
                 <tr>
                   <th>Receiving</th>
                   <th>Inspection</th>
@@ -110,22 +110,22 @@ const MaterialCostDetail = ({ part }) => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{fmt(labor.receiving)}</td>
-                  <td>{fmt(labor.inspection)}</td>
-                  <td>{fmt(labor.deliveryCourse)}</td>
-                  <td>{fmt(labor.supply)}</td>
-                  <td>{fmt(labor.binding)}</td>
-                  <td>{fmt(labor.sortingSupply)}</td>
-                  <td>{fmt(labor.pickPacking)}</td>
-                  <td>{fmt(labor.vanning)}</td>
-                  <td>{fmt(labor.boxValetReturn)}</td>
-                  <td>{fmt(labor.mixVan)}</td>
-                  <td>{fmt(labor.lashing)}</td>
-                  <td>{fmt(labor.totalTime)}</td>
-                  <td>{fmt(labor.requirement)}</td>
-                  <td>{fmt(labor.currentDL)}</td>
+                  <td>{fmt(manhour.receiving)}</td>
+                  <td>{fmt(manhour.inspection)}</td>
+                  <td>{fmt(manhour.deliveryCourse)}</td>
+                  <td>{fmt(manhour.supply)}</td>
+                  <td>{fmt(manhour.binding)}</td>
+                  <td>{fmt(manhour.sortingSupply)}</td>
+                  <td>{fmt(manhour.pickPacking)}</td>
+                  <td>{fmt(manhour.vanning)}</td>
+                  <td>{fmt(manhour.boxValetReturn)}</td>
+                  <td>{fmt(manhour.mixVan)}</td>
+                  <td>{fmt(manhour.lashing)}</td>
+                  <td>{fmt(manhour.totalTime)}</td>
+                  <td>{fmt(manhour.requirement)}</td>
+                  <td>{fmt(manhour.currentDL)}</td>
                   <td>{fmt(labor.idl)}</td>
-                  <td>{fmt(labor.facilityOthers)}</td>
+                  <td>{fmt(labor.facility)}</td>
                 </tr>
               </tbody>
             </table>
@@ -140,14 +140,14 @@ const MaterialCostDetail = ({ part }) => {
     if (!inland) return null;
     return (
       <>
-        <h5 style={{ fontSize: '8pt', textAlign: 'left', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => toggleSection('inland')}>
+        <h5 style={{ fontSize: '8pt', textAlign: 'left', fontWeight: 'bold', cursor: 'pointer', backgroundColor: '#f7fbff' }} onClick={() => toggleSection('inland')}>
           <i className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'} mr-2`}></i>
           INLAND
         </h5>
         {isExpanded && (
           <div className="table-responsive">
             <table className="table table-bordered table-sm" style={{ minWidth: '800px' }}>
-              <thead>
+              <thead style={{ backgroundColor: '#e9ecef' }}>
                 <tr>
                   <th>Pack Time (V-PASS)</th>
                   <th>Inland Cost</th>
@@ -158,11 +158,11 @@ const MaterialCostDetail = ({ part }) => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{inland.packTime || '-'}</td>
-                  <td>{fmt(inland.inlandCost) || '-'}</td>
+                  <td>{inland.packing_time || '-'}</td>
+                  <td>{fmt(inland.inland_cost) || '-'}</td>
                   <td>{fmt(inland.inlandCostM3) || '-'}</td>
                   <td>{inland.diff || '-'}</td>
-                  <td>{fmt(inland.milkrunCost) || '-'}</td>
+                  <td>{fmt(inland.milkrun_cost) || '-'}</td>
                 </tr>
               </tbody>
             </table>
@@ -171,15 +171,14 @@ const MaterialCostDetail = ({ part }) => {
       </>
     );
   };
-  debugger;
 
   return (
     <td colSpan="32">
       <div className="p-2">
         {renderMaterialsTable(part.cps?.packing?.inner, 'Inner')}
         {renderMaterialsTable(part.cps?.packing?.outer, 'Outer')}
-        {renderLaborTable(part.cps?.packing?.labor)}
-        {renderInlandTable(part.cps?.packing?.inland)}
+        {renderLaborTable(part.cps?.manhour, part.cps?.labor)}
+        {renderInlandTable(part.cps?.inland)}
       </div>
     </td>
   );

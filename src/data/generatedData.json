@@ -4,7 +4,7 @@
       "id": 1,
       "implementation_period": "003.2025",
       "model_code": "579W",
-      "part_no": "90466T006200",
+      "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
         "refCpsNo": "",
@@ -15,7 +15,1521 @@
           "model_code": "579W",
           "cfc": "CF-001"
         },
-        "part_no": "90466T006200",
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT006",
+              "qty": 6,
+              "price": 350,
+              "sum": 2100
+            },
+            {
+              "materialNo": "MAT030",
+              "qty": 7,
+              "price": 145.75,
+              "sum": 1020.25
+            },
+            {
+              "materialNo": "MAT007",
+              "qty": 3,
+              "price": 45.8,
+              "sum": 137.4
+            },
+            {
+              "materialNo": "MAT008",
+              "qty": 7,
+              "price": 850,
+              "sum": 5950
+            },
+            {
+              "materialNo": "MAT001",
+              "qty": 8,
+              "price": 150,
+              "sum": 1200
+            },
+            {
+              "materialNo": "MAT017",
+              "qty": 8,
+              "price": 28.45,
+              "sum": 227.6
+            },
+            {
+              "materialNo": "MAT024",
+              "qty": 7,
+              "price": 78.25,
+              "sum": 547.75
+            },
+            {
+              "materialNo": "MAT023",
+              "qty": 9,
+              "price": 120.45,
+              "sum": 1084.05
+            },
+            {
+              "materialNo": "MAT025",
+              "qty": 9,
+              "price": 42.15,
+              "sum": 379.35
+            },
+            {
+              "materialNo": "MAT020",
+              "qty": 3,
+              "price": 55.35,
+              "sum": 166.05
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT002",
+              "qty": 7,
+              "price": 25.5,
+              "sum": 178.5
+            },
+            {
+              "materialNo": "MAT015",
+              "qty": 5,
+              "price": 245.9,
+              "sum": 1229.5
+            },
+            {
+              "materialNo": "MAT029",
+              "qty": 9,
+              "price": 210.5,
+              "sum": 1894.5
+            },
+            {
+              "materialNo": "MAT019",
+              "qty": 3,
+              "price": 85.7,
+              "sum": 257.1
+            },
+            {
+              "materialNo": "MAT030",
+              "qty": 2,
+              "price": 145.75,
+              "sum": 291.5
+            },
+            {
+              "materialNo": "MAT007",
+              "qty": 8,
+              "price": 45.8,
+              "sum": 366.4
+            },
+            {
+              "materialNo": "MAT035",
+              "qty": 9,
+              "price": 185.45,
+              "sum": 1669.05
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 659,
+          "inspection": 616,
+          "delivery_course": 197,
+          "pallet_supply": 332,
+          "binding": 483,
+          "non_pallet_supply": 512,
+          "pick_packing": 506,
+          "empty_box": 954,
+          "mix_van": 377,
+          "lashing": 925
+        },
+        "labor": {
+          "dl": 2007.05,
+          "idl": 3451.82,
+          "facility": 480.23
+        },
+        "inland": {
+          "packing_time": 37,
+          "inland_cost": 1263.67,
+          "milkrun_cost": 96.21
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 1,
+      "cpsNo": "CPS999W301B004.202590360T001200",
+      "partNo": "90360T001200",
+      "partName": "BALL",
+      "parentNo": "PARENT-008",
+      "supplierCode": "5150",
+      "supplierName": "NAMICOH INDONESIA",
+      "weightPerPc": 9.43,
+      "qtyPerBox": 19,
+      "subTotalInner": 12812.45,
+      "subTotalOuter": 5886.55,
+      "subTotalMaterial": 18699,
+      "subTotalLabor": 5939.1,
+      "subTotalInland": 1359.88,
+      "subTotal": 25997.98,
+      "diffPct": "3.0%"
+    },
+    {
+      "id": 2,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT004",
+              "qty": 1,
+              "price": 200,
+              "sum": 200
+            },
+            {
+              "materialNo": "MAT008",
+              "qty": 3,
+              "price": 850,
+              "sum": 2550
+            },
+            {
+              "materialNo": "MAT031",
+              "qty": 10,
+              "price": 38.4,
+              "sum": 384
+            },
+            {
+              "materialNo": "MAT028",
+              "qty": 9,
+              "price": 22.85,
+              "sum": 205.65
+            },
+            {
+              "materialNo": "MAT009",
+              "qty": 6,
+              "price": 18.95,
+              "sum": 113.7
+            },
+            {
+              "materialNo": "MAT004",
+              "qty": 3,
+              "price": 200,
+              "sum": 600
+            },
+            {
+              "materialNo": "MAT027",
+              "qty": 3,
+              "price": 165.3,
+              "sum": 495.9
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT003",
+              "qty": 2,
+              "price": 75.25,
+              "sum": 150.5
+            },
+            {
+              "materialNo": "MAT019",
+              "qty": 1,
+              "price": 85.7,
+              "sum": 85.7
+            },
+            {
+              "materialNo": "MAT009",
+              "qty": 8,
+              "price": 18.95,
+              "sum": 151.6
+            },
+            {
+              "materialNo": "MAT021",
+              "qty": 4,
+              "price": 95.6,
+              "sum": 382.4
+            },
+            {
+              "materialNo": "MAT025",
+              "qty": 8,
+              "price": 42.15,
+              "sum": 337.2
+            },
+            {
+              "materialNo": "MAT034",
+              "qty": 10,
+              "price": 15.3,
+              "sum": 153
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 334,
+          "inspection": 985,
+          "delivery_course": 91,
+          "pallet_supply": 558,
+          "binding": 289,
+          "non_pallet_supply": 660,
+          "pick_packing": 128,
+          "empty_box": 998,
+          "mix_van": 487,
+          "lashing": 737
+        },
+        "labor": {
+          "dl": 2932.09,
+          "idl": 3745.95,
+          "facility": 463.05
+        },
+        "inland": {
+          "packing_time": 3,
+          "inland_cost": 1147.76,
+          "milkrun_cost": 439.69
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 2,
+      "cpsNo": "CPS607W722C002.202316282BZ11000",
+      "partNo": "16282BZ11000",
+      "partName": "HOSE, WATER BY-PASS, NO.5",
+      "parentNo": "PARENT-005",
+      "supplierCode": "5150",
+      "supplierName": "NAMICOH INDONESIA",
+      "weightPerPc": 5.2,
+      "qtyPerBox": 37,
+      "subTotalInner": 4549.25,
+      "subTotalOuter": 1260.4,
+      "subTotalMaterial": 5809.65,
+      "subTotalLabor": 7141.09,
+      "subTotalInland": 1587.45,
+      "subTotal": 14538.19,
+      "diffPct": "0.3%"
+    },
+    {
+      "id": 3,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT020",
+              "qty": 10,
+              "price": 55.35,
+              "sum": 553.5
+            },
+            {
+              "materialNo": "MAT019",
+              "qty": 10,
+              "price": 85.7,
+              "sum": 857
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 5,
+              "price": 320.25,
+              "sum": 1601.25
+            },
+            {
+              "materialNo": "MAT012",
+              "qty": 2,
+              "price": 420.75,
+              "sum": 841.5
+            },
+            {
+              "materialNo": "MAT031",
+              "qty": 9,
+              "price": 38.4,
+              "sum": 345.6
+            },
+            {
+              "materialNo": "MAT035",
+              "qty": 6,
+              "price": 185.45,
+              "sum": 1112.7
+            },
+            {
+              "materialNo": "MAT020",
+              "qty": 8,
+              "price": 55.35,
+              "sum": 442.8
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT023",
+              "qty": 10,
+              "price": 120.45,
+              "sum": 1204.5
+            },
+            {
+              "materialNo": "MAT029",
+              "qty": 6,
+              "price": 210.5,
+              "sum": 1263
+            },
+            {
+              "materialNo": "MAT032",
+              "qty": 7,
+              "price": 88.95,
+              "sum": 622.65
+            },
+            {
+              "materialNo": "MAT010",
+              "qty": 10,
+              "price": 125.5,
+              "sum": 1255
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 3,
+              "price": 320.25,
+              "sum": 960.75
+            },
+            {
+              "materialNo": "MAT026",
+              "qty": 8,
+              "price": 135.8,
+              "sum": 1086.4
+            },
+            {
+              "materialNo": "MAT015",
+              "qty": 5,
+              "price": 245.9,
+              "sum": 1229.5
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 593,
+          "inspection": 557,
+          "delivery_course": 489,
+          "pallet_supply": 857,
+          "binding": 924,
+          "non_pallet_supply": 533,
+          "pick_packing": 927,
+          "empty_box": 453,
+          "mix_van": 547,
+          "lashing": 660
+        },
+        "labor": {
+          "dl": 2243.05,
+          "idl": 2324.97,
+          "facility": 5.35
+        },
+        "inland": {
+          "packing_time": 0,
+          "inland_cost": 1607.19,
+          "milkrun_cost": 505.19
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 3,
+      "cpsNo": "CPS286W722C004.202416261BZ75000",
+      "partNo": "16261BZ75000",
+      "partName": "HOSE, WATER BY-PASS, NO.1",
+      "parentNo": "PARENT-009",
+      "supplierCode": "5453",
+      "supplierName": "VELASTO INDONESIA",
+      "weightPerPc": 4.48,
+      "qtyPerBox": 15,
+      "subTotalInner": 5754.35,
+      "subTotalOuter": 7621.8,
+      "subTotalMaterial": 13376.15,
+      "subTotalLabor": 4573.37,
+      "subTotalInland": 2112.38,
+      "subTotal": 20061.9,
+      "diffPct": "0.4%"
+    },
+    {
+      "id": 4,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT034",
+              "qty": 9,
+              "price": 15.3,
+              "sum": 137.7
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 5,
+              "price": 275.6,
+              "sum": 1378
+            },
+            {
+              "materialNo": "MAT024",
+              "qty": 5,
+              "price": 78.25,
+              "sum": 391.25
+            },
+            {
+              "materialNo": "MAT001",
+              "qty": 6,
+              "price": 150,
+              "sum": 900
+            },
+            {
+              "materialNo": "MAT010",
+              "qty": 10,
+              "price": 125.5,
+              "sum": 1255
+            },
+            {
+              "materialNo": "MAT033",
+              "qty": 4,
+              "price": 275.6,
+              "sum": 1102.4
+            },
+            {
+              "materialNo": "MAT027",
+              "qty": 10,
+              "price": 165.3,
+              "sum": 1653
+            },
+            {
+              "materialNo": "MAT014",
+              "qty": 3,
+              "price": 32.6,
+              "sum": 97.8
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT027",
+              "qty": 7,
+              "price": 165.3,
+              "sum": 1157.1
+            },
+            {
+              "materialNo": "MAT035",
+              "qty": 7,
+              "price": 185.45,
+              "sum": 1298.15
+            },
+            {
+              "materialNo": "MAT009",
+              "qty": 1,
+              "price": 18.95,
+              "sum": 18.95
+            },
+            {
+              "materialNo": "MAT021",
+              "qty": 7,
+              "price": 95.6,
+              "sum": 669.2
+            },
+            {
+              "materialNo": "MAT019",
+              "qty": 7,
+              "price": 85.7,
+              "sum": 599.9
+            },
+            {
+              "materialNo": "MAT002",
+              "qty": 6,
+              "price": 25.5,
+              "sum": 153
+            },
+            {
+              "materialNo": "MAT014",
+              "qty": 3,
+              "price": 32.6,
+              "sum": 97.8
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 5,
+              "price": 68.9,
+              "sum": 344.5
+            },
+            {
+              "materialNo": "MAT028",
+              "qty": 2,
+              "price": 22.85,
+              "sum": 45.7
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 15,
+          "inspection": 456,
+          "delivery_course": 475,
+          "pallet_supply": 900,
+          "binding": 357,
+          "non_pallet_supply": 574,
+          "pick_packing": 694,
+          "empty_box": 629,
+          "mix_van": 210,
+          "lashing": 363
+        },
+        "labor": {
+          "dl": 1267.57,
+          "idl": 2781.2,
+          "facility": 74.04
+        },
+        "inland": {
+          "packing_time": 54,
+          "inland_cost": 521.13,
+          "milkrun_cost": 976.39
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 4,
+      "cpsNo": "CPS999W301B004.202532101BZ10000",
+      "partNo": "32101BZ10000",
+      "partName": "GEAR SUB-ASSY DRIVE PLATE & RING",
+      "parentNo": "PARENT-003",
+      "supplierCode": "5062",
+      "supplierName": "MENARA TERUS MAKMUR",
+      "weightPerPc": 7.3,
+      "qtyPerBox": 4,
+      "subTotalInner": 6915.15,
+      "subTotalOuter": 4384.3,
+      "subTotalMaterial": 11299.45,
+      "subTotalLabor": 4122.81,
+      "subTotalInland": 1497.52,
+      "subTotal": 16919.78,
+      "diffPct": "3.7%"
+    },
+    {
+      "id": 5,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT018",
+              "qty": 5,
+              "price": 195.8,
+              "sum": 979
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 8,
+              "price": 68.9,
+              "sum": 551.2
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 6,
+              "price": 68.9,
+              "sum": 413.4
+            },
+            {
+              "materialNo": "MAT029",
+              "qty": 9,
+              "price": 210.5,
+              "sum": 1894.5
+            },
+            {
+              "materialNo": "MAT026",
+              "qty": 2,
+              "price": 135.8,
+              "sum": 271.6
+            },
+            {
+              "materialNo": "MAT010",
+              "qty": 9,
+              "price": 125.5,
+              "sum": 1129.5
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT013",
+              "qty": 5,
+              "price": 180.4,
+              "sum": 902
+            },
+            {
+              "materialNo": "MAT003",
+              "qty": 2,
+              "price": 75.25,
+              "sum": 150.5
+            },
+            {
+              "materialNo": "MAT022",
+              "qty": 3,
+              "price": 68.9,
+              "sum": 206.7
+            },
+            {
+              "materialNo": "MAT027",
+              "qty": 10,
+              "price": 165.3,
+              "sum": 1653
+            },
+            {
+              "materialNo": "MAT004",
+              "qty": 1,
+              "price": 200,
+              "sum": 200
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 287,
+          "inspection": 630,
+          "delivery_course": 267,
+          "pallet_supply": 763,
+          "binding": 737,
+          "non_pallet_supply": 232,
+          "pick_packing": 667,
+          "empty_box": 795,
+          "mix_van": 995,
+          "lashing": 10
+        },
+        "labor": {
+          "dl": 4976.52,
+          "idl": 961.06,
+          "facility": 1886.18
+        },
+        "inland": {
+          "packing_time": 52,
+          "inland_cost": 443.51,
+          "milkrun_cost": 45.23
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 5,
+      "cpsNo": "CPS578W704B001.202390119T044400",
+      "partNo": "90119T044400",
+      "partName": "BOLT, W/WASHER",
+      "parentNo": "PARENT-002",
+      "supplierCode": "722E",
+      "supplierName": "TOYOTA MOTOR THAILAND",
+      "weightPerPc": 9.47,
+      "qtyPerBox": 44,
+      "subTotalInner": 5239.2,
+      "subTotalOuter": 3112.2,
+      "subTotalMaterial": 8351.4,
+      "subTotalLabor": 7823.76,
+      "subTotalInland": 488.74,
+      "subTotal": 16663.9,
+      "diffPct": "4.1%"
+    },
+    {
+      "id": 6,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT026",
+              "qty": 2,
+              "price": 135.8,
+              "sum": 271.6
+            },
+            {
+              "materialNo": "MAT002",
+              "qty": 10,
+              "price": 25.5,
+              "sum": 255
+            },
+            {
+              "materialNo": "MAT026",
+              "qty": 9,
+              "price": 135.8,
+              "sum": 1222.2
+            },
+            {
+              "materialNo": "MAT035",
+              "qty": 9,
+              "price": 185.45,
+              "sum": 1669.05
+            },
+            {
+              "materialNo": "MAT024",
+              "qty": 10,
+              "price": 78.25,
+              "sum": 782.5
+            },
+            {
+              "materialNo": "MAT008",
+              "qty": 1,
+              "price": 850,
+              "sum": 850
+            },
+            {
+              "materialNo": "MAT018",
+              "qty": 3,
+              "price": 195.8,
+              "sum": 587.4
+            },
+            {
+              "materialNo": "MAT018",
+              "qty": 5,
+              "price": 195.8,
+              "sum": 979
+            },
+            {
+              "materialNo": "MAT011",
+              "qty": 1,
+              "price": 65.3,
+              "sum": 65.3
+            },
+            {
+              "materialNo": "MAT029",
+              "qty": 1,
+              "price": 210.5,
+              "sum": 210.5
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT012",
+              "qty": 10,
+              "price": 420.75,
+              "sum": 4207.5
+            },
+            {
+              "materialNo": "MAT007",
+              "qty": 1,
+              "price": 45.8,
+              "sum": 45.8
+            },
+            {
+              "materialNo": "MAT015",
+              "qty": 6,
+              "price": 245.9,
+              "sum": 1475.4
+            },
+            {
+              "materialNo": "MAT002",
+              "qty": 10,
+              "price": 25.5,
+              "sum": 255
+            },
+            {
+              "materialNo": "MAT008",
+              "qty": 9,
+              "price": 850,
+              "sum": 7650
+            },
+            {
+              "materialNo": "MAT020",
+              "qty": 8,
+              "price": 55.35,
+              "sum": 442.8
+            },
+            {
+              "materialNo": "MAT014",
+              "qty": 9,
+              "price": 32.6,
+              "sum": 293.4
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 347,
+          "inspection": 68,
+          "delivery_course": 675,
+          "pallet_supply": 551,
+          "binding": 553,
+          "non_pallet_supply": 93,
+          "pick_packing": 24,
+          "empty_box": 611,
+          "mix_van": 323,
+          "lashing": 892
+        },
+        "labor": {
+          "dl": 455.4,
+          "idl": 3242.48,
+          "facility": 1506.89
+        },
+        "inland": {
+          "packing_time": 60,
+          "inland_cost": 241.46,
+          "milkrun_cost": 406.36
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 6,
+      "cpsNo": "CPS385W807B003.2022115110Y04000",
+      "partNo": "115110Y04000",
+      "partName": "CAP, CRANKSHAFT BEARING, NO.1",
+      "parentNo": "PARENT-001",
+      "supplierCode": "5365",
+      "supplierName": "TOKAI RUBBER INDONESIA",
+      "weightPerPc": 1.71,
+      "qtyPerBox": 9,
+      "subTotalInner": 6892.55,
+      "subTotalOuter": 14369.9,
+      "subTotalMaterial": 21262.45,
+      "subTotalLabor": 5204.77,
+      "subTotalInland": 647.82,
+      "subTotal": 27115.04,
+      "diffPct": "0.8%"
+    },
+    {
+      "id": 7,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
+        "part_name": "HOSE, WATER BY-PASS, NO.2",
+        "supplier": {},
+        "part_status": "New",
+        "detail_part_status": "New/Uniqe Export",
+        "packing_spec_status": "New",
+        "plant_code": "TMMIN",
+        "dock_code": "D01",
+        "pse_info": {
+          "packing_plant_curr": "PLANT-1",
+          "packing_plant_next": "PLANT-1",
+          "vanning_plant_curr": "VPLANT-A",
+          "vanning_plant_next": "VPLANT-A",
+          "order_pattern_curr": "A1",
+          "order_pattern_next": "A1",
+          "category": "CAT-1",
+          "katashiki": {
+            "AD": "1",
+            "AU": "1",
+            "AF": "1",
+            "AX": "1"
+          },
+          "importer_line_process": "ILP-1",
+          "case_code": "CC-001",
+          "box_number": "B-001",
+          "renban": "R-001",
+          "renban_eff": "2024-07-10",
+          "packing_process_boxing": "Manual",
+          "packing_process_stacking": "Auto"
+        },
+        "images": {
+          "part": {
+            "caption": "Part Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          },
+          "packing": {
+            "caption": "Packing Image",
+            "files": [
+              "/assets/6.png"
+            ]
+          },
+          "outer": {
+            "caption": "Outer Image",
+            "files": [
+              "/assets/2.png"
+            ]
+          },
+          "qkp": {
+            "caption": "QKP Image",
+            "files": [
+              "/assets/3.png"
+            ]
+          },
+          "bkp": {
+            "caption": "BKP Image",
+            "files": [
+              "/assets/4.png"
+            ]
+          }
+        },
+        "packing": {
+          "inner": [
+            {
+              "materialNo": "MAT026",
+              "qty": 9,
+              "price": 135.8,
+              "sum": 1222.2
+            },
+            {
+              "materialNo": "MAT035",
+              "qty": 5,
+              "price": 185.45,
+              "sum": 927.25
+            },
+            {
+              "materialNo": "MAT013",
+              "qty": 4,
+              "price": 180.4,
+              "sum": 721.6
+            },
+            {
+              "materialNo": "MAT015",
+              "qty": 3,
+              "price": 245.9,
+              "sum": 737.7
+            },
+            {
+              "materialNo": "MAT032",
+              "qty": 10,
+              "price": 88.95,
+              "sum": 889.5
+            }
+          ],
+          "outer": [
+            {
+              "materialNo": "MAT029",
+              "qty": 4,
+              "price": 210.5,
+              "sum": 842
+            },
+            {
+              "materialNo": "MAT034",
+              "qty": 4,
+              "price": 15.3,
+              "sum": 61.2
+            },
+            {
+              "materialNo": "MAT016",
+              "qty": 9,
+              "price": 320.25,
+              "sum": 2882.25
+            },
+            {
+              "materialNo": "MAT023",
+              "qty": 8,
+              "price": 120.45,
+              "sum": 963.6
+            },
+            {
+              "materialNo": "MAT021",
+              "qty": 8,
+              "price": 95.6,
+              "sum": 764.8
+            },
+            {
+              "materialNo": "MAT027",
+              "qty": 5,
+              "price": 165.3,
+              "sum": 826.5
+            },
+            {
+              "materialNo": "MAT032",
+              "qty": 3,
+              "price": 88.95,
+              "sum": 266.85
+            },
+            {
+              "materialNo": "MAT034",
+              "qty": 8,
+              "price": 15.3,
+              "sum": 122.4
+            },
+            {
+              "materialNo": "MAT009",
+              "qty": 2,
+              "price": 18.95,
+              "sum": 37.9
+            }
+          ]
+        },
+        "manhour": {
+          "receiving": 452,
+          "inspection": 44,
+          "delivery_course": 463,
+          "pallet_supply": 389,
+          "binding": 360,
+          "non_pallet_supply": 649,
+          "pick_packing": 54,
+          "empty_box": 342,
+          "mix_van": 321,
+          "lashing": 649
+        },
+        "labor": {
+          "dl": 1725.27,
+          "idl": 1228.6,
+          "facility": 664.45
+        },
+        "inland": {
+          "packing_time": 34,
+          "inland_cost": 1512.75,
+          "milkrun_cost": 530.6
+        },
+        "logistic_info": {
+          "dock_code": "L",
+          "address_rack": "FR-01-32",
+          "process_type": "N"
+        }
+      },
+      "recNo": 7,
+      "cpsNo": "CPS578W704B001.2023893400K010",
+      "partNo": "893400K010",
+      "partName": "COMPUTER ASSY, CLEARANCE WARNING",
+      "parentNo": "PARENT-001",
+      "supplierCode": "5062",
+      "supplierName": "MENARA TERUS MAKMUR",
+      "weightPerPc": 3.96,
+      "qtyPerBox": 15,
+      "subTotalInner": 4498.25,
+      "subTotalOuter": 6767.5,
+      "subTotalMaterial": 11265.75,
+      "subTotalLabor": 3618.32,
+      "subTotalInland": 2043.35,
+      "subTotal": 16927.42,
+      "diffPct": "2.0%"
+    },
+    {
+      "id": 8,
+      "implementation_period": "003.2025",
+      "model_code": "579W",
+      "part_no": "16264BZ38000",
+      "cps": {
+        "cps_no": "CPS-2024-001",
+        "refCpsNo": "",
+        "issue_date": "2024-07-01",
+        "effective_date": "2024-07-10",
+        "model": {
+          "model_type": "lot",
+          "model_code": "579W",
+          "cfc": "CF-001"
+        },
+        "part_no": "16264BZ38000",
         "part_name": "HOSE, WATER BY-PASS, NO.2",
         "supplier": {},
         "part_status": "New",
@@ -81,319 +1595,36 @@
           "inner": [
             {
               "materialNo": "MAT012",
-              "qty": 6,
+              "qty": 3,
               "price": 420.75,
-              "sum": 2524.5
+              "sum": 1262.25
             },
             {
-              "materialNo": "MAT025",
-              "qty": 1,
-              "price": 42.15,
-              "sum": 42.15
-            },
-            {
-              "materialNo": "MAT021",
-              "qty": 6,
-              "price": 95.6,
-              "sum": 573.59
-            },
-            {
-              "materialNo": "MAT033",
+              "materialNo": "MAT029",
               "qty": 3,
-              "price": 275.6,
-              "sum": 826.80
-            },
-            {
-              "materialNo": "MAT015",
-              "qty": 5,
-              "price": 245.9,
-              "sum": 1229.5
-            },
-            {
-              "materialNo": "MAT020",
-              "qty": 3,
-              "price": 55.35,
-              "sum": 166.05
-            },
-            {
-              "materialNo": "MAT017",
-              "qty": 8,
-              "price": 28.45,
-              "sum": 227.6
-            },
-            {
-              "materialNo": "MAT011",
-              "qty": 9,
-              "price": 65.3,
-              "sum": 587.69
-            },
-            {
-              "materialNo": "MAT032",
-              "qty": 9,
-              "price": 88.95,
-              "sum": 800.55
-            }
-          ],
-          "outer": [
-            {
-              "materialNo": "MAT005",
-              "qty": 2,
-              "price": 12.75,
-              "sum": 25.5
-            },
-            {
-              "materialNo": "MAT010",
-              "qty": 1,
-              "price": 125.5,
-              "sum": 125.5
-            },
-            {
-              "materialNo": "MAT024",
-              "qty": 9,
-              "price": 78.25,
-              "sum": 704.25
-            },
-            {
-              "materialNo": "MAT005",
-              "qty": 7,
-              "price": 12.75,
-              "sum": 89.25
-            },
-            {
-              "materialNo": "MAT024",
-              "qty": 9,
-              "price": 78.25,
-              "sum": 704.25
-            },
-            {
-              "materialNo": "MAT019",
-              "qty": 3,
-              "price": 85.7,
-              "sum": 257.1
-            },
-            {
-              "materialNo": "MAT033",
-              "qty": 3,
-              "price": 275.6,
-              "sum": 826.80
-            },
-            {
-              "materialNo": "MAT028",
-              "qty": 8,
-              "price": 22.85,
-              "sum": 182.8
-            },
-            {
-              "materialNo": "MAT032",
-              "qty": 7,
-              "price": 88.95,
-              "sum": 622.65
-            },
-            {
-              "materialNo": "MAT022",
-              "qty": 9,
-              "price": 68.9,
-              "sum": 620.1
-            }
-          ]
-        },
-        "manhour": {
-          "receiving": 961,
-          "inspection": 234,
-          "delivery_course": 880,
-          "pallet_supply": 407,
-          "binding": 270,
-          "non_pallet_supply": 629,
-          "pick_packing": 353,
-          "empty_box": 53,
-          "mix_van": 106,
-          "lashing": 705
-        },
-        "labor": {
-          "dl": 326,
-          "idl": 1985,
-          "facility": 359
-        },
-        "inland": {
-          "packing_time": 42,
-          "inland_cost": 452,
-          "milkrun_cost": 995
-        },
-        "logistic_info": {
-          "dock_code": "L",
-          "address_rack": "FR-01-32",
-          "process_type": "N"
-        }
-      },
-      "recNo": 1,
-      "cpsNo": "CPS999W301B004.202590466T006200",
-      "partName": "CLIP, HOSE",
-      "parentNo": "PARENT-007",
-      "supplierCode": "722E",
-      "supplierName": "TOYOTA MOTOR THAILAND",
-      "weightPerPc": "5.08",
-      "qtyPerBox": 6,
-      "subTotalInner": 6978.45,
-      "subTotalOuter": 4158.20,
-      "subTotalMaterial": 11136.65,
-      "subTotalLabor": 2670,
-      "subTotalInland": 1447,
-      "subTotal": 15253.65,
-      "diffPct": "1.9%"
-    },
-    {
-      "id": 2,
-      "implementation_period": "003.2025",
-      "model_code": "579W",
-      "part_no": "11115BZ16000",
-      "cps": {
-        "cps_no": "CPS-2024-001",
-        "refCpsNo": "",
-        "issue_date": "2024-07-01",
-        "effective_date": "2024-07-10",
-        "model": {
-          "model_type": "lot",
-          "model_code": "579W",
-          "cfc": "CF-001"
-        },
-        "part_no": "11115BZ16000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier": {},
-        "part_status": "New",
-        "detail_part_status": "New/Uniqe Export",
-        "packing_spec_status": "New",
-        "plant_code": "TMMIN",
-        "dock_code": "D01",
-        "pse_info": {
-          "packing_plant_curr": "PLANT-1",
-          "packing_plant_next": "PLANT-1",
-          "vanning_plant_curr": "VPLANT-A",
-          "vanning_plant_next": "VPLANT-A",
-          "order_pattern_curr": "A1",
-          "order_pattern_next": "A1",
-          "category": "CAT-1",
-          "katashiki": {
-            "AD": "1",
-            "AU": "1",
-            "AF": "1",
-            "AX": "1"
-          },
-          "importer_line_process": "ILP-1",
-          "case_code": "CC-001",
-          "box_number": "B-001",
-          "renban": "R-001",
-          "renban_eff": "2024-07-10",
-          "packing_process_boxing": "Manual",
-          "packing_process_stacking": "Auto"
-        },
-        "images": {
-          "part": {
-            "caption": "Part Image",
-            "files": [
-              "/assets/4.png"
-            ]
-          },
-          "packing": {
-            "caption": "Packing Image",
-            "files": [
-              "/assets/6.png"
-            ]
-          },
-          "outer": {
-            "caption": "Outer Image",
-            "files": [
-              "/assets/2.png"
-            ]
-          },
-          "qkp": {
-            "caption": "QKP Image",
-            "files": [
-              "/assets/3.png"
-            ]
-          },
-          "bkp": {
-            "caption": "BKP Image",
-            "files": [
-              "/assets/4.png"
-            ]
-          }
-        },
-        "packing": {
-          "inner": [
-            {
-              "materialNo": "MAT007",
-              "qty": 8,
-              "price": 45.8,
-              "sum": 366.4
-            },
-            {
-              "materialNo": "MAT020",
-              "qty": 2,
-              "price": 55.35,
-              "sum": 110.7
-            },
-            {
-              "materialNo": "MAT013",
-              "qty": 9,
-              "price": 180.4,
-              "sum": 1623.60
-            },
-            {
-              "materialNo": "MAT009",
-              "qty": 5,
-              "price": 18.95,
-              "sum": 94.75
+              "price": 210.5,
+              "sum": 631.5
             },
             {
               "materialNo": "MAT008",
-              "qty": 3,
+              "qty": 4,
               "price": 850,
-              "sum": 2550
+              "sum": 3400
             },
             {
-              "materialNo": "MAT027",
+              "materialNo": "MAT018",
               "qty": 3,
-              "price": 165.3,
-              "sum": 495.90
+              "price": 195.8,
+              "sum": 587.4
             },
             {
-              "materialNo": "MAT001",
-              "qty": 8,
-              "price": 150,
-              "sum": 1200
-            },
-            {
-              "materialNo": "MAT019",
-              "qty": 9,
-              "price": 85.7,
-              "sum": 771.30
+              "materialNo": "MAT021",
+              "qty": 3,
+              "price": 95.6,
+              "sum": 286.8
             }
           ],
           "outer": [
-            {
-              "materialNo": "MAT016",
-              "qty": 3,
-              "price": 320.25,
-              "sum": 960.75
-            },
-            {
-              "materialNo": "MAT016",
-              "qty": 2,
-              "price": 320.25,
-              "sum": 640.5
-            },
-            {
-              "materialNo": "MAT033",
-              "qty": 4,
-              "price": 275.6,
-              "sum": 1102.4
-            },
-            {
-              "materialNo": "MAT001",
-              "qty": 8,
-              "price": 150,
-              "sum": 1200
-            },
             {
               "materialNo": "MAT008",
               "qty": 10,
@@ -401,275 +1632,58 @@
               "sum": 8500
             },
             {
-              "materialNo": "MAT006",
-              "qty": 6,
-              "price": 350,
-              "sum": 2100
-            },
-            {
-              "materialNo": "MAT001",
-              "qty": 4,
-              "price": 150,
-              "sum": 600
-            },
-            {
-              "materialNo": "MAT027",
-              "qty": 10,
-              "price": 165.3,
-              "sum": 1653
-            }
-          ]
-        },
-        "manhour": {
-          "receiving": 398,
-          "inspection": 141,
-          "delivery_course": 618,
-          "pallet_supply": 120,
-          "binding": 246,
-          "non_pallet_supply": 941,
-          "pick_packing": 337,
-          "empty_box": 654,
-          "mix_van": 854,
-          "lashing": 201
-        },
-        "labor": {
-          "dl": 3379,
-          "idl": 1402,
-          "facility": 1781
-        },
-        "inland": {
-          "packing_time": 69,
-          "inland_cost": 967,
-          "milkrun_cost": 184
-        },
-        "logistic_info": {
-          "dock_code": "L",
-          "address_rack": "FR-01-32",
-          "process_type": "N"
-        }
-      },
-      "recNo": 2,
-      "cpsNo": "CPS607W722C002.202311115BZ16000",
-      "partName": "GASKET, CYLINDER HEAD",
-      "parentNo": "PARENT-006",
-      "supplierCode": "5453",
-      "supplierName": "VELASTO INDONESIA",
-      "weightPerPc": "1.45",
-      "qtyPerBox": 9,
-      "subTotalInner": 7212.65,
-      "subTotalOuter": 16756.65,
-      "subTotalMaterial": 23969.30,
-      "subTotalLabor": 6562,
-      "subTotalInland": 1151,
-      "subTotal": 31682.30,
-      "diffPct": "0.8%"
-    },
-    {
-      "id": 3,
-      "implementation_period": "003.2025",
-      "model_code": "579W",
-      "part_no": "90406T001100",
-      "cps": {
-        "cps_no": "CPS-2024-001",
-        "refCpsNo": "",
-        "issue_date": "2024-07-01",
-        "effective_date": "2024-07-10",
-        "model": {
-          "model_type": "lot",
-          "model_code": "579W",
-          "cfc": "CF-001"
-        },
-        "part_no": "90406T001100",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier": {},
-        "part_status": "New",
-        "detail_part_status": "New/Uniqe Export",
-        "packing_spec_status": "New",
-        "plant_code": "TMMIN",
-        "dock_code": "D01",
-        "pse_info": {
-          "packing_plant_curr": "PLANT-1",
-          "packing_plant_next": "PLANT-1",
-          "vanning_plant_curr": "VPLANT-A",
-          "vanning_plant_next": "VPLANT-A",
-          "order_pattern_curr": "A1",
-          "order_pattern_next": "A1",
-          "category": "CAT-1",
-          "katashiki": {
-            "AD": "1",
-            "AU": "1",
-            "AF": "1",
-            "AX": "1"
-          },
-          "importer_line_process": "ILP-1",
-          "case_code": "CC-001",
-          "box_number": "B-001",
-          "renban": "R-001",
-          "renban_eff": "2024-07-10",
-          "packing_process_boxing": "Manual",
-          "packing_process_stacking": "Auto"
-        },
-        "images": {
-          "part": {
-            "caption": "Part Image",
-            "files": [
-              "/assets/4.png"
-            ]
-          },
-          "packing": {
-            "caption": "Packing Image",
-            "files": [
-              "/assets/6.png"
-            ]
-          },
-          "outer": {
-            "caption": "Outer Image",
-            "files": [
-              "/assets/2.png"
-            ]
-          },
-          "qkp": {
-            "caption": "QKP Image",
-            "files": [
-              "/assets/3.png"
-            ]
-          },
-          "bkp": {
-            "caption": "BKP Image",
-            "files": [
-              "/assets/4.png"
-            ]
-          }
-        },
-        "packing": {
-          "inner": [
-            {
-              "materialNo": "MAT015",
-              "qty": 6,
-              "price": 245.9,
-              "sum": 1475.4
-            },
-            {
-              "materialNo": "MAT013",
-              "qty": 10,
-              "price": 180.4,
-              "sum": 1804
-            },
-            {
-              "materialNo": "MAT034",
-              "qty": 3,
-              "price": 15.3,
-              "sum": 45.90
+              "materialNo": "MAT012",
+              "qty": 8,
+              "price": 420.75,
+              "sum": 3366
             },
             {
               "materialNo": "MAT008",
-              "qty": 5,
+              "qty": 4,
               "price": 850,
-              "sum": 4250
+              "sum": 3400
             },
             {
-              "materialNo": "MAT018",
-              "qty": 3,
-              "price": 195.8,
-              "sum": 587.40
-            },
-            {
-              "materialNo": "MAT028",
-              "qty": 9,
-              "price": 22.85,
-              "sum": 205.65
-            },
-            {
-              "materialNo": "MAT028",
-              "qty": 8,
-              "price": 22.85,
-              "sum": 182.8
-            },
-            {
-              "materialNo": "MAT010",
+              "materialNo": "MAT019",
               "qty": 6,
-              "price": 125.5,
-              "sum": 753
+              "price": 85.7,
+              "sum": 514.2
             },
             {
-              "materialNo": "MAT035",
-              "qty": 4,
-              "price": 185.45,
-              "sum": 741.8
-            }
-          ],
-          "outer": [
-            {
-              "materialNo": "MAT032",
-              "qty": 4,
-              "price": 88.95,
-              "sum": 355.8
-            },
-            {
-              "materialNo": "MAT025",
-              "qty": 8,
-              "price": 42.15,
-              "sum": 337.2
-            },
-            {
-              "materialNo": "MAT006",
-              "qty": 7,
-              "price": 350,
-              "sum": 2450
-            },
-            {
-              "materialNo": "MAT023",
-              "qty": 6,
-              "price": 120.45,
-              "sum": 722.7
-            },
-            {
-              "materialNo": "MAT029",
-              "qty": 6,
-              "price": 210.5,
-              "sum": 1263
-            },
-            {
-              "materialNo": "MAT034",
-              "qty": 5,
-              "price": 15.3,
-              "sum": 76.5
-            },
-            {
-              "materialNo": "MAT013",
-              "qty": 1,
-              "price": 180.4,
-              "sum": 180.4
+              "materialNo": "MAT033",
+              "qty": 2,
+              "price": 275.6,
+              "sum": 551.2
             },
             {
               "materialNo": "MAT032",
-              "qty": 4,
+              "qty": 2,
               "price": 88.95,
-              "sum": 355.8
+              "sum": 177.9
             }
           ]
         },
         "manhour": {
-          "receiving": 276,
-          "inspection": 267,
-          "delivery_course": 827,
-          "pallet_supply": 401,
-          "binding": 294,
-          "non_pallet_supply": 125,
-          "pick_packing": 565,
-          "empty_box": 369,
-          "mix_van": 69,
-          "lashing": 324
+          "receiving": 723,
+          "inspection": 842,
+          "delivery_course": 630,
+          "pallet_supply": 510,
+          "binding": 530,
+          "non_pallet_supply": 379,
+          "pick_packing": 117,
+          "empty_box": 428,
+          "mix_van": 313,
+          "lashing": 347
         },
         "labor": {
-          "dl": 4524,
-          "idl": 4306,
-          "facility": 501
+          "dl": 48.09,
+          "idl": 1010.45,
+          "facility": 1526.97
         },
         "inland": {
           "packing_time": 10,
-          "inland_cost": 1975,
-          "milkrun_cost": 500
+          "inland_cost": 1477.03,
+          "milkrun_cost": 432.54
         },
         "logistic_info": {
           "dock_code": "L",
@@ -677,21 +1691,22 @@
           "process_type": "N"
         }
       },
-      "recNo": 3,
-      "cpsNo": "CPS578W704B001.202390406T001100",
-      "partName": "TUBE, UNION",
-      "parentNo": "PARENT-001",
-      "supplierCode": "5062",
-      "supplierName": "MENARA TERUS MAKMUR",
-      "weightPerPc": "7.57",
-      "qtyPerBox": 23,
-      "subTotalInner": 10045.95,
-      "subTotalOuter": 5741.4,
-      "subTotalMaterial": 15787.35,
-      "subTotalLabor": 9331,
-      "subTotalInland": 2475,
-      "subTotal": 27593.35,
-      "diffPct": "3.9%"
+      "recNo": 8,
+      "cpsNo": "CPS824W709B001.2025115130Y04000",
+      "partNo": "115130Y04000",
+      "partName": "CAP, CRANKSHAFT BEARING, NO.3",
+      "parentNo": "PARENT-005",
+      "supplierCode": "5150",
+      "supplierName": "NAMICOH INDONESIA",
+      "weightPerPc": 8.3,
+      "qtyPerBox": 19,
+      "subTotalInner": 6167.95,
+      "subTotalOuter": 16509.3,
+      "subTotalMaterial": 22677.25,
+      "subTotalLabor": 2585.51,
+      "subTotalInland": 1909.57,
+      "subTotal": 27172.33,
+      "diffPct": "0.2%"
     }
   ]
 }
