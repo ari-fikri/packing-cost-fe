@@ -171,14 +171,15 @@ const MaterialCostDetail = ({ part }) => {
       </>
     );
   };
+  debugger;
 
   return (
     <td colSpan="32">
       <div className="p-2">
-        {renderMaterialsTable(part.inner?.materials, 'Inner')}
-        {renderMaterialsTable(part.outer?.materials, 'Outer')}
-        {renderLaborTable(part.labor)}
-        {renderInlandTable(part.inland)}
+        {renderMaterialsTable(part.cps?.packing?.inner, 'Inner')}
+        {renderMaterialsTable(part.cps?.packing?.outer, 'Outer')}
+        {renderLaborTable(part.cps?.packing?.labor)}
+        {renderInlandTable(part.cps?.packing?.inland)}
       </div>
     </td>
   );

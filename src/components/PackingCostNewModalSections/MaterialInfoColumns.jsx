@@ -34,7 +34,7 @@ export function MaterialLeafCells({ arr = [], count = 10 }) {
     const m = arr[i];
     cells.push(
       <React.Fragment key={`mat-leaf-cell-${i}`}>
-        <td className="align-middle">{m?.partNo ?? '-'}</td>
+        <td className="align-middle">{m?.materialNo ?? '-'}</td>
         <td className="align-middle">{m?.qty ?? '-'}</td>
         <td className="align-middle">{m?.price ?? '-'}</td>
         <td className="align-middle">{m?.sum ?? '-'}</td>

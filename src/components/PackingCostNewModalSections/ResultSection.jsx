@@ -82,7 +82,7 @@ export default function ResultSection({
             <th rowSpan={2}>Suffix</th>
             <th rowSpan={2}>Part Name</th>
             <th rowSpan={2}>Parent Part No</th>
-            <th rowSpan={2}>Supplier ID</th>
+            <th rowSpan={2}>Supplier Code</th>
             <th rowSpan={2}>Supplier Name</th>
             <th rowSpan={2}>L</th>
             <th rowSpan={2}>W</th>
@@ -118,6 +118,7 @@ export default function ResultSection({
           ) : (
             // Map through visible parts to create table rows
             visibleParts.map((p, i) => {
+              debugger;
               // Ensure part data 'p' is not null or undefined before rendering
               if (!p) return null;
 
@@ -159,7 +160,7 @@ export default function ResultSection({
                     <td>{p.suffix}</td>
                     <td>{p.partName}</td>
                     <td>{p.parentPartNo}</td>
-                    <td>{p.supplierId}</td>
+                    <td>{p.supplierCode}</td>
                     <td>{p.supplierName}</td>
                     <td>{fmt(p.L)}</td>
                     <td>{fmt(p.W)}</td>
