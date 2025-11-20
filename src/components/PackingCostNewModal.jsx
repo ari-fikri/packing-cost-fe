@@ -46,6 +46,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [selectedRows, setSelectedRows] = useState({});
   // State to track expanded rows in the result table
   const [expandedRows, setExpandedRows] = useState({});
+  const [cpsData, setCpsData] = useState([]);
 
   // Effect to handle modal visibility changes
   useEffect(() => {
@@ -63,6 +64,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
     // Cleanup effect
     return () => document.body.classList.remove("modal-open");
   }, [show]);
+
+  useEffect(() => {
+    import("../data/generatedData.json")
+      .then((module) => {
+        setCpsData(module.default.cpsData);
+      })
+      .catch((error) => console.error("Error loading generated data:", error));
+  }, []);
 
   // Do not render if not visible
   if (!show) return null;
@@ -127,18 +136,187 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         if (exists) {
           return prev;
         }
-        // Here we only have partNo, other details will be missing until fetched
+        // Create a part object, not just a string
         return [...prev, { partNo: newPartNo }];
       });
     }
   }
 
   /**
-   * Moves staged parts to the main parts list to be displayed in the results table.
+   * Handles the calculation process when the "Calculate" button is clicked.
+   * It takes the parts that have been staged (e.g., from the part picker or manual input),
+   * finds their corresponding data in the asynchronously loaded `cpsData`,
+   * formats the data for display in the results table, and updates the component's state.
    */
   function handleCalculate() {
-    setParts(stagedParts);
-    setPage(1); // Reset to first page
+    // Check if the CPS data has been loaded. If not, log an error and exit.
+    if (cpsData.length === 0) {
+      console.error("CPS data is not loaded yet.");
+      return;
+    }
+
+    // Map over the staged parts to find their corresponding data and format them.
+    const calculatedParts = stagedParts
+      .map((stagedPart) => {
+        // Find the CPS data for the current part number, ensuring cps and cps.part exist.
+        const data = cpsData.find(
+          (cps) => cps && cps.part_no === stagedPart.partNo
+        );
+
+        // If no data is found for the part, return a default object indicating it was not found.
+        if (!data) {
+          return {
+            partNo: stagedPart.partNo,
+            partName: "Part not found in generatedData.json",
+            suffix: "",
+            parentPartNo: "",
+            supplierId: "",
+            supplierName: "",
+            L: "",
+            W: "",
+            H: "",
+            boxM3: 0,
+            inner: { totalCost: 0, prevYear: 0, diff: "0%", materials: [] },
+            outer: { totalCost: 0, prevYear: 0, diff: "0%", materials: [] },
+            material: { totalCost: 0, prevYear: 0, diff: "0%" },
+            labor: {
+              totalCost: 0,
+              prevYear: 0,
+              diff: "0%",
+              manHour: 0,
+              cost: 0,
+              receiving: 0,
+              inspection: 0,
+              deliveryCourse: 0,
+              supply: 0,
+              binding: 0,
+              sortingSupply: 0,
+              pickPacking: 0,
+              vanning: 0,
+              boxValetReturn: 0,
+              mixVan: 0,
+              lashing: 0,
+              totalTime: 0,
+              requirement: 0,
+              currentDL: 0,
+              idl: 0,
+              facilityOthers: 0,
+            },
+            inland: {
+              totalCost: 0,
+              prevYear: 0,
+              diff: "0%",
+              cost: 0,
+              packTime: 0,
+              inlandCost: 0,
+              inlandCostM3: 0,
+              milkrunCost: 0,
+            },
+            total: { totalCost: 0, prevYear: 0, diff: "0%" },
+          };
+        }
+
+        // Destructure the data from the found CPS entry.
+        const {
+          cps,
+          part,
+          supplier,
+          subTotalMaterial,
+          subTotalLabor,
+          subTotalInland,
+          subTotal,
+          diffPct,
+        } = data;
+        const { packing, labor, manhour, inland } = cps;
+
+        // Calculate the total man-hour from the manhour object.
+        const totalManhour = Object.values(manhour).reduce((a, b) => a + b, 0);
+
+        // Return the formatted part data for the results table.
+        return {
+          partNo: cps.part_no,
+          suffix: cps.suffix,
+          partName: cps.part_name,
+          parentPartNo: "", // This data is not available in generatedData.json
+          supplierId: cps.supplier.code,
+          supplierName: cps.supplier.name,
+          L: cps.packing.outer.length > 0 ? cps.packing.outer[0].l : "",
+          W: cps.packing.outer.length > 0 ? cps.packing.outer[0].w : "",
+          H: cps.packing.outer.length > 0 ? cps.packing.outer[0].h : "",
+          boxM3: cps.packing.outer.reduce((acc, item) => acc + item.m3, 0),
+          inner: {
+            totalCost: cps.packing.inner.reduce((acc, item) => acc + item.sum, 0),
+            prevYear: 0, // Placeholder
+            diff: "0%", // Placeholder
+            materials: packing.inner,
+          },
+          outer: {
+            totalCost: cps.packing.outer.reduce((acc, item) => acc + item.sum, 0),
+            prevYear: 0, // Placeholder
+            diff: "0%", // Placeholder
+            materials: cps.packing.outer,
+          },
+          material: {
+            totalCost: cps.subTotalMaterial,
+            prevYear: 0, // Placeholder
+            diff: "0%", // Placeholder
+          },
+          labor: {
+            totalCost: cps.subTotalLabor,
+            prevYear: 0, // Placeholder
+            diff: "0%", // Placeholder
+            manHour: cps.totalManhour,
+            cost: cps.labor.dl + cps.labor.idl,
+            receiving: cps.manhour.receiving,
+            inspection: cps.manhour.inspection,
+            deliveryCourse: cps.manhour.delivery_course,
+            supply:
+              (cps.manhour.pallet_supply || 0) + (cps.manhour.non_pallet_supply || 0),
+            binding: cps.manhour.binding,
+            sortingSupply: 0, // Placeholder
+            pickPacking: cps.manhour.pick_packing,
+            vanning: 0, // Placeholder
+            boxValetReturn: cps.manhour.empty_box,
+            mixVan: cps.manhour.mix_van,
+            lashing: cps.manhour.lashing,
+            totalTime: cps.totalManhour,
+            requirement: 1, // Placeholder
+            currentDL: cps.labor.dl,
+            idl: cps.labor.idl,
+            facilityOthers: cps.labor.facility,
+          },
+          inland: {
+            totalCost: cps.subTotalInland,
+            prevYear: 0, // Placeholder
+            diff: "0%", // Placeholder
+            cost: cps.inland.inland_cost,
+            packTime: cps.inland.packing_time,
+            inlandCost: cps.inland.inland_cost,
+            inlandCostM3: 0, // Placeholder
+            milkrunCost: cps.inland.milkrun_cost,
+          },
+          total: {
+            totalCost: cps.subTotal,
+            prevYear: 0, // Placeholder
+            diff: cps.diffPct,
+          },
+        };
+      })
+      .filter(Boolean); // Filter out any null/undefined entries from parts not found.
+
+    // Get the part numbers of the parts already in the results table.
+    const existingPartNos = parts.map((p) => p.partNo);
+    // Filter out parts that are already in the table to avoid duplicates.
+    const newParts = calculatedParts.filter(
+      (p) => !existingPartNos.includes(p.partNo)
+    );
+
+    // Add the new, unique parts to the results table.
+    setParts((prevParts) => [...prevParts, ...newParts]);
+    // Clear the staged parts.
+    setStagedParts([]);
+    // Reset to the first page of the results table.
+    setPage(1);
   }
 
   /**
