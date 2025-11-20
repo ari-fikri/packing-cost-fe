@@ -100,7 +100,7 @@ export default function SearchSection({
         {/* Button Container - Right Aligned */}
         <div className="col-12 d-flex justify-content-end">
           {/* Filter Button */}
-          <button type="button" className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Filter</button>
+          <button type="button" className="btn btn-primary btn-sm mr-2" onClick={handleSearch}><i className="fas fa-search mr-1"></i> Search</button>
           {/* Clear Filter Button */}
           <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-times mr-1"></i> Clear</button>
         </div>

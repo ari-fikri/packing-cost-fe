@@ -25,7 +25,7 @@ export default function SearchSection({
         {/* Left Column */}
         <div className="col-md-6">
           <div className="form-group">
-            <label className="small mb-1">Material No</label>
+            <label className="small mb-1">Item No</label>
             <input 
               type="text" 
               className="form-control form-control-sm" 
@@ -59,7 +59,7 @@ export default function SearchSection({
         {/* Right Column */}
         <div className="col-md-6">
           <div className="form-group">
-            <label className="small mb-1">Item No</label>
+            <label className="small mb-1">eWarehouse Item No</label>
             <input 
               type="text" 
               className="form-control form-control-sm" 

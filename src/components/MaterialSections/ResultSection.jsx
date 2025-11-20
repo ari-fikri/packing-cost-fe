@@ -18,31 +18,31 @@ export default function ResultSection({
         <table className="table table-striped table-sm mb-0">
           <thead>
             <tr>
-              <th style={{ width: 50 }}>No</th>
-              <th>Material No</th>
-              <th>Material Name</th>
-              <th>Parent Material</th>
-              <th>Item No</th>
-              <th>Price</th>
-              <th>Material Type</th>
-              <th style={{ width: 120 }}>Action</th>
+              <th style={{ width: 50 }} className="text-center">No</th>
+              <th className="text-center">Item No</th>
+              <th className="text-center">Material Name</th>
+              <th className="text-center">Price</th>
+              <th className="text-center">eWH Item No</th>
+              <th className="text-center">eWH Price</th>
+              <th className="text-center">Material Type</th>
+              <th style={{ width: 120 }} className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {materials.length === 0 ? (
               <tr>
-                <td colSpan="8" className="text-center py-4 text-muted">No Data Found</td>
+                <td colSpan="8" className="text-center py-4 text-muted text-center">No Data Found</td>
               </tr>
             ) : (
               materials.map((material, i) => (
-                <tr key={material.id || i}>
-                  <td>{(currentPage - 1) * pageSize + i + 1}</td>
-                  <td>{material.materialNo}</td>
-                  <td>{material.materialName}</td>
-                  <td>{material.parentMaterial}</td>
-                  <td>{material.itemNo}</td>
-                  <td>{material.price}</td>
-                  <td>{material.materialType}</td>
+               <tr key={material.id || i}>
+                 <td className="text-center">{(currentPage - 1) * pageSize + i + 1}</td>
+                 <td className="text-center">{material.materialNo}</td>
+                 <td>{material.materialName}</td>
+                 <td className="text-center">{material.price}</td>
+                 <td className="text-center">{material.itemNo}</td>
+                 <td className="text-center">{material.ewarehouse_price}</td>
+                 <td className="text-center">{material.materialType}</td>
                   <td>
                     <button 
                       type="button" 

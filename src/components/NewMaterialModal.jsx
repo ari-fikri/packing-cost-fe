@@ -3,19 +3,43 @@ import React, { useEffect, useState } from 'react'
 export default function NewMaterialModal({ show, onClose, onSave, initialData = null, mode = 'new' }) {
   const [materialNo, setMaterialNo] = useState('')
   const [materialName, setMaterialName] = useState('')
-  const [parentMaterial, setParentMaterial] = useState('')
-  const [itemNo, setItemNo] = useState('')
   const [price, setPrice] = useState('')
   const [materialType, setMaterialType] = useState('')
+  const [supplierCode, setSupplierCode] = useState('')
+  const [supplierName, setSupplierName] = useState('')
+  const [address, setAddress] = useState('')
+  const [plantCode, setPlantCode] = useState('')
+  const [eWarehouse, setEWarehouse] = useState('')
+  const [eWarehousePrice, setEWarehousePrice] = useState('')
+  const [dimLength, setDimLength] = useState('')
+  const [dimWeightPc, setDimWeightPc] = useState('')
+  const [dimWidth, setDimWidth] = useState('')
+  const [dimQtyBundling, setDimQtyBundling] = useState('')
+  const [dimHeight, setDimHeight] = useState('')
+  const [totalDimWeight, setTotalDimWeight] = useState('')
+  const [docMSDS, setDocMSDS] = useState('')
+  const [docDrawing, setDocDrawing] = useState('')
 
   useEffect(() => {
     if (show && initialData) {
       setMaterialNo(initialData.materialNo || '')
       setMaterialName(initialData.materialName || '')
-      setParentMaterial(initialData.parentMaterial || '')
-      setItemNo(initialData.itemNo || '')
       setPrice(initialData.price ?? '')
       setMaterialType(initialData.materialType || '')
+      setSupplierCode(initialData.supplierCode || '')
+      setSupplierName(initialData.supplierName || '')
+      setAddress(initialData.address || '')
+      setPlantCode(initialData.plantCode || '')
+      setEWarehouse(initialData.eWarehouse || '')
+      setEWarehousePrice(initialData.eWarehousePrice || '')
+      setDimLength(initialData.dimLength || '')
+      setDimWeightPc(initialData.dimWeightPc || '')
+      setDimWidth(initialData.dimWidth || '')
+      setDimQtyBundling(initialData.dimQtyBundling || '')
+      setDimHeight(initialData.dimHeight || '')
+      setTotalDimWeight(initialData.totalDimWeight || '')
+      setDocMSDS(initialData.docMSDS || '')
+      setDocDrawing(initialData.docDrawing || '')
     } else if (!show) {
       handleClear()
     }
@@ -33,10 +57,22 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
       id: initialData?.id,
       materialNo,
       materialName,
-      parentMaterial,
-      itemNo,
       price,
       materialType,
+      supplierCode,
+      supplierName,
+      address,
+      plantCode,
+      eWarehouse,
+      eWarehousePrice,
+      dimLength,
+      dimWeightPc,
+      dimWidth,
+      dimQtyBundling,
+      dimHeight,
+      totalDimWeight,
+      docMSDS,
+      docDrawing,
       createdDate: mode === 'edit' ? (initialData?.createdDate || new Date().toLocaleDateString()) : new Date().toLocaleDateString()
     }
 
@@ -47,10 +83,22 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
   function handleClear() {
     setMaterialNo('')
     setMaterialName('')
-    setParentMaterial('')
-    setItemNo('')
     setPrice('')
     setMaterialType('')
+    setSupplierCode('')
+    setSupplierName('')
+    setAddress('')
+    setPlantCode('')
+    setEWarehouse('')
+    setEWarehousePrice('')
+    setDimLength('')
+    setDimWeightPc('')
+    setDimWidth('')
+    setDimQtyBundling('')
+    setDimHeight('')
+    setTotalDimWeight('')
+    setDocMSDS('')
+    setDocDrawing('')
   }
 
   function handleClose() {
@@ -107,30 +155,9 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Parent Material</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={parentMaterial}
-                  onChange={e => setParentMaterial(e.target.value)}
-                  placeholder="Enter Parent Material"
-                />
-              </div>
             </div>
 
             <div className="col-md-6">
-              <div className="form-group">
-                <label className="form-label">Item No</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={itemNo}
-                  onChange={e => setItemNo(e.target.value)}
-                  placeholder="Enter Item No"
-                />
-              </div>
-
               <div className="form-group">
                 <label className="form-label">Price</label>
                 <input
@@ -158,6 +185,199 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   <option value="Outer">Outer</option>
                   <option value="Module">Module</option>
                 </select>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Supplier Code</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={supplierCode}
+                  onChange={e => setSupplierCode(e.target.value)}
+                  placeholder="Enter Supplier Code"
+                />
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Supplier Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={supplierName}
+                  readOnly
+                  placeholder="Supplier Name"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={address}
+                  readOnly
+                  placeholder="Address"
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">eWarehouse Item No</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={eWarehouse}
+                  onChange={e => setEWarehouse(e.target.value)}
+                  placeholder="eWarehouse Item No"
+                />
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Plant Code</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={plantCode}
+                  readOnly
+                  placeholder="Plant Code"
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">eWarehouse Price</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={eWarehousePrice}
+                  onChange={e => setEWarehousePrice(e.target.value)}
+                  placeholder="eWarehouse Price"
+                  step="0.01"
+                  min="0"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Dim Length (mm)</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={dimLength}
+                  onChange={e => setDimLength(e.target.value)}
+                  placeholder="Dim Length (mm)"
+                />
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Dim Weight/pc (gr)</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={dimWeightPc}
+                  onChange={e => setDimWeightPc(e.target.value)}
+                  placeholder="Dim Weight/pc (gr)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Dim Width (mm)</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={dimWidth}
+                  onChange={e => setDimWidth(e.target.value)}
+                  placeholder="Dim Width (mm)"
+                />
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Dim Qty/Bundling</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={dimQtyBundling}
+                  onChange={e => setDimQtyBundling(e.target.value)}
+                  placeholder="Dim Qty/Bundling"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Dim Height (mm)</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={dimHeight}
+                  onChange={e => setDimHeight(e.target.value)}
+                  placeholder="Dim Height (mm)"
+                />
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Total Dim Weight (gr)</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={totalDimWeight}
+                  onChange={e => setTotalDimWeight(e.target.value)}
+                  placeholder="Total Dim Weight (gr)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Doc MSDS</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"><i className="fas fa-image"></i></span>
+                  </div>
+                  <input
+                    type="file"
+                    className="form-control"
+                    accept="image/*"
+                    onChange={e => setDocMSDS(e.target.files[0]?.name || '')}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Doc Drawing</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"><i className="fas fa-image"></i></span>
+                  </div>
+                  <input
+                    type="file"
+                    className="form-control"
+                    accept="image/*"
+                    onChange={e => setDocDrawing(e.target.files[0]?.name || '')}
+                  />
+                </div>
               </div>
             </div>
           </div>
