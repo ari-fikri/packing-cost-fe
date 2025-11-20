@@ -192,11 +192,12 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         parentNo : data.parentNo,
         cpsNo: data.cpsNo,
         calculationTime: new Date().toISOString(),
-        subTotalManhour: data.subTotalManhour,
-        subTotalLabor: data.subTotalLabor,
-        subTotalInland: data.subTotalInland,
-        subTotalInner: data.subTotalInner,
-        subTotalOuter: data.subTotalOuter,
+        subtotals: data.subtotals,
+        // subTotalManhour: data.subTotalManhour,
+        // subTotalLabor: data.subTotalLabor,
+        // subTotalInland: data.subTotalInland,
+        // subTotalInner: data.subTotalInner,
+        // subTotalOuter: data.subTotalOuter,
         total: data.total,
         cps : data.cps
       }));

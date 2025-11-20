@@ -100,8 +100,8 @@ export default function ResultSection({
           <tr style={{ backgroundColor: "#dee2e6" }}>
             {[...Array(6)].map((_, i) => (
               <React.Fragment key={i}>
-                <th>Total Cost</th>
-                <th>Prev Year</th>
+                <th>Prev</th>
+                <th>Current</th>
                 <th>Diff</th>
               </React.Fragment>
             ))}
@@ -126,11 +126,11 @@ export default function ResultSection({
               const isExpanded = expandedRows && expandedRows[globalIndex];
 
               // Calculate difference percentage for highlighting
-              const totalCost = Number(p.total?.totalCost ?? 0);
-              const prevYear = Number(p.total?.prevYear ?? 0);
-              const diffPerc = prevYear ? ((totalCost - prevYear) / prevYear) * 100 : 0;
+              const totalCost = Number(p.subtotals?.total?.total ?? 0);
+              const prevYear = Number(p.subtotals?.total?.prev_year ?? 0);
+              const diffPerc = Number(p.subtotals?.total?.diff ?? 0);
               const showRemark = diffPerc > threshold_percentage;
-
+              debugger;  
               return (
                 <React.Fragment key={globalIndex}>
                   <tr>
@@ -166,23 +166,23 @@ export default function ResultSection({
                     <td>{fmt(p.W)}</td>
                     <td>{fmt(p.H)}</td>
                     <td>{fmt(p.boxM3)}</td>
-                    <td>{fmt(p.inner?.totalCost)}</td>
-                    <td>{fmt(p.inner?.prevYear)}</td>
-                    <td>{fmt(p.inner?.diff)}</td>
-                    <td>{fmt(p.outer?.totalCost)}</td>
-                    <td>{fmt(p.outer?.prevYear)}</td>
-                    <td>{fmt(p.outer?.diff)}</td>
-                    <td>{fmt(p.material?.totalCost)}</td>
-                    <td>{fmt(p.material?.prevYear)}</td>
-                    <td>{fmt(p.material?.diff)}</td>
-                    <td>{fmt(p.labor?.totalCost)}</td>
-                    <td>{fmt(p.labor?.prevYear)}</td>
-                    <td>{fmt(p.labor?.diff)}</td>
-                    <td>{fmt(p.inland?.totalCost)}</td>
-                    <td>{fmt(p.inland?.prevYear)}</td>
-                    <td>{fmt(p.inland?.diff)}</td>
-                    <td>{fmt(p.total?.totalCost)}</td>
-                    <td>{fmt(p.total?.prevYear)}</td>
+                    <td>{fmt(p.subtotals?.inner?.prev_year)}</td>
+                    <td>{fmt(p.subtotals?.inner?.total)}</td>
+                    <td>{fmt(p.subtotals?.inner?.diff)}</td>
+                    <td>{fmt(p.subtotals?.outer?.prev_year)}</td>
+                    <td>{fmt(p.subtotals?.outer?.total)}</td>
+                    <td>{fmt(p.subtotals?.outer?.diff)}</td>
+                    <td>{fmt(p.subtotals?.material?.prev_year)}</td>
+                    <td>{fmt(p.subtotals?.material?.total)}</td>
+                    <td>{fmt(p.subtotals?.material?.diff)}</td>
+                    <td>{fmt(p.subtotals?.labor?.prev_year)}</td>
+                    <td>{fmt(p.subtotals?.labor?.total)}</td>
+                    <td>{fmt(p.subtotals?.labor?.diff)}</td>
+                    <td>{fmt(p.subtotals?.inland?.prev_year)}</td>
+                    <td>{fmt(p.subtotals?.inland?.total)}</td>
+                    <td>{fmt(p.subtotals?.inland?.diff)}</td>
+                    <td>{fmt(p.subtotals?.total?.prev_year)}</td>
+                    <td>{fmt(p.subtotals?.total?.total)}</td>
                     {/* Difference cell with conditional styling */}
                     <td
                       style={{
@@ -190,7 +190,7 @@ export default function ResultSection({
                         fontWeight: diffPerc > threshold_percentage ? 'bold' : undefined,
                       }}
                     >
-                      {fmt(p.total?.diff)}
+                      {fmt(p.subtotals?.total?.diff)}
                     </td>
                     {/* Remark textarea, shown conditionally */}
                     <td>
