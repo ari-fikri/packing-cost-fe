@@ -101,6 +101,16 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
     setDocDrawing('')
   }
 
+  function handleSearchEWH() {
+    // For demonstration, using mock data. Replace with actual API call.
+    const randomMaterialNo = `EWH-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+    const randomPrice = (Math.random() * 1000).toFixed(2)
+
+    setEWarehouse(randomMaterialNo)
+    setEWarehousePrice(randomPrice)
+    setPrice(randomPrice)
+  }
+
   function handleClose() {
     handleClear()
     onClose()
@@ -125,21 +135,35 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           </div>
         </div>
 
-        <div className="card-body">
+        <div className="card-body" style={{ fontSize: '0.7rem' }}>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
                 <label className="form-label">
-                  Material No <span className="text-danger">*</span>
+                  Item No <span className="text-danger">*</span>
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={materialNo}
-                  onChange={e => setMaterialNo(e.target.value)}
-                  placeholder="Enter Material No"
-                  autoFocus
-                />
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={materialNo}
+                    onChange={e => setMaterialNo(e.target.value)}
+                    placeholder="Enter Item No"
+                    autoFocus
+                  />
+                  <div className="input-group-append">
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                      style={{ fontSize: '0.8rem' }}
+                      onClick={handleSearchEWH}
+                      disabled={!materialNo}
+                    >
+                      <i className="fas fa-search mr-1"></i>
+                      Search eWH
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="form-group">
@@ -190,10 +214,12 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
             </div>
           </div>
 
+          {/* Supplier Section */}
+          <h5 className="mt-3"><b>Supplier</b></h5>
           <div className="row">
-            <div className="col-6">
+            <div className="col-md-6">
               <div className="form-group">
-                <label className="form-label">Supplier Code</label>
+                <label className="form-label">Code</label>
                 <input
                   type="text"
                   className="form-control"
@@ -202,23 +228,6 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   placeholder="Enter Supplier Code"
                 />
               </div>
-            </div>
-            <div className="col-6">
-              <div className="form-group">
-                <label className="form-label">Supplier Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={supplierName}
-                  readOnly
-                  placeholder="Supplier Name"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-6">
               <div className="form-group">
                 <label className="form-label">Address</label>
                 <input
@@ -229,18 +238,18 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   placeholder="Address"
                 />
               </div>
+            </div>
+            <div className="col-md-6">
               <div className="form-group">
-                <label className="form-label">eWarehouse Item No</label>
+                <label className="form-label">Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  value={eWarehouse}
-                  onChange={e => setEWarehouse(e.target.value)}
-                  placeholder="eWarehouse Item No"
+                  value={supplierName}
+                  readOnly
+                  placeholder="Supplier Name"
                 />
               </div>
-            </div>
-            <div className="col-6">
               <div className="form-group">
                 <label className="form-label">Plant Code</label>
                 <input
@@ -251,8 +260,26 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   placeholder="Plant Code"
                 />
               </div>
+            </div>
+          </div>
+
+          <h6 className="mt-3"><b>eWarehouse</b></h6>
+          <div className="row">
+            <div className="col-6">
               <div className="form-group">
-                <label className="form-label">eWarehouse Price</label>
+                <label className="form-label">Item No</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={eWarehouse}
+                  onChange={e => setEWarehouse(e.target.value)}
+                  placeholder="Item No"
+                />
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="form-group">
+                <label className="form-label">Price</label>
                 <input
                   type="number"
                   className="form-control"
@@ -266,28 +293,29 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
             </div>
           </div>
 
+          <h6 className="mt-3"><b>Dimension</b></h6>
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Length (mm) <span className="text-danger">*</span></label>
+                <label className="form-label">Length (mm) <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
                   value={dimLength}
                   onChange={e => setDimLength(e.target.value)}
-                  placeholder="Dim Length (mm)"
+                  placeholder="Length (mm)"
                 />
               </div>
             </div>
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Weight/pc (gr)</label>
+                <label className="form-label">Weight/pc (gr)</label>
                 <input
                   type="number"
                   className="form-control"
                   value={dimWeightPc}
                   onChange={e => setDimWeightPc(e.target.value)}
-                  placeholder="Dim Weight/pc (gr)"
+                  placeholder="Weight/pc (gr)"
                 />
               </div>
             </div>
@@ -296,25 +324,25 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Width (mm) <span className="text-danger">*</span></label>
+                <label className="form-label">Width (mm) <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
                   value={dimWidth}
                   onChange={e => setDimWidth(e.target.value)}
-                  placeholder="Dim Width (mm)"
+                  placeholder=" Width (mm)"
                 />
               </div>
             </div>
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Qty/Bundling</label>
+                <label className="form-label">Qty/Bundling</label>
                 <input
                   type="number"
                   className="form-control"
                   value={dimQtyBundling}
                   onChange={e => setDimQtyBundling(e.target.value)}
-                  placeholder="Dim Qty/Bundling"
+                  placeholder="Qty/Bundling"
                 />
               </div>
             </div>
@@ -323,34 +351,35 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Height (mm) <span className="text-danger">*</span></label>
+                <label className="form-label">Height (mm) <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
                   value={dimHeight}
                   onChange={e => setDimHeight(e.target.value)}
-                  placeholder="Dim Height (mm)"
+                  placeholder="Height (mm)"
                 />
               </div>
             </div>
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Total Dim Weight (gr)</label>
+                <label className="form-label">Total Weight (gr)</label>
                 <input
                   type="number"
                   className="form-control"
                   value={totalDimWeight}
                   onChange={e => setTotalDimWeight(e.target.value)}
-                  placeholder="Total Dim Weight (gr)"
+                  placeholder="Total Weight (gr)"
                 />
               </div>
             </div>
           </div>
 
+          <h6 className="mt-3"><b>Documents</b></h6>
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Doc MSDS</label>
+                <label className="form-label">MSDS</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span className="input-group-text"><i className="fas fa-image"></i></span>
@@ -366,7 +395,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
             </div>
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Doc Drawing</label>
+                <label className="form-label">Drawing</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span className="input-group-text"><i className="fas fa-image"></i></span>
@@ -380,12 +409,6 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="form-group mt-3">
-            <small className="text-muted">
-              <span className="text-danger">*</span> Required fields
-            </small>
           </div>
         </div>
 
