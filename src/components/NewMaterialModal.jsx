@@ -159,7 +159,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
 
             <div className="col-md-6">
               <div className="form-group">
-                <label className="form-label">Price</label>
+                <label className="form-label">Price <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
@@ -269,7 +269,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Length (mm)</label>
+                <label className="form-label">Dim Length (mm) <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
@@ -296,7 +296,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Width (mm)</label>
+                <label className="form-label">Dim Width (mm) <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
@@ -323,7 +323,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                <label className="form-label">Dim Height (mm)</label>
+                <label className="form-label">Dim Height (mm) <span className="text-danger">*</span></label>
                 <input
                   type="number"
                   className="form-control"
