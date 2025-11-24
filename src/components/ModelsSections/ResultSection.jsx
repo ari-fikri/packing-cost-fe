@@ -18,27 +18,27 @@ export default function ResultSection({
       {/* Fixed Table Container with Scrollable Body */}
       <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
         <table className="table table-striped table-sm mb-0">
-          <thead className="thead-light" style={{ position: 'sticky', top: 0, zIndex: 5 }}>
+          <thead className="thead-light" style={{ position: 'sticky', top: 0, zIndex: 5, fontSize: '0.8rem' }}>
             <tr>
-              <th style={{ width: 50 }}>No</th>
-              <th>Model Code</th>
-              <th>Model Name</th>
-              <th>CFC</th>
-              <th>Type</th>
-              <th>Project Code</th>
-              <th>Impl Period</th>
-              <th>Dest Code</th>
-              <th>Country Code</th>
-              <th>Country</th>
-              <th>Remark</th>
-              <th>Parts</th>
-              <th style={{ width: 120 }}>Action</th>
+              <th style={{ width: 50, textAlign: 'center' }}>No</th>
+              <th style={{ textAlign: 'center' }}>Model Code</th>
+              <th style={{ textAlign: 'center' }}>Model Name</th>
+              <th style={{ textAlign: 'center' }}>CFC</th>
+              <th style={{ textAlign: 'center' }}>Type</th>
+              <th style={{ textAlign: 'center' }}>Project Code</th>
+              <th style={{ textAlign: 'center' }}>Impl Period</th>
+              <th style={{ textAlign: 'center' }}>Dest Code</th>
+              <th style={{ textAlign: 'center' }}>Country Code</th>
+              <th style={{ textAlign: 'center' }}>Country</th>
+              <th style={{ textAlign: 'center' }}>Remark</th>
+              <th style={{ textAlign: 'center' }}>Parts</th>
+              <th style={{ width: 120, textAlign: 'center' }}>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ fontSize: '0.8rem' }}>
             {paginatedModels.length === 0 ? (
               <tr>
-                <td colSpan="13" className="text-center py-4 text-muted">No Data Found</td>
+                <td colSpan="13" className="text-center">No models found</td>
               </tr>
             ) : (
               paginatedModels.map((m, idx) => {
@@ -46,17 +46,17 @@ export default function ResultSection({
                 return (
                 <tr key={idx}>
                   <td>{(currentPage - 1) * pageSize + idx + 1}</td>
-                  <td>{m.model_code}</td>
-                  <td>{m.model_name}</td>
-                  <td>{m.model_cfc}</td>
-                  <td>{m.model_type}</td>
-                  <td>{m.project?.project_code}</td>
-                  <td>{m.model_implementation_period}</td>
-                  <td>{m.model_destination_code}</td>
-                  <td>{destination ? destination.code : ''}</td>
-                  <td>{destination ? destination.country : ''}</td>
-                  <td>{m.model_remark}</td>
-                  <td>{Array.isArray(m.parts) ? m.parts.length : 0}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_code}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_name}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_cfc}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_type}</td>
+                  <td style={{ textAlign: 'center' }}>{m.project?.project_code}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_implementation_period}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_destination_code}</td>
+                  <td style={{ textAlign: 'center' }}>{destination ? destination.code : ''}</td>
+                  <td style={{ textAlign: 'center' }}>{destination ? destination.country : ''}</td>
+                  <td style={{ textAlign: 'center' }}>{m.model_remark}</td>
+                  <td style={{ textAlign: 'right' }}>{Array.isArray(m.parts) ? m.parts.length : 0}</td>
                   <td>
                     <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEditModel((currentPage - 1) * pageSize + idx)}>
                       <i className="fas fa-pencil-alt" />
