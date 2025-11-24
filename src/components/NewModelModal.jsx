@@ -88,15 +88,42 @@ export default function NewModelModal({
 
   // Handler: Process selected parts from part picker
   function handlePartPicked(selectedParts) {
-    // selectedParts is an array of part objects from the part picker
-    setParts(prev => [...prev, ...selectedParts])                       // Add selected parts to existing parts array
-    setShowPartPicker(false)                                             // Close part picker modal
+    const newParts = selectedParts.map(p => ({
+      partNo: p.partNo || '',
+      suffix: '', // Not provided by picker
+      name: p.partName || '', // Map from partName
+      parent: p.parentPartNo || '', // Map from parentPartNo
+      supplierId: p.supplierId || '',
+      supplierName: p.supplierName || '',
+      L: p.L || 0,
+      W: p.W || 0,
+      H: p.H || 0,
+      wtPerPc: p.wtPerPc || 0, // Not provided, default to 0
+      qty: 1, // Default to 1
+      totalWt: p.wtPerPc ? (1 * p.wtPerPc).toFixed(2) : 0
+    }));
+    setParts(prev => [...prev, ...newParts]);
+    setShowPartPicker(false);
   }
 
   // Handler: Remove specific part from parts array
   function handleRemovePart(idx) {
     setParts(prev => prev.filter((_, i) => i !== idx))                   // Remove part at specified index
   }
+  function handlePartDataChange(index, field, value) {
+    const newParts = [...parts];
+    const part = { ...newParts[index] };
+    part[field] = value;
+
+    if (field === 'qty' || field === 'wtPerPc') {
+        const qty = field === 'qty' ? value : part.qty;
+        const wtPerPc = field === 'wtPerPc' ? value : part.wtPerPc;
+        part.totalWt = (Number(qty) * Number(wtPerPc)).toFixed(2);
+    }
+
+    newParts[index] = part;
+    setParts(newParts);
+}
 
   // Handler: Destination code change with auto-population logic
   function handleDestinationCodeChange(value) {
@@ -153,7 +180,7 @@ export default function NewModelModal({
   return (
     <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}>
       {/* Modal Container */}
-      <div className="np-modal card card-outline card-success" style={{ maxWidth: 980 }}>
+      <div className="np-modal card card-outline card-success" style={{ maxWidth: 1200 }}>
         
         {/* === MODAL HEADER SECTION === */}
         <div className="card-header d-flex align-items-center">
@@ -216,7 +243,7 @@ export default function NewModelModal({
           {/* Row 3: Implementation Period & Destination Code */}
           <div className="row">
             <div className="col-md-6">
-              <label className="small">Implementation Period <span style={{color: 'red'}}>*</span> <span className="text-muted ml-2"><i>e.g., Q2 2025</i></span></label>
+              <label className="small">Implementation Period <span style={{color: 'red'}}>*</span> <span className="text-muted ml-2"><i>e.g., 02.2025</i></span></label>
               <input className="form-control form-control-sm mb-2" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value)} placeholder="Implementation Period" />
             </div>
             <div className="col-md-6">
@@ -270,23 +297,23 @@ export default function NewModelModal({
           {/* Responsive Table Container */}
           <div className="table-responsive">
             {/* Parts Information Table */}
-            <table className="table table-sm table-bordered mb-2">
+            <table className="table table-sm table-bordered mb-2" style={{ fontSize: '0.8rem' }}>
               {/* Table Header */}
-              <thead>
+              <thead className="thead-light">
                 <tr>
-                  <th>Part No</th>        {/* Part number column */}
-                  <th>Suffix</th>         {/* Part suffix column */}
-                  <th>Name</th>           {/* Part name column */}
-                  <th>Parent</th>         {/* Parent part column */}
-                  <th>Supplier ID</th>    {/* Supplier ID column */}
-                  <th>Supplier Name</th>  {/* Supplier name column */}
-                  <th>L</th>              {/* Length dimension column */}
-                  <th>W</th>              {/* Width dimension column */}
-                  <th>H</th>              {/* Height dimension column */}
-                  <th>Wt/PC</th>          {/* Weight per piece column */}
-                  <th>Qty</th>            {/* Quantity column */}
-                  <th>Total Wt</th>       {/* Total weight column */}
-                  <th style={{ width: 90 }}>Action</th>  {/* Action buttons column */}
+                  <th style={{ width: 130,textAlign: 'center' }}>Part No</th>
+                  <th style={{ width: 50,textAlign: 'center' }}>Suffix</th>
+                  <th style={{ textAlign: 'center' }}>Name</th>
+                  <th style={{ textAlign: 'center' }}>Parent</th>
+                  <th style={{ width: 50,textAlign: 'center' }}>Supplier ID</th>
+                  <th style={{ textAlign: 'center' }}>Supplier Name</th>
+                  <th style={{ width: 60,textAlign: 'center' }}>L</th>
+                  <th style={{ width: 60,textAlign: 'center' }}>W</th>
+                  <th style={{ width: 60,textAlign: 'center' }}>H</th>
+                  <th style={{ width: 60,textAlign: 'center' }}>Wt/pc</th>
+                  <th style={{ width: 60,textAlign: 'center' }}>Qty</th>
+                  <th style={{ width: 70,textAlign: 'center' }}>Total Wt</th>
+                  <th style={{ width: 70, textAlign: 'center' }}>Action</th>
                 </tr>
               </thead>
               {/* Table Body - Dynamic content based on parts array */}
@@ -300,18 +327,18 @@ export default function NewModelModal({
                   /* Parts Data Rows - Map through parts array */
                   parts.map((p, idx) => (
                     <tr key={idx}>
-                      <td>{p.partNo}</td>        {/* Display part number */}
-                      <td>{p.suffix}</td>        {/* Display part suffix */}
-                      <td>{p.name}</td>          {/* Display part name */}
-                      <td>{p.parent}</td>        {/* Display parent part */}
-                      <td>{p.supplierId}</td>    {/* Display supplier ID */}
-                      <td>{p.supplierName}</td>  {/* Display supplier name */}
-                      <td>{p.L}</td>             {/* Display length */}
-                      <td>{p.W}</td>             {/* Display width */}
-                      <td>{p.H}</td>             {/* Display height */}
-                      <td>{p.wtPerPc}</td>       {/* Display weight per piece */}
-                      <td>{p.qty}</td>           {/* Display quantity */}
-                      <td>{p.totalWt}</td>       {/* Display total weight */}
+                      <td><input type="text" className="form-control form-control-sm" value={p.partNo} onChange={e => handlePartDataChange(idx, 'partNo', e.target.value)} /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.suffix} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.name} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.parent} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.supplierId} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.supplierName} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" style={{ textAlign: 'right' }} value={p.L} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" style={{ textAlign: 'right' }} value={p.W} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" style={{ textAlign: 'right' }} value={p.H} readOnly /></td>
+                      <td><input type="text" className="form-control form-control-sm" style={{ textAlign: 'right' }} value={p.wtPerPc} readOnly /></td>
+                      <td><input type="number" className="form-control form-control-sm" style={{ textAlign: 'right' }} value={p.qty} onChange={e => handlePartDataChange(idx, 'qty', e.target.value)} /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.totalWt} readOnly /></td>
                       <td>
                         {/* Remove Part Button */}
                         <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleRemovePart(idx)}>
