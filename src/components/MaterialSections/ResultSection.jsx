@@ -40,8 +40,8 @@ export default function ResultSection({
                  <td className="text-center">{material.materialNo}</td>
                  <td>{material.materialName}</td>
                  <td className="text-center">{material.price}</td>
-                 <td className="text-center">{material.itemNo}</td>
-                 <td className="text-center">{material.ewarehouse_price}</td>
+                 <td className="text-center">{material.eWarehouse}</td>
+                 <td className="text-center">{material.eWarehousePrice}</td>
                  <td className="text-center">{material.materialType}</td>
                   <td>
                     <button 
