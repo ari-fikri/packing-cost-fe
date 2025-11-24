@@ -122,7 +122,7 @@ export default function SearchSection({
       {/* Action buttons */}
       <div className="d-flex justify-content-end mb-3">
         <button type="button" className="btn btn-sm btn-primary mr-2" onClick={handleFilter}>
-          <i className="fas fa-search mr-1" /> Filter
+          <i className="fas fa-search mr-1" /> Search
         </button>
         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={handleClear}>
           <i className="fas fa-times mr-1" /> Clear

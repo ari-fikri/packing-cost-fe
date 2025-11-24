@@ -4,6 +4,29 @@ import PackingCostNewModal from '../../components/PackingCostNewModal'
 import SearchSection from './CalculatePackingCostSections/SearchSection';
 import ResultSection from './CalculatePackingCostSections/ResultSection';
 
+const initialRows = [
+  {
+    calCode: 'PC001',
+    period: '03.2025',
+    destCode: 'ID',
+    destCountry: 'Indonesia',
+    modelCode: '579W',
+    numParts: 5,
+    type: 'PxP',
+    parts: []
+  },
+  {
+    calCode: 'PC002',
+    period: '03.2025',
+    destCode: 'TH',
+    destCountry: 'Thailand',
+    modelCode: '579W',
+    numParts: 3,
+    type: 'Lot',
+    parts: []
+  }
+];
+
 export default function CalculatePackingCost() {
   // filters (two-column layout)
   const [calCode, setCalCode] = useState('')
@@ -13,7 +36,7 @@ export default function CalculatePackingCost() {
   const [type, setType] = useState('All') // 'All' | 'PxP' | 'Lot'
 
   // table / paging state (empty for now)
-  const [rows, setRows] = useState([]) // <-- use both!
+  const [rows, setRows] = useState(initialRows) // <-- use both!
   const [perPage, setPerPage] = useState(3)
   const [page, setPage] = useState(1)
   const total = rows.length
@@ -34,6 +57,7 @@ export default function CalculatePackingCost() {
     setDestCode('All')
     setModelCode('')
     setType('All')
+    setRows([])
     setPage(1)
   }
 

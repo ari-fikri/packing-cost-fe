@@ -65,7 +65,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
           <div className="row">
             <div className="col-12 col-md-6">
               <div className="form-group">
-                <label className="small">Project Code</label>
+                <label className="small">Project Code <span style={{color: 'red'}}>*</span></label>
                 <input className="form-control form-control-sm mb-2" value={code} onChange={e => setCode(e.target.value)} placeholder="Project Code" />
               </div>
               <div className="form-group">
@@ -73,7 +73,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
                 <input className="form-control form-control-sm mb-2" value={name} onChange={e => setName(e.target.value)} placeholder="Project Name" />
               </div>
               <div className="form-group">
-                <label className="small">Status</label>
+                <label className="small">Status <span style={{color: 'red'}}>*</span></label>
                 <select className="form-control form-control-sm mb-2" value={status} onChange={e => setStatus(e.target.value)}>
                   <option>Draft</option>
                   <option>Active</option>

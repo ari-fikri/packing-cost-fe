@@ -47,7 +47,7 @@ export default function ResultSection({
                 return (
                   <React.Fragment key={i}>
                     <tr>
-                      <td>{fmt(fullIndex + 1)}</td>
+                      <td>{String(fullIndex + 1).padStart(2, '0')}</td>
                       <td>{r.calCode}</td>
                       <td>{r.period}</td>
                       <td>{r.destCode}</td>
