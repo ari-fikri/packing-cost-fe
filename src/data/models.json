@@ -1,720 +1,812 @@
 [
   {
-    "code": "024J",
-    "name": "Front Bumper Model",
-    "implementationPeriod": "001.2025",
-    "destinationCode": "807B",
-    "destinationCountryCode": "TMMIN",
-    "country": "INDONESIA",
-    "remark": "Prototype 2025",
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "model canggih 1",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "Proto 1",
+    "model_type": "eng",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "16261BZ76000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "131110E010",
-        "part_name": "RING, COMPRESSION, NO.1",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "286W",
-    "name": "Rear Bumper Model",
-    "implementationPeriod": "004.2024",
-    "destinationCode": "722C",
-    "destinationCountryCode": "TMT",
-    "country": "THAILAND",
-    "remark": "Production 2024",
+    "model_code": "024J722C286WLOT",
+    "model_cfc": "286W",
+    "model_name": "model canggih 2",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": " Proto 2",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ38000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      },
-      {
-        "part_no": "115130Y04000",
-        "part_name": "CAP, CRANKSHAFT BEARING, NO.3",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "90406T001100",
-        "part_name": "TUBE, UNION",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "332W",
-    "name": "Hood Model",
-    "implementationPeriod": "002.2023",
-    "destinationCode": "301B",
-    "destinationCountryCode": "TAR",
-    "country": "ARGENTINA",
-    "remark": "Prototype 2023",
+    "model_code": "286W722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
     "project": {
-      "code": "286W",
-      "name": "Project 2",
-      "manager": "Budi Santoso",
-      "status": "Active"
-    },
-    "parts": [
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "17173BZ13000",
-        "part_name": "GASKET, EXHAUST MANIFOLD",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      }
-    ]
+      "project_code": "286W",
+      "project_name": "Project 2",
+      "project_manager": "Budi Santoso",
+      "project_status": "Active"
+    }
   },
   {
-    "code": "385W",
-    "name": "Fender Model",
-    "implementationPeriod": "003.2022",
-    "destinationCode": "807B",
-    "destinationCountryCode": "TMMIN",
-    "country": "INDONESIA",
-    "remark": "Production 2022",
+    "model_code": "286W301B332WENG",
+    "model_cfc": "332W",
+    "model_name": "Model 332W",
+    "model_implementation_period": "02.2023",
+    "model_destination_code": "301B",
+    "model_remark": "",
+    "model_type": "eng",
     "project": {
-      "code": "286W",
-      "name": "Project 2",
-      "manager": "Budi Santoso",
-      "status": "Active"
-    },
-    "parts": [
-      {
-        "part_no": "16264BZ39000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      },
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "131110E010",
-        "part_name": "RING, COMPRESSION, NO.1",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      }
-    ]
+      "project_code": "286W",
+      "project_name": "Project 2",
+      "project_manager": "Budi Santoso",
+      "project_status": "Active"
+    }
   },
   {
-    "code": "388W",
-    "name": "Grille Model",
-    "implementationPeriod": "001.2021",
-    "destinationCode": "722C",
-    "destinationCountryCode": "TMT",
-    "country": "THAILAND",
-    "remark": "Prototype 2021",
+    "model_code": "286W807B385WENG",
+    "model_cfc": "385W",
+    "model_name": "Model 385W",
+    "model_implementation_period": "03.2022",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
     "project": {
-      "code": "385W",
-      "name": "Project 4",
-      "manager": "John Doe",
-      "status": "Completed"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      }
-    ]
+      "project_code": "286W",
+      "project_name": "Project 2",
+      "project_manager": "Budi Santoso",
+      "project_status": "Active"
+    }
   },
   {
-    "code": "999W",
-    "name": "Sample Model NOT FOR SALE",
-    "implementationPeriod": "004.2025",
-    "destinationCode": "301B",
-    "destinationCountryCode": "TAR",
-    "country": "ARGENTINA",
-    "remark": "Prototype 2025",
+    "model_code": "332W301B332WPXP",
+    "model_cfc": "332W",
+    "model_name": "Model 332W",
+    "model_implementation_period": "02.2023",
+    "model_destination_code": "301B",
+    "model_remark": "",
+    "model_type": "pxp",
     "project": {
-      "code": "388W",
-      "name": "Project 5",
-      "manager": "Jane Smith",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ39000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      },
-      {
-        "part_no": "115110Y04000",
-        "part_name": "CAP, CRANKSHAFT BEARING, NO.1",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      },
-      {
-        "part_no": "90406T001300",
-        "part_name": "TUBE, UNION",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      }
-    ]
+      "project_code": "332W",
+      "project_name": "Project 3",
+      "project_manager": "Siti Aminah",
+      "project_status": "On Hold"
+    }
   },
   {
-    "code": "408W",
-    "name": "Side Panel Model",
-    "implementationPeriod": "002.2024",
-    "destinationCode": "812B",
-    "destinationCountryCode": "UMW",
-    "country": "MALAYSIA",
-    "remark": "Production 2024",
+    "model_code": "332W807B385WENG",
+    "model_cfc": "385W",
+    "model_name": "Model 385W",
+    "model_implementation_period": "03.2022",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
     "project": {
-      "code": "408W",
-      "name": "Project 6",
-      "manager": "Arif Fikri",
-      "status": "Active"
-    },
-    "parts": [
-      {
-        "part_no": "16261BZ76000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "16282BZ11000",
-        "part_name": "HOSE, WATER BY-PASS, NO.5",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      }
-    ]
+      "project_code": "332W",
+      "project_name": "Project 3",
+      "project_manager": "Siti Aminah",
+      "project_status": "On Hold"
+    }
   },
   {
-    "code": "488W",
-    "name": "Door Panel Model",
-    "implementationPeriod": "003.2023",
-    "destinationCode": "715B",
-    "destinationCountryCode": "TMV",
-    "country": "VIETNAM",
-    "remark": "Prototype 2023",
+    "model_code": "385W807B385WLOT",
+    "model_cfc": "385W",
+    "model_name": "Model 385W",
+    "model_implementation_period": "03.2022",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ38000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      }
-    ]
+      "project_code": "385W",
+      "project_name": "Project 4",
+      "project_manager": "John Doe",
+      "project_status": "Completed"
+    }
   },
   {
-    "code": "496W",
-    "name": "Trunk Lid Model",
-    "implementationPeriod": "001.2025",
-    "destinationCode": "811C",
-    "destinationCountryCode": "TMP",
-    "country": "PHILIPINE",
-    "remark": "Production 2025",
+    "model_code": "385W722C388WPXP",
+    "model_cfc": "388W",
+    "model_name": "Model 388W",
+    "model_implementation_period": "01.2021",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      }
-    ]
+      "project_code": "385W",
+      "project_name": "Project 4",
+      "project_manager": "John Doe",
+      "project_status": "Completed"
+    }
   },
   {
-    "code": "514W",
-    "name": "Roof Panel Model",
-    "implementationPeriod": "004.2022",
-    "destinationCode": "709B",
-    "destinationCountryCode": "TKM",
-    "country": "INDIA",
-    "remark": "Prototype 2022",
+    "model_code": "385W807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ76000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      }
-    ]
+      "project_code": "385W",
+      "project_name": "Project 4",
+      "project_manager": "John Doe",
+      "project_status": "Completed"
+    }
   },
   {
-    "code": "565W",
-    "name": "Quarter Panel Model",
-    "implementationPeriod": "002.2024",
-    "destinationCode": "537B",
-    "destinationCountryCode": "TSM",
-    "country": "AFRIKA",
-    "remark": "Production 2024",
+    "model_code": "388W722C388WLOT",
+    "model_cfc": "388W",
+    "model_name": "Model 388W",
+    "model_implementation_period": "01.2021",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ39000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "TOKAI RUBBER INDONESIA",
-        "supplier_code": "5365",
-        "sub_part": []
-      },
-      {
-        "part_no": "115130Y04000",
-        "part_name": "CAP, CRANKSHAFT BEARING, NO.3",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      }
-    ]
+      "project_code": "388W",
+      "project_name": "Project 5",
+      "project_manager": "Jane Smith",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "578W",
-    "name": "Mirror Cover Model",
-    "implementationPeriod": "001.2023",
-    "destinationCode": "704B",
-    "destinationCountryCode": "TMY",
-    "country": "MYANMAR",
-    "remark": "Prototype 2023",
+    "model_code": "388W301B999WLOT",
+    "model_cfc": "999W",
+    "model_name": "Model 999W",
+    "model_implementation_period": "04.2025",
+    "model_destination_code": "301B",
+    "model_remark": "",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "16261BZ76000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      }
-    ]
+      "project_code": "388W",
+      "project_name": "Project 5",
+      "project_manager": "Jane Smith",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "579W",
-    "name": "Spoiler Model",
-    "implementationPeriod": "003.2025",
-    "destinationCode": "303B",
-    "destinationCountryCode": "TDB",
-    "country": "BRAZIL",
-    "remark": "Production 2025",
+    "model_code": "408W812B408WPXP",
+    "model_cfc": "408W",
+    "model_name": "Model 408W",
+    "model_implementation_period": "02.2024",
+    "model_destination_code": "812B",
+    "model_remark": "",
+    "model_type": "pxp",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ38000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      }
-    ]
+      "project_code": "408W",
+      "project_name": "Project 6",
+      "project_manager": "Arif Fikri",
+      "project_status": "Active"
+    }
   },
   {
-    "code": "588W",
-    "name": "Running Board Model",
-    "implementationPeriod": "004.2024",
-    "destinationCode": "807B",
-    "destinationCountryCode": "TMMIN",
-    "country": "INDONESIA",
-    "remark": "Prototype 2024",
+    "model_code": "408W807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      }
-    ]
+      "project_code": "408W",
+      "project_name": "Project 6",
+      "project_manager": "Arif Fikri",
+      "project_status": "Active"
+    }
   },
   {
-    "code": "607W",
-    "name": "Mudguard Model",
-    "implementationPeriod": "002.2023",
-    "destinationCode": "722C",
-    "destinationCountryCode": "TMT",
-    "country": "THAILAND",
-    "remark": "Production 2023",
+    "model_code": "408W722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      }
-    ]
+      "project_code": "408W",
+      "project_name": "Project 6",
+      "project_manager": "Arif Fikri",
+      "project_status": "Active"
+    }
   },
   {
-    "code": "681W",
-    "name": "Wheel Arch Model",
-    "implementationPeriod": "001.2025",
-    "destinationCode": "301B",
-    "destinationCountryCode": "TAR",
-    "country": "ARGENTINA",
-    "remark": "Prototype 2025",
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ38000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      },
-      {
-        "part_no": "115130Y04000",
-        "part_name": "CAP, CRANKSHAFT BEARING, NO.3",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 1",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "688W",
-    "name": "Side Skirt Model",
-    "implementationPeriod": "003.2022",
-    "destinationCode": "812B",
-    "destinationCountryCode": "UMW",
-    "country": "MALAYSIA",
-    "remark": "Production 2022",
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "16261BZ76000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      },
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "111910Y01000",
-        "part_name": "TUBE, SPARK PLUG",
-        "supplier_name": "TOYOTA MOTOR THAILAND",
-        "supplier_code": "722E",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 1",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "757W",
-    "name": "Headlight Cover Model",
-    "implementationPeriod": "004.2024",
-    "destinationCode": "715B",
-    "destinationCountryCode": "TMV",
-    "country": "VIETNAM",
-    "remark": "Prototype 2024",
+    "model_code": "024J722C024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 2",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "758W",
-    "name": "Taillight Cover Model",
-    "implementationPeriod": "002.2023",
-    "destinationCode": "811C",
-    "destinationCountryCode": "TMP",
-    "country": "PHILIPINE",
-    "remark": "Production 2023",
+    "model_code": "024J807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "111150Y03000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "NAMICOH INDONESIA",
-        "supplier_code": "5150",
-        "sub_part": []
-      },
-      {
-        "part_no": "16264BZ38000",
-        "part_name": "HOSE, WATER BY-PASS, NO.2",
-        "supplier_name": "MENARA TERUS MAKMUR",
-        "supplier_code": "5062",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 3",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   },
   {
-    "code": "824W",
-    "name": "License Plate Frame Model",
-    "implementationPeriod": "001.2025",
-    "destinationCode": "709B",
-    "destinationCountryCode": "TKM",
-    "country": "INDIA",
-    "remark": "Prototype 2025",
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
     "project": {
-      "code": "024J",
-      "name": "Project 1",
-      "manager": "Arif Fikri",
-      "status": "Draft"
-    },
-    "parts": [
-      {
-        "part_no": "11115BZ16000",
-        "part_name": "GASKET, CYLINDER HEAD",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      },
-      {
-        "part_no": "16261BZ75000",
-        "part_name": "HOSE, WATER BY-PASS, NO.1",
-        "supplier_name": "VELASTO INDONESIA",
-        "supplier_code": "5453",
-        "sub_part": []
-      }
-    ]
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 3",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 4",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 4",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 5",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 5",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JPXP",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 6",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WLOT",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 6",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 7",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 7",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 8",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WLOT",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 8",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JPXP",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 9",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 9",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 10",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WLOT",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 10",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 11",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 11",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 12",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 12",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JPXP",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 13",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 13",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 14",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 14",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JPXP",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 15",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 15",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 16",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 16",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 17",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 17",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JPXP",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 18",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WENG",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 18",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JLOT",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 19",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WPXP",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "pxp",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 19",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J807B024JENG",
+    "model_cfc": "024J",
+    "model_name": "Model 024J",
+    "model_implementation_period": "01.2025",
+    "model_destination_code": "807B",
+    "model_remark": "",
+    "model_type": "eng",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 20",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
+  },
+  {
+    "model_code": "024J722C286WLOT",
+    "model_cfc": "286W",
+    "model_name": "Model 286W",
+    "model_implementation_period": "04.2024",
+    "model_destination_code": "722C",
+    "model_remark": "",
+    "model_type": "lot",
+    "project": {
+      "project_code": "024J",
+      "project_name": "Project 1 Extra 20",
+      "project_manager": "Arif Fikri",
+      "project_status": "Draft"
+    }
   }
 ]

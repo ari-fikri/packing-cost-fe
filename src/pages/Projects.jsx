@@ -91,23 +91,36 @@ export default function Projects() {
 
   // Saves a new project or updates an existing one.
   function handleSaveNew(payload) {
-    const newRow = {
-      code: payload.code || `CFC-${((results || []).length + 1).toString().padStart(3, '0')}`,
-      name: payload.name || '(No name)',
-      manager: payload.manager || '',
-      status: payload.status || 'Draft',
-      models: (payload.models || []).map(m => m.code).join(', ')
-    }
-
     // If editingIndex is not null, update the existing project.
     if (editingIndex !== null) {
-      setResults(prev => prev.map((r, i) => (i === editingIndex ? newRow : r)))
+      setResults(prev => prev.map((r, i) => {
+        if (i !== editingIndex) return r;
+        return {
+          ...r, // Keep existing fields
+          project_code: payload.code,
+          project_name: payload.name,
+          project_manager: payload.manager,
+          project_status: payload.status,
+          description: payload.description,
+          note: payload.note,
+          models: payload.models,
+        };
+      }));
     } else {
       // Otherwise, add the new project to the beginning of the results.
-      setResults(prev => [newRow, ...(prev || [])])
+      const newRow = {
+        project_code: payload.code || `CFC-${((results || []).length + 1).toString().padStart(3, '0')}`,
+        project_name: payload.name || '(No name)',
+        project_manager: payload.manager || '',
+        project_status: payload.status || 'Draft',
+        description: payload.description,
+        note: payload.note,
+        models: payload.models,
+      };
+      setResults(prev => [newRow, ...(prev || [])]);
     }
-    setShowNewModal(false) // Close the modal.
-    setEditingIndex(null) // Reset editing index.
+    setShowNewModal(false); // Close the modal.
+    setEditingIndex(null); // Reset editing index.
   }
 
   // Opens the modal in edit mode for a specific project.

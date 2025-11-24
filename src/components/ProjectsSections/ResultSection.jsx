@@ -35,14 +35,14 @@ export default function ResultSection({
             {paginatedResults.map((r, idx) => (
               <tr key={idx}>
                 <td>{(currentPage - 1) * pageSize + idx + 1}</td>
-                <td>{r.code}</td>
-                <td>{r.name}</td>
-                <td>{r.manager}</td>
-                <td>{r.status}</td>
+                <td>{r.project_code}</td>
+                <td>{r.project_name}</td>
+                <td>{r.project_manager}</td>
+                <td>{r.project_status}</td>
                 <td>
                   {Array.isArray(r.models)
                     ? r.models
-                        .map(m => (typeof m === 'string' ? m : m.code))
+                        .map(m => (typeof m === 'string' ? m : m.model_code))
                         .join(', ')
                     : r.models}
                 </td>

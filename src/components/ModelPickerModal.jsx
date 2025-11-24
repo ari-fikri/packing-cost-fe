@@ -6,6 +6,10 @@ import modelsData from "../data/models.json";
 export default function ModelPickerModal({ show, onClose, onAdd, selectionMode = "multi" }) {
   const [filterCode, setFilterCode] = useState("");
   const [filterName, setFilterName] = useState("");
+  const [filterCfc, setFilterCfc] = useState("");
+  const [filterDestCode, setFilterDestCode] = useState("");
+  const [filterImplPeriod, setFilterImplPeriod] = useState("");
+  const [filterType, setFilterType] = useState("");
   const [filterRemark, setFilterRemark] = useState("");
   const [selectedModels, setSelectedModels] = useState(selectionMode === "multi" ? [] : null);
   const [displayedModels, setDisplayedModels] = useState(modelsData);
@@ -16,6 +20,10 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
     if (show) {
       setFilterCode("");
       setFilterName("");
+      setFilterCfc("");
+      setFilterDestCode("");
+      setFilterImplPeriod("");
+      setFilterType("");
       setFilterRemark("");
       setSelectedModels(selectionMode === "multi" ? [] : null);
       setDisplayedModels(modelsData);
@@ -34,9 +42,13 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
   const handleSearch = () => {
     const filtered = modelsData.filter(
       (m) =>
-        m.code.toLowerCase().includes(filterCode.toLowerCase()) &&
-        m.name.toLowerCase().includes(filterName.toLowerCase()) &&
-        m.remark.toLowerCase().includes(filterRemark.toLowerCase())
+        m.model_code.toLowerCase().includes(filterCode.toLowerCase()) &&
+        m.model_name.toLowerCase().includes(filterName.toLowerCase()) &&
+        (m.model_cfc || '').toLowerCase().includes(filterCfc.toLowerCase()) &&
+        (m.destination_code || '').toLowerCase().includes(filterDestCode.toLowerCase()) &&
+        (m.model_implementation_period || '').toLowerCase().includes(filterImplPeriod.toLowerCase()) &&
+        (m.model_type || '').toLowerCase().includes(filterType.toLowerCase()) &&
+        m.model_remark.toLowerCase().includes(filterRemark.toLowerCase())
     );
     setDisplayedModels(filtered);
     setCurrentPage(1);
@@ -45,6 +57,10 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
   const handleClear = () => {
     setFilterCode("");
     setFilterName("");
+    setFilterCfc("");
+    setFilterDestCode("");
+    setFilterImplPeriod("");
+    setFilterType("");
     setFilterRemark("");
     setDisplayedModels(modelsData);
     setCurrentPage(1);
@@ -53,9 +69,9 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
   const handleAdd = () => {
     if (typeof onAdd === "function") {
       if (selectionMode === "multi") {
-        onAdd(selectedModels.map((code) => modelsData.find((m) => m.code === code)));
+        onAdd(selectedModels.map((code) => modelsData.find((m) => m.model_code === code)));
       } else {
-        const selectedModel = modelsData.find((m) => m.code === selectedModels);
+        const selectedModel = modelsData.find((m) => m.model_code === selectedModels);
         onAdd(selectedModel);
       }
     }
@@ -98,7 +114,7 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
           <div className="modal-body">
             {/* Filters */}
             <div className="form-row align-items-end mb-3">
-              <div className="form-group col-md-3">
+              <div className="form-group col-md-2">
                 <label className="small">Model Code</label>
                 <input
                   type="text"
@@ -107,7 +123,7 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
                   onChange={(e) => setFilterCode(e.target.value)}
                 />
               </div>
-              <div className="form-group col-md-4">
+              <div className="form-group col-md-2">
                 <label className="small">Name</label>
                 <input
                   type="text"
@@ -116,13 +132,40 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
                   onChange={(e) => setFilterName(e.target.value)}
                 />
               </div>
-              <div className="form-group col-md-3">
-                <label className="small">Remark</label>
+              <div className="form-group col-md-1">
+                <label className="small">CFC</label>
                 <input
                   type="text"
                   className="form-control form-control-sm"
-                  value={filterRemark}
-                  onChange={(e) => setFilterRemark(e.target.value)}
+                  value={filterCfc}
+                  onChange={(e) => setFilterCfc(e.target.value)}
+                />
+              </div>
+              <div className="form-group col-md-2">
+                <label className="small">Dest Code</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={filterDestCode}
+                  onChange={(e) => setFilterDestCode(e.target.value)}
+                />
+              </div>
+              <div className="form-group col-md-2">
+                <label className="small">Impl. Period</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={filterImplPeriod}
+                  onChange={(e) => setFilterImplPeriod(e.target.value)}
+                />
+              </div>
+              <div className="form-group col-md-1">
+                <label className="small">Type</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
                 />
               </div>
               <div className="form-group col-md-2 text-right">
@@ -144,30 +187,38 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
                       <th style={{ width: 30 }}></th>
                       <th>Model Code</th>
                       <th>Name</th>
+                      <th>CFC</th>
+                      <th>Dest Code</th>
+                      <th>Impl. Period</th>
+                      <th>Type</th>
                       <th>Remark</th>
                     </tr>
                   </thead>
                   <tbody>
                     {currentModels.length === 0 ? (
                       <tr>
-                        <td colSpan="4" className="text-center text-muted" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
+                        <td colSpan="8" className="text-center text-muted" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
                           No models found
                         </td>
                       </tr>
                     ) : (
                       currentModels.map((m) => (
-                        <tr key={m.code}>
+                        <tr key={m.model_code}>
                           <td>
                             <input
                               type={selectionMode === "multi" ? "checkbox" : "radio"}
                               name="model-selection"
-                              checked={selectionMode === "multi" ? selectedModels.includes(m.code) : selectedModels === m.code}
-                              onChange={() => handleSelectionChange(m.code)}
+                              checked={selectionMode === "multi" ? selectedModels.includes(m.model_code) : selectedModels === m.model_code}
+                              onChange={() => handleSelectionChange(m.model_code)}
                             />
                           </td>
-                          <td>{m.code}</td>
-                          <td>{m.name}</td>
-                          <td>{m.remark}</td>
+                          <td>{m.model_code}</td>
+                          <td>{m.model_name}</td>
+                          <td>{m.model_cfc}</td>
+                          <td>{m.destination_code}</td>
+                          <td>{m.model_implementation_period}</td>
+                          <td>{m.model_type}</td>
+                          <td>{m.model_remark}</td>
                         </tr>
                       ))
                     )}
@@ -198,7 +249,7 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
               </button>
             </div>
             <div>
-              <button className="btn btn-primary" onClick={handleAdd} type="button">
+              <button className="btn btn-primary mr-2" onClick={handleAdd} type="button">
                 Add <i className="fas fa-check" />
               </button>
               <button className="btn btn-secondary" onClick={onClose} type="button">
