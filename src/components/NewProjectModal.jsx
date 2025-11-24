@@ -32,7 +32,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
   }, [initialData, visible]);
 
   const handleAddModel = () => {
-    setModels(prev => [...prev, { code: '', name: '', remark: '' }]);
+    setModels(prev => [...prev, { code: '', cfc: '', name: '', implementation_period: '', destination_code: '', remark: '', model_type: '' }]);
   };
 
   const handleModelChange = (idx, field, value) => {
@@ -52,7 +52,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
 
   return (
     <div className="np-modal-backdrop" style={{ position: 'fixed', inset: 0, zIndex: 1040 }}>
-      <div className="np-modal card card-outline card-primary" style={{ maxWidth: 600, margin: '40px auto', zIndex: 1041 }}>
+      <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1000, margin: '40px auto', zIndex: 1041 }}>
         <div className="card-header d-flex align-items-center">
           <h3 className="card-title mb-0"><b>Project - New</b></h3>
           <div className="card-tools ml-auto">
@@ -121,16 +121,20 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
                 <table className="table table-sm table-bordered mb-0">
                   <thead>
                     <tr>
-                      <th style={{ width: 40 }}>No</th>
-                      <th>Model Code</th>
-                      <th>Model Name</th>
-                      <th>Remark</th>
-                      <th style={{ width: 90 }}>Action</th>
+                      <th style={{ width: 40, textAlign: 'center' }}>No</th>
+                      <th style={{ textAlign: 'center' }}>Model Code</th>
+                      <th style={{ textAlign: 'center' }}>CFC</th>
+                      <th style={{ textAlign: 'center' }}>Model Name</th>
+                      <th style={{ textAlign: 'center' }}>Impl. Period</th>
+                      <th style={{ textAlign: 'center' }}>Dest. Code</th>
+                      <th style={{ textAlign: 'center' }}>Type</th>
+                      <th style={{ textAlign: 'center' }}>Remark</th>
+                      <th style={{ width: 90, textAlign: 'center' }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {models.length === 0 ? (
-                      <tr><td colSpan="5" className="text-center text-muted py-4">No Data Found</td></tr>
+                      <tr><td colSpan="9" className="text-center text-muted py-4">No Data Found</td></tr>
                     ) : (
                       models.map((m, i) => (
                         <tr key={i}>
@@ -146,9 +150,41 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
                           <td>
                             <input
                               className="form-control form-control-sm"
+                              value={m.cfc}
+                              onChange={e => handleModelChange(i, 'cfc', e.target.value)}
+                              placeholder="CFC"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
                               value={m.name}
                               onChange={e => handleModelChange(i, 'name', e.target.value)}
                               placeholder="Model Name"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={m.implementation_period}
+                              onChange={e => handleModelChange(i, 'implementation_period', e.target.value)}
+                              placeholder="Implementation Period"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={m.destination_code}
+                              onChange={e => handleModelChange(i, 'destination_code', e.target.value)}
+                              placeholder="Destination Code"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="form-control form-control-sm"
+                              value={m.model_type}
+                              onChange={e => handleModelChange(i, 'model_type', e.target.value)}
+                              placeholder="Type"
                             />
                           </td>
                           <td>
