@@ -168,7 +168,7 @@ export default function NewModelModal({
           {/* Row 1: Model Code & Model Name */}
           <div className="row">
             <div className="col-md-6">
-              <label className="small">Model Code</label>
+              <label className="small">Model Code <span style={{color: 'red'}}>*</span></label>
               <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} placeholder="Model Code" />
             </div>
             <div className="col-md-6">
@@ -180,7 +180,7 @@ export default function NewModelModal({
           {/* Row 2: Project Code & Project Name */}
           <div className="row">
             <div className="col-md-6">
-              <label className="small">Project Code</label>
+              <label className="small">Project Code <span style={{color: 'red'}}>*</span></label>
               <input className="form-control form-control-sm mb-2" value={projectCode} onChange={e => setProjectCode(e.target.value)} placeholder="Project Code" />
             </div>
             <div className="col-md-6">
@@ -192,11 +192,11 @@ export default function NewModelModal({
           {/* Row 3: Implementation Period & Destination Code */}
           <div className="row">
             <div className="col-md-6">
-              <label className="small">Implementation Period <span className="text-muted ml-2"><i>e.g., Q2 2025</i></span></label>
+              <label className="small">Implementation Period <span style={{color: 'red'}}>*</span> <span className="text-muted ml-2"><i>e.g., Q2 2025</i></span></label>
               <input className="form-control form-control-sm mb-2" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value)} placeholder="Implementation Period" />
             </div>
             <div className="col-md-6">
-              <label className="small">Destination Code</label>
+              <label className="small">Destination Code <span style={{color: 'red'}}>*</span></label>
               <div className="input-group input-group-sm mb-2">
                 <input className="form-control form-control-sm" value={destinationCode} onChange={e => handleDestinationCodeChange(e.target.value)} placeholder="Destination Code" />
                 <div className="input-group-append">
