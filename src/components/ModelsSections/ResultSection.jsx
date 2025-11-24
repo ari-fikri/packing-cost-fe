@@ -1,5 +1,6 @@
 import React from 'react'
 import Pagination from '../Pagination'
+import DESTINATIONS from '../../data/destinations'
 
 export default function ResultSection({
   models,
@@ -22,6 +23,8 @@ export default function ResultSection({
               <th style={{ width: 50 }}>No</th>
               <th>Model Code</th>
               <th>Model Name</th>
+              <th>CFC</th>
+              <th>Type</th>
               <th>Project Code</th>
               <th>Impl Period</th>
               <th>Dest Code</th>
@@ -35,20 +38,24 @@ export default function ResultSection({
           <tbody>
             {paginatedModels.length === 0 ? (
               <tr>
-                <td colSpan="11" className="text-center py-4 text-muted">No Data Found</td>
+                <td colSpan="13" className="text-center py-4 text-muted">No Data Found</td>
               </tr>
             ) : (
-              paginatedModels.map((m, idx) => (
+              paginatedModels.map((m, idx) => {
+                const destination = DESTINATIONS.find(d => d.destCode === m.model_destination_code);
+                return (
                 <tr key={idx}>
                   <td>{(currentPage - 1) * pageSize + idx + 1}</td>
-                  <td>{m.code}</td>
-                  <td>{m.name}</td>
-                  <td>{m.project.code}</td>
-                  <td>{m.implementationPeriod}</td>
-                  <td>{m.destinationCode}</td>
-                  <td>{m.destinationCountryCode}</td>
-                  <td>{m.country}</td>
-                  <td>{m.remark}</td>
+                  <td>{m.model_code}</td>
+                  <td>{m.model_name}</td>
+                  <td>{m.model_cfc}</td>
+                  <td>{m.model_type}</td>
+                  <td>{m.project?.project_code}</td>
+                  <td>{m.model_implementation_period}</td>
+                  <td>{m.model_destination_code}</td>
+                  <td>{destination ? destination.code : ''}</td>
+                  <td>{destination ? destination.country : ''}</td>
+                  <td>{m.model_remark}</td>
                   <td>{Array.isArray(m.parts) ? m.parts.length : 0}</td>
                   <td>
                     <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEditModel((currentPage - 1) * pageSize + idx)}>
@@ -59,7 +66,7 @@ export default function ResultSection({
                     </button>
                   </td>
                 </tr>
-              ))
+              )})
             )}
           </tbody>
         </table>

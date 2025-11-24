@@ -20,6 +20,8 @@ export default function NewModelModal({
   const [newCode, setNewCode] = useState('')                          // Model code input
   const [newName, setNewName] = useState('')                          // Model name input
   const [newRemark, setNewRemark] = useState('')                      // Model remark/description input
+  const [modelCfc, setModelCfc] = useState('');
+  const [modelType, setModelType] = useState('');
   
   // Implementation and Destination Fields
   const [implementationPeriod, setImplementationPeriod] = useState('') // Implementation period input
@@ -37,16 +39,18 @@ export default function NewModelModal({
     if (show) {
       if (initialData) {
         // === EDIT MODE: Populate form with existing data ===
-        setProjectCode(initialData.project?.code || '') // Set existing project code from nested object
-        setProjectName(initialData.project?.name || ''); // Set existing project name from nested object
-        setNewCode(initialData.code || '')                              // Set existing model code
-        setNewName(initialData.name || '')                              // Set existing model name
-        setNewRemark(initialData.remark || '')                          // Set existing model remark
-        setImplementationPeriod(initialData.implementationPeriod || '') // Set existing implementation period
-        setDestinationCode(initialData.destinationCode || '')           // Set existing destination code
+        setProjectCode(initialData.project?.project_code || '') // Set existing project code from nested object
+        setProjectName(initialData.project?.project_name || ''); // Set existing project name from nested object
+        setNewCode(initialData.model_code || '')                              // Set existing model code
+        setNewName(initialData.model_name || '')                              // Set existing model name
+        setNewRemark(initialData.model_remark || '')                          // Set existing model remark
+        setImplementationPeriod(initialData.model_implementation_period || '') // Set existing implementation period
+        setDestinationCode(initialData.model_destination_code || '')           // Set existing destination code
         setDestinationCountryCode(initialData.destinationCountryCode || '') // Set existing country code
         setCountry(initialData.country || '')                           // Set existing country
         setParts(initialData.parts || [])                               // Set existing parts array
+        setModelCfc(initialData.model_cfc || '');
+        setModelType(initialData.model_type || '');
       } else {
         // === NEW MODE: Clear all form fields ===
         setProjectCode('')                                              // Clear project code
@@ -59,6 +63,8 @@ export default function NewModelModal({
         setDestinationCountryCode('')                                    // Clear country code
         setCountry('')                                                   // Clear country
         setParts([])                                                     // Clear parts array
+        setModelCfc('');
+        setModelType('');
       }
       setShowPartPicker(false)                                           // Always close part picker when modal opens
     }
@@ -66,8 +72,8 @@ export default function NewModelModal({
 
   useEffect(() => {
     if (projectCode) {
-      const project = projectsData.find(p => p.code === projectCode);
-      setProjectName(project ? project.name : '');
+      const project = projectsData.find(p => p.project_code === projectCode);
+      setProjectName(project ? project.project_name : '');
     } else {
       setProjectName('');
     }
@@ -119,18 +125,20 @@ export default function NewModelModal({
     // Create payload object, merging new data with existing data to preserve all fields
     const payload = {
       ...(initialData || {}), // Preserve unedited fields from the original model
-      code: newCode,
-      name: newName,
-      remark: newRemark,
-      implementationPeriod,
-      destinationCode,
+      model_code: newCode,
+      model_name: newName,
+      model_remark: newRemark,
+      model_implementation_period: implementationPeriod,
+      model_destination_code: destinationCode,
       destinationCountryCode,
       country,
       parts: parts.slice(),
+      model_cfc: modelCfc,
+      model_type: modelType,
       project: {
         ...(initialData?.project || {}), // Preserve unedited project fields like manager and status
-        code: projectCode,
-        name: projectName,
+        project_code: projectCode,
+        project_name: projectName,
       }
     }
     console.log('Saving model:', payload)                                 // Debug log
@@ -177,6 +185,22 @@ export default function NewModelModal({
             </div>
           </div>
           
+          <div className="row">
+            <div className="col-md-6">
+              <label className="small">CFC</label>
+              <input className="form-control form-control-sm mb-2" value={modelCfc} onChange={e => setModelCfc(e.target.value)} placeholder="CFC" />
+            </div>
+            <div className="col-md-6">
+              <label className="small">Type</label>
+              <select className="form-control form-control-sm mb-2" value={modelType} onChange={e => setModelType(e.target.value)}>
+                <option value="">-- Select Type --</option>
+                <option value="PxP">PxP</option>
+                <option value="Lot">Lot</option>
+                <option value="Engine">Engine</option>
+              </select>
+            </div>
+          </div>
+
           {/* Row 2: Project Code & Project Name */}
           <div className="row">
             <div className="col-md-6">

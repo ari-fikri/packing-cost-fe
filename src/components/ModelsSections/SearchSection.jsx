@@ -6,6 +6,10 @@ export default function SearchSection({
   setCode,
   filterName,
   setFilterName,
+  filterCfc,
+  setFilterCfc,
+  filterType,
+  setFilterType,
   filterRemark,
   setFilterRemark,
   implementationPeriod,
@@ -61,6 +65,28 @@ export default function SearchSection({
             value={filterName}
             onChange={e => setFilterName(e.target.value)}
             placeholder="Name"
+          />
+        </div>
+
+        <div className="form-group col-md-6">
+          <label className="small mb-1">CFC</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            value={filterCfc}
+            onChange={e => setFilterCfc(e.target.value)}
+            placeholder="CFC"
+          />
+        </div>
+
+        <div className="form-group col-md-6">
+          <label className="small mb-1">Type</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            value={filterType}
+            onChange={e => setFilterType(e.target.value)}
+            placeholder="Type"
           />
         </div>
 

@@ -10,6 +10,8 @@ export default function Models() {
   const [code, setCode] = useState('')
   const [projectCode, setProjectCode] = useState('')
   const [filterName, setFilterName] = useState('')
+  const [filterCfc, setFilterCfc] = useState('')
+  const [filterType, setFilterType] = useState('')
   const [filterRemark, setFilterRemark] = useState('')
   const [implementationPeriod, setImplementationPeriod] = useState('')
   const [destinationCode, setDestinationCode] = useState('')
@@ -37,7 +39,7 @@ export default function Models() {
   }, [])
 
   function handleFilter() {
-    const noFilters = !code && !projectCode && !filterName && !filterRemark && !implementationPeriod && !destinationCode;
+    const noFilters = !code && !projectCode && !filterName && !filterCfc && !filterType && !filterRemark && !implementationPeriod && !destinationCode;
 
     if (noFilters) {
       setFilteredModels([...modelsData].reverse());
@@ -46,12 +48,14 @@ export default function Models() {
     }
 
     let filtered = models.filter(model =>
-      (!code || model.code?.toLowerCase().includes(code.toLowerCase())) &&
-      (!projectCode || model.project.code?.toLowerCase().includes(projectCode.toLowerCase())) &&
-      (!filterName || model.name?.toLowerCase().includes(filterName.toLowerCase())) &&
-      (!filterRemark || model.remark?.toLowerCase().includes(filterRemark.toLowerCase())) &&
-      (!implementationPeriod || model.implementationPeriod?.toLowerCase().includes(implementationPeriod.toLowerCase())) &&
-      (!destinationCode || model.destinationCode?.toLowerCase().includes(destinationCode.toLowerCase()))
+      (!code || model.model_code?.toLowerCase().includes(code.toLowerCase())) &&
+      (!projectCode || model.project.project_code?.toLowerCase().includes(projectCode.toLowerCase())) &&
+      (!filterName || model.model_name?.toLowerCase().includes(filterName.toLowerCase())) &&
+      (!filterCfc || model.model_cfc?.toLowerCase().includes(filterCfc.toLowerCase())) &&
+      (!filterType || model.model_type?.toLowerCase().includes(filterType.toLowerCase())) &&
+      (!filterRemark || model.model_remark?.toLowerCase().includes(filterRemark.toLowerCase())) &&
+      (!implementationPeriod || model.model_implementation_period?.toLowerCase().includes(implementationPeriod.toLowerCase())) &&
+      (!destinationCode || model.model_destination_code?.toLowerCase().includes(destinationCode.toLowerCase()))
     )
 
     setFilteredModels(filtered)
@@ -62,6 +66,8 @@ export default function Models() {
     setCode('')
     setProjectCode('')
     setFilterName('')
+    setFilterCfc('')
+    setFilterType('')
     setFilterRemark('')
     setImplementationPeriod('')
     setDestinationCode('')
@@ -96,9 +102,9 @@ export default function Models() {
       // Update filtered models as well
       const newFilteredModels = filteredModels.map(model => {
         // Find if this model is the one being edited
-        if (model.code === editingModel.code && 
-            model.name === editingModel.name && 
-            model.remark === editingModel.remark) {
+        if (model.model_code === editingModel.model_code && 
+            model.model_name === editingModel.model_name && 
+            model.model_remark === editingModel.model_remark) {
           return payload
         }
         return model
@@ -111,12 +117,14 @@ export default function Models() {
       
       // Check if new model matches current filter criteria
       const matchesFilter = 
-        (!code || payload.code?.toLowerCase().includes(code.toLowerCase())) &&
-        (!projectCode || payload.project.code?.toLowerCase().includes(projectCode.toLowerCase())) &&
-        (!filterName || payload.name?.toLowerCase().includes(filterName.toLowerCase())) &&
-        (!filterRemark || payload.remark?.toLowerCase().includes(filterRemark.toLowerCase())) &&
-        (!implementationPeriod || payload.implementationPeriod?.toLowerCase().includes(implementationPeriod.toLowerCase())) &&
-        (!destinationCode || payload.destinationCode?.toLowerCase().includes(destinationCode.toLowerCase()))
+        (!code || payload.model_code?.toLowerCase().includes(code.toLowerCase())) &&
+        (!projectCode || payload.project.project_code?.toLowerCase().includes(projectCode.toLowerCase())) &&
+        (!filterName || payload.model_name?.toLowerCase().includes(filterName.toLowerCase())) &&
+        (!filterCfc || payload.model_cfc?.toLowerCase().includes(filterCfc.toLowerCase())) &&
+        (!filterType || payload.model_type?.toLowerCase().includes(filterType.toLowerCase())) &&
+        (!filterRemark || payload.model_remark?.toLowerCase().includes(filterRemark.toLowerCase())) &&
+        (!implementationPeriod || payload.model_implementation_period?.toLowerCase().includes(implementationPeriod.toLowerCase())) &&
+        (!destinationCode || payload.model_destination_code?.toLowerCase().includes(destinationCode.toLowerCase()))
       
       if (matchesFilter) {
         setFilteredModels([payload, ...filteredModels])
@@ -134,9 +142,9 @@ export default function Models() {
     const modelToEdit = filteredModels[filteredIndex]
     // Find its index in the original models array
     const originalIndex = models.findIndex(m => 
-      m.code === modelToEdit.code && 
-      m.name === modelToEdit.name && 
-      m.remark === modelToEdit.remark
+      m.model_code === modelToEdit.model_code && 
+      m.model_name === modelToEdit.model_name && 
+      m.model_remark === modelToEdit.model_remark
     )
     
     console.log('Editing model:', modelToEdit) // Debug log
@@ -151,9 +159,9 @@ export default function Models() {
     if (!confirm('Delete this model?')) return
     const modelToDelete = filteredModels[filteredIndex]
     const originalIndex = models.findIndex(m => 
-      m.code === modelToDelete.code && 
-      m.name === modelToDelete.name && 
-      m.remark === modelToDelete.remark
+      m.model_code === modelToDelete.model_code && 
+      m.model_name === modelToDelete.model_name && 
+      m.model_remark === modelToDelete.model_remark
     )
     
     if (originalIndex !== -1) {
@@ -190,6 +198,10 @@ export default function Models() {
           setProjectCode={setProjectCode}
           filterName={filterName}
           setFilterName={setFilterName}
+          filterCfc={filterCfc}
+          setFilterCfc={setFilterCfc}
+          filterType={filterType}
+          setFilterType={setFilterType}
           filterRemark={filterRemark}
           setFilterRemark={setFilterRemark}
           implementationPeriod={implementationPeriod}
