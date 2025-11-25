@@ -227,6 +227,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   <option value="Inner">Inner</option>
                   <option value="Outer">Outer</option>
                   <option value="Module">Module</option>
+                  <option value="Module">Box</option>
                 </select>
               </div>
 

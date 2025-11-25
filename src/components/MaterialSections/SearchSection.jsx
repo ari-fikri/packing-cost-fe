@@ -89,6 +89,7 @@ export default function SearchSection({
               <option value="Inner">Inner</option>
               <option value="Outer">Outer</option>
               <option value="Module">Module</option>
+              <option value="Box">Module</option>
             </select>
           </div>
         </div>
