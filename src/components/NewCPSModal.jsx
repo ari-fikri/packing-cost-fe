@@ -22,7 +22,7 @@ import {
 
 import { buildPayload, resetStates } from '../utils/cpsHelpers.js';
 
-export default function NewCPSModal({ show, onClose, onSave, editData }) {
+export default function NewCPSModal({ show, onClose, onSave, editData, config }) {
   const [activeTab, setActiveTab] = useState('general');
 
   // General states
@@ -393,92 +393,111 @@ export default function NewCPSModal({ show, onClose, onSave, editData }) {
           
           <div className="card-body">
             {/* General Info */}
-            <GeneralInfoSection
-              cpsNo={cpsNo}
-              setCpsNo={setCpsNo}
-              refCpsNo={refCpsNo}
-              setRefCpsNo={setRefCpsNo}
-              cfcPjtCode={cfcPjtCode}
-              setCfcPjtCode={setCfcPjtCode}
-              model={model}
-              setModel={setModel}
-              partNo={partNo} setPartNo={setPartNo}
-              partName={partName} setPartName={setPartName}
-              supplier={supplier} setSupplier={setSupplier}
-              plantCode={plantCode} setPlantCode={setPlantCode}
-              dockCode={dockCode} setDockCode={setDockCode}
-              openPartPicker={() => setPartPickerOpen(true)}
-              openModelPicker={openModelPicker}
-              setComparisonOpen={setComparisonOpen}
-            />
-
-            <hr />
+            {config.general.visible && (
+              <>
+                <GeneralInfoSection
+                  config={config.general}
+                  cpsNo={cpsNo}
+                  setCpsNo={setCpsNo}
+                  refCpsNo={refCpsNo}
+                  setRefCpsNo={setRefCpsNo}
+                  cfcPjtCode={cfcPjtCode}
+                  setCfcPjtCode={setCfcPjtCode}
+                  model={model}
+                  setModel={setModel}
+                  partNo={partNo} setPartNo={setPartNo}
+                  partName={partName} setPartName={setPartName}
+                  supplier={supplier} setSupplier={setSupplier}
+                  plantCode={plantCode} setPlantCode={setPlantCode}
+                  dockCode={dockCode} setDockCode={setDockCode}
+                  openPartPicker={() => setPartPickerOpen(true)}
+                  openModelPicker={openModelPicker}
+                  setComparisonOpen={setComparisonOpen}
+                />
+                {config.pse.visible && <hr />}
+              </>
+            )}
 
             {/* PSE Info Section */}
-            <PseInfoSection
-              pseOpen={pseOpen} setPseOpen={setPseOpen}
-              packingPlantCurr={packingPlantCurr} setPackingPlantCurr={setPackingPlantCurr}
-              packingPlantNext={packingPlantNext} setPackingPlantNext={setPackingPlantNext}
-              vanningPlantCurr={vanningPlantCurr} setVanningPlantCurr={setVanningPlantCurr}
-              vanningPlantNext={vanningPlantNext} setVanningPlantNext={setVanningPlantNext}
-              orderPatternCurr={orderPatternCurr} setOrderPatternCurr={setOrderPatternCurr}
-              orderPatternNext={orderPatternNext} setOrderPatternNext={setOrderPatternNext}
-              category={category} setCategory={setCategory}
-              katashiki={katashiki} setKatashiki={setKatashiki}
-              importerLineProcess={importerLineProcess} setImporterLineProcess={setImporterLineProcess}
-              caseCode={caseCode} setCaseCode={setCaseCode}
-              boxNumber={boxNumber} setBoxNumber={setBoxNumber}
-              renban={renban} setRenban={setRenban}
-              renbanEff={renbanEff} setRenbanEff={setRenbanEff}
-              packingProcessBoxing={packingProcessBoxing} setPackingProcessBoxing={setPackingProcessBoxing}
-              packingProcessStacking={packingProcessStacking} setPackingProcessStacking={setPackingProcessStacking}
-            />
-
-            <hr />
+            {config.pse.visible && (
+              <>
+                <PseInfoSection
+                  config={config.pse}
+                  pseOpen={pseOpen} setPseOpen={setPseOpen}
+                  packingPlantCurr={packingPlantCurr} setPackingPlantCurr={setPackingPlantCurr}
+                  packingPlantNext={packingPlantNext} setPackingPlantNext={setPackingPlantNext}
+                  vanningPlantCurr={vanningPlantCurr} setVanningPlantCurr={setVanningPlantCurr}
+                  vanningPlantNext={vanningPlantNext} setVanningPlantNext={setVanningPlantNext}
+                  orderPatternCurr={orderPatternCurr} setOrderPatternCurr={setOrderPatternCurr}
+                  orderPatternNext={orderPatternNext} setOrderPatternNext={setOrderPatternNext}
+                  category={category} setCategory={setCategory}
+                  katashiki={katashiki} setKatashiki={setKatashiki}
+                  importerLineProcess={importerLineProcess} setImporterLineProcess={setImporterLineProcess}
+                  caseCode={caseCode} setCaseCode={setCaseCode}
+                  boxNumber={boxNumber} setBoxNumber={setBoxNumber}
+                  renban={renban} setRenban={setRenban}
+                  renbanEff={renbanEff} setRenbanEff={setRenbanEff}
+                  packingProcessBoxing={packingProcessBoxing} setPackingProcessBoxing={setPackingProcessBoxing}
+                  packingProcessStacking={packingProcessStacking} setPackingProcessStacking={setPackingProcessStacking}
+                />
+                {config.images.visible && <hr />}
+              </>
+            )}
 
             {/* Images Section */}
-            <ImagesSection
-              imagesOpen={imagesOpen} setImagesOpen={setImagesOpen}
-              imagesPart={imagesPart} setImagesPart={setImagesPart}
-              imagesPacking={imagesPacking} setImagesPacking={setImagesPacking}
-              imagesOuter={imagesOuter} setImagesOuter={setImagesOuter}
-              imagesQkp={imagesQkp} setImagesQkp={setImagesQkp}
-              imagesBkp={imagesBkp} setImagesBkp={setImagesBkp}
-            />
-
-            <hr />
+            {config.images.visible && (
+              <>
+                <ImagesSection
+                  config={config.images}
+                  imagesOpen={imagesOpen} setImagesOpen={setImagesOpen}
+                  imagesPart={imagesPart} setImagesPart={setImagesPart}
+                  imagesPacking={imagesPacking} setImagesPacking={setImagesPacking}
+                  imagesOuter={imagesOuter} setImagesOuter={setImagesOuter}
+                  imagesQkp={imagesQkp} setImagesQkp={setImagesQkp}
+                  imagesBkp={imagesBkp} setImagesBkp={setImagesBkp}
+                />
+                {config.packing.visible && <hr />}
+              </>
+            )}
 
             {/* Packing Section */}
-            <PackingSection
-              materials={materials}
-              packingOpen={packingOpen} setPackingOpen={setPackingOpen}
-              outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
-              outerMaterialName={outerMaterialName}
-              outerDimension={outerDimension}
-              innerVolume={innerVolume}
-              outerVolume={outerVolume}
-              innerRows={innerRows} setInnerRows={setInnerRows}
-              newInner={newInner} setNewInner={setNewInner}
-              handleAddInnerRow={handleAddInnerRow}
-              handleRemoveInnerRow={handleRemoveInnerRow}
-              openMaterialPicker={openMaterialPicker}
-            />
-
-            <hr />
+            {config.packing.visible && (
+              <>
+                <PackingSection
+                  config={config.packing}
+                  materials={materials}
+                  packingOpen={packingOpen} setPackingOpen={setPackingOpen}
+                  outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
+                  outerMaterialName={outerMaterialName}
+                  outerDimension={outerDimension}
+                  innerVolume={innerVolume}
+                  outerVolume={outerVolume}
+                  innerRows={innerRows} setInnerRows={setInnerRows}
+                  newInner={newInner} setNewInner={setNewInner}
+                  handleAddInnerRow={handleAddInnerRow}
+                  handleRemoveInnerRow={handleRemoveInnerRow}
+                  openMaterialPicker={openMaterialPicker}
+                />
+                {config.logistic.visible && <hr />}
+              </>
+            )}
 
             {/* Logistic Info Section */}
-            <LogisticSection
-              logisticOpen={logisticOpen}
-              setLogisticOpen={setLogisticOpen}
-              tmmindDestDockCode={tmmindDestDockCode}
-              setTmmindDestDockCode={setTmmindDestDockCode}
-              logisticRemark={logisticRemark}
-              setLogisticRemark={setLogisticRemark}
-              processType={processType}
-              setProcessType={setProcessType}
-              addressRack={addressRack}
-              setAddressRack={setAddressRack}
-            />
+            {config.logistic.visible && (
+              <LogisticSection
+                config={config.logistic}
+                logisticOpen={logisticOpen}
+                setLogisticOpen={setLogisticOpen}
+                tmmindDestDockCode={tmmindDestDockCode}
+                setTmmindDestDockCode={setTmmindDestDockCode}
+                logisticRemark={logisticRemark}
+                setLogisticRemark={setLogisticRemark}
+                processType={processType}
+                setProcessType={setProcessType}
+                addressRack={addressRack}
+                setAddressRack={setAddressRack}
+              />
+            )}
 
             {/* Notes */}
             <div className="form-group">

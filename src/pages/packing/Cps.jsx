@@ -6,8 +6,24 @@ import PersonPickerModal from '../../components/PersonPickerModal';
 import DESTINATIONS from '../../data/destinations.js';
 import { cpsData as initialCpsData } from '../../data/cps.js';
 import HeaderActions from './cps/HeaderActions';
+import { cpsPageConfig, ROLES } from '../../config/cpsPageConfig.js';
+import { useAuth } from '../../auth.jsx';
 
 const Cps = () => {
+  const { user } = useAuth();
+
+  const getConfig = () => {
+    if (user && user.department && user.role) {
+      const departmentConfig = cpsPageConfig[user.department];
+      if (departmentConfig && departmentConfig[user.role]) {
+        return departmentConfig[user.role];
+      }
+    }
+    // Fallback to a default config if no user or specific config found
+    return cpsPageConfig.default;
+  };
+  const config = getConfig();
+
   const [cpsData, setCpsData] = useState(initialCpsData);
   const [filteredCps, setFilteredCps] = useState([]);
   const [showNewCps, setShowNewCps] = useState(false);
@@ -164,6 +180,7 @@ const Cps = () => {
         onClose={handleCloseModal}
         onSave={handleSave}
         editData={editingCps}
+        config={config}
       />
       {showPersonPicker && (
         <PersonPickerModal

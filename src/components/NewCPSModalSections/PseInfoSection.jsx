@@ -3,6 +3,7 @@ import React from "react";
 export default function PseInfoSection(props) {
   // Destructure props as needed
   const {
+    config,
     pseOpen,
     setPseOpen,
     packingPlantCurr,
@@ -62,12 +63,14 @@ export default function PseInfoSection(props) {
                   className="form-control form-control-sm"
                   value={packingPlantCurr}
                   onChange={(e) => setPackingPlantCurr(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <label className="small mb-1 mt-2">Packing Plant (Next)</label>
                 <input
                   className="form-control form-control-sm"
                   value={packingPlantNext}
                   onChange={(e) => setPackingPlantNext(e.target.value)}
+                  disabled={!config.editable}
                 />
               </div>
               <div className="col-md-4">
@@ -76,12 +79,14 @@ export default function PseInfoSection(props) {
                   className="form-control form-control-sm"
                   value={vanningPlantCurr}
                   onChange={(e) => setVanningPlantCurr(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <label className="small mb-1 mt-2">Vanning Plant (Next)</label>
                 <input
                   className="form-control form-control-sm"
                   value={vanningPlantNext}
                   onChange={(e) => setVanningPlantNext(e.target.value)}
+                  disabled={!config.editable}
                 />
               </div>
               <div className="col-md-4">
@@ -90,12 +95,14 @@ export default function PseInfoSection(props) {
                   className="form-control form-control-sm"
                   value={orderPatternCurr}
                   onChange={(e) => setOrderPatternCurr(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <label className="small mb-1 mt-2">Order Pattern (Next)</label>
                 <input
                   className="form-control form-control-sm"
                   value={orderPatternNext}
                   onChange={(e) => setOrderPatternNext(e.target.value)}
+                  disabled={!config.editable}
                 />
               </div>
 
@@ -105,6 +112,7 @@ export default function PseInfoSection(props) {
                   className="form-control form-control-sm"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
+                  disabled={!config.editable}
                 >
                   <option value="">—</option>
                   <option value="Trim">Trim</option>
@@ -123,6 +131,7 @@ export default function PseInfoSection(props) {
                       onChange={(e) =>
                         setKatashiki((k) => ({ ...k, AD: e.target.value }))
                       }
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="col">
@@ -133,6 +142,7 @@ export default function PseInfoSection(props) {
                       onChange={(e) =>
                         setKatashiki((k) => ({ ...k, AU: e.target.value }))
                       }
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="col">
@@ -143,6 +153,7 @@ export default function PseInfoSection(props) {
                       onChange={(e) =>
                         setKatashiki((k) => ({ ...k, AF: e.target.value }))
                       }
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="col">
@@ -153,6 +164,7 @@ export default function PseInfoSection(props) {
                       onChange={(e) =>
                         setKatashiki((k) => ({ ...k, AX: e.target.value }))
                       }
+                      disabled={!config.editable}
                     />
                   </div>
                 </div>
@@ -166,6 +178,7 @@ export default function PseInfoSection(props) {
                       className="form-control form-control-sm"
                       value={importerLineProcess}
                       onChange={(e) => setImporterLineProcess(e.target.value)}
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="form-group col-md-4">
@@ -174,6 +187,7 @@ export default function PseInfoSection(props) {
                       className="form-control form-control-sm"
                       value={caseCode}
                       onChange={(e) => setCaseCode(e.target.value)}
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="form-group col-md-4">
@@ -182,6 +196,7 @@ export default function PseInfoSection(props) {
                       className="form-control form-control-sm"
                       value={boxNumber}
                       onChange={(e) => setBoxNumber(e.target.value)}
+                      disabled={!config.editable}
                     />
                   </div>
                 </div>
@@ -193,6 +208,7 @@ export default function PseInfoSection(props) {
                       className="form-control form-control-sm"
                       value={renban}
                       onChange={(e) => setRenban(e.target.value)}
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="form-group col-md-4">
@@ -201,6 +217,7 @@ export default function PseInfoSection(props) {
                       className="form-control form-control-sm"
                       value={renbanEff}
                       onChange={(e) => setRenbanEff(e.target.value)}
+                      disabled={!config.editable}
                     />
                   </div>
                   <div className="form-group col-md-4">
@@ -211,6 +228,7 @@ export default function PseInfoSection(props) {
                       className="form-control form-control-sm"
                       value={packingProcessBoxing}
                       onChange={(e) => setPackingProcessBoxing(e.target.value)}
+                      disabled={!config.editable}
                     >
                       <option value="">—</option>
                       <option value="SUPPLIER">SUPPLIER</option>
@@ -229,6 +247,7 @@ export default function PseInfoSection(props) {
                       onChange={(e) =>
                         setPackingProcessStacking(e.target.value)
                       }
+                      disabled={!config.editable}
                     >
                       <option value="">—</option>
                       <option value="TMMIN">TMMIN</option>
