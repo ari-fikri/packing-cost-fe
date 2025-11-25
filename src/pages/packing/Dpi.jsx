@@ -89,7 +89,44 @@ export default function DPI() {
   }
 
   function handleViewDpi() {
-    alert('View DPI placeholder');
+    const newWindow = window.open('', '_blank', 'fullscreen=yes');
+    newWindow.document.write('<html><head><title>DPI View</title>');
+    newWindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />');
+    newWindow.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">');
+    newWindow.document.write('</head><body>');
+    newWindow.document.write('<button id="download-pdf">Download PDF</button>');
+    newWindow.document.write('<button id="download-csv">Download CSV</button>');
+    newWindow.document.write('<div id="dpi-content" class="card card-outline card-primary"></div>');
+    newWindow.document.write('</body></html>');
+    newWindow.document.close();
+
+    const content = document.getElementById('result-section').innerHTML;
+    const dpiContent = newWindow.document.getElementById('dpi-content');
+    if (dpiContent) {
+      dpiContent.innerHTML = content;
+    }
+
+    newWindow.document.getElementById('download-pdf').addEventListener('click', () => newWindow.print());
+
+    newWindow.document.getElementById('download-csv').addEventListener('click', () => {
+      const table = dpiContent.querySelector('table');
+      let csv = [];
+      for (const row of table.rows) {
+        const rowData = [];
+        for (const cell of row.cells) {
+          rowData.push(cell.innerText);
+        }
+        csv.push(rowData.join(','));
+      }
+      const csvContent = 'data:text/csv;charset=utf-8,' + csv.join('\\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'dpi_data.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   }
 
   function goToPage(p) {
@@ -169,6 +206,7 @@ export default function DPI() {
             onTemplate={handleTemplate}
             onCreateDpi={handleCreateDpi}
             onCreatePci={handleCreatePci}
+            viewDpiDisabled={rows.length === 0}
           />
         </div>
 
@@ -179,16 +217,18 @@ export default function DPI() {
           onClear={handleClear}
         />
 
-        <ResultSection
-          rows={rows}
-          visibleRows={visibleRows}
-          page={page}
-          perPage={perPage}
-          total={total}
-          totalPages={totalPages}
-          goToPage={goToPage}
-          setPerPage={setPerPage}
-        />
+        <div id="result-section">
+          <ResultSection
+            rows={rows}
+            visibleRows={visibleRows}
+            page={page}
+            perPage={perPage}
+            total={total}
+            totalPages={totalPages}
+            goToPage={goToPage}
+            setPerPage={setPerPage}
+          />
+        </div>
       </div>
 
       <NewDpiModal

@@ -6,10 +6,11 @@ export default function ActionHeaderButtons({
   onTemplate,
   onCreateDpi,
   onCreatePci,
+  viewDpiDisabled,
 }) {
   return (
     <div className="card-tools ml-auto">
-      <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={onViewDpi} title="View DPI">
+      <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={onViewDpi} title="View DPI" disabled={viewDpiDisabled}>
         <i className="fas fa-eye" /> View DPI
       </button>
       <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={onUpload} title="Upload">
