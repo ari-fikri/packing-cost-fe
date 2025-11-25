@@ -193,11 +193,6 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         cpsNo: data.cpsNo,
         calculationTime: new Date().toISOString(),
         subtotals: data.subtotals,
-        // subTotalManhour: data.subTotalManhour,
-        // subTotalLabor: data.subTotalLabor,
-        // subTotalInland: data.subTotalInland,
-        // subTotalInner: data.subTotalInner,
-        // subTotalOuter: data.subTotalOuter,
         total: data.total,
         cps : data.cps
       }));
@@ -227,7 +222,11 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         const existingModelCodes = prev.modelCode || [];
         // Filter out duplicates
         const uniqueNewCodes = newModelCodes.filter((code) => !existingModelCodes.includes(code));
-        return { ...prev, modelCode: [...existingModelCodes, ...uniqueNewCodes] };
+        return {
+          ...prev,
+          modelCode: [...existingModelCodes, ...uniqueNewCodes],
+          modelCodeInput: "", // Clear input on pick
+        };
       });
     }
     setShowModelPicker(false);

@@ -182,17 +182,36 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
             </div>
 
             <div className="col-md-6">
-              <div className="form-group">
-                <label className="form-label">Price <span className="text-danger">*</span></label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={price}
-                  onChange={e => setPrice(e.target.value)}
-                  placeholder="Enter Price"
-                  step="0.01"
-                  min="0"
-                />
+              <div className="row">
+                <div className="col-6">
+                  <div className="form-group">
+                    <label className="form-label">Price <span className="text-danger">*</span></label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={price}
+                      onChange={e => setPrice(e.target.value)}
+                      placeholder="Enter Price"
+                      step="0.01"
+                      min="0"
+                    />
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="form-group">
+                    <label className="form-label">eWarehouse Price</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={eWarehousePrice}
+                      onChange={e => setEWarehousePrice(e.target.value)}
+                      placeholder="eWarehouse Price"
+                      step="0.01"
+                      min="0"
+                      readOnly
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="form-group">
@@ -215,7 +234,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
           </div>
 
           {/* Supplier Section */}
-          <h5 className="mt-3"><b>Supplier</b></h5>
+          <h6 className="mt-3"><b>Supplier</b></h6>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
@@ -262,37 +281,8 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
               </div>
             </div>
           </div>
-
-          <h6 className="mt-3"><b>eWarehouse</b></h6>
-          <div className="row">
-            <div className="col-6">
-              <div className="form-group">
-                <label className="form-label">Item No</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={eWarehouse}
-                  onChange={e => setEWarehouse(e.target.value)}
-                  placeholder="Item No"
-                />
-              </div>
-            </div>
-            <div className="col-6">
-              <div className="form-group">
-                <label className="form-label">Price</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={eWarehousePrice}
-                  onChange={e => setEWarehousePrice(e.target.value)}
-                  placeholder="eWarehouse Price"
-                  step="0.01"
-                  min="0"
-                />
-              </div>
-            </div>
-          </div>
-
+          
+          {/* Dimension Section */}
           <h6 className="mt-3"><b>Dimension</b></h6>
           <div className="row">
             <div className="col-6">
