@@ -14,6 +14,7 @@ import React, { useState, useEffect, useRef } from 'react';
  */
 export default function PackingInnerSection(props) {
   const {
+    config,
     innerRows,
     setInnerRows,
     newInner,
@@ -91,7 +92,7 @@ export default function PackingInnerSection(props) {
                 setEditingIndex(null);
                 setShowNewRow(true);
               }}
-              disabled={showNewRow}
+              disabled={showNewRow || !config.editable}
             >
               Add
             </button>
@@ -99,9 +100,9 @@ export default function PackingInnerSection(props) {
         </div>
 
         <div className="table-responsive mt-2">
-          <table className="table table-sm table-bordered mb-0">
+          <table className="table table-sm table-bordered mb-0 small">
             <thead>
-              <tr>
+              <tr className="text-center">
                 <th style={{ width: 40 }}>No</th>
                 <th>Pack Material No</th>
                 <th>Suffix</th>
@@ -141,6 +142,7 @@ export default function PackingInnerSection(props) {
                             onChange={(e) => handleRowChange(i, 'materialNo', e.target.value)}
                             onBlur={(e) => handleMaterialNoBlur(e.target.value, i)}
                             className="form-control form-control-sm"
+                            disabled={!config.editable}
                           />
                         </td>
                         <td>
@@ -148,6 +150,7 @@ export default function PackingInnerSection(props) {
                             value={r.suffix}
                             onChange={(e) => handleRowChange(i, 'suffix', e.target.value)}
                             className="form-control form-control-sm"
+                            disabled={!config.editable}
                           />
                         </td>
                         <td><input value={r.name} readOnly className="form-control form-control-sm" /></td>
@@ -160,6 +163,7 @@ export default function PackingInnerSection(props) {
                             value={r.wtPerPc}
                             onChange={(e) => handleRowChange(i, 'wtPerPc', e.target.value)}
                             className="form-control form-control-sm"
+                            disabled={!config.editable}
                           />
                         </td>
                         <td>
@@ -167,11 +171,12 @@ export default function PackingInnerSection(props) {
                             value={r.qty}
                             onChange={(e) => handleRowChange(i, 'qty', e.target.value)}
                             className="form-control form-control-sm"
+                            disabled={!config.editable}
                           />
                         </td>
                         <td>{(Number(r.wtPerPc || 0) * Number(r.qty || 0)).toFixed(2)}</td>
                         <td>
-                          <button className="btn btn-sm btn-primary" onClick={() => setEditingIndex(null)}>
+                          <button className="btn btn-sm btn-primary" onClick={() => setEditingIndex(null)} disabled={!config.editable}>
                             Save
                           </button>
                         </td>
@@ -183,8 +188,10 @@ export default function PackingInnerSection(props) {
                     <tr
                       key={i}
                       onClick={() => {
-                        setEditingIndex(i);
-                        setShowNewRow(false);
+                        if (config.editable) {
+                          setEditingIndex(i);
+                          setShowNewRow(false);
+                        }
                       }}
                     >
                       <td>{i + 1}</td>
@@ -205,6 +212,7 @@ export default function PackingInnerSection(props) {
                             e.stopPropagation();
                             handleRemoveInnerRow(i);
                           }}
+                          disabled={!config.editable}
                         >
                           <i className="fas fa-trash" />
                         </button>
@@ -234,6 +242,7 @@ export default function PackingInnerSection(props) {
                           className="btn btn-outline-secondary btn-sm"
                           type="button"
                           onClick={() => openMaterialPicker('inner')}
+                          disabled={!config.editable}
                         >
                           ...
                         </button>
@@ -338,6 +347,7 @@ export default function PackingInnerSection(props) {
                       <button
                         className="btn btn-sm btn-primary"
                         onClick={handleAddInnerRow}
+                        disabled={!config.editable}
                       >
                         Add
                       </button>
@@ -359,6 +369,7 @@ export default function PackingInnerSection(props) {
                           });
                           setShowNewRow(false);
                         }}
+                        disabled={!config.editable}
                       >
                         Cancel
                       </button>
