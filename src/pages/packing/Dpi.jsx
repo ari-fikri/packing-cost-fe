@@ -4,17 +4,20 @@ import { dpiData } from '../../data/dpi.json';
 import SearchSection from './dpi/SearchSection';
 import ResultSection from './dpi/ResultSection';
 import ActionHeaderButtons from './dpi/ActionHeaderButtons';
+import PartPickerModal from '../../components/PartPickerModal';
 
 export default function DPI() {
   // filter fields
   const [modelCode, setModelCode] = useState('');
   const [destCode, setDestCode] = useState('');
+  const [partNo, setPartNo] = useState([]);
   const [supplierCode, setSupplierCode] = useState('');
   const [cpsNo, setCpsNo] = useState('');
   const [implementationPeriod, setImplementationPeriod] = useState('');
 
   // modal state
   const [showNewDpi, setShowNewDpi] = useState(false);
+  const [showPartPicker, setShowPartPicker] = useState(false);
 
   // table data
   const [rows, setRows] = useState([]);
@@ -32,6 +35,13 @@ export default function DPI() {
     if (modelCode) {
       filteredData = filteredData.filter(item => 
         item.model_code?.toLowerCase().includes(modelCode.toLowerCase())
+      );
+    }
+    if (partNo && partNo.length > 0) {
+      const lowerCasePartNos = partNo.map(pn => pn.toLowerCase());
+      filteredData = filteredData.filter(item =>
+        lowerCasePartNos.includes(item.part_no?.toLowerCase()) ||
+        lowerCasePartNos.includes(item.cps?.part_no?.toLowerCase())
       );
     }
     if (destCode) {
@@ -64,9 +74,18 @@ export default function DPI() {
     setPage(1);
   }
 
+  function handlePartPicked(parts) {
+    if (parts && parts.length > 0) {
+      const newPartNumbers = parts.map(p => p.partNo);
+      setPartNo(prev => [...new Set([...prev, ...newPartNumbers])]);
+    }
+    setShowPartPicker(false);
+  }
+
   function handleClear() {
     setModelCode('');
     setDestCode('');
+    setPartNo([]);
     setSupplierCode('');
     setCpsNo('');
     setImplementationPeriod('');
@@ -182,6 +201,7 @@ export default function DPI() {
   const searchFilters = {
     modelCode,
     destCode,
+    partNo,
     supplierCode,
     cpsNo,
     implementationPeriod
@@ -190,6 +210,7 @@ export default function DPI() {
   const searchSetters = {
     setModelCode,
     setDestCode,
+    setPartNo,
     setSupplierCode,
     setCpsNo,
     setImplementationPeriod
@@ -215,6 +236,7 @@ export default function DPI() {
           setters={searchSetters}
           onSearch={handleSearch}
           onClear={handleClear}
+          onPartSearch={() => setShowPartPicker(true)}
         />
 
         <div id="result-section">
@@ -236,6 +258,13 @@ export default function DPI() {
         onClose={() => setShowNewDpi(false)}
         onSave={handleSaveNewDpi}
         onSubmit={handleSubmitNewDpi}
+      />
+
+      <PartPickerModal
+        show={showPartPicker}
+        onClose={() => setShowPartPicker(false)}
+        onSelect={handlePartPicked}
+        mode="multi"
       />
     </div>
   );

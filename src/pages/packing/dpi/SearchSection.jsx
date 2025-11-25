@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function SearchSection(props) {
   // Log all incoming props to see what the component is receiving
@@ -9,6 +9,7 @@ export default function SearchSection(props) {
     setters,
     onSearch,
     onClear,
+    onPartSearch,
   } = props;
 
   const {
@@ -28,6 +29,23 @@ export default function SearchSection(props) {
     setCpsNo,
     setImplementationPeriod,
   } = setters || {}; // Added fallback for safety
+
+  const [partNoInput, setPartNoInput] = useState('');
+
+  const handlePartNoKeyDown = (e) => {
+    if (e.key === ' ' || e.key === ',') {
+      e.preventDefault();
+      const newPart = partNoInput.trim();
+      if (newPart) {
+        setPartNo(prev => [...new Set([...prev, newPart])]);
+      }
+      setPartNoInput('');
+    }
+  };
+
+  const removePartNo = (partToRemove) => {
+    setPartNo(prev => prev.filter(p => p !== partToRemove));
+  };
 
   const handleSearch = () => {
     console.log("Search button clicked in SearchSection");
@@ -66,9 +84,31 @@ export default function SearchSection(props) {
             <div className="form-group col-12">
               <label className="small mb-1">Part No</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={partNo || ''} onChange={e => setPartNo && setPartNo(e.target.value)} placeholder="Part No" />
+                <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                  {partNo.map(part => (
+                    <span key={part} className="badge badge-primary" style={{ display: 'flex', alignItems: 'center', padding: '4px 8px' }}>
+                      {part}
+                      <button
+                        type="button"
+                        className="close"
+                        aria-label="Remove"
+                        onClick={() => removePartNo(part)}
+                        style={{ color: 'white', marginLeft: '8px', textShadow: 'none', opacity: 1, fontSize: '1rem' }}
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </span>
+                  ))}
+                  <input
+                    style={{ border: 'none', outline: 'none', flex: '1', minWidth: '100px' }}
+                    value={partNoInput}
+                    onChange={e => setPartNoInput(e.target.value)}
+                    onKeyDown={handlePartNoKeyDown}
+                    placeholder="Type and press space"
+                  />
+                </div>
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part No" onClick={() => alert('Search Part No placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Part No" onClick={onPartSearch}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
