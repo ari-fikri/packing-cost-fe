@@ -382,7 +382,7 @@ export default function PseInfoSection(props) {
 
         <div className="table-responsive mt-2">
           <table className="table table-sm table-bordered mb-0 small">
-            <thead>
+            <thead style={{ backgroundColor: "#cfcfcfff" }}>
               <tr className="text-center">
                 <th style={{ width: 30 }}>No</th>
                 <th style={{ width: 120 }}>Pack Material No</th>
