@@ -1,5 +1,4 @@
 import React from 'react';
-import PackingOuterSection from './PackingOuterSection';
 import PackingInnerSection from './PackingInnerSection';
 
 export default function PackingSection(props) {
@@ -26,7 +25,6 @@ export default function PackingSection(props) {
         </button>
         {packingOpen && (
           <div id="packingSection">
-            <PackingOuterSection {...props} />
             <PackingInnerSection {...props} />
           </div>
         )}

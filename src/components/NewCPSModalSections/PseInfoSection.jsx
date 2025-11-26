@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function PseInfoSection(props) {
   // Destructure props as needed
@@ -36,7 +36,116 @@ export default function PseInfoSection(props) {
     setPackingProcessBoxing,
     packingProcessStacking,
     setPackingProcessStacking,
+    pseOuterRows,
+    setPseOuterRows,
+    newPseOuter,
+    setNewPseOuter,
+    openMaterialPicker,
   } = props;
+
+  const [showNewRow, setShowNewRow] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
+
+  const handleAddRow = () => {
+    if (!newPseOuter.materialNo.trim()) {
+      alert('Enter Pack Material No');
+      return;
+    }
+    setPseOuterRows(prev => [...prev, { ...newPseOuter }]);
+    setNewPseOuter({
+      materialNo: '',
+      suffix: '',
+      name: '',
+      supplier: '',
+      L: '',
+      W: '',
+      H: '',
+      wtPerPc: '',
+      qty: '',
+      totalWt: ''
+    });
+    setShowNewRow(false);
+  };
+
+  const handleRemoveRow = (index) => {
+    setPseOuterRows(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleRowChange = (index, field, value) => {
+    const updatedRows = pseOuterRows.map((row, i) => {
+      if (i === index) {
+        const newRow = { ...row, [field]: value };
+        if (field === 'qty' || field === 'wtPerPc') {
+          newRow.totalWt = (parseFloat(newRow.qty) || 0) * (parseFloat(newRow.wtPerPc) || 0);
+        }
+        return newRow;
+      }
+      return row;
+    });
+    setPseOuterRows(updatedRows);
+  };
+
+  const renderRow = (r, i) => {
+    const isEditing = editingIndex === i;
+    return (
+      <tr key={i} onClick={() => !isEditing && config.editable && setEditingIndex(i)}>
+        <td>{i + 1}</td>
+        <td>
+          {isEditing ? (
+            <div className="input-group input-group-sm">
+              <input
+                value={r.materialNo}
+                onChange={(e) => handleRowChange(i, 'materialNo', e.target.value)}
+                className="form-control form-control-sm"
+                disabled={!config.editable}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-secondary btn-sm"
+                  type="button"
+                  onClick={() => openMaterialPicker('pse-outer', i)}
+                  disabled={!config.editable}
+                >
+                  ...
+                </button>
+              </div>
+            </div>
+          ) : (
+            r.materialNo
+          )}
+        </td>
+        <td>{isEditing ? <input readOnly value={r.suffix} onChange={(e) => handleRowChange(i, 'suffix', e.target.value)} className="form-control form-control-sm" /> : r.suffix}</td>
+        <td>{r.name}</td>
+        <td>{r.supplier}</td>
+        <td>{isEditing ? <input readOnly value={r.L} onChange={(e) => handleRowChange(i, 'L', e.target.value)} className="form-control form-control-sm" /> : r.L}</td>
+        <td>{isEditing ? <input readOnly value={r.W} onChange={(e) => handleRowChange(i, 'W', e.target.value)} className="form-control form-control-sm" /> : r.W}</td>
+        <td>{isEditing ? <input readOnly value={r.H} onChange={(e) => handleRowChange(i, 'H', e.target.value)} className="form-control form-control-sm" /> : r.H}</td>
+        <td>{isEditing ? <input value={r.wtPerPc} onChange={(e) => handleRowChange(i, 'wtPerPc', e.target.value)} className="form-control form-control-sm" /> : r.wtPerPc}</td>
+        <td>{isEditing ? <input value={r.qty} onChange={(e) => handleRowChange(i, 'qty', e.target.value)} className="form-control form-control-sm" /> : r.qty}</td>
+        <td>{r.totalWt}</td>
+        <td><button className="btn btn-sm btn-link"><i className="fas fa-file-alt" /></button></td>
+        <td><button className="btn btn-sm btn-link"><i className="fas fa-file-alt" /></button></td>
+        <td>
+          {isEditing ? (
+            <button className="btn btn-sm btn-primary" onClick={() => setEditingIndex(null)} disabled={!config.editable}>
+              Save
+            </button>
+          ) : (
+            <button
+              className="btn btn-sm btn-outline-danger"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRemoveRow(i);
+              }}
+              disabled={!config.editable}
+            >
+              <i className="fas fa-trash" />
+            </button>
+          )}
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div>
@@ -254,6 +363,109 @@ export default function PseInfoSection(props) {
                     </select>
                   </div>
                 </div>
+          
+          <div className="d-flex justify-content-between align-items-center">
+            <label className="small mb-1">OUTER (Pack Material)</label>
+            <div>
+              <button
+                className="btn btn-sm btn-outline-primary"
+                onClick={() => {
+                  setEditingIndex(null);
+                  setShowNewRow(true);
+                }}
+                disabled={showNewRow || !config.editable}
+              >
+                Add
+              </button>
+            </div>
+          </div>            
+
+        <div className="table-responsive mt-2">
+          <table className="table table-sm table-bordered mb-0 small">
+            <thead>
+              <tr className="text-center">
+                <th style={{ width: 30 }}>No</th>
+                <th style={{ width: 120 }}>Pack Material No</th>
+                <th style={{ width: 40 }}>Suffix</th>
+                <th>Name</th>
+                <th>Supplier</th>
+                <th style={{ width: 60 }}>L</th>
+                <th style={{ width: 60 }}>W</th>
+                <th style={{ width: 60 }}>H</th>
+                <th style={{ width: 60 }}>Wt/pc</th>
+                <th style={{ width: 60 }}>Qty</th>
+                <th style={{ width: 80 }}>Total Wt</th>
+                <th style={{ width: 10 }}>msds</th>
+                <th style={{ width: 10 }}>draw</th>
+                <th style={{ width: 80 }}>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pseOuterRows.length === 0 && !showNewRow ? (
+                <tr>
+                  <td colSpan="14" className="text-center text-muted py-3">
+                    No Data Found
+                  </td>
+                </tr>
+              ) : (
+                pseOuterRows.map(renderRow)
+              )}
+              {showNewRow && (
+                <tr>
+                  <td>+</td>
+                  <td>
+                    <div className="input-group input-group-sm">
+                      <input
+                        className="form-control form-control-sm"
+                        value={newPseOuter.materialNo}
+                        onChange={(e) => setNewPseOuter(n => ({ ...n, materialNo: e.target.value }))}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-outline-secondary btn-sm"
+                          type="button"
+                          onClick={() => openMaterialPicker('pse-outer', 'new')}
+                          disabled={!config.editable}
+                        >
+                          ...
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.suffix} onChange={(e) => setNewPseOuter(n => ({ ...n, suffix: e.target.value }))} /></td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.name} /></td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.supplier} /></td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.L} onChange={(e) => setNewPseOuter(n => ({ ...n, L: e.target.value }))} /></td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.W} onChange={(e) => setNewPseOuter(n => ({ ...n, W: e.target.value }))} /></td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.H} onChange={(e) => setNewPseOuter(n => ({ ...n, H: e.target.value }))} /></td>
+                  <td><input className="form-control form-control-sm" value={newPseOuter.wtPerPc} onChange={(e) => setNewPseOuter(n => ({ ...n, wtPerPc: e.target.value, totalWt: (parseFloat(e.target.value) || 0) * (parseFloat(n.qty) || 0) }))} /></td>
+                  <td><input className="form-control form-control-sm" value={newPseOuter.qty} onChange={(e) => setNewPseOuter(n => ({ ...n, qty: e.target.value, totalWt: (parseFloat(e.target.value) || 0) * (parseFloat(n.wtPerPc) || 0) }))} /></td>
+                  <td><input readOnly className="form-control form-control-sm" value={newPseOuter.totalWt} /></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div className="btn-group">
+                      <button
+                        className="btn btn-sm btn-primary"
+                        onClick={handleAddRow}
+                        disabled={!config.editable}
+                      >
+                        Add
+                      </button>
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => setShowNewRow(false)}
+                        disabled={!config.editable}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
               </div>
             </div>
           </div>

@@ -1,30 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-/**
- * Section for managing inner pack materials.
- * @param {object} props - Component props.
- * @param {Array<object>} props.innerRows - The list of inner pack material rows.
- * @param {function} props.setInnerRows - Function to update the inner rows.
- * @param {object} props.newInner - The object holding data for a new inner row.
- * @param {function} props.setNewInner - Function to update the new inner row data.
- * @param {function} props.handleAddInnerRow - Function to add a new inner row to the list.
- * @param {function} props.handleRemoveInnerRow - Function to remove an inner row from the list.
- * @param {function} props.openMaterialPicker - Function to open the material picker modal.
- * @param {Array<object>} props.materials - The list of all materials.
- */
-export default function PackingInnerSection(props) {
+export default function PackingOuterMaterialSection(props) {
   const {
     config,
-    innerRows,
-    setInnerRows,
-    newInner,
-    setNewInner,
-    handleRemoveInnerRow,
+    outerRows,
+    setOuterRows,
+    newOuter,
+    setNewOuter,
+    handleAddOuterRow,
+    handleRemoveOuterRow,
     openMaterialPicker,
     materials,
   } = props;
 
-  // State to control the visibility of the new row input form
   const [showNewRow, setShowNewRow] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const materialNoInputRef = useRef(null);
@@ -35,42 +23,19 @@ export default function PackingInnerSection(props) {
     }
   }, [editingIndex]);
 
-  const handleAddInnerRow = () => {
-    if (!newInner.materialNo.trim()) {
-      alert('Enter Pack Material No');
-      return;
-    }
-    setInnerRows(prev => [...prev, { ...newInner }]);
-    setNewInner({
-      materialNo: '',
-      suffix: '',
-      name: '',
-      parent: '',
-      supplierId: '',
-      supplierName: '',
-      L: '',
-      W: '',
-      H: '',
-      wtPerPc: '',
-      qty: '',
-    });
-  };
-
   const handleRowChange = (index, field, value) => {
-    const updatedRows = innerRows.map((row, i) => {
+    const updatedRows = outerRows.map((row, i) => {
       if (i === index) {
         return { ...row, [field]: value };
       }
       return row;
     });
-    setInnerRows(updatedRows);
+    setOuterRows(updatedRows);
   };
 
   const handleMaterialNoBlur = (materialNo, index) => {
     const material = materials.find((m) => m.materialNo === materialNo);
-    console.log("Blurred ->>");
     if (material) {
-      console.log("Material FOund -->", JSON.stringify(material));
       const updatedData = {
         name: material.materialName,
         supplierName: material.supplier.supplier_name,
@@ -80,13 +45,12 @@ export default function PackingInnerSection(props) {
       };
 
       if (index === "new") {
-        console.log("New Inner -->", newInner);
-        setNewInner((prev) => ({
+        setNewOuter((prev) => ({
           ...prev,
           ...updatedData,
         }));
       } else {
-        const updatedRows = innerRows.map((row, i) => {
+        const updatedRows = outerRows.map((row, i) => {
           if (i === index) {
             return {
               ...row,
@@ -95,7 +59,7 @@ export default function PackingInnerSection(props) {
           }
           return row;
         });
-        setInnerRows(updatedRows);
+        setOuterRows(updatedRows);
       }
     }
   };
@@ -104,7 +68,7 @@ export default function PackingInnerSection(props) {
     <div className="row mt-3">
       <div className="col-12">
         <div className="d-flex justify-content-between align-items-center">
-          <label className="small mb-1">INNER (Pack Material)</label>
+          <label className="small mb-1">OUTER (Pack Material)</label>
           <div>
             <button
               className="btn btn-sm btn-outline-primary"
@@ -124,23 +88,23 @@ export default function PackingInnerSection(props) {
             <thead>
               <tr className="text-center">
                 <th style={{ width: 30 }}>No</th>
-                <th style={{ width: 120 }}>Pack Material No</th>
+                <th style={{ width: 110 }}>Pack Material No</th>
                 <th style={{ width: 40 }}>Suffix</th>
-                <th>Name</th>
-                <th>Supplier</th>
+                <th style={{ width: 100 }}>Name</th>
+                <th style={{ width: 100 }}>Supplier</th>
                 <th style={{ width: 60 }}>L</th>
                 <th style={{ width: 60 }}>W</th>
                 <th style={{ width: 60 }}>H</th>
                 <th style={{ width: 60 }}>Wt/pc</th>
                 <th style={{ width: 60 }}>Qty</th>
                 <th style={{ width: 80 }}>Total Wt</th>
-                <th style={{ width: 10 }}>msds</th>
-                <th style={{ width: 10 }}>draw</th>
+                <th>msds</th>
+                <th>drawing</th>
                 <th style={{ width: 80 }}>Action</th>
               </tr>
             </thead>
             <tbody>
-              {innerRows.length === 0 && !showNewRow ? (
+              {outerRows.length === 0 && !showNewRow ? (
                 <tr>
                   <td
                     colSpan="14"
@@ -150,7 +114,7 @@ export default function PackingInnerSection(props) {
                   </td>
                 </tr>
               ) : (
-                innerRows.map((r, i) => {
+                outerRows.map((r, i) => {
                   const isEditing = editingIndex === i;
 
                   if (isEditing) {
@@ -171,7 +135,7 @@ export default function PackingInnerSection(props) {
                               <button
                                 className="btn btn-outline-secondary btn-sm"
                                 type="button"
-                                onClick={() => openMaterialPicker('inner', i)}
+                                onClick={() => openMaterialPicker('outer-material', i)}
                                 disabled={!config.editable}
                               >
                                 ...
@@ -179,7 +143,7 @@ export default function PackingInnerSection(props) {
                             </div>
                           </div>
                         </td>
-                        <td><input value={r.suffix} onChange={(e) => handleRowChange(i, 'suffix', e.target.value)} readOnly className="form-control form-control-sm" /></td>
+                        <td><input value={r.suffix} onChange={(e) => handleRowChange(i, 'suffix', e.target.value)} className="form-control form-control-sm" /></td>
                         <td><input value={r.name} readOnly className="form-control form-control-sm" /></td>
                         <td><input value={r.supplierName} readOnly className="form-control form-control-sm" /></td>
                         <td><input value={r.L} readOnly className="form-control form-control-sm" /></td>
@@ -257,7 +221,7 @@ export default function PackingInnerSection(props) {
                           className="btn btn-sm btn-outline-danger"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleRemoveInnerRow(i);
+                            handleRemoveOuterRow(i);
                           }}
                           disabled={!config.editable}
                         >
@@ -275,9 +239,9 @@ export default function PackingInnerSection(props) {
                     <div className="input-group input-group-sm">
                       <input
                         className="form-control form-control-sm"
-                        value={newInner.materialNo}
+                        value={newOuter.materialNo}
                         onChange={(e) =>
-                          setNewInner((n) => ({
+                          setNewOuter((n) => ({
                             ...n,
                             materialNo: e.target.value,
                           }))
@@ -288,7 +252,7 @@ export default function PackingInnerSection(props) {
                         <button
                           className="btn btn-outline-secondary btn-sm"
                           type="button"
-                          onClick={() => openMaterialPicker('inner')}
+                          onClick={() => openMaterialPicker('outer-material')}
                           disabled={!config.editable}
                         >
                           ...
@@ -299,22 +263,21 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.suffix}
+                      value={newOuter.suffix}
                       onChange={(e) =>
-                        setNewInner((n) => ({
+                        setNewOuter((n) => ({
                           ...n,
                           suffix: e.target.value,
                         }))
                       }
-                      readOnly
                     />
                   </td>
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.name}
+                      value={newOuter.name}
                       onChange={(e) =>
-                        setNewInner((n) => ({
+                        setNewOuter((n) => ({
                           ...n,
                           name: e.target.value,
                         }))
@@ -325,9 +288,9 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.supplierName}
+                      value={newOuter.supplierName}
                       onChange={(e) =>
-                        setNewInner((n) => ({
+                        setNewOuter((n) => ({
                           ...n,
                           supplierName: e.target.value,
                         }))
@@ -338,9 +301,9 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.L}
+                      value={newOuter.L}
                       onChange={(e) =>
-                        setNewInner((n) => ({ ...n, L: e.target.value }))
+                        setNewOuter((n) => ({ ...n, L: e.target.value }))
                       }
                       readOnly
                     />
@@ -348,9 +311,9 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.W}
+                      value={newOuter.W}
                       onChange={(e) =>
-                        setNewInner((n) => ({ ...n, W: e.target.value }))
+                        setNewOuter((n) => ({ ...n, W: e.target.value }))
                       }
                       readOnly
                     />
@@ -358,9 +321,9 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.H}
+                      value={newOuter.H}
                       onChange={(e) =>
-                        setNewInner((n) => ({ ...n, H: e.target.value }))
+                        setNewOuter((n) => ({ ...n, H: e.target.value }))
                       }
                       readOnly
                     />
@@ -368,9 +331,9 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.wtPerPc}
+                      value={newOuter.wtPerPc}
                       onChange={(e) =>
-                        setNewInner((n) => ({
+                        setNewOuter((n) => ({
                           ...n,
                           wtPerPc: e.target.value,
                         }))
@@ -380,9 +343,9 @@ export default function PackingInnerSection(props) {
                   <td>
                     <input
                       className="form-control form-control-sm"
-                      value={newInner.qty}
+                      value={newOuter.qty}
                       onChange={(e) =>
-                        setNewInner((n) => ({
+                        setNewOuter((n) => ({
                           ...n,
                           qty: e.target.value,
                         }))
@@ -404,7 +367,7 @@ export default function PackingInnerSection(props) {
                     <div className="btn-group">
                       <button
                         className="btn btn-sm btn-primary"
-                        onClick={handleAddInnerRow}
+                        onClick={handleAddOuterRow}
                         disabled={!config.editable}
                       >
                         Add
@@ -412,7 +375,7 @@ export default function PackingInnerSection(props) {
                       <button
                         className="btn btn-sm btn-outline-secondary"
                         onClick={() => {
-                          setNewInner({
+                          setNewOuter({
                             materialNo: "",
                             suffix: "",
                             name: "",

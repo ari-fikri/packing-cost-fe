@@ -58,6 +58,21 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   const [packingProcessBoxing, setPackingProcessBoxing] = useState('')
   const [packingProcessStacking, setPackingProcessStacking] = useState('')
 
+  // PSE Outer Pack Material
+  const [pseOuterRows, setPseOuterRows] = useState([]);
+  const [newPseOuter, setNewPseOuter] = useState({
+    materialNo: '',
+    suffix: '',
+    name: '',
+    supplier: '',
+    L: '',
+    W: '',
+    H: '',
+    wtPerPc: '',
+    qty: '',
+    totalWt: ''
+  });
+
   // images groups (caption and array of files)
   const [imagesPart, setImagesPart] = useState({ caption: "", files: [] });
   const [imagesPacking, setImagesPacking] = useState({ caption: "", files: [] });
@@ -66,11 +81,6 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   const [imagesBkp, setImagesBkp] = useState({ caption: "", files: [] });
 
   // Packing - Outer summary
-  const [outerModuleType, setOuterModuleType] = useState('')
-  const [outerMaterialName, setOuterMaterialName] = useState("");
-  const [outerMaterialNo, setOuterMaterialNo] = useState("");
-  const [outerDimension, setOuterDimension] = useState({ L: "", W: "", H: "" });
-  const [outerVolume, setOuterVolume] = useState("");
   const [innerVolume, setInnerVolume] = useState('')
 
   // Inner pack materials table (static/simpler table as requested)
@@ -112,6 +122,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   // NEW: control for material picker modal
   const [isMaterialPickerOpen, setMaterialPickerOpen] = useState(false);
   const [materialFilter, setMaterialFilter] = useState("all");
+  const [materialPickerTarget, setMaterialPickerTarget] = useState(null);
 
   // NEW: Logistic Info collapse state & fields
   const [logisticOpen, setLogisticOpen] = useState(true);
@@ -158,6 +169,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
           setRenbanEff(editData.pseInfo.renbanEff || '');
           setPackingProcessBoxing(editData.pseInfo.packingProcessBoxing || '');
           setPackingProcessStacking(editData.pseInfo.packingProcessStacking || '');
+          setPseOuterRows(editData.pseInfo.outerRows || []);
         }
 
         if (editData.images) {
@@ -169,11 +181,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
         }
 
         if (editData.packing) {
-          setOuterModuleType(editData.packing.outerModuleType || '');
-          setOuterMaterialName(editData.packing.outerMaterialName || '');
-          setOuterDimension(editData.packing.outerDimension || { L: '', W: '', H: '' });
           setInnerVolume(editData.packing.innerVolume || '');
-          setOuterVolume(editData.packing.outerVolume || '');
           setInnerRows(editData.packing.innerRows || []);
         }
 
@@ -206,16 +214,20 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
         setCategory(''); setKatashiki({ AD: '', AU: '', AF: '', AX: '' });
         setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('');
         setPackingProcessBoxing(''); setPackingProcessStacking('');
+        setPseOuterRows([]);
 
+        // Images
         setImagesPart({ caption: "", files: [] });
         setImagesPacking({ caption: "", files: [] });
         setImagesOuter({ caption: "", files: [] });
         setImagesQkp({ caption: "", files: [] });
         setImagesBkp({ caption: "", files: [] });
 
-        setOuterModuleType(''); setOuterMaterialName(''); setOuterDimension({ L: '', W: '', H: '' });
-        setInnerVolume(''); setOuterVolume('');
+        // Packing
+        setInnerVolume('');
         setInnerRows([]);
+
+        // Notes
         setNotes('');
         setNewInner({
           materialNo: '',
@@ -291,13 +303,14 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
       pseInfo: {
         packingPlantCurr, packingPlantNext, vanningPlantCurr, vanningPlantNext,
         orderPatternCurr, orderPatternNext, category, katashiki, importerLineProcess,
-        caseCode, boxNumber, renban, renbanEff, packingProcessBoxing, packingProcessStacking
+        caseCode, boxNumber, renban, renbanEff, packingProcessBoxing, packingProcessStacking,
+        outerRows: pseOuterRows,
       },
       images: {
         part: imagesPart, packing: imagesPacking, outer: imagesOuter, qkp: imagesQkp, bkp: imagesBkp
       },
       packing: {
-        outerModuleType, outerDimension, innerVolume, outerVolume,
+        innerVolume,
         innerRows
       },
       notes,
@@ -319,8 +332,9 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
       setPseOpen, setPackingPlantCurr, setPackingPlantNext, setVanningPlantCurr, setVanningPlantNext,
       setOrderPatternCurr, setOrderPatternNext, setCategory, setKatashiki, setImporterLineProcess,
       setCaseCode, setBoxNumber, setRenban, setRenbanEff, setPackingProcessBoxing, setPackingProcessStacking,
+      setPseOuterRows, setNewPseOuter,
       setImagesPart, setImagesPacking, setImagesOuter, setImagesQkp, setImagesBkp,
-      setOuterModuleType, setOuterMaterialName, setOuterDimension, setInnerVolume, setOuterVolume,
+      setInnerVolume,
       setInnerRows, setNotes, setNewInner,
       setLogisticOpen, setTmmindDestDockCode, setLogisticRemark, setProcessType, setAddressRack
     });
@@ -342,19 +356,24 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
 
   function handleMaterialPicked(material) {
     if (material) {
-      if (materialFilter === 'outer' || materialFilter === 'module') {
-        console.dir(" Material >>>" + JSON.stringify(material));
-        setOuterModuleType(material.materialNo);
-        setOuterMaterialName(material.materialName);
-        setOuterDimension({
+      const targetIndex = materialPickerTarget;
+      if (materialFilter === 'pse-outer') {
+        const newRowData = {
+          materialNo: material.materialNo,
+          name: material.materialName,
+          supplier: material.supplierName,
           L: material.dimension_length,
           W: material.dimension_width,
           H: material.dimension_height,
-        });
-        var inner = (material.dimension_inner_width * material.dimension_inner_height * material.dimension_inner_length/1000000);
-        var outer = (material.dimension_outer_width * material.dimension_outer_height * material.dimension_outer_length)/1000000;
-        setOuterVolume(formatCurrency(outer));
-        setInnerVolume(formatCurrency(inner));
+          wtPerPc: material.unitWeight,
+        };
+        if (targetIndex === 'new') {
+          setNewPseOuter(n => ({ ...n, ...newRowData }));
+        } else {
+          const updatedRows = [...pseOuterRows];
+          updatedRows[targetIndex] = { ...updatedRows[targetIndex], ...newRowData };
+          setPseOuterRows(updatedRows);
+        }
       } else if (materialFilter === 'inner') {
         setNewInner({
           ...newInner,
@@ -372,8 +391,9 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
 
   const openModelPicker = () => setModelPickerOpen(true);
 
-  const openMaterialPicker = (filter) => {
+  const openMaterialPicker = (filter, index = null) => {
     setMaterialFilter(filter);
+   setMaterialPickerTarget(index);
     setMaterialPickerOpen(true);
   };
 
@@ -383,7 +403,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
     <>
       {/* CPS modal backdrop */}
       <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}>
-        <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1100 }}>
+        <div className="np-modal card card-outline card-primary" style={{ maxWidth: 1200 }}>
           <div className="card-header d-flex align-items-center">
             <h3 className="card-title mb-0"><b>{editData ? 'CPS - Edit' : 'CPS - New'}</b></h3>
             <div className="card-tools ml-auto">
@@ -439,6 +459,11 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
                   renbanEff={renbanEff} setRenbanEff={setRenbanEff}
                   packingProcessBoxing={packingProcessBoxing} setPackingProcessBoxing={setPackingProcessBoxing}
                   packingProcessStacking={packingProcessStacking} setPackingProcessStacking={setPackingProcessStacking}
+                  pseOuterRows={pseOuterRows}
+                  setPseOuterRows={setPseOuterRows}
+                  newPseOuter={newPseOuter}
+                  setNewPseOuter={setNewPseOuter}
+                  openMaterialPicker={openMaterialPicker}
                 />
                 {config.images.visible && <hr />}
               </>
@@ -467,11 +492,6 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
                   config={config.packing}
                   materials={materials}
                   packingOpen={packingOpen} setPackingOpen={setPackingOpen}
-                  outerModuleType={outerModuleType} setOuterModuleType={setOuterModuleType}
-                  outerMaterialName={outerMaterialName}
-                  outerDimension={outerDimension}
-                  innerVolume={innerVolume}
-                  outerVolume={outerVolume}
                   innerRows={innerRows} setInnerRows={setInnerRows}
                   newInner={newInner} setNewInner={setNewInner}
                   handleAddInnerRow={handleAddInnerRow}
