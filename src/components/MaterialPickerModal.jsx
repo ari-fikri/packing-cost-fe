@@ -17,7 +17,7 @@ export default function MaterialPickerModal({
   const [filterName, setFilterName] = useState("");
   const [filterType, setFilterType] = useState("");
   const [selectedMaterials, setSelectedMaterials] = useState(selectionMode === "multi" ? [] : null);
-  const [displayedMaterials, setDisplayedMaterials] = useState(materialsData);
+  const [displayedMaterials, setDisplayedMaterials] = useState([]);
   const materialsPerPage = 15;
 
   useEffect(() => {
@@ -35,6 +35,8 @@ export default function MaterialPickerModal({
       setSelectedMaterials(selectionMode === "multi" ? [] : null);
       setDisplayedMaterials(initialMaterials);
       setCurrentPage(1);
+    } else {
+      setDisplayedMaterials([]);
     }
   }, [show, selectionMode, filter]);
 

@@ -357,7 +357,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   function handleMaterialPicked(material) {
     if (material) {
       const targetIndex = materialPickerTarget;
-      if (materialFilter === 'pse-outer') {
+      if (materialFilter === 'outer' || materialFilter === 'module') {
         const newRowData = {
           materialNo: material.materialNo,
           name: material.materialName,

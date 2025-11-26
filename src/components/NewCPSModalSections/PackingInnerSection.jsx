@@ -171,7 +171,8 @@ export default function PackingInnerSection(props) {
                               <button
                                 className="btn btn-outline-secondary btn-sm"
                                 type="button"
-                                onClick={() => openMaterialPicker('inner', i)}
+                                onClick={() => openMaterialPicker(i === 0 ? 'Box' : 'inner', i)}
+                                //onClick={() => openMaterialPicker('inner', i)}
                                 disabled={!config.editable}
                               >
                                 ...
