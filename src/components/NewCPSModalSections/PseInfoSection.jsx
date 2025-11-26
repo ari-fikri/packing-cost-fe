@@ -88,25 +88,14 @@ export default function PseInfoSection(props) {
   const renderRow = (r, i) => {
     const isEditing = editingIndex === i;
     return (
-      <tr key={i} onClick={() => !isEditing && config.editable && setEditingIndex(i)}>
-        <td>{i + 1}</td>
+      <tr key={i}>
         <td>
           {isEditing ? (
-            <div className="input-group input-group-sm">
-              <input
-                value={r.materialNo}
-                onChange={(e) => handleRowChange(i, 'materialNo', e.target.value)}
-                className="form-control form-control-sm"
-                disabled={!config.editable}
-              />
+            <div className="input-group">
+              <input value={r.materialNo} onChange={(e) => handleRowChange(i, 'materialNo', e.target.value)} className="form-control form-control-sm" />
               <div className="input-group-append">
-                <button
-                  className="btn btn-outline-secondary btn-sm"
-                  type="button"
-                  onClick={() => openMaterialPicker('pse-outer', i)}
-                  disabled={!config.editable}
-                >
-                  ...
+                <button className="btn btn-sm btn-outline-secondary" type="button" onClick={() => openMaterialPicker(i === 0 ? 'Module' : 'outer', i)}>
+                  <i className="fas fa-search" />
                 </button>
               </div>
             </div>
@@ -424,7 +413,7 @@ export default function PseInfoSection(props) {
                         <button
                           className="btn btn-outline-secondary btn-sm"
                           type="button"
-                          onClick={() => openMaterialPicker('pse-outer', 'new')}
+                          onClick={() => openMaterialPicker('Outer', 'new')}
                           disabled={!config.editable}
                         >
                           ...

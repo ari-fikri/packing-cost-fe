@@ -10,7 +10,7 @@ export function InnerGroupHeaders({ count = 10, isPseUser }) {
     <>
       {Array.from({ length: count }).map((_, i) => (
         <th key={`innerGroupHdr-${i}`} colSpan={isPseUser ? 2 : 4} className="align-middle border text-center tbl-row2-hdr text-nowrap">
-          Inner {i + 1}
+          {i === 0 ? 'Box' : `Inner ${i}`}
         </th>
       ))}
     </>

@@ -171,7 +171,7 @@ export default function PackingInnerSection(props) {
                               <button
                                 className="btn btn-outline-secondary btn-sm"
                                 type="button"
-                                onClick={() => openMaterialPicker(i === 0 ? 'Box' : 'inner', i)}
+                                onClick={() => openMaterialPicker(i === 0 ? 'box' : 'inner', i)}
                                 //onClick={() => openMaterialPicker('inner', i)}
                                 disabled={!config.editable}
                               >
@@ -289,7 +289,7 @@ export default function PackingInnerSection(props) {
                         <button
                           className="btn btn-outline-secondary btn-sm"
                           type="button"
-                          onClick={() => openMaterialPicker('inner')}
+                          onClick={() => openMaterialPicker(innerRows.length === 0 ? 'box' : 'inner')}
                           disabled={!config.editable}
                         >
                           ...

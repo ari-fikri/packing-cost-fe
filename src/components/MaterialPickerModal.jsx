@@ -23,24 +23,26 @@ export default function MaterialPickerModal({
   useEffect(() => {
     if (show) {
       let initialMaterials = materialsData;
-      if (typeof filter === "string" && filter !== "all") {
-        initialMaterials = materialsData.filter(
-          (m) => m.materialType.toLowerCase() === filter.toLowerCase()
-        );
+      if (filter) {
+        if (filter === 'module') {
+          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'module');
+        } else if (filter === 'outer') {
+          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'outer');
+        } else if (filter === 'inner') {
+          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'inner');
+        } else if (filter === 'box') {
+          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'box');
+        }
       }
-
-      setFilterMaterialNo("");
-      setFilterName("");
-      setFilterType("");
-      setSelectedMaterials(selectionMode === "multi" ? [] : null);
       setDisplayedMaterials(initialMaterials);
-      setCurrentPage(1);
     } else {
       setDisplayedMaterials([]);
+      setSearchTerm('');
+      setCurrentPage(1);
     }
-  }, [show, selectionMode, filter]);
+  }, [show, filter]);
 
-  const handleSelectionChange = (materialNo) => {
+  function handleSelect(material) {
     if (selectionMode === "multi") {
       setSelectedMaterials((prev) => (prev.includes(materialNo) ? prev.filter((m) => m !== materialNo) : [...prev, materialNo]));
     } else {

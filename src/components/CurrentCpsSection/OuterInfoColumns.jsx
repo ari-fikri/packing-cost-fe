@@ -5,12 +5,12 @@ import { MaterialLeafHeaders, MaterialLeafCells } from "./MaterialInfoColumns";
 /**
  * Outer Info group headers (Material 1 .. Material N)
  */
-export function OuterGroupHeaders({ count = 10, isPseUser}) {
+export function OuterGroupHeaders({ count = 1 }) {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
-        <th key={`outerGroupHdr-${i}`} colSpan={isPseUser ? 2 : 4} className="align-middle">
-          Outer {i + 1}
+        <th className="align-middle border text-center tbl-row2-hdr text-nowrap" key={`outerGrp-${i}`} colSpan={2}>
+          {i === 0 ? 'Module' : `Outer ${i}`}
         </th>
       ))}
     </>

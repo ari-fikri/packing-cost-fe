@@ -7,7 +7,7 @@ export function InnerGroupHeaders({ count = 1 }) {
     <>
       {Array.from({ length: count }).map((_, i) => (
         <th className="align-middle border text-center tbl-row2-hdr text-nowrap" key={`innerGrp-${i}`} colSpan={i === 0 ? 8 : 2}>
-          {`Inner ${i + 1}`}
+          {i === 0 ? 'Box' : `Inner ${i}`}
         </th>
       ))}
     </>

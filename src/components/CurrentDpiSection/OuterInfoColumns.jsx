@@ -7,7 +7,7 @@ export function OuterGroupHeaders({ count = 1 }) {
     <>
       {Array.from({ length: count }).map((_, i) => (
         <th className="align-middle border text-center tbl-row2-hdr text-nowrap" key={`outerGrp-${i}`} colSpan={i === 0 ? 8 : 2}>
-          {`Outer ${i + 1}`}
+          {i === 0 ? 'Module' : `Outer ${i}`}
         </th>
       ))}
     </>
