@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { ImageModal } from './ImageModal';
 
-export function ImageInfoHeaders() {
+export function ImageInfoHeaders({ visibleColumns }) {
   return (
     <>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Packing</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Outer</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Qkp</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Bkp</th>
+      {visibleColumns.partImage && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part</th>}
+      {visibleColumns.packingImage && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Packing</th>}
+      {visibleColumns.outerImage && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Outer</th>}
+      {visibleColumns.qkpImage && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Qkp</th>}
+      {visibleColumns.bkpImage && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Bkp</th>}
     </>
   );
 }
@@ -38,15 +38,15 @@ function ImageViewer({ files }) {
   );
 }
 
-export function ImageInfoCells({ images }) {
+export function ImageInfoCells({ images, visibleColumns }) {
   const { part, packing, outer, qkp, bkp } = images || {};
   return (
     <>
-      <td className="align-middle"><ImageViewer files={part?.files} /></td>
-      <td className="align-middle"><ImageViewer files={packing?.files} /></td>
-      <td className="align-middle"><ImageViewer files={outer?.files} /></td>
-      <td className="align-middle"><ImageViewer files={qkp?.files} /></td>
-      <td className="align-middle"><ImageViewer files={bkp?.files} /></td>
+      {visibleColumns.partImage && <td className="align-middle"><ImageViewer files={part?.files} /></td>}
+      {visibleColumns.packingImage && <td className="align-middle"><ImageViewer files={packing?.files} /></td>}
+      {visibleColumns.outerImage && <td className="align-middle"><ImageViewer files={outer?.files} /></td>}
+      {visibleColumns.qkpImage && <td className="align-middle"><ImageViewer files={qkp?.files} /></td>}
+      {visibleColumns.bkpImage && <td className="align-middle"><ImageViewer files={bkp?.files} /></td>}
     </>
   );
 }

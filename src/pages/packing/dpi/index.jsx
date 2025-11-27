@@ -5,6 +5,8 @@ import SearchSection from './SearchSection';
 import ResultSection from './ResultSection';
 import ActionHeaderButtons from './ActionHeaderButtons';
 import dpiData from '../../../data/dpi.json';
+import ColumnSelectionModal from '../../../components/ColumnSelectionModal';
+import { columnsConfig, initialVisibleColumns } from './columnsConfig';
 
 export default function DpiComparison() {
   const [rows, setRows] = useState([]);
@@ -13,6 +15,9 @@ export default function DpiComparison() {
   const [perPage, setPerPage] = useState(10);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+
+  const [showColumnSelector, setShowColumnSelector] = useState(false);
+  const [visibleColumns, setVisibleColumns] = useState(initialVisibleColumns);
 
   const [modelCode, setModelCode] = useState('');
   const [destCode, setDestCode] = useState('');
@@ -74,7 +79,7 @@ export default function DpiComparison() {
       title="DPI Comparison"
       heading="DPI Comparison"
       showDate
-      right={<ActionHeaderButtons />}
+      right={<ActionHeaderButtons onToggleColumnSelector={() => setShowColumnSelector(true)} />}
     >
       <Container fluid>
         <Row>
@@ -94,10 +99,18 @@ export default function DpiComparison() {
               totalPages={totalPages}
               goToPage={goToPage}
               setPerPage={setPerPage}
+              visibleColumns={visibleColumns}
             />
           </Col>
         </Row>
       </Container>
+      <ColumnSelectionModal
+        isOpen={showColumnSelector}
+        toggle={() => setShowColumnSelector(false)}
+        columnsConfig={columnsConfig}
+        visibleColumns={visibleColumns}
+        setVisibleColumns={setVisibleColumns}
+      />
     </Page>
   );
 }

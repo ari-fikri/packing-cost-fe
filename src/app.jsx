@@ -12,7 +12,7 @@ import Parts from './pages/Parts'
 import Suppliers from './pages/Suppliers'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Cps from './pages/packing/Cps'
-import Dpi from './pages/packing/Dpi'
+import Dpi from './pages/packing/Dpi.jsx'
 import Calculate from './pages/packing/CalculatePackingCost'
 import Comparison from './pages/ComparisonPage'
 import Material from './pages/Material'  // Now using the properly named Material.jsx file

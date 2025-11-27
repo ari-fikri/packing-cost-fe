@@ -19,6 +19,3 @@
 .modal.multi-parts-comparison {
   z-index: 2100 !important;
 }
-.modal-backdrop.show {
-  z-index: 2095 !important;
-}

@@ -2,7 +2,7 @@
 import React from "react";
 import { MaterialLeafHeaders, MaterialLeafCells } from "./MaterialInfoColumns";
 
-export function InnerGroupHeaders({ count = 1 }) {
+export function InnerGroupHeaders({ count = 1, visibleColumns }) {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
@@ -14,9 +14,9 @@ export function InnerGroupHeaders({ count = 1 }) {
   );
 }
 
-export const InnerLeafHeaders = ({ count }) => (
-  <MaterialLeafHeaders count={count} />
+export const InnerLeafHeaders = ({ count, visibleColumns }) => (
+  <MaterialLeafHeaders count={count} visibleColumns={visibleColumns} />
 );
-export const InnerLeafCells = ({ data, count }) => {
-  return <MaterialLeafCells arr={data} count={count} />;
+export const InnerLeafCells = ({ data, count, visibleColumns }) => {
+  return <MaterialLeafCells arr={data} count={count} visibleColumns={visibleColumns} />;
 };
