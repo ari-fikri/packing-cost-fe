@@ -29,7 +29,8 @@ export default function DPI() {
     'order_pattern_current', 'order_pattern_next', 'katashiiki', 'katashiiki_ad', 'katashiiki_au',
     'katashiiki_af', 'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number',
     'renban', 'renban_eff', 'packing_process', 'packing_process_boxing', 'packing_process_stacking',
-    'logistic_info', 'dock_code', 'address', 'process_type'
+    'logistic_info', 'dock_code', 'address', 'process_type',
+    'images', 'part_image', 'packing_image', 'outer_image', 'qkp_image', 'bkp_image'
   ]);
 
   // column visibility - This will be wired up later

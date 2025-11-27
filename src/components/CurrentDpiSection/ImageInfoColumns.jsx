@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { ImageModal } from './ImageModal';
 
-export function ImageInfoHeaders() {
+export function ImageInfoHeaders({ checked }) {
   return (
     <>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Packing</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Outer</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Qkp</th>
-      <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Bkp</th>
+      {checked.includes('part_image') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Part</th>}
+      {checked.includes('packing_image') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Packing</th>}
+      {checked.includes('outer_image') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Outer</th>}
+      {checked.includes('qkp_image') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Qkp</th>}
+      {checked.includes('bkp_image') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Bkp</th>}
     </>
   );
 }
@@ -38,15 +38,15 @@ function ImageViewer({ files }) {
   );
 }
 
-export function ImageInfoCells({ images }) {
+export function ImageInfoCells({ images, checked }) {
   const { part, packing, outer, qkp, bkp } = images || {};
   return (
     <>
-      <td className="align-middle"><ImageViewer files={part?.files} /></td>
-      <td className="align-middle"><ImageViewer files={packing?.files} /></td>
-      <td className="align-middle"><ImageViewer files={outer?.files} /></td>
-      <td className="align-middle"><ImageViewer files={qkp?.files} /></td>
-      <td className="align-middle"><ImageViewer files={bkp?.files} /></td>
+      {checked.includes('part_image') && <td className="align-middle"><ImageViewer files={part?.files} /></td>}
+      {checked.includes('packing_image') && <td className="align-middle"><ImageViewer files={packing?.files} /></td>}
+      {checked.includes('outer_image') && <td className="align-middle"><ImageViewer files={outer?.files} /></td>}
+      {checked.includes('qkp_image') && <td className="align-middle"><ImageViewer files={qkp?.files} /></td>}
+      {checked.includes('bkp_image') && <td className="align-middle"><ImageViewer files={bkp?.files} /></td>}
     </>
   );
 }
