@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Input } from 'reactstrap';
 
 const nodes = [
@@ -151,6 +151,32 @@ const nodes = [
 
 const ColumnSelectionModal = ({ isOpen, toggle, checked, onCheckedChange }) => {
     const [expanded, setExpanded] = useState([]);
+
+    useEffect(() => {
+        if (isOpen) {
+            let newChecked = [...checked];
+            let changed = false;
+    
+            const checkParents = (nodes) => {
+                nodes.forEach(node => {
+                    if (node.children) {
+                        const allChildrenChecked = node.children.every(child => newChecked.includes(child.value));
+                        if (allChildrenChecked && !newChecked.includes(node.value)) {
+                            newChecked.push(node.value);
+                            changed = true;
+                        }
+                        checkParents(node.children);
+                    }
+                });
+            };
+    
+            checkParents(nodes);
+    
+            if (changed) {
+                onCheckedChange([...new Set(newChecked)]);
+            }
+        }
+    }, [isOpen, checked, onCheckedChange]);
 
     const getDescendants = (node, descendants = []) => {
         if (node.children) {
