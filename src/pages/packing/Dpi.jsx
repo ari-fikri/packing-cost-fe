@@ -5,6 +5,7 @@ import SearchSection from './dpi/SearchSection';
 import ResultSection from './dpi/ResultSection';
 import ActionHeaderButtons from './dpi/ActionHeaderButtons';
 import PartPickerModal from '../../components/PartPickerModal';
+import ColumnSelectionModal from '../../components/ColumnSelectionModal';
 
 export default function DPI() {
   // filter fields
@@ -18,6 +19,10 @@ export default function DPI() {
   // modal state
   const [showNewDpi, setShowNewDpi] = useState(false);
   const [showPartPicker, setShowPartPicker] = useState(false);
+  const [showColumnSelector, setShowColumnSelector] = useState(false);
+
+  // column visibility - This will be wired up later
+  // const [visibleColumns, setVisibleColumns] = useState(() => getInitialVisibility(columnsConfig, initialVisibleColumns));
 
   // table data
   const [rows, setRows] = useState([]);
@@ -105,6 +110,10 @@ export default function DPI() {
   }
   function handleTemplate() {
     alert('Download template placeholder');
+  }
+
+  function handleToggleColumnSelector() {
+    setShowColumnSelector(prev => !prev);
   }
 
   function handleViewDpi() {
@@ -227,6 +236,7 @@ export default function DPI() {
             onTemplate={handleTemplate}
             onCreateDpi={handleCreateDpi}
             onCreatePci={handleCreatePci}
+            onToggleColumnSelector={handleToggleColumnSelector}
             viewDpiDisabled={rows.length === 0}
           />
         </div>
@@ -265,6 +275,11 @@ export default function DPI() {
         onClose={() => setShowPartPicker(false)}
         onSelect={handlePartPicked}
         mode="multi"
+      />
+
+      <ColumnSelectionModal
+        isOpen={showColumnSelector}
+        toggle={handleToggleColumnSelector}
       />
     </div>
   );
