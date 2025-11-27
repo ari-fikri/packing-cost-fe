@@ -20,7 +20,11 @@ export default function DPI() {
   const [showNewDpi, setShowNewDpi] = useState(false);
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
-  const [checked, setChecked] = useState(['destination', 'model', 'impl_period', 'cps_no']);
+  const [checked, setChecked] = useState([
+    'destination', 'model', 'impl_period', 'cps_no',
+    'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
+    'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box'
+  ]);
 
   // column visibility - This will be wired up later
   // const [visibleColumns, setVisibleColumns] = useState(() => getInitialVisibility(columnsConfig, initialVisibleColumns));

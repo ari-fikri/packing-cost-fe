@@ -63,6 +63,13 @@ export default function ResultSection({
   const outerCount = firstRowCps.packing?.outer?.length || 1;
   // const outerCount = firstRowCps.outerMaterials?.length || 1;
 
+  const partInfoChildren = [
+    'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
+    'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box'
+  ];
+  const partInfoColSpan = partInfoChildren.filter(child => checked.includes(child)).length;
+  const showPartInfoHeader = partInfoColSpan > 0;
+
   return (
     <>
       {/* small spacer */}
@@ -80,16 +87,16 @@ export default function ResultSection({
           <thead style={{ fontSize: '8pt' }}>
             <tr>
               <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">No</th>
-              <MainInfoHeaders checked={checked} />              
-              <th colSpan={10} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>
+              <MainInfoHeaders checked={checked} />
+              {showPartInfoHeader && <th colSpan={partInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>}
               <th colSpan={17} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>
               <th colSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>
               <th colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Images</th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Materials</th>
-              <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Materials</th>
+              <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap\">Outer Materials</th>
             </tr>
             <tr>
-              <PartInfoHeaders />
+              <PartInfoHeaders checked={checked} />
               <PseInfoHeaders />
               <LogisticInfoHeaders />
               <ImageInfoHeaders />
@@ -117,7 +124,7 @@ export default function ResultSection({
                 <tr key={i}>
                   <td>{((page - 1) * perPage) + i + 1}</td>
                   <MainInfoCells mainInfo={row} checked={checked} />
-                  <PartInfoCells partInfo={current} />
+                  <PartInfoCells partInfo={current} checked={checked} />
                   <PseInfoCells pseInfo={pseInfo} />
                   <LogisticInfoCells logisticInfo={logisticInfo} />
                   <ImageInfoCells images={images} />
