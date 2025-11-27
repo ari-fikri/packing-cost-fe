@@ -162,8 +162,8 @@ const ColumnSelectionModal = ({ isOpen, toggle, checked, onCheckedChange }) => {
         return descendants;
     };
 
-    const getParent = (value, nodes) => {
-        for (const node of nodes) {
+    const getParent = (value, nodesToSearch) => {
+        for (const node of nodesToSearch) {
             if (node.children?.some(child => child.value === value)) {
                 return node;
             }
@@ -177,9 +177,11 @@ const ColumnSelectionModal = ({ isOpen, toggle, checked, onCheckedChange }) => {
 
     const handleCheck = (node) => {
         let newChecked = [...checked];
+        const isChecked = newChecked.includes(node.value);
         const descendants = getDescendants(node);
 
-        if (newChecked.includes(node.value)) {
+        if (isChecked) {
+            // Uncheck logic: remove the node, its descendants, and all its parents from the checked list
             newChecked = newChecked.filter(item => item !== node.value && !descendants.includes(item));
             let parent = getParent(node.value, nodes);
             while (parent) {
@@ -187,13 +189,22 @@ const ColumnSelectionModal = ({ isOpen, toggle, checked, onCheckedChange }) => {
                 parent = getParent(parent.value, nodes);
             }
         } else {
+            // Check logic: add the node and its descendants to the checked list
             newChecked.push(node.value);
-            newChecked.push(...descendants);
+            if (node.children) {
+                newChecked.push(...descendants);
+            }
+            
+            // Update parent status: if all children of a parent are checked, check the parent
             let parent = getParent(node.value, nodes);
             while (parent) {
-                const allChildrenChecked = parent.children.every(child => newChecked.includes(child.value));
+                const allChildrenChecked = parent.children.every(child =>
+                    newChecked.includes(child.value)
+                );
                 if (allChildrenChecked) {
-                    newChecked.push(parent.value);
+                    if (!newChecked.includes(parent.value)) {
+                        newChecked.push(parent.value);
+                    }
                 }
                 parent = getParent(parent.value, nodes);
             }

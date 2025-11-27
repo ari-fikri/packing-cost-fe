@@ -70,6 +70,15 @@ export default function ResultSection({
   const partInfoColSpan = partInfoChildren.filter(child => checked.includes(child)).length;
   const showPartInfoHeader = partInfoColSpan > 0;
 
+  const pseInfoChildren = [
+    'packing_plant_current', 'packing_plant_next', 'vanning_plant_current', 'vanning_plant_next',
+    'order_pattern_current', 'order_pattern_next', 'katashiiki_ad', 'katashiiki_au', 'katashiiki_af',
+    'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number', 'renban', 'renban_eff',
+    'packing_process_boxing', 'packing_process_stacking'
+  ];
+  const pseInfoColSpan = pseInfoChildren.filter(child => checked.includes(child)).length;
+  const showPseInfoHeader = pseInfoColSpan > 0;
+
   return (
     <>
       {/* small spacer */}
@@ -89,7 +98,7 @@ export default function ResultSection({
               <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">No</th>
               <MainInfoHeaders checked={checked} />
               {showPartInfoHeader && <th colSpan={partInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>}
-              <th colSpan={17} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>
+              {showPseInfoHeader && <th colSpan={pseInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>}
               <th colSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>
               <th colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Images</th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Materials</th>
@@ -97,14 +106,14 @@ export default function ResultSection({
             </tr>
             <tr>
               <PartInfoHeaders checked={checked} />
-              <PseInfoHeaders />
+              <PseInfoHeaders checked={checked} />
               <LogisticInfoHeaders />
               <ImageInfoHeaders />
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
             </tr>
             <tr>
-              <PseInfoSubHeaders />
+              <PseInfoSubHeaders checked={checked} />
               <InnerLeafHeaders count={innerCount} />
               <OuterLeafHeaders count={outerCount} />
             </tr>
@@ -125,7 +134,7 @@ export default function ResultSection({
                   <td>{((page - 1) * perPage) + i + 1}</td>
                   <MainInfoCells mainInfo={row} checked={checked} />
                   <PartInfoCells partInfo={current} checked={checked} />
-                  <PseInfoCells pseInfo={pseInfo} />
+                  <PseInfoCells pseInfo={pseInfo} checked={checked} />
                   <LogisticInfoCells logisticInfo={logisticInfo} />
                   <ImageInfoCells images={images} />
                   <InnerLeafCells data={innerData} count={innerCount} />

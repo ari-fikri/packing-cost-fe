@@ -23,7 +23,11 @@ export default function DPI() {
   const [checked, setChecked] = useState([
     'destination', 'model', 'impl_period', 'cps_no',
     'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
-    'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box'
+    'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box',
+    'packing_plant_current', 'packing_plant_next', 'vanning_plant_current', 'vanning_plant_next',
+    'order_pattern_current', 'order_pattern_next', 'katashiiki_ad', 'katashiiki_au', 'katashiiki_af',
+    'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number', 'renban', 'renban_eff',
+    'packing_process_boxing', 'packing_process_stacking'
   ]);
 
   // column visibility - This will be wired up later
