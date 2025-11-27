@@ -1,192 +1,272 @@
-import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import React, { useState } from 'react';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Input } from 'reactstrap';
+
+const nodes = [
+    {
+        value: 'main_info',
+        label: 'Main Info',
+        children: [
+            { value: 'destination', label: 'Destination' },
+            { value: 'model', label: 'Model' },
+            { value: 'part_no_main', label: 'Part No' },
+            { value: 'implementation_period', label: 'Implementation Period' },
+            { value: 'cps_no', label: 'CPS No' },
+        ],
+    },
+    {
+        value: 'part_info',
+        label: 'Part Info',
+        children: [
+            { value: 'part_no_part', label: 'Part No' },
+            { value: 'part_name', label: 'Part Name' },
+            { value: 'parent_part', label: 'Parent Part' },
+            { value: 'supplier_code', label: 'Supplier Code' },
+            { value: 'supplier_name', label: 'Supplier Name' },
+            { value: 'part_status', label: 'Part Status' },
+            { value: 'dtl_part_status', label: 'Dtl Part Status' },
+            { value: 'pack_spec_status', label: 'Pack Spec Status' },
+            { value: 'weight_pc', label: 'Weight/Pc' },
+            { value: 'qty_box', label: 'Qty/Box' },
+        ],
+    },
+    {
+        value: 'pse_info',
+        label: 'PSE Info',
+        children: [
+            {
+                value: 'packing_plant',
+                label: 'Packing Plant',
+                children: [
+                    { value: 'packing_plant_current', label: 'Current' },
+                    { value: 'packing_plant_next', label: 'Next' },
+                ]
+            },
+            {
+                value: 'vanning_plant',
+                label: 'Vanning Plant',
+                children: [
+                    { value: 'vanning_plant_current', label: 'Current' },
+                    { value: 'vanning_plant_next', label: 'Next' },
+                ]
+            },
+            {
+                value: 'order_pattern',
+                label: 'Order Pattern',
+                children: [
+                    { value: 'order_pattern_current', label: 'Current' },
+                    { value: 'order_pattern_next', label: 'Next' },
+                ]
+            },
+            {
+                value: 'katashiiki',
+                label: 'Katashiiki',
+                children: [
+                    { value: 'katashiiki_ad', label: 'AD' },
+                    { value: 'katashiiki_au', label: 'AU' },
+                    { value: 'katashiiki_af', label: 'AF' },
+                    { value: 'katashiiki_ax', label: 'AX' },
+                ]
+            },
+            { value: 'importer_line_process', label: 'Importer Line Process' },
+            { value: 'case_code', label: 'Case Code' },
+            { value: 'box_number', label: 'Box Number' },
+            { value: 'renban', label: 'Renban' },
+            { value: 'renban_eff', label: 'Renban Eff' },
+            {
+                value: 'packing_process',
+                label: 'Packing Process',
+                children: [
+                    { value: 'packing_process_boxing', label: 'Boxing' },
+                    { value: 'packing_process_stacking', label: 'Stacking' },
+                ]
+            },
+        ],
+    },
+    {
+        value: 'logistic_info',
+        label: 'Logistic Info',
+        children: [
+            { value: 'dock_code', label: 'Dock Code' },
+            { value: 'address', label: 'Address' },
+            { value: 'process_type', label: 'Process Type' },
+        ],
+    },
+    {
+        value: 'images',
+        label: 'Images',
+        children: [
+            { value: 'part_image', label: 'Part' },
+            { value: 'packing_image', label: 'Packing' },
+            { value: 'outer_image', label: 'Outer' },
+            { value: 'qkp_image', label: 'QKP' },
+            { value: 'bkp_image', label: 'BKP' },
+        ],
+    },
+    {
+        value: 'inner_materials',
+        label: 'Inner Materials',
+        children: [
+            {
+                value: 'box',
+                label: 'Box',
+                children: [
+                    { value: 'box_mat_no', label: 'Mat No' },
+                    { value: 'box_length', label: 'Length' },
+                    { value: 'box_width', label: 'Width' },
+                    { value: 'box_height', label: 'Height' },
+                    { value: 'box_volume_inner', label: 'Volume Inner' },
+                    { value: 'box_volume_outer', label: 'Volume Outer' },
+                    { value: 'box_usage', label: 'Usage' },
+                    { value: 'box_source', label: 'Source' },
+                ]
+            },
+            ...[...Array(9).keys()].map(i => ({
+                value: `outer_${i + 1}`,
+                label: `Outer ${i + 1}`,
+                children: [
+                    { value: `outer_${i + 1}_mat_no`, label: 'Mat No' },
+                    { value: `outer_${i + 1}_usage`, label: 'Usage' },
+                ]
+            }))
+        ],
+    },
+    {
+        value: 'outer_materials',
+        label: 'Outer Materials',
+        children: [
+            {
+                value: 'module',
+                label: 'Module',
+                children: [
+                    { value: 'module_mat_no', label: 'Mat No' },
+                    { value: 'module_length', label: 'Length' },
+                    { value: 'module_width', label: 'Width' },
+                    { value: 'module_height', label: 'Height' },
+                    { value: 'module_volume_inner', label: 'Volume Inner' },
+                    { value: 'module_usage', label: 'Usage' },
+                ]
+            },
+        ],
+    },
+];
 
 const ColumnSelectionModal = ({ isOpen, toggle }) => {
-  return (
-    <Modal 
-      isOpen={isOpen} 
-      toggle={toggle} 
-      zIndex={9999}
-    >
-      <ModalHeader toggle={toggle}>Column Selection</ModalHeader>
-      <ModalBody>
-        <div className="row">
-          {/* Main Info */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>Main Info</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Destination</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Model</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Part No</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Implementation Period</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> CPS No</Label></FormGroup>
-            </div>
-          </div>
+    const [checked, setChecked] = useState([]);
+    const [expanded, setExpanded] = useState([]);
 
-          {/* Part Info */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>Part Info</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Part No</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Part Name</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Parent Part</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Supplier Code</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Supplier Name</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Part Status</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Dtl Part Status</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Pack Spec Status</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Weight/Pc</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Qty/Box</Label></FormGroup>
-            </div>
-          </div>
+    const getDescendants = (node, descendants = []) => {
+        if (node.children) {
+            node.children.forEach(child => {
+                descendants.push(child.value);
+                getDescendants(child, descendants);
+            });
+        }
+        return descendants;
+    };
 
-          {/* PSE Info */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>PSE Info</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Packing Plant</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> Current</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Next</Label></FormGroup>
-              </div>
-              <FormGroup check><Label check><Input type="checkbox" /> Vanning Plant</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> Current</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Next</Label></FormGroup>
-              </div>
-              <FormGroup check><Label check><Input type="checkbox" /> Order Pattern</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> Current</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Next</Label></FormGroup>
-              </div>
-              <FormGroup check><Label check><Input type="checkbox" /> Katashiiki</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> AD</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> AU</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> AF</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> AX</Label></FormGroup>
-              </div>
-              <FormGroup check><Label check><Input type="checkbox" /> Importer Line Process</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Case Code</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Box Number</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Renban</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Renban Eff</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Packing Process</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> Boxing</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Stacking</Label></FormGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row mt-3">
-          {/* Logistic Info */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>Logistic Info</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Dock Code</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Address</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Process Type</Label></FormGroup>
-            </div>
-          </div>
+    const getParent = (value, nodes) => {
+        for (const node of nodes) {
+            if (node.children?.some(child => child.value === value)) {
+                return node;
+            }
+            if (node.children) {
+                const parent = getParent(value, node.children);
+                if (parent) return parent;
+            }
+        }
+        return null;
+    };
 
-          {/* Images */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>Images</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Part</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Packing</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> Outer</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> QKP</Label></FormGroup>
-              <FormGroup check><Label check><Input type="checkbox" /> BKP</Label></FormGroup>
-            </div>
-          </div>
+    const handleCheck = (node) => {
+        let newChecked = [...checked];
+        const descendants = getDescendants(node);
 
-          {/* Inner Materials */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>Inner Materials</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Box</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> Mat No</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Length</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Width</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Height</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Volume Inner</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Volume Outer</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Usage</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Source</Label></FormGroup>
-              </div>
-              {[...Array(9).keys()].map(i => (
-                  <div key={i}>
-                      <FormGroup check><Label check><Input type="checkbox" /> Outer {i + 1}</Label></FormGroup>
-                      <div style={{ paddingLeft: '20px' }}>
-                          <FormGroup check><Label check><Input type="checkbox" /> Mat No</Label></FormGroup>
-                          <FormGroup check><Label check><Input type="checkbox" /> Usage</Label></FormGroup>
-                      </div>
-                  </div>
-              ))}
+        if (newChecked.includes(node.value)) {
+            newChecked = newChecked.filter(item => item !== node.value && !descendants.includes(item));
+            let parent = getParent(node.value, nodes);
+            while (parent) {
+                newChecked = newChecked.filter(item => item !== parent.value);
+                parent = getParent(parent.value, nodes);
+            }
+        } else {
+            newChecked.push(node.value);
+            newChecked.push(...descendants);
+            let parent = getParent(node.value, nodes);
+            while (parent) {
+                const allChildrenChecked = parent.children.every(child => newChecked.includes(child.value));
+                if (allChildrenChecked) {
+                    newChecked.push(parent.value);
+                }
+                parent = getParent(parent.value, nodes);
+            }
+        }
+        
+        setChecked([...new Set(newChecked)]);
+    };
+
+    const toggleExpanded = (value) => {
+        setExpanded(prev => 
+            prev.includes(value) 
+                ? prev.filter(item => item !== value)
+                : [...prev, value]
+        );
+    };
+
+    const renderTree = (nodes, level = 0) => {
+        return nodes.map(node => (
+            <div key={node.value}>
+                <div style={{ display: 'flex', alignItems: 'center', paddingLeft: `${level * 20}px` }}>
+                    {node.children && (
+                        <span 
+                            style={{ cursor: 'pointer', marginRight: '5px' }}
+                            onClick={() => toggleExpanded(node.value)}
+                        >
+                            {expanded.includes(node.value) ? '−' : '+'}
+                        </span>
+                    )}
+                    <FormGroup check style={{ margin: 0, marginLeft: !node.children ? '20px' : '0' }}>
+                        <Label check>
+                            <Input
+                                type="checkbox"
+                                checked={checked.includes(node.value)}
+                                onChange={() => handleCheck(node)}
+                            />
+                            {' '}
+                            {level === 0 ? <strong>{node.label}</strong> : node.label}
+                        </Label>
+                    </FormGroup>
+                </div>
+                {node.children && expanded.includes(node.value) && (
+                    <div>
+                        {renderTree(node.children, level + 1)}
+                    </div>
+                )}
             </div>
-          </div>
-        </div>
-        <div className="row mt-3">
-          {/* Outer Materials */}
-          <div className="col-md-4">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" />{' '}
-                <strong>Outer Materials</strong>
-              </Label>
-            </FormGroup>
-            <div style={{ paddingLeft: '20px' }}>
-              <FormGroup check><Label check><Input type="checkbox" /> Module</Label></FormGroup>
-              <div style={{ paddingLeft: '20px' }}>
-                  <FormGroup check><Label check><Input type="checkbox" /> Mat No</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Length</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Width</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Height</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Volume Inner</Label></FormGroup>
-                  <FormGroup check><Label check><Input type="checkbox" /> Usage</Label></FormGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        <Button color="primary" onClick={toggle}>Close</Button>
-      </ModalFooter>
-    </Modal>
-  );
+        ));
+    };
+
+    return (
+        <Modal isOpen={isOpen} toggle={toggle} zIndex={9999} size="lg">
+            <ModalHeader toggle={toggle}>Column Selection</ModalHeader>
+            <ModalBody>
+                <div className="row">
+                    <div className="col-md-4">
+                        {renderTree(nodes.slice(0, 3))}
+                    </div>
+                    <div className="col-md-4">
+                        {renderTree(nodes.slice(3, 5))}
+                    </div>
+                    <div className="col-md-4">
+                        {renderTree(nodes.slice(5))}
+                    </div>
+                </div>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary" onClick={toggle}>Apply</Button>
+                <Button color="secondary" onClick={toggle}>Cancel</Button>
+            </ModalFooter>
+        </Modal>
+    );
 }
 
 export default ColumnSelectionModal;
