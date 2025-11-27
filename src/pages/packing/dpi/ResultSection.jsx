@@ -79,6 +79,10 @@ export default function ResultSection({
   const pseInfoColSpan = pseInfoChildren.filter(child => checked.includes(child)).length;
   const showPseInfoHeader = pseInfoColSpan > 0;
 
+  const logisticInfoChildren = ['dock_code', 'address', 'process_type'];
+  const logisticInfoColSpan = logisticInfoChildren.filter(child => checked.includes(child)).length;
+  const showLogisticInfoHeader = logisticInfoColSpan > 0;
+
   return (
     <>
       {/* small spacer */}
@@ -99,7 +103,7 @@ export default function ResultSection({
               <MainInfoHeaders checked={checked} />
               {showPartInfoHeader && <th colSpan={partInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>}
               {showPseInfoHeader && <th colSpan={pseInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>}
-              <th colSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>
+              {showLogisticInfoHeader && <th colSpan={logisticInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>}
               <th colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Images</th>
               <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Materials</th>
               <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap\">Outer Materials</th>
@@ -107,7 +111,7 @@ export default function ResultSection({
             <tr>
               <PartInfoHeaders checked={checked} />
               <PseInfoHeaders checked={checked} />
-              <LogisticInfoHeaders />
+              <LogisticInfoHeaders checked={checked} />
               <ImageInfoHeaders />
               <InnerGroupHeaders count={innerCount} />
               <OuterGroupHeaders count={outerCount} />
@@ -135,7 +139,7 @@ export default function ResultSection({
                   <MainInfoCells mainInfo={row} checked={checked} />
                   <PartInfoCells partInfo={current} checked={checked} />
                   <PseInfoCells pseInfo={pseInfo} checked={checked} />
-                  <LogisticInfoCells logisticInfo={logisticInfo} />
+                  <LogisticInfoCells logisticInfo={logisticInfo} checked={checked} />
                   <ImageInfoCells images={images} />
                   <InnerLeafCells data={innerData} count={innerCount} />
                   <OuterLeafCells data={outerData} count={outerCount} />

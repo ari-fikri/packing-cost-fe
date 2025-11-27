@@ -21,13 +21,15 @@ export default function DPI() {
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
   const [checked, setChecked] = useState([
-    'destination', 'model', 'impl_period', 'cps_no',
-    'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
+    'main_info', 'destination', 'model', 'impl_period', 'cps_no',
+    'part_info', 'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
     'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box',
-    'packing_plant_current', 'packing_plant_next', 'vanning_plant_current', 'vanning_plant_next',
-    'order_pattern_current', 'order_pattern_next', 'katashiiki_ad', 'katashiiki_au', 'katashiiki_af',
-    'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number', 'renban', 'renban_eff',
-    'packing_process_boxing', 'packing_process_stacking'
+    'pse_info', 'packing_plant', 'packing_plant_current', 'packing_plant_next',
+    'vanning_plant', 'vanning_plant_current', 'vanning_plant_next', 'order_pattern',
+    'order_pattern_current', 'order_pattern_next', 'katashiiki', 'katashiiki_ad', 'katashiiki_au',
+    'katashiiki_af', 'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number',
+    'renban', 'renban_eff', 'packing_process', 'packing_process_boxing', 'packing_process_stacking',
+    'logistic_info', 'dock_code', 'address', 'process_type'
   ]);
 
   // column visibility - This will be wired up later
