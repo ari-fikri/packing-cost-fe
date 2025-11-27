@@ -8,6 +8,20 @@ import PartPickerModal from '../../components/PartPickerModal';
 import ColumnSelectionModal from '../../components/ColumnSelectionModal';
 import { columnsConfig, initialVisibleColumns } from './dpi/columnsConfig';
 
+function getInitialVisibility(config, existingVisibility) {
+  const visibility = {};
+  for (const parentKey in config) {
+    visibility[parentKey] = {};
+    if (config[parentKey].children) {
+      for (const childKey in config[parentKey].children) {
+        // Preserve existing state if available, otherwise default to true
+        visibility[parentKey][childKey] = existingVisibility?.[parentKey]?.[childKey] ?? true;
+      }
+    }
+  }
+  return visibility;
+}
+
 export default function DPI() {
   // filter fields
   const [modelCode, setModelCode] = useState('');
@@ -23,7 +37,7 @@ export default function DPI() {
   const [showColumnSelector, setShowColumnSelector] = useState(false);
 
   // column visibility
-  const [visibleColumns, setVisibleColumns] = useState(initialVisibleColumns);
+  const [visibleColumns, setVisibleColumns] = useState(() => getInitialVisibility(columnsConfig, initialVisibleColumns));
 
   // table data
   const [rows, setRows] = useState([]);
@@ -114,6 +128,8 @@ export default function DPI() {
   }
 
   function handleToggleColumnSelector() {
+    // Re-sync visibility with config every time the modal is opened
+    setVisibleColumns(prev => getInitialVisibility(columnsConfig, prev));
     setShowColumnSelector(prev => !prev);
   }
 

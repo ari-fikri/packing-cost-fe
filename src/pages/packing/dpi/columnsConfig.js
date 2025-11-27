@@ -4,29 +4,37 @@ export const columnsConfig = {
     children: {
       destination: { label: 'Destination' },
       model: { label: 'Model' },
-      partNo: { label: 'Part No' },
-      partName: { label: 'Part Name' },
-      supplier: { label: 'Supplier' },
-      packingPlant: { label: 'Packing Plant' },
-      vanningPlant: { label: 'Vanning Plant' },
-      katashiiki: { label: 'Katashiiki' },
+      implementationPeriod: { label: 'Impl Period' },      
+      cpsNo: { label: 'CPS No' },
     }
   },
   partInfo: {
     label: 'Part Info',
     children: {
-      overallLength: { label: 'Overall Length (mm)' },
-      overallWidth: { label: 'Overall Width (mm)' },
-      overallHeight: { label: 'Overall Height (mm)' },
-      netWeight: { label: 'Net Weight (kg)' },
-    }
+      partNo: { label: 'Part No' },
+      partName: { label: 'Part Name' },
+      parentPart: { label: 'Parent Part' },
+      supplierCode: { label: 'Supplier Code' },
+      supplierName: { label: 'Supplier Name' },
+      partStatus: { label: 'Part Status' },
+      dtlPartStatus: { label: 'Dtl Part Status' },
+      packSpecStatus: { label: 'Pack Spec Status' },
+      weightPc: { label: 'Weight/Pc' },
+      qtyBox: { label: 'Qty/Box' },    
   },
   pseInfo: {
     label: 'PSE Info',
     children: {
-      dockCode: { label: 'Dock Code' },
-      address: { label: 'Address' },
-      processType: { label: 'Process Type' },
+      packingPlant: { label: 'Packing Plant' },
+      vanningPlant: { label: 'Vanning Plant' },
+      orderPattern: { label: 'Order Pattern' },
+      katashiiki: { label: 'Katashiiki' },
+      importerLineProcess: { label: 'Importer Line Process' },
+      caseCode: { label: 'Case Code' },
+      boxNumber: { label: 'Box Number' },
+      renban: { label: 'Renban' },
+      renbanEff: { label: 'Renban Eff' },
+      packingProcess: { label: 'Packing Process' },
     }
   },
   logisticInfo: {
@@ -48,29 +56,10 @@ export const columnsConfig = {
     }
   },
   innerPacking: {
-    label: 'Inner Packing',
-    children: {
-      materialCode: { label: 'Material Code' },
-      materialName: { label: 'Material Name' },
-      length: { label: 'Length (mm)' },
-      width: { label: 'Width (mm)' },
-      height: { label: 'Height (mm)' },
-      thickness: { label: 'Thickness (mm)' },
-      weight: { label: 'Weight (g)' },
-      materialCost: { label: 'Material Cost' },
-    }
+    label: 'Inner Packing'
   },
   outerPacking: {
-    label: 'Outer Packing',
-    children: {
-      materialCode: { label: 'Material Code' },
-      materialName: { label: 'Material Name' },
-      length: { label: 'Length (mm)' },
-      width: { label: 'Width (mm)' },
-      height: { label: 'Height (mm)' },
-      thickness: { label: 'Thickness (mm)' },
-      weight: { label: 'Weight (g)' },
-      materialCost: { label: 'Material Cost' },
+    label: 'Outer Packing'
     }
   },
   subTotal: {
