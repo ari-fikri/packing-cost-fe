@@ -54,6 +54,7 @@ export default function ResultSection({
   totalPages,
   goToPage,
   setPerPage,
+  checked,
 }) {
   //debugger;
   const firstRowCps = visibleRows[0]?.cps || {};
@@ -79,7 +80,7 @@ export default function ResultSection({
           <thead style={{ fontSize: '8pt' }}>
             <tr>
               <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">No</th>
-              <MainInfoHeaders />              
+              <MainInfoHeaders checked={checked} />              
               <th colSpan={10} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>
               <th colSpan={17} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>
               <th colSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>
@@ -115,7 +116,7 @@ export default function ResultSection({
               return (
                 <tr key={i}>
                   <td>{((page - 1) * perPage) + i + 1}</td>
-                  <MainInfoCells mainInfo={row} />
+                  <MainInfoCells mainInfo={row} checked={checked} />
                   <PartInfoCells partInfo={current} />
                   <PseInfoCells pseInfo={pseInfo} />
                   <LogisticInfoCells logisticInfo={logisticInfo} />

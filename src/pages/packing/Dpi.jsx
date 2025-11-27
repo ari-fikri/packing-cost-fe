@@ -20,6 +20,7 @@ export default function DPI() {
   const [showNewDpi, setShowNewDpi] = useState(false);
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
+  const [checked, setChecked] = useState(['destination', 'model', 'impl_period', 'cps_no']);
 
   // column visibility - This will be wired up later
   // const [visibleColumns, setVisibleColumns] = useState(() => getInitialVisibility(columnsConfig, initialVisibleColumns));
@@ -114,6 +115,10 @@ export default function DPI() {
 
   function handleToggleColumnSelector() {
     setShowColumnSelector(prev => !prev);
+  }
+
+  function handleColumnSelectionChange(newChecked) {
+    setChecked(newChecked);
   }
 
   function handleViewDpi() {
@@ -259,6 +264,7 @@ export default function DPI() {
             totalPages={totalPages}
             goToPage={goToPage}
             setPerPage={setPerPage}
+            checked={checked}
           />
         </div>
       </div>
@@ -280,6 +286,8 @@ export default function DPI() {
       <ColumnSelectionModal
         isOpen={showColumnSelector}
         toggle={handleToggleColumnSelector}
+        checked={checked}
+        onCheckedChange={handleColumnSelectionChange}
       />
     </div>
   );

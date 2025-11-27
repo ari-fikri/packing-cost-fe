@@ -8,8 +8,7 @@ const nodes = [
         children: [
             { value: 'destination', label: 'Destination' },
             { value: 'model', label: 'Model' },
-            { value: 'part_no_main', label: 'Part No' },
-            { value: 'implementation_period', label: 'Implementation Period' },
+            { value: 'impl_period', label: 'Implementation Period' },
             { value: 'cps_no', label: 'CPS No' },
         ],
     },
@@ -150,8 +149,7 @@ const nodes = [
     },
 ];
 
-const ColumnSelectionModal = ({ isOpen, toggle }) => {
-    const [checked, setChecked] = useState([]);
+const ColumnSelectionModal = ({ isOpen, toggle, checked, onCheckedChange }) => {
     const [expanded, setExpanded] = useState([]);
 
     const getDescendants = (node, descendants = []) => {
@@ -201,7 +199,7 @@ const ColumnSelectionModal = ({ isOpen, toggle }) => {
             }
         }
         
-        setChecked([...new Set(newChecked)]);
+        onCheckedChange([...new Set(newChecked)]);
     };
 
     const toggleExpanded = (value) => {
