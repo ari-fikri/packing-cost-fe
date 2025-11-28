@@ -11,8 +11,8 @@ const emptyForm = {
   partInput: "",
   period: "All",
   destCode: "All",
-  modelCode: [],
-  modelCodeInput: "",
+  modelCfc: [],
+  modelCfcInput: "",
   type: "PxP",
 };
 
@@ -86,23 +86,23 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
 
   /**
-   * Handles the 'keydown' event for the model code input.
-   * Converts typed text into a model code pill when the space key is pressed.
+   * Handles the 'keydown' event for the model cfc input.
+   * Converts typed text into a model cfc pill when the space key is pressed.
    * @param {React.KeyboardEvent<HTMLInputElement>} e - The keyboard event.
    */
-  function handleModelCodeKeyDown(e) {
-    if (e.key === " " && form.modelCodeInput.trim()) {
+  function handleModelCfcKeyDown(e) {
+    if (e.key === " " && form.modelCfcInput.trim()) {
       e.preventDefault();
-      const newModelCode = form.modelCodeInput.trim();
+      const newModelCfc = form.modelCfcInput.trim();
       setForm((prev) => {
-        // Avoid adding duplicate model codes
-        if (prev.modelCode.includes(newModelCode)) {
-          return { ...prev, modelCodeInput: "" };
+        // Avoid adding duplicate model cfcs
+        if (prev.modelCfc.includes(newModelCfc)) {
+          return { ...prev, modelCfcInput: "" };
         }
         return {
           ...prev,
-          modelCode: [...prev.modelCode, newModelCode],
-          modelCodeInput: "",
+          modelCfc: [...prev.modelCfc, newModelCfc],
+          modelCfcInput: "",
         };
       });
     }
@@ -159,28 +159,53 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
       return;
     }
 
-    // Use flatMap to handle cases where one part number might match multiple CPS entries.
-    const calculatedParts = stagedParts.flatMap((stagedPart) => {
-      // Filter for all CPS data entries that match the current part number.
-      const matchingData = cpsData.filter(
-        (cps) => cps && cps.part_no === stagedPart.partNo
+    // Filter by Model CFC if provided
+    let dataToSearch = cpsData;
+    if (form.modelCfc.length > 0) {
+      dataToSearch = dataToSearch.filter(
+        (cps) => cps.model_cfc && form.modelCfc.includes(cps.model_cfc)
       );
+    }
 
-      // If no data is found for the part, return a default object indicating it was not found.
-      if (matchingData.length === 0) {
-        return [
-          {
-            partNo: stagedPart.partNo,
-            description: "NOT FOUND",
-            calculationTime: new Date().toISOString(),
-          },
-        ];
-      }
+    let calculatedParts = [];
 
-      // Map over all the found matches and format them for the results table.
-      debugger;
-      return matchingData.map((data) => ({
-        partNo: stagedPart.partNo,
+    if (stagedParts.length > 0) {
+      calculatedParts = stagedParts.flatMap((stagedPart) => {
+        const matchingData = dataToSearch.filter(
+          (cps) => cps && cps.part_no === stagedPart.partNo
+        );
+
+        if (matchingData.length === 0) {
+          return [
+            {
+              partNo: stagedPart.partNo,
+              description: "NOT FOUND",
+              calculationTime: new Date().toISOString(),
+            },
+          ];
+        }
+
+        return matchingData.map((data) => ({
+          partNo: stagedPart.partNo,
+          description: data.part?.description || "NOT FOUND",
+          partName: data.partName,
+          supplierName: data.supplierName,
+          supplierCode: data.supplierCcode,
+          destination: data.model
+            ? `${data.model.destinationCode} - ${data.model.destinationName}`
+            : "N/A",
+          model: data.model?.name,
+          parentNo: data.parentNo,
+          cpsNo: data.cpsNo,
+          calculationTime: new Date().toISOString(),
+          subtotals: data.subtotals,
+          total: data.total,
+          cps: data.cps,
+        }));
+      });
+    } else if (form.modelCfc.length > 0) {
+      calculatedParts = dataToSearch.map((data) => ({
+        partNo: data.part_no,
         description: data.part?.description || "NOT FOUND",
         partName: data.partName,
         supplierName: data.supplierName,
@@ -189,14 +214,14 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
           ? `${data.model.destinationCode} - ${data.model.destinationName}`
           : "N/A",
         model: data.model?.name,
-        parentNo : data.parentNo,
+        parentNo: data.parentNo,
         cpsNo: data.cpsNo,
         calculationTime: new Date().toISOString(),
         subtotals: data.subtotals,
         total: data.total,
-        cps : data.cps
+        cps: data.cps,
       }));
-    });
+    }
 
     // Update the state with the newly calculated parts.
     setParts(calculatedParts);
@@ -217,15 +242,15 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
    */
   function handleModelsPicked(models) {
     if (Array.isArray(models) && models.length > 0) {
-      const newModelCodes = models.map((m) => m.code);
+      const newModelCfcs = models.map((m) => m.cfc);
       setForm((prev) => {
-        const existingModelCodes = prev.modelCode || [];
+        const existingModelCfcs = prev.modelCfc || [];
         // Filter out duplicates
-        const uniqueNewCodes = newModelCodes.filter((code) => !existingModelCodes.includes(code));
+        const uniqueNewCfcs = newModelCfcs.filter((cfc) => !existingModelCfcs.includes(cfc));
         return {
           ...prev,
-          modelCode: [...existingModelCodes, ...uniqueNewCodes],
-          modelCodeInput: "", // Clear input on pick
+          modelCfc: [...existingModelCfcs, ...uniqueNewCfcs],
+          modelCfcInput: "", // Clear input on pick
         };
       });
     }
@@ -233,13 +258,13 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }
 
   /**
-   * Removes a model code from the form.
-   * @param {string} modelCodeToRemove - The model code to remove.
+   * Removes a model cfc from the form.
+   * @param {string} modelCfcToRemove - The model cfc to remove.
    */
-  function handleModelRemove(modelCodeToRemove) {
+  function handleModelRemove(modelCfcToRemove) {
     setForm((prev) => ({
       ...prev,
-      modelCode: prev.modelCode.filter((code) => code !== modelCodeToRemove),
+      modelCfc: prev.modelCfc.filter((cfc) => cfc !== modelCfcToRemove),
     }));
   }
 
@@ -448,7 +473,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
                 handleClear={handleClear}
                 onModelRemove={handleModelRemove}
                 onPartRemove={handlePartRemove}
-                onModelCodeKeyDown={handleModelCodeKeyDown}
+                onModelCfcKeyDown={handleModelCfcKeyDown}
                 onPartKeyDown={handlePartKeyDown}
               />
 

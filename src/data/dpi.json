@@ -4,6 +4,7 @@
       "id": 1,
       "implementation_period": "003.2025",
       "model_code": "579W",
+"model_cfc":"579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -12,6 +13,7 @@
         "effective_date": "2024-07-10",
         "model": {
           "model_code": "579W",
+"model_cfc":"579W",
           "model_name": "Spoiler Model",
           "implementation_period": "003.2025",
           "destination": {
