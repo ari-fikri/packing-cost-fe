@@ -31,7 +31,8 @@ export default function Projects() {
   const pageSize = 10 // Number of items per page.
 
   useEffect(() => {
-    fetch('/projects.json')
+    const projectUrl = `${import.meta.env.BASE_URL}projects.json`;
+    fetch(projectUrl)
       .then(response => response.json())
       .then(data => {
         setProjectsData(data);

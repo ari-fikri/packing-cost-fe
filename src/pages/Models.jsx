@@ -30,10 +30,12 @@ export default function Models() {
 
   // Load models data on mount
   useEffect(() => {
-    fetch('/models.json')
+    const modelUrl = `${import.meta.env.BASE_URL}models.json`;
+    fetch(modelUrl)
       .then(response => response.json())
       .then(data => {
-        setModels(data);
+        const sortedData = data.sort((a, b) => new Date(b.model_implementation_period) - new Date(a.model_implementation_period));
+        setModels(sortedData);
         setFilteredModels([]);
       });
   }, [])

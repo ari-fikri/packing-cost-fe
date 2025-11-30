@@ -21,7 +21,8 @@ export default function MaterialPickerModal({
   const materialsPerPage = 15;
 
   useEffect(() => {
-    fetch("/Materials.json")
+    const dpiUrl = `${import.meta.env.BASE_URL}dpi.json`;
+    fetch(dpiUrl)
       .then((response) => response.json())
       .then((data) => setMaterialsData(data))
       .catch((error) => console.error("Error fetching materials:", error));
