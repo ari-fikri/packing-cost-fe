@@ -1,0 +1,542 @@
+{
+  "current": {
+    "recNo": 1,
+    "cpsNo": "CPS-0001",
+    "partNo": "12345-A1",
+    "partName": "Front Bumper",
+    "parentNo": "PARENT-001",
+    "supplierCode": "SUPP100",
+    "supplierName": "Aisin Seiki Intl",
+    "weightPerPc": 5.25,
+    "qtyPerBox": 20,
+    "subTotal": 150000,
+    "diffPct": "3.5%",
+    "inner": [
+      {
+        "materialNo": "IMAT1",
+        "qty": 2,
+        "price": 1100,
+        "sum": 2200
+      },
+      {
+        "materialNo": "IMAT2",
+        "qty": 4,
+        "price": 1200,
+        "sum": 4800
+      },
+      {
+        "materialNo": "IMAT3",
+        "qty": 1,
+        "price": 1300,
+        "sum": 1300
+      },
+      {
+        "materialNo": "IMAT4",
+        "qty": 5,
+        "price": 1400,
+        "sum": 7000
+      },
+      {
+        "materialNo": "IMAT5",
+        "qty": 3,
+        "price": 1500,
+        "sum": 4500
+      },
+      {
+        "materialNo": "IMAT6",
+        "qty": 2,
+        "price": 1600,
+        "sum": 3200
+      },
+      {
+        "materialNo": "IMAT7",
+        "qty": 7,
+        "price": 1700,
+        "sum": 11900
+      },
+      {
+        "materialNo": "IMAT8",
+        "qty": 6,
+        "price": 1800,
+        "sum": 10800
+      },
+      {
+        "materialNo": "IMAT9",
+        "qty": 8,
+        "price": 1900,
+        "sum": 15200
+      },
+      {
+        "materialNo": "IMAT10",
+        "qty": 10,
+        "price": 2000,
+        "sum": 20000
+      }
+    ],
+    "outer": [
+      {
+        "materialNo": "OMAT1",
+        "qty": 3,
+        "price": 2100,
+        "sum": 6300
+      },
+      {
+        "materialNo": "OMAT2",
+        "qty": 2,
+        "price": 2200,
+        "sum": 4400
+      },
+      {
+        "materialNo": "OMAT3",
+        "qty": 1,
+        "price": 2300,
+        "sum": 2300
+      },
+      {
+        "materialNo": "OMAT4",
+        "qty": 4,
+        "price": 2400,
+        "sum": 9600
+      },
+      {
+        "materialNo": "OMAT5",
+        "qty": 5,
+        "price": 2500,
+        "sum": 12500
+      },
+      {
+        "materialNo": "OMAT6",
+        "qty": 3,
+        "price": 2600,
+        "sum": 7800
+      },
+      {
+        "materialNo": "OMAT7",
+        "qty": 6,
+        "price": 2700,
+        "sum": 16200
+      },
+      {
+        "materialNo": "OMAT8",
+        "qty": 7,
+        "price": 2800,
+        "sum": 19600
+      },
+      {
+        "materialNo": "OMAT9",
+        "qty": 8,
+        "price": 2900,
+        "sum": 23200
+      },
+      {
+        "materialNo": "OMAT10",
+        "qty": 9,
+        "price": 3000,
+        "sum": 27000
+      }
+    ],
+    "labor": {
+      "receiving": 2.0,
+      "inspection": 1.5,
+      "deliveryCourse": 0.5,
+      "palletSupply": 0.8,
+      "pickPacking": 3.2,
+      "vanning": 1.0,
+      "boxValetReturn": 0.4,
+      "mixVan": 0.6,
+      "lashing": 1.2,
+      "totalTimeReq": 13.2,
+      "others": 0.5,
+      "laborCostCurrent": 50000,
+      "laborCostDL": 15000,
+      "laborCostIDL": 8000,
+      "laborCostFacility": 12000
+    },
+    "inland": {
+      "packTimeVPass": 1.0,
+      "costM3": 2500,
+      "diff": "0.2%",
+      "milkrunCost": 5000
+    }
+  },
+  "comparisons": [
+    {
+      "recNo": 2,
+      "cpsNo": "CPS-0002",
+      "partNo": "12345-A1",
+      "name": "Front Bumper",
+      "parentNo": "PARENT-001",
+      "supplierCode": "SUPP100",
+      "supplierName": "Aisin Seiki Intl",
+      "weightPerPc": 5.25,
+      "qtyPerBox": 20,
+      "subTotalInner": 80700,
+      "subTotalOuter": 108900,
+      "subTotalMaterial": 189600,
+      "subTotalLabor": 85000,
+      "subTotalInland": 7500,
+      "diffPct": "4.2%",
+      "price": 50000,
+      "leadTime": "2 weeks",
+      "inner": [
+        {
+          "materialNo": "MAT002",
+          "qty": 2,
+          "price": 1100,
+          "sum": 2200
+        }
+      ],
+      "outer": [
+        {
+          "materialNo": "MAT001",
+          "qty": 3,
+          "price": 2100,
+          "sum": 6300
+        }
+      ]
+    },
+    {
+      "recNo": 3,
+      "cpsNo": "CPS-5231",
+      "partNo": "54321-B2",
+      "name": "Rear Spoiler",
+      "parentNo": "PARENT-002",
+      "supplierCode": "SUPP200",
+      "supplierName": "Denso Corp",
+      "weightPerPc": 2.5,
+      "qtyPerBox": 10,
+      "subTotalInner": 45000,
+      "subTotalOuter": 62000,
+      "subTotalMaterial": 107000,
+      "subTotalLabor": 40000,
+      "subTotalInland": 5000,
+      "diffPct": "2.1%",
+      "price": 25000,
+      "leadTime": "1 week",
+      "inner": [
+        {
+          "materialNo": "MAT003",
+          "qty": 5,
+          "price": 1500,
+          "sum": 7500
+        }
+      ],
+      "outer": [
+        {
+          "materialNo": "MAT004",
+          "qty": 1,
+          "price": 3000,
+          "sum": 3000
+        }
+      ]
+    },
+    {
+      "recNo": 4,
+      "cpsNo": "CPS-8432",
+      "partNo": "98765-C3",
+      "name": "Side Mirror",
+      "parentNo": "PARENT-003",
+      "supplierCode": "SUPP300",
+      "supplierName": "Yazaki",
+      "weightPerPc": 1.2,
+      "qtyPerBox": 30,
+      "subTotalInner": 22000,
+      "subTotalOuter": 31000,
+      "subTotalMaterial": 53000,
+      "subTotalLabor": 20000,
+      "subTotalInland": 2500,
+      "diffPct": "1.5%",
+      "price": 12000,
+      "leadTime": "3 weeks",
+      "inner": [
+        {
+          "materialNo": "MAT002",
+          "qty": 1,
+          "price": 500,
+          "sum": 500
+        },
+        {
+          "materialNo": "MAT003",
+          "qty": 2,
+          "price": 800,
+          "sum": 1600
+        }
+      ],
+      "outer": [
+        {
+          "materialNo": "MAT001",
+          "qty": 1,
+          "price": 1200,
+          "sum": 1200
+        }
+      ]
+    },
+    {
+      "recNo": 5,
+      "cpsNo": "CPS-3863",
+      "partNo": "25978-A4",
+      "name": "Generated Part 5",
+      "parentNo": "PARENT-008",
+      "supplierCode": "SUPP321",
+      "supplierName": "Generated Supplier 5",
+      "weightPerPc": 8.03,
+      "qtyPerBox": 41,
+      "subTotalInner": 120386,
+      "subTotalOuter": 101836,
+      "subTotalMaterial": 222222,
+      "subTotalLabor": 93289,
+      "subTotalInland": 8392,
+      "diffPct": "4.5%",
+      "price": 23668,
+      "leadTime": "2 weeks",
+      "inner": [
+        {
+          "materialNo": "MAT016",
+          "qty": 10,
+          "price": 4015,
+          "sum": 40150
+        },
+        {
+          "materialNo": "MAT005",
+          "qty": 8,
+          "price": 2639,
+          "sum": 21112
+        },
+        {
+          "materialNo": "MAT011",
+          "qty": 3,
+          "price": 4188,
+          "sum": 12564
+        },
+        {
+          "materialNo": "MAT001",
+          "qty": 5,
+          "price": 2795,
+          "sum": 13975
+        },
+        {
+          "materialNo": "MAT001",
+          "qty": 10,
+          "price": 3258,
+          "sum": 32585
+        }
+      ],
+      "outer": [
+        {
+          "materialNo": "MAT012",
+          "qty": 3,
+          "price": 3158,
+          "sum": 9474
+        },
+        {
+          "materialNo": "MAT011",
+          "qty": 8,
+          "price": 4901,
+          "sum": 39208
+        },
+        {
+          "materialNo": "MAT018",
+          "qty": 1,
+          "price": 3069,
+          "sum": 3069
+        },
+        {
+          "materialNo": "MAT002",
+          "qty": 7,
+          "price": 4148,
+          "sum": 29036
+        },
+        {
+          "materialNo": "MAT006",
+          "qty": 5,
+          "price": 4209,
+          "sum": 21049
+        }
+      ]
+    },
+    {
+      "recNo": 6,
+      "cpsNo": "CPS-1419",
+      "partNo": "29288-C7",
+      "name": "Generated Part 6",
+      "parentNo": "PARENT-002",
+      "supplierCode": "SUPP885",
+      "supplierName": "Generated Supplier 6",
+      "weightPerPc": 5.1,
+      "qtyPerBox": 41,
+      "subTotalInner": 113952,
+      "subTotalOuter": 123808,
+      "subTotalMaterial": 237760,
+      "subTotalLabor": 82980,
+      "subTotalInland": 8933,
+      "diffPct": "4.2%",
+      "price": 40949,
+      "leadTime": "4 weeks",
+      "inner": [
+        {
+          "materialNo": "MAT012",
+          "qty": 1,
+          "price": 2199,
+          "sum": 2199
+        },
+        {
+          "materialNo": "MAT001",
+          "qty": 9,
+          "price": 4201,
+          "sum": 37809
+        },
+        {
+          "materialNo": "MAT017",
+          "qty": 1,
+          "price": 1038,
+          "sum": 1038
+        },
+        {
+          "materialNo": "MAT010",
+          "qty": 4,
+          "price": 4171,
+          "sum": 16684
+        },
+        {
+          "materialNo": "MAT002",
+          "qty": 7,
+          "price": 4983,
+          "sum": 34881
+        },
+        {
+          "materialNo": "MAT019",
+          "qty": 5,
+          "price": 4268,
+          "sum": 21341
+        }
+      ],
+      "outer": [
+        {
+          "materialNo": "MAT014",
+          "qty": 1,
+          "price": 4819,
+          "sum": 4819
+        },
+        {
+          "materialNo": "MAT006",
+          "qty": 7,
+          "price": 4181,
+          "sum": 29267
+        },
+        {
+          "materialNo": "MAT001",
+          "qty": 8,
+          "price": 4128,
+          "sum": 33024
+        },
+        {
+          "materialNo": "MAT019",
+          "qty": 1,
+          "price": 3088,
+          "sum": 3088
+        },
+        {
+          "materialNo": "MAT001",
+          "qty": 10,
+          "price": 4411,
+          "sum": 44110
+        },
+        {
+          "materialNo": "MAT018",
+          "qty": 2,
+          "price": 4750,
+          "sum": 9500
+        }
+      ]
+    },
+    {
+      "recNo": 7,
+      "cpsNo": "CPS-1198",
+      "partNo": "11929-C3",
+      "name": "Generated Part 7",
+      "parentNo": "PARENT-001",
+      "supplierCode": "SUPP184",
+      "supplierName": "Generated Supplier 7",
+      "weightPerPc": 9.2,
+      "qtyPerBox": 23,
+      "subTotalInner": 131310,
+      "subTotalOuter": 132399,
+      "subTotalMaterial": 263709,
+      "subTotalLabor": 53582,
+      "subTotalInland": 9824,
+      "diffPct": "2.6%",
+      "price": 41137,
+      "leadTime": "3 weeks",
+      "inner": [
+        {
+          "materialNo": "MAT019",
+          "qty": 1,
+          "price": 3139,
+          "sum": 3139
+        },
+        {
+          "materialNo": "MAT001",
+          "qty": 8,
+          "price": 4901,
+          "sum": 39208
+        },
+        {
+          "materialNo": "MAT010",
+          "qty": 1,
+          "price": 4918,
+          "sum": 4918
+        },
+        {
+          "materialNo": "MAT012",
+          "qty": 10,
+          "price": 4181,
+          "sum": 41810
+        },
+        {
+          "materialNo": "MAT013",
+          "qty": 9,
+          "price": 4693,
+          "sum": 42235
+        }
+      ],
+      "outer": [
+        {
+          "materialNo": "MAT018",
+          "qty": 1,
+          "price": 3019,
+          "sum": 3019
+        },
+        {
+          "materialNo": "MAT002",
+          "qty": 8,
+          "price": 4101,
+          "sum": 32808
+        },
+        {
+          "materialNo": "MAT011",
+          "qty": 1,
+          "price": 3109,
+          "sum": 3109
+        },
+        {
+          "materialNo": "MAT017",
+          "qty": 10,
+          "price": 4569,
+          "sum": 45690
+        },
+        {
+          "materialNo": "MAT002",
+          "qty": 9,
+          "price": 4908,
+          "sum": 44172
+        },
+        {
+          "materialNo": "MAT018",
+          "qty": 1,
+          "price": 3601,
+          "sum": 3601
+        }
+      ]
+    }
+  ]
+}

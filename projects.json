@@ -1,0 +1,696 @@
+[
+  {
+    "project_code": "024J",
+    "project_name": "Project 1",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "model canggih 1",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "Proto 1",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WLOT",
+        "model_cfc": "286W",
+        "model_name": "model canggih 2",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": " Proto 2",
+        "model_type": "lot"
+      }
+    ]
+  },
+  {
+    "project_code": "286W",
+    "project_name": "Project 2",
+    "project_manager": "Budi Santoso",
+    "project_status": "Active",
+    "models": [
+      {
+        "model_code": "286W722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "286W301B332WENG",
+        "model_cfc": "332W",
+        "model_name": "Model 332W",
+        "model_implementation_period": "02.2023",
+        "model_destination_code": "301B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "286W807B385WENG",
+        "model_cfc": "385W",
+        "model_name": "Model 385W",
+        "model_implementation_period": "03.2022",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "332W",
+    "project_name": "Project 3",
+    "project_manager": "Siti Aminah",
+    "project_status": "On Hold",
+    "models": [
+      {
+        "model_code": "332W301B332WPXP",
+        "model_cfc": "332W",
+        "model_name": "Model 332W",
+        "model_implementation_period": "02.2023",
+        "model_destination_code": "301B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "332W807B385WENG",
+        "model_cfc": "385W",
+        "model_name": "Model 385W",
+        "model_implementation_period": "03.2022",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "385W",
+    "project_name": "Project 4",
+    "project_manager": "John Doe",
+    "project_status": "Completed",
+    "models": [
+      {
+        "model_code": "385W807B385WLOT",
+        "model_cfc": "385W",
+        "model_name": "Model 385W",
+        "model_implementation_period": "03.2022",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "385W722C388WPXP",
+        "model_cfc": "388W",
+        "model_name": "Model 388W",
+        "model_implementation_period": "01.2021",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "385W807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      }
+    ]
+  },
+  {
+    "project_code": "388W",
+    "project_name": "Project 5",
+    "project_manager": "Jane Smith",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "388W722C388WLOT",
+        "model_cfc": "388W",
+        "model_name": "Model 388W",
+        "model_implementation_period": "01.2021",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "388W301B999WLOT",
+        "model_cfc": "999W",
+        "model_name": "Model 999W",
+        "model_implementation_period": "04.2025",
+        "model_destination_code": "301B",
+        "model_remark": "",
+        "model_type": "lot"
+      }
+    ]
+  },
+  {
+    "project_code": "408W",
+    "project_name": "Project 6",
+    "project_manager": "Arif Fikri",
+    "project_status": "Active",
+    "models": [
+      {
+        "model_code": "408W812B408WPXP",
+        "model_cfc": "408W",
+        "model_name": "Model 408W",
+        "model_implementation_period": "02.2024",
+        "model_destination_code": "812B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "408W807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "408W722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 1",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 2",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J722C024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 3",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 4",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 5",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 6",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JPXP",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "024J722C286WLOT",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "lot"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 7",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 8",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WLOT",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "lot"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 9",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JPXP",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 10",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WLOT",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "lot"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 11",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 12",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 13",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JPXP",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 14",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 15",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JPXP",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 16",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 17",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 18",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JPXP",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "pxp"
+      },
+      {
+        "model_code": "024J722C286WENG",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "eng"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 19",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JLOT",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "lot"
+      },
+      {
+        "model_code": "024J722C286WPXP",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "pxp"
+      }
+    ]
+  },
+  {
+    "project_code": "024J",
+    "project_name": "Project 1 Extra 20",
+    "project_manager": "Arif Fikri",
+    "project_status": "Draft",
+    "models": [
+      {
+        "model_code": "024J807B024JENG",
+        "model_cfc": "024J",
+        "model_name": "Model 024J",
+        "model_implementation_period": "01.2025",
+        "model_destination_code": "807B",
+        "model_remark": "",
+        "model_type": "eng"
+      },
+      {
+        "model_code": "024J722C286WLOT",
+        "model_cfc": "286W",
+        "model_name": "Model 286W",
+        "model_implementation_period": "04.2024",
+        "model_destination_code": "722C",
+        "model_remark": "",
+        "model_type": "lot"
+      }
+    ]
+  }
+]
