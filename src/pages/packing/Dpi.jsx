@@ -46,8 +46,14 @@ export default function DPI() {
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
   useEffect(() => {
-    fetch('/dpi.json')
-      .then(res => res.json())
+    const dpiUrl = `${import.meta.env.BASE_URL}dpi.json`;
+    fetch(dpiUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
       .then(data => {
         const allRows = data.dpiData || [];
         // Sort data initially
@@ -55,11 +61,22 @@ export default function DPI() {
           (b.implementation_period || '').localeCompare(a.implementation_period || '')
         );
         setDpiData(sortedData);
-        setRows(sortedData); // Set rows to display all data on load
+        setRows([]); // Set rows to empty to prevent initial load
+      })
+      .catch(error => {
+        console.error('Error fetching DPI data:', error);
       });
   }, []);
 
   function handleSearch() {
+    const noFilters = !modelCode && (!partNo || partNo.length === 0) && !destCode && !supplierCode && !cpsNo && !implementationPeriod;
+
+    if (noFilters) {
+      setRows(dpiData);
+      setPage(1);
+      return;
+    }
+
     let filteredData = [...dpiData];
     // Apply filters
     if (modelCode) {
