@@ -32,11 +32,19 @@ export default function Models() {
   useEffect(() => {
     const modelUrl = `${import.meta.env.BASE_URL}models.json`;
     fetch(modelUrl)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         const sortedData = data.sort((a, b) => new Date(b.model_implementation_period) - new Date(a.model_implementation_period));
         setModels(sortedData);
         setFilteredModels([]);
+      })
+      .catch(error => {
+        console.error('Error fetching models:', error);
       });
   }, [])
 

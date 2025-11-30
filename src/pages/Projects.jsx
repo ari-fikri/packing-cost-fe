@@ -31,11 +31,19 @@ export default function Projects() {
   const pageSize = 10 // Number of items per page.
 
   useEffect(() => {
-    const projectUrl = `projects.json`;
+    const projectUrl = `${import.meta.env.BASE_URL}projects.json`;
     fetch(projectUrl)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setProjectsData(data);
+      })
+      .catch(error => {
+        console.error('Error fetching projects:', error);
       });
   }, []);
 

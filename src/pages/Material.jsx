@@ -22,12 +22,21 @@ export default function Material() {
   const [materials, setMaterials] = useState([])
 
   useEffect(() => {
-    fetch('/materials.json')
-      .then(res => res.json())
+    const materialUrl = `${import.meta.env.BASE_URL}materials.json`;
+    fetch(materialUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setAllMaterials(data);
         setMaterials([]);
       })
+      .catch(error => {
+        console.error('Error fetching materials:', error);
+      });
   }, []);
 
   const totalPages = Math.ceil(materials.length / pageSize)
