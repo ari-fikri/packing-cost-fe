@@ -5,9 +5,7 @@ import PartPickerModal from './PartPickerModal';
 import ModelPickerModal from './ModelPickerModal';
 import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
-import comparisonData from '../data/cpsComparison.json';
 import { formatCurrency } from '../utils/globalFunctions';
-import materials from '../data/materials.json';
 import './NewCPSModalSections/NewCPSModalSections.css';
 
 
@@ -24,6 +22,8 @@ import { buildPayload, resetStates } from '../utils/cpsHelpers.js';
 
 export default function NewCPSModal({ show, onClose, onSave, editData, config }) {
   const [activeTab, setActiveTab] = useState('general');
+  const [comparisonData, setComparisonData] = useState({ current: {}, comparisons: [] });
+  const [materials, setMaterials] = useState([]);
 
   // General states
   const [cpsNo, setCpsNo] = useState('')
@@ -130,6 +130,16 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   const [logisticRemark, setLogisticRemark] = useState('');
   const [processType, setProcessType] = useState('N');
   const [addressRack, setAddressRack] = useState('');
+
+  useEffect(() => {
+    fetch('/cpsComparison.json')
+      .then(res => res.json())
+      .then(data => setComparisonData(data));
+    
+    fetch('/materials.json')
+      .then(res => res.json())
+      .then(data => setMaterials(data));
+  }, []);
 
   // Transform comparison data from cpsComparison.json
   const currentCpsRecord = comparisonData.current;

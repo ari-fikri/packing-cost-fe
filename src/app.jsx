@@ -20,7 +20,7 @@ import Settings from './pages/Settings'
 import Params from './pages/ParamsPanel'
 
 //Data files
-import DESTINATIONS from './data/destinations';
+import DESTINATIONS from './data/destinations.js';
 
 function ProtectedRoute({ children }){
   const auth = useAuth()

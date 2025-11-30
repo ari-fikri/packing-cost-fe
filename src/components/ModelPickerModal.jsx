@@ -1,9 +1,9 @@
 // src/components/ModelPickerModal.jsx
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import modelsData from "../data/models.json";
 
 export default function ModelPickerModal({ show, onClose, onAdd, selectionMode = "multi" }) {
+  const [modelsData, setModelsData] = useState([]);
   const [filterCode, setFilterCode] = useState("");
   const [filterName, setFilterName] = useState("");
   const [filterCfc, setFilterCfc] = useState("");
@@ -12,9 +12,18 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
   const [filterType, setFilterType] = useState("");
   const [filterRemark, setFilterRemark] = useState("");
   const [selectedModels, setSelectedModels] = useState(selectionMode === "multi" ? [] : null);
-  const [displayedModels, setDisplayedModels] = useState(modelsData);
+  const [displayedModels, setDisplayedModels] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const modelsPerPage = 15;
+
+  useEffect(() => {
+    fetch('/models.json')
+      .then(response => response.json())
+      .then(data => {
+        setModelsData(data);
+        setDisplayedModels(data);
+      });
+  }, []);
 
   useEffect(() => {
     if (show) {

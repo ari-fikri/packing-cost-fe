@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewDpiModal from '../../components/NewDpiModal';
-import { dpiData } from '../../data/dpi.json';
 import SearchSection from './dpi/SearchSection';
 import ResultSection from './dpi/ResultSection';
 import ActionHeaderButtons from './dpi/ActionHeaderButtons';
@@ -38,6 +37,7 @@ export default function DPI() {
 
   // table data
   const [rows, setRows] = useState([]);
+  const [dpiData, setDpiData] = useState([]);
 
   // paging
   const [perPage, setPerPage] = useState(10);
@@ -45,9 +45,22 @@ export default function DPI() {
   const total = rows.length;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
+  useEffect(() => {
+    fetch('/dpi.json')
+      .then(res => res.json())
+      .then(data => {
+        const allRows = data.dpiData || [];
+        // Sort data initially
+        const sortedData = [...allRows].sort((a, b) => 
+          (b.implementation_period || '').localeCompare(a.implementation_period || '')
+        );
+        setDpiData(sortedData);
+        setRows(sortedData); // Set rows to display all data on load
+      });
+  }, []);
+
   function handleSearch() {
     let filteredData = [...dpiData];
-    
     // Apply filters
     if (modelCode) {
       filteredData = filteredData.filter(item => 
@@ -63,17 +76,17 @@ export default function DPI() {
     }
     if (destCode) {
       filteredData = filteredData.filter(item => 
-        item.cps.model.destination.code?.toLowerCase().includes(destCode.toLowerCase())
+        item.cps?.model?.destination?.code?.toLowerCase().includes(destCode.toLowerCase())
       );
     }
     if (supplierCode) {
       filteredData = filteredData.filter(item => 
-        item.cps.supplier.supplier_code?.toLowerCase().includes(supplierCode.toLowerCase())
+        item.cps?.supplier?.supplier_code?.toLowerCase().includes(supplierCode.toLowerCase())
       );
     }
     if (cpsNo) {
       filteredData = filteredData.filter(item => 
-        item.cps.cps_no?.toLowerCase().includes(cpsNo.toLowerCase())
+        item.cps?.cps_no?.toLowerCase().includes(cpsNo.toLowerCase())
       );
     }
     if (implementationPeriod) {
@@ -106,7 +119,7 @@ export default function DPI() {
     setSupplierCode('');
     setCpsNo('');
     setImplementationPeriod('');
-    setRows([]);
+    setRows(dpiData);
     setPage(1);
   }
 

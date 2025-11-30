@@ -66,9 +66,10 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }, [show]);
 
   useEffect(() => {
-    import("../data/generatedData.json")
-      .then((module) => {
-        setCpsData(module.default.cpsData);
+    fetch('/generatedData.json')
+      .then(response => response.json())
+      .then(data => {
+        setCpsData(data.cpsData);
       })
       .catch((error) => console.error("Error loading generated data:", error));
   }, []);

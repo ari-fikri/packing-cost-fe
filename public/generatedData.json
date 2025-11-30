@@ -50,23 +50,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -309,23 +319,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -574,23 +594,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -803,23 +833,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -1038,23 +1078,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -1303,23 +1353,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -1544,23 +1604,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {
@@ -1767,23 +1837,33 @@
         "images": {
           "part": {
             "caption": "Part Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           },
           "packing": {
             "caption": "Packing Image",
-            "files": ["/assets/6.png"]
+            "files": [
+              "/assets/6.png"
+            ]
           },
           "outer": {
             "caption": "Outer Image",
-            "files": ["/assets/2.png"]
+            "files": [
+              "/assets/2.png"
+            ]
           },
           "qkp": {
             "caption": "QKP Image",
-            "files": ["/assets/3.png"]
+            "files": [
+              "/assets/3.png"
+            ]
           },
           "bkp": {
             "caption": "BKP Image",
-            "files": ["/assets/4.png"]
+            "files": [
+              "/assets/4.png"
+            ]
           }
         },
         "packing": {

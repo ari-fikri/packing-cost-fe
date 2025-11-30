@@ -1,7 +1,6 @@
 // src/pages/Projects.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewProjectModal from '../components/NewProjectModal'
-import projectsData from '../data/projects.json'
 import SearchSection from '../components/ProjectsSections/SearchSection'
 import ResultSection from '../components/ProjectsSections/ResultSection'
 
@@ -25,10 +24,19 @@ export default function Projects() {
   // result section (table header) can be rendered on initial load while
   // showing no data rows.
   const [results, setResults] = useState([])
+  const [projectsData, setProjectsData] = useState([]);
 
   // State for pagination.
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10 // Number of items per page.
+
+  useEffect(() => {
+    fetch('/projects.json')
+      .then(response => response.json())
+      .then(data => {
+        setProjectsData(data);
+      });
+  }, []);
 
   // Resets all filters to their default values and clears the search results.
   function clearFilters() {

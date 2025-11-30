@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewMaterialModal from '../components/NewMaterialModal'
 import { SearchSection, ResultSection } from '../components/MaterialSections'
-import materialsData from '../data/materials.json'
 
 export default function Material() {
   const [materialNo, setMaterialNo] = useState('')
@@ -19,8 +18,17 @@ export default function Material() {
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10
 
-  const [allMaterials, setAllMaterials] = useState(materialsData)
+  const [allMaterials, setAllMaterials] = useState([])
   const [materials, setMaterials] = useState([])
+
+  useEffect(() => {
+    fetch('/materials.json')
+      .then(res => res.json())
+      .then(data => {
+        setAllMaterials(data);
+        setMaterials([]);
+      })
+  }, []);
 
   const totalPages = Math.ceil(materials.length / pageSize)
   const startIndex = (currentPage - 1) * pageSize

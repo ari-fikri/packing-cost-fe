@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import NewModelModal from '../components/NewModelModal'
 import SearchSection from '../components/ModelsSections/SearchSection'
 import ResultSection from '../components/ModelsSections/ResultSection'
-import modelsData from '../data/models.json'
 
 export default function Models() {
   // filters
@@ -31,18 +30,19 @@ export default function Models() {
 
   // Load models data on mount
   useEffect(() => {
-    setModels(modelsData)
-    // Do not populate filteredModels on initial load so the table header
-    // is visible but no data rows are shown. The user must click Filter to
-    // load results; clicking Filter with no criteria will show latest-first.
-    setFilteredModels([])
+    fetch('/models.json')
+      .then(response => response.json())
+      .then(data => {
+        setModels(data);
+        setFilteredModels([]);
+      });
   }, [])
 
   function handleFilter() {
     const noFilters = !code && !projectCode && !filterName && !filterCfc && !filterType && !filterRemark && !implementationPeriod && !destinationCode;
 
     if (noFilters) {
-      setFilteredModels([...modelsData].reverse());
+      setFilteredModels([...models].reverse());
       setCurrentPage(1);
       return;
     }

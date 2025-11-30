@@ -1,7 +1,6 @@
 // src/pages/ComparisonPage.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CollapsibleRow from "./CollapsibleRow";
-import comparisonData from '../data/comparison.json';
 
 // helpers
 const fmt = (v) => {
@@ -29,6 +28,23 @@ export default function ComparisonPage() {
 
   const [periodeLeft, setPeriodeLeft] = useState("2025");
   const [periodeRight, setPeriodeRight] = useState("2026");
+
+  const [comparisonData, setComparisonData] = useState([]);
+  const [cpsComparisonData, setCpsComparisonData] = useState([]);
+
+  useEffect(() => {
+    fetch('/comparison.json')
+      .then(res => res.json())
+      .then(data => setComparisonData(data));
+    
+    fetch('/cpsComparison.json')
+      .then(res => res.json())
+      .then(data => setCpsComparisonData(data));
+  }, []);
+
+  if (comparisonData.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   // Get selected parts
   const partLeft = comparisonData[partIndexLeft];
