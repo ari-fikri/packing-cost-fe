@@ -1,11 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotificationDetail() {
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
   return (
     <div className="container-fluid">
       <div className="card">
         <div className="card-header">
           <h3 className="card-title">Notification Detail</h3>
+          <div className="card-tools">
+            <button type="button" className="btn btn-tool" onClick={handleClose}>
+              <i className="fas fa-times"></i>
+            </button>
+          </div>
         </div>
         <div className="card-body">
           <p><strong>Date :</strong> 20 Feb 2025 13:10</p>
