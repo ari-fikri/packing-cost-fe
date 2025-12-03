@@ -1,7 +1,6 @@
 // src/components/MaterialPickerModal.jsx
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import materialsData from "../data/Materials.json";
 
 export default function MaterialPickerModal({
   show = false,
@@ -11,6 +10,7 @@ export default function MaterialPickerModal({
   zIndex = 1050,
   filter = "all",
 }) {
+  const [materialsData, setMaterialsData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [filterMaterialNo, setFilterMaterialNo] = useState("");
@@ -21,7 +21,15 @@ export default function MaterialPickerModal({
   const materialsPerPage = 15;
 
   useEffect(() => {
-    if (show) {
+    const dpiUrl = `${import.meta.env.BASE_URL}dpi.json`;
+    fetch(dpiUrl)
+      .then((response) => response.json())
+      .then((data) => setMaterialsData(data))
+      .catch((error) => console.error("Error fetching materials:", error));
+  }, []);
+
+  useEffect(() => {
+    if (show && materialsData.length > 0) {
       let initialMaterials = materialsData;
       if (filter) {
         if (filter === 'module') {
@@ -40,15 +48,15 @@ export default function MaterialPickerModal({
       setSearchTerm('');
       setCurrentPage(1);
     }
-  }, [show, filter]);
+  }, [show, filter, materialsData]);
 
-  function handleSelect(material) {
+  function handleSelectionChange(materialNo) {
     if (selectionMode === "multi") {
       setSelectedMaterials((prev) => (prev.includes(materialNo) ? prev.filter((m) => m !== materialNo) : [...prev, materialNo]));
     } else {
       setSelectedMaterials(materialNo);
     }
-  };
+  }
 
   const handleSearch = () => {
     const filtered = materialsData.filter(

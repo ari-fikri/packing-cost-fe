@@ -1,31 +1,8 @@
 // src/pages/packing/CalculatePackingCost.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PackingCostNewModal from '../../components/PackingCostNewModal'
 import SearchSection from './CalculatePackingCostSections/SearchSection';
 import ResultSection from './CalculatePackingCostSections/ResultSection';
-
-const initialRows = [
-  {
-    calCode: 'PC001',
-    period: '03.2025',
-    destCode: 'ID',
-    destCountry: 'Indonesia',
-    modelCode: '579W',
-    numParts: 5,
-    type: 'PxP',
-    parts: []
-  },
-  {
-    calCode: 'PC002',
-    period: '03.2025',
-    destCode: 'TH',
-    destCountry: 'Thailand',
-    modelCode: '579W',
-    numParts: 3,
-    type: 'Lot',
-    parts: []
-  }
-];
 
 export default function CalculatePackingCost() {
   // filters (two-column layout)
@@ -36,7 +13,8 @@ export default function CalculatePackingCost() {
   const [type, setType] = useState('All') // 'All' | 'PxP' | 'Lot'
 
   // table / paging state (empty for now)
-  const [rows, setRows] = useState(initialRows) // <-- use both!
+  const [rows, setRows] = useState([]) // <-- Start with empty
+  const [allData, setAllData] = useState([]); // To store all fetched data
   const [perPage, setPerPage] = useState(3)
   const [page, setPage] = useState(1)
   const total = rows.length
@@ -45,10 +23,58 @@ export default function CalculatePackingCost() {
   // Modal state
   const [showNewModal, setShowNewModal] = useState(false)
 
+  useEffect(() => {
+    const dataUrl = `${import.meta.env.BASE_URL}generatedData.json`;
+    fetch(dataUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => {
+        debugger;
+        const transformedData = data.map(item => ({
+          id: item.id,
+          calCode: item.pack_cost_cal_code,
+          period: item.implementation_period,
+          destCode: item.destination_code,
+          destCountry: item.destination_country,
+          modelCode: item.model_cfc,
+          numParts: item.parts ? item.parts.length : 0,
+          type: item.type,
+          parts: item.parts || [],
+        }));
+        setAllData(transformedData);
+        setRows([]); // Ensure rows are empty initially
+      })
+      .catch(error => {
+        console.error('Error fetching packing cost data:', error);
+      });
+  }, []);
+
   function handleFilter(e) {
-    e && e.preventDefault && e.preventDefault()
-    console.log('Filter with', { calCode, period, destCode, modelCode, type })
-    setPage(1)
+    e && e.preventDefault && e.preventDefault();
+    let filteredData = [...allData];
+
+    if (calCode) {
+      filteredData = filteredData.filter(row => row.calCode.toLowerCase().includes(calCode.toLowerCase()));
+    }
+    if (period !== 'All') {
+      filteredData = filteredData.filter(row => row.period === period);
+    }
+    if (destCode !== 'All') {
+      filteredData = filteredData.filter(row => row.destCode === destCode);
+    }
+    if (modelCode) {
+      filteredData = filteredData.filter(row => row.modelCode.toLowerCase().includes(modelCode.toLowerCase()));
+    }
+    if (type !== 'All') {
+      filteredData = filteredData.filter(row => row.type === type);
+    }
+
+    setRows(filteredData);
+    setPage(1);
   }
 
   function handleClear() {

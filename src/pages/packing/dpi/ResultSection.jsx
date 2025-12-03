@@ -54,7 +54,7 @@ export default function ResultSection({
   totalPages,
   goToPage,
   setPerPage,
-  visibleColumns,
+  checked,
 }) {
   const vc = visibleColumns || {};
   //debugger;
@@ -63,6 +63,30 @@ export default function ResultSection({
   const innerCount = firstRowCps.packing?.inner?.length || 1;
   const outerCount = firstRowCps.packing?.outer?.length || 1;
   // const outerCount = firstRowCps.outerMaterials?.length || 1;
+
+  const partInfoChildren = [
+    'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
+    'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box'
+  ];
+  const partInfoColSpan = partInfoChildren.filter(child => checked.includes(child)).length;
+  const showPartInfoHeader = partInfoColSpan > 0;
+
+  const pseInfoChildren = [
+    'packing_plant_current', 'packing_plant_next', 'vanning_plant_current', 'vanning_plant_next',
+    'order_pattern_current', 'order_pattern_next', 'katashiiki_ad', 'katashiiki_au', 'katashiiki_af',
+    'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number', 'renban', 'renban_eff',
+    'packing_process_boxing', 'packing_process_stacking'
+  ];
+  const pseInfoColSpan = pseInfoChildren.filter(child => checked.includes(child)).length;
+  const showPseInfoHeader = pseInfoColSpan > 0;
+
+  const logisticInfoChildren = ['dock_code', 'address', 'process_type'];
+  const logisticInfoColSpan = logisticInfoChildren.filter(child => checked.includes(child)).length;
+  const showLogisticInfoHeader = logisticInfoColSpan > 0;
+
+  const imageInfoChildren = ['part_image', 'packing_image', 'outer_image', 'qkp_image', 'bkp_image'];
+  const imageInfoColSpan = imageInfoChildren.filter(child => checked.includes(child)).length;
+  const showImageInfoHeader = imageInfoColSpan > 0;
 
   return (
     <>
@@ -81,33 +105,26 @@ export default function ResultSection({
           <thead style={{ fontSize: '8pt' }}>
             <tr>
               <th rowSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">No</th>
-              {vc.mainInfo && <MainInfoHeaders visibleColumns={vc.mainInfo} />}
-              {vc.partInfo && <th colSpan={10} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>}
-              {vc.pseInfo && <th colSpan={17} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>}
-              {vc.logisticInfo && <th colSpan={3} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>}
-              {vc.imageInfo && <th colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Images</th>}
-              {vc.innerPacking && <th colSpan={innerCount > 0 ? innerCount * 8 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Materials</th>}
-              {vc.outerPacking && <th colSpan={outerCount > 0 ? outerCount * 8 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Outer Materials</th>}
-              {vc.subTotal && <th colSpan={5} className="align-middle border text-center tbl-row1-hdr text-nowrap">Sub Total</th>}
-              {vc.laborInfo && <th colSpan={17} className="align-middle border text-center tbl-row1-hdr text-nowrap">Labor Information</th>}
-              {vc.inland && <th colSpan={4} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inland</th>}
+              <MainInfoHeaders checked={checked} />
+              {showPartInfoHeader && <th colSpan={partInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Part Information</th>}
+              {showPseInfoHeader && <th colSpan={pseInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">PSE Information</th>}
+              {showLogisticInfoHeader && <th colSpan={logisticInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Logistic Information</th>}
+              {showImageInfoHeader && <th colSpan={imageInfoColSpan} className="align-middle border text-center tbl-row1-hdr text-nowrap">Images</th>}
+              <th colSpan={innerCount > 0 ? innerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap">Inner Materials</th>
+              <th colSpan={outerCount > 0 ? outerCount * 2 + 6 : 0} className="align-middle border text-center tbl-row1-hdr text-nowrap\">Outer Materials</th>
             </tr>
             <tr>
-              {vc.partInfo && <PartInfoHeaders visibleColumns={vc.partInfo} />}
-              {vc.pseInfo && <PseInfoHeaders visibleColumns={vc.pseInfo} />}
-              {vc.logisticInfo && <LogisticInfoHeaders visibleColumns={vc.logisticInfo} />}
-              {vc.imageInfo && <ImageInfoHeaders visibleColumns={vc.imageInfo} />}
-              {vc.innerPacking && <InnerGroupHeaders count={innerCount} />}
-              {vc.outerPacking && <OuterGroupHeaders count={outerCount} />}
-              {vc.subTotal && <SubTotalHeaders />}
-              {vc.laborInfo && <LaborManHourHeaders />}
-              {vc.laborInfo && <LaborCostHeaders />}
-              {vc.inland && <InlandLeafHeaders />}
+              <PartInfoHeaders checked={checked} />
+              <PseInfoHeaders checked={checked} />
+              <LogisticInfoHeaders checked={checked} />
+              <ImageInfoHeaders checked={checked} />
+              <InnerGroupHeaders count={innerCount} />
+              <OuterGroupHeaders count={outerCount} />
             </tr>
             <tr>
-              {vc.pseInfo && <PseInfoSubHeaders visibleColumns={vc.pseInfo} />}
-              {vc.innerPacking && <InnerLeafHeaders count={innerCount} visibleColumns={vc.innerPacking}/>}
-              {vc.outerPacking && <OuterLeafHeaders count={outerCount} visibleColumns={vc.outerPacking}/>}
+              <PseInfoSubHeaders checked={checked} />
+              <InnerLeafHeaders count={innerCount} />
+              <OuterLeafHeaders count={outerCount} />
             </tr>
           </thead>
           <tbody style={{ fontSize: '8pt' }}>
@@ -124,17 +141,13 @@ export default function ResultSection({
               return (
                 <tr key={i}>
                   <td>{((page - 1) * perPage) + i + 1}</td>
-                  {vc.mainInfo && <MainInfoCells mainInfo={row} visibleColumns={vc.mainInfo} />}
-                  {vc.partInfo && <PartInfoCells partInfo={current} visibleColumns={vc.partInfo} />}
-                  {vc.pseInfo && <PseInfoCells pseInfo={pseInfo} visibleColumns={vc.pseInfo} />}
-                  {vc.logisticInfo && <LogisticInfoCells logisticInfo={logisticInfo} visibleColumns={vc.logisticInfo} />}
-                  {vc.imageInfo && <ImageInfoCells images={images} visibleColumns={vc.imageInfo} />}
-                  {vc.innerPacking && <InnerLeafCells data={innerData} count={innerCount} visibleColumns={vc.innerPacking} />}
-                  {vc.outerPacking && <OuterLeafCells data={outerData} count={outerCount} visibleColumns={vc.outerPacking} />}
-                  {vc.subTotal && <SubTotalData subTotal={current.subTotal} />}
-                  {vc.laborInfo && <LaborManHourCells labor={labor} />}
-                  {vc.laborInfo && <LaborCostCells labor={labor} />}
-                  {vc.inland && <InlandLeafCells inland={inland} />}
+                  <MainInfoCells mainInfo={row} checked={checked} />
+                  <PartInfoCells partInfo={current} checked={checked} />
+                  <PseInfoCells pseInfo={pseInfo} checked={checked} />
+                  <LogisticInfoCells logisticInfo={logisticInfo} checked={checked} />
+                  <ImageInfoCells images={images} checked={checked} />
+                  <InnerLeafCells data={innerData} count={innerCount} />
+                  <OuterLeafCells data={outerData} count={outerCount} />
                 </tr>
               );
             })}

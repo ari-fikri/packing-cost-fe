@@ -13,48 +13,48 @@ import React from 'react';
  * @param {function} props.handleClear - Handler for the clear button.
  * @param {function} props.onModelRemove - Handler to remove a model pill.
  * @param {function} props.onPartRemove - Handler to remove a part pill.
- * @param {function} props.onModelCodeKeyDown - Keydown handler for model code input.
+ * @param {function} props.onModelCfcKeyDown - Keydown handler for model cfc input.
  * @param {function} props.onPartKeyDown - Keydown handler for part input.
  */
-export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove, onModelCodeKeyDown, onPartKeyDown }) {
+export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove, onModelCfcKeyDown, onPartKeyDown }) {
   return (
     <>
       {/* Header form with input fields */}
       <div className="row">
         {/* Left column */}
         <div className="col-md-6">
-          {/* Model Code input with pills */}
+          {/* Model CFC input with pills */}
           <div className="form-group">
-            <label>Model Code</label>
+            <label>Model CFC</label>
             <div className="input-group input-group-sm">
               <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px', alignItems: 'center' }}>
-                {/* Display selected model codes as pills */}
-                {form.modelCode.map(code => (
-                  <span key={code} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
-                    {code}
+                {/* Display selected model cfcs as pills */}
+                {form.modelCfc.map(cfc => (
+                  <span key={cfc} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
+                    {cfc}
                     <button
                       type="button"
                       className="close"
                       aria-label="Close"
                       style={{ color: 'white', marginLeft: '5px', textShadow: 'none', opacity: 0.7, fontSize: '1.2em', lineHeight: '0.8' }}
-                      onClick={() => onModelRemove(code)}
+                      onClick={() => onModelRemove(cfc)}
                     >
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </span>
                 ))}
-                {/* Input for typing new model codes */}
+                {/* Input for typing new model cfcs */}
                 <input
                   type="text"
-                  name="modelCodeInput"
-                  value={form.modelCodeInput}
+                  name="modelCfcInput"
+                  value={form.modelCfcInput}
                   onChange={change}
-                  onKeyDown={onModelCodeKeyDown}
+                  onKeyDown={onModelCfcKeyDown}
                   style={{ border: 'none', outline: 'none', flexGrow: 1, padding: 0, margin: 0, height: '20px' }}
                 />
               </div>
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => setShowModelPicker(true)}>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model CFC" onClick={() => setShowModelPicker(true)}>
                   <i className="fas fa-search" />
                 </button>
               </div>

@@ -1,27 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewDpiModal from '../../components/NewDpiModal';
-import { dpiData } from '../../data/dpi.json';
 import SearchSection from './dpi/SearchSection';
 import ResultSection from './dpi/ResultSection';
 import ActionHeaderButtons from './dpi/ActionHeaderButtons';
 import PartPickerModal from '../../components/PartPickerModal';
 import ColumnSelectionModal from '../../components/ColumnSelectionModal';
-import { columnsConfig, initialVisibleColumns } from './dpi/columnsConfig';
-
-function getInitialVisibility(config, existingVisibility) {
-  const visibility = {};
-  for (const parentKey in config) {
-    visibility[parentKey] = {};
-    if (config[parentKey].children) {
-      for (const childKey in config[parentKey].children) {
-        // Preserve existing state if available, otherwise default to true
-        visibility[parentKey][childKey] = existingVisibility?.[parentKey]?.[childKey] ?? true;
-      }
-    }
-  }
-  return visibility;
-}
-
 export default function DPI() {
   // filter fields
   const [modelCode, setModelCode] = useState('');
@@ -36,11 +19,9 @@ export default function DPI() {
   const [showPartPicker, setShowPartPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
 
-  // column visibility
-  const [visibleColumns, setVisibleColumns] = useState(() => getInitialVisibility(columnsConfig, initialVisibleColumns));
-
   // table data
   const [rows, setRows] = useState([]);
+  const [dpiData, setDpiData] = useState([]);
 
   // paging
   const [perPage, setPerPage] = useState(10);
@@ -48,9 +29,39 @@ export default function DPI() {
   const total = rows.length;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
+  useEffect(() => {
+    const dpiUrl = `${import.meta.env.BASE_URL}dpi.json`;
+    fetch(dpiUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => {
+        const allRows = data.dpiData || [];
+        // Sort data initially
+        const sortedData = [...allRows].sort((a, b) => 
+          (b.implementation_period || '').localeCompare(a.implementation_period || '')
+        );
+        setDpiData(sortedData);
+        setRows([]); // Set rows to empty to prevent initial load
+      })
+      .catch(error => {
+        console.error('Error fetching DPI data:', error);
+      });
+  }, []);
+
   function handleSearch() {
+    const noFilters = !modelCode && (!partNo || partNo.length === 0) && !destCode && !supplierCode && !cpsNo && !implementationPeriod;
+
+    if (noFilters) {
+      setRows(dpiData);
+      setPage(1);
+      return;
+    }
+
     let filteredData = [...dpiData];
-    
     // Apply filters
     if (modelCode) {
       filteredData = filteredData.filter(item => 
@@ -66,17 +77,17 @@ export default function DPI() {
     }
     if (destCode) {
       filteredData = filteredData.filter(item => 
-        item.cps.model.destination.code?.toLowerCase().includes(destCode.toLowerCase())
+        item.cps?.model?.destination?.code?.toLowerCase().includes(destCode.toLowerCase())
       );
     }
     if (supplierCode) {
       filteredData = filteredData.filter(item => 
-        item.cps.supplier.supplier_code?.toLowerCase().includes(supplierCode.toLowerCase())
+        item.cps?.supplier?.supplier_code?.toLowerCase().includes(supplierCode.toLowerCase())
       );
     }
     if (cpsNo) {
       filteredData = filteredData.filter(item => 
-        item.cps.cps_no?.toLowerCase().includes(cpsNo.toLowerCase())
+        item.cps?.cps_no?.toLowerCase().includes(cpsNo.toLowerCase())
       );
     }
     if (implementationPeriod) {
@@ -109,7 +120,7 @@ export default function DPI() {
     setSupplierCode('');
     setCpsNo('');
     setImplementationPeriod('');
-    setRows([]);
+    setRows(dpiData);
     setPage(1);
   }
 
@@ -128,9 +139,11 @@ export default function DPI() {
   }
 
   function handleToggleColumnSelector() {
-    // Re-sync visibility with config every time the modal is opened
-    setVisibleColumns(prev => getInitialVisibility(columnsConfig, prev));
     setShowColumnSelector(prev => !prev);
+  }
+
+  function handleColumnSelectionChange(newChecked) {
+    setChecked(newChecked);
   }
 
   function handleViewDpi() {
@@ -276,7 +289,7 @@ export default function DPI() {
             totalPages={totalPages}
             goToPage={goToPage}
             setPerPage={setPerPage}
-            visibleColumns={visibleColumns}
+            checked={checked}
           />
         </div>
       </div>
@@ -297,10 +310,9 @@ export default function DPI() {
 
       <ColumnSelectionModal
         isOpen={showColumnSelector}
-        toggle={() => setShowColumnSelector(false)}
-        columnsConfig={columnsConfig}
-        visibleColumns={visibleColumns}
-        setVisibleColumns={setVisibleColumns}
+        toggle={handleToggleColumnSelector}
+        checked={checked}
+        onCheckedChange={handleColumnSelectionChange}
       />
     </div>
   );

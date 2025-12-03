@@ -63,9 +63,13 @@ export default function ResultSection({
                     {expandedRow === fullIndex && (
                       <tr>
                         <td colSpan="9">
-                          {r.parts.map((part, partIndex) => (
-                            <MaterialCostDetail key={partIndex} part={part} />
-                          ))}
+                          {r.parts && r.parts.length > 0 ? (
+                            r.parts.map((part, partIndex) => (
+                              <MaterialCostDetail key={partIndex} part={part} />
+                            ))
+                          ) : (
+                            <div className="p-3 text-center text-muted">No part details available for this calculation.</div>
+                          )}
                         </td>
                       </tr>
                     )}

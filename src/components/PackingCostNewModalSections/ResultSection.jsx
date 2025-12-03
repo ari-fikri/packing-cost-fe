@@ -78,6 +78,9 @@ export default function ResultSection({
             </th>
             <th rowSpan={2} style={{ width: 40 }}></th>
             <th rowSpan={2} style={{ width: 40 }}>No</th>
+            <th rowSpan={2}>Model CFC</th>
+            <th rowSpan={2}>Dest Code</th>
+            <th rowSpan={2}>Implementation Period</th>
             <th rowSpan={2}>Part No</th>
             <th rowSpan={2}>Suffix</th>
             <th rowSpan={2}>Part Name</th>
@@ -113,7 +116,7 @@ export default function ResultSection({
           {visibleParts.length === 0 ? (
             // Display when no data is available
             <tr>
-              <td colSpan={32} className="text-center py-4 text-muted">No Data Found</td>
+              <td colSpan={35} className="text-center py-4 text-muted">No Data Found</td>
             </tr>
           ) : (
             // Map through visible parts to create table rows
@@ -156,6 +159,9 @@ export default function ResultSection({
                       </button>
                     </td>
                     <td>{globalIndex + 1}</td>
+                    <td>{p.model_cfc}</td>
+                    <td>{p.destination}</td>
+                    <td>{p.implementation_period}</td>
                     <td>{p.partNo}</td>
                     <td>{p.suffix}</td>
                     <td>{p.partName}</td>

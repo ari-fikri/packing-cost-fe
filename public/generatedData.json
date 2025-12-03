@@ -4,7 +4,8 @@
       "id": 1,
       "implementation_period": "003.2025",
       "model_code": "579W",
-      "part_no": "16264BZ38000",
+      "model_cfc": "579W",
+      "part_no": "16264BZ38001",
       "cps": {
         "cps_no": "CPS-2024-001",
         "refCpsNo": "",
@@ -13,9 +14,10 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
-        "part_no": "16264BZ38000",
+        "part_no": "16264BZ38001",
         "part_name": "HOSE, WATER BY-PASS, NO.2",
         "supplier": {},
         "part_status": "New",
@@ -271,6 +273,7 @@
       "id": 2,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -280,6 +283,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",
@@ -544,6 +548,7 @@
       "id": 3,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -553,6 +558,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",
@@ -781,6 +787,7 @@
       "id": 4,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -790,6 +797,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",
@@ -1024,6 +1032,7 @@
       "id": 5,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -1033,6 +1042,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",
@@ -1297,6 +1307,7 @@
       "id": 6,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -1306,6 +1317,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",
@@ -1546,6 +1558,7 @@
       "id": 7,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -1555,6 +1568,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",
@@ -1777,6 +1791,7 @@
       "id": 8,
       "implementation_period": "003.2025",
       "model_code": "579W",
+      "model_cfc": "579W",
       "part_no": "16264BZ38000",
       "cps": {
         "cps_no": "CPS-2024-001",
@@ -1786,6 +1801,7 @@
         "model": {
           "model_type": "lot",
           "model_code": "579W",
+          "model_cfc": "579W",
           "cfc": "CF-001"
         },
         "part_no": "16264BZ38000",

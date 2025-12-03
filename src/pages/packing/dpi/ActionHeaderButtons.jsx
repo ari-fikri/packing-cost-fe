@@ -20,19 +20,10 @@ export default function ActionHeaderButtons({
       >
         <i className="fas fa-eye" /> View DPI
       </button>
-      <button
-        type="button"
-        className="btn btn-sm btn-outline-secondary mr-1"
-        onClick={onToggleColumnSelector}
-      >
+      <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={onToggleColumnSelector} title="Select Columns">
         <i className="fas fa-cog" />
       </button>
-      <button
-        type="button"
-        className="btn btn-sm btn-outline-secondary mr-1"
-        onClick={onUpload}
-        title="Upload"
-      >
+      <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={onUpload} title="Upload">
         <i className="fas fa-cloud-upload-alt" /> Upload
       </button>
       <button

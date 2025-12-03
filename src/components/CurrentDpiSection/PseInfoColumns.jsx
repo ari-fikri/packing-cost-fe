@@ -1,47 +1,62 @@
 import React from 'react';
 
-export function PseInfoHeaders({ visibleColumns }) {
+export function PseInfoHeaders({ checked }) {
+  const showPackingPlant = checked.includes('packing_plant_current') || checked.includes('packing_plant_next');
+  const packingPlantColSpan = [checked.includes('packing_plant_current'), checked.includes('packing_plant_next')].filter(Boolean).length;
+
+  const showVanningPlant = checked.includes('vanning_plant_current') || checked.includes('vanning_plant_next');
+  const vanningPlantColSpan = [checked.includes('vanning_plant_current'), checked.includes('vanning_plant_next')].filter(Boolean).length;
+
+  const showOrderPattern = checked.includes('order_pattern_current') || checked.includes('order_pattern_next');
+  const orderPatternColSpan = [checked.includes('order_pattern_current'), checked.includes('order_pattern_next')].filter(Boolean).length;
+
+  const showKatashiiki = checked.includes('katashiiki_ad') || checked.includes('katashiiki_au') || checked.includes('katashiiki_af') || checked.includes('katashiiki_ax');
+  const katashiikiColSpan = [checked.includes('katashiiki_ad'), checked.includes('katashiiki_au'), checked.includes('katashiiki_af'), checked.includes('katashiiki_ax')].filter(Boolean).length;
+
+  const showPackingProcess = checked.includes('packing_process_boxing') || checked.includes('packing_process_stacking');
+  const packingProcessColSpan = [checked.includes('packing_process_boxing'), checked.includes('packing_process_stacking')].filter(Boolean).length;
+
   return (
     <>
-      {visibleColumns.packingPlant && <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Packing Plant</th>}
-      {visibleColumns.vanningPlant && <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Vanning Plant</th>}
-      {visibleColumns.orderPattern && <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Order Pattern</th>}
-      {visibleColumns.katashiiki && <th colSpan={4} className="align-middle border text-center tbl-row2-hdr">Katashiiki</th>}
-      {visibleColumns.importerLineProcess && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Importer Line Process</th>}
-      {visibleColumns.caseCode && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Case code</th>}
-      {visibleColumns.boxNumber && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Box Number</th>}
-      {visibleColumns.renban && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Renban</th>}
-      {visibleColumns.renbanEff && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Renban Eff</th>}
-      {visibleColumns.packingProcess && <th colSpan={2} className="align-middle border text-center tbl-row2-hdr">Packing Process</th>}
+      {showPackingPlant && <th colSpan={packingPlantColSpan} className="align-middle border text-center tbl-row2-hdr">Packing Plant</th>}
+      {showVanningPlant && <th colSpan={vanningPlantColSpan} className="align-middle border text-center tbl-row2-hdr">Vanning Plant</th>}
+      {showOrderPattern && <th colSpan={orderPatternColSpan} className="align-middle border text-center tbl-row2-hdr">Order Pattern</th>}
+      {showKatashiiki && <th colSpan={katashiikiColSpan} className="align-middle border text-center tbl-row2-hdr">Katashiiki</th>}
+      {checked.includes('importer_line_process') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr text-nowrap">Importer Line Process</th>}
+      {checked.includes('case_code') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Case code</th>}
+      {checked.includes('box_number') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Box Number</th>}
+      {checked.includes('renban') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Renban</th>}
+      {checked.includes('renban_eff') && <th rowSpan={2} className="align-middle border text-center tbl-row2-hdr">Renban Eff</th>}
+      {showPackingProcess && <th colSpan={packingProcessColSpan} className="align-middle border text-center tbl-row2-hdr">Packing Process</th>}
     </>
   );
 }
 
-export function PseInfoSubHeaders({ visibleColumns }) {
+export function PseInfoSubHeaders({ checked }) {
     return (
       <>
         {/* Packing Plant */}
-        {visibleColumns.packingPlant && <th className="align-middle border text-center tbl-row2-hdr">Current</th>}
-        {visibleColumns.packingPlant && <th className="align-middle border text-center tbl-row2-hdr">Next</th>}
+        {checked.includes('packing_plant_current') && <th className="align-middle border text-center tbl-row2-hdr">Current</th>}
+        {checked.includes('packing_plant_next') && <th className="align-middle border text-center tbl-row2-hdr">Next</th>}
         {/* Vanning Plant */}
-        {visibleColumns.vanningPlant && <th className="align-middle border text-center tbl-row2-hdr">Current</th>}
-        {visibleColumns.vanningPlant && <th className="align-middle border text-center tbl-row2-hdr">Next</th>}
+        {checked.includes('vanning_plant_current') && <th className="align-middle border text-center tbl-row2-hdr">Current</th>}
+        {checked.includes('vanning_plant_next') && <th className="align-middle border text-center tbl-row2-hdr">Next</th>}
         {/* Order Pattern */}
-        {visibleColumns.orderPattern && <th className="align-middle border text-center tbl-row2-hdr">Current</th>}
-        {visibleColumns.orderPattern && <th className="align-middle border text-center tbl-row2-hdr">Next</th>}
+        {checked.includes('order_pattern_current') && <th className="align-middle border text-center tbl-row2-hdr">Current</th>}
+        {checked.includes('order_pattern_next') && <th className="align-middle border text-center tbl-row2-hdr">Next</th>}
         {/* Katashiiki */}
-        {visibleColumns.katashiiki && <th className="align-middle border text-center tbl-row2-hdr">AD</th>}
-        {visibleColumns.katashiiki && <th className="align-middle border text-center tbl-row2-hdr">AU</th>}
-        {visibleColumns.katashiiki && <th className="align-middle border text-center tbl-row2-hdr">AF</th>}
-        {visibleColumns.katashiiki && <th className="align-middle border text-center tbl-row2-hdr">AX</th>}
+        {checked.includes('katashiiki_ad') && <th className="align-middle border text-center tbl-row2-hdr">AD</th>}
+        {checked.includes('katashiiki_au') && <th className="align-middle border text-center tbl-row2-hdr">AU</th>}
+        {checked.includes('katashiiki_af') && <th className="align-middle border text-center tbl-row2-hdr">AF</th>}
+        {checked.includes('katashiiki_ax') && <th className="align-middle border text-center tbl-row2-hdr">AX</th>}
         {/* Packing Process */}
-        {visibleColumns.packingProcess && <th className="align-middle border text-center tbl-row2-hdr">Boxing</th>}
-        {visibleColumns.packingProcess && <th className="align-middle border text-center tbl-row2-hdr">Stacking</th>}
+        {checked.includes('packing_process_boxing') && <th className="align-middle border text-center tbl-row2-hdr">Boxing</th>}
+        {checked.includes('packing_process_stacking') && <th className="align-middle border text-center tbl-row2-hdr">Stacking</th>}
       </>
     );
 }
 
-export function PseInfoCells({ pseInfo, visibleColumns }) {
+export function PseInfoCells({ pseInfo, checked }) {
   const {
     packing_plant_curr,
     packing_plant_next,
@@ -64,23 +79,23 @@ export function PseInfoCells({ pseInfo, visibleColumns }) {
   } = pseInfo || {};
   return (
     <>
-      {visibleColumns.packingPlant && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_plant_curr ?? '-'}</td>}
-      {visibleColumns.packingPlant && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_plant_next ?? '-'}</td>}
-      {visibleColumns.vanningPlant && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{vanning_plant_curr ?? '-'}</td>}
-      {visibleColumns.vanningPlant && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{vanning_plant_next ?? '-'}</td>}
-      {visibleColumns.orderPattern && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{order_pattern_curr ?? '-'}</td>}
-      {visibleColumns.orderPattern && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{order_pattern_next ?? '-'}</td>}
-      {visibleColumns.katashiiki && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AD ?? '-'}</td>}
-      {visibleColumns.katashiiki && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AU ?? '-'}</td>}
-      {visibleColumns.katashiiki && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AF ?? '-'}</td>}
-      {visibleColumns.katashiiki && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AX ?? '-'}</td>}
-      {visibleColumns.importerLineProcess && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{importer_line_process ?? '-'}</td>}
-      {visibleColumns.caseCode && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{case_code ?? '-'}</td>}
-      {visibleColumns.boxNumber && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{box_number ?? '-'}</td>}
-      {visibleColumns.renban && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{renban ?? '-'}</td>}
-      {visibleColumns.renbanEff && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{renban_eff ?? '-'}</td>}
-      {visibleColumns.packingProcess && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_process_boxing ?? '-'}</td>}
-      {visibleColumns.packingProcess && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_process_stacking ?? '-'}</td>}
+      {checked.includes('packing_plant_current') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_plant_curr ?? '-'}</td>}
+      {checked.includes('packing_plant_next') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_plant_next ?? '-'}</td>}
+      {checked.includes('vanning_plant_current') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{vanning_plant_curr ?? '-'}</td>}
+      {checked.includes('vanning_plant_next') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{vanning_plant_next ?? '-'}</td>}
+      {checked.includes('order_pattern_current') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{order_pattern_curr ?? '-'}</td>}
+      {checked.includes('order_pattern_next') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{order_pattern_next ?? '-'}</td>}
+      {checked.includes('katashiiki_ad') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AD ?? '-'}</td>}
+      {checked.includes('katashiiki_au') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AU ?? '-'}</td>}
+      {checked.includes('katashiiki_af') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AF ?? '-'}</td>}
+      {checked.includes('katashiiki_ax') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{katashiki?.AX ?? '-'}</td>}
+      {checked.includes('importer_line_process') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{importer_line_process ?? '-'}</td>}
+      {checked.includes('case_code') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{case_code ?? '-'}</td>}
+      {checked.includes('box_number') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{box_number ?? '-'}</td>}
+      {checked.includes('renban') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{renban ?? '-'}</td>}
+      {checked.includes('renban_eff') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{renban_eff ?? '-'}</td>}
+      {checked.includes('packing_process_boxing') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_process_boxing ?? '-'}</td>}
+      {checked.includes('packing_process_stacking') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{packing_process_stacking ?? '-'}</td>}
     </>
   );
 }

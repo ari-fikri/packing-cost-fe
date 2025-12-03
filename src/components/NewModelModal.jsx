@@ -5,7 +5,6 @@
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from '../components/PartPickerModal'   // Part selection modal component
 import DESTINATIONS from '../data/destinations'               // Destination lookup data
-import projectsData from '../data/projects.json';
 
 export default function NewModelModal({ 
   show,        // Boolean: Controls modal visibility
@@ -32,6 +31,7 @@ export default function NewModelModal({
   // === PARTS MANAGEMENT STATE ===
   const [parts, setParts] = useState([])                             // Array of selected parts for this model
   const [showPartPicker, setShowPartPicker] = useState(false)        // Boolean: Controls part picker modal visibility
+  const [projectsData, setProjectsData] = useState([]);
 
   // === FORM INITIALIZATION EFFECT ===
   // Initialize form data when modal is shown or initialData changes
@@ -69,6 +69,12 @@ export default function NewModelModal({
       setShowPartPicker(false)                                           // Always close part picker when modal opens
     }
   }, [show, initialData])
+
+  useEffect(() => {
+    fetch('/projects.json')
+      .then(response => response.json())
+      .then(data => setProjectsData(data));
+  }, []);
 
   useEffect(() => {
     if (projectCode) {

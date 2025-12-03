@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import NewModelModal from '../components/NewModelModal'
 import SearchSection from '../components/ModelsSections/SearchSection'
 import ResultSection from '../components/ModelsSections/ResultSection'
-import modelsData from '../data/models.json'
 
 export default function Models() {
   // filters
@@ -31,18 +30,29 @@ export default function Models() {
 
   // Load models data on mount
   useEffect(() => {
-    setModels(modelsData)
-    // Do not populate filteredModels on initial load so the table header
-    // is visible but no data rows are shown. The user must click Filter to
-    // load results; clicking Filter with no criteria will show latest-first.
-    setFilteredModels([])
+    const modelUrl = `${import.meta.env.BASE_URL}models.json`;
+    fetch(modelUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const sortedData = data.sort((a, b) => new Date(b.model_implementation_period) - new Date(a.model_implementation_period));
+        setModels(sortedData);
+        setFilteredModels([]);
+      })
+      .catch(error => {
+        console.error('Error fetching models:', error);
+      });
   }, [])
 
   function handleFilter() {
     const noFilters = !code && !projectCode && !filterName && !filterCfc && !filterType && !filterRemark && !implementationPeriod && !destinationCode;
 
     if (noFilters) {
-      setFilteredModels([...modelsData].reverse());
+      setFilteredModels([...models].reverse());
       setCurrentPage(1);
       return;
     }
