@@ -1,10 +1,17 @@
 // src/components/Header.jsx
 import React from 'react'
 import { useAuth } from '../auth'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Header(){
 const auth = useAuth()
+const navigate = useNavigate();
+
+const handleSeeDetail = () => {
+  navigate('/notification-detail');
+};
+
 return (
 <nav className="main-header navbar navbar-expand navbar-white navbar-light">
 <ul className="navbar-nav">
@@ -30,18 +37,18 @@ return (
           <div className="dropdown-item">
             <p style={{fontWeight: 'bold'}}>Date : 20 Feb 2025 13:15</p>
             <p className="text-sm">You have new form request to review.</p>
-            <p className="text-sm text-muted">From : Jonathan Hairi</p>
+            <p className="text-sm text-muted">From : Jonathan Hairi at 20 Feb 2025 13:10</p>
             <p className="text-sm text-muted">Dept : PPMD</p>
-            <button className="btn btn-primary btn-sm">See Detail</button>
+            <button className="btn btn-primary btn-sm" onClick={handleSeeDetail}>See Detail</button>
           </div>
           <div className="dropdown-divider"></div>
           <div className="dropdown-item">
             <p style={{fontWeight: 'bold'}}>Date : 19 Feb 2025 12:15</p>
-            <p className="text-sm">Your form submission has been rejected</p>
-            <p className="text-sm text-muted">From : Jonathan Hairi</p>
+            <p className="text-sm">Your form submission has been rejected by :</p>
+            <p className="text-sm text-muted">By : Jonathan Hairi at 19 Feb 2025 13:10</p>
             <p className="text-sm text-muted">Dept : PPMD</p>
-            <p className="text-sm text-muted">Comment: Sheet tersebut sudah tidak ada di pasaran ...</p>
-            <button className="btn btn-primary btn-sm">See Detail</button>
+            <p className="text-sm text-muted">Comment: Sheet tersebut sudah tidak ada di pasaran dan akan diganti sheet yg sama dari supplier lain.</p>
+            <button className="btn btn-primary btn-sm" onClick={handleSeeDetail}>See Detail</button>
           </div>
           <div className="dropdown-divider"></div>
           <a href="#" className="dropdown-item dropdown-footer">See All Notifications</a>
