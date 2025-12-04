@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "calCode": "CALC-001",
+    "period": "2023-10",
+    "destCode": "DEST-A",
+    "modelCode": "MODEL-X",
+    "type": "PxP",
+    "numParts": 5,
+    "parts": [] 
+  },
+  {
+    "id": 2,
+    "calCode": "CALC-002",
+    "period": "2023-11",
+    "destCode": "DEST-B",
+    "modelCode": "MODEL-Y",
+    "type": "Lot",
+    "numParts": 10,
+    "parts": []
+  },
+  {
+    "id": 3,
+    "calCode": "CALC-003",
+    "period": "2023-10",
+    "destCode": "DEST-A",
+    "modelCode": "MODEL-Z",
+    "type": "PxP",
+    "numParts": 8,
+    "parts": []
+  }
+]
