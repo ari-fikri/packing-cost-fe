@@ -12,6 +12,14 @@ export default function ResultSection({
   const totalPages = Math.ceil(results.length / pageSize)
   const paginatedResults = results.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 
+  const handleDeleteWithConfirmation = (index) => {
+    const projectName = paginatedResults[index % pageSize]?.project_name || 'this project'
+    const confirmed = window.confirm(`Apakah Anda yakin ingin menghapus project "${projectName}"?`)
+    if (confirmed) {
+      handleDelete((currentPage - 1) * pageSize + index)
+    }
+  }
+
   return (
     <div className="card-body pt-0">
       {/* Fixed Table Container with Scrollable Body */}
@@ -48,7 +56,7 @@ export default function ResultSection({
                 </td>
                 <td>
                   <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit((currentPage - 1) * pageSize + idx)}><i className="fas fa-edit" /></button>
-                  <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDelete((currentPage - 1) * pageSize + idx)}><i className="fas fa-trash" /></button>
+                  <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => handleDeleteWithConfirmation(idx)}><i className="fas fa-trash" /></button>
                 </td>
               </tr>
             ))}
