@@ -158,7 +158,7 @@ export default function Suppliers() {
           <div className="row mb-3">
             <div className="col-12 text-right">
               <button className="btn btn-sm btn-primary mr-2" onClick={handleFilter}>
-                <i className="fas fa-search mr-1" /> Filter
+                <i className="fas fa-search mr-1" /> Search
               </button>
               <button className="btn btn-sm btn-outline-secondary" onClick={handleClear}>
                 <i className="fas fa-times mr-1" /> Clear
@@ -171,7 +171,7 @@ export default function Suppliers() {
             <table className="table table-striped table-sm">
               <thead>
                 <tr>
-                  <th style={{ width: 40 }}>#</th>
+                  <th style={{ width: 40 }}>No</th>
                   <th>Supplier Code</th>
                   <th>Supplier Name</th>
                   <th>Address</th>

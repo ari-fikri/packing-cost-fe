@@ -349,7 +349,7 @@ export default function Parts() {
             <table className="table table-striped table-sm mb-0">
               <thead>
                 <tr>
-                  <th style={{ width: 40 }}>#</th>
+                  <th style={{ width: 40 }}>No</th>
                   <th>Part No</th>
                   <th>Suffix</th>
                   <th>Unique No</th>
