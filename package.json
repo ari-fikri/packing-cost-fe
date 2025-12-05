@@ -20,7 +20,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",
     "reactstrap": "^9.2.2",
-    "serve": "^14.2.5"
+    "serve": "^14.2.5",
+    "vite-plugin-gh-pages": "^1.0.1"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^10.0.0",
