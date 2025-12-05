@@ -2,7 +2,7 @@
 import React from "react";
 import { MaterialLeafHeaders, MaterialLeafCells } from "./MaterialInfoColumns";
 
-export function OuterGroupHeaders({ count = 1, visibleColumns }) {
+export function OuterGroupHeaders({ count = 1 }) {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
@@ -14,11 +14,11 @@ export function OuterGroupHeaders({ count = 1, visibleColumns }) {
   );
 }
 
-export const OuterLeafHeaders = ({ count, visibleColumns }) => (
-  <MaterialLeafHeaders count={count} visibleColumns={visibleColumns} />
+export const OuterLeafHeaders = ({ count }) => (
+  <MaterialLeafHeaders count={count} />
 );
 
-export const OuterLeafCells = ({ data, count, visibleColumns }) => {  
+export const OuterLeafCells = ({ data, count }) => {  
   //debugger;
-  return <MaterialLeafCells arr={data} count={count} visibleColumns={visibleColumns} />
+  return <MaterialLeafCells arr={data} count={count} />
   ;}

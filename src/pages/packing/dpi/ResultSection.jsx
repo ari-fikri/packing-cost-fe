@@ -56,7 +56,6 @@ export default function ResultSection({
   setPerPage,
   checked,
 }) {
-  const vc = visibleColumns || {};
   //debugger;
   const firstRowCps = visibleRows[0]?.cps || {};
   // const innerCount = firstRowCps.innerMaterials?.length || 1;
