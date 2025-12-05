@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "start": "npm run build && npx serve -s dist -p ${PORT:-3000}",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "postbuild": "cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "chart.js": "4.4.0",
