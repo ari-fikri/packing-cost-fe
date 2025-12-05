@@ -33,8 +33,8 @@ export default function CalculatePackingCost() {
         return res.json();
       })
       .then(data => {
-        debugger;
-        const transformedData = data.map(item => ({
+        const cpsArray = data.cpsData || [];
+        const transformedData = cpsArray.map(item => ({
           id: item.id,
           calCode: item.pack_cost_cal_code,
           period: item.implementation_period,
