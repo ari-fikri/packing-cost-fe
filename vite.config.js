@@ -1,10 +1,9 @@
 // vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import ghPages from 'vite-plugin-gh-pages'
 
 export default defineConfig(({ command }) => ({
-  plugins: [react(), ghPages()],
+  plugins: [react() ],
   base: command === "build" ? "/packing-cost-fe/" : "/",
   build: {
     rollupOptions: {
