@@ -33,11 +33,13 @@ export default function ComparisonPage() {
   const [cpsComparisonData, setCpsComparisonData] = useState([]);
 
   useEffect(() => {
-    fetch('/comparison.json')
+    const comparisonUrl = `${import.meta.env.BASE_URL}comparison.json`;
+    const cpsComparisonUrl = `${import.meta.env.BASE_URL}cpsComparison.json`
+    fetch(comparisonUrl)
       .then(res => res.json())
       .then(data => setComparisonData(data));
     
-    fetch('/cpsComparison.json')
+    fetch(cpsComparisonUrl)
       .then(res => res.json())
       .then(data => setCpsComparisonData(data));
   }, []);
