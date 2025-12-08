@@ -147,14 +147,14 @@ export default function ComparisonPage() {
                     <tr>
                       <td></td>
                       <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                        <div>- Part No: {mat.detail.partNo}</div>
+                        <div>- Material No: {mat.detail.partNo}</div>
                         <div>- Code: {mat.detail.code}</div>
                         <div>- Qty: {fmt(mat.detail.qty)}</div>
                         <div>- Price: {fmtPrice(mat.detail.price)}</div>
                         <div>- Subtotal: {fmt(mat.detail.qty * mat.detail.price)}</div>
                       </td>
                       <td style={{ paddingLeft: "40px", verticalAlign: "top" }}>
-                        <div>- Part No: {matRight?.detail.partNo}</div>
+                        <div>- Material No: {matRight?.detail.partNo}</div>
                         <div>- Code: {matRight?.detail.code}</div>
                         <div>- Qty: {fmt(matRight?.detail.qty)}</div>
                         <div>- Price: {fmtPrice(matRight?.detail.price)}</div>
