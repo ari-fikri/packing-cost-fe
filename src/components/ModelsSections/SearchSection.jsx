@@ -1,5 +1,6 @@
-import React from 'react'
-import DESTINATIONS from '../../data/destinations'
+import React, { useState } from 'react';
+import DESTINATIONS from '../../data/destinations';
+import ModelPickerModal from '../ModelPickerModal';
 
 export default function SearchSection({
   code,
@@ -24,6 +25,8 @@ export default function SearchSection({
   handleClearFilters,
   handleOpenNew
 }) {
+  const [showModelPicker, setShowModelPicker] = useState(false);
+
   // Handle destination code change and auto-populate related fields
   const handleDestinationCodeChange = (value) => {
     setDestinationCode(value)
@@ -35,9 +38,24 @@ export default function SearchSection({
       setDestinationCountryCode('')
       setCountry('')
     }
-  }
+  };
+
+  const handleAddModel = (model) => {
+    if (model) {
+      setCode(model.model_code);
+      setFilterName(model.model_name);
+    }
+    setShowModelPicker(false);
+  };
+
   return (
     <div className="card-body">
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={() => setShowModelPicker(false)}
+        onAdd={handleAddModel}
+        selectionMode="single"
+      />
       {/* MidSection - Filters */}
       <div className="form-row mb-3">
         <div className="form-group col-md-6">
@@ -50,7 +68,7 @@ export default function SearchSection({
               placeholder="Code"
             />
             <div className="input-group-append">
-              <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code" onClick={() => alert('Search code placeholder')}>
+              <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code" onClick={() => setShowModelPicker(true)}>
                 <i className="fas fa-search" />
               </button>
             </div>
