@@ -79,13 +79,16 @@ export default function SearchSection({
         </div>
         <div className="form-group col-md-6">
           <label className="small mb-1">Type</label>
-          <input
-            type="text"
+          <select
             className="form-control form-control-sm"
             value={filterType}
             onChange={e => setFilterType(e.target.value)}
-            placeholder="Type"
-          />
+          >
+            <option value=""> </option>
+            <option value="pxp">PxP</option>
+            <option value="lot">Lot</option>
+            <option value="eng">Engine</option>
+          </select>
         </div>
 
         {/* Row 3 */}
