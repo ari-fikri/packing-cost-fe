@@ -21,19 +21,8 @@ export default function SearchSection({
   handleFilter,
   handleClearFilters,
   onSearchCfc,
+  onSearchDestination,
 }) {
-  const handleDestinationCodeChange = (value) => {
-    setDestinationCode(value);
-    const destination = DESTINATIONS.find(dest => dest.destCode === value);
-    if (destination) {
-      setDestinationCountryCode(destination.code);
-      setCountry(destination.country);
-    } else {
-      setDestinationCountryCode('');
-      setCountry('');
-    }
-  };
-
   return (
     <div className="card-body">
       <div className="form-row mb-3">
@@ -101,11 +90,13 @@ export default function SearchSection({
                   type="text"
                   className="form-control form-control-sm"
                   value={destinationCode}
-                  onChange={e => handleDestinationCodeChange(e.target.value)}
+                  onChange={e => setDestinationCode(e.target.value)}
                   placeholder="Destination Code"
                 />
                 <div className="input-group-append">
-                  <span className="input-group-text"><i className="fas fa-map-marker-alt" /></span>
+                  <button className="btn btn-outline-secondary" type="button" onClick={onSearchDestination}>
+                    <i className="fas fa-search" />
+                  </button>
                 </div>
               </div>
             </div>
