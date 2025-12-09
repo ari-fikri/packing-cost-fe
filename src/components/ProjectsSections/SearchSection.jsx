@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProjectModal from '../ProjectModal';
+import { handleInputChange } from '../../utils/globalFunctions';
 
 export default function SearchSection({
   code, setCode,
@@ -22,6 +23,13 @@ export default function SearchSection({
     }
   }
 
+  function handleSelectProject(selected) {
+    if (selected.length > 0) {
+      setCode(selected.map(p => p.code).join(', '));
+    }
+    setShowProjectModal(false);
+  }
+
   return (
     <div className="card-body">
       {/* First Row: Project Code and Project Name */}
@@ -31,7 +39,7 @@ export default function SearchSection({
           <div className="form-group">
             <label className="small mb-1">Project Code</label>
             <div className="input-group input-group-sm">
-              <input value={code} onChange={e => setCode(e.target.value)} className="form-control form-control-sm" placeholder="Code" />
+              <input value={code} onChange={handleInputChange(setCode)} className="form-control form-control-sm" placeholder="Code" />
               <div className="input-group-append">
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code" onClick={() => setShowProjectModal(true)}><i className="fas fa-search"></i></button>
               </div>
@@ -43,7 +51,7 @@ export default function SearchSection({
           <div className="form-group">
             <label className="small mb-1">Project Name</label>
             <div className="input-group input-group-sm">
-              <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
+              <input value={name} onChange={handleInputChange(setName)} className="form-control form-control-sm" placeholder="Project name" />
               <div className="input-group-append">
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Search name" onClick={() => setShowProjectModal(true)}><i className="fas fa-search"></i></button>
               </div>
@@ -58,7 +66,7 @@ export default function SearchSection({
           <div className="form-group">
             <label className="small mb-1">Related Models</label>
             <div className="input-group input-group-sm">
-              <input value={models} onChange={e => setModels(e.target.value)} className="form-control form-control-sm" placeholder="Model code / name" />
+              <input value={models} onChange={handleInputChange(setModels)} className="form-control form-control-sm" placeholder="Model code / name" />
               <div className="input-group-append">
                 <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Model"><i className="fas fa-search"></i></button>
               </div>
@@ -70,7 +78,7 @@ export default function SearchSection({
           <div className="form-group">
             <label className="small mb-1">Project Manager</label>
             <div className="input-group input-group-sm">
-              <input value={manager} onChange={e => setManager(e.target.value)} className="form-control form-control-sm" placeholder="Manager name" />
+              <input value={manager} onChange={handleInputChange(setManager)} className="form-control form-control-sm" placeholder="Manager name" />
               <div className="input-group-append">
                 <span className="input-group-text"><i className="fas fa-user" /></span>
               </div>
@@ -108,7 +116,7 @@ export default function SearchSection({
           <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-times mr-1"></i> Clear</button>
         </div>
       </div>
-      <ProjectModal show={showProjectModal} onHide={() => setShowProjectModal(false)} />
+      <ProjectModal show={showProjectModal} onHide={() => setShowProjectModal(false)} onSelect={handleSelectProject} />
     </div>
   );
 }

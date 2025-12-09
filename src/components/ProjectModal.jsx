@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const ProjectModal = ({ show, onHide }) => {
+const ProjectModal = ({ show, onHide, onSelect }) => {
   const [projectCode, setProjectCode] = useState('');
   const [projectName, setProjectName] = useState('');
   const [status, setStatus] = useState('All');
   const [projectManager, setProjectManager] = useState('');
+  const [selectedProjects, setSelectedProjects] = useState([]);
 
   const allProjects = [
     { code: '024J', name: 'Front Bumper Model', status: 'Active', manager: 'Prototype 2025' },
@@ -51,6 +52,22 @@ const ProjectModal = ({ show, onHide }) => {
     setStatus('All');
     setProjectManager('');
     setResults(allProjects);
+    setSelectedProjects([]);
+  };
+
+  const handleCheckboxChange = (project, isChecked) => {
+    if (isChecked) {
+      setSelectedProjects(prev => [...prev, project]);
+    } else {
+      setSelectedProjects(prev => prev.filter(p => p.code !== project.code));
+    }
+  };
+
+  const handleAdd = () => {
+    if (onSelect) {
+      onSelect(selectedProjects);
+    }
+    onHide();
   };
 
   const modalBodyStyle = {
@@ -120,7 +137,13 @@ const ProjectModal = ({ show, onHide }) => {
                   {results.length > 0 ? (
                     results.map((item, index) => (
                       <tr key={index}>
-                        <td className="text-center"><input type="checkbox" /></td>
+                        <td className="text-center">
+                          <input
+                            type="checkbox"
+                            onChange={(e) => handleCheckboxChange(item, e.target.checked)}
+                            checked={selectedProjects.some(p => p.code === item.code)}
+                          />
+                        </td>
                         <td>{item.code}</td>
                         <td>{item.name}</td>
                         <td>{item.status}</td>
@@ -137,7 +160,7 @@ const ProjectModal = ({ show, onHide }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary btn-sm">Add</button>
+            <button type="button" className="btn btn-primary btn-sm" onClick={handleAdd}>Add</button>
             <button type="button" className="btn btn-secondary btn-sm" onClick={onHide}>Close</button>
           </div>
         </div>

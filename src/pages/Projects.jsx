@@ -59,19 +59,19 @@ export default function Projects() {
   // Handles the search functionality based on the current filter states.
   function handleSearch() {
     // Perform search and update results. We don't gate rendering on a
-    // "hasSearched" flag anymore; the results array controls what is
+    // \"hasSearched\" flag anymore; the results array controls what is
     // displayed. An empty array will show the table header with no rows.
     // Check if any filters have been applied.
     const noFilters = !code && !name && !models && !manager && statuses.all;
 
     // Filter the projectsData based on the input fields.
     let filtered = projectsData.filter(p =>
-      (!code || p.code?.toLowerCase().includes(code.toLowerCase())) &&
-      (!name || p.name?.toLowerCase().includes(name.toLowerCase())) &&
+      (!code || p.project_code?.toLowerCase().includes(code.toLowerCase())) &&
+      (!name || p.project_name?.toLowerCase().includes(name.toLowerCase())) &&
       (!models || (Array.isArray(p.models)
         ? p.models.join(', ').toLowerCase().includes(models.toLowerCase())
         : (p.models || '').toLowerCase().includes(models.toLowerCase()))) &&
-      (!manager || p.manager?.toLowerCase().includes(manager.toLowerCase()))
+      (!manager || p.project_manager?.toLowerCase().includes(manager.toLowerCase()))
     );
 
     // Apply status filters if 'all' is not selected.
