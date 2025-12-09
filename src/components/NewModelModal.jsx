@@ -71,7 +71,8 @@ export default function NewModelModal({
   }, [show, initialData])
 
   useEffect(() => {
-    fetch('/projects.json')
+    const dataUrl = `${import.meta.env.BASE_URL}projects.json`;
+    fetch(dataUrl)
       .then(response => response.json())
       .then(data => setProjectsData(data));
   }, []);

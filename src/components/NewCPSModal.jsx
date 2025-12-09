@@ -132,7 +132,8 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   const [addressRack, setAddressRack] = useState('');
 
   useEffect(() => {
-    fetch('/cpsComparison.json')
+    const dataUrl = `${import.meta.env.BASE_URL}cpsComparison.json`;
+    fetch(dataUrl)
       .then(res => res.json())
       .then(data => setComparisonData(data));
     

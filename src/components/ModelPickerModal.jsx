@@ -17,7 +17,8 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
   const modelsPerPage = 15;
 
   useEffect(() => {
-    fetch('/models.json')
+    const dataUrl = `${import.meta.env.BASE_URL}models.json`;
+    fetch(dataUrl)
       .then(response => response.json())
       .then(data => {
         setModelsData(data);

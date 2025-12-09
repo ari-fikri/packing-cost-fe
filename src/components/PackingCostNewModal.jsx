@@ -66,7 +66,8 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   }, [show]);
 
   useEffect(() => {
-    fetch('/generatedData.json')
+    const dataUrl = `${import.meta.env.BASE_URL}generatedData.json`;
+    fetch(dataUrl)
       .then(response => response.json())
       .then(data => {
         setCpsData(data.cpsData);
