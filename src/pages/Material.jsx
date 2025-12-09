@@ -146,10 +146,10 @@ export default function Material() {
               <i className="fas fa-file mr-1" /> Add Material
             </button>
             <button type="button" className="btn btn-sm btn-outline-secondary mr-1" onClick={() => alert('Upload placeholder')}>
-              <i className="fas fa-cloud-upload-alt" /> Upload
+              <i className="fas fa-cloud-upload-alt" />
             </button>
             <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => alert('Download template placeholder')}>
-              <i className="fas fa-cloud-download-alt" /> Template
+              <i className="fas fa-cloud-download-alt" />
             </button>
           </div>
         </div>

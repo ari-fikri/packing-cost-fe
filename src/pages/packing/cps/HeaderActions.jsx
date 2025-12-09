@@ -15,14 +15,12 @@ const HeaderActions = ({ onNewCps, onUpload, onDownload, onCreatePsi, onCreateEc
       <button type="button" className="btn btn-sm btn-info" onClick={onComparePcs}>
         <i className="fas fa-exchange-alt mr-1"></i> Compare PCS
       </button>
-      <div className="btn-group ml-2">
-        <button type="button" className="btn btn-sm btn-outline-secondary" title="Upload" onClick={onUpload}>
-            <i className="fas fa-cloud-upload-alt"></i>
-        </button>
-        <button type="button" className="btn btn-sm btn-outline-secondary" title="Download Template" onClick={onDownload}>
-            <i className="fas fa-cloud-download-alt"></i>
-        </button>
-      </div>
+      <button type="button" className="btn btn-sm btn-outline-secondary ml-2" title="Upload" onClick={onUpload}>
+          <i className="fas fa-cloud-upload-alt"></i>
+      </button>
+      <button type="button" className="btn btn-sm btn-outline-secondary ml-1" title="Download Template" onClick={onDownload}>
+          <i className="fas fa-cloud-download-alt"></i>
+      </button>
     </div>
   );
 };

@@ -123,10 +123,10 @@ export default function CalculatePackingCost() {
             </button>
 
             <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload">
-              <i className="fas fa-cloud-upload-alt" /> Upload
+              <i className="fas fa-cloud-upload-alt" />
             </button>
             <button type="button" className="btn btn-sm btn-outline-secondary" title="Template">
-              <i className="fas fa-cloud-download-alt" /> Template
+              <i className="fas fa-cloud-download-alt" />
             </button>
           </div>
         </div>

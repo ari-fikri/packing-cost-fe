@@ -190,7 +190,7 @@ export default function Models() {
           {/* TopSection */}
           <div className="ml-auto">
             <button type="button" className="btn btn-sm btn-success mr-2" onClick={handleOpenNew}>
-              <i className="fas fa-file mr-1" /> Add New Model
+              <i className="fas fa-file mr-1" /> Add Model
             </button>
             <button type="button" className="btn btn-sm btn-outline-secondary mr-1" title="Upload" onClick={() => alert('Upload placeholder')}>
               <i className="fas fa-cloud-upload-alt" />
