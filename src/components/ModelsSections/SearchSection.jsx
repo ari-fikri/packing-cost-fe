@@ -20,6 +20,7 @@ export default function SearchSection({
   setCountry,
   handleFilter,
   handleClearFilters,
+  onSearchCfc,
 }) {
   const handleDestinationCodeChange = (value) => {
     setDestinationCode(value);
@@ -39,13 +40,20 @@ export default function SearchSection({
         {/* Row 1 */}
         <div className="form-group col-md-6">
           <label className="small mb-1">CFC</label>
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            value={filterCfc}
-            onChange={e => setFilterCfc(e.target.value)}
-            placeholder="CFC"
-          />
+          <div className="input-group input-group-sm">
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={filterCfc}
+              onChange={e => setFilterCfc(e.target.value)}
+              placeholder="CFC"
+            />
+            <div className="input-group-append">
+              <button className="btn btn-outline-secondary" type="button" onClick={onSearchCfc}>
+                <i className="fas fa-search" />
+              </button>
+            </div>
+          </div>
         </div>
         <div className="form-group col-md-6">
           <label className="small mb-1">Model Name</label>

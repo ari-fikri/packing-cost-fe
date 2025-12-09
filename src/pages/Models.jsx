@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import NewModelModal from '../components/NewModelModal'
 import SearchSection from '../components/ModelsSections/SearchSection'
 import ResultSection from '../components/ModelsSections/ResultSection'
+import ModelPickerModal from '../components/ModelPickerModal'
 
 export default function Models() {
   // filters
@@ -18,6 +19,7 @@ export default function Models() {
 
   // modal & data
   const [showNewModal, setShowNewModal] = useState(false)
+  const [showModelPicker, setShowModelPicker] = useState(false)
   const [editingIndex, setEditingIndex] = useState(null)
   const [editingModel, setEditingModel] = useState(null)
   const [models, setModels] = useState([])
@@ -95,6 +97,14 @@ export default function Models() {
     setEditingIndex(null)
     setEditingModel(null)
   }
+
+  const handleAddModel = (selectedModel) => {
+    if (selectedModel) {
+      setFilterCfc(selectedModel.model_cfc);
+      setFilterName(selectedModel.model_name);
+    }
+    setShowModelPicker(false);
+  };
 
   // called by NewModelModal when user saves a model (payload includes parts if any)
   function handleSaveNewModel(payload) {
@@ -219,6 +229,7 @@ export default function Models() {
           handleFilter={handleFilter}
           handleClearFilters={handleClearFilters}
           handleOpenNew={handleOpenNew}
+          onSearchCfc={() => setShowModelPicker(true)}
         />
 
         <ResultSection
@@ -237,6 +248,14 @@ export default function Models() {
         onClose={handleCloseNew}
         onSave={handleSaveNewModel}
         initialData={editingModel}
+      />
+
+      {/* MODEL PICKER MODAL */}
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={() => setShowModelPicker(false)}
+        onAdd={handleAddModel}
+        selectionMode="single"
       />
     </div>
   )
