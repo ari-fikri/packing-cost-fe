@@ -1,6 +1,7 @@
 // src/components/NewProjectModal.jsx
 import React, { useState, useEffect } from 'react';
 import ModelPickerModal from './ModelPickerModal';
+import { handleInputChange } from '../utils/globalFunctions';
 
 export default function NewProjectModal({ visible, onClose, onSave, initialData }) {
   // basic form fields
@@ -74,11 +75,11 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="small">Project Code <span style={{color: 'red'}}>*</span></label>
-                  <input className="form-control form-control-sm mb-2" value={code} onChange={e => setCode(e.target.value)} placeholder="Project Code" />
+                  <input className="form-control form-control-sm mb-2" value={code} onChange={handleInputChange(setCode)} placeholder="Project Code" />
                 </div>
                 <div className="form-group">
                   <label className="small">Project Name</label>
-                  <input className="form-control form-control-sm mb-2" value={name} onChange={e => setName(e.target.value)} placeholder="Project Name" />
+                  <input className="form-control form-control-sm mb-2" value={name} onChange={handleInputChange(setName)} placeholder="Project Name" />
                 </div>
                 <div className="form-group">
                   <label className="small">Status <span style={{color: 'red'}}>*</span></label>
@@ -94,7 +95,7 @@ export default function NewProjectModal({ visible, onClose, onSave, initialData 
                 <div className="form-group">
                   <label className="small">Project Manager</label>
                   <div className="input-group input-group-sm mb-2">
-                    <input className="form-control form-control-sm" value={manager} onChange={e => setManager(e.target.value)} placeholder="Project Manager" />
+                    <input className="form-control form-control-sm" value={manager} onChange={handleInputChange(setManager)} placeholder="Project Manager" />
                     <div className="input-group-append">
                       <span className="input-group-text"><i className="fas fa-user" /></span>
                     </div>
