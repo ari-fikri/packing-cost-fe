@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react';
+import ProjectModal from '../ProjectModal';
 
 export default function SearchSection({
   code, setCode,
@@ -10,12 +11,14 @@ export default function SearchSection({
   clearFilters,
   handleOpenNew
 }) {
+  const [showProjectModal, setShowProjectModal] = useState(false);
+
   function toggleStatus(key) {
     if (key === 'all') {
-      const newVal = !statuses.all
-      setStatuses({ all: newVal, draft: false, active: false, onhold: false, completed: false })
+      const newVal = !statuses.all;
+      setStatuses({ all: newVal, draft: false, active: false, onhold: false, completed: false });
     } else {
-      setStatuses(prev => ({ ...prev, [key]: !prev[key], all: false }))
+      setStatuses(prev => ({ ...prev, [key]: !prev[key], all: false }));
     }
   }
 
@@ -30,7 +33,7 @@ export default function SearchSection({
             <div className="input-group input-group-sm">
               <input value={code} onChange={e => setCode(e.target.value)} className="form-control form-control-sm" placeholder="Code" />
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code"><i className="fas fa-search"></i></button>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code" onClick={() => setShowProjectModal(true)}><i className="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -42,7 +45,7 @@ export default function SearchSection({
             <div className="input-group input-group-sm">
               <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search name"><i className="fas fa-search"></i></button>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search name" onClick={() => setShowProjectModal(true)}><i className="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -73,7 +76,7 @@ export default function SearchSection({
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
       {/* Third Row: Status Filter Checkboxes */}
       <div className="row">
@@ -84,13 +87,13 @@ export default function SearchSection({
           <div className="form-inline flex-wrap">
             {/* Dynamic Status Checkboxes */}
             {['all', 'draft', 'active', 'onhold', 'completed'].map(key => {
-              const id = `status-${key}`
+              const id = `status-${key}`;
               return (
                 <div className="form-check mr-3" key={key}>
                   <input id={id} type="checkbox" className="form-check-input" checked={statuses[key]} onChange={() => toggleStatus(key)} />
                   <label className="form-check-label small ml-1" htmlFor={id}>{key === 'onhold' ? 'On Hold' : key.charAt(0).toUpperCase() + key.slice(1)}</label>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
@@ -105,6 +108,7 @@ export default function SearchSection({
           <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-times mr-1"></i> Clear</button>
         </div>
       </div>
+      <ProjectModal show={showProjectModal} onHide={() => setShowProjectModal(false)} />
     </div>
-  )
+  );
 }
