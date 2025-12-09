@@ -108,6 +108,25 @@ const Cps = () => {
     setShowNewCps(true);
   };
 
+  const handleClone = (cpsToClone) => {
+    const newId = cpsData.length > 0 ? Math.max(...cpsData.map(c => c.id)) + 1 : 1;
+    const clonedCps = {
+      ...cpsToClone,
+      id: newId,
+      refCpsNo: cpsToClone.cpsNo, // Set Ref CPS No from original CPS No
+      cpsNo: '',                   // Clear CPS No
+    };
+
+    const index = filteredCps.findIndex(item => item.id === cpsToClone.id);
+
+    const updatedCpsData = [...cpsData, clonedCps];
+    const updatedFilteredCps = [...filteredCps];
+    updatedFilteredCps.splice(index + 1, 0, clonedCps);
+
+    setCpsData(updatedCpsData);
+    setFilteredCps(updatedFilteredCps);
+  };
+
   const handleCloseModal = () => {
     setShowNewCps(false);
     setEditingCps(null);
@@ -172,6 +191,7 @@ const Cps = () => {
             setPage={(page) => setPagination(p => ({...p, currentPage: page}))}
             setPerPage={(perPage) => setPagination(p => ({...p, perPage: perPage}))}
             onEdit={handleEdit}
+            onClone={handleClone}
           />
         </div>
       </div>
