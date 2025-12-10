@@ -8,6 +8,7 @@ import { cpsData as initialCpsData } from '../../data/cps.js';
 import HeaderActions from './cps/HeaderActions';
 import { cpsPageConfig, ROLES } from '../../config/cpsPageConfig.js';
 import { useAuth } from '../../auth.jsx';
+import DestinationPickerModal from '../../components/DestinationPickerModal.jsx';
 
 const Cps = () => {
   const { user } = useAuth();
@@ -30,6 +31,7 @@ const Cps = () => {
   const [editingCps, setEditingCps] = useState(null);
   const [showPersonPicker, setShowPersonPicker] = useState(false);
   const [personPickerTarget, setPersonPickerTarget] = useState(null);
+  const [showDestinationPicker, setShowDestinationPicker] = useState(false);
 
   // Filter states
   const [cpsNo, setCpsNo] = useState('');
@@ -158,6 +160,12 @@ const Cps = () => {
     setShowPersonPicker(true);
   };
 
+  const handleDestinationPicked = (destination) => {
+    setDestCode(destination.destCode);
+    setDestCountry(destination.country);
+    setShowDestinationPicker(false);
+  };
+
   const filters = {
     cpsNo, refCpsNo, model, partNo, partName, cfcPjt, fromUser, toUser,
     status, destCode, destCountry, cpsPsiEci, supplierCode, supplierName
@@ -187,6 +195,7 @@ const Cps = () => {
             onSearch={() => handleSearch()}
             onClear={handleClear}
             onPersonPicker={handlePersonPicker}
+            onDestinationPicker={() => setShowDestinationPicker(true)}
             destinations={DESTINATIONS}
           />
           <hr />
@@ -222,6 +231,12 @@ const Cps = () => {
           }}
         />
       )}
+      <DestinationPickerModal
+        show={showDestinationPicker}
+        onClose={() => setShowDestinationPicker(false)}
+        onAdd={handleDestinationPicked}
+        selectionMode="single"
+      />
     </div>
   );
 }

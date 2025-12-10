@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PartPickerModal from '../../../components/PartPickerModal';
 
-const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, destinations }) => {
+const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, onDestinationPicker, destinations }) => {
   const [showPartPicker, setShowPartPicker] = useState(false);
 
   const handleDestCodeChange = (e) => {
@@ -55,23 +55,25 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
           <div className="form-group">
             <label className="small mb-1">Dest Code</label>
             <div className="input-group input-group-sm">
-                <select
-                    className="form-control form-control-sm mr-2"
-                    value={filters.destCode}
-                    onChange={handleDestCodeChange}
-                >
-                    <option value="">Select Dest Code</option>
-                    {uniqueDestCodes.map(code => (
-                        <option key={code} value={code}>{code}</option>
-                    ))}
-                </select>
-                <input
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={filters.destCountry}
-                    readOnly
-                    placeholder="Country Code - Country"
-                />
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                value={filters.destCode}
+                onChange={(e) => setters.setDestCode(e.target.value)}
+                placeholder="Dest Code"
+              />
+              <div className="input-group-append">
+                <button className="btn btn-outline-secondary" type="button" onClick={onDestinationPicker}>
+                  <i className="fas fa-search" />
+                </button>
+              </div>
+              <input
+                type="text"
+                className="form-control form-control-sm ml-2"
+                value={filters.destCountry}
+                readOnly
+                placeholder="Country Code - Country"
+              />
             </div>
           </div>
           {/* Row 4 */}
