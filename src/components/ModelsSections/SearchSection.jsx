@@ -1,5 +1,6 @@
 import React from 'react';
 import DESTINATIONS from '../../data/destinations';
+import { handleInputChange } from '../../utils/globalFunctions';
 
 export default function SearchSection({
   filterName,
@@ -34,7 +35,7 @@ export default function SearchSection({
               type="text"
               className="form-control form-control-sm"
               value={filterCfc}
-              onChange={e => setFilterCfc(e.target.value)}
+              onChange={handleInputChange(setFilterCfc)}
               placeholder="CFC"
             />
             <div className="input-group-append">
@@ -50,7 +51,7 @@ export default function SearchSection({
             type="text"
             className="form-control form-control-sm"
             value={filterName}
-            onChange={e => setFilterName(e.target.value)}
+            onChange={handleInputChange(setFilterName)}
             placeholder="Name"
           />
         </div>
@@ -62,7 +63,7 @@ export default function SearchSection({
             type="text"
             className="form-control form-control-sm"
             value={implementationPeriod}
-            onChange={e => setImplementationPeriod(e.target.value)}
+            onChange={handleInputChange(setImplementationPeriod)}
             placeholder="Implementation Period"
           />
         </div>
@@ -90,7 +91,7 @@ export default function SearchSection({
                   type="text"
                   className="form-control form-control-sm"
                   value={destinationCode}
-                  onChange={e => setDestinationCode(e.target.value)}
+                  onChange={handleInputChange(setDestinationCode)}
                   placeholder="Destination Code"
                 />
                 <div className="input-group-append">
