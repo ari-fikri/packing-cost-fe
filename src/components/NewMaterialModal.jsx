@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { handleInputChange } from '../utils/globalFunctions'
 
 export default function NewMaterialModal({ show, onClose, onSave, initialData = null, mode = 'new' }) {
   const [materialNo, setMaterialNo] = useState('')
@@ -147,7 +148,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                     type="text"
                     className="form-control"
                     value={materialNo}
-                    onChange={e => setMaterialNo(e.target.value)}
+                    onChange={handleInputChange(setMaterialNo)}
                     placeholder="Enter Item No"
                     autoFocus
                   />
@@ -174,7 +175,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   type="text"
                   className="form-control"
                   value={materialName}
-                  onChange={e => setMaterialName(e.target.value)}
+                  onChange={handleInputChange(setMaterialName)}
                   placeholder="Enter Material Name"
                 />
               </div>
@@ -244,7 +245,7 @@ export default function NewMaterialModal({ show, onClose, onSave, initialData = 
                   type="text"
                   className="form-control"
                   value={supplierCode}
-                  onChange={e => setSupplierCode(e.target.value)}
+                  onChange={handleInputChange(setSupplierCode)}
                   placeholder="Enter Supplier Code"
                 />
               </div>

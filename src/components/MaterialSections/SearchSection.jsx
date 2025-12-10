@@ -1,4 +1,5 @@
 import React from 'react'
+import { handleInputChange } from '../../utils/globalFunctions'
 
 export default function SearchSection({
   // Search filter states
@@ -30,7 +31,7 @@ export default function SearchSection({
               type="text" 
               className="form-control form-control-sm" 
               value={materialNo} 
-              onChange={e => setMaterialNo(e.target.value)} 
+              onChange={handleInputChange(setMaterialNo)} 
               placeholder="Material No" 
             />
           </div>
@@ -40,7 +41,7 @@ export default function SearchSection({
               type="text" 
               className="form-control form-control-sm" 
               value={materialName} 
-              onChange={e => setMaterialName(e.target.value)} 
+              onChange={handleInputChange(setMaterialName)} 
               placeholder="Material Name" 
             />
           </div>
@@ -50,7 +51,7 @@ export default function SearchSection({
               type="text" 
               className="form-control form-control-sm" 
               value={parentMaterial} 
-              onChange={e => setParentMaterial(e.target.value)} 
+              onChange={handleInputChange(setParentMaterial)} 
               placeholder="Parent Material" 
             />
           </div>
@@ -64,7 +65,7 @@ export default function SearchSection({
               type="text" 
               className="form-control form-control-sm" 
               value={itemNo} 
-              onChange={e => setItemNo(e.target.value)} 
+              onChange={handleInputChange(setItemNo)} 
               placeholder="Item No" 
             />
           </div>
