@@ -1,6 +1,7 @@
 // src/components/PartPickerModal.jsx
 import React, { useState, useEffect } from 'react'
 import PARTS from '../data/parts'
+import { handleInputChange } from '../utils/globalFunctions'
 
 // PartPickerModal
 // Props: show (bool), onClose(), onSelect(selectedParts:Array), mode ('single'|'multi')
@@ -34,14 +35,18 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
     }
   })
 
-  const [filters, setFilters] = useState({ partNo: '', partName: '', supplierName: '' })
+  const [filterPartNo, setFilterPartNo] = useState('')
+  const [filterPartName, setFilterPartName] = useState('')
+  const [filterSupplierName, setFilterSupplierName] = useState('')
   const [selected, setSelected] = useState(mode === 'multi' ? {} : null)
   const [page, setPage] = useState(1)
   const [perPage, setPerPage] = useState(10)
 
   useEffect(() => {
     if (show) {
-      setFilters({ partNo: '', partName: '', supplierName: '' })
+      setFilterPartNo('')
+      setFilterPartName('')
+      setFilterSupplierName('')
       setSelected(mode === 'multi' ? {} : null)
       setPage(1)
       document.body.classList.add('modal-open')
@@ -53,16 +58,10 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
 
   if (!show) return null
 
-  function handleFilterChange(e) {
-    const { name, value } = e.target
-    setFilters(f => ({ ...f, [name]: value }))
-    setPage(1)
-  }
-
   function filteredParts() {
-    const qPart = filters.partNo.trim().toLowerCase()
-    const qName = filters.partName.trim().toLowerCase()
-    const qSup = filters.supplierName.trim().toLowerCase()
+    const qPart = filterPartNo.trim().toLowerCase()
+    const qName = filterPartName.trim().toLowerCase()
+    const qSup = filterSupplierName.trim().toLowerCase()
     return enriched.filter((p) => {
       if (qPart && !p.partNo.toLowerCase().includes(qPart)) return false
       if (qName && !p.partName.toLowerCase().includes(qName)) return false
@@ -178,15 +177,15 @@ export default function PartPickerModal({ show = false, onClose, onSelect, zInde
             <div className="form-row">
               <div className="form-group col-12 col-md-4">
                 <label className="small mb-1">Part No</label>
-                <input name="partNo" value={filters.partNo} onChange={handleFilterChange} className="form-control form-control-sm" />
+                <input value={filterPartNo} onChange={handleInputChange(setFilterPartNo)} className="form-control form-control-sm" />
               </div>
               <div className="form-group col-12 col-md-4">
                 <label className="small mb-1">Part Name</label>
-                <input name="partName" value={filters.partName} onChange={handleFilterChange} className="form-control form-control-sm" />
+                <input value={filterPartName} onChange={handleInputChange(setFilterPartName)} className="form-control form-control-sm" />
               </div>
               <div className="form-group col-12 col-md-4">
                 <label className="small mb-1">Supplier Name</label>
-                <input name="supplierName" value={filters.supplierName} onChange={handleFilterChange} className="form-control form-control-sm" />
+                <input value={filterSupplierName} onChange={handleInputChange(setFilterSupplierName)} className="form-control form-control-sm" />
               </div>
             </div>
           </div>

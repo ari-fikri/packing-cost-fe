@@ -4,6 +4,7 @@ import NewPartModal from '../components/NewPartModal' // make sure this file exi
 import PartPickerModal from '../components/PartPickerModal' // wired picker
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import partsData from '../data/parts'
+import { handleInputChange } from '../utils/globalFunctions';
 
 // Transform the raw parts data into a more usable format
 const transformedParts = partsData.map((part, index) => ({
@@ -228,7 +229,7 @@ export default function Parts() {
                   <input
                     className="form-control form-control-sm"
                     value={partNo}
-                    onChange={e => setPartNo(e.target.value)}
+                    onChange={handleInputChange(setPartNo)}
                     placeholder="Part No"
                   />
                   <div className="input-group-append">
@@ -252,7 +253,7 @@ export default function Parts() {
                 <input
                   className="form-control form-control-sm"
                   value={uniqueNo}
-                  onChange={e => setUniqueNo(e.target.value)}
+                  onChange={handleInputChange(setUniqueNo)}
                   placeholder="Unique No"
                 />
               </div>
@@ -268,7 +269,7 @@ export default function Parts() {
                   <input
                     className="form-control form-control-sm"
                     value={supplierId}
-                    onChange={e => setSupplierId(e.target.value)}
+                    onChange={handleInputChange(setSupplierId)}
                     placeholder="Supplier ID"
                   />
                   <div className="input-group-append">
@@ -286,7 +287,7 @@ export default function Parts() {
                 <input
                   className="form-control form-control-sm"
                   value={supplierName}
-                  onChange={e => setSupplierName(e.target.value)}
+                  onChange={handleInputChange(setSupplierName)}
                   placeholder="Supplier Name"
                 />
               </div>
@@ -302,7 +303,7 @@ export default function Parts() {
                   <input
                     className="form-control form-control-sm"
                     value={parentPart}
-                    onChange={e => setParentPart(e.target.value)}
+                    onChange={handleInputChange(setParentPart)}
                     placeholder="Parent Part"
                   />
                   <div className="input-group-append">

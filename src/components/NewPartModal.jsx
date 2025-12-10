@@ -1,6 +1,7 @@
 // src/components/NewPartModal.jsx
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from './PartPickerModal' // adjust path if needed
+import { handleInputChange } from '../utils/globalFunctions'
 
 export default function NewPartModal({ show = false, onClose = () => {}, onSave = () => {}, initialData = null }) {
   // main fields
@@ -184,11 +185,11 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
             <div className="form-group col-md-6 d-flex">
               <div style={{ flex: 1 }}>
                 <label className="small mb-1">Part No</label>
-                <input className="form-control form-control-sm mb-1" value={partNo} onChange={e => setPartNo(e.target.value)} />
+                <input className="form-control form-control-sm mb-1" value={partNo} onChange={handleInputChange(setPartNo)} />
               </div>
               <div style={{ width: '30%', marginLeft: 8 }}>
                 <label className="small mb-1">Suffix Code</label>
-                <input className="form-control form-control-sm mb-1" value={suffixCode} onChange={e => setSuffixCode(e.target.value)} />
+                <input className="form-control form-control-sm mb-1" value={suffixCode} onChange={handleInputChange(setSuffixCode)} />
               </div>
             </div>
             <div className="form-group col-md-6">
@@ -197,7 +198,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 <input
                   className="form-control form-control-sm"
                   value={parentPartNo}
-                  onChange={e => setParentPartNo(e.target.value)}
+                  onChange={handleInputChange(setParentPartNo)}
                 />
                 <div className="input-group-append">
                   <button
@@ -220,7 +221,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 <input
                   className="form-control form-control-sm"
                   value={uniqueNo}
-                  onChange={e => setUniqueNo(e.target.value)}
+                  onChange={handleInputChange(setUniqueNo)}
                 />
                 <div className="input-group-append">
                   <button
@@ -245,7 +246,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 <input
                   className="form-control form-control-sm"
                   value={suppCode}
-                  onChange={e => setSuppCode(e.target.value)}
+                  onChange={handleInputChange(setSuppCode)}
                 />
                 <div className="input-group-append">
                   <button
