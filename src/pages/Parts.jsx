@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import NewPartModal from '../components/NewPartModal' // make sure this file exists
 import PartPickerModal from '../components/PartPickerModal' // wired picker
+import SupplierPickerModal from '../components/SupplierPickerModal'
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import partsData from '../data/parts'
 import { handleInputChange } from '../utils/globalFunctions';
@@ -46,8 +47,9 @@ export default function Parts() {
 
   // Part picker state
   const [showPartPicker, setShowPartPicker] = useState(false)
-  // which field opened the picker: \'partNo\' | \'parentPart\' — used in onSelect
+  // which field opened the picker: 'partNo' | 'parentPart' — used in onSelect
   const [pickerTarget, setPickerTarget] = useState(null)
+  const [showSupplierPicker, setShowSupplierPicker] = useState(false)
 
   // pagination placeholders
   const [perPage, setPerPage] = useState(10)
@@ -199,6 +201,14 @@ export default function Parts() {
     setPickerTarget(null)
   }
 
+  function handleSupplierPicked(supplier) {
+    if (supplier) {
+      setSupplierId(supplier.code)
+      setSupplierName(supplier.name)
+    }
+    setShowSupplierPicker(false)
+  }
+
   return (
     <div className="container-fluid">
       <div className="card card-outline card-primary">
@@ -264,7 +274,7 @@ export default function Parts() {
             {/* Row 2: Supplier ID + Supplier Name */}
             <div className="col-md-6">
               <div className="form-group">
-                <label className="small mb-1">Supplier ID</label>
+                <label className="small mb-1">Supplier Code</label>
                 <div className="input-group input-group-sm">
                   <input
                     className="form-control form-control-sm"
@@ -273,7 +283,7 @@ export default function Parts() {
                     placeholder="Supplier ID"
                   />
                   <div className="input-group-append">
-                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => alert('search supplier placeholder')}>
+                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => setShowSupplierPicker(true)}>
                       <i className="fas fa-search" />
                     </button>
                   </div>
@@ -462,6 +472,12 @@ export default function Parts() {
         show={showPartPicker}
         onClose={() => { setShowPartPicker(false); setPickerTarget(null); }}
         onSelect={handlePartPicked}
+      />
+
+      <SupplierPickerModal
+        show={showSupplierPicker}
+        onClose={() => setShowSupplierPicker(false)}
+        onSelect={handleSupplierPicked}
       />
     </div>
   )

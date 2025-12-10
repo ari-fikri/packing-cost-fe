@@ -1,6 +1,7 @@
 // src/components/NewPartModal.jsx
 import React, { useState, useEffect } from 'react'
 import PartPickerModal from './PartPickerModal' // adjust path if needed
+import SupplierPickerModal from './SupplierPickerModal'
 import { handleInputChange } from '../utils/globalFunctions'
 
 export default function NewPartModal({ show = false, onClose = () => {}, onSave = () => {}, initialData = null }) {
@@ -45,6 +46,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
   // new state for part picker modal
   const [showPartPicker, setShowPartPicker] = useState(false)
   const [partPickerMode, setPartPickerMode] = useState('parent') // 'parent' or 'child'
+  const [showSupplierPicker, setShowSupplierPicker] = useState(false)
 
   useEffect(() => {
     if (show) {
@@ -141,6 +143,15 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
       setParentPartNo(part.partNo)
     }
     setShowPartPicker(false)
+  }
+
+  function handlePickSupplier(supplier) {
+    if(supplier) {
+      setSuppCode(supplier.code)
+      setSupplierName(supplier.name)
+      setSupplierAddress(supplier.address)
+    }
+    setShowSupplierPicker(false)
   }
 
   // Handler for picking child parts
@@ -252,7 +263,7 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                   <button
                     className="btn btn-outline-secondary btn-sm"
                     type="button"
-                    onClick={() => alert('Search Supplier placeholder')}
+                    onClick={() => setShowSupplierPicker(true)}
                   >
                     <i className="fas fa-search" />
                   </button>
@@ -397,6 +408,16 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
             mode={partPickerMode === 'parent' ? 'single' : 'multi'}
             onClose={() => setShowPartPicker(false)}
             onSelect={partPickerMode === 'parent' ? handlePickParentPart : handlePickChildParts}
+          />
+        </div>
+      )}
+
+      {showSupplierPicker && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 3000 }}>
+          <SupplierPickerModal
+            show={showSupplierPicker}
+            onClose={() => setShowSupplierPicker(false)}
+            onSelect={handlePickSupplier}
           />
         </div>
       )}
