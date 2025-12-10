@@ -36,6 +36,7 @@ const Cps = () => {
   const [refCpsNo, setRefCpsNo] = useState('');
   const [model, setModel] = useState('');
   const [partNo, setPartNo] = useState('');
+  const [partName, setPartName] = useState('');
   const [cfcPjt, setCfcPjt] = useState('');
   const [fromUser, setFromUser] = useState('');
   const [toUser, setToUser] = useState('');
@@ -43,6 +44,8 @@ const Cps = () => {
   const [destCode, setDestCode] = useState('');
   const [destCountry, setDestCountry] = useState('');
   const [cpsPsiEci, setCpsPsiEci] = useState('');
+  const [supplierCode, setSupplierCode] = useState('');
+  const [supplierName, setSupplierName] = useState('');
 
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -54,6 +57,7 @@ const Cps = () => {
     setRefCpsNo('');
     setModel('');
     setPartNo('');
+    setPartName('');
     setCfcPjt('');
     setFromUser('');
     setToUser('');
@@ -61,6 +65,8 @@ const Cps = () => {
     setDestCode('');
     setDestCountry('');
     setCpsPsiEci('');
+    setSupplierCode('');
+    setSupplierName('');
     setFilteredCps([]);
   };
 
@@ -153,13 +159,13 @@ const Cps = () => {
   };
 
   const filters = {
-    cpsNo, refCpsNo, model, partNo, cfcPjt, fromUser, toUser,
-    status, destCode, destCountry, cpsPsiEci
+    cpsNo, refCpsNo, model, partNo, partName, cfcPjt, fromUser, toUser,
+    status, destCode, destCountry, cpsPsiEci, supplierCode, supplierName
   };
 
   const setters = {
-    setCpsNo, setRefCpsNo, setModel, setPartNo, setCfcPjt, setFromUser, setToUser,
-    setStatus, setDestCode, setDestCountry, setCpsPsiEci
+    setCpsNo, setRefCpsNo, setModel, setPartNo, setPartName, setCfcPjt, setFromUser, setToUser,
+    setStatus, setDestCode, setDestCountry, setCpsPsiEci, setSupplierCode, setSupplierName
   };
 
   return (

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PartPickerModal from '../../../components/PartPickerModal';
 
 const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, destinations }) => {
+  const [showPartPicker, setShowPartPicker] = useState(false);
+
   const handleDestCodeChange = (e) => {
     const code = e.target.value;
     setters.setDestCode(code);
@@ -10,6 +13,13 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
     } else {
       setters.setDestCountry('');
     }
+  };
+
+  const handlePartPicked = (part) => {
+    setters.setPartNo(part.partNo);
+    setters.setPartName(part.partName);
+    setters.setSupplierCode(part.supplierId);
+    setters.setSupplierName(part.supplierName);
   };
 
   const uniqueDestCodes = [...new Set(destinations.map(d => d.destCode))];
@@ -68,20 +78,25 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
           <div className="form-group">
             <label className="small mb-1">Part No - Part Name</label>
             <div className="input-group input-group-sm">
-                <input
-                    type="text"
-                    className="form-control form-control-sm mr-2"
-                    value={filters.partNo}
-                    onChange={(e) => setters.setPartNo(e.target.value)}
-                    placeholder="Part No"
-                />
-                <input
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={filters.partName}
-                    readOnly
-                    placeholder="Part Name"
-                />
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                value={filters.partNo}
+                onChange={(e) => setters.setPartNo(e.target.value)}
+                placeholder="Part No"
+              />
+              <div className="input-group-append">
+                <button className="btn btn-outline-secondary" type="button" onClick={() => setShowPartPicker(true)}>
+                  <i className="fas fa-search" />
+                </button>
+              </div>
+              <input
+                type="text"
+                className="form-control form-control-sm ml-2"
+                value={filters.partName}
+                readOnly
+                placeholder="Part Name"
+              />
             </div>
           </div>
           {/* Row 5 */}
@@ -178,6 +193,13 @@ const SearchSection = ({ filters, setters, onSearch, onClear, onPersonPicker, de
           </button>
         </div>
       </div>
+
+      <PartPickerModal
+        show={showPartPicker}
+        onClose={() => setShowPartPicker(false)}
+        onSelect={handlePartPicked}
+        mode="single"
+      />
     </div>
   );
 };
