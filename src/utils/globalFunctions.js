@@ -6,5 +6,6 @@ export const formatCurrency = (num) => {
 };
 
 export const handleInputChange = (setter) => (e) => {
-  setter(e.target.value.toUpperCase());
+  const value = (e && e.target && typeof e.target.value === 'string') ? e.target.value : e;
+  setter(String(value).toUpperCase());
 };

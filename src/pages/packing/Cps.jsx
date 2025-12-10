@@ -161,8 +161,8 @@ const Cps = () => {
   };
 
   const handleDestinationPicked = (destination) => {
-    setDestCode(destination.destCode);
-    setDestCountry(destination.country);
+    setDestCode(destination.destCode.toUpperCase());
+    setDestCountry(destination.country.toUpperCase());
     setShowDestinationPicker(false);
   };
 
@@ -172,8 +172,20 @@ const Cps = () => {
   };
 
   const setters = {
-    setCpsNo, setRefCpsNo, setModel, setPartNo, setPartName, setCfcPjt, setFromUser, setToUser,
-    setStatus, setDestCode, setDestCountry, setCpsPsiEci, setSupplierCode, setSupplierName
+    setCpsNo: (val) => setCpsNo(val.toUpperCase()),
+    setRefCpsNo: (val) => setRefCpsNo(val.toUpperCase()),
+    setModel: (val) => setModel(val.toUpperCase()),
+    setPartNo: (val) => setPartNo(val.toUpperCase()),
+    setPartName: (val) => setPartName(val.toUpperCase()),
+    setCfcPjt: (val) => setCfcPjt(val.toUpperCase()),
+    setFromUser: (val) => setFromUser(val.toUpperCase()),
+    setToUser: (val) => setToUser(val.toUpperCase()),
+    setStatus: (val) => setStatus(val.toUpperCase()),
+    setDestCode: (val) => setDestCode(val.toUpperCase()),
+    setDestCountry: (val) => setDestCountry(val.toUpperCase()),
+    setCpsPsiEci: (val) => setCpsPsiEci(val.toUpperCase()),
+    setSupplierCode: (val) => setSupplierCode(val.toUpperCase()),
+    setSupplierName: (val) => setSupplierName(val.toUpperCase()),
   };
 
   return (

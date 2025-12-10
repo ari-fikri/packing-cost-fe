@@ -5,7 +5,7 @@ import PartPickerModal from './PartPickerModal';
 import ModelPickerModal from './ModelPickerModal';
 import MaterialPickerModal from './MaterialPickerModal';
 import './modalOverrides.css'
-import { formatCurrency } from '../utils/globalFunctions';
+import { formatCurrency, handleInputChange } from '../utils/globalFunctions';
 import './NewCPSModalSections/NewCPSModalSections.css';
 
 
@@ -429,18 +429,18 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
                 <GeneralInfoSection
                   config={config.general}
                   cpsNo={cpsNo}
-                  setCpsNo={setCpsNo}
+                  setCpsNo={handleInputChange(setCpsNo)}
                   refCpsNo={refCpsNo}
-                  setRefCpsNo={setRefCpsNo}
+                  setRefCpsNo={handleInputChange(setRefCpsNo)}
                   cfcPjtCode={cfcPjtCode}
-                  setCfcPjtCode={setCfcPjtCode}
+                  setCfcPjtCode={handleInputChange(setCfcPjtCode)}
                   model={model}
-                  setModel={setModel}
-                  partNo={partNo} setPartNo={setPartNo}
-                  partName={partName} setPartName={setPartName}
-                  supplier={supplier} setSupplier={setSupplier}
-                  plantCode={plantCode} setPlantCode={setPlantCode}
-                  dockCode={dockCode} setDockCode={setDockCode}
+                  setModel={handleInputChange(setModel)}
+                  partNo={partNo} setPartNo={handleInputChange(setPartNo)}
+                  partName={partName} setPartName={handleInputChange(setPartName)}
+                  supplier={supplier} setSupplier={handleInputChange(setSupplier)}
+                  plantCode={plantCode} setPlantCode={handleInputChange(setPlantCode)}
+                  dockCode={dockCode} setDockCode={handleInputChange(setDockCode)}
                   openPartPicker={() => setPartPickerOpen(true)}
                   openModelPicker={openModelPicker}
                   setComparisonOpen={setComparisonOpen}
@@ -455,21 +455,21 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
                 <PseInfoSection
                   config={config.pse}
                   pseOpen={pseOpen} setPseOpen={setPseOpen}
-                  packingPlantCurr={packingPlantCurr} setPackingPlantCurr={setPackingPlantCurr}
-                  packingPlantNext={packingPlantNext} setPackingPlantNext={setPackingPlantNext}
-                  vanningPlantCurr={vanningPlantCurr} setVanningPlantCurr={setVanningPlantCurr}
-                  vanningPlantNext={vanningPlantNext} setVanningPlantNext={setVanningPlantNext}
-                  orderPatternCurr={orderPatternCurr} setOrderPatternCurr={setOrderPatternCurr}
-                  orderPatternNext={orderPatternNext} setOrderPatternNext={setOrderPatternNext}
-                  category={category} setCategory={setCategory}
+                  packingPlantCurr={packingPlantCurr} setPackingPlantCurr={handleInputChange(setPackingPlantCurr)}
+                  packingPlantNext={packingPlantNext} setPackingPlantNext={handleInputChange(setPackingPlantNext)}
+                  vanningPlantCurr={vanningPlantCurr} setVanningPlantCurr={handleInputChange(setVanningPlantCurr)}
+                  vanningPlantNext={vanningPlantNext} setVanningPlantNext={handleInputChange(setVanningPlantNext)}
+                  orderPatternCurr={orderPatternCurr} setOrderPatternCurr={handleInputChange(setOrderPatternCurr)}
+                  orderPatternNext={orderPatternNext} setOrderPatternNext={handleInputChange(setOrderPatternNext)}
+                  category={category} setCategory={handleInputChange(setCategory)}
                   katashiki={katashiki} setKatashiki={setKatashiki}
-                  importerLineProcess={importerLineProcess} setImporterLineProcess={setImporterLineProcess}
-                  caseCode={caseCode} setCaseCode={setCaseCode}
-                  boxNumber={boxNumber} setBoxNumber={setBoxNumber}
-                  renban={renban} setRenban={setRenban}
-                  renbanEff={renbanEff} setRenbanEff={setRenbanEff}
-                  packingProcessBoxing={packingProcessBoxing} setPackingProcessBoxing={setPackingProcessBoxing}
-                  packingProcessStacking={packingProcessStacking} setPackingProcessStacking={setPackingProcessStacking}
+                  importerLineProcess={importerLineProcess} setImporterLineProcess={handleInputChange(setImporterLineProcess)}
+                  caseCode={caseCode} setCaseCode={handleInputChange(setCaseCode)}
+                  boxNumber={boxNumber} setBoxNumber={handleInputChange(setBoxNumber)}
+                  renban={renban} setRenban={handleInputChange(setRenban)}
+                  renbanEff={renbanEff} setRenbanEff={handleInputChange(setRenbanEff)}
+                  packingProcessBoxing={packingProcessBoxing} setPackingProcessBoxing={handleInputChange(setPackingProcessBoxing)}
+                  packingProcessStacking={packingProcessStacking} setPackingProcessStacking={handleInputChange(setPackingProcessStacking)}
                   pseOuterRows={pseOuterRows}
                   setPseOuterRows={setPseOuterRows}
                   newPseOuter={newPseOuter}
@@ -533,7 +533,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
             {/* Notes */}
             <div className="form-group">
               <label className="small mb-1">Note</label>
-              <textarea className="form-control form-control-sm" rows="3" value={notes} onChange={e => setNotes(e.target.value)} />
+              <textarea className="form-control form-control-sm" rows="3" value={notes} onChange={handleInputChange(setNotes)} />
             </div>
           </div>
 
