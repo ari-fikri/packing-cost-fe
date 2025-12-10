@@ -3,6 +3,7 @@ import { suppliers as suppliersData } from '../data/suppliers';
 import NewSupplierModal from '../components/NewSupplierModal';
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import Pagination from '../components/Pagination';
+import { handleInputChange } from '../utils/globalFunctions';
 
 export default function Suppliers() {
   const [suppliers, setSuppliers] = useState([]);
@@ -123,7 +124,7 @@ export default function Suppliers() {
                   type="text"
                   className="form-control form-control-sm"
                   value={filterCode}
-                  onChange={e => setFilterCode(e.target.value)}
+                  onChange={handleInputChange(setFilterCode)}
                   placeholder="Supplier Code"
                 />
               </div>
@@ -135,7 +136,7 @@ export default function Suppliers() {
                   type="text"
                   className="form-control form-control-sm"
                   value={filterName}
-                  onChange={e => setFilterName(e.target.value)}
+                  onChange={handleInputChange(setFilterName)}
                   placeholder="Supplier Name"
                 />
               </div>
