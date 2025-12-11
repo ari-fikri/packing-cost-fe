@@ -11,10 +11,12 @@ export default function SearchSection(props) {
     onSearch,
     onClear,
     onPartSearch,
+    onModelSearch,
+    onDpiSearch,
   } = props;
 
   const {
-    modelCode,
+    modelCfc,
     destCode,
     partNo,
     supplierCode,
@@ -23,7 +25,7 @@ export default function SearchSection(props) {
   } = filters || {}; // Added fallback for safety
 
   const {
-    setModelCode,
+    setModelCfc,
     setDestCode,
     setPartNo,
     setSupplierCode,
@@ -64,11 +66,11 @@ export default function SearchSection(props) {
         <div className="col-12 col-md-6">
           <div className="form-row">
             <div className="form-group col-12">
-              <label className="small mb-1">Model Code</label>
+              <label className="small mb-1">Model CFC</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={modelCode || ''} onChange={setModelCode ? handleInputChange(setModelCode) : undefined} placeholder="Model Code" />
+                <input className="form-control form-control-sm" value={modelCfc || ''} onChange={handleInputChange(setModelCfc)} placeholder="Model CFC" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model Code" onClick={() => alert('Search Model Code placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Model CFC" onClick={onModelSearch}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
@@ -78,7 +80,7 @@ export default function SearchSection(props) {
             <div className="form-group col-12">
               <label className="small mb-1">Implementation Period</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={implementationPeriod || ''} onChange={setImplementationPeriod ? handleInputChange(setImplementationPeriod) : undefined} placeholder="Implementation Period" />
+                <input className="form-control form-control-sm" value={implementationPeriod || ''} onChange={handleInputChange(setImplementationPeriod)} placeholder="Implementation Period" />
               </div>
             </div>
 
@@ -86,7 +88,7 @@ export default function SearchSection(props) {
               <label className="small mb-1">Part No</label>
               <div className="input-group input-group-sm">
                 <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                  {partNo.map(part => (
+                  {partNo && partNo.map(part => (
                     <span key={part} className="badge badge-primary" style={{ display: 'flex', alignItems: 'center', padding: '4px 8px' }}>
                       {part}
                       <button
@@ -125,7 +127,7 @@ export default function SearchSection(props) {
             <div className="form-group col-12">
               <label className="small mb-1">Dest Code</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={destCode || ''} onChange={setDestCode ? handleInputChange(setDestCode) : undefined} placeholder="Dest Code" />
+                <input className="form-control form-control-sm" value={destCode || ''} onChange={handleInputChange(setDestCode)} placeholder="Dest Code" />
                 <div className="input-group-append">
                   <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Dest Code" onClick={() => alert('Search Dest Code placeholder')}>
                     <i className="fas fa-search" />
@@ -137,9 +139,9 @@ export default function SearchSection(props) {
             <div className="form-group col-12">
               <label className="small mb-1">CPS No</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={cpsNo || ''} onChange={setCpsNo ? handleInputChange(setCpsNo) : undefined} placeholder="CPS No" />
+                <input className="form-control form-control-sm" value={cpsNo || ''} onChange={handleInputChange(setCpsNo)} placeholder="CPS No" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search CPS No" onClick={() => alert('Search CPS No placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search CPS No" onClick={onDpiSearch}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
@@ -149,7 +151,7 @@ export default function SearchSection(props) {
             <div className="form-group col-12">
               <label className="small mb-1">Supplier Code</label>
               <div className="input-group input-group-sm">
-                <input className="form-control form-control-sm" value={supplierCode || ''} onChange={setSupplierCode ? handleInputChange(setSupplierCode) : undefined} placeholder="Supplier Code" />
+                <input className="form-control form-control-sm" value={supplierCode || ''} onChange={handleInputChange(setSupplierCode)} placeholder="Supplier Code" />
                 <div className="input-group-append">
                   <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => alert('Search Supplier placeholder')}>
                     <i className="fas fa-search" />
