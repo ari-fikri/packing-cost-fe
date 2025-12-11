@@ -1,0 +1,164 @@
+[
+  {
+    "destCode": "301B",
+    "code": "TAR",
+    "country": "ARGENTINA",
+    "companyName": "Toyota Argentina"
+  },
+  {
+    "destCode": "537B",
+    "code": "TSM",
+    "country": "AFRIKA",
+    "companyName": "Toyota South Africa Motors"
+  },
+  {
+    "destCode": "709B",
+    "code": "TKM",
+    "country": "INDIA",
+    "companyName": "Toyota Kirloskar Motor"
+  },
+  {
+    "destCode": "715B",
+    "code": "TMV",
+    "country": "VIETNAM",
+    "companyName": "Toyota Motor Vietnam"
+  },
+  {
+    "destCode": "717C",
+    "code": "IMC",
+    "country": "PAKISTAN",
+    "companyName": "Indus Motor Company"
+  },
+  {
+    "destCode": "721B",
+    "code": "KUO",
+    "country": "KUOZUI",
+    "companyName": "Kuozui Motors"
+  },
+  {
+    "destCode": "721C",
+    "code": "KUO",
+    "country": "KUOZUI",
+    "companyName": "Kuozui Motors"
+  },
+  {
+    "destCode": "722C",
+    "code": "TMT",
+    "country": "THAILAND",
+    "companyName": "Toyota Motor Thailand"
+  },
+  {
+    "destCode": "722F",
+    "code": "TMT",
+    "country": "THAILAND",
+    "companyName": "Toyota Motor Thailand"
+  },
+  {
+    "destCode": "722B",
+    "code": "TMT",
+    "country": "THAILAND",
+    "companyName": "Toyota Motor Thailand"
+  },
+  {
+    "destCode": "811C",
+    "code": "TMP",
+    "country": "PHILIPINE",
+    "companyName": "Toyota Motor Philippines"
+  },
+  {
+    "destCode": "812B",
+    "code": "UMW",
+    "country": "MALAYSIA",
+    "companyName": "UMW Toyota Motor"
+  },
+  {
+    "destCode": "812K",
+    "code": "UMW",
+    "country": "MALAYSIA",
+    "companyName": "UMW Toyota Motor"
+  },
+  {
+    "destCode": "547A",
+    "code": "TEE",
+    "country": "MESIR",
+    "companyName": "Toyota Egypt Enterprise"
+  },
+  {
+    "destCode": "303B",
+    "code": "TDB",
+    "country": "BRAZIL",
+    "companyName": "Toyota do Brasil"
+  },
+  {
+    "destCode": "303E",
+    "code": "TDB",
+    "country": "BRAZIL",
+    "companyName": "Toyota do Brasil"
+  },
+  {
+    "destCode": "303D",
+    "code": "TDB",
+    "country": "BRAZIL",
+    "companyName": "Toyota do Brasil"
+  },
+  {
+    "destCode": "D55E",
+    "code": "TDB",
+    "country": "BRAZIL",
+    "companyName": "Toyota do Brasil"
+  },
+  {
+    "destCode": "704B",
+    "code": "TMY",
+    "country": "MYANMAR",
+    "companyName": "Toyota Motor Myanmar"
+  },
+  {
+    "destCode": "705A",
+    "code": "CAM",
+    "country": "CAMBOJA",
+    "companyName": "Cambodia Toyota Motor"
+  },
+  {
+    "destCode": "709C",
+    "code": "TKAP",
+    "country": "INDIA 2",
+    "companyName": "Toyota Kirloskar Auto Parts"
+  },
+  {
+    "destCode": "709D",
+    "code": "TIEI",
+    "country": "INDIA 3",
+    "companyName": "Toyota Industries Engine India"
+  },
+  {
+    "destCode": "722S",
+    "code": "STM",
+    "country": "SIAM THAILAND",
+    "companyName": "Siam Toyota Motor"
+  },
+  {
+    "destCode": "811W",
+    "code": "TAP",
+    "country": "PHILIPINE 2",
+    "companyName": "Toyota Auto Parts Philippines"
+  },
+  {
+    "destCode": "807B",
+    "code": "TMMIN",
+    "country": "INDONESIA",
+    "companyName": "Toyota Motor Manufacturing Indonesia"
+  },
+  {
+    "destCode": "807D",
+    "code": "TMMIN",
+    "country": "INDONESIA",
+    "companyName": "Toyota Motor Manufacturing Indonesia"
+  },
+  {
+    "destCode": "807J",
+    "code": "TMMIN",
+    "country": "INDONESIA",
+    "companyName": "Toyota Motor Manufacturing Indonesia"
+  }
+]
