@@ -6,6 +6,7 @@ import ActionHeaderButtons from './dpi/ActionHeaderButtons';
 import ModelPickerModal from '../../components/ModelPickerModal';
 import ColumnSelectionModal from '../../components/ColumnSelectionModal';
 import PartPickerModal from '../../components/PartPickerModal';
+import DestinationPickerModal from '../../components/DestinationPickerModal';
 
 export default function DPI() {
   // filter fields
@@ -22,6 +23,8 @@ export default function DPI() {
   const [showModelPicker, setShowModelPicker] = useState(false);
   const [showDpiPicker, setShowDpiPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
+  const [showDestinationPicker, setShowDestinationPicker] = useState(false);
+
   const [checked, setChecked] = useState([
     'main_info', 'destination', 'model', 'impl_period', 'cps_no',
     'part_info', 'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
@@ -38,6 +41,7 @@ export default function DPI() {
   // table data
   const [rows, setRows] = useState([]);
   const [dpiData, setDpiData] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   // paging
   const [perPage, setPerPage] = useState(10);
@@ -62,6 +66,7 @@ export default function DPI() {
         );
         setDpiData(sortedData);
         setRows([]); // Set rows to empty to prevent initial load
+        setHasSearched(false);
       })
       .catch(error => {
         console.error('Error fetching DPI data:', error);
@@ -69,6 +74,7 @@ export default function DPI() {
   }, []);
 
   function handleSearch() {
+    setHasSearched(true);
     const noFilters = !modelCfc && (!partNo || partNo.length === 0) && !destCode && !supplierCode && !cpsNo && !implementationPeriod;
 
     if (noFilters) {
@@ -121,6 +127,7 @@ export default function DPI() {
 
     setRows(sortedData);
     setPage(1);
+    setHasSearched(false);
   }
 
   function handleModelPicked(model) {
@@ -128,6 +135,13 @@ export default function DPI() {
       setModelCfc(model.model_cfc);
     }
     setShowModelPicker(false);
+  }
+
+  function handleDestinationPicked(destination) {
+    if (destination) {
+      setDestCode(destination.destCode);
+    }
+    setShowDestinationPicker(false);
   }
 
   function handleDpiPicked(dpi) {
@@ -154,6 +168,7 @@ export default function DPI() {
     setImplementationPeriod('');
     setRows(dpiData);
     setPage(1);
+    setHasSearched(false);
   }
 
   // actions
@@ -311,6 +326,7 @@ export default function DPI() {
           onPartSearch={() => setShowPartPicker(true)}
           onModelSearch={() => setShowModelPicker(true)}
           onDpiSearch={() => setShowDpiPicker(true)}
+          onSearchDestination={() => setShowDestinationPicker(true)}
         />
 
         <div id="result-section">
@@ -324,6 +340,7 @@ export default function DPI() {
             goToPage={goToPage}
             setPerPage={setPerPage}
             checked={checked}
+            hasSearched={hasSearched}
           />
         </div>
       </div>
@@ -346,6 +363,13 @@ export default function DPI() {
         show={showModelPicker}
         onClose={() => setShowModelPicker(false)}
         onAdd={handleModelPicked}
+        selectionMode="single"
+      />
+
+      <DestinationPickerModal
+        show={showDestinationPicker}
+        onClose={() => setShowDestinationPicker(false)}
+        onAdd={handleDestinationPicked}
         selectionMode="single"
       />
 

@@ -13,6 +13,7 @@ export default function SearchSection(props) {
     onPartSearch,
     onModelSearch,
     onDpiSearch,
+    onSearchDestination,
   } = props;
 
   const {
@@ -129,7 +130,7 @@ export default function SearchSection(props) {
               <div className="input-group input-group-sm">
                 <input className="form-control form-control-sm" value={destCode || ''} onChange={handleInputChange(setDestCode)} placeholder="Dest Code" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Dest Code" onClick={() => alert('Search Dest Code placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Dest Code" onClick={onSearchDestination}>
                     <i className="fas fa-search" />
                   </button>
                 </div>
