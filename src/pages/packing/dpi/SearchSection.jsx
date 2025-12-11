@@ -14,6 +14,7 @@ export default function SearchSection(props) {
     onModelSearch,
     onDpiSearch,
     onSearchDestination,
+    onSearchSupplier,
   } = props;
 
   const {
@@ -154,7 +155,7 @@ export default function SearchSection(props) {
               <div className="input-group input-group-sm">
                 <input className="form-control form-control-sm" value={supplierCode || ''} onChange={handleInputChange(setSupplierCode)} placeholder="Supplier Code" />
                 <div className="input-group-append">
-                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => alert('Search Supplier placeholder')}>
+                  <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={onSearchSupplier}>
                     <i className="fas fa-search" />
                   </button>
                 </div>

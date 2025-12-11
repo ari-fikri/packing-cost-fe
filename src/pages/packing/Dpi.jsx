@@ -7,6 +7,7 @@ import ModelPickerModal from '../../components/ModelPickerModal';
 import ColumnSelectionModal from '../../components/ColumnSelectionModal';
 import PartPickerModal from '../../components/PartPickerModal';
 import DestinationPickerModal from '../../components/DestinationPickerModal';
+import SupplierPickerModal from '../../components/SupplierPickerModal';
 
 export default function DPI() {
   // filter fields
@@ -24,6 +25,7 @@ export default function DPI() {
   const [showDpiPicker, setShowDpiPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
   const [showDestinationPicker, setShowDestinationPicker] = useState(false);
+  const [showSupplierPicker, setShowSupplierPicker] = useState(false);
 
   const [checked, setChecked] = useState([
     'main_info', 'destination', 'model', 'impl_period', 'cps_no',
@@ -142,6 +144,13 @@ export default function DPI() {
       setDestCode(destination.destCode);
     }
     setShowDestinationPicker(false);
+  }
+
+  function handleSupplierPicked(supplier) {
+    if (supplier) {
+      setSupplierCode(supplier.code);
+    }
+    setShowSupplierPicker(false);
   }
 
   function handleDpiPicked(dpi) {
@@ -327,6 +336,7 @@ export default function DPI() {
           onModelSearch={() => setShowModelPicker(true)}
           onDpiSearch={() => setShowDpiPicker(true)}
           onSearchDestination={() => setShowDestinationPicker(true)}
+          onSearchSupplier={() => setShowSupplierPicker(true)}
         />
 
         <div id="result-section">
@@ -371,6 +381,13 @@ export default function DPI() {
         onClose={() => setShowDestinationPicker(false)}
         onAdd={handleDestinationPicked}
         selectionMode="single"
+      />
+
+      <SupplierPickerModal
+        show={showSupplierPicker}
+        onClose={() => setShowSupplierPicker(false)}
+        onSelect={handleSupplierPicked}
+        mode="single"
       />
 
       <ColumnSelectionModal
