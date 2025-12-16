@@ -17,14 +17,6 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
   const [plantCode, setPlantCode] = useState('')
   const [uniqueNo2, setUniqueNo2] = useState('')
 
-  // dimensions & weights
-  const [lengthMM, setLengthMM] = useState('')
-  const [widthMM, setWidthMM] = useState('')
-  const [heightMM, setHeightMM] = useState('')
-  const [weightPerPc, setWeightPerPc] = useState('')
-  const [qtyBox, setQtyBox] = useState('')
-  // Remove totalWeight state, always compute
-
   // child parts inside modal
   const [childParts, setChildParts] = useState([])
   const [showAddChildRow, setShowAddChildRow] = useState(false)
@@ -36,11 +28,6 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
     parent: '',
     supplierId: '',
     supplierName: '',
-    L: '',
-    W: '',
-    H: '',
-    wtPerPc: '',
-    qty: '',
   })
 
   // new state for part picker modal
@@ -61,45 +48,24 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
         setSupplierAddress(initialData.supplierAddress || '')
         setPlantCode(initialData.plantCode || '')
         setUniqueNo2(initialData.uniqueNo2 || '')
-        setLengthMM(initialData.dimensions?.L || '')
-        setWidthMM(initialData.dimensions?.W || '')
-        setHeightMM(initialData.dimensions?.H || '')
-        setWeightPerPc(initialData.weightPerPc || '')
-        setQtyBox(initialData.qtyBox || '')
         setChildParts(initialData.childParts || [])
         setShowAddChildRow(false)
         setChildForm({
           partNo: '', suffix: '', uniqueNo: '', name: '', parent: '',
-          supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: ''
+          supplierId: '', supplierName: '',
         })
       } else {
         setPartNo(''); setUniqueNo(''); setSuffixCode(''); setPartName('')
         setParentPartNo(''); setSuppCode(''); setSupplierName(''); setSupplierAddress(''); setPlantCode('')
         setUniqueNo2('')
-        setLengthMM(''); setWidthMM(''); setHeightMM(''); setWeightPerPc(''); setQtyBox('')
         setChildParts([]); setShowAddChildRow(false)
         setChildForm({
           partNo: '', suffix: '', uniqueNo: '', name: '', parent: '',
-          supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: ''
+          supplierId: '', supplierName: '',
         })
       }
     }
   }, [show, initialData])
-
-  function computeVolume(l, w, h) {
-    const L = Number(l) || 0
-    const W = Number(w) || 0
-    const H = Number(h) || 0
-    if (!L || !W || !H) return ''
-    return ((L * W * H) / 1000000).toFixed(3)
-  }
-
-  function computeTotalWeight(wtGr, qtyN) {
-    const w = Number(wtGr) || 0
-    const q = Number(qtyN) || 0
-    if (!w || !q) return ''
-    return (w * q).toFixed(3)
-  }
 
   function handleAddChildClick() {
     setShowAddChildRow(true)
@@ -109,11 +75,9 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
       alert('Enter child Part No')
       return
     }
-    const qty = Number(childForm.qty) || 0
-    const wt = Number(childForm.wtPerPc) || 0
-    const cp = { ...childForm, qty, wtPerPc: wt, totalWt: +(qty * wt).toFixed(3) }
+    const cp = { ...childForm }
     setChildParts(prev => [...prev, cp])
-    setChildForm({ partNo: '', suffix: '', uniqueNo: '', name: '', parent: '', supplierId: '', supplierName: '', L: '', W: '', H: '', wtPerPc: '', qty: '' })
+    setChildForm({ partNo: '', suffix: '', uniqueNo: '', name: '', parent: '', supplierId: '', supplierName: '' })
     setShowAddChildRow(false)
   }
   function handleRemoveChild(idx) {
@@ -128,10 +92,6 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
     const payload = {
       partNo, uniqueNo, suffixCode, partName, parentPartNo, suppCode, supplierName, supplierAddress,
       plantCode, uniqueNo2,
-      dimensions: { L: lengthMM, W: widthMM, H: heightMM },
-      weightPerPc: Number(weightPerPc) || 0,
-      qtyBox: Number(qtyBox) || 0,
-      totalWeight: Number(computeTotalWeight(weightPerPc, qtyBox)) || 0,
       childParts: childParts.slice()
     }
     onSave(payload)
@@ -166,12 +126,6 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
         parent: p.parent || '',
         supplierId: p.supplierId || '',
         supplierName: p.supplierName || p[3] || '',
-        L: p.L || '',
-        W: p.W || '',
-        H: p.H || '',
-        wtPerPc: p.wtPerPc || '',
-        qty: p.qty || '',
-        totalWt: p.totalWt || '',
       }))
       setChildParts(prev => [...prev, ...mapped])
     }
@@ -288,51 +242,6 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
             </div>
           </div>
 
-          {/* 5th row: Dimensions */}
-          <div className="form-row align-items-end">
-            <div className="form-group col-md-6 mb-0">
-              <label className="small">Dimension (mm)</label>
-              <div className="form-row">
-                <div className="form-group col-md-4 mb-0">
-                  <label className="small mb-1">Length</label>
-                  <input className="form-control form-control-sm" value={lengthMM} onChange={e => setLengthMM(e.target.value)} />
-                </div>
-                <div className="form-group col-md-4 mb-0">
-                  <label className="small mb-1">Width</label>
-                  <input className="form-control form-control-sm" value={widthMM} onChange={e => setWidthMM(e.target.value)} />
-                </div>
-                <div className="form-group col-md-4 mb-0">
-                  <label className="small mb-1">Height</label>
-                  <input className="form-control form-control-sm" value={heightMM} onChange={e => setHeightMM(e.target.value)} />
-                </div>
-              </div>
-            </div>
-            <div className="form-group col-md-6 mb-0 d-flex align-items-end">
-              <div style={{ width: '100%' }}>
-                <label className="small mb-1">Volume (m³)</label>
-                <input className="form-control form-control-sm" value={computeVolume(lengthMM, widthMM, heightMM)} readOnly />
-              </div>
-            </div>
-          </div>
-
-          {/* 6th row: Weight and Qty */}
-          <div className="form-row">
-            <div className="form-group col-md-6 d-flex">
-              <div style={{ flex: 1, marginRight: 8 }}>
-                <label className="small mb-1">Weight/PC (gr)</label>
-                <input type="number" className="form-control form-control-sm" value={weightPerPc} onChange={e => setWeightPerPc(e.target.value)} />
-              </div>
-              <div style={{ flex: 1 }}>
-                <label className="small mb-1">Qty/Box</label>
-                <input type="number" className="form-control form-control-sm" value={qtyBox} onChange={e => setQtyBox(e.target.value)} />
-              </div>
-            </div>
-            <div className="form-group col-md-6">
-              <label className="small mb-1">Total Weight (gr)</label>
-              <input className="form-control form-control-sm" value={computeTotalWeight(weightPerPc, qtyBox)} readOnly />
-            </div>
-          </div>
-
           {/* Add Child Part toolbar */}
           <div className="mb-3">
             <button
@@ -351,14 +260,13 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 <tr>
                   <th style={{ width: 40 }}>No</th>
                   <th>Part No</th><th>Suffix</th><th>Unique No</th><th>Name</th><th>Parent</th>
-                  <th>Supplier ID</th><th>Supplier Name</th><th>L</th><th>W</th><th>H</th>
-                  <th>Wt/PC</th><th>Qty</th><th>Total Wt</th><th style={{ width: 90 }}>Action</th>
+                  <th>Supplier ID</th><th>Supplier Name</th><th style={{ width: 90 }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {childParts.length === 0 ? (
                   <tr>
-                    <td colSpan="15" className="text-center py-4 text-muted">No Data Found</td>
+                    <td colSpan="9" className="text-center py-4 text-muted">No Data Found</td>
                   </tr>
                 ) : (
                   childParts.map((cp, i) => (
@@ -371,12 +279,6 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                       <td>{cp.parent}</td>
                       <td>{cp.supplierId}</td>
                       <td>{cp.supplierName}</td>
-                      <td>{cp.L}</td>
-                      <td>{cp.W}</td>
-                      <td>{cp.H}</td>
-                      <td>{cp.wtPerPc}</td>
-                      <td>{cp.qty}</td>
-                      <td>{cp.totalWt}</td>
                       <td>
                         <button
                           type="button"

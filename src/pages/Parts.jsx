@@ -368,18 +368,13 @@ export default function Parts() {
                   <th>Supplier Name</th>
                   <th>Parent Part No</th>
                   <th>Subparts</th>
-                  <th>L</th>
-                  <th>W</th>
-                  <th>H</th>
-                  <th>Qty/Box</th>
-                  <th>Total Wt</th>
                   <th style={{ width: 110 }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredParts.length === 0 ? (
                   <tr>
-                    <td colSpan="14" className="text-center py-4 text-muted">No Data Found</td>
+                    <td colSpan="9" className="text-center py-4 text-muted">No Data Found</td>
                   </tr>
                 ) : (
                   filteredParts.slice((page - 1) * perPage, page * perPage).map((p, i) => (
@@ -392,11 +387,6 @@ export default function Parts() {
                       <td>{p.supplierName}</td>
                       <td>{p.parentPartNo ?? p.parent}</td>
                       <td>{p.childParts ? p.childParts.length : (p.subparts ? p.subparts.length : 0)}</td>
-                      <td>{p.dimensions?.L ?? p.L}</td>
-                      <td>{p.dimensions?.W ?? p.W}</td>
-                      <td>{p.dimensions?.H ?? p.H}</td>
-                      <td>{p.qtyBox ?? p.qty}</td>
-                      <td>{p.totalWeight ?? p.totalWt}</td>
                       <td>
                         <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit(p)}>
                           <i className="fas fa-pencil-alt" />
