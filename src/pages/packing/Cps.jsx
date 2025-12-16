@@ -8,6 +8,7 @@ import { cpsData as initialCpsData } from '../../data/cps.js';
 import HeaderActions from './cps/HeaderActions';
 import { cpsPageConfig, ROLES } from '../../config/cpsPageConfig.js';
 import { useAuth } from '../../auth.jsx';
+import DestinationPickerModal from '../../components/DestinationPickerModal.jsx';
 
 const Cps = () => {
   const { user } = useAuth();
@@ -30,12 +31,14 @@ const Cps = () => {
   const [editingCps, setEditingCps] = useState(null);
   const [showPersonPicker, setShowPersonPicker] = useState(false);
   const [personPickerTarget, setPersonPickerTarget] = useState(null);
+  const [showDestinationPicker, setShowDestinationPicker] = useState(false);
 
   // Filter states
   const [cpsNo, setCpsNo] = useState('');
   const [refCpsNo, setRefCpsNo] = useState('');
   const [model, setModel] = useState('');
   const [partNo, setPartNo] = useState('');
+  const [partName, setPartName] = useState('');
   const [cfcPjt, setCfcPjt] = useState('');
   const [fromUser, setFromUser] = useState('');
   const [toUser, setToUser] = useState('');
@@ -43,6 +46,8 @@ const Cps = () => {
   const [destCode, setDestCode] = useState('');
   const [destCountry, setDestCountry] = useState('');
   const [cpsPsiEci, setCpsPsiEci] = useState('');
+  const [supplierCode, setSupplierCode] = useState('');
+  const [supplierName, setSupplierName] = useState('');
 
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -54,6 +59,7 @@ const Cps = () => {
     setRefCpsNo('');
     setModel('');
     setPartNo('');
+    setPartName('');
     setCfcPjt('');
     setFromUser('');
     setToUser('');
@@ -61,6 +67,8 @@ const Cps = () => {
     setDestCode('');
     setDestCountry('');
     setCpsPsiEci('');
+    setSupplierCode('');
+    setSupplierName('');
     setFilteredCps([]);
   };
 
@@ -108,6 +116,25 @@ const Cps = () => {
     setShowNewCps(true);
   };
 
+  const handleClone = (cpsToClone) => {
+    const newId = cpsData.length > 0 ? Math.max(...cpsData.map(c => c.id)) + 1 : 1;
+    const clonedCps = {
+      ...cpsToClone,
+      id: newId,
+      refCpsNo: cpsToClone.cpsNo, // Set Ref CPS No from original CPS No
+      cpsNo: '',                   // Clear CPS No
+    };
+
+    const index = filteredCps.findIndex(item => item.id === cpsToClone.id);
+
+    const updatedCpsData = [...cpsData, clonedCps];
+    const updatedFilteredCps = [...filteredCps];
+    updatedFilteredCps.splice(index + 1, 0, clonedCps);
+
+    setCpsData(updatedCpsData);
+    setFilteredCps(updatedFilteredCps);
+  };
+
   const handleCloseModal = () => {
     setShowNewCps(false);
     setEditingCps(null);
@@ -133,14 +160,32 @@ const Cps = () => {
     setShowPersonPicker(true);
   };
 
+  const handleDestinationPicked = (destination) => {
+    setDestCode(destination.destCode.toUpperCase());
+    setDestCountry(destination.country.toUpperCase());
+    setShowDestinationPicker(false);
+  };
+
   const filters = {
-    cpsNo, refCpsNo, model, partNo, cfcPjt, fromUser, toUser,
-    status, destCode, destCountry, cpsPsiEci
+    cpsNo, refCpsNo, model, partNo, partName, cfcPjt, fromUser, toUser,
+    status, destCode, destCountry, cpsPsiEci, supplierCode, supplierName
   };
 
   const setters = {
-    setCpsNo, setRefCpsNo, setModel, setPartNo, setCfcPjt, setFromUser, setToUser,
-    setStatus, setDestCode, setDestCountry, setCpsPsiEci
+    setCpsNo: (val) => setCpsNo(val.toUpperCase()),
+    setRefCpsNo: (val) => setRefCpsNo(val.toUpperCase()),
+    setModel: (val) => setModel(val.toUpperCase()),
+    setPartNo: (val) => setPartNo(val.toUpperCase()),
+    setPartName: (val) => setPartName(val.toUpperCase()),
+    setCfcPjt: (val) => setCfcPjt(val.toUpperCase()),
+    setFromUser: (val) => setFromUser(val.toUpperCase()),
+    setToUser: (val) => setToUser(val.toUpperCase()),
+    setStatus: (val) => setStatus(val.toUpperCase()),
+    setDestCode: (val) => setDestCode(val.toUpperCase()),
+    setDestCountry: (val) => setDestCountry(val.toUpperCase()),
+    setCpsPsiEci: (val) => setCpsPsiEci(val.toUpperCase()),
+    setSupplierCode: (val) => setSupplierCode(val.toUpperCase()),
+    setSupplierName: (val) => setSupplierName(val.toUpperCase()),
   };
 
   return (
@@ -162,6 +207,7 @@ const Cps = () => {
             onSearch={() => handleSearch()}
             onClear={handleClear}
             onPersonPicker={handlePersonPicker}
+            onDestinationPicker={() => setShowDestinationPicker(true)}
             destinations={DESTINATIONS}
           />
           <hr />
@@ -172,6 +218,7 @@ const Cps = () => {
             setPage={(page) => setPagination(p => ({...p, currentPage: page}))}
             setPerPage={(perPage) => setPagination(p => ({...p, perPage: perPage}))}
             onEdit={handleEdit}
+            onClone={handleClone}
           />
         </div>
       </div>
@@ -196,6 +243,12 @@ const Cps = () => {
           }}
         />
       )}
+      <DestinationPickerModal
+        show={showDestinationPicker}
+        onClose={() => setShowDestinationPicker(false)}
+        onAdd={handleDestinationPicked}
+        selectionMode="single"
+      />
     </div>
   );
 }

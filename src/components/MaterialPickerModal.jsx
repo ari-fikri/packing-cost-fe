@@ -1,6 +1,7 @@
 // src/components/MaterialPickerModal.jsx
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { handleInputChange } from "../utils/globalFunctions";
 
 export default function MaterialPickerModal({
   show = false,
@@ -132,7 +133,7 @@ export default function MaterialPickerModal({
                   type="text"
                   className="form-control form-control-sm"
                   value={filterMaterialNo}
-                  onChange={(e) => setFilterMaterialNo(e.target.value)}
+                  onChange={handleInputChange(setFilterMaterialNo)}
                 />
               </div>
               <div className="form-group col-md-4">
@@ -141,7 +142,7 @@ export default function MaterialPickerModal({
                   type="text"
                   className="form-control form-control-sm"
                   value={filterName}
-                  onChange={(e) => setFilterName(e.target.value)}
+                  onChange={handleInputChange(setFilterName)}
                 />
               </div>
               <div className="form-group col-md-3">
@@ -150,7 +151,7 @@ export default function MaterialPickerModal({
                   type="text"
                   className="form-control form-control-sm"
                   value={filterType}
-                  onChange={(e) => setFilterType(e.target.value)}
+                  onChange={handleInputChange(setFilterType)}
                 />
               </div>
               <div className="form-group col-md-2 text-right">

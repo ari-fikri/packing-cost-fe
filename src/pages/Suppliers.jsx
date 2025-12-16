@@ -3,6 +3,7 @@ import { suppliers as suppliersData } from '../data/suppliers';
 import NewSupplierModal from '../components/NewSupplierModal';
 import ConfirmationDialog from '../components/ConfirmationDialog';
 import Pagination from '../components/Pagination';
+import { handleInputChange } from '../utils/globalFunctions';
 
 export default function Suppliers() {
   const [suppliers, setSuppliers] = useState([]);

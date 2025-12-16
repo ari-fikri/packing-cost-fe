@@ -2,24 +2,9 @@
 import React, { useState, useEffect } from 'react'
 import NewPartModal from '../components/NewPartModal' // make sure this file exists
 import PartPickerModal from '../components/PartPickerModal' // wired picker
+import SupplierPickerModal from '../components/SupplierPickerModal'
 import ConfirmationDialog from '../components/ConfirmationDialog';
-import partsData from '../data/parts'
-
-// Transform the raw parts data into a more usable format
-const transformedParts = partsData.map((part, index) => ({
-  id: index,
-  partNo: part[0],
-  name: part[1],
-  supplierName: part[2],
-  // Add other fields with default values if they don't exist in the raw data
-  suffix: 'A',
-  uniqueNo: `UN-00${index + 1}`,
-  parentPartNo: null,
-  childParts: [],
-  dimensions: { L: 10, W: 10, H: 10 },
-  qtyBox: 1,
-  totalWeight: 1,
-}));
+import { handleInputChange } from '../utils/globalFunctions';
 
 
 export default function Parts() {
@@ -45,8 +30,9 @@ export default function Parts() {
 
   // Part picker state
   const [showPartPicker, setShowPartPicker] = useState(false)
-  // which field opened the picker: \'partNo\' | \'parentPart\' — used in onSelect
+  // which field opened the picker: 'partNo' | 'parentPart' — used in onSelect
   const [pickerTarget, setPickerTarget] = useState(null)
+  const [showSupplierPicker, setShowSupplierPicker] = useState(false)
 
   // pagination placeholders
   const [perPage, setPerPage] = useState(10)
@@ -55,8 +41,27 @@ export default function Parts() {
 
 
   useEffect(() => {
-    setParts(transformedParts);
-    setFilteredParts([]);
+    fetch('/parts.json')
+      .then(res => res.json())
+      .then(data => {
+        const transformed = data.map((part, index) => ({
+          id: index,
+          partNo: part.part_no,
+          name: part.part_name,
+          partName: part.part_name,
+          supplierName: part.supplier_name,
+          supplierId: part.supplier_code,
+          suppCode: part.supplier_code,
+          childParts: part.sub_part || [],
+          // Add other fields with default values
+          suffix: '00',
+          uniqueNo: `UN-00${index + 1}`,
+          parentPartNo: null,
+        }));
+        setParts(transformed);
+        setFilteredParts([]);
+      })
+      .catch(error => console.error('Error fetching parts data:', error));
   }, []);
 
 
@@ -73,7 +78,7 @@ export default function Parts() {
     let filtered = parts.filter(p => {
       const partNoMatch = !partNo || p.partNo.toLowerCase().includes(partNo.toLowerCase());
       const uniqueNoMatch = !uniqueNo || (p.uniqueNo && p.uniqueNo.toLowerCase().includes(uniqueNo.toLowerCase()));
-      const supplierIdMatch = !supplierId || (p.supplierId && p.supplierId.toLowerCase().includes(supplierId.toLowerCase()));
+      const supplierIdMatch = !supplierId || ((p.supplierId && p.supplierId.toLowerCase().includes(supplierId.toLowerCase())) || (p.suppCode && p.suppCode.toLowerCase().includes(supplierId.toLowerCase())));
       const supplierNameMatch = !supplierName || p.supplierName.toLowerCase().includes(supplierName.toLowerCase());
       const parentPartMatch = !parentPart || (p.parentPartNo && p.parentPartNo.toLowerCase().includes(parentPart.toLowerCase()));
       const hasSubpartsMatch = !hasSubparts || (hasSubparts === 'Yes' && p.childParts && p.childParts.length > 0) || (hasSubparts === 'No' && (!p.childParts || p.childParts.length === 0));
@@ -198,6 +203,14 @@ export default function Parts() {
     setPickerTarget(null)
   }
 
+  function handleSupplierPicked(supplier) {
+    if (supplier) {
+      setSupplierId(supplier.code)
+      setSupplierName(supplier.name)
+    }
+    setShowSupplierPicker(false)
+  }
+
   return (
     <div className="container-fluid">
       <div className="card card-outline card-primary">
@@ -228,6 +241,7 @@ export default function Parts() {
                   <input
                     className="form-control form-control-sm"
                     value={partNo}
+                    onChange={handleInputChange(setPartNo)}
                     onChange={e => setPartNo(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Part No"
@@ -253,6 +267,7 @@ export default function Parts() {
                 <input
                   className="form-control form-control-sm"
                   value={uniqueNo}
+                  onChange={handleInputChange(setUniqueNo)}
                   onChange={e => setUniqueNo(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   placeholder="Unique No"
@@ -265,17 +280,18 @@ export default function Parts() {
             {/* Row 2: Supplier ID + Supplier Name */}
             <div className="col-md-6">
               <div className="form-group">
-                <label className="small mb-1">Supplier ID</label>
+                <label className="small mb-1">Supplier Code</label>
                 <div className="input-group input-group-sm">
                   <input
                     className="form-control form-control-sm"
                     value={supplierId}
+                    onChange={handleInputChange(setSupplierId)}
                     onChange={e => setSupplierId(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Supplier ID"
                   />
                   <div className="input-group-append">
-                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => alert('search supplier placeholder')}>
+                    <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Supplier" onClick={() => setShowSupplierPicker(true)}>
                       <i className="fas fa-search" />
                     </button>
                   </div>
@@ -289,6 +305,7 @@ export default function Parts() {
                 <input
                   className="form-control form-control-sm"
                   value={supplierName}
+                  onChange={handleInputChange(setSupplierName)}
                   onChange={e => setSupplierName(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   placeholder="Supplier Name"
@@ -306,6 +323,7 @@ export default function Parts() {
                   <input
                     className="form-control form-control-sm"
                     value={parentPart}
+                    onChange={handleInputChange(setParentPart)}
                     onChange={e => setParentPart(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Parent Part"
@@ -359,21 +377,17 @@ export default function Parts() {
                   <th>Suffix</th>
                   <th>Unique No</th>
                   <th>Name</th>
+                  <th>Supplier Code</th>
                   <th>Supplier Name</th>
                   <th>Parent Part No</th>
                   <th>Subparts</th>
-                  <th>L</th>
-                  <th>W</th>
-                  <th>H</th>
-                  <th>Qty/Box</th>
-                  <th>Total Wt</th>
                   <th style={{ width: 110 }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredParts.length === 0 ? (
                   <tr>
-                    <td colSpan="14" className="text-center py-4 text-muted">No Data Found</td>
+                    <td colSpan="10" className="text-center py-4 text-muted">No Data Found</td>
                   </tr>
                 ) : (
                   filteredParts.slice((page - 1) * perPage, page * perPage).map((p, i) => (
@@ -383,14 +397,10 @@ export default function Parts() {
                       <td>{p.suffixCode ?? p.suffix}</td>
                       <td>{p.uniqueNo}</td>
                       <td>{p.partName ?? p.name}</td>
+                      <td>{p.suppCode ?? p.supplierId}</td>
                       <td>{p.supplierName}</td>
                       <td>{p.parentPartNo ?? p.parent}</td>
                       <td>{p.childParts ? p.childParts.length : (p.subparts ? p.subparts.length : 0)}</td>
-                      <td>{p.dimensions?.L ?? p.L}</td>
-                      <td>{p.dimensions?.W ?? p.W}</td>
-                      <td>{p.dimensions?.H ?? p.H}</td>
-                      <td>{p.qtyBox ?? p.qty}</td>
-                      <td>{p.totalWeight ?? p.totalWt}</td>
                       <td>
                         <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEdit(p)}>
                           <i className="fas fa-pencil-alt" />
@@ -466,6 +476,12 @@ export default function Parts() {
         show={showPartPicker}
         onClose={() => { setShowPartPicker(false); setPickerTarget(null); }}
         onSelect={handlePartPicked}
+      />
+
+      <SupplierPickerModal
+        show={showSupplierPicker}
+        onClose={() => setShowSupplierPicker(false)}
+        onSelect={handleSupplierPicked}
       />
     </div>
   )

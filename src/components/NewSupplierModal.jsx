@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { handleInputChange } from '../utils/globalFunctions';
 
 export default function NewSupplierModal({ show = false, onClose = () => {}, onSave = () => {}, initialData = null }) {
   const [code, setCode] = useState('');
@@ -46,7 +47,7 @@ export default function NewSupplierModal({ show = false, onClose = () => {}, onS
                 type="text"
                 className="form-control"
                 value={code}
-                onChange={(e) => setCode(e.target.value)}
+                onChange={handleInputChange(setCode)}
                 readOnly={!!initialData}
               />
             </div>
@@ -56,7 +57,7 @@ export default function NewSupplierModal({ show = false, onClose = () => {}, onS
                 type="text"
                 className="form-control"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleInputChange(setName)}
               />
             </div>
             <div className="form-group">

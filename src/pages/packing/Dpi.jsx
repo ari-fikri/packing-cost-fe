@@ -3,11 +3,15 @@ import NewDpiModal from '../../components/NewDpiModal';
 import SearchSection from './dpi/SearchSection';
 import ResultSection from './dpi/ResultSection';
 import ActionHeaderButtons from './dpi/ActionHeaderButtons';
-import PartPickerModal from '../../components/PartPickerModal';
+import ModelPickerModal from '../../components/ModelPickerModal';
 import ColumnSelectionModal from '../../components/ColumnSelectionModal';
+import PartPickerModal from '../../components/PartPickerModal';
+import DestinationPickerModal from '../../components/DestinationPickerModal';
+import SupplierPickerModal from '../../components/SupplierPickerModal';
+
 export default function DPI() {
   // filter fields
-  const [modelCode, setModelCode] = useState('');
+  const [modelCfc, setModelCfc] = useState('');
   const [destCode, setDestCode] = useState('');
   const [partNo, setPartNo] = useState([]);
   const [supplierCode, setSupplierCode] = useState('');
@@ -17,7 +21,12 @@ export default function DPI() {
   // modal state
   const [showNewDpi, setShowNewDpi] = useState(false);
   const [showPartPicker, setShowPartPicker] = useState(false);
+  const [showModelPicker, setShowModelPicker] = useState(false);
+  const [showDpiPicker, setShowDpiPicker] = useState(false);
   const [showColumnSelector, setShowColumnSelector] = useState(false);
+  const [showDestinationPicker, setShowDestinationPicker] = useState(false);
+  const [showSupplierPicker, setShowSupplierPicker] = useState(false);
+
   const [checked, setChecked] = useState([
     'main_info', 'destination', 'model', 'impl_period', 'cps_no',
     'part_info', 'part_no_part', 'part_name', 'parent_part', 'supplier_code', 'supplier_name',
@@ -34,6 +43,7 @@ export default function DPI() {
   // table data
   const [rows, setRows] = useState([]);
   const [dpiData, setDpiData] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   // paging
   const [perPage, setPerPage] = useState(10);
@@ -53,11 +63,12 @@ export default function DPI() {
       .then(data => {
         const allRows = data.dpiData || [];
         // Sort data initially
-        const sortedData = [...allRows].sort((a, b) => 
+        const sortedData = [...allRows].sort((a, b) =>
           (b.implementation_period || '').localeCompare(a.implementation_period || '')
         );
         setDpiData(sortedData);
         setRows([]); // Set rows to empty to prevent initial load
+        setHasSearched(false);
       })
       .catch(error => {
         console.error('Error fetching DPI data:', error);
@@ -65,7 +76,8 @@ export default function DPI() {
   }, []);
 
   function handleSearch() {
-    const noFilters = !modelCode && (!partNo || partNo.length === 0) && !destCode && !supplierCode && !cpsNo && !implementationPeriod;
+    setHasSearched(true);
+    const noFilters = !modelCfc && (!partNo || partNo.length === 0) && !destCode && !supplierCode && !cpsNo && !implementationPeriod;
 
     if (noFilters) {
       setRows(dpiData);
@@ -73,11 +85,13 @@ export default function DPI() {
       return;
     }
 
+    console.log("Filtering with modelCfc:", modelCfc); // Add this line
     let filteredData = [...dpiData];
+    debugger;
     // Apply filters
-    if (modelCode) {
-      filteredData = filteredData.filter(item => 
-        item.model_code?.toLowerCase().includes(modelCode.toLowerCase())
+    if (modelCfc) {
+      filteredData = filteredData.filter(item =>
+        item.model_cfc?.toLowerCase().includes(modelCfc.toLowerCase())
       );
     }
     if (partNo && partNo.length > 0) {
@@ -88,33 +102,62 @@ export default function DPI() {
       );
     }
     if (destCode) {
-      filteredData = filteredData.filter(item => 
+      filteredData = filteredData.filter(item =>
         item.cps?.model?.destination?.code?.toLowerCase().includes(destCode.toLowerCase())
       );
     }
     if (supplierCode) {
-      filteredData = filteredData.filter(item => 
+      filteredData = filteredData.filter(item =>
         item.cps?.supplier?.supplier_code?.toLowerCase().includes(supplierCode.toLowerCase())
       );
     }
     if (cpsNo) {
-      filteredData = filteredData.filter(item => 
+      filteredData = filteredData.filter(item =>
         item.cps?.cps_no?.toLowerCase().includes(cpsNo.toLowerCase())
       );
     }
     if (implementationPeriod) {
-      filteredData = filteredData.filter(item => 
+      filteredData = filteredData.filter(item =>
         item.implementation_period?.toLowerCase().includes(implementationPeriod.toLowerCase())
       );
     }
 
     // Sort by implementation period
-    const sortedData = filteredData.sort((a, b) => 
+    const sortedData = filteredData.sort((a, b) =>
       (b.implementation_period || '').localeCompare(a.implementation_period || '')
     );
-    
+
     setRows(sortedData);
     setPage(1);
+    setHasSearched(false);
+  }
+
+  function handleModelPicked(model) {
+    if (model && model.model_cfc) {
+      setModelCfc(model.model_cfc);
+    }
+    setShowModelPicker(false);
+  }
+
+  function handleDestinationPicked(destination) {
+    if (destination) {
+      setDestCode(destination.destCode);
+    }
+    setShowDestinationPicker(false);
+  }
+
+  function handleSupplierPicked(supplier) {
+    if (supplier) {
+      setSupplierCode(supplier.code);
+    }
+    setShowSupplierPicker(false);
+  }
+
+  function handleDpiPicked(dpi) {
+    if (dpi) {
+      setCpsNo(dpi.cps_no);
+    }
+    setShowDpiPicker(false);
   }
 
   function handlePartPicked(parts) {
@@ -126,7 +169,7 @@ export default function DPI() {
   }
 
   function handleClear() {
-    setModelCode('');
+    setModelCfc('');
     setDestCode('');
     setPartNo([]);
     setSupplierCode('');
@@ -134,6 +177,7 @@ export default function DPI() {
     setImplementationPeriod('');
     setRows(dpiData);
     setPage(1);
+    setHasSearched(false);
   }
 
   // actions
@@ -250,7 +294,7 @@ export default function DPI() {
   }
 
   const searchFilters = {
-    modelCode,
+    modelCfc,
     destCode,
     partNo,
     supplierCode,
@@ -259,7 +303,7 @@ export default function DPI() {
   };
 
   const searchSetters = {
-    setModelCode,
+    setModelCfc,
     setDestCode,
     setPartNo,
     setSupplierCode,
@@ -289,6 +333,10 @@ export default function DPI() {
           onSearch={handleSearch}
           onClear={handleClear}
           onPartSearch={() => setShowPartPicker(true)}
+          onModelSearch={() => setShowModelPicker(true)}
+          onDpiSearch={() => setShowDpiPicker(true)}
+          onSearchDestination={() => setShowDestinationPicker(true)}
+          onSearchSupplier={() => setShowSupplierPicker(true)}
         />
 
         <div id="result-section">
@@ -302,6 +350,7 @@ export default function DPI() {
             goToPage={goToPage}
             setPerPage={setPerPage}
             checked={checked}
+            hasSearched={hasSearched}
           />
         </div>
       </div>
@@ -318,6 +367,27 @@ export default function DPI() {
         onClose={() => setShowPartPicker(false)}
         onSelect={handlePartPicked}
         mode="multi"
+      />
+
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={() => setShowModelPicker(false)}
+        onAdd={handleModelPicked}
+        selectionMode="single"
+      />
+
+      <DestinationPickerModal
+        show={showDestinationPicker}
+        onClose={() => setShowDestinationPicker(false)}
+        onAdd={handleDestinationPicked}
+        selectionMode="single"
+      />
+
+      <SupplierPickerModal
+        show={showSupplierPicker}
+        onClose={() => setShowSupplierPicker(false)}
+        onSelect={handleSupplierPicked}
+        mode="single"
       />
 
       <ColumnSelectionModal

@@ -8,6 +8,7 @@ export default function ResultSection({
   setPage,
   setPerPage,
   onEdit,
+  onClone,
 }) {
   const visibleRows = filteredCps.slice((page - 1) * perPage, page * perPage);
 
@@ -78,7 +79,7 @@ export default function ResultSection({
                       <button
                         type="button"
                         className="btn btn-sm btn-outline-secondary mr-1"
-                        onClick={() => alert('Clone placeholder')}
+                        onClick={() => onClone(r)}
                       >
                         <i className="fas fa-clone" />
                       </button>

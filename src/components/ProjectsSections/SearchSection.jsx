@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProjectModal from '../ProjectModal';
+import { handleInputChange } from '../../utils/globalFunctions';
 import ModelPickerModal from '../ModelPickerModal';
 
 export default function SearchSection({

@@ -56,6 +56,19 @@ const ProjectModal = ({ show, onHide, onAdd, field = 'code' }) => {
     setSelectedProjects([]);
   };
 
+  const handleCheckboxChange = (project, isChecked) => {
+    if (isChecked) {
+      setSelectedProjects(prev => [...prev, project]);
+    } else {
+      setSelectedProjects(prev => prev.filter(p => p.code !== project.code));
+    }
+  };
+
+  const handleAdd = () => {
+    if (onSelect) {
+      onSelect(selectedProjects);
+    }
+    onHide();
   const handleSelectAll = (checked) => {
     if (checked) {
       setSelectedProjects(results.map(p => p.code));

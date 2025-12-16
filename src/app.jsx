@@ -57,12 +57,12 @@ export default function App(){
           <Route path="/models" element={<ProtectedRoute><Models/></ProtectedRoute>} />
           <Route path="/parts" element={<ProtectedRoute><Parts/></ProtectedRoute>} />
           <Route path="/suppliers" element={<ProtectedRoute><Suppliers/></ProtectedRoute>} />
-          <Route path="/packing/cps" element={<Cps />} />
-          <Route path="/packing/dpi" element={<Dpi />} />
-          <Route path="/packing/CalculatePackingCost" element={<Calculate />} />
-          <Route path="/packing/ComparisonPage" element={<Comparison />} />
-          <Route path="/module-type" element={<Material />} />
-          <Route path="/material" element={<Material />} />
+          <Route path="/packing/cps" element={<ProtectedRoute><Cps /></ProtectedRoute>} />
+          <Route path="/packing/dpi" element={<ProtectedRoute><Dpi /></ProtectedRoute>} />
+          <Route path="/packing/CalculatePackingCost" element={<ProtectedRoute><Calculate /></ProtectedRoute>} />
+          <Route path="/packing/ComparisonPage" element={<ProtectedRoute><Comparison /></ProtectedRoute>} />
+          <Route path="/module-type" element={<ProtectedRoute><Material /></ProtectedRoute>} />
+          <Route path="/material" element={<ProtectedRoute><Material /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/params" element={<ProtectedRoute><Params /></ProtectedRoute>} />
           <Route path="/notification-detail" element={<ProtectedRoute><NotificationDetail /></ProtectedRoute>} />

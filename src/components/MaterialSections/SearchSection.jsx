@@ -1,4 +1,5 @@
 import React from 'react'
+import { handleInputChange } from '../../utils/globalFunctions'
 
 export default function SearchSection({
   // Search filter states

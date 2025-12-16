@@ -59,7 +59,7 @@ export default function Projects() {
   // Handles the search functionality based on the current filter states.
   function handleSearch() {
     // Perform search and update results. We don't gate rendering on a
-    // "hasSearched" flag anymore; the results array controls what is
+    // \"hasSearched\" flag anymore; the results array controls what is
     // displayed. An empty array will show the table header with no rows.
     // Check if any filters have been applied.
     const noFilters = !code && !name && !models && !manager && statuses.all;

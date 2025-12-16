@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react'
 import NewModelModal from '../components/NewModelModal'
 import SearchSection from '../components/ModelsSections/SearchSection'
 import ResultSection from '../components/ModelsSections/ResultSection'
+import ModelPickerModal from '../components/ModelPickerModal'
+import DestinationPickerModal from '../components/DestinationPickerModal'
 
 export default function Models() {
   // filters
-  const [code, setCode] = useState('')
   const [projectCode, setProjectCode] = useState('')
   const [filterName, setFilterName] = useState('')
   const [filterCfc, setFilterCfc] = useState('')
@@ -19,6 +20,8 @@ export default function Models() {
 
   // modal & data
   const [showNewModal, setShowNewModal] = useState(false)
+  const [showModelPicker, setShowModelPicker] = useState(false)
+  const [showDestinationPicker, setShowDestinationPicker] = useState(false)
   const [editingIndex, setEditingIndex] = useState(null)
   const [editingModel, setEditingModel] = useState(null)
   const [models, setModels] = useState([])
@@ -49,7 +52,7 @@ export default function Models() {
   }, [])
 
   function handleFilter() {
-    const noFilters = !code && !projectCode && !filterName && !filterCfc && !filterType && !filterRemark && !implementationPeriod && !destinationCode;
+    const noFilters = !projectCode && !filterName && !filterCfc && !filterType && !filterRemark && !implementationPeriod && !destinationCode;
 
     if (noFilters) {
       setFilteredModels([...models].reverse());
@@ -58,7 +61,6 @@ export default function Models() {
     }
 
     let filtered = models.filter(model =>
-      (!code || model.model_code?.toLowerCase().includes(code.toLowerCase())) &&
       (!projectCode || model.project.project_code?.toLowerCase().includes(projectCode.toLowerCase())) &&
       (!filterName || model.model_name?.toLowerCase().includes(filterName.toLowerCase())) &&
       (!filterCfc || model.model_cfc?.toLowerCase().includes(filterCfc.toLowerCase())) &&
@@ -73,7 +75,6 @@ export default function Models() {
   }
   
   function handleClearFilters() {
-    setCode('')
     setProjectCode('')
     setFilterName('')
     setFilterCfc('')
@@ -98,6 +99,23 @@ export default function Models() {
     setEditingIndex(null)
     setEditingModel(null)
   }
+
+  const handleAddModel = (selectedModel) => {
+    if (selectedModel) {
+      setFilterCfc(selectedModel.model_cfc);
+      setFilterName(selectedModel.model_name);
+    }
+    setShowModelPicker(false);
+  };
+
+  const handleAddDestination = (selectedDestination) => {
+    if (selectedDestination) {
+      setDestinationCode(selectedDestination.destCode);
+      setDestinationCountryCode(selectedDestination.code);
+      setCountry(selectedDestination.country);
+    }
+    setShowDestinationPicker(false);
+  };
 
   // called by NewModelModal when user saves a model (payload includes parts if any)
   function handleSaveNewModel(payload) {
@@ -127,7 +145,6 @@ export default function Models() {
       
       // Check if new model matches current filter criteria
       const matchesFilter = 
-        (!code || payload.model_code?.toLowerCase().includes(code.toLowerCase())) &&
         (!projectCode || payload.project.project_code?.toLowerCase().includes(projectCode.toLowerCase())) &&
         (!filterName || payload.model_name?.toLowerCase().includes(filterName.toLowerCase())) &&
         (!filterCfc || payload.model_cfc?.toLowerCase().includes(filterCfc.toLowerCase())) &&
@@ -202,8 +219,6 @@ export default function Models() {
         </div>
 
         <SearchSection
-          code={code}
-          setCode={setCode}
           projectCode={projectCode}
           setProjectCode={setProjectCode}
           filterName={filterName}
@@ -225,6 +240,8 @@ export default function Models() {
           handleFilter={handleFilter}
           handleClearFilters={handleClearFilters}
           handleOpenNew={handleOpenNew}
+          onSearchCfc={() => setShowModelPicker(true)}
+          onSearchDestination={() => setShowDestinationPicker(true)}
         />
 
         <ResultSection
@@ -243,6 +260,22 @@ export default function Models() {
         onClose={handleCloseNew}
         onSave={handleSaveNewModel}
         initialData={editingModel}
+      />
+
+      {/* MODEL PICKER MODAL */}
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={() => setShowModelPicker(false)}
+        onAdd={handleAddModel}
+        selectionMode="single"
+      />
+
+      {/* DESTINATION PICKER MODAL */}
+      <DestinationPickerModal
+        show={showDestinationPicker}
+        onClose={() => setShowDestinationPicker(false)}
+        onAdd={handleAddDestination}
+        selectionMode="single"
       />
     </div>
   )
