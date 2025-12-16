@@ -4,24 +4,7 @@ import NewPartModal from '../components/NewPartModal' // make sure this file exi
 import PartPickerModal from '../components/PartPickerModal' // wired picker
 import SupplierPickerModal from '../components/SupplierPickerModal'
 import ConfirmationDialog from '../components/ConfirmationDialog';
-import partsData from '../data/parts'
 import { handleInputChange } from '../utils/globalFunctions';
-
-// Transform the raw parts data into a more usable format
-const transformedParts = partsData.map((part, index) => ({
-  id: index,
-  partNo: part[0],
-  name: part[1],
-  supplierName: part[2],
-  // Add other fields with default values if they don't exist in the raw data
-  suffix: 'A',
-  uniqueNo: `UN-00${index + 1}`,
-  parentPartNo: null,
-  childParts: [],
-  dimensions: { L: 10, W: 10, H: 10 },
-  qtyBox: 1,
-  totalWeight: 1,
-}));
 
 
 export default function Parts() {
@@ -58,8 +41,30 @@ export default function Parts() {
 
 
   useEffect(() => {
-    setParts(transformedParts);
-    setFilteredParts([]);
+    fetch('/parts.json')
+      .then(res => res.json())
+      .then(data => {
+        const transformed = data.map((part, index) => ({
+          id: index,
+          partNo: part.part_no,
+          name: part.part_name,
+          partName: part.part_name,
+          supplierName: part.supplier_name,
+          supplierId: part.supplier_code,
+          suppCode: part.supplier_code,
+          childParts: part.sub_part || [],
+          // Add other fields with default values
+          suffix: 'A',
+          uniqueNo: `UN-00${index + 1}`,
+          parentPartNo: null,
+          dimensions: { L: 10, W: 10, H: 10 },
+          qtyBox: 1,
+          totalWeight: 1,
+        }));
+        setParts(transformed);
+        setFilteredParts([]);
+      })
+      .catch(error => console.error('Error fetching parts data:', error));
   }, []);
 
 
@@ -76,7 +81,7 @@ export default function Parts() {
     let filtered = parts.filter(p => {
       const partNoMatch = !partNo || p.partNo.toLowerCase().includes(partNo.toLowerCase());
       const uniqueNoMatch = !uniqueNo || (p.uniqueNo && p.uniqueNo.toLowerCase().includes(uniqueNo.toLowerCase()));
-      const supplierIdMatch = !supplierId || (p.supplierId && p.supplierId.toLowerCase().includes(supplierId.toLowerCase()));
+      const supplierIdMatch = !supplierId || ((p.supplierId && p.supplierId.toLowerCase().includes(supplierId.toLowerCase())) || (p.suppCode && p.suppCode.toLowerCase().includes(supplierId.toLowerCase())));
       const supplierNameMatch = !supplierName || p.supplierName.toLowerCase().includes(supplierName.toLowerCase());
       const parentPartMatch = !parentPart || (p.parentPartNo && p.parentPartNo.toLowerCase().includes(parentPart.toLowerCase()));
       const hasSubpartsMatch = !hasSubparts || (hasSubparts === 'Yes' && p.childParts && p.childParts.length > 0) || (hasSubparts === 'No' && (!p.childParts || p.childParts.length === 0));
@@ -365,6 +370,7 @@ export default function Parts() {
                   <th>Suffix</th>
                   <th>Unique No</th>
                   <th>Name</th>
+                  <th>Supplier Code</th>
                   <th>Supplier Name</th>
                   <th>Parent Part No</th>
                   <th>Subparts</th>
@@ -374,7 +380,7 @@ export default function Parts() {
               <tbody>
                 {filteredParts.length === 0 ? (
                   <tr>
-                    <td colSpan="9" className="text-center py-4 text-muted">No Data Found</td>
+                    <td colSpan="10" className="text-center py-4 text-muted">No Data Found</td>
                   </tr>
                 ) : (
                   filteredParts.slice((page - 1) * perPage, page * perPage).map((p, i) => (
@@ -384,6 +390,7 @@ export default function Parts() {
                       <td>{p.suffixCode ?? p.suffix}</td>
                       <td>{p.uniqueNo}</td>
                       <td>{p.partName ?? p.name}</td>
+                      <td>{p.suppCode ?? p.supplierId}</td>
                       <td>{p.supplierName}</td>
                       <td>{p.parentPartNo ?? p.parent}</td>
                       <td>{p.childParts ? p.childParts.length : (p.subparts ? p.subparts.length : 0)}</td>
