@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function LogisticSection(props) {
   const {
+    config,
     logisticOpen,
     setLogisticOpen,
     tmmindDestDockCode,
@@ -38,6 +39,7 @@ export default function LogisticSection(props) {
                   className="form-control form-control-sm"
                   value={tmmindDestDockCode}
                   onChange={e => setTmmindDestDockCode(e.target.value)}
+                  disabled={!config.editable}
                   placeholder="Dock Code"
                 />
                 <div className="input-group-append">
@@ -53,6 +55,7 @@ export default function LogisticSection(props) {
                 className="form-control form-control-sm"
                 value={addressRack}
                 onChange={e => setAddressRack(e.target.value)}
+                disabled={!config.editable}
                 placeholder="Address Rack"
               />
             </div>
@@ -64,6 +67,7 @@ export default function LogisticSection(props) {
               rows={3}
               value={logisticRemark}
               onChange={e => setLogisticRemark(e.target.value)}
+              disabled={!config.editable}
               placeholder="Remark"
             />
           </div>
@@ -78,6 +82,7 @@ export default function LogisticSection(props) {
                     value={type}
                     checked={processType === type}
                     onChange={() => setProcessType(type)}
+                    disabled={!config.editable}
                   />{" "}
                   {type}
                 </label>

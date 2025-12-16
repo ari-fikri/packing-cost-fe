@@ -34,6 +34,7 @@ const Thumbnail = React.memo(({ file, index, onRemove }) => {
 });
 
 const ImagesSection = ({
+    config,
     imagesPart, setImagesPart,
     imagesPacking, setImagesPacking,
     imagesOuter, setImagesOuter,
@@ -99,6 +100,7 @@ const ImagesSection = ({
                                         placeholder="Enter a caption..."
                                         rows="2"
                                         className="form-control mb-2"
+                                        disabled={!config.editable}
                                     />
                                     <div className="d-flex flex-wrap">
                                         {state.files.length === 0 ? (
@@ -128,6 +130,7 @@ const ImagesSection = ({
                                             multiple
                                             style={{ display: "none" }}
                                             onChange={createFilesChangeHandler(setter)}
+                                            disabled={!config.editable}
                                         />
                                     </div>
                                 </div>

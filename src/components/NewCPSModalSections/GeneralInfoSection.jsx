@@ -3,6 +3,7 @@ import React from "react";
 export default function GeneralInfoSection(props) {
   // Destructure props as needed
   const {
+    config,
     cpsNo,
     setCpsNo,
     refCpsNo,
@@ -42,6 +43,7 @@ export default function GeneralInfoSection(props) {
                 className="form-control form-control-sm"
                 value={cpsNo}
                 onChange={(e) => setCpsNo(e.target.value)}
+                disabled={!config.editable}
                 placeholder="CPSxxxx..."
               />
             </div>

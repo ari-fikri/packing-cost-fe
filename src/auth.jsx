@@ -13,6 +13,9 @@ const USERS = [
   { username: 'hanifa', password: '2', department: DEPARTMENTS.PCD, role: ROLES.PROCUREMENT },
   { username: 'viewer.pse', password: '1', department: DEPARTMENTS.PSE, role: ROLES.VIEWER },
   { username: 'viewer.pcd', password: '1', department: DEPARTMENTS.PCD, role: ROLES.VIEWER },
+  { username: 'admin_pse', password: '1', department: DEPARTMENTS.PSE, role: ROLES.ADMIN_PSE },
+  { username: 'admin_logistic', password: '1', department: DEPARTMENTS.LOGISTIC, role: ROLES.ADMIN_LOGISTIC },
+  { username: 'supplier', password: '1', department: DEPARTMENTS.SUPPLIER, role: ROLES.SUPPLIER },
 ]
 
 export function AuthProvider({ children }){
