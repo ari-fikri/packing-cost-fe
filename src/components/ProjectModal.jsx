@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const ProjectModal = ({ show, onHide }) => {
+const ProjectModal = ({ show, onHide, onAdd, field = 'code' }) => {
   const [projectCode, setProjectCode] = useState('');
   const [projectName, setProjectName] = useState('');
   const [status, setStatus] = useState('All');
   const [projectManager, setProjectManager] = useState('');
+  const [selectedProjects, setSelectedProjects] = useState([]);
 
   const allProjects = [
     { code: '024J', name: 'Front Bumper Model', status: 'Active', manager: 'Prototype 2025' },
@@ -19,6 +20,7 @@ const ProjectModal = ({ show, onHide }) => {
   useEffect(() => {
     if (show) {
       handleClear();
+      setSelectedProjects([]);
     }
   }, [show]);
 
@@ -51,6 +53,15 @@ const ProjectModal = ({ show, onHide }) => {
     setStatus('All');
     setProjectManager('');
     setResults(allProjects);
+    setSelectedProjects([]);
+  };
+
+  const handleSelectAll = (checked) => {
+    if (checked) {
+      setSelectedProjects(results.map(p => p.code));
+    } else {
+      setSelectedProjects([]);
+    }
   };
 
   const modalBodyStyle = {
@@ -109,7 +120,7 @@ const ProjectModal = ({ show, onHide }) => {
               <table className="table table-bordered table-striped table-sm">
                 <thead>
                   <tr>
-                    <th style={{width: '30px'}}><input type="checkbox" /></th>
+                    <th style={{width: '30px'}}><input type="checkbox" checked={selectedProjects.length === results.length && results.length > 0} onChange={(e) => handleSelectAll(e.target.checked)} /></th>
                     <th>Project Code</th>
                     <th>Name</th>
                     <th>Status</th>
@@ -120,7 +131,13 @@ const ProjectModal = ({ show, onHide }) => {
                   {results.length > 0 ? (
                     results.map((item, index) => (
                       <tr key={index}>
-                        <td className="text-center"><input type="checkbox" /></td>
+                        <td className="text-center"><input type="checkbox" checked={selectedProjects.includes(item.code)} onChange={() => {
+                          if (selectedProjects.includes(item.code)) {
+                            setSelectedProjects(prev => prev.filter(c => c !== item.code));
+                          } else {
+                            setSelectedProjects(prev => [...prev, item.code]);
+                          }
+                        }} /></td>
                         <td>{item.code}</td>
                         <td>{item.name}</td>
                         <td>{item.status}</td>
@@ -137,9 +154,15 @@ const ProjectModal = ({ show, onHide }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary btn-sm">Add</button>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={onHide}>Close</button>
-          </div>
+             <button type="button" className="btn btn-primary btn-sm" onClick={() => {
+               if (onAdd && selectedProjects.length > 0) {
+                 const selected = selectedProjects.map(code => allProjects.find(p => p.code === code));
+                 onAdd(selected, field);
+               }
+               onHide();
+             }}>Add</button>
+             <button type="button" className="btn btn-secondary btn-sm" onClick={onHide}>Close</button>
+           </div>
         </div>
       </div>
     </div>

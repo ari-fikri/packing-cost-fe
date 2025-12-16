@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProjectModal from '../ProjectModal';
+import ModelPickerModal from '../ModelPickerModal';
 
 export default function SearchSection({
   code, setCode,
@@ -12,6 +13,19 @@ export default function SearchSection({
   handleOpenNew
 }) {
   const [showProjectModal, setShowProjectModal] = useState(false);
+  const [showModelPicker, setShowModelPicker] = useState(false);
+  const [currentField, setCurrentField] = useState('code');
+
+  function handleSelectProjects(selected, field) {
+    if (field === 'code') {
+      const projectCodes = selected.map(p => p.code).join('; ');
+      setCode(projectCodes);
+    } else if (field === 'name') {
+      const projectNames = selected.map(p => p.name).join('; ');
+      setName(projectNames);
+    }
+    setShowProjectModal(false);
+  }
 
   function toggleStatus(key) {
     if (key === 'all') {
@@ -20,6 +34,12 @@ export default function SearchSection({
     } else {
       setStatuses(prev => ({ ...prev, [key]: !prev[key], all: false }));
     }
+  }
+
+  function handleSelectModels(selected) {
+    const modelCodes = selected.map(m => m.model_code).join('; ');
+    setModels(modelCodes);
+    setShowModelPicker(false);
   }
 
   return (
@@ -33,7 +53,7 @@ export default function SearchSection({
             <div className="input-group input-group-sm">
               <input value={code} onChange={e => setCode(e.target.value)} className="form-control form-control-sm" placeholder="Code" />
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code" onClick={() => setShowProjectModal(true)}><i className="fas fa-search"></i></button>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search code" onClick={() => { setCurrentField('code'); setShowProjectModal(true); }}><i className="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -45,7 +65,7 @@ export default function SearchSection({
             <div className="input-group input-group-sm">
               <input value={name} onChange={e => setName(e.target.value)} className="form-control form-control-sm" placeholder="Project name" />
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search name" onClick={() => setShowProjectModal(true)}><i className="fas fa-search"></i></button>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search name" onClick={() => { setCurrentField('name'); setShowProjectModal(true); }}><i className="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -60,7 +80,7 @@ export default function SearchSection({
             <div className="input-group input-group-sm">
               <input value={models} onChange={e => setModels(e.target.value)} className="form-control form-control-sm" placeholder="Model code / name" />
               <div className="input-group-append">
-                <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Model"><i className="fas fa-search"></i></button>
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Select Model" onClick={() => setShowModelPicker(true)}><i className="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -108,7 +128,12 @@ export default function SearchSection({
           <button type="button" className="btn btn-secondary btn-sm" onClick={clearFilters}><i className="fas fa-times mr-1"></i> Clear</button>
         </div>
       </div>
-      <ProjectModal show={showProjectModal} onHide={() => setShowProjectModal(false)} />
+      <ProjectModal show={showProjectModal} onHide={() => setShowProjectModal(false)} onAdd={handleSelectProjects} field={currentField} />
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={() => setShowModelPicker(false)}
+        onAdd={handleSelectModels}
+      />
     </div>
   );
 }

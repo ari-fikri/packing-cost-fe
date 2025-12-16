@@ -65,14 +65,15 @@ export default function Projects() {
     const noFilters = !code && !name && !models && !manager && statuses.all;
 
     // Filter the projectsData based on the input fields.
-    let filtered = projectsData.filter(p =>
-      (!code || p.code?.toLowerCase().includes(code.toLowerCase())) &&
-      (!name || p.name?.toLowerCase().includes(name.toLowerCase())) &&
-      (!models || (Array.isArray(p.models)
-        ? p.models.join(', ').toLowerCase().includes(models.toLowerCase())
-        : (p.models || '').toLowerCase().includes(models.toLowerCase()))) &&
-      (!manager || p.manager?.toLowerCase().includes(manager.toLowerCase()))
-    );
+    let filtered = projectsData.filter(p => {
+      const codeMatch = !code || code.split(/[;,]/).some(c => c.trim() && p.project_code?.toLowerCase().includes(c.trim().toLowerCase()));
+      const nameMatch = !name || name.split(/[;,]/).some(n => n.trim() && p.project_name?.toLowerCase().includes(n.trim().toLowerCase()));
+      const modelsMatch = !models || models.split(/[;,]/).some(m => m.trim() && (Array.isArray(p.models)
+        ? p.models.map(mod => mod.model_code).join(', ').toLowerCase().includes(m.trim().toLowerCase())
+        : (p.models || '').toLowerCase().includes(m.trim().toLowerCase())));
+      const managerMatch = !manager || p.project_manager?.toLowerCase().includes(manager.toLowerCase());
+      return codeMatch && nameMatch && modelsMatch && managerMatch;
+    });
 
     // Apply status filters if 'all' is not selected.
     if (!statuses.all) {
@@ -82,7 +83,7 @@ export default function Projects() {
       if (statuses.onhold) statusKeys.push('On Hold');
       if (statuses.completed) statusKeys.push('Completed');
       if (statusKeys.length > 0) {
-        filtered = filtered.filter(p => statusKeys.includes(p.status));
+        filtered = filtered.filter(p => statusKeys.includes(p.project_status));
       }
     }
 
