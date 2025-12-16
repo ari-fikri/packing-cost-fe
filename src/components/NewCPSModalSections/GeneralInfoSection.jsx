@@ -57,6 +57,7 @@ export default function GeneralInfoSection(props) {
                   className="form-control form-control-sm"
                   value={model}
                   onChange={(e) => setModel(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <div className="input-group-append">
                   <button
@@ -79,6 +80,7 @@ export default function GeneralInfoSection(props) {
                   className="form-control form-control-sm"
                   value={partNo}
                   onChange={(e) => setPartNo(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <div className="input-group-append">
                   <button
@@ -119,6 +121,7 @@ export default function GeneralInfoSection(props) {
                   className="form-control form-control-sm"
                   value={refCpsNo}
                   onChange={(e) => setRefCpsNo(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <div className="input-group-append">
                   <button
@@ -142,6 +145,7 @@ export default function GeneralInfoSection(props) {
                   className="form-control form-control-sm"
                   value={cfcPjtCode}
                   onChange={(e) => setCfcPjtCode(e.target.value)}
+                  disabled={!config.editable}
                 />
                 <div className="input-group-append">
                   <button

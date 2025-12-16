@@ -73,7 +73,7 @@ export const cpsPageConfig = {
   },
   [DEPARTMENTS.SUPPLIER]: {
     [ROLES.SUPPLIER]: {
-      general: { visible: true, editable: true },
+      general: { visible: true, editable: false },
       pse: { visible: false, editable: false },
       packing: { visible: true, editable: true },
       images: { visible: true, editable: true },
