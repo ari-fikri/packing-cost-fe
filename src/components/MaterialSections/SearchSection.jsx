@@ -31,7 +31,7 @@ export default function SearchSection({
               type="text"
               className="form-control form-control-sm"
               value={materialNo}
-              onChange={e => setMaterialNo(e.target.value)}
+              onChange={handleInputChange(setMaterialNo)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
               placeholder="Material No"
             />
@@ -42,7 +42,7 @@ export default function SearchSection({
               type="text"
               className="form-control form-control-sm"
               value={materialName}
-              onChange={e => setMaterialName(e.target.value)}
+              onChange={handleInputChange(setMaterialName)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
               placeholder="Material Name"
             />
@@ -53,7 +53,7 @@ export default function SearchSection({
               type="text"
               className="form-control form-control-sm"
               value={parentMaterial}
-              onChange={e => setParentMaterial(e.target.value)}
+              onChange={handleInputChange(setParentMaterial)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
               placeholder="Parent Material"
             />
@@ -68,7 +68,7 @@ export default function SearchSection({
               type="text"
               className="form-control form-control-sm"
               value={itemNo}
-              onChange={e => setItemNo(e.target.value)}
+              onChange={handleInputChange(setItemNo)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
               placeholder="Item No"
             />
@@ -79,7 +79,7 @@ export default function SearchSection({
               type="text"
               className="form-control form-control-sm"
               value={price}
-              onChange={e => setPrice(e.target.value)}
+              onChange={handleInputChange(setPrice)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
               placeholder="Price"
             />

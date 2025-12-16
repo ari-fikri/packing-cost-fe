@@ -124,7 +124,7 @@ export default function Suppliers() {
                   type="text"
                   className="form-control form-control-sm"
                   value={filterCode}
-                  onChange={e => setFilterCode(e.target.value)}
+                  onChange={handleInputChange(setFilterCode)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFilter(); } }}
                   placeholder="Supplier Code"
                 />
@@ -137,7 +137,7 @@ export default function Suppliers() {
                   type="text"
                   className="form-control form-control-sm"
                   value={filterName}
-                  onChange={e => setFilterName(e.target.value)}
+                  onChange={handleInputChange(setFilterName)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFilter(); } }}
                   placeholder="Supplier Name"
                 />
@@ -152,7 +152,7 @@ export default function Suppliers() {
                   type="text"
                   className="form-control form-control-sm"
                   value={filterAddress}
-                  onChange={e => setFilterAddress(e.target.value)}
+                  onChange={handleInputChange(setFilterAddress)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFilter(); } }}
                   placeholder="Address"
                 />

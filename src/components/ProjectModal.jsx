@@ -69,6 +69,7 @@ const ProjectModal = ({ show, onHide, onAdd, field = 'code' }) => {
       onSelect(selectedProjects);
     }
     onHide();
+  }
   const handleSelectAll = (checked) => {
     if (checked) {
       setSelectedProjects(results.map(p => p.code));

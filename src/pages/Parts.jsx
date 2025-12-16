@@ -242,7 +242,6 @@ export default function Parts() {
                     className="form-control form-control-sm"
                     value={partNo}
                     onChange={handleInputChange(setPartNo)}
-                    onChange={e => setPartNo(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Part No"
                   />
@@ -268,7 +267,6 @@ export default function Parts() {
                   className="form-control form-control-sm"
                   value={uniqueNo}
                   onChange={handleInputChange(setUniqueNo)}
-                  onChange={e => setUniqueNo(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   placeholder="Unique No"
                 />
@@ -286,7 +284,6 @@ export default function Parts() {
                     className="form-control form-control-sm"
                     value={supplierId}
                     onChange={handleInputChange(setSupplierId)}
-                    onChange={e => setSupplierId(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Supplier ID"
                   />
@@ -306,7 +303,6 @@ export default function Parts() {
                   className="form-control form-control-sm"
                   value={supplierName}
                   onChange={handleInputChange(setSupplierName)}
-                  onChange={e => setSupplierName(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   placeholder="Supplier Name"
                 />
@@ -324,7 +320,6 @@ export default function Parts() {
                     className="form-control form-control-sm"
                     value={parentPart}
                     onChange={handleInputChange(setParentPart)}
-                    onChange={e => setParentPart(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Parent Part"
                   />
