@@ -229,6 +229,7 @@ export default function Parts() {
                     className="form-control form-control-sm"
                     value={partNo}
                     onChange={e => setPartNo(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Part No"
                   />
                   <div className="input-group-append">
@@ -253,6 +254,7 @@ export default function Parts() {
                   className="form-control form-control-sm"
                   value={uniqueNo}
                   onChange={e => setUniqueNo(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   placeholder="Unique No"
                 />
               </div>
@@ -269,6 +271,7 @@ export default function Parts() {
                     className="form-control form-control-sm"
                     value={supplierId}
                     onChange={e => setSupplierId(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Supplier ID"
                   />
                   <div className="input-group-append">
@@ -287,6 +290,7 @@ export default function Parts() {
                   className="form-control form-control-sm"
                   value={supplierName}
                   onChange={e => setSupplierName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   placeholder="Supplier Name"
                 />
               </div>
@@ -303,6 +307,7 @@ export default function Parts() {
                     className="form-control form-control-sm"
                     value={parentPart}
                     onChange={e => setParentPart(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                     placeholder="Parent Part"
                   />
                   <div className="input-group-append">

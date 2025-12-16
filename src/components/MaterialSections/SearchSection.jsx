@@ -26,32 +26,35 @@ export default function SearchSection({
         <div className="col-md-6">
           <div className="form-group">
             <label className="small mb-1">Item No</label>
-            <input 
-              type="text" 
-              className="form-control form-control-sm" 
-              value={materialNo} 
-              onChange={e => setMaterialNo(e.target.value)} 
-              placeholder="Material No" 
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={materialNo}
+              onChange={e => setMaterialNo(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
+              placeholder="Material No"
             />
           </div>
           <div className="form-group">
             <label className="small mb-1">Material Name</label>
-            <input 
-              type="text" 
-              className="form-control form-control-sm" 
-              value={materialName} 
-              onChange={e => setMaterialName(e.target.value)} 
-              placeholder="Material Name" 
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={materialName}
+              onChange={e => setMaterialName(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
+              placeholder="Material Name"
             />
           </div>
           <div className="form-group">
             <label className="small mb-1">Parent Material</label>
-            <input 
-              type="text" 
-              className="form-control form-control-sm" 
-              value={parentMaterial} 
-              onChange={e => setParentMaterial(e.target.value)} 
-              placeholder="Parent Material" 
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={parentMaterial}
+              onChange={e => setParentMaterial(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
+              placeholder="Parent Material"
             />
           </div>
         </div>
@@ -60,22 +63,24 @@ export default function SearchSection({
         <div className="col-md-6">
           <div className="form-group">
             <label className="small mb-1">eWarehouse Item No</label>
-            <input 
-              type="text" 
-              className="form-control form-control-sm" 
-              value={itemNo} 
-              onChange={e => setItemNo(e.target.value)} 
-              placeholder="Item No" 
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={itemNo}
+              onChange={e => setItemNo(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
+              placeholder="Item No"
             />
           </div>
           <div className="form-group">
             <label className="small mb-1">Price</label>
-            <input 
-              type="text" 
-              className="form-control form-control-sm" 
-              value={price} 
-              onChange={e => setPrice(e.target.value)} 
-              placeholder="Price" 
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onFilter(); } }}
+              placeholder="Price"
             />
           </div>
           <div className="form-group">

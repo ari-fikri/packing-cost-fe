@@ -124,6 +124,7 @@ export default function Suppliers() {
                   className="form-control form-control-sm"
                   value={filterCode}
                   onChange={e => setFilterCode(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFilter(); } }}
                   placeholder="Supplier Code"
                 />
               </div>
@@ -136,6 +137,7 @@ export default function Suppliers() {
                   className="form-control form-control-sm"
                   value={filterName}
                   onChange={e => setFilterName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFilter(); } }}
                   placeholder="Supplier Name"
                 />
               </div>
@@ -150,6 +152,7 @@ export default function Suppliers() {
                   className="form-control form-control-sm"
                   value={filterAddress}
                   onChange={e => setFilterAddress(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFilter(); } }}
                   placeholder="Address"
                 />
               </div>
