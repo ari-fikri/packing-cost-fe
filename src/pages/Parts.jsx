@@ -54,12 +54,9 @@ export default function Parts() {
           suppCode: part.supplier_code,
           childParts: part.sub_part || [],
           // Add other fields with default values
-          suffix: 'A',
+          suffix: '00',
           uniqueNo: `UN-00${index + 1}`,
           parentPartNo: null,
-          dimensions: { L: 10, W: 10, H: 10 },
-          qtyBox: 1,
-          totalWeight: 1,
         }));
         setParts(transformed);
         setFilteredParts([]);
