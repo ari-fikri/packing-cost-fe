@@ -356,10 +356,10 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
     if (selection) {
       if (Array.isArray(selection)) {
         // Multi-select mode
-        setModel(selection.map((m) => m.code).join(", "));
+        setModel(selection.map((m) => m.model_code).join(", "));
       } else {
         // Single-select mode
-        setModel(selection.code || "");
+        setModel(selection.model_code || "");
       }
     }
     setModelPickerOpen(false);

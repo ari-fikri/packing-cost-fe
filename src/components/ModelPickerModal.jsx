@@ -259,7 +259,7 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
               </button>
             </div>
             <div>
-              <button className="btn btn-primary mr-2" onClick={handleAdd} type="button">
+              <button className="btn btn-primary mr-2" onClick={handleAdd} type="button" disabled={selectionMode === "multi" ? selectedModels.length === 0 : !selectedModels}>
                 Add <i className="fas fa-check" />
               </button>
               <button className="btn btn-secondary" onClick={onClose} type="button">
