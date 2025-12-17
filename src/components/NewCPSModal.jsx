@@ -136,11 +136,18 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
     fetch(dataUrl)
       .then(res => res.json())
       .then(data => setComparisonData(data));
-    
+
     fetch('/materials.json')
       .then(res => res.json())
       .then(data => setMaterials(data));
   }, []);
+
+  // Auto-fill CPS No for new CPS
+  useEffect(() => {
+    if (!editData && model && partNo) {
+      setCpsNo(`${model}-${partNo}`);
+    }
+  }, [editData, model, partNo]);
 
   // Transform comparison data from cpsComparison.json
   const currentCpsRecord = comparisonData.current;
