@@ -142,9 +142,10 @@ export default function NewModelModal({
 
   // Handler: Destination code change with auto-population logic
   function handleDestinationCodeChange(value) {
-    setDestinationCode(value)                                            // Set the destination code input value
+    const upperValue = value.toUpperCase();
+    setDestinationCode(upperValue)                                        // Set the destination code input value
     // Look up destination details from DESTINATIONS data
-    const destination = DESTINATIONS.find(dest => dest.destCode === value)
+    const destination = DESTINATIONS.find(dest => dest.destCode === upperValue)
     if (destination) {
       // Auto-populate related fields if destination found
       setDestinationCountryCode(destination.code)                        // Set 3-character country code
@@ -219,18 +220,18 @@ export default function NewModelModal({
           <div className="row">
             <div className="col-md-6">
               <label className="small">Model Code <span style={{color: 'red'}}>*</span></label>
-              <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} placeholder="Model Code" disabled={!initialData} style={!initialData ? {backgroundColor: '#f8f9fa'} : {}} />
+              <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value.toUpperCase())} placeholder="Model Code" disabled={!initialData} style={!initialData ? {backgroundColor: '#f8f9fa'} : {}} />
             </div>
             <div className="col-md-6">
               <label className="small">Model Name</label>
-              <input className="form-control form-control-sm mb-2" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Model Name" />
+              <input className="form-control form-control-sm mb-2" value={newName} onChange={e => setNewName(e.target.value.toUpperCase())} placeholder="Model Name" />
             </div>
           </div>
           
           <div className="row">
             <div className="col-md-6">
               <label className="small">CFC</label>
-              <input className="form-control form-control-sm mb-2" value={modelCfc} onChange={e => setModelCfc(e.target.value)} placeholder="CFC" />
+              <input className="form-control form-control-sm mb-2" value={modelCfc} onChange={e => setModelCfc(e.target.value.toUpperCase())} placeholder="CFC" />
             </div>
             <div className="col-md-6">
               <label className="small">Type</label>
@@ -247,7 +248,7 @@ export default function NewModelModal({
           <div className="row">
             <div className="col-md-6">
               <label className="small">Project Code <span style={{color: 'red'}}>*</span></label>
-              <input className="form-control form-control-sm mb-2" value={projectCode} onChange={e => setProjectCode(e.target.value)} placeholder="Project Code" />
+              <input className="form-control form-control-sm mb-2" value={projectCode} onChange={e => setProjectCode(e.target.value.toUpperCase())} placeholder="Project Code" />
             </div>
             <div className="col-md-6">
               <label className="small">Project Name</label>
@@ -259,7 +260,7 @@ export default function NewModelModal({
           <div className="row">
             <div className="col-md-6">
               <label className="small">Implementation Period <span style={{color: 'red'}}>*</span> <span className="text-muted ml-2"><i>e.g., 02.2025</i></span></label>
-              <input className="form-control form-control-sm mb-2" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value)} placeholder="Implementation Period" />
+              <input className="form-control form-control-sm mb-2" value={implementationPeriod} onChange={e => setImplementationPeriod(e.target.value.toUpperCase())} placeholder="Implementation Period" />
             </div>
             <div className="col-md-6">
               <label className="small">Destination Code <span style={{color: 'red'}}>*</span></label>
@@ -288,7 +289,7 @@ export default function NewModelModal({
           <div className="row">
             <div className="col-md-12">
               <label className="small">Remark</label>
-              <input className="form-control form-control-sm mb-2" value={newRemark} onChange={e => setNewRemark(e.target.value)} placeholder="Remark" />
+              <input className="form-control form-control-sm mb-2" value={newRemark} onChange={e => setNewRemark(e.target.value.toUpperCase())} placeholder="Remark" />
             </div>
           </div>
 
@@ -342,7 +343,7 @@ export default function NewModelModal({
                   /* Parts Data Rows - Map through parts array */
                   parts.map((p, idx) => (
                     <tr key={idx}>
-                      <td><input type="text" className="form-control form-control-sm" value={p.partNo} onChange={e => handlePartDataChange(idx, 'partNo', e.target.value)} /></td>
+                      <td><input type="text" className="form-control form-control-sm" value={p.partNo} onChange={e => handlePartDataChange(idx, 'partNo', e.target.value.toUpperCase())} /></td>
                       <td><input type="text" className="form-control form-control-sm" value={p.suffix} readOnly /></td>
                       <td><input type="text" className="form-control form-control-sm" value={p.name} readOnly /></td>
                       <td><input type="text" className="form-control form-control-sm" value={p.parent} readOnly /></td>
