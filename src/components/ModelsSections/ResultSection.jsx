@@ -31,6 +31,7 @@ export default function ResultSection({
               <th style={{ textAlign: 'center' }}>Country Code</th>
               <th style={{ textAlign: 'center' }}>Country</th>
               <th style={{ textAlign: 'center' }}>Remark</th>
+              <th style={{ textAlign: 'center' }}>Katashiki</th>
               <th style={{ textAlign: 'center' }}>Parts</th>
               <th style={{ width: 120, textAlign: 'center' }}>Action</th>
             </tr>
@@ -38,7 +39,7 @@ export default function ResultSection({
           <tbody style={{ fontSize: '0.8rem' }}>
             {paginatedModels.length === 0 ? (
               <tr>
-                <td colSpan="13" className="text-center">No models found</td>
+                <td colSpan="14" className="text-center">No models found</td>
               </tr>
             ) : (
               paginatedModels.map((m, idx) => {
@@ -56,6 +57,15 @@ export default function ResultSection({
                   <td style={{ textAlign: 'center' }}>{destination ? destination.code : ''}</td>
                   <td style={{ textAlign: 'center' }}>{destination ? destination.country : ''}</td>
                   <td style={{ textAlign: 'center' }}>{m.model_remark}</td>
+                  <td style={{ textAlign: 'center' }}>
+                    {Array.isArray(m.katashiki) && m.katashiki.length > 0 ? (
+                      m.katashiki.map((k, i) => (
+                        <span key={i} className="badge badge-primary mr-1">{k.string} : {k.number}</span>
+                      ))
+                    ) : (
+                      '-'
+                    )}
+                  </td>
                   <td style={{ textAlign: 'right' }}>{Array.isArray(m.parts) ? m.parts.length : 0}</td>
                   <td>
                     <button type="button" className="btn btn-sm btn-outline-primary mr-1" onClick={() => handleEditModel((currentPage - 1) * pageSize + idx)}>

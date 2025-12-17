@@ -7,6 +7,12 @@
     "model_destination_code": "807B",
     "model_remark": "Proto 1",
     "model_type": "eng",
+    "katashiki": [
+      {"string": "AD", "number": 10},
+      {"string": "AU", "number": 20},
+      {"string": "AF", "number": 30},
+      {"string": "AC", "number": 40}
+    ],
     "project": {
       "project_code": "024J",
       "project_name": "Project 1",
@@ -22,6 +28,10 @@
     "model_destination_code": "722C",
     "model_remark": " Proto 2",
     "model_type": "lot",
+    "katashiki": [
+      {"string": "AD", "number": 15},
+      {"string": "AU", "number": 25}
+    ],
     "project": {
       "project_code": "024J",
       "project_name": "Project 1",
@@ -37,6 +47,11 @@
     "model_destination_code": "722C",
     "model_remark": "",
     "model_type": "eng",
+    "katashiki": [
+      {"string": "AD", "number": 12},
+      {"string": "AU", "number": 22},
+      {"string": "AF", "number": 32}
+    ],
     "project": {
       "project_code": "286W",
       "project_name": "Project 2",
@@ -52,6 +67,7 @@
     "model_destination_code": "301B",
     "model_remark": "",
     "model_type": "eng",
+    "katashiki": [],
     "project": {
       "project_code": "286W",
       "project_name": "Project 2",
@@ -67,6 +83,10 @@
     "model_destination_code": "807B",
     "model_remark": "",
     "model_type": "eng",
+    "katashiki": [
+      {"string": "AD", "number": 18},
+      {"string": "AU", "number": 28}
+    ],
     "project": {
       "project_code": "286W",
       "project_name": "Project 2",
