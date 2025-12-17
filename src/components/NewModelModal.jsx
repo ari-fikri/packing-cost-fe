@@ -86,6 +86,14 @@ export default function NewModelModal({
     }
   }, [projectCode]);
 
+  // Auto-fill model code for new models
+  useEffect(() => {
+    if (!initialData) {
+      const combined = `${projectCode}-${destinationCode}-${modelCfc}${modelType}${implementationPeriod}`;
+      setNewCode(combined);
+    }
+  }, [initialData, projectCode, destinationCode, modelCfc, modelType, implementationPeriod]);
+
   // === EVENT HANDLER FUNCTIONS ===
   
   // Handler: Open part picker modal
@@ -211,7 +219,7 @@ export default function NewModelModal({
           <div className="row">
             <div className="col-md-6">
               <label className="small">Model Code <span style={{color: 'red'}}>*</span></label>
-              <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} placeholder="Model Code" />
+              <input className="form-control form-control-sm mb-2" value={newCode} onChange={e => setNewCode(e.target.value)} placeholder="Model Code" disabled={!initialData} style={!initialData ? {backgroundColor: '#f8f9fa'} : {}} />
             </div>
             <div className="col-md-6">
               <label className="small">Model Name</label>
