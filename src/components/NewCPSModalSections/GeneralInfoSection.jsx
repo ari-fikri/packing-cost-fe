@@ -44,6 +44,7 @@ export default function GeneralInfoSection(props) {
                 value={cpsNo}
                 onChange={(e) => setCpsNo(e.target.value)}
                 disabled={!config.editable}
+                readOnly
                 placeholder="CPSxxxx..."
               />
             </div>
