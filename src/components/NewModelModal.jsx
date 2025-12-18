@@ -297,7 +297,7 @@ export default function NewModelModal({
           {/* === KATASHIKI (FLEX, input vertical, plus nempel kanan) === */}
           {/* === KATASHIKI (FLEX, input vertical, plus nempel kanan) === */}
           <div className="kat-wrap mb-3">
-            <div className="kat-title">Katashiki</div>
+            <div className="kat-title">Katashiiki</div>
 
             <div className="kat-flex">
               <div className="kat-list">
@@ -309,7 +309,7 @@ export default function NewModelModal({
                       type="button"
                       className="kat-plus kat-plus--sm"
                       onClick={() => setKatashiki((prev) => [...prev, { string: "", number: 0 }])}
-                      title="Add Katashiki"
+                      title="Add Katashiiki"
                     >
                       +
                     </button>
@@ -366,7 +366,7 @@ export default function NewModelModal({
                       type="button"
                       className="kat-plus"
                       onClick={() => setKatashiki((prev) => [...prev, { string: "", number: 0 }])}
-                      title="Add Katashiki"
+                      title="Add Katashiiki"
                     >
                       +
                     </button>

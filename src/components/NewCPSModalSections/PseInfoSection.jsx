@@ -219,7 +219,7 @@ export default function PseInfoSection(props) {
               </div>
 
               <div className="col-12 mt-2">
-                <label className="small mb-1">Katashiki (AD/AU/AF/AX)</label>
+                <label className="small mb-1">Katashiiki (AD/AU/AF/AX)</label>
                 <div className="form-row">
                   <div className="col">
                     <input

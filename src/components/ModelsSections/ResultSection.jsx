@@ -31,7 +31,7 @@ export default function ResultSection({
               <th style={{ textAlign: 'center' }}>Country Code</th>
               <th style={{ textAlign: 'center' }}>Country</th>
               <th style={{ textAlign: 'center' }}>Remark</th>
-              <th style={{ textAlign: 'center' }}>Katashiki</th>
+              <th style={{ textAlign: 'center' }}>Katashiiki</th>
               <th style={{ textAlign: 'center' }}>Parts</th>
               <th style={{ width: 120, textAlign: 'center' }}>Action</th>
             </tr>
