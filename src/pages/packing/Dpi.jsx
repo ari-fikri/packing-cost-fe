@@ -33,8 +33,7 @@ export default function DPI() {
     'part_status', 'dtl_part_status', 'pack_spec_status', 'weight_pc', 'qty_box',
     'pse_info', 'packing_plant', 'packing_plant_current', 'packing_plant_next',
     'vanning_plant', 'vanning_plant_current', 'vanning_plant_next', 'order_pattern',
-    'order_pattern_current', 'order_pattern_next', 'katashiiki', 'katashiiki_ad', 'katashiiki_au',
-    'katashiiki_af', 'katashiiki_ax', 'importer_line_process', 'case_code', 'box_number',
+    'order_pattern_current', 'order_pattern_next', 'katashiiki', 'importer_line_process', 'case_code', 'box_number',
     'renban', 'renban_eff', 'packing_process', 'packing_process_boxing', 'packing_process_stacking',
     'logistic_info', 'dock_code', 'address', 'process_type',
     'images', 'part_image', 'packing_image', 'outer_image', 'qkp_image', 'bkp_image'

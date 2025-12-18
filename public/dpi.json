@@ -41,12 +41,24 @@
           "order_pattern_curr": "A1",
           "order_pattern_next": "A1",
           "category": "CAT-1",
-          "katashiki": {
-            "AD": "1",
-            "AU": "1",
-            "AF": "1",
-            "AX": "1"
-          },
+          "katashiki": [
+            {
+              "string": "AD",
+              "number": 1
+            },
+            {
+              "string": "AU",
+              "number": 1
+            },
+            {
+              "string": "AF",
+              "number": 1
+            },
+            {
+              "string": "AX",
+              "number": 1
+            }
+          ],
           "importer_line_process": "ILP-1",
           "case_code": "CC-001",
           "box_number": "B-001",
@@ -213,7 +225,7 @@
               "material_name": "Titanium Component",
               "parentMaterial": "Titanium",
               "itemNo": "ITM008",
-              "price": 850.0,
+              "price": 850,
               "materialType": "Module",
               "createdDate": "2024-03-01",
               "dimension_width": 180,
@@ -389,7 +401,7 @@
               "material_name": "Steel Sheet",
               "parentMaterial": "Steel",
               "itemNo": "ITM001",
-              "price": 150.0,
+              "price": 150,
               "materialType": "Outer",
               "createdDate": "2024-01-15",
               "dimension_width": 1365,
@@ -418,7 +430,7 @@
               "material_name": "Aluminum Frame",
               "parentMaterial": "Aluminum",
               "itemNo": "ITM004",
-              "price": 200.0,
+              "price": 200,
               "materialType": "Outer",
               "createdDate": "2024-02-10",
               "dimension_width": 1129,
@@ -447,7 +459,7 @@
               "material_name": "Carbon Fiber Panel",
               "parentMaterial": "Carbon Fiber",
               "itemNo": "ITM006",
-              "price": 350.0,
+              "price": 350,
               "materialType": "Outer",
               "createdDate": "2024-02-20",
               "dimension_width": 1689,
@@ -742,12 +754,24 @@
           "order_pattern_curr": "",
           "order_pattern_next": "",
           "category": "",
-          "katashiki": {
-            "AD": "1",
-            "AU": "2",
-            "AF": "2",
-            "AX": "1"
-          },
+          "katashiki": [
+            {
+              "string": "AD",
+              "number": 1
+            },
+            {
+              "string": "AU",
+              "number": 2
+            },
+            {
+              "string": "AF",
+              "number": 2
+            },
+            {
+              "string": "AX",
+              "number": 1
+            }
+          ],
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
@@ -914,7 +938,7 @@
               "material_name": "Titanium Component",
               "parentMaterial": "Titanium",
               "itemNo": "ITM008",
-              "price": 850.0,
+              "price": 850,
               "materialType": "Module",
               "createdDate": "2024-03-01",
               "dimension_width": 180,
@@ -1090,7 +1114,7 @@
               "material_name": "Steel Sheet",
               "parentMaterial": "Steel",
               "itemNo": "ITM001",
-              "price": 150.0,
+              "price": 150,
               "materialType": "Outer",
               "createdDate": "2024-01-15",
               "dimension_width": 1365,
@@ -1119,7 +1143,7 @@
               "material_name": "Aluminum Frame",
               "parentMaterial": "Aluminum",
               "itemNo": "ITM004",
-              "price": 200.0,
+              "price": 200,
               "materialType": "Outer",
               "createdDate": "2024-02-10",
               "dimension_width": 1129,
@@ -1148,7 +1172,7 @@
               "material_name": "Carbon Fiber Panel",
               "parentMaterial": "Carbon Fiber",
               "itemNo": "ITM006",
-              "price": 350.0,
+              "price": 350,
               "materialType": "Outer",
               "createdDate": "2024-02-20",
               "dimension_width": 1689,
@@ -1444,12 +1468,24 @@
           "order_pattern_curr": "KRW 1",
           "order_pattern_next": "KRW 2",
           "category": "",
-          "katashiki": {
-            "AD": "1",
-            "AU": "2",
-            "AF": "2",
-            "AX": "1"
-          },
+          "katashiki": [
+            {
+              "string": "AD",
+              "number": 1
+            },
+            {
+              "string": "AU",
+              "number": 2
+            },
+            {
+              "string": "AF",
+              "number": 2
+            },
+            {
+              "string": "AX",
+              "number": 1
+            }
+          ],
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
@@ -1616,7 +1652,7 @@
               "material_name": "Titanium Component",
               "parentMaterial": "Titanium",
               "itemNo": "ITM008",
-              "price": 850.0,
+              "price": 850,
               "materialType": "Module",
               "createdDate": "2024-03-01",
               "dimension_width": 180,
@@ -1792,7 +1828,7 @@
               "material_name": "Steel Sheet",
               "parentMaterial": "Steel",
               "itemNo": "ITM001",
-              "price": 150.0,
+              "price": 150,
               "materialType": "Outer",
               "createdDate": "2024-01-15",
               "dimension_width": 1365,
@@ -1821,7 +1857,7 @@
               "material_name": "Aluminum Frame",
               "parentMaterial": "Aluminum",
               "itemNo": "ITM004",
-              "price": 200.0,
+              "price": 200,
               "materialType": "Outer",
               "createdDate": "2024-02-10",
               "dimension_width": 1129,
@@ -1850,7 +1886,7 @@
               "material_name": "Carbon Fiber Panel",
               "parentMaterial": "Carbon Fiber",
               "itemNo": "ITM006",
-              "price": 350.0,
+              "price": 350,
               "materialType": "Outer",
               "createdDate": "2024-02-20",
               "dimension_width": 1689,
@@ -2146,12 +2182,24 @@
           "order_pattern_curr": "",
           "order_pattern_next": "",
           "category": "",
-          "katashiki": {
-            "AD": "",
-            "AU": "",
-            "AF": "",
-            "AX": ""
-          },
+          "katashiki": [
+            {
+              "string": "AD",
+              "number": 0
+            },
+            {
+              "string": "AU",
+              "number": 0
+            },
+            {
+              "string": "AF",
+              "number": 0
+            },
+            {
+              "string": "AX",
+              "number": 0
+            }
+          ],
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
@@ -2318,7 +2366,7 @@
               "material_name": "Titanium Component",
               "parentMaterial": "Titanium",
               "itemNo": "ITM008",
-              "price": 850.0,
+              "price": 850,
               "materialType": "Module",
               "createdDate": "2024-03-01",
               "dimension_width": 180,
@@ -2494,7 +2542,7 @@
               "material_name": "Steel Sheet",
               "parentMaterial": "Steel",
               "itemNo": "ITM001",
-              "price": 150.0,
+              "price": 150,
               "materialType": "Outer",
               "createdDate": "2024-01-15",
               "dimension_width": 1365,
@@ -2523,7 +2571,7 @@
               "material_name": "Aluminum Frame",
               "parentMaterial": "Aluminum",
               "itemNo": "ITM004",
-              "price": 200.0,
+              "price": 200,
               "materialType": "Outer",
               "createdDate": "2024-02-10",
               "dimension_width": 1129,
@@ -2552,7 +2600,7 @@
               "material_name": "Carbon Fiber Panel",
               "parentMaterial": "Carbon Fiber",
               "itemNo": "ITM006",
-              "price": 350.0,
+              "price": 350,
               "materialType": "Outer",
               "createdDate": "2024-02-20",
               "dimension_width": 1689,
@@ -2848,12 +2896,24 @@
           "order_pattern_curr": "",
           "order_pattern_next": "",
           "category": "",
-          "katashiki": {
-            "AD": "",
-            "AU": "",
-            "AF": "",
-            "AX": ""
-          },
+          "katashiki": [
+            {
+              "string": "AD",
+              "number": 0
+            },
+            {
+              "string": "AU",
+              "number": 0
+            },
+            {
+              "string": "AF",
+              "number": 0
+            },
+            {
+              "string": "AX",
+              "number": 0
+            }
+          ],
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
@@ -3020,7 +3080,7 @@
               "material_name": "Titanium Component",
               "parentMaterial": "Titanium",
               "itemNo": "ITM008",
-              "price": 850.0,
+              "price": 850,
               "materialType": "Module",
               "createdDate": "2024-03-01",
               "dimension_width": 180,
@@ -3196,7 +3256,7 @@
               "material_name": "Steel Sheet",
               "parentMaterial": "Steel",
               "itemNo": "ITM001",
-              "price": 150.0,
+              "price": 150,
               "materialType": "Outer",
               "createdDate": "2024-01-15",
               "dimension_width": 1365,
@@ -3225,7 +3285,7 @@
               "material_name": "Aluminum Frame",
               "parentMaterial": "Aluminum",
               "itemNo": "ITM004",
-              "price": 200.0,
+              "price": 200,
               "materialType": "Outer",
               "createdDate": "2024-02-10",
               "dimension_width": 1129,
@@ -3254,7 +3314,7 @@
               "material_name": "Carbon Fiber Panel",
               "parentMaterial": "Carbon Fiber",
               "itemNo": "ITM006",
-              "price": 350.0,
+              "price": 350,
               "materialType": "Outer",
               "createdDate": "2024-02-20",
               "dimension_width": 1689,
@@ -3550,12 +3610,24 @@
           "order_pattern_curr": "",
           "order_pattern_next": "",
           "category": "",
-          "katashiki": {
-            "AD": "",
-            "AU": "",
-            "AF": "",
-            "AX": ""
-          },
+          "katashiki": [
+            {
+              "string": "AD",
+              "number": 0
+            },
+            {
+              "string": "AU",
+              "number": 0
+            },
+            {
+              "string": "AF",
+              "number": 0
+            },
+            {
+              "string": "AX",
+              "number": 0
+            }
+          ],
           "importer_line_process": "",
           "case_code": "",
           "box_number": "",
@@ -3722,7 +3794,7 @@
               "material_name": "Titanium Component",
               "parentMaterial": "Titanium",
               "itemNo": "ITM008",
-              "price": 850.0,
+              "price": 850,
               "materialType": "Module",
               "createdDate": "2024-03-01",
               "dimension_width": 180,
@@ -3898,7 +3970,7 @@
               "material_name": "Steel Sheet",
               "parentMaterial": "Steel",
               "itemNo": "ITM001",
-              "price": 150.0,
+              "price": 150,
               "materialType": "Outer",
               "createdDate": "2024-01-15",
               "dimension_width": 1365,
@@ -3927,7 +3999,7 @@
               "material_name": "Aluminum Frame",
               "parentMaterial": "Aluminum",
               "itemNo": "ITM004",
-              "price": 200.0,
+              "price": 200,
               "materialType": "Outer",
               "createdDate": "2024-02-10",
               "dimension_width": 1129,
@@ -3956,7 +4028,7 @@
               "material_name": "Carbon Fiber Panel",
               "parentMaterial": "Carbon Fiber",
               "itemNo": "ITM006",
-              "price": 350.0,
+              "price": 350,
               "materialType": "Outer",
               "createdDate": "2024-02-20",
               "dimension_width": 1689,

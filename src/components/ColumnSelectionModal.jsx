@@ -56,16 +56,7 @@ const nodes = [
                     { value: 'order_pattern_next', label: 'Next' },
                 ]
             },
-            {
-                value: 'katashiiki',
-                label: 'Katashiiki',
-                children: [
-                    { value: 'katashiiki_ad', label: 'AD' },
-                    { value: 'katashiiki_au', label: 'AU' },
-                    { value: 'katashiiki_af', label: 'AF' },
-                    { value: 'katashiiki_ax', label: 'AX' },
-                ]
-            },
+            { value: 'katashiiki', label: 'Katashiiki' },
             { value: 'importer_line_process', label: 'Importer Line Process' },
             { value: 'case_code', label: 'Case Code' },
             { value: 'box_number', label: 'Box Number' },
