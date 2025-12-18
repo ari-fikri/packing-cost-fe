@@ -247,7 +247,7 @@ export default function PseInfoSection(props) {
                                   return next;
                                 });
                               }}
-                              disabled={!config.editable}
+                              disabled
                             />
                           </div>
                         </div>
