@@ -202,12 +202,13 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
                       <th>Impl. Period</th>
                       <th>Type</th>
                       <th>Remark</th>
+                      <th>Katashiiki</th>
                     </tr>
                   </thead>
                   <tbody>
                     {currentModels.length === 0 ? (
                       <tr>
-                        <td colSpan="8" className="text-center text-muted" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
+                        <td colSpan="9" className="text-center text-muted" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
                           No models found
                         </td>
                       </tr>
@@ -229,6 +230,15 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
                           <td>{m.model_implementation_period}</td>
                           <td>{m.model_type}</td>
                           <td>{m.model_remark}</td>
+                          <td>
+                            {Array.isArray(m.katashiki) && m.katashiki.length > 0 ? (
+                              m.katashiki.map((k, i) => (
+                                <span key={i} className="badge badge-primary mr-1">{k.string} : {k.number}</span>
+                              ))
+                            ) : (
+                              '-'
+                            )}
+                          </td>
                         </tr>
                       ))
                     )}
