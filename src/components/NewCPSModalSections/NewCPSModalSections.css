@@ -50,13 +50,10 @@
 
 .kat-box{
   width: 180px;          /* ⬅️ sebelumnya 220px */
-  border: 2px solid #000;
-  border-radius: 8px;
   padding: 8px;
   background: #fff;
-
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 6px;
 }
 
@@ -68,6 +65,14 @@
   border-radius: 6px;
   padding: 0 8px;
   font-size: 13px;
+}
+
+.kat-label{
+  height: 28px;
+  padding: 0 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
 }
 
 .kat-input-num{

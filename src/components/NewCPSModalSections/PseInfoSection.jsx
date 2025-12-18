@@ -232,13 +232,7 @@ export default function PseInfoSection(props) {
                       katashiki.map((k, idx) => (
                         <div className="kat-item" key={idx}>
                           <div className="kat-box">
-                            <input
-                              type="text"
-                              className="kat-input"
-                              placeholder="Code"
-                              value={k.string}
-                              disabled
-                            />
+                            <div className="kat-label">{k.string}:</div>
 
                             <input
                               type="number"
