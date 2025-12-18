@@ -24,6 +24,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   const [activeTab, setActiveTab] = useState('general');
   const [comparisonData, setComparisonData] = useState({ current: {}, comparisons: [] });
   const [materials, setMaterials] = useState([]);
+  const [modelsData, setModelsData] = useState([]);
 
   // General states
   const [cpsNo, setCpsNo] = useState('')
@@ -49,7 +50,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   const [orderPatternCurr, setOrderPatternCurr] = useState('')
   const [orderPatternNext, setOrderPatternNext] = useState('')
   const [category, setCategory] = useState('')
-  const [katashiki, setKatashiki] = useState({ AD: '', AU: '', AF: '', AX: '' })
+  const [katashiki, setKatashiki] = useState([])
   const [importerLineProcess, setImporterLineProcess] = useState('')
   const [caseCode, setCaseCode] = useState('')
   const [boxNumber, setBoxNumber] = useState('')
@@ -140,6 +141,10 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
     fetch('/materials.json')
       .then(res => res.json())
       .then(data => setMaterials(data));
+
+    fetch('/models.json')
+      .then(res => res.json())
+      .then(data => setModelsData(data));
   }, []);
 
   // Auto-fill CPS No for new CPS
@@ -179,7 +184,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
           setOrderPatternCurr(editData.pseInfo.orderPatternCurr || '');
           setOrderPatternNext(editData.pseInfo.orderPatternNext || '');
           setCategory(editData.pseInfo.category || '');
-          setKatashiki(editData.pseInfo.katashiki || { AD: '', AU: '', AF: '', AX: '' });
+          setKatashiki(editData.pseInfo.katashiki || []);
           setImporterLineProcess(editData.pseInfo.importerLineProcess || '');
           setCaseCode(editData.pseInfo.caseCode || '');
           setBoxNumber(editData.pseInfo.boxNumber || '');
@@ -229,7 +234,7 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
         setPackingPlantCurr(''); setPackingPlantNext('');
         setVanningPlantCurr(''); setVanningPlantNext('');
         setOrderPatternCurr(''); setOrderPatternNext('');
-        setCategory(''); setKatashiki({ AD: '', AU: '', AF: '', AX: '' });
+        setCategory(''); setKatashiki([]);
         setImporterLineProcess(''); setCaseCode(''); setBoxNumber(''); setRenban(''); setRenbanEff('');
         setPackingProcessBoxing(''); setPackingProcessStacking('');
         setPseOuterRows([]);
@@ -367,6 +372,12 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
       } else {
         // Single-select mode
         setModel(selection.model_code || "");
+        // Populate katashiki and cfc from selected model
+        const selectedModel = modelsData.find(m => m.model_code === selection.model_code);
+        if (selectedModel) {
+          setKatashiki(selectedModel.katashiki || []);
+          setCfcPjtCode(selectedModel.model_cfc || '');
+        }
       }
     }
     setModelPickerOpen(false);

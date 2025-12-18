@@ -218,52 +218,47 @@ export default function PseInfoSection(props) {
                 </select>
               </div>
 
-              <div className="col-12 mt-2">
-                <label className="small mb-1">Katashiiki (AD/AU/AF/AX)</label>
-                <div className="form-row">
-                  <div className="col">
-                    <input
-                      className="form-control form-control-sm"
-                      placeholder="AD"
-                      value={katashiki.AD}
-                      onChange={(e) =>
-                        setKatashiki((k) => ({ ...k, AD: e.target.value }))
-                      }
-                      disabled={!config.editable}
-                    />
-                  </div>
-                  <div className="col">
-                    <input
-                      className="form-control form-control-sm"
-                      placeholder="AU"
-                      value={katashiki.AU}
-                      onChange={(e) =>
-                        setKatashiki((k) => ({ ...k, AU: e.target.value }))
-                      }
-                      disabled={!config.editable}
-                    />
-                  </div>
-                  <div className="col">
-                    <input
-                      className="form-control form-control-sm"
-                      placeholder="AF"
-                      value={katashiki.AF}
-                      onChange={(e) =>
-                        setKatashiki((k) => ({ ...k, AF: e.target.value }))
-                      }
-                      disabled={!config.editable}
-                    />
-                  </div>
-                  <div className="col">
-                    <input
-                      className="form-control form-control-sm"
-                      placeholder="AX"
-                      value={katashiki.AX}
-                      onChange={(e) =>
-                        setKatashiki((k) => ({ ...k, AX: e.target.value }))
-                      }
-                      disabled={!config.editable}
-                    />
+              {/* === KATASHIKI (flex, input vertical, no add/remove, code disabled) === */}
+              <div className="kat-wrap mb-3">
+                <div className="kat-title">Katashiiki</div>
+
+                <div className="kat-flex">
+                  <div className="kat-list">
+                    {katashiki.length === 0 ? (
+                      <div className="kat-empty text-muted">
+                        <span>No data katashiiki.</span>
+                      </div>
+                    ) : (
+                      katashiki.map((k, idx) => (
+                        <div className="kat-item" key={idx}>
+                          <div className="kat-box">
+                            <input
+                              type="text"
+                              className="kat-input"
+                              placeholder="Code"
+                              value={k.string}
+                              disabled
+                            />
+
+                            <input
+                              type="number"
+                              className="kat-input kat-input-num"
+                              placeholder="0"
+                              value={k.number}
+                              onChange={(e) => {
+                                const v = Number(e.target.value);
+                                setKatashiki((prev) => {
+                                  const next = [...prev];
+                                  next[idx] = { ...next[idx], number: v };
+                                  return next;
+                                });
+                              }}
+                              disabled={!config.editable}
+                            />
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
