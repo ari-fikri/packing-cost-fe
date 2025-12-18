@@ -43,20 +43,16 @@
           "category": "CAT-1",
           "katashiki": [
             {
-              "string": "AD",
-              "number": 1
-            },
-            {
-              "string": "AU",
-              "number": 1
+              "string": "AE",
+              "number": 10
             },
             {
               "string": "AF",
-              "number": 1
+              "number": 6
             },
             {
-              "string": "AX",
-              "number": 1
+              "string": "AC",
+              "number": 6
             }
           ],
           "importer_line_process": "ILP-1",
@@ -756,19 +752,7 @@
           "category": "",
           "katashiki": [
             {
-              "string": "AD",
-              "number": 1
-            },
-            {
-              "string": "AU",
-              "number": 2
-            },
-            {
               "string": "AF",
-              "number": 2
-            },
-            {
-              "string": "AX",
               "number": 1
             }
           ],
@@ -1474,16 +1458,8 @@
               "number": 1
             },
             {
-              "string": "AU",
-              "number": 2
-            },
-            {
-              "string": "AF",
-              "number": 2
-            },
-            {
-              "string": "AX",
-              "number": 1
+              "string": "AB",
+              "number": 6
             }
           ],
           "importer_line_process": "",
@@ -2184,20 +2160,20 @@
           "category": "",
           "katashiki": [
             {
-              "string": "AD",
-              "number": 0
+              "string": "AX",
+              "number": 9
+            },
+            {
+              "string": "AE",
+              "number": 1
             },
             {
               "string": "AU",
-              "number": 0
+              "number": 5
             },
             {
               "string": "AF",
-              "number": 0
-            },
-            {
-              "string": "AX",
-              "number": 0
+              "number": 6
             }
           ],
           "importer_line_process": "",
@@ -2899,19 +2875,15 @@
           "katashiki": [
             {
               "string": "AD",
-              "number": 0
+              "number": 10
             },
             {
-              "string": "AU",
-              "number": 0
-            },
-            {
-              "string": "AF",
-              "number": 0
+              "string": "AB",
+              "number": 7
             },
             {
               "string": "AX",
-              "number": 0
+              "number": 8
             }
           ],
           "importer_line_process": "",
@@ -3612,20 +3584,20 @@
           "category": "",
           "katashiki": [
             {
-              "string": "AD",
-              "number": 0
+              "string": "AC",
+              "number": 9
+            },
+            {
+              "string": "AB",
+              "number": 6
             },
             {
               "string": "AU",
-              "number": 0
+              "number": 3
             },
             {
               "string": "AF",
-              "number": 0
-            },
-            {
-              "string": "AX",
-              "number": 0
+              "number": 5
             }
           ],
           "importer_line_process": "",
