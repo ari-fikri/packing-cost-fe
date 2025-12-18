@@ -386,33 +386,54 @@ export default function NewCPSModal({ show, onClose, onSave, editData, config })
   function handleMaterialPicked(material) {
     if (material) {
       const targetIndex = materialPickerTarget;
-      if (materialFilter === 'outer' || materialFilter === 'module') {
+      const filterLower = materialFilter.toLowerCase();
+      if (filterLower === 'outer' || filterLower === 'module' || filterLower === 'outer-material') {
+        const isPackingOuter = filterLower === 'outer-material';
         const newRowData = {
           materialNo: material.materialNo,
           name: material.materialName,
-          supplier: material.supplierName,
+          [isPackingOuter ? 'supplierName' : 'supplier']: material.supplierName,
           L: material.dimension_length,
           W: material.dimension_width,
           H: material.dimension_height,
           wtPerPc: material.unitWeight,
         };
         if (targetIndex === 'new') {
-          setNewPseOuter(n => ({ ...n, ...newRowData }));
+          if (isPackingOuter) {
+            setNewOuter(n => ({ ...n, ...newRowData }));
+          } else {
+            setNewPseOuter(n => ({ ...n, ...newRowData }));
+          }
+        } else if (targetIndex === null) {
+          setNewOuter(n => ({ ...n, ...newRowData }));
         } else {
-          const updatedRows = [...pseOuterRows];
-          updatedRows[targetIndex] = { ...updatedRows[targetIndex], ...newRowData };
-          setPseOuterRows(updatedRows);
+          if (isPackingOuter) {
+            const updatedRows = [...outerRows];
+            updatedRows[targetIndex] = { ...updatedRows[targetIndex], ...newRowData };
+            setOuterRows(updatedRows);
+          } else {
+            const updatedRows = [...pseOuterRows];
+            updatedRows[targetIndex] = { ...updatedRows[targetIndex], ...newRowData };
+            setPseOuterRows(updatedRows);
+          }
         }
-      } else if (materialFilter === 'inner') {
-        setNewInner({
-          ...newInner,
+      } else if (filterLower === 'inner' || filterLower === 'box') {
+        const newRowData = {
           materialNo: material.materialNo,
           name: material.materialName,
-          L: material.dimension_length,
-          W: material.dimension_width,
-          H: material.dimension_height,
+          supplierName: material.supplierName,
+          L: material.dimension_inner_length,
+          W: material.dimension_inner_width,
+          H: material.dimension_inner_height,
           wtPerPc: material.unitWeight,
-        });
+        };
+        if (targetIndex === 'new' || targetIndex === null) {
+          setNewInner(n => ({ ...n, ...newRowData }));
+        } else {
+          const updatedRows = [...innerRows];
+          updatedRows[targetIndex] = { ...updatedRows[targetIndex], ...newRowData };
+          setInnerRows(updatedRows);
+        }
       }
     }
     setMaterialPickerOpen(false);

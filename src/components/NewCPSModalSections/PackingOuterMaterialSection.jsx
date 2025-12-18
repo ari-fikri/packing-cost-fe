@@ -39,9 +39,9 @@ export default function PackingOuterMaterialSection(props) {
       const updatedData = {
         name: material.materialName,
         supplierName: material.supplier.supplier_name,
-        L: material.dimension_inner_length,
-        W: material.dimension_inner_width,
-        H: material.dimension_inner_height,
+        L: material.dimension_length,
+        W: material.dimension_width,
+        H: material.dimension_height,
       };
 
       if (index === "new") {

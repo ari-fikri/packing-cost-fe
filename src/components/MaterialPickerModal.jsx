@@ -22,34 +22,20 @@ export default function MaterialPickerModal({
   const materialsPerPage = 15;
 
   useEffect(() => {
-    const dpiUrl = `${import.meta.env.BASE_URL}dpi.json`;
-    fetch(dpiUrl)
+    const materialsUrl = `${import.meta.env.BASE_URL}materials.json`;
+    fetch(materialsUrl)
       .then((response) => response.json())
       .then((data) => setMaterialsData(data))
       .catch((error) => console.error("Error fetching materials:", error));
   }, []);
 
   useEffect(() => {
-    if (show && materialsData.length > 0) {
-      let initialMaterials = materialsData;
-      if (filter) {
-        if (filter === 'module') {
-          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'module');
-        } else if (filter === 'outer') {
-          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'outer');
-        } else if (filter === 'inner') {
-          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'inner');
-        } else if (filter === 'box') {
-          initialMaterials = materialsData.filter(m => m.materialType.toLowerCase() === 'box');
-        }
-      }
-      setDisplayedMaterials(initialMaterials);
-    } else {
+    if (show) {
       setDisplayedMaterials([]);
       setSearchTerm('');
       setCurrentPage(1);
     }
-  }, [show, filter, materialsData]);
+  }, [show]);
 
   function handleSelectionChange(materialNo) {
     if (selectionMode === "multi") {
@@ -60,7 +46,20 @@ export default function MaterialPickerModal({
   }
 
   const handleSearch = () => {
-    const filtered = materialsData.filter(
+    let filtered = materialsData;
+    if (filter) {
+      const filterLower = filter.toLowerCase();
+      if (filterLower === 'module') {
+        filtered = filtered.filter(m => m.materialType.toLowerCase() === 'outer' || m.materialType.toLowerCase() === 'module');
+      } else if (filterLower === 'outer') {
+        filtered = filtered.filter(m => m.materialType.toLowerCase() === 'outer' || m.materialType.toLowerCase() === 'module');
+      } else if (filterLower === 'inner') {
+        filtered = filtered.filter(m => m.materialType.toLowerCase() === 'inner' || m.materialType.toLowerCase() === 'box');
+      } else if (filterLower === 'box') {
+        filtered = filtered.filter(m => m.materialType.toLowerCase() === 'inner' || m.materialType.toLowerCase() === 'box');
+      }
+    }
+    filtered = filtered.filter(
       (m) =>
         (m.materialNo || "").toLowerCase().includes(filterMaterialNo.toLowerCase()) &&
         (m.materialName || "").toLowerCase().includes(filterName.toLowerCase()) &&
@@ -74,18 +73,44 @@ export default function MaterialPickerModal({
     setFilterMaterialNo("");
     setFilterName("");
     setFilterType("");
-    setDisplayedMaterials(materialsData);
+    let cleared = materialsData;
+    if (filter) {
+      const filterLower = filter.toLowerCase();
+      if (filterLower === 'module') {
+        cleared = cleared.filter(m => m.materialType.toLowerCase() === 'module');
+      } else if (filterLower === 'outer') {
+        cleared = cleared.filter(m => m.materialType.toLowerCase() === 'outer');
+      } else if (filterLower === 'inner') {
+        cleared = cleared.filter(m => m.materialType.toLowerCase() === 'inner' || m.materialType.toLowerCase() === 'box');
+      } else if (filterLower === 'box') {
+        cleared = cleared.filter(m => m.materialType.toLowerCase() === 'box');
+      }
+    }
+    setDisplayedMaterials(cleared);
     setCurrentPage(1);
   };
 
   const handleAdd = () => {
     if (typeof onAdd === "function") {
       if (selectionMode === "multi") {
-        onAdd(selectedMaterials.map((materialNo) => materialsData.find((m) => m.materialNo === materialNo)));
+        const selectedMaterialObjects = selectedMaterials.map((materialNo) => {
+          const material = materialsData.find((m) => m.materialNo === materialNo);
+          // Ensure supplierName field exists
+          return {
+            ...material,
+            supplierName: material.supplier?.supplier_name || material.supplierName
+          };
+        });
+        onAdd(selectedMaterialObjects);
       } else {
         const selectedMaterial = materialsData.find((m) => m.materialNo === selectedMaterials);
-        console.log(">>>>" + selectedMaterial);
-        onAdd(selectedMaterial);
+        console.log("Selected material:", selectedMaterial);
+        // Ensure supplierName field exists
+        const materialWithSupplierName = {
+          ...selectedMaterial,
+          supplierName: selectedMaterial.supplier?.supplier_name || selectedMaterial.supplierName
+        };
+        onAdd(materialWithSupplierName);
       }
     }
     setSelectedMaterials(selectionMode === "multi" ? [] : null);
@@ -120,7 +145,7 @@ export default function MaterialPickerModal({
           <div className="modal-header">
             <h5 className="modal-title">Select Material</h5>
             <button type="button" className="close" onClick={onClose} aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+              <span aria-hidden="true">×</span>
             </button>
           </div>
 
@@ -174,6 +199,7 @@ export default function MaterialPickerModal({
                       <th>Material No</th>
                       <th>Name</th>
                       <th>Type</th>
+                      <th>Supplier</th>
                       <th style={{ textAlign: "right" }}>L</th>
                       <th style={{ textAlign: "right" }}>W</th>
                       <th style={{ textAlign: "right" }}>H</th>
@@ -202,6 +228,7 @@ export default function MaterialPickerModal({
                           <td>{m.materialNo}</td>
                           <td>{m.materialName}</td>
                           <td>{m.materialType}</td>
+                          <td>{m.supplier?.supplier_name || m.supplierName || ''}</td>
                           <td style={{ textAlign: "right" }}>{formatInteger(m.dimension_length)}</td>
                           <td style={{ textAlign: "right" }}>{formatInteger(m.dimension_width)}</td>
                           <td style={{ textAlign: "right" }}>{formatInteger(m.dimension_height)}</td>
