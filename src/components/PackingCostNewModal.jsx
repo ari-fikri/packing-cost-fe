@@ -154,60 +154,59 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
    * finds their corresponding data in the asynchronously loaded `cpsData`,
    * formats the data for display in the results table, and updates the component's state.
    */
-  const handleCalculate = () => {
-    // Ensure that cpsData is loaded before proceeding.
-    if (!cpsData || !cpsData.length) {
-      console.error("CPS data is not loaded yet.");
-      return;
-    }
+  const norm = (v) => String(v ?? "").trim().toUpperCase();
 
-    // Filter by Model CFC if provided
-    let dataToSearch = cpsData;
-    if (form.modelCfc.length > 0) {
-      dataToSearch = dataToSearch.filter(
-        (cps) => cps.model_cfc && form.modelCfc.includes(cps.model_cfc)
-      );
-    }
+const handleCalculate = () => {
+  // Jika tidak ada stagedParts tapi ada modelCfc, baru pakai cpsData
+  if ((!stagedParts || stagedParts.length === 0) && form.modelCfc.length === 0) {
+    setParts([]);
+    return;
+  }
 
-    let calculatedParts = [];
-
-    if (stagedParts.length > 0) {
-      calculatedParts = stagedParts.flatMap((stagedPart) => {
-        const matchingData = dataToSearch.filter(
-          (cps) => cps && cps.part_no === stagedPart.partNo
-        );
-
-        if (matchingData.length === 0) {
-          return [
-            {
-              partNo: stagedPart.partNo,
-              description: "NOT FOUND",
-              calculationTime: new Date().toISOString(),
-            },
-          ];
-        }
-
-        return matchingData.map((data) => ({
-          partNo: stagedPart.partNo,
-          description: data.part?.description || "NOT FOUND",
-          partName: data.partName,
-          supplierName: data.supplierName,
-          supplierCode: data.supplierCcode,
-          destination: data.model
-            ? `${data.model.destinationCode} - ${data.model.destinationName}`
-            : "N/A",
-          model: data.model?.name,
-          parentNo: data.parentNo,
-          cpsNo: data.cpsNo,
+  // CASE 1: ada stagedParts (dari picker / manual)
+  if (stagedParts && stagedParts.length > 0) {
+    const calculatedParts = stagedParts.flatMap((sp) => {
+      // Jika dari picker: sudah punya detail (partName, inner, outer, dst)
+      const isFromPicker = !!sp.partName; // indikator sederhana
+      if (isFromPicker) {
+        return [{
+          ...sp,
+          description: sp.partName || sp.description || "N/A",
           calculationTime: new Date().toISOString(),
-          subtotals: data.subtotals,
-          total: data.total,
-          cps: data.cps,
-        }));
-      });
-    } else if (form.modelCfc.length > 0) {
-      calculatedParts = dataToSearch.map((data) => ({
-        partNo: data.part_no,
+        }];
+      }
+
+      // Jika manual: baru lookup ke cpsData
+      if (!cpsData || !cpsData.length) {
+        return [{
+          partNo: sp.partNo,
+          description: "CPS DATA NOT LOADED",
+          calculationTime: new Date().toISOString(),
+        }];
+      }
+
+      // Filter modelCfc kalau ada
+      let dataToSearch = cpsData;
+      if (form.modelCfc.length > 0) {
+        const allowed = new Set(form.modelCfc.map(norm));
+        dataToSearch = cpsData.filter((cps) => allowed.has(norm(cps.model_cfc)));
+      }
+
+      const partNo = norm(sp.partNo);
+      const matchingData = dataToSearch.filter((cps) =>
+        norm(cps.part_no ?? cps.partNo) === partNo
+      );
+
+      if (matchingData.length === 0) {
+        return [{
+          partNo: sp.partNo,
+          description: "NOT FOUND",
+          calculationTime: new Date().toISOString(),
+        }];
+      }
+
+      return matchingData.map((data) => ({
+        partNo: sp.partNo,
         description: data.part?.description || "NOT FOUND",
         partName: data.partName,
         supplierName: data.supplierName,
@@ -223,11 +222,45 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
         total: data.total,
         cps: data.cps,
       }));
-    }
+    });
 
-    // Update the state with the newly calculated parts.
     setParts(calculatedParts);
-  };
+    return;
+  }
+
+  // CASE 2: tidak ada stagedParts, tapi ada modelCfc => tampilkan dari cpsData
+  if (!cpsData || !cpsData.length) {
+    console.error("CPS data is not loaded yet.");
+    return;
+  }
+
+  let dataToSearch = cpsData;
+  if (form.modelCfc.length > 0) {
+    const allowed = new Set(form.modelCfc.map(norm));
+    dataToSearch = cpsData.filter((cps) => allowed.has(norm(cps.model_cfc)));
+  }
+
+  const calculatedParts = dataToSearch.map((data) => ({
+    partNo: data.part_no ?? data.partNo,
+    description: data.part?.description || "NOT FOUND",
+    partName: data.partName,
+    supplierName: data.supplierName,
+    supplierCode: data.supplierCcode,
+    destination: data.model
+      ? `${data.model.destinationCode} - ${data.model.destinationName}`
+      : "N/A",
+    model: data.model?.name,
+    parentNo: data.parentNo,
+    cpsNo: data.cpsNo,
+    calculationTime: new Date().toISOString(),
+    subtotals: data.subtotals,
+    total: data.total,
+    cps: data.cps,
+  }));
+
+  setParts(calculatedParts);
+};
+
 
   /**
    * Clears the form and all part lists.
