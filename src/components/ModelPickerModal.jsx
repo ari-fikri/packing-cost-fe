@@ -226,7 +226,7 @@ export default function ModelPickerModal({ show, onClose, onAdd, selectionMode =
                           <td>{m.model_code}</td>
                           <td>{m.model_name}</td>
                           <td>{m.model_cfc}</td>
-                          <td>{m.destination_code}</td>
+                          <td>{m.model_destination_code}</td>
                           <td>{m.model_implementation_period}</td>
                           <td>{m.model_type}</td>
                           <td>{m.model_remark}</td>

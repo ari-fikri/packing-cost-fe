@@ -157,109 +157,145 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const norm = (v) => String(v ?? "").trim().toUpperCase();
 
 const handleCalculate = () => {
-  // Jika tidak ada stagedParts tapi ada modelCfc, baru pakai cpsData
-  if ((!stagedParts || stagedParts.length === 0) && form.modelCfc.length === 0) {
-    setParts([]);
-    return;
-  }
-
-  // CASE 1: ada stagedParts (dari picker / manual)
-  if (stagedParts && stagedParts.length > 0) {
-    const calculatedParts = stagedParts.flatMap((sp) => {
-      // Jika dari picker: sudah punya detail (partName, inner, outer, dst)
-      const isFromPicker = !!sp.partName; // indikator sederhana
-      if (isFromPicker) {
-        return [{
-          ...sp,
-          description: sp.partName || sp.description || "N/A",
-          calculationTime: new Date().toISOString(),
-        }];
-      }
-
-      // Jika manual: baru lookup ke cpsData
-      if (!cpsData || !cpsData.length) {
-        return [{
-          partNo: sp.partNo,
-          description: "CPS DATA NOT LOADED",
-          calculationTime: new Date().toISOString(),
-        }];
-      }
-
-      // Filter modelCfc kalau ada
-      let dataToSearch = cpsData;
-      if (form.modelCfc.length > 0) {
-        const allowed = new Set(form.modelCfc.map(norm));
-        dataToSearch = cpsData.filter((cps) => allowed.has(norm(cps.model_cfc)));
-      }
-
-      const partNo = norm(sp.partNo);
-      const matchingData = dataToSearch.filter((cps) =>
-        norm(cps.part_no ?? cps.partNo) === partNo
-      );
-
-      if (matchingData.length === 0) {
-        return [{
-          partNo: sp.partNo,
-          description: "NOT FOUND",
-          calculationTime: new Date().toISOString(),
-        }];
-      }
-
-      return matchingData.map((data) => ({
-        partNo: sp.partNo,
-        description: data.part?.description || "NOT FOUND",
-        partName: data.partName,
-        supplierName: data.supplierName,
-        supplierCode: data.supplierCcode,
-        destination: data.model
-          ? `${data.model.destinationCode} - ${data.model.destinationName}`
-          : "N/A",
-        model: data.model?.name,
-        parentNo: data.parentNo,
-        cpsNo: data.cpsNo,
-        calculationTime: new Date().toISOString(),
-        subtotals: data.subtotals,
-        total: data.total,
-        cps: data.cps,
-      }));
-    });
-
-    setParts(calculatedParts);
-    return;
-  }
-
-  // CASE 2: tidak ada stagedParts, tapi ada modelCfc => tampilkan dari cpsData
-  if (!cpsData || !cpsData.length) {
+  // flow sama seperti versi lama: stagedParts -> search cpsData
+  if (!cpsData || cpsData.length === 0) {
     console.error("CPS data is not loaded yet.");
+    setParts([]); // biar jelas kosong
     return;
   }
 
+  // Filter by Model CFC if provided (pakai norm biar tidak miss)
   let dataToSearch = cpsData;
-  if (form.modelCfc.length > 0) {
+  if (form.modelCfc?.length > 0) {
     const allowed = new Set(form.modelCfc.map(norm));
     dataToSearch = cpsData.filter((cps) => allowed.has(norm(cps.model_cfc)));
   }
 
-  const calculatedParts = dataToSearch.map((data) => ({
-    partNo: data.part_no ?? data.partNo,
-    description: data.part?.description || "NOT FOUND",
-    partName: data.partName,
-    supplierName: data.supplierName,
-    supplierCode: data.supplierCcode,
-    destination: data.model
-      ? `${data.model.destinationCode} - ${data.model.destinationName}`
-      : "N/A",
-    model: data.model?.name,
-    parentNo: data.parentNo,
-    cpsNo: data.cpsNo,
-    calculationTime: new Date().toISOString(),
-    subtotals: data.subtotals,
-    total: data.total,
-    cps: data.cps,
-  }));
+  let calculatedParts = [];
+
+  // CASE 1: ada stagedParts
+  if (stagedParts?.length > 0) {
+    console.info(stagedParts)
+    console.info(dataToSearch)
+    calculatedParts = stagedParts.flatMap((sp) => {
+      const spPartNo = norm(sp.partNo);
+
+      // cari di cpsData (norm part_no)
+      const matchingData = dataToSearch.filter((cps) => {
+        const cpsPartNo = norm(cps.part_no ?? cps.partNo);
+        return cpsPartNo === spPartNo;
+      });
+
+      // kalau ketemu, pakai CPS sebagai source-of-truth
+      if (matchingData.length > 0) {
+        return matchingData.map((row) => mapCpsToRow(row, sp));
+      }
+
+      // kalau tidak ketemu CPS, baru fallback:
+      // - kalau sp dari picker, tampilkan data picker supaya user tetap lihat sesuatu
+      const isFromPicker = !!sp.partName;
+      if (isFromPicker) {
+        return [{
+          ...sp,
+          partNo: sp.partNo,
+          parentNo: sp.parentPartNo ?? sp.parentNo ?? "",
+          supplierCode: sp.supplierCode ?? sp.supplierId ?? "",
+          calculationTime: new Date().toISOString(),
+        }];
+      }
+      // manual tapi tidak ketemu
+      return [{
+        partNo: sp.partNo,
+        description: "NOT FOUND",
+        calculationTime: new Date().toISOString(),
+      }];
+    });
+  }
+  // CASE 2: tidak ada stagedParts, tapi ada modelCfc => tampilkan semua hasil filter
+  else if (form.modelCfc?.length > 0) {
+    calculatedParts = dataToSearch.map(mapCpsToRow);
+  }
 
   setParts(calculatedParts);
 };
+
+function toDiffStr(diff) {
+  if (diff == null) return "0%";
+  if (typeof diff === "string") return diff.includes("%") ? diff : `${diff}%`;
+  const n = Number(diff);
+  return Number.isFinite(n) ? `${n}%` : "0%";
+}
+
+function mapCpsToRow(cpsRow, stagedPart) {
+  const subtotals = cpsRow?.subtotals || {};
+  const packing = cpsRow?.cps?.packing || {};
+
+  // dimensi: utamakan stagedPart, fallback ke cpsRow kalau suatu saat ada
+  const L = stagedPart?.L ?? cpsRow?.L ?? "";
+  const W = stagedPart?.W ?? cpsRow?.W ?? "";
+  const H = stagedPart?.H ?? cpsRow?.H ?? "";
+  const boxM3 = stagedPart?.boxM3 ?? cpsRow?.boxM3 ?? "";
+
+  return {
+    // identitas part
+    partNo: cpsRow?.part_no ?? cpsRow?.partNo ?? stagedPart?.partNo ?? "",
+    suffix: stagedPart?.suffix ?? "",
+    partName: cpsRow?.cps?.part_name ?? cpsRow?.partName ?? stagedPart?.partName ?? "N/A",
+    parentPartNo: stagedPart?.parentPartNo ?? "",
+    parentNo: cpsRow?.parentNo ?? stagedPart?.parentNo ?? "",
+
+    supplierCode: cpsRow?.supplierCode ?? stagedPart?.supplierId ?? "",
+    supplierName: cpsRow?.supplierName ?? stagedPart?.supplierName ?? "",
+
+    // dimensi yang Anda butuhkan di table
+    L,
+    W,
+    H,
+    boxM3,
+
+    cpsNo: cpsRow?.cpsNo ?? cpsRow?.cps?.cps_no ?? "",
+    calculationTime: new Date().toISOString(),
+
+    inner: {
+      totalCost: subtotals.inner?.total ?? 0,
+      prevYear: subtotals.inner?.prev_year ?? 0,
+      diff: toDiffStr(subtotals.inner?.diff),
+      materials: packing.inner ?? [],
+    },
+    outer: {
+      totalCost: subtotals.outer?.total ?? 0,
+      prevYear: subtotals.outer?.prev_year ?? 0,
+      diff: toDiffStr(subtotals.outer?.diff),
+      materials: packing.outer ?? [],
+    },
+    material: {
+      totalCost: subtotals.material?.total ?? 0,
+      prevYear: subtotals.material?.prev_year ?? 0,
+      diff: toDiffStr(subtotals.material?.diff),
+    },
+    labor: {
+      totalCost: subtotals.labor?.total ?? 0,
+      prevYear: subtotals.labor?.prev_year ?? 0,
+      diff: toDiffStr(subtotals.labor?.diff),
+      // jika ResultSection butuh detail labor dari stagedPart, Anda bisa merge di sini juga
+      ...(stagedPart?.labor ? { ...stagedPart.labor } : {}),
+    },
+    inland: {
+      totalCost: subtotals.inland?.total ?? 0,
+      prevYear: subtotals.inland?.prev_year ?? 0,
+      diff: toDiffStr(subtotals.inland?.diff),
+      ...(stagedPart?.inland ? { ...stagedPart.inland } : {}),
+    },
+    total: {
+      totalCost: subtotals.total?.total ?? 0,
+      prevYear: subtotals.total?.prev_year ?? 0,
+      diff: toDiffStr(subtotals.total?.diff),
+    },
+
+    cps: cpsRow?.cps,
+    subtotals: cpsRow?.subtotals,
+  };
+}
 
 
   /**
