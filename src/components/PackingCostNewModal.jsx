@@ -315,7 +315,7 @@ function mapCpsToRow(cpsRow, stagedPart) {
    */
   function handleModelsPicked(models) {
     if (Array.isArray(models) && models.length > 0) {
-      const newModelCfcs = models.map((m) => m.cfc);
+      const newModelCfcs = models.map((m) => m.model_cfc);
       setForm((prev) => {
         const existingModelCfcs = prev.modelCfc || [];
         // Filter out duplicates
@@ -626,7 +626,7 @@ function mapCpsToRow(cpsRow, stagedPart) {
       <ModelPickerModal
         show={showModelPicker}
         onClose={() => setShowModelPicker(false)}
-        onPick={handleModelsPicked}
+        onAdd={handleModelsPicked}
       />
 
       <DestCodePickerModal
