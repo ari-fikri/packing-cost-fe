@@ -41,7 +41,7 @@ const fmt = (v) => {
  * @param {number} [props.threshold_percentage=5] - The percentage threshold to highlight differences.
  */
 export default function ResultSection({
-  visibleParts,
+  parts: visibleParts,
   selectedRows,
   handleCheckboxChange,
   page,
@@ -52,24 +52,27 @@ export default function ResultSection({
   handleToggleExpand,
   threshold_percentage = 5,
 }) {
+  // Defensively ensure visibleParts is an array.
+  const parts = Array.isArray(visibleParts) ? visibleParts : [];
+
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-sm text-center w-100" style={{ fontSize: '8pt' }}>
         {/* Table Header */}
         <thead>
-          <tr style={{ backgroundColor: "#f7fbff" }}>
+          <tr style={{ backgroundColor: "#dee2e6" }}>
             {/* Checkbox for selecting all visible rows */}
             <th rowSpan={2} style={{ width: 40 }}>
               <input
                 type="checkbox"
                 checked={
-                  visibleParts.length > 0 &&
-                  visibleParts.every((_, i) => selectedRows[(page - 1) * perPage + i])
+                  parts.length > 0 &&
+                  parts.every((_, i) => selectedRows && selectedRows[(page - 1) * perPage + i])
                 }
                 onChange={e => {
                   const checked = e.target.checked;
-                  const newSelectedRows = { ...selectedRows };
-                  visibleParts.forEach((_, i) => {
+                  const newSelectedRows = { ...(selectedRows || {}) };
+                  parts.forEach((_, i) => {
                     newSelectedRows[(page - 1) * perPage + i] = checked;
                   });
                   handleCheckboxChange(newSelectedRows);
@@ -113,14 +116,14 @@ export default function ResultSection({
 
         {/* Table Body */}
         <tbody>
-          {visibleParts.length === 0 ? (
+          {parts.length === 0 ? (
             // Display when no data is available
             <tr>
               <td colSpan={35} className="text-center py-4 text-muted">No Data Found</td>
             </tr>
           ) : (
             // Map through visible parts to create table rows
-            visibleParts.map((p, i) => {
+            parts.map((p, i) => {
               debugger;
               // Ensure part data 'p' is not null or undefined before rendering
               if (!p) return null;
@@ -143,7 +146,7 @@ export default function ResultSection({
                         type="checkbox"
                         checked={!!(selectedRows && selectedRows[globalIndex])}
                         onChange={e => {
-                          const newSelectedRows = { ...selectedRows, [globalIndex]: e.target.checked };
+                          const newSelectedRows = { ...(selectedRows || {}), [globalIndex]: e.target.checked };
                           handleCheckboxChange(newSelectedRows);
                         }}
                       />

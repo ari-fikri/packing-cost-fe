@@ -16,7 +16,7 @@ import React from 'react';
  * @param {function} props.onModelCfcKeyDown - Keydown handler for model cfc input.
  * @param {function} props.onPartKeyDown - Keydown handler for part input.
  */
-export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, handleCalculate, handleClear, onModelRemove, onPartRemove, onModelCfcKeyDown, onPartKeyDown }) {
+export default function SearchSection({ form, change, setShowPartPicker, setShowModelPicker, setShowDestCodePicker, handleCalculate, handleClear, onModelRemove, onPartRemove, onModelCfcKeyDown, onPartKeyDown, onDestCodeRemove }) {
   return (
     <>
       {/* Header form with input fields */}
@@ -76,10 +76,29 @@ export default function SearchSection({ form, change, setShowPartPicker, setShow
           {/* Destination Code dropdown */}
           <div className="form-group">
             <label>Dest Code</label>
-            <select className="form-control form-control-sm" name="destCode" value={form.destCode} onChange={change}>
-              <option>All</option>
-              <option value="TASA">TASA - Argentina</option>
-            </select>
+            <div className="input-group input-group-sm">
+              <div className="form-control form-control-sm" style={{ height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '5px', alignItems: 'center' }}>
+                {Array.isArray(form.destCode) && form.destCode.map(code => (
+                  <span key={code} className="badge badge-pill badge-info" style={{ display: 'flex', alignItems: 'center' }}>
+                    {code}
+                    <button
+                      type="button"
+                      className="close"
+                      aria-label="Close"
+                      style={{ color: 'white', marginLeft: '5px', textShadow: 'none', opacity: 0.7, fontSize: '1.2em', lineHeight: '0.8' }}
+                      onClick={() => onDestCodeRemove(code)}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </span>
+                ))}
+              </div>
+              <div className="input-group-append">
+                <button type="button" className="btn btn-outline-secondary btn-sm" title="Search Dest Code" onClick={() => setShowDestCodePicker(true)}>
+                  <i className="fas fa-search" />
+                </button>
+              </div>
+            </div>
           </div>
           {/* Part input with pills */}
           <div className="form-group">

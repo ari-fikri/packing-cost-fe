@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import PartPickerModal from "./PartPickerModal";
 import ModelPickerModal from "./ModelPickerModal";
+import DestCodePickerModal from './DestCodePickerModal';
 import SearchSection from "./PackingCostNewModalSections/SearchSection";
 import ResultSection from "./PackingCostNewModalSections/ResultSection";
 import Pagination from "./PackingCostNewModalSections/Pagination";
@@ -10,7 +11,7 @@ const emptyForm = {
   part: [],
   partInput: "",
   period: "All",
-  destCode: "All",
+  destCode: [],
   modelCfc: [],
   modelCfcInput: "",
   type: "PxP",
@@ -40,6 +41,7 @@ export default function PackingCostNewModal({ show = false, onClose, onSave }) {
   const [showPartPicker, setShowPartPicker] = useState(false);
   // State to control the visibility of the Model Picker Modal
   const [showModelPicker, setShowModelPicker] = useState(false);
+  const [showDestCodePicker, setShowDestCodePicker] = useState(false);
   // State for remarks on each part row
   const [remarks, setRemarks] = useState({});
   // State to track selected rows in the result table
@@ -328,6 +330,18 @@ function mapCpsToRow(cpsRow, stagedPart) {
     setShowModelPicker(false);
   }
 
+  function handleDestCodesPicked(destCodes) {
+    if (Array.isArray(destCodes) && destCodes.length > 0) {
+      const newDestCodes = destCodes.map(d => d.destCode);
+      setForm(prev => {
+        const existingDestCodes = prev.destCode || [];
+        const uniqueNewDestCodes = newDestCodes.filter(code => !existingDestCodes.includes(code));
+        return { ...prev, destCode: [...existingDestCodes, ...uniqueNewDestCodes] };
+      });
+    }
+    setShowDestCodePicker(false);
+  }
+
   /**
    * Removes a model cfc from the form.
    * @param {string} modelCfcToRemove - The model cfc to remove.
@@ -336,6 +350,13 @@ function mapCpsToRow(cpsRow, stagedPart) {
     setForm((prev) => ({
       ...prev,
       modelCfc: prev.modelCfc.filter((cfc) => cfc !== modelCfcToRemove),
+    }));
+  }
+
+  function handleDestCodeRemove(destCodeToRemove) {
+    setForm(prev => ({
+      ...prev,
+      destCode: prev.destCode.filter(code => code !== destCodeToRemove),
     }));
   }
 
@@ -498,107 +519,122 @@ function mapCpsToRow(cpsRow, stagedPart) {
       .filter(idx => selectedRows[idx])
       .map(idx => Number(idx));
     if (toDelete.length === 0) return;
-    
-    const newParts = parts.filter((_, i) => !toDelete.includes(i));
-    setParts(newParts);
 
-    const newSelectedRows = {};
-    const newRemarks = {};
-    
-    // Re-index selected rows and remarks after deletion
-    const remainingParts = parts.map((part, i) => (toDelete.includes(i) ? null : part)).filter(Boolean);
-    
-    remainingParts.forEach((part, i) => {
-        const oldIndex = parts.indexOf(part);
-        if (selectedRows[oldIndex]) {
-            newSelectedRows[i] = true;
-        }
-        if (remarks[oldIndex]) {
-            newRemarks[i] = remarks[oldIndex];
-        }
-    });
+    const remainingParts = parts.filter((_, idx) => !toDelete.includes(idx));
+    setParts(remainingParts);
 
-    setSelectedRows(newSelectedRows);
-    setRemarks(newRemarks);
+    const remainingStaged = stagedParts.filter(sp => remainingParts.some(rp => rp.partNo === sp.partNo));
+    setStagedParts(remainingStaged);
+
+    const partNosToKeep = new Set(remainingParts.map(p => p.partNo));
+    setForm(prev => ({
+      ...prev,
+      part: prev.part.filter(pn => partNosToKeep.has(pn)),
+    }));
+
+    setSelectedRows({});
   }
 
   return (
-    <>
-      {/* Modal backdrop */}
-      <div className="np-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) handleCancel() }}>
-        {/* Modal dialog */}
-        <div className="np-modal card card-outline card-primary" style={{ maxWidth: '95vw', maxHeight: '90vh', width: '95vw', height: '90vh' }}>
-            <div className="card-header">
-              <h5 className="card-title mb-0"><strong>Packing Cost Calculation New</strong></h5>
-              <button type="button" className="close" onClick={handleCancel} aria-label="Close"><span aria-hidden>×</span></button>
-            </div>
+    <div
+      className={`modal fade ${show ? "show" : ""}`}
+      style={{ display: show ? "block" : "none" }}
+      tabIndex="-1"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="packingCostNewModalLabel"
+    >
+      <div className="modal-dialog modal-xl" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="packingCostNewModalLabel">
+              Packing Cost Calculation New
+            </h5>
+            <button
+              type="button"
+              className="close"
+              aria-label="Close"
+              onClick={handleCancel}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            <SearchSection
+              form={form}
+              change={change}
+              handlePartKeyDown={handlePartKeyDown}
+              handlePartRemove={handlePartRemove}
+              handleModelCfcKeyDown={handleModelCfcKeyDown}
+              handleModelRemove={handleModelRemove}
+              handleDestCodeRemove={handleDestCodeRemove}
+              setShowPartPicker={setShowPartPicker}
+              setShowModelPicker={setShowModelPicker}
+              setShowDestCodePicker={setShowDestCodePicker}
+              handleCalculate={handleCalculate}
+              handleClear={handleClear}
+              handlePartInputBlur={handlePartInputBlur}
+            />
 
-            {/* Modal body with scrolling content */}
-            <div className="card-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
-              <SearchSection
-                form={form}
-                change={change}
-                setShowPartPicker={setShowPartPicker}
-                setShowModelPicker={setShowModelPicker}
-                handleCalculate={handleCalculate}
-                handleClear={handleClear}
-                onModelRemove={handleModelRemove}
-                onPartRemove={handlePartRemove}
-                onModelCfcKeyDown={handleModelCfcKeyDown}
-                onPartKeyDown={handlePartKeyDown}
-              />
+            <ResultSection
+              visibleParts={visibleParts}
+              selectedRows={selectedRows}
+              handleCheckboxChange={handleCheckboxChange}
+              page={page}
+              perPage={perPage}
+              remarks={remarks}
+              handleRemarkChange={handleRemarkChange}
+              expandedRows={expandedRows}
+              handleToggleExpand={handleToggleExpand}
+            />
+          </div>
 
-              <ResultSection
-                visibleParts={visibleParts}
-                selectedRows={selectedRows}
-                handleCheckboxChange={handleCheckboxChange}
-                page={page}
-                perPage={perPage}
-                remarks={remarks}
-                handleRemarkChange={handleRemarkChange}
-                expandedRows={expandedRows}
-                handleToggleExpand={handleToggleExpand}
-                threshold_percentage={5}
-              />
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            goToPage={goToPage}
+            perPage={perPage}
+            setPerPage={setPerPage}
+            total={total}
+          />
 
-              <Pagination 
-                page={page}
-                totalPages={totalPages}
-                goToPage={goToPage}
-                perPage={perPage}
-              />
-            </div>
-
-            {/* Modal footer with action buttons */}
-            <div className="card-footer d-flex justify-content-end">
-              <button type="button" className="btn btn-success mr-2" onClick={handleSave}>
-                <i className="fas fa-download mr-1" /> Save
-              </button>
-              <button type="button" className="btn btn-secondary" onClick={handleCancel}>
-                <i className="fas fa-times mr-1" /> Cancel
-              </button>
-            </div>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleSave}
+            >
+              Save
+            </button>
           </div>
         </div>
+      </div>
 
-      {/* Part Picker Modal, shown conditionally */}
-      {showPartPicker && (
-        <PartPickerModal 
-          show={showPartPicker} 
-          onClose={() => setShowPartPicker(false)} 
-          onSelect={handlePartsPicked} 
-        />
-      )}
+      <PartPickerModal
+        show={showPartPicker}
+        onClose={() => setShowPartPicker(false)}
+        onPick={handlePartsPicked}
+      />
 
-      {/* Model Picker Modal, shown conditionally */}
-      {showModelPicker && (
-        <ModelPickerModal
-          show={showModelPicker}
-          onClose={() => setShowModelPicker(false)}
-          onAdd={handleModelsPicked}
-          selectionMode="multi"
-        />
-      )}
-    </>
+      <ModelPickerModal
+        show={showModelPicker}
+        onClose={() => setShowModelPicker(false)}
+        onPick={handleModelsPicked}
+      />
+
+      <DestCodePickerModal
+        show={showDestCodePicker}
+        onClose={() => setShowDestCodePicker(false)}
+        onPick={handleDestCodesPicked}
+        initialSelected={form.destCode}
+      />
+    </div>
   );
 }
