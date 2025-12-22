@@ -131,6 +131,7 @@ export default function ComparisonPage() {
               value1={fmt(innerTotalLeft)}
               value2={fmt(innerTotalRight)}
               diff={calcDiff(innerTotalLeft, innerTotalRight)}
+              style={{ paddingLeft: "15px" }}
             >
               {partLeft.materials.inner.map((mat, i) => {
                 const matRight = partRight.materials.inner[i];
@@ -173,6 +174,7 @@ export default function ComparisonPage() {
               value1={fmt(outerTotalLeft)}
               value2={fmt(outerTotalRight)}
               diff={calcDiff(outerTotalLeft, outerTotalRight)}
+              style={{ paddingLeft: "15px" }}
             >
               {partLeft.materials.outer.map((mat, i) => {
                 const matRight = partRight.materials.outer[i];

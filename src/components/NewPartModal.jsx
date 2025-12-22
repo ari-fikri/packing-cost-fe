@@ -199,7 +199,10 @@ export default function NewPartModal({ show = false, onClose = () => {}, onSave 
                 </div>
               </div>
             </div>
-            <div className="form-group col-md-6"></div>
+            <div className="form-group col-md-6">
+              <label className="small mb-1">Part Name</label>
+              <input className="form-control form-control-sm" value={partName} onChange={handleInputChange(setPartName)} />
+            </div>
           </div>
           {/* end 2nd row */}
 

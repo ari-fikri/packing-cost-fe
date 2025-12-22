@@ -1,7 +1,7 @@
 // src/components/CollapsibleRow.jsx
 import React, { useState } from "react";
 
-export default function CollapsibleRow({ title, value1, value2, diff, children }) {
+export default function CollapsibleRow({ title, value1, value2, diff, children, style = {} }) {
   const [isOpen, setIsOpen] = useState(true);
 
   // Split into "label" and "(unit)"
@@ -44,7 +44,7 @@ export default function CollapsibleRow({ title, value1, value2, diff, children }
         style={{ backgroundColor: "#f9f9f9", cursor: "pointer" }}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <td>
+        <td style={style}>
           <div
             style={{
               display: "flex",
