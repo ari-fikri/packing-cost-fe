@@ -19,6 +19,7 @@ import Material from './pages/Material'  // Now using the properly named Materia
 import Settings from './pages/Settings'
 import Params from './pages/ParamsPanel'
 import NotificationDetail from './pages/NotificationDetail';
+import CostMovementPage from './pages/CostMovementPage';
 
 //Data files
 import DESTINATIONS from './data/destinations.js';
@@ -66,6 +67,7 @@ export default function App(){
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/params" element={<ProtectedRoute><Params /></ProtectedRoute>} />
           <Route path="/notification-detail" element={<ProtectedRoute><NotificationDetail /></ProtectedRoute>} />
+          <Route path="/cost-movement" element={<ProtectedRoute><CostMovementPage /></ProtectedRoute>} />
         </Routes>
       </div>
 

@@ -31,7 +31,7 @@ export default function Sidebar() {
       setMasterOpen(false)
     }
 
-    if (path.startsWith('/packing') || path.startsWith('/cps') || path.startsWith('/dpi') || path.startsWith('/calculate-packing-cost') || path.startsWith('/calculate')) {
+    if (path.startsWith('/packing') || path.startsWith('/cps') || path.startsWith('/dpi') || path.startsWith('/calculate-packing-cost') || path.startsWith('/calculate') || path.startsWith('/cost-movement')) {
       setPackingOpen(true)
     } else {
       setPackingOpen(false)
@@ -175,7 +175,13 @@ export default function Sidebar() {
                     <i className="far fa-circle nav-icon" />
                     <p>Comparison</p>
                   </NavLink>
-                </li>                
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/cost-movement" className={navLinkClass}>
+                    <i className="far fa-circle nav-icon" />
+                    <p>Cost Movement</p>
+                  </NavLink>
+                </li>
               </ul>
             </li>
 
