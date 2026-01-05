@@ -20,6 +20,7 @@ import Settings from './pages/Settings'
 import Params from './pages/ParamsPanel'
 import NotificationDetail from './pages/NotificationDetail';
 import CostMovementPage from './pages/CostMovementPage';
+import CostMovementDetailPage from './pages/CostMovementDetailPage';
 
 //Data files
 import DESTINATIONS from './data/destinations.js';
@@ -68,6 +69,7 @@ export default function App(){
           <Route path="/params" element={<ProtectedRoute><Params /></ProtectedRoute>} />
           <Route path="/notification-detail" element={<ProtectedRoute><NotificationDetail /></ProtectedRoute>} />
           <Route path="/cost-movement" element={<ProtectedRoute><CostMovementPage /></ProtectedRoute>} />
+          <Route path="/cost-movement/:partNo" element={<ProtectedRoute><CostMovementDetailPage /></ProtectedRoute>} />
         </Routes>
       </div>
 

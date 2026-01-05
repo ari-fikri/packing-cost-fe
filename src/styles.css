@@ -1,6 +1,6 @@
 :root { --brand-primary: #007bff }
 html,body,#root { height:100% }
-.content-wrapper { min-height: calc(100vh - 114px); padding-top: 1rem }
+.content-wrapper { min-height: calc(100vh - 114px); padding-top: 1rem; background-color: white; }
 
 
 /* small tweaks to make AdminLTE + React work nicely */

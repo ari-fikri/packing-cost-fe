@@ -67,7 +67,7 @@ export default function ComparisonPage() {
   const inlandTotalRight = partRight.inland.inlandCost + partRight.inland.milkrunCost;
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3" style={{ backgroundColor: 'white' }}>
       <h5>Packing Cost Comparison</h5>
 
       <table className="table table-bordered table-sm" style={{ fontSize: "0.85rem" }}>
@@ -84,13 +84,15 @@ export default function ComparisonPage() {
                 {comparisonData.map((p, i) => <option key={i} value={i}>{p.partNo} - {p.code}</option>)}
               </select>
             </th>
-            <th>Diff</th>
+            <th style={{borderRight: '1px solid #dee2e6'}}>Diff</th>
+            <th>Remark</th>
           </tr>
 
           <tr>
             <th>Periode</th>
             <th><input value={periodeLeft} onChange={e => setPeriodeLeft(e.target.value)} className="form-control form-control-sm" /></th>
             <th><input value={periodeRight} onChange={e => setPeriodeRight(e.target.value)} className="form-control form-control-sm" /></th>
+            <th style={{borderRight: '1px solid #dee2e6'}}></th>
             <th></th>
           </tr>
         </thead>
@@ -101,12 +103,14 @@ export default function ComparisonPage() {
             <td>Part Name</td>
             <td>{partLeft?.name || ""}</td>
             <td>{partRight?.name || ""}</td>
+            <td style={{borderRight: '1px solid #dee2e6'}}></td>
             <td></td>
           </tr>
           <tr>
             <td>Supplier</td>
             <td>{partLeft?.supplier || ""}</td>
             <td>{partRight?.supplier || ""}</td>
+            <td style={{borderRight: '1px solid #dee2e6'}}></td>
             <td></td>
           </tr>
 
@@ -115,7 +119,8 @@ export default function ComparisonPage() {
             <td>TOTAL COST (Rp)</td>
             <td style={right}>{fmt(partLeft?.totalCost)}</td>
             <td style={right}>{fmt(partRight?.totalCost)}</td>
-            <td style={right}>{calcDiff(partLeft?.totalCost, partRight?.totalCost)}</td>
+            <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(partLeft?.totalCost, partRight?.totalCost)}</td>
+            <td></td>
           </tr>
 
           {/* MATERIAL */}
@@ -141,7 +146,8 @@ export default function ComparisonPage() {
                       <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
                       <td style={right}>{fmt(mat.value)}</td>
                       <td style={right}>{fmt(matRight?.value)}</td>
-                      <td style={right}>{calcDiff(mat.value, matRight?.value)}</td>
+                      <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(mat.value, matRight?.value)}</td>
+                      <td></td>
                     </tr>
 
                     {/* details moved to 2nd & 3rd columns */}
@@ -184,7 +190,8 @@ export default function ComparisonPage() {
                       <td style={{ paddingLeft: "20px" }}>{mat.name}</td>
                       <td style={right}>{fmt(mat.value)}</td>
                       <td style={right}>{fmt(matRight?.value)}</td>
-                      <td style={right}>{calcDiff(mat.value, matRight?.value)}</td>
+                      <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(mat.value, matRight?.value)}</td>
+                      <td></td>
                     </tr>
 
                     <tr>
@@ -222,19 +229,22 @@ export default function ComparisonPage() {
               <td style={{ paddingLeft: "20px" }}>- DL</td>
               <td style={right}>{fmt(partLeft.labor.dl)}</td>
               <td style={right}>{fmt(partRight.labor.dl)}</td>
-              <td style={right}>{calcDiff(partLeft.labor.dl, partRight.labor.dl)}</td>
+              <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(partLeft.labor.dl, partRight.labor.dl)}</td>
+              <td></td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- IDL</td>
               <td style={right}>{fmt(partLeft.labor.idl)}</td>
               <td style={right}>{fmt(partRight.labor.idl)}</td>
-              <td style={right}>{calcDiff(partLeft.labor.idl, partRight.labor.idl)}</td>
+              <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(partLeft.labor.idl, partRight.labor.idl)}</td>
+              <td></td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Facility/Others</td>
               <td style={right}>{fmt(partLeft.labor.facility)}</td>
               <td style={right}>{fmt(partRight.labor.facility)}</td>
-              <td style={right}>{calcDiff(partLeft.labor.facility, partRight.labor.facility)}</td>
+              <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(partLeft.labor.facility, partRight.labor.facility)}</td>
+              <td></td>
             </tr>
           </CollapsibleRow>
 
@@ -249,13 +259,15 @@ export default function ComparisonPage() {
               <td style={{ paddingLeft: "20px" }}>- Inland Cost</td>
               <td style={right}>{fmt(partLeft.inland.inlandCost)}</td>
               <td style={right}>{fmt(partRight.inland.inlandCost)}</td>
-              <td style={right}>{calcDiff(partLeft.inland.inlandCost, partRight.inland.inlandCost)}</td>
+              <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(partLeft.inland.inlandCost, partRight.inland.inlandCost)}</td>
+              <td></td>
             </tr>
             <tr>
               <td style={{ paddingLeft: "20px" }}>- Milkrun Cost</td>
               <td style={right}>{fmt(partLeft.inland.milkrunCost)}</td>
               <td style={right}>{fmt(partRight.inland.milkrunCost)}</td>
-              <td style={right}>{calcDiff(partLeft.inland.milkrunCost, partRight.inland.milkrunCost)}</td>
+              <td style={{...right, borderRight: '1px solid #dee2e6'}}>{calcDiff(partLeft.inland.milkrunCost, partRight.inland.milkrunCost)}</td>
+              <td></td>
             </tr>
           </CollapsibleRow>
         </tbody>

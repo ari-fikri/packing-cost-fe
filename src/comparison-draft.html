@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal Costing – Detail Comparison</title>
+  <style>
+    :root {
+      --green: #1a7f37;
+      --red: #c62828;
+      --gray-900: #1f2937;
+      --gray-700: #4b5563;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      color: var(--gray-900);
+      background: var(--bg);
+    }
+
+    /* ---------- Sticky Context Header ---------- */
+    .context-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
+      border-bottom: 1px solid var(--gray-300);
+      padding: 12px 24px;
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 16px;
+      font-size: 13px;
+      align-items: end;
+    }
+
+    .context-grid > div {
+      min-width: 0; /* Allow grid items to shrink */
+    }
+
+    .label { color: var(--gray-500); font-size: 11px; }
+
+    /* ---------- Cost Summary ---------- */
+    .summary {
+      padding: 24px;
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    .total {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .delta-down { color: var(--green); }
+    .delta-up { color: var(--red); }
+
+    .category-deltas {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    /* ---------- Filters ---------- */
+    .filters {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--gray-300);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    /* ---------- Sections ---------- */
+    .section {
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    .section-header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: var(--gray-100);
+    }
+
+    .section-header h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .section-header h4 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .section-content {
+      padding: 16px 24px;
+    }
+
+    /* ---------- Table ---------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    col.col-divider {
+      border-left: 3px solid var(--gray-300);
+    }
+
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--gray-300);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th {
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .old { color: var(--gray-500); }
+    .new { font-weight: 600; }
+
+    /* ---------- Compact List ---------- */
+    .compact-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--gray-300);
+      font-size: 13px;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer {
+      padding: 16px 24px;
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+      .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .remark-col textarea {
+      width: 100%;
+      min-height: 56px;
+      font-size: 13px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      padding: 16px 24px;
+      align-items: start;
+    }
+    .page-grid .section-header {
+      background: none;
+      padding: 16px 0;
+    }
+    .page-grid .section-content {
+      padding: 0;
+    }
+    .page-grid h3 {
+      font-size: 16px;
+    }
+    .page-grid table {
+      table-layout: fixed;
+    }
+    .divider {
+      border-right: 1px solid #dee2e6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Summary -->
+<div class="summary">
+  <div class="total">
+    Rp 368.00 → Rp 362.07
+    <span class="delta-down">▼ -1.63%</span>
+  </div>
+  <div class="category-deltas">
+    <div>Material <span class="delta-down">▼ -53.92%</span></div>
+    <div>Inner <span class="delta-down">▼ -53.92%</span></div>
+    <div>Outer <span class="delta-down">▼ -53.92%</span></div>
+    <div>Labor <span class="delta-down">▼ -7.16%</span></div>
+    <div>Inland <span class="delta-down">▼ -4.85%</span></div>
+  </div>
+</div>  
+
+<!-- Filters -->
+<div class="filters">
+  Show: <select><option>All Changes</option></select>
+  Min Δ %: <input type="number" value="5" style="width:60px" />
+  <label><input type="checkbox" /> Supplier change only</label>
+</div>
+
+<div class="page-grid">
+  <!-- Baseline Column -->
+  <div class="baseline-col">
+    <!-- Context Header -->
+    <div class="context-header" style="position: static; border-bottom: none; padding: 0;">
+      <div class="label">Baseline</div>
+      <div style="display:flex; flex-direction:column; gap:6px; margin-top: 4px;">
+        <select style="width:100%">
+          <option>169290E010‑00 – HOSE ASSY</option>
+          <option>364070K010‑00 – HOSE ASSY REV</option>
+        </select>
+        <select style="width:100%">
+          <option value="2024-01">Jan 2024</option>
+          <option value="2024-02">Feb 2024</option>
+          <option value="2024-03">Mar 2024</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Column -->
+  <div class="comparison-col">
+    <!-- Context Header -->
+    <div class="context-header" style="position: static; border-bottom: none; padding: 0;">
+      <div class="label">Comparison</div>
+      <div style="display:flex; flex-direction:column; gap:6px; margin-top: 4px;">
+        <select style="width:100%">
+          <option>169290E010‑00 – HOSE ASSY</option>
+          <option selected>364070K010‑00 – HOSE ASSY REV</option>
+        </select>
+        <select style="width:100%">
+          <option value="2025-08">Aug 2025</option>
+          <option value="2025-09">Sep 2025</option>
+          <option value="2025-10">Oct 2025</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Others Column -->
+  <div class="others-col">
+    <!-- Context Header -->
+    <div class="context-header" style="position: static; border-bottom: none; padding: 0; text-align: left;">
+      <button style="width: 150px; margin-top: 24px;">Compare</button>
+    </div>
+  </div>
+
+  <!-- Materials Section -->
+  <div class="section" style="grid-column: 1 / -1;">
+    <div class="section-header">
+      <h3><span class="collapse-icon">▼ </span>Materials</h3>
+      <div>Rp 595.00 → Rp 545.00 <span class="delta-down">▼ -8.40%</span></div>
+    </div>
+    <div class="section-content">
+      <!-- Inner Packaging Section -->
+      <div class="section" style="grid-column: 1 / -1; border-top: none; margin-left: 24px;">
+        <div class="section-header" style="background: var(--gray-100);">
+          <h4><span class="collapse-icon">▼ </span>Inner Packaging</h4>
+          <div>Rp 245.00 → Rp 230.00 <span class="delta-down">▼ -6.12%</span></div>
+        </div>
+        <div class="section-content">
+          <table style="width: 100%;">
+        <colgroup>
+          <!-- Baseline -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Comparison -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Others -->
+          <col style="width: 100px">
+          <col style="width: 80px">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <!-- Baseline -->
+            <th style="text-align: center; font-weight: bold" colspan="4" class="divider">Baseline</th>
+            <!-- Comparison -->
+            <th style="text-align: center; font-weight: bold;" colspan="4" class="divider">Comparison</th>
+            <!-- Diff -->
+            <th style="text-align: center; font-weight: bold;" colspan="2" class="divider">Diff</th>
+            <!-- Others -->
+            <th style="text-align: center; font-weight: bold;" colspan="1">Others</th>
+          </tr>
+          <tr>
+            <!-- Baseline -->
+            <th>Mat No</th><th>Mat Name</th><th class="qty-col">Qty</th><th class="divider">Cost (Rp)</th>
+            <!-- Comparison -->
+            <th>Mat No</th><th>Mat Name</th><th class="qty-col">Qty</th><th class="divider">Cost (Rp)</th>
+            <!-- Others -->
+            <th>Diff (Amt)</th><th>Diff (%)</th><th>Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Baseline data -->
+            <td>B027‑0201</td><td>Paper Tape</td><td class="qty-col">20</td><td class="divider">24.00</td>
+            <!-- Comparison data -->
+            <td>B027‑0201</td><td>Paper Tape</td><td class="qty-col">18</td><td class="delta-down divider">11.06</td>
+            <!-- Diff/Remark data -->
+            <td>3,500</td><td>13%</td>
+            <td><textarea placeholder="Reason for >15% change"></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td>B027‑0109</td><td>Plastic Sheet</td><td class="qty-col">10</td><td class="divider">3.00</td>
+            <!-- Comparison data -->
+            <td>B027‑0305</td><td>Bubble Sheet</td><td class="qty-col">10</td><td class="delta-up divider">5.20</td>
+            <!-- Diff/Remark data -->
+            <td>3,500</td><td>13%</td>
+            <td><textarea placeholder="Reason for new item"></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td>MAT002</td><td>Foam Padding</td><td class="qty-col">15</td><td class="divider">25.50</td>
+            <!-- Comparison data -->
+            <td>MAT002</td><td>Foam Padding</td><td class="qty-col">15</td><td class="delta-down divider">22.95</td>
+            <!-- Diff/Remark data -->
+            <td>-2.55</td><td>-10%</td>
+            <td><textarea placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td>MAT005</td><td>Rubber Gasket</td><td class="qty-col">30</td><td class="divider">12.75</td>
+            <!-- Comparison data -->
+            <td>MAT005</td><td>Rubber Gasket</td><td class="qty-col">30</td><td class="delta-down divider">11.48</td>
+            <!-- Diff/Remark data -->
+            <td>-1.27</td><td>-10%</td>
+            <td><textarea placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td>MAT007</td><td>Memory Foam Insert</td><td class="qty-col">5</td><td class="divider">45.80</td>
+            <!-- Comparison data -->
+            <td>MAT007</td><td>Memory Foam Insert</td><td class="qty-col">5</td><td class="delta-down divider">41.22</td>
+            <!-- Diff/Remark data -->
+            <td>-4.58</td><td>-10%</td>
+            <td><textarea placeholder=""></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Outer Packaging Section -->
+  <div class="section" style="grid-column: 1 / -1; margin-left: 24px;">
+    <div class="section-header" style="background: var(--gray-100);">
+      <h4><span class="collapse-icon">▼ </span>Outer Packaging</h4>
+      <div>Rp 350.00 → Rp 315.00 <span class="delta-down">▼ -10.00%</span></div>
+    </div>
+    <div class="section-content">
+      <table style="width: 100%;">
+        <colgroup>
+          <!-- Baseline -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Comparison -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Others -->
+          <col style="width: 100px">
+          <col style="width: 80px">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <!-- Baseline -->
+            <th style="text-align: center; font-weight: bold" colspan="4" class="divider">Baseline</th>
+            <!-- Comparison -->
+            <th style="text-align: center; font-weight: bold;" colspan="4" class="divider">Comparison</th>
+            <!-- Diff -->
+            <th style="text-align: center; font-weight: bold;" colspan="2" class="divider">Diff</th>
+            <!-- Others -->
+            <th style="text-align: center; font-weight: bold;" colspan="1">Others</th>
+          </tr>
+          <tr>
+            <!-- Baseline -->
+            <th>Mat No</th><th>Mat Name</th><th class="qty-col">Qty</th><th class="divider">Cost (Rp)</th>
+            <!-- Comparison -->
+            <th>Mat No</th><th>Mat Name</th><th class="qty-col">Qty</th><th class="divider">Cost (Rp)</th>
+            <!-- Others -->
+            <th>Diff (Amt)</th><th>Diff (%)</th><th>Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Baseline data -->
+            <td>MAT001</td><td>Steel Sheet</td><td class="qty-col">1</td><td class="divider">150.00</td>
+            <!-- Comparison data -->
+            <td>MAT001</td><td>Steel Sheet</td><td class="qty-col">1</td><td class="delta-down divider">135.00</td>
+            <!-- Diff/Remark data -->
+            <td>-15.00</td><td>-10%</td>
+            <td><textarea placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td>MAT004</td><td>Aluminum Frame</td><td class="qty-col">1</td><td class="divider">200.00</td>
+            <!-- Comparison data -->
+            <td>MAT004</td><td>Aluminum Frame</td><td class="qty-col">1</td><td class="delta-down divider">180.00</td>
+            <!-- Diff/Remark data -->
+            <td>-20.00</td><td>-10%</td>
+            <td><textarea placeholder=""></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+    </div>
+</div>
+
+  <!-- Labor Section -->
+  <div class="section" style="grid-column: 1 / -1;">
+    <div class="section-header">
+      <h3><span class="collapse-icon">▼ </span>Labor</h3>
+      <div>Rp 55.00 → Rp 51.06 <span class="delta-down">▼ -7.16%</span></div>
+    </div>
+    <div class="section-content">
+      <table style="width: 100%; table-layout: fixed;">
+        <colgroup>
+          <!-- Baseline -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Comparison -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Others -->
+          <col style="width: 100px">
+          <col style="width: 80px">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="3" style="text-align: left;">Item</th>
+            <th class="divider" style="text-align: right;">Price</th>
+            <th colspan="3" style="text-align: left;">Item</th>
+            <th class="divider" style="text-align: right;">Price</th>
+            <th style="text-align: right;">Diff Amt</th>
+            <th style="text-align: right;">Diff %</th>
+            <th>Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Baseline data -->
+            <td colspan="3" style="text-align: left;">DL</td>
+            <td class="divider" style="text-align: right;">14.00</td>
+            <!-- Comparison data -->
+            <td colspan="3" style="text-align: left;">DL</td>
+            <td class="delta-down divider" style="text-align: right;">11.06</td>
+            <!-- Diff/Remark data -->
+            <td class="delta-down" style="text-align: right;">-2.94</td>
+            <td class="delta-down" style="text-align: right;">-21.00%</td>
+            <td><textarea style="width: 100%; box-sizing: border-box;"></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td colspan="3" style="text-align: left;">IDL</td>
+            <td class="divider" style="text-align: right;">26.00</td>
+            <!-- Comparison data -->
+            <td colspan="3" style="text-align: left;">IDL</td>
+            <td class="delta-up divider" style="text-align: right;">27.00</td>
+            <!-- Diff/Remark data -->
+            <td class="delta-up" style="text-align: right;">1.00</td>
+            <td class="delta-up" style="text-align: right;">3.85%</td>
+            <td><textarea style="width: 100%; box-sizing: border-box;"></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td colspan="3" style="text-align: left;">Facility/Others</td>
+            <td class="divider" style="text-align: right;">15.00</td>
+            <!-- Comparison data -->
+            <td colspan="3" style="text-align: left;">Facility/Others</td>
+            <td class="delta-down divider" style="text-align: right;">13.00</td>
+            <!-- Diff/Remark data -->
+            <td class="delta-down" style="text-align: right;">-2.00</td>
+            <td class="delta-down" style="text-align: right;">-13.33%</td>
+            <td><textarea style="width: 100%; box-sizing: border-box;"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Inland Section -->
+  <div class="section" style="grid-column: 1 / -1;">
+    <div class="section-header">
+      <h3><span class="collapse-icon">▼ </span>Inland</h3>
+      <div>Rp 40.00 → Rp 39.00 <span class="delta-down">▼ -2.50%</span></div>
+    </div>
+    <div class="section-content">
+      <table style="width: 100%; table-layout: fixed;">
+        <colgroup>
+          <!-- Baseline -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Comparison -->
+          <col style="width: 100px">
+          <col>
+          <col style="width: 50px">
+          <col style="width: 100px">
+          <!-- Others -->
+          <col style="width: 100px">
+          <col style="width: 80px">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="3" style="text-align: left;">Item</th>
+            <th class="divider" style="text-align: right;">Price</th>
+            <th colspan="3" style="text-align: left;">Item</th>
+            <th class="divider" style="text-align: right;">Price</th>
+            <th style="text-align: right;">Diff Amt</th>
+            <th style="text-align: right;">Diff %</th>
+            <th>Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Baseline data -->
+            <td colspan="3" style="text-align: left;">Inland Cost</td>
+            <td class="divider" style="text-align: right;">14.00</td>
+            <!-- Comparison data -->
+            <td colspan="3" style="text-align: left;">Inland Cost</td>
+            <td class="delta-down divider" style="text-align: right;">11.06</td>
+            <!-- Diff/Remark data -->
+            <td class="delta-down" style="text-align: right;">-2.94</td>
+            <td class="delta-down" style="text-align: right;">-21.00%</td>
+            <td><textarea style="width: 100%; box-sizing: border-box;"></textarea></td>
+          </tr>
+          <tr>
+            <!-- Baseline data -->
+            <td colspan="3" style="text-align: left;">Milkrun Cost</td>
+            <td class="divider" style="text-align: right;">26.00</td>
+            <!-- Comparison data -->
+            <td colspan="3" style="text-align: left;">Milkrun Cost</td>
+            <td class="delta-up divider" style="text-align: right;">27.94</td>
+            <!-- Diff/Remark data -->
+            <td class="delta-up" style="text-align: right;">1.94</td>
+            <td class="delta-up" style="text-align: right;">7.46%</td>
+            <td><textarea style="width: 100%; box-sizing: border-box;"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    <button>Copy Summary</button>
+    <button>Export Excel</button>
+  </div>
+
+<script>
+  document.querySelectorAll('.section-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.collapse-icon');
+      const isCollapsed = content.style.display === 'none';
+      content.style.display = isCollapsed ? '' : 'none';
+      if (icon) {
+        icon.textContent = isCollapsed ? '▼ ' : '► ';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
