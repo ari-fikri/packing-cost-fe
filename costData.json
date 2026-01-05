@@ -1,0 +1,135 @@
+[
+  {
+    "partNo": "PN-001",
+    "partName": "Part 1",
+    "totalCost": 1250.5,
+    "change": 5.2,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-002",
+    "partName": "Part 2",
+    "totalCost": 850.0,
+    "change": -2.1,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-003",
+    "partName": "Part 3",
+    "totalCost": 2300.0,
+    "change": 15.0,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-004",
+    "partName": "Part 4",
+    "totalCost": 500.75,
+    "change": 0,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-005",
+    "partName": "Part 5",
+    "totalCost": 1800.25,
+    "change": 8.5,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-006",
+    "partName": "Part 6",
+    "totalCost": 320.0,
+    "change": -1.2,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-007",
+    "partName": "Part 7",
+    "totalCost": 2100.0,
+    "change": 12.3,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-008",
+    "partName": "Part 8",
+    "totalCost": 750.5,
+    "change": -20.0,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-009",
+    "partName": "Part 9",
+    "totalCost": 990.0,
+    "change": 2.5,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-010",
+    "partName": "Part 10",
+    "totalCost": 4500.0,
+    "change": 25.0,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-011",
+    "partName": "Part 11",
+    "totalCost": 600.0,
+    "change": 1.8,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-012",
+    "partName": "Part 12",
+    "totalCost": 1350.8,
+    "change": -3.4,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-013",
+    "partName": "Part 13",
+    "totalCost": 880.0,
+    "change": 0.5,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-014",
+    "partName": "Part 14",
+    "totalCost": 1950.0,
+    "change": 9.9,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-015",
+    "partName": "Part 15",
+    "totalCost": 250.0,
+    "change": -16.5,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-016",
+    "partName": "Part 16",
+    "totalCost": 50.25,
+    "change": 1.0,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-017",
+    "partName": "Part 17",
+    "totalCost": 3000.0,
+    "change": 18.0,
+    "aboveThreshold": true
+  },
+  {
+    "partNo": "PN-018",
+    "partName": "Part 18",
+    "totalCost": 120.0,
+    "change": -0.8,
+    "aboveThreshold": false
+  },
+  {
+    "partNo": "PN-019",
+    "partName": "Part 19",
+    "totalCost": 1500.0,
+    "change": 7.2,
+    "aboveThreshold": true
+  }
+]
