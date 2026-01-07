@@ -86,7 +86,7 @@ export default function DPI() {
 
     console.log("Filtering with modelCfc:", modelCfc); // Add this line
     let filteredData = [...dpiData];
-    debugger;
+    // debugger;
     // Apply filters
     if (modelCfc) {
       filteredData = filteredData.filter(item =>

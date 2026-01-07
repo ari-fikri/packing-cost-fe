@@ -13,7 +13,7 @@ export function MainInfoHeaders({ checked }) {
 
 export function MainInfoCells({ mainInfo, checked }) {
   const { destination, model_name, impl_period, cps_no } = mainInfo || {};
-  debugger;
+  // debugger;
   return (
     <>
       {checked.includes('destination') && <td className="align-middle" style={{ whiteSpace: 'nowrap' }}>{mainInfo?.cps?.model?.destination?.code ?? "-"}</td>}

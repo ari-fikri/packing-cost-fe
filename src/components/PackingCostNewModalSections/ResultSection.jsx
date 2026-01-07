@@ -124,7 +124,7 @@ export default function ResultSection({
           ) : (
             // Map through visible parts to create table rows
             parts.map((p, i) => {
-              debugger;
+              // debugger;
               // Ensure part data 'p' is not null or undefined before rendering
               if (!p) return null;
 
@@ -136,7 +136,7 @@ export default function ResultSection({
               const prevYear = Number(p.subtotals?.total?.prev_year ?? 0);
               const diffPerc = Number(p.subtotals?.total?.diff ?? 0);
               const showRemark = diffPerc > threshold_percentage;
-              debugger;  
+              // debugger;  
               return (
                 <React.Fragment key={globalIndex}>
                   <tr>
