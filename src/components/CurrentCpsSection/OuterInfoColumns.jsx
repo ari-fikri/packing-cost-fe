@@ -28,6 +28,6 @@ export function OuterLeafHeaders({ count = 10, isPseUser }) {
  * Outer data cells
  */
 export function OuterLeafCells({ data = [], count = 10, isPseUser }) {
-  debugger;
+  // debugger;
   return <MaterialLeafCells arr={data} count={count} isPseUser={isPseUser} />;
 }

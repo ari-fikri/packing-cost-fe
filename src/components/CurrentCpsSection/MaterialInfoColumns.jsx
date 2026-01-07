@@ -25,7 +25,7 @@ export function MaterialLeafHeaders({ count = 1, isPseUser }) {
  * innerArr is an array of material objects; if missing an entry, cells show '-'
  */
 export function MaterialLeafCells({ arr = [], count = 1, isPseUser }) {
-  debugger;
+  // debugger;
   return (
     <>
       {Array.from({ length: count }).map((_, i) => {

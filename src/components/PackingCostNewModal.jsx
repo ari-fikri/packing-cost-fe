@@ -577,7 +577,7 @@ function mapCpsToRow(cpsRow, stagedPart) {
             />
 
             <ResultSection
-              visibleParts={visibleParts}
+              parts={visibleParts}
               selectedRows={selectedRows}
               handleCheckboxChange={handleCheckboxChange}
               page={page}
@@ -620,7 +620,7 @@ function mapCpsToRow(cpsRow, stagedPart) {
       <PartPickerModal
         show={showPartPicker}
         onClose={() => setShowPartPicker(false)}
-        onPick={handlePartsPicked}
+        onSelect={handlePartsPicked}
       />
 
       <ModelPickerModal
