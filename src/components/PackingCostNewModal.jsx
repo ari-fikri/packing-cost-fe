@@ -177,8 +177,6 @@ const handleCalculate = () => {
 
   // CASE 1: ada stagedParts
   if (stagedParts?.length > 0) {
-    console.info(stagedParts)
-    console.info(dataToSearch)
     calculatedParts = stagedParts.flatMap((sp) => {
       const spPartNo = norm(sp.partNo);
 
@@ -240,8 +238,11 @@ function mapCpsToRow(cpsRow, stagedPart) {
 
   return {
     // identitas part
+    modelCfc: cpsRow?.model_cfc ?? cpsRow?.modelCfc ?? "",
+    destination: cpsRow?.destination ?? "",
+    implementationPeriod: cpsRow?.implementation_period ?? "",
     partNo: cpsRow?.part_no ?? cpsRow?.partNo ?? stagedPart?.partNo ?? "",
-    suffix: stagedPart?.suffix ?? "",
+    suffix: cpsRow?.suffix ?? stagedPart?.suffix ?? "",
     partName: cpsRow?.cps?.part_name ?? cpsRow?.partName ?? stagedPart?.partName ?? "N/A",
     parentPartNo: stagedPart?.parentPartNo ?? "",
     parentNo: cpsRow?.parentNo ?? stagedPart?.parentNo ?? "",
@@ -559,7 +560,7 @@ function mapCpsToRow(cpsRow, stagedPart) {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className="modal-body">
+          <div className="modal-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
             <SearchSection
               form={form}
               change={change}
