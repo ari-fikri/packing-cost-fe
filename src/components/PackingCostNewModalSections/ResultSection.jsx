@@ -162,9 +162,9 @@ export default function ResultSection({
                       </button>
                     </td>
                     <td>{globalIndex + 1}</td>
-                    <td>{p.model_cfc}</td>
+                    <td>{p.modelCfc}</td>
                     <td>{p.destination}</td>
-                    <td>{p.implementation_period}</td>
+                    <td>{p.implementationPeriod}</td>
                     <td>{p.partNo}</td>
                     <td>{p.suffix}</td>
                     <td>{p.partName}</td>
