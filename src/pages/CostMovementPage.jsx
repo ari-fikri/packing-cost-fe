@@ -13,8 +13,9 @@ const CostMovementPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
+  const dataUrl = `${import.meta.env.BASE_URL}costData.json`;
   useEffect(() => {
-    fetch('/costData.json')
+    fetch(dataUrl)
       .then(response => response.json())
       .then(data => setCostData(data));
   }, []);
