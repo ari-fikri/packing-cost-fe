@@ -545,7 +545,7 @@ function mapCpsToRow(cpsRow, stagedPart) {
       aria-modal="true"
       aria-labelledby="packingCostNewModalLabel"
     >
-      <div className="modal-dialog modal-xl" role="document">
+      <div className="modal-dialog modal-xl" role="document" style={{ maxWidth: "95%", maxHeight: "100%" }}>
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="packingCostNewModalLabel">
