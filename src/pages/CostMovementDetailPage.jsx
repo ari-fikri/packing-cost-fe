@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import html from '../comparison-draft.html?raw';
 
 const CostMovementDetailPage = () => {
@@ -44,7 +44,28 @@ const CostMovementDetailPage = () => {
     };
   }, [partNo]); // Rerun if the partNo changes.
 
-  return <div ref={containerRef} dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
+  return (
+    <div style={{ position: 'relative' }}>
+      <Link
+        to="/cost-movement"
+        style={{
+          position: 'absolute',
+          top: '24px',
+          right: '24px',
+          zIndex: 20,
+          fontSize: '28px',
+          lineHeight: '1',
+          textDecoration: 'none',
+          color: '#4b5563', // var(--gray-700)
+          padding: '0 8px',
+        }}
+        title="Close"
+      >
+        &times;
+      </Link>
+      <div ref={containerRef} dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
+    </div>
+  );
 };
 
 export default CostMovementDetailPage;
