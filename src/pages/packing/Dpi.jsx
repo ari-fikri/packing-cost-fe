@@ -190,7 +190,12 @@ export default function DPI() {
     alert('Upload placeholder');
   }
   function handleTemplate() {
-    alert('Download template placeholder');
+    const link = document.createElement('a');
+    link.href = `${import.meta.env.BASE_URL}DPI Upload Template.xlsx`;
+    link.setAttribute('download', 'DPI Upload Template.xlsx');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   function handleToggleColumnSelector() {
